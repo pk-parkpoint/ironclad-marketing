@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Ironclad Plumbing</title>
+  <desc id="desc">Austin plumbing done right.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1E2A38" />
+      <stop offset="100%" stop-color="#2F6BFF" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <g fill="#FFFFFF" font-family="DM Sans, Arial, sans-serif">
+    <text x="88" y="292" font-size="80" font-weight="700">Ironclad Plumbing</text>
+    <text x="88" y="362" font-size="38" opacity="0.9">Austin's modern plumbing company</text>
+  </g>
+</svg>

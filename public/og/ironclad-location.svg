@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Ironclad Plumbing Service Areas</title>
+  <desc id="desc">Local service area pages for Ironclad Plumbing.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#122533" />
+      <stop offset="100%" stop-color="#1F8A6D" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <g fill="#FFFFFF" font-family="DM Sans, Arial, sans-serif">
+    <text x="88" y="276" font-size="70" font-weight="700">Ironclad Plumbing</text>
+    <text x="88" y="348" font-size="48" font-weight="600">Service Areas</text>
+    <text x="88" y="404" font-size="32" opacity="0.9">Trusted plumbing across Greater Austin.</text>
+  </g>
+</svg>

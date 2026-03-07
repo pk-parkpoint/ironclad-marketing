@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <clipPath id="circle">
+      <circle cx="256" cy="256" r="250"/>
+    </clipPath>
+    <radialGradient id="highlight" cx="78%" cy="18%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6"/>
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.2"/>
+      <stop offset="65%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0a1a3a" stop-opacity="0.2"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- Background: darkest blue -->
+  <circle cx="256" cy="256" r="250" fill="#1b4d8e"/>
+  
+  <g clip-path="url(#circle)">
+    
+    <!-- Wave 1: Medium-dark blue -->
+    <!-- Enters from left ~y330, dips down to ~y380 in center-left, rises to ~y200 on right -->
+    <path d="M-10,330 
+             C60,350 130,390 200,380 
+             C280,368 340,280 400,230 
+             C440,200 490,170 530,140
+             L530,-20 L-10,-20 Z" fill="#5b9cd6"/>
+    
+    <!-- Wave 2: Light blue -->
+    <!-- Same S-shape but shifted up/right. Enters ~y240, dips to ~y290, rises to ~y110 -->
+    <path d="M-10,230
+             C70,260 140,300 210,295
+             C290,288 350,200 415,150
+             C455,118 495,85 540,50
+             L540,-20 L-10,-20 Z" fill="#8dc1e8"/>
+    
+    <!-- Wave 3: Pale blue -->
+    <!-- Enters ~y150, dips to ~y190, rises to ~y30 -->
+    <path d="M-10,140
+             C75,170 145,210 220,205
+             C305,198 365,115 430,65
+             C470,35 505,-5 550,-40
+             L550,-20 L-10,-20 Z" fill="#b5daf2"/>
+    
+    <!-- Wave 4: Near-white -->
+    <!-- Enters ~y60, dips to ~y95, rises off the top -->
+    <path d="M-10,50
+             C80,80 150,118 230,115
+             C315,110 375,35 440,-15
+             C475,-42 510,-70 560,-100
+             L560,-20 L-10,-20 Z" fill="#daedfb"/>
+             
+  </g>
+  
+  <!-- 3D sphere lighting -->
+  <circle cx="256" cy="256" r="250" fill="url(#highlight)"/>
+</svg>

@@ -1,0 +1,53 @@
+{
+  "name": "ironclad",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "qa:cross-browser": "playwright test --project=chromium --project=firefox --project=webkit",
+    "qa:cross-device": "playwright test --project=mobile-chrome --project=mobile-safari",
+    "qa:cross-all": "playwright test --project=chromium --project=firefox --project=webkit --project=mobile-chrome --project=mobile-safari",
+    "sanity:dev": "sanity dev --host 0.0.0.0 --port 3333",
+    "sanity:deploy": "sanity deploy",
+    "cms:seed": "tsx scripts/generate-sanity-seed.ts",
+    "metadata:audit": "tsx scripts/validate-metadata.ts",
+    "structured-data:audit": "tsx scripts/validate-structured-data.ts",
+    "ssr:audit": "tsx scripts/validate-ssr-rendering.ts",
+    "phase0:live:audit": "tsx scripts/validate-phase0-live.ts",
+    "sitemap-robots:audit": "tsx scripts/validate-sitemap-robots.ts",
+    "search-visibility:audit": "tsx scripts/validate-search-visibility.ts",
+    "internal-links:audit": "tsx scripts/validate-internal-links.ts",
+    "analytics:audit": "tsx scripts/validate-analytics.ts",
+    "launch:prod:audit": "tsx scripts/validate-production-launch.ts",
+    "og:generate": "tsx scripts/generate-og-images.ts",
+    "test:e2e:cross-browser": "playwright test --project=chromium --project=firefox --project=webkit --workers=1",
+    "test:e2e:cross-device": "playwright test tests/e2e/cross-device-smoke.spec.ts --project=chromium --project=mobile-chrome --project=ios-safari --project=ipad-safari --workers=1"
+  },
+  "dependencies": {
+    "@sanity/vision": "^4.22.0",
+    "lucide-react": "^0.564.0",
+    "next": "15.5.10",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "sanity": "^4.22.0",
+    "styled-components": "^6.3.9"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.58.2",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.10",
+    "tailwindcss": "^4",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  }
+}
