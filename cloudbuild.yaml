@@ -1,0 +1,31 @@
+steps:
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'ironclad-marketing'
+      - '--source=.'
+      - '--region=us-central1'
+      - '--port=3000'
+      - '--allow-unauthenticated'
+      - '--max-instances=20'
+      - '--cpu-boost'
+      - '--quiet'
+      - '--set-env-vars=NEXT_PUBLIC_SITE_URL=https://ironcladtexas.com,NEXT_PUBLIC_PHONE=(512) 555-0199,NEXT_PUBLIC_TEXT_NUMBER=(512) 555-0199,NEXT_PUBLIC_CONTACT_EMAIL=info@ironcladtexas.com'
+
+  # Invalidate CDN cache after deploy
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'compute'
+      - 'url-maps'
+      - 'invalidate-cdn-cache'
+      - 'ironclad-url-map'
+      - '--path=/*'
+      - '--global'
+      - '--quiet'
+
+timeout: '1200s'
+options:
+  logging: CLOUD_LOGGING_ONLY
