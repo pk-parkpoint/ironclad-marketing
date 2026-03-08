@@ -2,6 +2,15 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { CANONICAL_HOST, stripTrailingSlashes } from "@/lib/site-url";
 
+function setSecurityHeaders(response: NextResponse): void {
+  response.headers.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
+  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  response.headers.delete("X-Powered-By");
+}
+
 // Enforce a single canonical hostname and path shape to reduce duplicate indexing
 // (e.g. www vs apex, and trailing-slash variants).
 export function middleware(request: NextRequest) {
@@ -44,13 +53,16 @@ export function middleware(request: NextRequest) {
   if (!shouldRedirect) {
     const response = NextResponse.next();
     response.headers.set("Cache-Control", "public, max-age=300, s-maxage=300, stale-while-revalidate=60");
+    setSecurityHeaders(response);
     return response;
   }
 
   const destination = `https://${CANONICAL_HOST}${url.pathname}${url.search}`;
 
   // Permanent redirect; safe for bots and preserves method semantics.
-  return NextResponse.redirect(destination, 308);
+  const redirectResponse = NextResponse.redirect(destination, 308);
+  setSecurityHeaders(redirectResponse);
+  return redirectResponse;
 }
 
 export const config = {

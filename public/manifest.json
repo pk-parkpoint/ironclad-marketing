@@ -1,0 +1,21 @@
+{
+  "name": "Ironclad Plumbing",
+  "short_name": "Ironclad",
+  "description": "Licensed Austin plumber with on-time arrival windows, upfront pricing, and a written workmanship warranty.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1E2A38",
+  "icons": [
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -201,6 +201,26 @@ export function buildLocalBusinessSchema(path: string): JsonLd {
       addressRegion: "TX",
       addressCountry: "US",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 30.2672,
+      longitude: -97.7431,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "07:00",
+        closes: "18:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: "08:00",
+        closes: "14:00",
+      },
+    ],
+    priceRange: "$$",
     areaServed: buildAreaServedList(),
     serviceType: [...BUSINESS_SERVICE_TYPES],
     hasOfferCatalog: {

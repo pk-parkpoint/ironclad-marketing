@@ -3,12 +3,20 @@ import { CtaBanner } from "@/components/layout/cta-banner";
 import { Hero } from "@/components/layout/hero";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { StructuredData } from "@/components/seo/structured-data";
 import { FaqAccordion } from "@/components/service/faq-accordion";
 import { ServiceGridTile } from "@/components/service/service-grid-tile";
 import { FAQ_ENTRIES } from "@/content/faqs";
 import { SERVICES } from "@/content/services";
 import { getPublicContactInfo } from "@/lib/contact";
 import { buildPageMetadata } from "@/lib/seo";
+import {
+  buildBreadcrumbItems,
+  buildBreadcrumbListSchema,
+  buildFaqPageSchema,
+  buildLocalBusinessSchema,
+  buildSchemaStack,
+} from "@/lib/structured-data";
 
 export const metadata = buildPageMetadata({
   title: "Plumbing Services in Austin, TX | Ironclad Plumbing",
@@ -24,10 +32,16 @@ const SERVICE_HUB_FAQS = FAQ_ENTRIES.filter((entry) =>
 
 export default function PlumbingHubPage() {
   const contactInfo = getPublicContactInfo();
+  const schemas = buildSchemaStack(
+    buildBreadcrumbListSchema(buildBreadcrumbItems("/plumbing", "Plumbing")),
+    buildLocalBusinessSchema("/plumbing"),
+    buildFaqPageSchema(SERVICE_HUB_FAQS.map((faq) => ({ question: faq.question, answer: faq.answer }))),
+  );
 
   return (
     <>
       <SiteHeader />
+      <StructuredData data={schemas} id="ld-plumbing-hub" />
       <main>
         <Hero
           actions={[
