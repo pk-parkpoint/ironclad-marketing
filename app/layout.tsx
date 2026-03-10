@@ -154,6 +154,7 @@ export default function RootLayout({
         <meta name="geo.placename" content="Austin" />
         <meta name="geo.position" content="30.2672;-97.7431" />
         <meta name="ICBM" content="30.2672, -97.7431" />
+        {(GTM_ID || GA4_MEASUREMENT_ID) ? <link rel="preconnect" href="https://www.googletagmanager.com" /> : null}
         <link
           rel="preload"
           as="image"
