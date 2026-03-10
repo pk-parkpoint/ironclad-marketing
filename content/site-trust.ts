@@ -21,6 +21,15 @@ export const BUSINESS_SERVICE_TYPES = [
   "Fixture installation and repair",
   "Water treatment",
   "Emergency plumbing",
+  "Slab leak detection and repair",
+  "Water heater repair",
+  "Water heater installation",
+  "Sewer camera inspection",
+  "Trenchless sewer repair",
+  "Toilet repair and installation",
+  "Faucet and sink repair",
+  "Garbage disposal repair and installation",
+  "Hydro jetting",
 ] as const;
 
 export function buildAreaServedList(): string[] {

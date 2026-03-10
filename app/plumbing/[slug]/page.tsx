@@ -261,6 +261,28 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
           </div>
         </section>
 
+        {/* ── Section 3: Process Steps ── */}
+        <section className="bg-[#F9FAFB] py-16 md:py-20">
+          <div className="mx-auto w-full max-w-[1280px] px-6">
+            <h2 className="text-center text-[32px] font-bold leading-[1.2] text-[#111827]">
+              {detail.processHeading}
+            </h2>
+            <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {detail.processSteps.slice(0, 4).map((step) => (
+                <div key={step.number} className="text-center">
+                  <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#2563EB] text-[20px] font-bold text-white">
+                    {step.number}
+                  </span>
+                  <h3 className="mt-4 text-[18px] font-bold text-[#111827]">{step.title}</h3>
+                  <p className="mt-2 text-[15px] leading-[1.65] text-[#374151]" data-speakable="service-desc">
+                    {step.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <ServiceRelatedLinks
           relatedCities={relatedCities}
           relatedGuides={relatedGuides}
