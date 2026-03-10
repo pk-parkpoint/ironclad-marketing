@@ -63,17 +63,27 @@ async function main() {
     {
       label: "homepage",
       path: "/",
-      requiredPatterns: [/The Plumber Austin Trusts\./i, /application\/ld\+json/i],
+      requiredPatterns: [/The Plumber Austin Trusts\./i, /application\/ld\+json/i, /View All \d+ Services/i],
     },
     {
-      label: "service page",
+      label: "service page (core)",
       path: "/plumbing/repairs",
       requiredPatterns: [/Plumbing Repairs That Last/i, /application\/ld\+json/i, /Related Services and Resources/i],
+    },
+    {
+      label: "service page (new)",
+      path: "/plumbing/slab-leak-repair",
+      requiredPatterns: [/Slab Leak Repair/i, /application\/ld\+json/i, /data-speakable/i],
     },
     {
       label: "city page",
       path: "/service-area/austin-tx",
       requiredPatterns: [/FAQ for\s*Austin/i, /application\/ld\+json/i, /Request Service in Austin/i],
+    },
+    {
+      label: "FAQ hub",
+      path: "/faq",
+      requiredPatterns: [/Frequently Asked Questions/i, /application\/ld\+json/i],
     },
   ];
 
