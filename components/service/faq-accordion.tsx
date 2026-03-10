@@ -162,6 +162,7 @@ export function FaqAccordion({
               >
                 <div
                   className="px-6 pb-5 text-sm text-muted md:text-base"
+                  data-speakable="faq-answer"
                   ref={(element) => {
                     panelRefs.current[index] = element;
                   }}

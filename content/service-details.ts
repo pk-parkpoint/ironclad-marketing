@@ -756,6 +756,575 @@ const EMERGENCY_DETAIL: ServiceDetail = {
   bookingCtaText: "Get Emergency Help",
 };
 
+const SLAB_LEAK_REPAIR_DETAIL: ServiceDetail = {
+  slug: "slab-leak-repair",
+  heroDescription:
+    "A slab leak is a water or drain line leak beneath your home's concrete foundation. In Austin, where expansive clay soil swells and shrinks with moisture, even a small slab leak can saturate the soil, shift your foundation, and cause cracks in walls and floors within weeks. Ironclad pinpoints slab leaks non-invasively and repairs them with the least disruption to your home.",
+  symptomsHeading: "Signs of a Slab Leak",
+  symptoms: [
+    "Unexplained spike in your water bill",
+    "Sound of running water when all fixtures are off",
+    "Warm or damp spots on your floor",
+    "Cracks in walls, baseboards, or tile",
+    "Mildew or musty smell with no visible source",
+    "Foundation shifting or doors that no longer close properly",
+    "Water meter spinning with nothing running",
+  ],
+  solutionsHeading: "How We Repair Slab Leaks",
+  solutions: [
+    "Electronic and acoustic leak detection to pinpoint the exact location",
+    "Spot repair through minimal slab access",
+    "Pipe reroute above the slab to bypass the damaged section",
+    "Epoxy pipe lining for multi-point deterioration",
+    "Full repipe when the supply system has widespread failure",
+    "Post-repair pressure testing and verification",
+  ],
+  austinNoteTitle: "Austin Note",
+  austinNoteBody:
+    "Austin's clay-heavy Blackland Prairie soil is one of the most expansive in the U.S. When a slab leak saturates the soil beneath your foundation, the clay swells unevenly. This differential movement cracks slabs, shifts door frames, and can cause structural damage that costs $10,000+ to remediate. Neighborhoods like Allandale, Crestview, Hyde Park, and Travis Heights — where homes from the 1950s–70s still have original copper supply lines — are the most common areas we service for slab leaks.",
+  processHeading: "What to Expect",
+  processSteps: [
+    { number: "1", title: "Detect", description: "Electronic and thermal detection to pinpoint the leak without demolition." },
+    { number: "2", title: "Options", description: "Written estimate with repair options: spot repair, reroute, or reline." },
+    { number: "3", title: "Repair", description: "We complete the repair with minimal disruption to your flooring." },
+    { number: "4", title: "Verify", description: "Pressure test to confirm the leak is resolved." },
+  ],
+  trustPoints: [
+    { title: "Non-invasive detection", description: "We pinpoint the leak before cutting into anything." },
+    { title: "Multiple repair options", description: "Spot repair, reroute, or reline — you choose." },
+    { title: "Foundation awareness", description: "We understand Austin's soil and its impact on your home." },
+  ],
+  faqs: [
+    {
+      question: "How much does slab leak repair cost in Austin?",
+      answer:
+        "Spot repairs typically run $1,500–$3,500. Reroutes range from $2,500–$5,000. Full repipes cost more but solve systemic issues. We give you a specific written price after detection.",
+    },
+    {
+      question: "How do you find a slab leak without tearing up my floor?",
+      answer:
+        "We use electronic acoustic sensors and thermal imaging to detect the leak through the slab. This pinpoints the location to within a few inches, so only a small access point is needed.",
+    },
+    {
+      question: "Should I repair or reroute a slab leak?",
+      answer:
+        "If it's an isolated leak in an otherwise sound pipe, spot repair is cost-effective. If you've had multiple slab leaks or the pipe shows widespread corrosion, a reroute or repipe prevents future failures.",
+    },
+    {
+      question: "Does homeowners insurance cover slab leak repair?",
+      answer:
+        "Most policies cover sudden pipe failures but not gradual corrosion. The resulting water damage (flooring, drywall) is more likely covered than the plumbing repair itself. We provide documentation for your claim.",
+    },
+  ],
+  bookingCtaText: "Book Slab Leak Repair",
+};
+
+const WATER_HEATER_REPAIR_DETAIL: ServiceDetail = {
+  slug: "water-heater-repair",
+  heroDescription:
+    "No hot water usually means a fixable problem — a failed thermostat, a burned-out heating element, a tripped reset button, or a faulty gas valve. Before you assume you need a full replacement, let us diagnose it. Many water heater issues are same-day repairs that cost a fraction of a new unit.",
+  symptomsHeading: "Signs Your Water Heater Needs Repair",
+  symptoms: [
+    "No hot water at all",
+    "Water is lukewarm but not hot",
+    "Hot water runs out much faster than usual",
+    "Pilot light keeps going out",
+    "Popping or rumbling sounds from the tank",
+    "Water pooling at the base of the unit",
+    "Discolored or rusty hot water",
+  ],
+  solutionsHeading: "What We Repair",
+  solutions: [
+    "Thermostat diagnosis and replacement",
+    "Heating element replacement (electric units)",
+    "Gas valve and thermocouple repair",
+    "Pilot light and ignitor repair",
+    "Anode rod replacement to prevent tank corrosion",
+    "T&P (temperature and pressure) relief valve replacement",
+    "Dip tube replacement",
+    "Sediment flush and maintenance",
+  ],
+  austinNoteTitle: "Austin Note",
+  austinNoteBody:
+    "Austin's 184 ppm hard water accelerates sediment buildup inside your tank. That sediment insulates the heating element from the water, forcing the unit to work harder and fail sooner. If your water heater is making popping or rumbling noises, sediment is the most likely cause — and a flush may restore normal operation.",
+  processHeading: "What to Expect",
+  processSteps: [
+    { number: "1", title: "Diagnose", description: "We test thermostats, elements, gas valves, and connections." },
+    { number: "2", title: "Recommend", description: "Repair vs. replace recommendation with honest reasoning." },
+    { number: "3", title: "Repair", description: "Same-day repair with parts we carry on our trucks." },
+    { number: "4", title: "Test", description: "We verify hot water output and check for leaks." },
+  ],
+  trustPoints: [
+    { title: "Repair-first approach", description: "We fix what's fixable instead of pushing a replacement." },
+    { title: "Same-day parts", description: "Common parts on every truck for same-day turnaround." },
+    { title: "Honest replace guidance", description: "If replacement makes more sense, we'll tell you why." },
+  ],
+  faqs: [
+    {
+      question: "How much does water heater repair cost in Austin?",
+      answer:
+        "Most repairs run $150–$500 depending on the part and labor. Thermostat and element replacements are on the lower end; gas valve replacements are higher. You get a written price before we start.",
+    },
+    {
+      question: "Should I repair or replace my water heater?",
+      answer:
+        "If your unit is under 8 years old and the repair is straightforward, repair usually makes sense. If it's over 10 years, leaking from the tank, or needs repeated repairs, replacement is more cost-effective long-term.",
+    },
+    {
+      question: "Why is my water heater making noise?",
+      answer:
+        "Popping or rumbling usually means sediment buildup at the bottom of the tank. A flush often resolves it. If the noise persists, the tank may be deteriorating internally.",
+    },
+    {
+      question: "Can you repair a tankless water heater?",
+      answer:
+        "Yes. We service both tank and tankless units. Tankless repairs commonly involve flow sensors, ignition components, and descaling.",
+    },
+  ],
+  bookingCtaText: "Book Water Heater Repair",
+};
+
+const WATER_HEATER_INSTALLATION_DETAIL: ServiceDetail = {
+  slug: "water-heater-installation",
+  heroDescription:
+    "Whether you're replacing a failing unit or upgrading to something more efficient, proper installation determines how well your water heater performs and how long it lasts. Ironclad handles the full job — removal, installation, code-compliant connections, expansion tank, and permits — so you get reliable hot water from day one.",
+  symptomsHeading: "When to Consider a New Water Heater",
+  symptoms: [
+    "Your unit is 10+ years old and losing efficiency",
+    "Tank is leaking from the bottom (not repairable)",
+    "Repeated repairs are adding up in cost",
+    "You're remodeling and need a different size or location",
+    "You want to switch from tank to tankless (or vice versa)",
+    "Your household hot water demand has increased",
+  ],
+  solutionsHeading: "What We Install",
+  solutions: [
+    "Standard tank water heaters (40–75 gallon, gas and electric)",
+    "High-efficiency tank water heaters",
+    "Tankless water heaters (indoor and outdoor models)",
+    "Heat pump / hybrid water heaters",
+    "Expansion tank installation (required by code in many jurisdictions)",
+    "Recirculation pump systems for instant hot water",
+    "Gas line and electrical upgrades as needed",
+  ],
+  austinNoteTitle: "Austin Note",
+  austinNoteBody:
+    "Austin's building code requires an expansion tank on new water heater installations connected to a closed plumbing system. We include this in every quote. If you're in an older home, we'll also check your gas line sizing, venting, and drain pan to make sure everything meets current code — not just the heater itself.",
+  processHeading: "What to Expect",
+  processSteps: [
+    { number: "1", title: "Evaluate", description: "We assess your current setup, hot water demand, and fuel source." },
+    { number: "2", title: "Quote", description: "Written estimate with 2–3 options at different price points." },
+    { number: "3", title: "Remove", description: "We disconnect and remove the old unit." },
+    { number: "4", title: "Install", description: "New unit installed with code-compliant connections, expansion tank, and drain pan." },
+    { number: "5", title: "Verify", description: "Full system test plus warranty documentation for manufacturer and labor." },
+  ],
+  trustPoints: [
+    { title: "Code-compliant every time", description: "Expansion tank, drain pan, proper venting — all included." },
+    { title: "Same-day available", description: "Standard tank swaps often completed the same day." },
+    { title: "Permits handled", description: "We pull permits when required and schedule inspections." },
+  ],
+  faqs: [
+    {
+      question: "How much does water heater installation cost in Austin?",
+      answer:
+        "Standard tank replacements typically run $1,800–$3,500 installed. Tankless installations range from $3,500–$6,500 depending on upgrades needed. We provide a specific written estimate.",
+    },
+    {
+      question: "How long does installation take?",
+      answer:
+        "Standard tank swaps take 2–4 hours. Tankless installations or fuel-type changes may take a full day due to gas line or venting work.",
+    },
+    {
+      question: "Should I get a tank or tankless water heater?",
+      answer:
+        "Tanks are less expensive upfront and simpler to install. Tankless lasts longer, uses less energy, and never runs out of hot water — but costs more initially and may need gas line or venting upgrades. We'll help you weigh the tradeoffs.",
+    },
+    {
+      question: "Do you remove the old water heater?",
+      answer:
+        "Yes. Removal and disposal of your old unit is included in every installation quote.",
+    },
+  ],
+  bookingCtaText: "Book Installation",
+};
+
+const SEWER_CAMERA_INSPECTION_DETAIL: ServiceDetail = {
+  slug: "sewer-camera-inspection",
+  heroDescription:
+    "A sewer camera inspection is the fastest way to know exactly what's happening inside your sewer line. Instead of guessing or digging, we feed a high-definition camera through the line and record everything — root intrusion, pipe cracks, bellied sections, blockages, and connection failures. You see the footage. We explain what it means.",
+  symptomsHeading: "When You Need a Sewer Camera Inspection",
+  symptoms: [
+    "Recurring sewer backups or slow drains",
+    "Buying a home and want to check the sewer line",
+    "Sewage odor in the yard or near cleanouts",
+    "Roots visible near sewer line path",
+    "Previous repair and you want to verify condition",
+    "Insurance or warranty documentation needed",
+  ],
+  solutionsHeading: "What We Inspect For",
+  solutions: [
+    "Root intrusion and root damage",
+    "Pipe cracks, breaks, and offsets",
+    "Bellied or sagging pipe sections that trap waste",
+    "Grease and mineral buildup",
+    "Pipe material identification (clay, cast iron, PVC, orangeburg)",
+    "Connection failures at joints",
+    "Locating cleanouts and determining pipe routing",
+  ],
+  austinNoteTitle: "Austin Note",
+  austinNoteBody:
+    "We recommend sewer camera inspections for any Austin home purchase, especially in older neighborhoods. Homes built before 1980 often have clay tile or cast-iron sewer lines that may be near end-of-life. A $300 inspection before closing can save you from a $10,000+ surprise after move-in. We provide recorded footage you can share with your realtor or home inspector.",
+  processHeading: "What to Expect",
+  processSteps: [
+    { number: "1", title: "Access", description: "We access the sewer line through an existing cleanout or toilet pull." },
+    { number: "2", title: "Inspect", description: "HD camera travels the full length of the line, recording everything." },
+    { number: "3", title: "Review", description: "We review the footage with you in real time and explain findings." },
+    { number: "4", title: "Report", description: "You receive a written summary and recorded footage for your records." },
+  ],
+  trustPoints: [
+    { title: "HD recorded footage", description: "You keep the footage — share it with realtors, insurers, or inspectors." },
+    { title: "No upsell pressure", description: "We report what we find, not what generates the biggest repair ticket." },
+    { title: "Pre-purchase specialist", description: "Protecting Austin home buyers from hidden sewer problems." },
+  ],
+  faqs: [
+    {
+      question: "How much does a sewer camera inspection cost in Austin?",
+      answer:
+        "A standard camera inspection runs $250–$450 depending on access and line length. It's one of the best investments you can make before buying a home or planning a sewer repair.",
+    },
+    {
+      question: "Should I get a sewer inspection before buying a house?",
+      answer:
+        "Yes, especially in Austin. Sewer line replacement can cost $5,000–$15,000+. A camera inspection before closing gives you negotiating leverage or lets you budget for future work.",
+    },
+    {
+      question: "How long does a sewer camera inspection take?",
+      answer:
+        "Typically 30–60 minutes for a standard residential line. You see the footage as we go.",
+    },
+    {
+      question: "Can you locate where the sewer line runs in my yard?",
+      answer:
+        "Yes. The camera head has a locator signal that lets us mark the line path and depth from the surface. This is especially useful before landscaping or construction projects.",
+    },
+  ],
+  bookingCtaText: "Book Camera Inspection",
+};
+
+const TRENCHLESS_SEWER_REPAIR_DETAIL: ServiceDetail = {
+  slug: "trenchless-sewer-repair",
+  heroDescription:
+    "Traditional sewer repair means digging a trench across your yard, tearing up landscaping, driveways, and sometimes sidewalks. Trenchless repair achieves the same result — a fully restored sewer line — with minimal excavation. We use pipe lining (CIPP) and pipe bursting to repair or replace your sewer line while keeping your property intact.",
+  symptomsHeading: "When Trenchless Repair Makes Sense",
+  symptoms: [
+    "Cracked or offset sewer pipe identified by camera inspection",
+    "Root intrusion that keeps coming back after clearing",
+    "Bellied pipe sections that trap waste and cause backups",
+    "Aging clay or cast-iron pipe nearing end-of-life",
+    "You want to avoid destroying your yard, driveway, or landscaping",
+    "Insurance or warranty documentation shows pipe deterioration",
+  ],
+  solutionsHeading: "Trenchless Methods We Use",
+  solutions: [
+    "Cured-in-place pipe lining (CIPP) — a resin-coated liner is inserted and cured inside the existing pipe",
+    "Pipe bursting — the old pipe is fractured outward while a new HDPE pipe is pulled through",
+    "Spot lining for localized damage in otherwise sound pipes",
+    "Camera inspection before and after to verify the repair",
+    "Traditional excavation when trenchless isn't suitable (we'll explain why)",
+  ],
+  austinNoteTitle: "Austin Note",
+  austinNoteBody:
+    "Austin's mature tree canopy is beautiful but hard on sewer lines. Live oaks, pecans, and cedar elms send aggressive root systems toward moisture sources — including cracked sewer joints. Trenchless lining seals those cracks from the inside, cutting off root access without cutting down trees. It's the most common trenchless method we use in Central Austin neighborhoods.",
+  processHeading: "What to Expect",
+  processSteps: [
+    { number: "1", title: "Camera", description: "Pre-repair camera inspection to assess pipe condition and determine method." },
+    { number: "2", title: "Quote", description: "Written estimate comparing trenchless vs. traditional options." },
+    { number: "3", title: "Prep", description: "Line is cleaned and any obstructions are cleared." },
+    { number: "4", title: "Repair", description: "Liner is installed and cured, or old pipe is burst and replaced." },
+    { number: "5", title: "Verify", description: "Post-repair camera confirms the new line is sound." },
+  ],
+  trustPoints: [
+    { title: "Minimal yard damage", description: "Usually just 1–2 small access points instead of a full trench." },
+    { title: "Camera-verified", description: "Before and after camera footage so you see the difference." },
+    { title: "Honest method selection", description: "We use trenchless when it fits — not when it doesn't." },
+  ],
+  faqs: [
+    {
+      question: "How much does trenchless sewer repair cost in Austin?",
+      answer:
+        "Pipe lining typically runs $4,000–$8,000 for a standard residential line. Pipe bursting ranges from $6,000–$12,000. Exact pricing depends on line length, depth, and condition.",
+    },
+    {
+      question: "Is trenchless as durable as traditional replacement?",
+      answer:
+        "Yes. CIPP liners and HDPE pipe used in bursting have a 50+ year expected lifespan. Many manufacturers warranty the liner for 50 years.",
+    },
+    {
+      question: "Can trenchless fix a bellied pipe?",
+      answer:
+        "Lining alone cannot fix a bellied (sagging) pipe — the sag remains even with a new liner. Pipe bursting can in some cases, or a short excavation at the sag point combined with lining elsewhere is a common solution.",
+    },
+    {
+      question: "How long does trenchless repair take?",
+      answer:
+        "Most residential trenchless repairs are completed in one day. The liner cures in 3–6 hours depending on diameter and length.",
+    },
+  ],
+  bookingCtaText: "Book Trenchless Repair",
+};
+
+const TOILET_REPAIR_INSTALLATION_DETAIL: ServiceDetail = {
+  slug: "toilet-repair-installation",
+  heroDescription:
+    "A running toilet wastes up to 200 gallons of water per day. A weak flush means something's wrong inside the tank or the drain path. Whether your toilet needs a flapper, a fill valve, a wax ring, or a full replacement, Ironclad handles it quickly with upfront pricing and tested results before we leave.",
+  symptomsHeading: "Signs Your Toilet Needs Service",
+  symptoms: [
+    "Toilet runs continuously or cycles on and off",
+    "Weak or incomplete flush",
+    "Toilet rocks or wobbles on the floor",
+    "Water pooling at the base",
+    "Cracks in the bowl or tank",
+    "Frequent clogs that a plunger can't clear",
+    "Gurgling sounds when other fixtures drain",
+  ],
+  solutionsHeading: "What We Do",
+  solutions: [
+    "Flapper, fill valve, and flush valve repair or replacement",
+    "Wax ring replacement to stop base leaks",
+    "Toilet flange repair or replacement",
+    "New toilet installation (standard, low-flow, comfort-height, elongated, ADA-compliant)",
+    "Bidet seat and bidet attachment installation",
+    "Toilet-to-floor bolt tightening and stabilization",
+    "Supply line replacement",
+  ],
+  austinNoteTitle: "Austin Note",
+  austinNoteBody:
+    "Austin Water offers rebates for replacing old toilets with WaterSense-certified low-flow models. If you're replacing a toilet that uses 3.5+ gallons per flush with a 1.28 GPF model, check Austin Water's rebate program — it can offset part of the cost. We install WaterSense models and can help you choose one that flushes well despite using less water.",
+  processHeading: "What to Expect",
+  processSteps: [
+    { number: "1", title: "Diagnose", description: "We identify the problem — tank internals, seal, flange, or drain." },
+    { number: "2", title: "Quote", description: "Written estimate for repair or replacement with options." },
+    { number: "3", title: "Fix", description: "Repair or install with proper sealing and connections." },
+    { number: "4", title: "Test", description: "Multiple flush tests and leak check before we leave." },
+  ],
+  trustPoints: [
+    { title: "Same-day repair", description: "Common toilet repairs completed in under an hour." },
+    { title: "Water-saving options", description: "Low-flow models that actually flush well." },
+    { title: "Clean installation", description: "Old wax, caulk, and bolts removed — not left behind." },
+  ],
+  faqs: [
+    {
+      question: "How much does toilet repair cost in Austin?",
+      answer:
+        "Internal repairs (flapper, fill valve) typically run $125–$250. Wax ring and flange repairs run $200–$400. Full toilet replacement installed runs $350–$800+ depending on the model.",
+    },
+    {
+      question: "Should I repair or replace my toilet?",
+      answer:
+        "If the bowl or tank is cracked, replace it. If it's an older model using 3.5+ GPF, replacing saves water and money long-term. For simple internal issues on a modern toilet, repair is usually the better call.",
+    },
+    {
+      question: "Can I buy my own toilet and have you install it?",
+      answer:
+        "Yes. We install customer-supplied toilets regularly. We warranty our labor but not the fixture itself.",
+    },
+    {
+      question: "Why does my toilet keep running?",
+      answer:
+        "Usually a worn flapper, a faulty fill valve, or an incorrect water level. These are inexpensive, same-day repairs.",
+    },
+  ],
+  bookingCtaText: "Book Toilet Service",
+};
+
+const FAUCET_SINK_REPAIR_INSTALLATION_DETAIL: ServiceDetail = {
+  slug: "faucet-sink-repair-installation",
+  heroDescription:
+    "A dripping faucet wastes up to 3,000 gallons per year. A leaking sink connection damages the cabinet below. These aren't cosmetic problems — they're plumbing problems with real cost. Ironclad repairs and installs kitchen faucets, bathroom faucets, and all sink types with proper sealing and tested connections.",
+  symptomsHeading: "Signs You Need Faucet or Sink Service",
+  symptoms: [
+    "Faucet drips after you turn it off",
+    "Handles are stiff, loose, or hard to turn",
+    "Low water pressure from a single faucet",
+    "Water leaking under the sink",
+    "Rust, corrosion, or mineral buildup on the fixture",
+    "You're upgrading as part of a kitchen or bath remodel",
+  ],
+  solutionsHeading: "What We Do",
+  solutions: [
+    "Faucet repair (cartridge, ceramic disc, ball-type, and compression)",
+    "Faucet replacement and new installation",
+    "Undermount, drop-in, farmhouse, and vessel sink installation",
+    "Supply line replacement",
+    "Shut-off valve repair and replacement under sinks",
+    "P-trap and drain connection repair",
+    "Garbage disposal connection with new sink installs",
+  ],
+  austinNoteTitle: "Austin Note",
+  austinNoteBody:
+    "Austin's hard water deposits calcium and mineral buildup inside faucet cartridges and aerators. If your faucet handle has gotten stiff or your flow has decreased, a cartridge replacement and aerator cleaning often restores full function. For fixtures older than 10 years, the buildup may be severe enough that replacement is the cleaner option.",
+  processHeading: "What to Expect",
+  processSteps: [
+    { number: "1", title: "Assess", description: "We inspect the fixture and supply connections." },
+    { number: "2", title: "Quote", description: "Written estimate for repair or replacement." },
+    { number: "3", title: "Install", description: "Professional installation with proper sealing and torque." },
+    { number: "4", title: "Test", description: "Leak check, flow test, and drain verification." },
+  ],
+  trustPoints: [
+    { title: "Precision installation", description: "Correct sealing prevents leaks behind walls and under cabinets." },
+    { title: "Customer fixtures welcome", description: "Buy your own — we install it right." },
+    { title: "Hard-water expertise", description: "We know which fixtures hold up in Austin's water." },
+  ],
+  faqs: [
+    {
+      question: "How much does faucet replacement cost?",
+      answer:
+        "Labor for faucet installation typically runs $150–$300 depending on complexity and access. The fixture cost is separate. We can supply one or install yours.",
+    },
+    {
+      question: "Can you install a farmhouse sink?",
+      answer:
+        "Yes. Farmhouse sinks often require cabinet modification and different drain configurations. We handle the plumbing side and can coordinate with your contractor on the cabinet work.",
+    },
+    {
+      question: "Why is my faucet handle hard to turn?",
+      answer:
+        "Usually mineral buildup inside the cartridge. A cartridge replacement typically restores smooth operation. In Austin's hard water, this is very common on fixtures older than 5 years.",
+    },
+    {
+      question: "My sink drains slowly — is that a faucet problem?",
+      answer:
+        "No, that's a drain issue. The P-trap or drain line may have buildup. We can clear it during the same visit if needed.",
+    },
+  ],
+  bookingCtaText: "Book Faucet & Sink Service",
+};
+
+const GARBAGE_DISPOSAL_REPAIR_INSTALLATION_DETAIL: ServiceDetail = {
+  slug: "garbage-disposal-repair-installation",
+  heroDescription:
+    "A jammed, humming, or leaking garbage disposal doesn't always need replacing. In many cases, a reset, a cleared jam, or a seal replacement gets it working again. When replacement is the better option, we install the new unit and handle the electrical and plumbing connections so it works properly from the start.",
+  symptomsHeading: "Signs Your Disposal Needs Service",
+  symptoms: [
+    "Disposal hums but doesn't spin",
+    "Disposal doesn't turn on at all",
+    "Leaking from the bottom or side",
+    "Persistent bad odor even after cleaning",
+    "Frequent jamming that requires manual resets",
+    "Grinding noise has changed or gotten louder",
+  ],
+  solutionsHeading: "What We Do",
+  solutions: [
+    "Jam clearing and manual reset",
+    "Disposal repair (bearings, seals, splash guard)",
+    "New disposal installation (1/3 HP to 1 HP models)",
+    "Disposal replacement with upgraded unit",
+    "Electrical connection and switch wiring",
+    "Dishwasher drain connection to disposal",
+    "Drain line connection and leak testing",
+  ],
+  austinNoteTitle: "Austin Note",
+  austinNoteBody:
+    "Most Austin homes have disposals connected to the kitchen drain and often to the dishwasher drain as well. When we install or replace a disposal, we verify both connections and test the dishwasher drain path too. A common issue we see is a clogged disposal causing dishwasher backup — a single visit fixes both.",
+  processHeading: "What to Expect",
+  processSteps: [
+    { number: "1", title: "Diagnose", description: "We determine if the issue is a jam, electrical, or mechanical failure." },
+    { number: "2", title: "Quote", description: "Repair vs. replacement quote with model options." },
+    { number: "3", title: "Install", description: "New unit mounted, wired, and plumbed." },
+    { number: "4", title: "Test", description: "Tested with water running — no leaks, no vibration, proper drainage." },
+  ],
+  trustPoints: [
+    { title: "Repair-first approach", description: "If a jam clear or reset fixes it, we won't push a replacement." },
+    { title: "Proper electrical", description: "Wired and connected to code — not jury-rigged." },
+    { title: "Complete connection", description: "Drain and dishwasher connections included and tested." },
+  ],
+  faqs: [
+    {
+      question: "How much does garbage disposal installation cost?",
+      answer:
+        "A standard disposal replacement including the unit runs $250–$550 installed. Premium models with longer warranties and more power cost more. We provide a specific written estimate.",
+    },
+    {
+      question: "My disposal hums but won't spin — is it broken?",
+      answer:
+        "Probably not. A humming disposal usually has a jam. We use an Allen wrench to free the impellers and clear the blockage. If the motor is burned out, we'll recommend replacement.",
+    },
+    {
+      question: "What size disposal do I need?",
+      answer:
+        "For most Austin households, a 1/2 HP model handles daily use well. Families that cook frequently or have large households may benefit from a 3/4 or 1 HP unit. We recommend based on your usage.",
+    },
+    {
+      question: "Can you add a disposal to a sink that doesn't have one?",
+      answer:
+        "Yes. We handle the plumbing modifications, electrical connection, and switch installation. The sink needs a standard drain opening (3.5 inches).",
+    },
+  ],
+  bookingCtaText: "Book Disposal Service",
+};
+
+const HYDRO_JETTING_DETAIL: ServiceDetail = {
+  slug: "hydro-jetting",
+  heroDescription:
+    "Hydro jetting uses high-pressure water — up to 4,000 PSI — to scour the inside of your sewer and drain lines. It removes grease, mineral scale, tree roots, and years of buildup that a cable snake can't touch. It's the difference between poking a hole through a clog and restoring the full diameter of the pipe.",
+  symptomsHeading: "When You Need Hydro Jetting",
+  symptoms: [
+    "Recurring drain clogs that come back after snaking",
+    "Grease buildup in commercial or heavy-use kitchen lines",
+    "Slow drainage throughout multiple fixtures",
+    "Camera inspection shows heavy scale or root intrusion",
+    "Preparing a line for pipe lining (CIPP) — jetting is required first",
+    "Sewage odor even after drain cleaning",
+  ],
+  solutionsHeading: "What We Do",
+  solutions: [
+    "High-pressure hydro jetting (up to 4,000 PSI) for sewer main lines",
+    "Kitchen drain jetting for grease and food buildup",
+    "Root cutting and flushing via hydro jet nozzle",
+    "Pre-lining pipe preparation (required before CIPP installation)",
+    "Camera inspection before and after to verify results",
+    "Descaling of mineral-encrusted lines",
+  ],
+  austinNoteTitle: "Austin Note",
+  austinNoteBody:
+    "Austin's combination of hard water, mature trees, and aging infrastructure makes hydro jetting one of the most effective maintenance tools available. For restaurants and commercial kitchens in Central Austin, annual jetting of grease lines prevents the costly backups that violate city code and shut down kitchens. For residential lines with recurring root problems, jetting plus root treatment can extend the life of an aging sewer line by years.",
+  processHeading: "What to Expect",
+  processSteps: [
+    { number: "1", title: "Camera", description: "Pre-jet camera inspection to assess pipe condition and identify concerns." },
+    { number: "2", title: "Quote", description: "Written estimate based on line length, diameter, and severity." },
+    { number: "3", title: "Jet", description: "High-pressure water scours the pipe walls clean." },
+    { number: "4", title: "Verify", description: "Post-jet camera confirms full pipe diameter is restored." },
+  ],
+  trustPoints: [
+    { title: "Camera-guided", description: "We inspect before jetting to avoid damaging compromised pipes." },
+    { title: "Full-diameter restoration", description: "Not a hole through the clog — the entire pipe is cleaned." },
+    { title: "Safe pipe assessment", description: "We won't jet a pipe that can't handle the pressure." },
+  ],
+  faqs: [
+    {
+      question: "How much does hydro jetting cost in Austin?",
+      answer:
+        "Residential hydro jetting typically runs $350–$800 depending on line length and access. Commercial or severely clogged lines may cost more. Camera inspection is usually included.",
+    },
+    {
+      question: "Is hydro jetting safe for old pipes?",
+      answer:
+        "It depends on the pipe condition. We always run a camera first. If the pipe is fragile, cracked, or deteriorating, we'll recommend an alternative. Jetting is safe for sound PVC, cast iron, and clay pipes.",
+    },
+    {
+      question: "How often should sewer lines be jetted?",
+      answer:
+        "Most residential lines don't need routine jetting. If you have recurring root intrusion or heavy grease buildup, annual or biannual jetting can prevent emergencies. Commercial kitchen lines often need quarterly service.",
+    },
+    {
+      question: "What's the difference between snaking and hydro jetting?",
+      answer:
+        "Snaking pokes through a blockage. Jetting removes the blockage and cleans the pipe walls. Snaking is cheaper for simple clogs; jetting is better for buildup, grease, roots, and recurring problems.",
+    },
+  ],
+  bookingCtaText: "Book Hydro Jetting",
+};
+
 const SERVICE_DETAILS_BY_SLUG: Partial<Record<string, ServiceDetail>> = {
   repairs: REPAIRS_DETAIL,
   "drain-cleaning": DRAIN_CLEANING_DETAIL,
@@ -767,6 +1336,15 @@ const SERVICE_DETAILS_BY_SLUG: Partial<Record<string, ServiceDetail>> = {
   fixtures: FIXTURES_DETAIL,
   "water-treatment": WATER_TREATMENT_DETAIL,
   emergency: EMERGENCY_DETAIL,
+  "slab-leak-repair": SLAB_LEAK_REPAIR_DETAIL,
+  "water-heater-repair": WATER_HEATER_REPAIR_DETAIL,
+  "water-heater-installation": WATER_HEATER_INSTALLATION_DETAIL,
+  "sewer-camera-inspection": SEWER_CAMERA_INSPECTION_DETAIL,
+  "trenchless-sewer-repair": TRENCHLESS_SEWER_REPAIR_DETAIL,
+  "toilet-repair-installation": TOILET_REPAIR_INSTALLATION_DETAIL,
+  "faucet-sink-repair-installation": FAUCET_SINK_REPAIR_INSTALLATION_DETAIL,
+  "garbage-disposal-repair-installation": GARBAGE_DISPOSAL_REPAIR_INSTALLATION_DETAIL,
+  "hydro-jetting": HYDRO_JETTING_DETAIL,
 };
 
 function buildGenericServiceDetail(entry: ServiceEntry): ServiceDetail {

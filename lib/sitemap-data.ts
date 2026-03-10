@@ -77,6 +77,43 @@ export function toAbsoluteSitemapUrl(path: string): string {
   return normalized === "/" ? getSitemapBaseUrl() : `${getSitemapBaseUrl()}${normalized}`;
 }
 
+export type ImageSitemapEntry = {
+  pagePath: string;
+  images: Array<{ path: string; caption: string }>;
+};
+
+export function buildImageSitemapEntries(): ImageSitemapEntry[] {
+  const entries: ImageSitemapEntry[] = [];
+
+  // Service page hero images
+  const heroImages: Record<string, { file: string; alt: string }> = {
+    repairs: { file: "plumbing-repairs.jpg", alt: "Plumbing repair technician working in Austin home" },
+    "drain-cleaning": { file: "drain-cleaning.jpg", alt: "Professional drain cleaning service in Austin" },
+    "sewer-services": { file: "sewer-line-services.jpg", alt: "Sewer camera and diagnostic equipment in Austin" },
+    "water-heaters": { file: "water-heaters.jpg", alt: "Water heater installation and service in Austin" },
+    fixtures: { file: "fixture-installation.jpg", alt: "Plumbing fixture installation in Austin bathroom" },
+    emergency: { file: "emergency-plumbing.jpg", alt: "Emergency plumbing response in Austin" },
+  };
+
+  for (const service of SERVICES) {
+    const hero = heroImages[service.slug];
+    if (hero) {
+      entries.push({
+        pagePath: `/plumbing/${service.slug}`,
+        images: [{ path: `/media/services/${hero.file}`, caption: hero.alt }],
+      });
+    }
+  }
+
+  // Homepage OG image
+  entries.push({
+    pagePath: "/",
+    images: [{ path: "/og/ironclad-default.png", caption: "Ironclad Plumbing — Austin licensed plumber" }],
+  });
+
+  return entries;
+}
+
 export function buildSitemapGroups() {
   return {
     articles: buildArticleSitemapEntries(),

@@ -17,6 +17,7 @@ import { buildPageMetadata } from "@/lib/seo";
 import {
   buildBreadcrumbItems,
   buildBreadcrumbListSchema,
+  buildHowToSchema,
   buildImageObjectSchema,
   buildLocalBusinessSchema,
   buildServiceSchema,
@@ -114,6 +115,15 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
     buildLocalBusinessSchema(pagePath),
     buildServiceSchema(service),
     buildServiceFaqSchema(service.slug, detail.faqs),
+    buildHowToSchema({
+      name: `How ${service.title} Works`,
+      description: detail.heroDescription,
+      path: pagePath,
+      steps: detail.processSteps.map((step) => ({
+        title: step.title,
+        description: step.description,
+      })),
+    }),
     buildImageObjectSchema({
       alt: `${service.title} service in Austin, Texas`,
       height: 900,
@@ -169,10 +179,10 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
               >
                 {service.h1}
               </h1>
-              <p className="mt-4 max-w-[560px] text-[16px] leading-[1.7] text-white/85 md:text-[17px]">
+              <p className="mt-4 max-w-[560px] text-[16px] leading-[1.7] text-white/85 md:text-[17px]" data-speakable="hero">
                 {detail.heroDescription}
               </p>
-              <div className="mt-6 flex flex-wrap items-center gap-4 text-[14px] font-semibold text-white/90">
+              <div className="mt-6 flex flex-wrap items-center gap-4 text-[14px] font-semibold text-white/90" data-speakable="trust">
                 <span className="flex items-center gap-2">
                   <TrustIcon />
                   Licensed &amp; Insured

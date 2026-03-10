@@ -146,7 +146,7 @@ export function Hero({
           ) : null}
           <h1 className="font-display text-4xl font-bold tracking-tight text-white md:text-5xl">{heading}</h1>
           {subtitle ? (
-            <p className={`text-base text-white/80 md:text-lg ${centered ? "mx-auto max-w-[40rem]" : "max-w-[38rem]"}`}>
+            <p className={`text-base text-white/80 md:text-lg ${centered ? "mx-auto max-w-[40rem]" : "max-w-[38rem]"}`} data-speakable="hero">
               {subtitle}
             </p>
           ) : null}

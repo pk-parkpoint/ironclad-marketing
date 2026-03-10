@@ -17,6 +17,7 @@ export function GET() {
     "/sitemaps/services.xml",
     "/sitemaps/service-areas.xml",
     "/sitemaps/articles.xml",
+    "/sitemaps/images.xml",
   ];
 
   const body = sitemapPaths

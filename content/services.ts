@@ -87,6 +87,78 @@ export const SERVICES: ServiceEntry[] = [
       "Burst pipes, sewer backups, and gas smells handled fast with 24/7 emergency response.",
     h1: "Emergency Plumbing - When Minutes Matter",
   },
+  {
+    slug: "slab-leak-repair",
+    title: "Slab Leak Repair",
+    titleTag: "Slab Leak Repair in Austin, TX | Ironclad Plumbing",
+    metaDescription:
+      "Austin slab leak detection and repair with non-invasive pinpointing, reroutes, and epoxy lining to protect your foundation.",
+    h1: "Slab Leak Repair - Protect Your Foundation Before It Shifts",
+  },
+  {
+    slug: "water-heater-repair",
+    title: "Water Heater Repair",
+    titleTag: "Water Heater Repair in Austin, TX | Ironclad Plumbing",
+    metaDescription:
+      "Same-day water heater repair in Austin. Thermostats, elements, pilot lights, and valves diagnosed and fixed with upfront pricing.",
+    h1: "Water Heater Repair - Restore Hot Water Fast",
+  },
+  {
+    slug: "water-heater-installation",
+    title: "Water Heater Installation",
+    titleTag: "Water Heater Installation in Austin, TX | Ironclad Plumbing",
+    metaDescription:
+      "Tank and tankless water heater installation in Austin with code-compliant connections, permits, and manufacturer warranty.",
+    h1: "Water Heater Installation - Right Size, Right Fit, Done Right",
+  },
+  {
+    slug: "sewer-camera-inspection",
+    title: "Sewer Camera Inspection",
+    titleTag: "Sewer Camera Inspection in Austin, TX | Ironclad Plumbing",
+    metaDescription:
+      "HD sewer camera inspection in Austin to diagnose root intrusion, pipe damage, bellied lines, and blockages before repair.",
+    h1: "Sewer Camera Inspection - See What's Really Going On",
+  },
+  {
+    slug: "trenchless-sewer-repair",
+    title: "Trenchless Sewer Repair",
+    titleTag: "Trenchless Sewer Repair in Austin, TX | Ironclad Plumbing",
+    metaDescription:
+      "Trenchless pipe lining and pipe bursting in Austin. Repair your sewer line without destroying your yard or landscaping.",
+    h1: "Trenchless Sewer Repair - Fix the Line, Keep the Yard",
+  },
+  {
+    slug: "toilet-repair-installation",
+    title: "Toilet Repair & Installation",
+    titleTag: "Toilet Repair & Installation in Austin, TX | Ironclad Plumbing",
+    metaDescription:
+      "Running toilets, weak flushes, and new toilet installation handled same-day with upfront pricing in Austin.",
+    h1: "Toilet Repair & Installation - Stop the Run, Fix the Flush",
+  },
+  {
+    slug: "faucet-sink-repair-installation",
+    title: "Faucet & Sink Services",
+    titleTag: "Faucet & Sink Repair in Austin, TX | Ironclad Plumbing",
+    metaDescription:
+      "Dripping faucets, leaking sinks, and new installations repaired or replaced with precision in Austin homes.",
+    h1: "Faucet & Sink Repair - End the Drip, Upgrade the Function",
+  },
+  {
+    slug: "garbage-disposal-repair-installation",
+    title: "Garbage Disposal Services",
+    titleTag: "Garbage Disposal Repair & Install | Austin, TX | Ironclad",
+    metaDescription:
+      "Garbage disposal repair, replacement, and new installation in Austin. Jammed, leaking, or dead units fixed same-day.",
+    h1: "Garbage Disposal Repair & Installation - Quick Fix, Clean Sink",
+  },
+  {
+    slug: "hydro-jetting",
+    title: "Hydro Jetting",
+    titleTag: "Hydro Jetting in Austin, TX | Ironclad Plumbing",
+    metaDescription:
+      "Commercial-grade hydro jetting in Austin to blast grease, roots, and mineral buildup from sewer and drain lines.",
+    h1: "Hydro Jetting - When a Snake Isn't Enough",
+  },
 ];
 
 export const SERVICE_SLUG_SET = new Set(SERVICES.map((service) => service.slug));

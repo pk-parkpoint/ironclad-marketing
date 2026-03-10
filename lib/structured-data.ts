@@ -9,6 +9,24 @@ const SCHEMA_CONTEXT = "https://schema.org";
 const BUSINESS_NAME = "Ironclad Plumbing";
 const DEFAULT_SITE_URL = "https://ironcladtexas.com";
 
+/**
+ * CSS selectors that voice assistants and AI answer engines should read aloud.
+ * Each selector targets a `data-speakable` attribute on page elements.
+ */
+const SPEAKABLE_CSS_SELECTORS = [
+  "[data-speakable='hero']",
+  "[data-speakable='faq-answer']",
+  "[data-speakable='service-desc']",
+  "[data-speakable='trust']",
+];
+
+function buildSpeakableSpec(): Record<string, unknown> {
+  return {
+    "@type": "SpeakableSpecification",
+    cssSelector: SPEAKABLE_CSS_SELECTORS,
+  };
+}
+
 type JsonLd = Record<string, unknown>;
 type JsonLdInput = JsonLd | null | undefined;
 
@@ -191,6 +209,7 @@ export function buildLocalBusinessSchema(path: string): JsonLd {
     "@id": schemaId("Plumber", "business"),
     name: BUSINESS_NAME,
     url: toAbsoluteUrl(path),
+    speakable: buildSpeakableSpec(),
     image: toAbsoluteUrl("/og/ironclad-default.png"),
     logo: toAbsoluteUrl("/media/ip-logo.svg"),
     email: contactInfo.contactEmail,
@@ -352,6 +371,7 @@ export function buildFaqPageSchema(faqs: Array<{ question: string; answer: strin
     "@context": SCHEMA_CONTEXT,
     "@type": "FAQPage",
     "@id": schemaId("FAQPage", `faq:${faqs.length}`),
+    speakable: buildSpeakableSpec(),
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
@@ -451,6 +471,33 @@ export function buildArticleSchema({
       "@id": toAbsoluteUrl(path),
     },
     image: [toAbsoluteUrl("/og/ironclad-blog.png")],
+    speakable: buildSpeakableSpec(),
+  };
+}
+
+export function buildHowToSchema({
+  name,
+  description,
+  path,
+  steps,
+}: {
+  name: string;
+  description: string;
+  path: string;
+  steps: Array<{ title: string; description: string }>;
+}): JsonLd {
+  return {
+    "@context": SCHEMA_CONTEXT,
+    "@type": "HowTo",
+    "@id": schemaId("HowTo", `howto:${normalizePath(path)}`),
+    name,
+    description,
+    step: steps.map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: step.title,
+      text: step.description,
+    })),
   };
 }
 

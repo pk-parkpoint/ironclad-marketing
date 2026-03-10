@@ -27,7 +27,7 @@ type RouteProps = {
 };
 
 export const dynamicParams = false;
-const PHASE0_SCAFFOLD_NOINDEX_PATHS = new Set(["about", "book", "careers", "contact", "reviews"]);
+const PHASE0_SCAFFOLD_NOINDEX_PATHS = new Set(["book", "careers"]);
 
 function getOgTemplateForPath(path: string): OgTemplate {
   if (path === "plumbing" || path.startsWith("plumbing/")) {
