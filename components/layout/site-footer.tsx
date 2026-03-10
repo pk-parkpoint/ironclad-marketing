@@ -92,8 +92,11 @@ const SERVICE_LINKS: FooterLink[] = [
   { href: "/plumbing/drain-cleaning", label: "Drain Cleaning" },
   { href: "/plumbing/sewer-services", label: "Sewer Line Services" },
   { href: "/plumbing/water-heaters", label: "Water Heaters" },
-  { href: "/plumbing/fixtures", label: "Fixture Installation" },
+  { href: "/plumbing/leak-detection", label: "Leak Detection" },
   { href: "/plumbing/emergency", label: "Emergency Plumbing" },
+  { href: "/plumbing/slab-leak-repair", label: "Slab Leak Repair" },
+  { href: "/plumbing/hydro-jetting", label: "Hydro Jetting" },
+  { href: "/plumbing", label: "View All Services →" },
 ];
 
 const GOOGLE_MAPS_EMBED =

@@ -9,6 +9,7 @@ import { HOME_FAQ_ITEMS } from "@/content/home-faqs";
 import { ReviewsSection } from "@/components/service/review-carousel";
 import { LOCATIONS } from "@/content/locations";
 import { REVIEWS } from "@/content/reviews";
+import { SERVICES } from "@/content/services";
 import { buildPageMetadata } from "@/lib/seo";
 import {
   buildAggregateRatingSchema,
@@ -184,6 +185,7 @@ export default function Home() {
               </h1>
               <p
                 className="mt-2.5 text-[18px] font-normal leading-[1.6] text-[rgba(255,255,255,0.9)] md:text-[20px]"
+                data-speakable="hero"
                 style={{ textShadow: "0 1px 4px rgba(0, 0, 0, 0.5)" }}
               >
                 Fast response. Fair price. Fixed right &mdash; so you never call twice.
@@ -248,6 +250,15 @@ export default function Home() {
                   </div>
                 </Link>
               ))}
+            </div>
+            <div className="mt-10 text-center">
+              <Link
+                className="focus-ring inline-flex items-center gap-2 rounded-full border-2 border-[#2563EB] bg-transparent px-8 py-[14px] text-[16px] font-semibold text-[#2563EB] transition-colors hover:bg-[#2563EB] hover:text-white hover:no-underline"
+                href="/plumbing"
+              >
+                View All {SERVICES.length} Services
+                <span aria-hidden="true" className="ml-1">→</span>
+              </Link>
             </div>
           </div>
         </section>
