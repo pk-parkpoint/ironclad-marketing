@@ -101,7 +101,7 @@ export default async function BlogPostDetailPage({ params }: RouteProps) {
           <div className="container-shell">
             <p className="text-sm font-semibold uppercase tracking-[0.12em] text-muted">Plumbing Guide</p>
             <h1 className="h1-display mt-4 max-w-[var(--max-readable-width)]">{post.h1}</h1>
-            <p className="body-large mt-4 max-w-[var(--max-readable-width)] text-muted">{body.dek}</p>
+            <p className="body-large mt-4 max-w-[var(--max-readable-width)] text-muted" data-speakable="hero">{body.dek}</p>
             <p className="mt-6 text-sm text-muted">
               Published {details.publishedAt} | Updated {details.updatedAt} | Author: {details.author} | Technical
               Review: {details.reviewer}
@@ -118,7 +118,7 @@ export default async function BlogPostDetailPage({ params }: RouteProps) {
                   <section className="space-y-4" id={anchorId} key={section.heading}>
                     <h2 className="h2-display text-[clamp(1.5rem,3vw,2rem)]">{section.heading}</h2>
                     {section.paragraphs.map((paragraph) => (
-                      <p className="text-sm text-body md:text-base" key={paragraph}>
+                      <p className="text-sm text-body md:text-base" data-speakable="article-body" key={paragraph}>
                         {paragraph}
                       </p>
                     ))}
@@ -146,7 +146,7 @@ export default async function BlogPostDetailPage({ params }: RouteProps) {
                           ⌄
                         </span>
                       </summary>
-                      <div className="px-6 pb-5 text-sm text-muted md:text-base">{item.answer}</div>
+                      <div className="px-6 pb-5 text-sm text-muted md:text-base" data-speakable="faq-answer">{item.answer}</div>
                     </details>
                   ))}
                 </div>

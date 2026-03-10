@@ -127,7 +127,7 @@ export default async function LocationDetailPage({ params }: RouteProps) {
               <h2 className="h2-display">{detail.overviewHeading}</h2>
               <div className="mt-5 space-y-4">
                 {detail.overviewParagraphs.map((paragraph) => (
-                  <p key={paragraph} className="text-sm text-body md:text-base">
+                  <p key={paragraph} className="text-sm text-body md:text-base" data-speakable="city-overview">
                     {paragraph}
                   </p>
                 ))}
@@ -197,7 +197,7 @@ export default async function LocationDetailPage({ params }: RouteProps) {
                 <div key={step.number} className="card-shell p-6 md:p-7">
                   <p className="text-sm font-semibold text-cta-blue">Step {step.number}</p>
                   <p className="mt-2 text-lg font-semibold text-ink">{step.title}</p>
-                  <p className="mt-2 text-sm text-muted md:text-base">{step.description}</p>
+                  <p className="mt-2 text-sm text-muted md:text-base" data-speakable="service-desc">{step.description}</p>
                 </div>
               ))}
             </div>
@@ -211,7 +211,7 @@ export default async function LocationDetailPage({ params }: RouteProps) {
               {detail.trustPoints.map((point) => (
                 <div key={point.title} className="card-shell bg-background p-6 md:p-7">
                   <p className="text-base font-semibold text-ink">{point.title}</p>
-                  <p className="mt-2 text-sm text-muted md:text-base">{point.description}</p>
+                  <p className="mt-2 text-sm text-muted md:text-base" data-speakable="trust">{point.description}</p>
                 </div>
               ))}
             </div>
