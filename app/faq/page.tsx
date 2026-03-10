@@ -102,7 +102,7 @@ export default function FaqHubPage() {
                             ⌄
                           </span>
                         </summary>
-                        <div className="px-6 pb-5 text-sm text-muted md:text-base">{faq.answer}</div>
+                        <div className="px-6 pb-5 text-sm text-muted md:text-base" data-speakable="faq-answer">{faq.answer}</div>
                       </details>
                     ))}
                   </div>
