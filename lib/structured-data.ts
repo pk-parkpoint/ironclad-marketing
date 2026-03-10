@@ -18,6 +18,8 @@ const SPEAKABLE_CSS_SELECTORS = [
   "[data-speakable='faq-answer']",
   "[data-speakable='service-desc']",
   "[data-speakable='trust']",
+  "[data-speakable='city-overview']",
+  "[data-speakable='article-body']",
 ];
 
 function buildSpeakableSpec(): Record<string, unknown> {

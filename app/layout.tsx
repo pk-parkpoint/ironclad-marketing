@@ -150,6 +150,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="theme-color" content="#1E2A38" />
+        <meta name="geo.region" content="US-TX" />
+        <meta name="geo.placename" content="Austin" />
+        <meta name="geo.position" content="30.2672;-97.7431" />
+        <meta name="ICBM" content="30.2672, -97.7431" />
         <link
           rel="preload"
           as="image"
