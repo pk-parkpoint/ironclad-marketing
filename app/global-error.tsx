@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- global-error renders outside the Next.js layout; <Link> is unavailable */
 "use client";
 
 export default function GlobalError({
