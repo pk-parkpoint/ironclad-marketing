@@ -72,6 +72,14 @@ export const STATIC_PAGES: StaticPageEntry[] = [
     section: "Trust",
   },
   {
+    path: "guarantees",
+    titleTag: "The Ironclad Guarantees | Ironclad Plumbing - Austin, TX",
+    metaDescription:
+      "Read the six written guarantees Ironclad Plumbing makes to Austin homeowners before any residential plumbing job begins.",
+    h1: "The Ironclad Guarantee - In Writing, Not in Marketing Speak",
+    section: "Trust",
+  },
+  {
     path: "special-offers",
     titleTag: "Plumbing Deals & Offers | Ironclad Plumbing Austin, TX",
     metaDescription:
@@ -109,14 +117,6 @@ export const STATIC_PAGES: StaticPageEntry[] = [
     metaDescription:
       "Straight answers from licensed plumbers about pricing, scheduling, leaks, and water heaters.",
     h1: "Plumbing FAQs - Honest Answers from Licensed Pros",
-    section: "Education",
-  },
-  {
-    path: "plumbing-guides",
-    titleTag: "Plumbing Guides & Tips | Ironclad Plumbing - Austin, TX",
-    metaDescription:
-      "Practical Austin homeowner guides covering maintenance, emergency prep, and upgrades.",
-    h1: "Homeowner Plumbing Guides",
     section: "Education",
   },
   {

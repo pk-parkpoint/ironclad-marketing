@@ -40,8 +40,7 @@ function getOgTemplateForPath(path: string): OgTemplate {
     path === "blog" ||
     path.startsWith("blog/") ||
     path === "faq" ||
-    path.startsWith("faq/") ||
-    path === "plumbing-guides"
+    path.startsWith("faq/")
   ) {
     return "blog";
   }

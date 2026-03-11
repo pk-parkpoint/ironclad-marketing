@@ -14,6 +14,7 @@ export function GET() {
   const now = new Date().toISOString();
   const sitemapPaths = [
     "/sitemaps/core.xml",
+    "/sitemaps/guides.xml",
     "/sitemaps/services.xml",
     "/sitemaps/service-areas.xml",
     "/sitemaps/articles.xml",
