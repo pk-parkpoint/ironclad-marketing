@@ -1,3 +1,4 @@
+import { GUIDES_DROPDOWN_LINKS } from "@/content/guides";
 import { STATIC_PAGES } from "@/content/static-pages";
 import { LOCATIONS } from "@/content/locations";
 import { SERVICES } from "@/content/services";
@@ -27,22 +28,25 @@ const SERVICE_AREA_DROPDOWN_LINKS: NavChildLink[] = [
 ];
 
 const ABOUT_DROPDOWN_LINKS: NavChildLink[] = [
+  { href: "/reviews", label: "Our Reviews" },
+  { href: "/guarantees", label: "Our Guarantees" },
+  { href: "/careers", label: "Careers" },
   { href: "/about", label: "About Us" },
-  { href: "/reviews", label: "Reviews" },
 ];
 
 export const TOP_NAV_LINKS: TopNavLink[] = [
-  { href: "/", label: "Home" },
   { href: "/plumbing", label: "Plumbing", children: PLUMBING_DROPDOWN_LINKS },
   { href: "/service-area", label: "Service Areas", children: SERVICE_AREA_DROPDOWN_LINKS },
-  { href: "/careers", label: "Careers" },
-  { href: "/about", label: "About", children: ABOUT_DROPDOWN_LINKS },
+  { href: "/guides", label: "Guides", children: GUIDES_DROPDOWN_LINKS },
+  { href: "/about", label: "About Us", children: ABOUT_DROPDOWN_LINKS },
 ];
 
 export const DEDICATED_MARKETING_PATHS = new Set([
   "blog",
   "faq",
   "faq/plumbing",
+  "guarantees",
+  "guides",
   "plumbing",
   "plumbing-guides",
   "service-area",

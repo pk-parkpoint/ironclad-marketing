@@ -175,8 +175,8 @@ export function buildWebSiteSchema(): JsonLd {
     name: BUSINESS_NAME,
     url: getBaseUrl(),
     potentialAction: {
-      "@type": "SearchAction",
-      target: `${getBaseUrl()}/plumbing-guides?query={search_term_string}`,
+    "@type": "SearchAction",
+      target: `${getBaseUrl()}/guides?query={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };

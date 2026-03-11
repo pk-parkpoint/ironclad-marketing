@@ -1,3 +1,4 @@
+import { GUIDE_ROUTE_PATHS } from "@/content/guides";
 import { BLOG_POSTS } from "@/content/blog-posts";
 import { LOCATIONS } from "@/content/locations";
 import { STATIC_ROUTE_PATHS } from "@/lib/routes";
@@ -72,6 +73,18 @@ export function buildArticleSitemapEntries(): SitemapEntry[] {
   }));
 }
 
+export function buildGuideSitemapEntries(): SitemapEntry[] {
+  const lastModified = buildTimestamp();
+  const routes = ["/guides", ...GUIDE_ROUTE_PATHS];
+
+  return routes.map((path) => ({
+    changeFrequency: "weekly",
+    lastModified,
+    path,
+    priority: path === "/guides" ? 0.86 : 0.72,
+  }));
+}
+
 export function toAbsoluteSitemapUrl(path: string): string {
   const normalized = normalizePath(path);
   return normalized === "/" ? getSitemapBaseUrl() : `${getSitemapBaseUrl()}${normalized}`;
@@ -118,6 +131,7 @@ export function buildSitemapGroups() {
   return {
     articles: buildArticleSitemapEntries(),
     core: buildCoreSitemapEntries(),
+    guides: buildGuideSitemapEntries(),
     serviceAreas: buildServiceAreaSitemapEntries(),
     services: buildServiceSitemapEntries(),
   };

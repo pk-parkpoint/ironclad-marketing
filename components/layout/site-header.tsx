@@ -194,6 +194,8 @@ export function SiteHeader() {
               {TOP_NAV_LINKS.map((link) => {
                 const active = isNavLinkActive(pathname, link.href);
                 const hasChildren = Boolean(link.children && link.children.length > 0);
+                const isPlumbingDropdown = link.href === "/plumbing";
+                const isAboutDropdown = link.href === "/about";
 
                 return (
                   <div className="group/nav relative" key={link.href}>
@@ -217,13 +219,21 @@ export function SiteHeader() {
                       <div className="pointer-events-none invisible absolute left-0 top-full z-30 pt-2 opacity-0 delay-150 transition-[opacity,transform] duration-150 ease-out -translate-y-1 group-focus-within/nav:pointer-events-auto group-focus-within/nav:visible group-focus-within/nav:opacity-100 group-focus-within/nav:translate-y-0 group-focus-within/nav:delay-0 group-hover/nav:pointer-events-auto group-hover/nav:visible group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:delay-0">
                         <div
                           className={`rounded-lg border border-[#E5E7EB] bg-white p-2 shadow-[0_4px_12px_rgba(0,0,0,0.1)] ${
-                            link.href === "/plumbing" ? "w-[min(40rem,72vw)]" : "w-[min(28rem,64vw)]"
+                            isPlumbingDropdown
+                              ? "w-[min(40rem,72vw)]"
+                              : isAboutDropdown
+                                ? "w-[min(18rem,32vw)]"
+                                : "w-[min(28rem,64vw)]"
                           }`}
                         >
                           <ul
                             aria-label={`${link.label} subpages`}
                             className={`m-0 list-none gap-1 p-0 ${
-                              link.href === "/plumbing" ? "grid grid-cols-2" : "grid grid-cols-1 sm:grid-cols-2"
+                              isPlumbingDropdown
+                                ? "grid grid-cols-2"
+                                : isAboutDropdown
+                                  ? "grid grid-cols-1"
+                                  : "grid grid-cols-1 sm:grid-cols-2"
                             }`}
                           >
                             {link.children?.map((childLink) => {
