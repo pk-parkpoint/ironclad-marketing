@@ -308,7 +308,7 @@ export function SiteHeader() {
 
       <div
         aria-hidden={!mobileNavOpen}
-        className={`fixed inset-0 z-50 transition-opacity duration-200 motion-reduce:transition-none lg:hidden ${
+        className={`fixed inset-0 z-50 overflow-hidden transition-opacity duration-200 motion-reduce:transition-none lg:hidden ${
           mobileNavOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         inert={!mobileNavOpen}
@@ -326,8 +326,8 @@ export function SiteHeader() {
         <div
           aria-label="Mobile navigation"
           aria-modal="true"
-          className={`absolute right-0 top-0 flex h-full w-[min(88vw,360px)] flex-col bg-white shadow-2xl transition-transform duration-300 motion-reduce:transition-none ${
-            mobileNavOpen ? "translate-x-0" : "translate-x-full"
+          className={`absolute right-0 top-0 h-full w-[min(88vw,360px)] flex-col bg-white shadow-2xl transition-transform duration-300 motion-reduce:transition-none ${
+            mobileNavOpen ? "flex translate-x-0" : "hidden translate-x-full"
           }`}
           ref={drawerRef}
           role="dialog"

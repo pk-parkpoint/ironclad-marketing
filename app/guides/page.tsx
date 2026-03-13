@@ -99,7 +99,8 @@ export default function GuidesHubPage() {
             <div className="guide-start-grid">
               <Link className="guide-start-feature" href={`/guides/${featuredPage.slug}`}>
                 <div className="guide-start-feature__media">
-                  <video autoPlay loop muted playsInline>
+                  <video autoPlay loop muted playsInline poster="/hero/ironclad-hero-poster.jpg" preload="none">
+                    <source src="/hero/ironclad-hero-bg.webm" type="video/webm" />
                     <source src="/media/hero-video.mp4" type="video/mp4" />
                   </video>
                 </div>
