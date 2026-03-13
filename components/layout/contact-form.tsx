@@ -179,21 +179,35 @@ export function ContactForm({
         <label className={labelClass} htmlFor={fieldId("service")}>
           Choose Service
         </label>
-        <select
-          className={`${inputClass} appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%239CA3AF%22%20stroke-width%3D%222%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px] bg-[right_12px_center] bg-no-repeat pr-10`}
-          defaultValue={serviceInterest || ""}
-          id={fieldId("service")}
-          name="service"
-        >
-          <option disabled value="">
-            Choose Service
-          </option>
-          {SERVICE_OPTIONS.map((service) => (
-            <option key={service} value={service}>
-              {service}
+        <div className="relative">
+          <select
+            className={`${inputClass} appearance-none pr-10`}
+            defaultValue={serviceInterest || ""}
+            id={fieldId("service")}
+            name="service"
+          >
+            <option disabled value="">
+              Choose Service
             </option>
-          ))}
-        </select>
+            {SERVICE_OPTIONS.map((service) => (
+              <option key={service} value={service}>
+                {service}
+              </option>
+            ))}
+          </select>
+          <svg
+            aria-hidden="true"
+            className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9CA3AF]"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
       </div>
 
       <div>
