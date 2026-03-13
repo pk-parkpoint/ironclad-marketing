@@ -16,7 +16,8 @@ import {
 function GuideRailVideo() {
   return (
     <div className="guide-rail-card guide-rail-card--media">
-      <video autoPlay className="guide-rail-video" loop muted playsInline>
+      <video autoPlay className="guide-rail-video" loop muted playsInline poster="/hero/ironclad-hero-poster.jpg" preload="none">
+        <source src="/hero/ironclad-hero-bg.webm" type="video/webm" />
         <source src="/media/hero-video.mp4" type="video/mp4" />
       </video>
       <p className="guide-rail-note">Need a straight answer? Call or text <a href="tel:+18335971932">(833) 597-1932</a>.</p>
