@@ -1,8 +1,6 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { HomeHeroVideo } from "@/components/home/home-hero-video";
 
 type HomeHeroProps = {
   reviewCount: number;
@@ -59,8 +57,6 @@ function ReviewStar() {
 }
 
 export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
-  const [isVideoReady, setIsVideoReady] = useState(false);
-
   return (
     <section className="relative isolate min-h-[480px] overflow-hidden md:min-h-[580px]">
       <div className="absolute inset-0">
@@ -75,20 +71,7 @@ export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
         />
       </div>
 
-      <video
-        aria-hidden="true"
-        autoPlay
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${isVideoReady ? "opacity-100" : "opacity-0"}`}
-        loop
-        muted
-        onCanPlay={() => setIsVideoReady(true)}
-        playsInline
-        poster="/hero/ironclad-hero-poster.jpg"
-        preload="metadata"
-      >
-        <source src="/hero/ironclad-hero-bg.webm" type="video/webm" />
-        <source src="/media/hero-video.mp4" type="video/mp4" />
-      </video>
+      <HomeHeroVideo />
 
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.225)_0%,rgba(0,0,0,0.525)_100%)]" />
 
