@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { DeferredReviewsSection } from "@/components/service/deferred-reviews-section";
 import { HomeHero } from "@/components/home/home-hero";
 import { FAQSection } from "@/components/layout/faq-section";
 import { GuaranteeBar } from "@/components/layout/guarantee-bar";
@@ -7,7 +8,6 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { StructuredData } from "@/components/seo/structured-data";
 import { HOME_FAQ_ITEMS } from "@/content/home-faqs";
-import { ReviewsSection } from "@/components/service/review-carousel";
 import { LOCATIONS } from "@/content/locations";
 import { REVIEWS } from "@/content/reviews";
 import { SERVICES } from "@/content/services";
@@ -96,7 +96,7 @@ export default function Home() {
       <main id="main-content">
         <HomeHero reviewCount={REVIEW_COUNT} reviewHref={GOOGLE_REVIEW_LINK} />
         <GuaranteeBar />
-        <section className="bg-[#F9FAFB] pt-16 pb-20">
+        <section className="bg-[#F9FAFB] pt-16 pb-20 home-deferred-section">
           <div className="mx-auto w-full max-w-[1280px] px-6">
             <h2 className="mb-10 text-center text-[32px] font-bold leading-[1.2] text-[#2563EB]">
               Our Services
@@ -148,8 +148,8 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <ReviewsSection />
-        <section className="section-block">
+        <DeferredReviewsSection />
+        <section className="section-block home-deferred-section">
           <div className="container-shell">
             <div className="relative overflow-hidden rounded-[var(--radius-card)] border border-border bg-[#ECEEF1]">
               <div

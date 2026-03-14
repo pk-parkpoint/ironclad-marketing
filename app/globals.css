@@ -1063,3 +1063,128 @@ main {
     white-space: nowrap;
   }
 }
+
+.home-deferred-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 960px;
+}
+
+.faq-home {
+  background: #1e293b;
+  padding: 96px 0 112px;
+}
+
+.faq-home__inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.faq-home__eyebrow {
+  display: inline-block;
+  margin-bottom: 20px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #1e293b;
+  padding: 8px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.faq-home__title {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.faq-home__divider {
+  width: 48px;
+  height: 3px;
+  margin: 0 auto 48px;
+  border-radius: 999px;
+  background: #3b82f6;
+}
+
+.faq-home__items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.faq-item {
+  border: 1px solid #222326;
+  border-radius: 2px;
+  background: #f4f5f8;
+  overflow: hidden;
+  transition: background-color 200ms ease;
+}
+
+.faq-item[open] {
+  background: #222326;
+}
+
+.faq-item__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.faq-item__summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item[open] .faq-item__summary {
+  color: #2563eb;
+}
+
+.faq-item__icon-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: currentColor;
+}
+
+.faq-item__icon {
+  position: absolute;
+  inset: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.faq-item__icon--minus {
+  opacity: 0;
+}
+
+.faq-item[open] .faq-item__icon--plus {
+  opacity: 0;
+}
+
+.faq-item[open] .faq-item__icon--minus {
+  opacity: 1;
+}
+
+.faq-item__answer {
+  padding: 4px 16px 16px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.faq-item__answer p {
+  margin: 0;
+}
