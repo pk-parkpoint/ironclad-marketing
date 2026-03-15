@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getPublicContactInfo } from "@/lib/contact";
 import { ContactForm } from "./contact-form";
@@ -101,6 +102,7 @@ const SERVICE_LINKS: FooterLink[] = [
 
 const GOOGLE_MAPS_EMBED =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d220440.45684492782!2d-97.89517099062068!3d30.307609929908208!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b599a0cc032f%3A0x5d9b464bd469d57a!2sAustin%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus";
+const FOOTER_WORDMARK = "Ironclad";
 
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
@@ -173,12 +175,13 @@ export function SiteFooter() {
             {/* Column 1 — Logo */}
             <div>
               <Link className="inline-flex items-center gap-2 text-lg font-semibold text-white hover:no-underline" href="/">
-                <span
-                  aria-hidden="true"
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#2563EB] text-sm font-bold text-white"
-                >
-                  I
-                </span>
+                <Image
+                  alt="Ironclad Plumbing logo"
+                  className="h-8 w-8"
+                  height={32}
+                  src="/media/ip-logo.svg"
+                  width={32}
+                />
                 Ironclad Plumbing
               </Link>
               <p className="mt-4 text-[13px] text-[#9CA3AF]">
@@ -196,10 +199,10 @@ export function SiteFooter() {
             <FooterColumn links={SERVICE_LINKS} title="Services" />
 
             {/* Column 5 — Google Map */}
-            <div className="overflow-hidden rounded-lg border border-[#374151]">
+            <div className="self-start overflow-hidden rounded-lg border border-[#374151] bg-[#0F172A]">
               <iframe
                 allowFullScreen
-                height="200"
+                className="block h-[240px] w-full"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 src={GOOGLE_MAPS_EMBED}
@@ -255,6 +258,16 @@ export function SiteFooter() {
                 ) : null}
               </div>
             </div>
+          </div>
+        </div>
+
+        <div aria-hidden="true" className="footer-wordmark-shell">
+          <div className="footer-wordmark-track">
+            {FOOTER_WORDMARK.split("").map((letter, index) => (
+              <span className="footer-wordmark-letter" key={`${letter}-${index}`}>
+                {letter}
+              </span>
+            ))}
           </div>
         </div>
       </footer>
