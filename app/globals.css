@@ -1188,3 +1188,46 @@ main {
 .faq-item__answer p {
   margin: 0;
 }
+
+.footer-wordmark-shell {
+  overflow: hidden;
+  padding-top: 20px;
+}
+
+.footer-wordmark-track {
+  display: flex;
+  justify-content: center;
+  gap: 0.01em;
+  font-size: clamp(6rem, 23vw, 18rem);
+  font-weight: 800;
+  line-height: 0.76;
+  letter-spacing: -0.06em;
+  color: rgba(255, 255, 255, 0.96);
+  transform: translateY(20%);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.footer-wordmark-letter {
+  display: inline-block;
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 220ms ease;
+  will-change: transform;
+}
+
+.footer-wordmark-letter:hover {
+  transform: translateY(-0.12em);
+  color: #ffffff;
+}
+
+@media (max-width: 767px) {
+  .footer-wordmark-shell {
+    padding-top: 16px;
+  }
+
+  .footer-wordmark-track {
+    justify-content: flex-start;
+    transform: translateY(18%);
+  }
+}
