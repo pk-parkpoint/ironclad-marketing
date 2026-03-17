@@ -12,9 +12,9 @@ export type SitemapEntry = {
   priority: number;
 };
 
-function buildTimestamp(): string {
-  return new Date().toISOString();
-}
+/** Fixed deploy date — update when content changes substantially. Avoids noisy
+ *  crawl signaling from stamping every URL with "right now" on each build. */
+const CONTENT_LAST_MODIFIED = "2026-03-16T00:00:00.000Z";
 
 function normalizePath(path: string): string {
   if (!path) {
@@ -28,7 +28,7 @@ export function getSitemapBaseUrl(): string {
 }
 
 export function buildCoreSitemapEntries(): SitemapEntry[] {
-  const lastModified = buildTimestamp();
+  const lastModified = CONTENT_LAST_MODIFIED;
   const routes = [
     "/",
     "/commercial-plumbing/austin-tx",
@@ -44,7 +44,7 @@ export function buildCoreSitemapEntries(): SitemapEntry[] {
 }
 
 export function buildServiceSitemapEntries(): SitemapEntry[] {
-  const lastModified = buildTimestamp();
+  const lastModified = CONTENT_LAST_MODIFIED;
   return SERVICES.map((service) => ({
     changeFrequency: "weekly",
     lastModified,
@@ -54,7 +54,7 @@ export function buildServiceSitemapEntries(): SitemapEntry[] {
 }
 
 export function buildServiceAreaSitemapEntries(): SitemapEntry[] {
-  const lastModified = buildTimestamp();
+  const lastModified = CONTENT_LAST_MODIFIED;
   return LOCATIONS.map((location) => ({
     changeFrequency: "weekly",
     lastModified,
@@ -64,7 +64,7 @@ export function buildServiceAreaSitemapEntries(): SitemapEntry[] {
 }
 
 export function buildArticleSitemapEntries(): SitemapEntry[] {
-  const lastModified = buildTimestamp();
+  const lastModified = CONTENT_LAST_MODIFIED;
   return BLOG_POSTS.map((post) => ({
     changeFrequency: "monthly",
     lastModified,
@@ -74,7 +74,7 @@ export function buildArticleSitemapEntries(): SitemapEntry[] {
 }
 
 export function buildGuideSitemapEntries(): SitemapEntry[] {
-  const lastModified = buildTimestamp();
+  const lastModified = CONTENT_LAST_MODIFIED;
   const routes = ["/guides", ...GUIDE_ROUTE_PATHS];
 
   return routes.map((path) => ({

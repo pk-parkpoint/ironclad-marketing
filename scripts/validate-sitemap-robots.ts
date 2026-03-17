@@ -1,4 +1,5 @@
 import { BLOG_POSTS } from "../content/blog-posts";
+import { GUIDE_ROUTE_PATHS } from "../content/guides";
 import { LOCATIONS } from "../content/locations";
 import { SERVICES } from "../content/services";
 import robots from "../app/robots";
@@ -6,6 +7,7 @@ import { STATIC_ROUTE_PATHS } from "../lib/routes";
 import {
   buildArticleSitemapEntries,
   buildCoreSitemapEntries,
+  buildGuideSitemapEntries,
   buildServiceAreaSitemapEntries,
   buildServiceSitemapEntries,
   getSitemapBaseUrl,
@@ -57,6 +59,8 @@ function main() {
     ...SERVICES.map((service) => `/plumbing/${service.slug}`),
     ...LOCATIONS.map((location) => `/service-area/${location.slug}`),
     ...BLOG_POSTS.map((post) => `/blog/${post.slug}`),
+    "/guides",
+    ...GUIDE_ROUTE_PATHS,
   ]);
   const expectedUrls = new Set([...expectedRoutes].map((route) => routeToUrl(baseUrl, route)));
 
@@ -65,6 +69,7 @@ function main() {
     ...buildServiceSitemapEntries(),
     ...buildServiceAreaSitemapEntries(),
     ...buildArticleSitemapEntries(),
+    ...buildGuideSitemapEntries(),
   ];
   assert(sitemapEntries.length > 0, "sitemap must contain at least one entry");
 

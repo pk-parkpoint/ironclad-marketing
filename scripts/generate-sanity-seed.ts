@@ -486,7 +486,7 @@ function main() {
     name: "Ironclad Plumbing",
     phone: "(512) XXX-XXXX",
     textNumber: "(512) XXX-XXXX",
-    email: "hello@ironcladplumbing.com",
+    email: "info@ironcladtexas.com",
     address: {
       street: "1234 Congress Ave",
       city: "Austin",
