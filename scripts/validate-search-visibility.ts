@@ -5,6 +5,7 @@ import { getPublicContactInfo } from "../lib/contact";
 import {
   buildArticleSitemapEntries,
   buildCoreSitemapEntries,
+  buildGuideSitemapEntries,
   buildServiceAreaSitemapEntries,
   buildServiceSitemapEntries,
   getSitemapBaseUrl,
@@ -78,6 +79,7 @@ function main() {
     ...buildServiceSitemapEntries(),
     ...buildServiceAreaSitemapEntries(),
     ...buildArticleSitemapEntries(),
+    ...buildGuideSitemapEntries(),
   ];
   assert(routes.length > 0, "sitemap must contain at least one URL");
   const urls = routes.map((entry) => toAbsoluteSitemapUrl(entry.path));
