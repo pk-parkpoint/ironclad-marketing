@@ -1,77 +1,97 @@
-# Ironclad Deployment Notes
+# Ironclad Deployment
 
-This project is configured for Google Cloud-hosted preview and production deployments.
+## CRITICAL: Canonical Repo
 
-## Prerequisites
+**This repo (`pk-parkpoint/ironclad-marketing`) is the ONLY source for ironcladtexas.com deployments.**
 
-- Google Cloud project/deployment target connected to this repository
-- `websites/ironclad` set as the project root
-- Environment variables from `.env.example` configured in the deployment target for:
-  - Preview
-  - Production
-- Sanity project created and dataset configured (`NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`)
+Do NOT deploy from `conduit/websites/ironclad/`. That is a stale copy. It does not have the guide pages, updated footer, or current content. Deploying from it will break the live site.
 
-## Expected Pipeline
+## Where the Site Lives
 
-- Pull requests to `main`: preview deployment URL (if enabled in CI/CD).
-- Merge to `main`: production deployment is triggered via Google Cloud-hosted pipeline.
+- **Production URL:** https://ironcladtexas.com
+- **GCP Project:** `conduit-external-dev`
+- **Cloud Run Service:** `ironclad-marketing` (region: `us-central1`)
+- **Static IP:** `34.49.24.117` (named `ironclad-ip`)
+- **Load Balancer:** `ironclad-url-map` → `ironclad-backend` → `ironclad-neg` → Cloud Run
+- **DNS:** GoDaddy, `ironcladtexas.com` → `34.49.24.117`
 
-## Local Validation
+## How to Deploy
 
 ```bash
-cd websites/ironclad
-npm run lint
-npm run build
+cd /path/to/ironclad-marketing
+gcloud run deploy ironclad-marketing \
+  --source=. \
+  --project=conduit-external-dev \
+  --region=us-central1 \
+  --port=3000 \
+  --allow-unauthenticated \
+  --set-env-vars="NEXT_PUBLIC_SITE_URL=https://ironcladtexas.com,NEXT_PUBLIC_PHONE=(512) 555-0199,NEXT_PUBLIC_TEXT_NUMBER=(512) 555-0199,NEXT_PUBLIC_CONTACT_EMAIL=info@ironcladtexas.com"
 ```
 
-## Production Smoke Validation (IC-081)
-
-Run after DNS and production deployment changes:
+After deploy, invalidate CDN cache:
 
 ```bash
-cd websites/ironclad
+gcloud compute url-maps invalidate-cdn-cache ironclad-url-map \
+  --path="/*" --global --quiet --project=conduit-external-dev
+```
+
+Or use Cloud Build (once permissions are fixed):
+
+```bash
+gcloud builds submit --config=cloudbuild.yaml --project=conduit-external-dev .
+```
+
+## Post-Deploy Verification
+
+```bash
+# Health check
+curl -sI https://ironcladtexas.com/api/health
+
+# Guides live
+curl -sI https://ironcladtexas.com/guides
+
+# Production smoke test
 npm run launch:prod:audit
 ```
 
-Optional env overrides:
-- `PROD_SITE_URL` (defaults to `https://ironcladtexas.com`)
-- `PROD_EXPECTED_BRAND` (defaults to `Ironclad Plumbing`)
-- `PROD_EXPECTED_MARKET` (defaults to `Austin`)
+CDN cache is 5 minutes. Invalidate after deploy or wait.
 
-## Search Visibility Preflight (IC-080)
-
-Run before Google Search Console / GBP submission:
+## Local Dev
 
 ```bash
-cd websites/ironclad
+npm install
+npm run dev
+# http://localhost:3000
+```
+
+## Local Validation (Pre-Deploy)
+
+```bash
+npm run lint
+npm run build
+npx tsc --noEmit
+```
+
+## Search / SEO Validation
+
+```bash
+npm run metadata:audit
+npm run sitemap-robots:audit
 npm run search-visibility:audit
+npm run structured-data:audit
+npm run ssr:audit
+AUDIT_BASE_URL=https://ironcladtexas.com npm run phase0:live:audit
 ```
 
-## Deployment Execution
+## DNS and Secrets
 
-Use the team’s Google Cloud deployment pipeline/runbook for this site target.
+GoDaddy credentials in Google Secret Manager (never committed):
 
-## GoDaddy DNS Automation (Secret Names Only)
-
-For automated DNS cutover of `ironcladtexas.com`, GoDaddy credentials are stored in Google Secret Manager (values are never committed):
-
-- Project `conduit-external-dev`:
-  - `godaddy-api-key`
-  - `godaddy-api-secret`
-- Project `conduit-external-prod`:
-  - `godaddy-api-key`
-  - `godaddy-api-secret`
-
-Example retrieval pattern (operator runtime only):
-
-```bash
-gcloud secrets versions access latest --secret=godaddy-api-key --project=conduit-external-prod
-gcloud secrets versions access latest --secret=godaddy-api-secret --project=conduit-external-prod
-```
-
-Do not print, commit, or share raw secret values in PRs/issues/docs.
+- Project `conduit-external-dev`: `godaddy-api-key`, `godaddy-api-secret`
+- Project `conduit-external-prod`: `godaddy-api-key`, `godaddy-api-secret`
 
 ## Notes
 
-- Trailing slash behavior is locked in `next.config.ts` and host config (`vercel.json` retained for compatibility).
-- `app/api/health` can be used as a post-deploy smoke check.
+- `vercel.json` is for header compatibility only — site is NOT on Vercel
+- `cloudbuild.yaml` defines the full deploy + CDN invalidation pipeline
+- `app/api/health` is the post-deploy smoke endpoint
