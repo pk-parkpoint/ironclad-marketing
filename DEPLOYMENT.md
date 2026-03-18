@@ -92,6 +92,5 @@ GoDaddy credentials in Google Secret Manager (never committed):
 
 ## Notes
 
-- `vercel.json` is for header compatibility only — site is NOT on Vercel
 - `cloudbuild.yaml` defines the full deploy + CDN invalidation pipeline
 - `app/api/health` is the post-deploy smoke endpoint
