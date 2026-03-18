@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HomeHeroVideo } from "@/components/home/home-hero-video";
+import { LavaGlow } from "@/components/layout/lava-glow";
 
 type HomeHeroProps = {
   reviewCount: number;
@@ -109,19 +110,33 @@ export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center md:justify-start">
-            <a
-              className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-transparent bg-[#D03E04] px-7 py-[14px] text-[16px] font-semibold text-white transition-colors hover:border-[#D03E04] hover:bg-white hover:text-[#D03E04] hover:no-underline sm:w-auto"
-              href="tel:+18335971932"
+            <LavaGlow
+              color1={[1.0, 0.72, 0.4]}
+              color2={[1.0, 0.85, 0.6]}
+              color3={[0.9, 0.55, 0.2]}
+              className="w-full rounded-full sm:w-auto"
             >
-              <PhoneIcon />
-              (833) 597-1932
-            </a>
-            <Link
-              className="focus-ring inline-flex w-full items-center justify-center rounded-full border-2 border-white bg-transparent px-7 py-[14px] text-[16px] font-semibold text-white transition-colors hover:bg-white hover:text-[#1E2A38] hover:no-underline sm:w-auto"
-              href="/book"
+              <a
+                className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-transparent bg-[#D03E04] px-7 py-[14px] text-[16px] font-semibold text-white transition-colors hover:border-[#D03E04] hover:bg-white hover:text-[#D03E04] hover:no-underline sm:w-auto"
+                href="tel:+18335971932"
+              >
+                <PhoneIcon />
+                (833) 597-1932
+              </a>
+            </LavaGlow>
+            <LavaGlow
+              color1={[0.7, 0.7, 0.7]}
+              color2={[1.0, 1.0, 1.0]}
+              color3={[0.5, 0.5, 0.5]}
+              className="w-full rounded-full sm:w-auto"
             >
-              Schedule Online
-            </Link>
+              <Link
+                className="focus-ring inline-flex w-full items-center justify-center rounded-full border-2 border-white bg-transparent px-7 py-[14px] text-[16px] font-semibold text-white transition-colors hover:bg-white hover:text-[#1E2A38] hover:no-underline sm:w-auto"
+                href="/book"
+              >
+                Schedule Online
+              </Link>
+            </LavaGlow>
           </div>
         </div>
       </div>
