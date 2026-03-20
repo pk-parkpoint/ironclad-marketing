@@ -1,0 +1,11 @@
+.git
+.gitignore
+node_modules/
+.next/
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+# .env.production is intentionally NOT ignored — Cloud Build needs it for NEXT_PUBLIC_* vars

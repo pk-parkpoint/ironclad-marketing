@@ -83,6 +83,31 @@ npm run ssr:audit
 AUDIT_BASE_URL=https://ironcladtexas.com npm run phase0:live:audit
 ```
 
+## API Keys & Environment Variables
+
+**NEVER hardcode API keys in source code.** Keys are managed via:
+
+1. **Cloud Run env vars** — set on the service, injected at runtime
+2. **`.env.production`** — local file (git-ignored), uploaded to Cloud Build via `.gcloudignore`
+3. **`.env.example`** — committed template with placeholder values
+
+### Google Maps API Key (booking wizard address autocomplete)
+
+- **Key name:** `Ironclad Maps Key (rotated YYYY-MM-DD)`
+- **GCP Console:** APIs & Services > Credentials > `conduit-external-dev`
+- **Env var:** `NEXT_PUBLIC_GOOGLE_MAPS_KEY`
+- **Restrictions:** HTTP referrer (`ironcladtexas.com/*`), API (Maps JS, Places, Geocoding)
+- **To rotate:** Create new key in console, update `.env.production` + Cloud Run env var, delete old key
+
+### Firebase Keys
+
+- **Env vars:** `NEXT_PUBLIC_FIREBASE_API_KEY`, `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`, `NEXT_PUBLIC_FIREBASE_PROJECT_ID`, `NEXT_PUBLIC_FIREBASE_APP_ID`
+- **GCP Console:** Firebase Console > Project Settings > `conduit-external-dev`
+
+### How keys flow at deploy time
+
+`NEXT_PUBLIC_*` vars are inlined by Next.js at **build time**, not runtime. The `.env.production` file is uploaded to Cloud Build (allowed by `.gcloudignore`) so the build has access. Cloud Run env vars serve as runtime backup.
+
 ## DNS and Secrets
 
 GoDaddy credentials in Google Secret Manager (never committed):
