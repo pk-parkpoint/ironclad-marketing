@@ -3,6 +3,13 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   trailingSlash: false,
   poweredByHeader: false,
+  env: {
+    NEXT_PUBLIC_GOOGLE_MAPS_KEY: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || "AIzaSyBhV4NaN_L3D0kRRTOEH16qQq2LgPdFTTk",
+    NEXT_PUBLIC_FIREBASE_API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyDIpEBHbUcCgvx2sEWzGJCGa5RThaqvPQM",
+    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "conduit-external-dev.firebaseapp.com",
+    NEXT_PUBLIC_FIREBASE_PROJECT_ID: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "conduit-external-dev",
+    NEXT_PUBLIC_FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:593318159666:web:f12ae83ae62ac3e1dc632b",
+  },
   async headers() {
     return [
       {

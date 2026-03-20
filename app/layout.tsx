@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { AnalyticsBootstrap } from "@/components/analytics/analytics-bootstrap";
-import { BookingModalHost } from "@/components/booking/booking-modal-host";
+import { BookingWizardHost } from "@/components/booking/booking-wizard-host";
 import { Inter } from "next/font/google";
 import { MobileBottomBar } from "@/components/layout/mobile-bottom-bar";
 import { CANONICAL_ORIGIN } from "@/lib/site-url";
@@ -165,7 +165,7 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased pb-24 md:pb-0`}>
         <AnalyticsBody />
         {children}
-        <BookingModalHost />
+        <BookingWizardHost />
         <MobileBottomBar />
       </body>
     </html>
