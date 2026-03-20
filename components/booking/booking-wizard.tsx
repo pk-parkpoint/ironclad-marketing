@@ -223,7 +223,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
         aria-modal="true"
         aria-labelledby="booking-wizard-title"
         aria-describedby="booking-wizard-desc"
-        className="booking-modal-sheet flex h-[100dvh] w-full max-w-[600px] flex-col bg-background shadow-2xl sm:h-auto sm:max-h-[96vh] sm:rounded-[var(--radius-modal)]"
+        className="booking-modal-sheet flex h-[100dvh] w-full max-w-[600px] flex-col bg-background shadow-lg sm:h-auto sm:max-h-[96vh] sm:rounded-[var(--radius-modal)]"
       >
         <div className="flex items-center justify-end px-5 pt-4 pb-0">
           <button
