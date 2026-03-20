@@ -262,9 +262,9 @@ main {
 
 @media (min-width: 640px) {
   .booking-modal-sheet {
-    border: 1.5px solid rgba(37, 99, 235, 0.22);
+    border: 3px solid rgba(37, 99, 235, 0.22);
     box-shadow:
-      0 0 0 1px rgba(37, 99, 235, 0.10),
+      0 0 0 2px rgba(37, 99, 235, 0.10),
       0 0 24px -2px rgba(37, 99, 235, 0.22),
       0 0 56px -6px rgba(129, 140, 248, 0.16),
       0 20px 40px -8px rgba(0, 0, 0, 0.18);
