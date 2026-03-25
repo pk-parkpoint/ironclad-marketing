@@ -165,7 +165,9 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased pb-24 md:pb-0`}>
         <AnalyticsBody />
         {children}
-        <BookingWizardHost />
+        <Suspense fallback={null}>
+          <BookingWizardHost />
+        </Suspense>
         <MobileBottomBar />
       </body>
     </html>
