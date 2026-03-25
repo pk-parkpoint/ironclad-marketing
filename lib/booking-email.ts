@@ -43,10 +43,19 @@ function formatValue(value: string | undefined | null): string {
   return normalizeValue(value);
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function row(label: string, value: string | undefined | null): string {
   const display = formatValue(value);
   const color = display === "NA" ? "#9ca3af" : "#1f2937";
-  return `<tr><td style="padding:6px 12px;font-weight:600;color:#374151;white-space:nowrap">${label}</td><td style="padding:6px 12px;color:${color}">${display}</td></tr>`;
+  return `<tr><td style="padding:6px 12px;font-weight:600;color:#374151;white-space:nowrap">${escapeHtml(label)}</td><td style="padding:6px 12px;color:${color}">${escapeHtml(display)}</td></tr>`;
 }
 
 function textRow(label: string, value: string | undefined | null): string {

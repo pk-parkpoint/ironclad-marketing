@@ -215,7 +215,9 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
     window.addEventListener("pagehide", onPageHide);
     return () => {
       window.removeEventListener("pagehide", onPageHide);
-      sendAbandonmentRef.current({ useBeacon: true });
+      if (!finalizedRef.current) {
+        sendAbandonmentRef.current({ useBeacon: true });
+      }
     };
   }, [open]);
 

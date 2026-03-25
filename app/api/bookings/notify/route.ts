@@ -13,8 +13,21 @@ export async function POST(request: Request) {
   if (!body || typeof body !== "object") {
     return NextResponse.json({ error: "invalid payload" }, { status: 400 });
   }
+  if (body.status !== "completed") {
+    return NextResponse.json({ error: "invalid status" }, { status: 400 });
+  }
 
-  const sent = await sendBusinessNotification(withServerContext(body, request));
+  const payload = withServerContext(body, request);
+  const sent = await sendBusinessNotification(payload);
+  console.info("[booking-notify]", {
+    sent,
+    sessionId: payload.sessionId,
+    status: payload.status,
+  });
 
-  return NextResponse.json({ sent });
+  if (!sent) {
+    return NextResponse.json({ sent: false }, { status: 500 });
+  }
+
+  return NextResponse.json({ sent: true });
 }
