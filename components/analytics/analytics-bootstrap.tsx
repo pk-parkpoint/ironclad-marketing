@@ -12,6 +12,7 @@ import {
   parseAttribution,
 } from "@/lib/analytics";
 import { derivePageContext, getDeviceType } from "@/lib/analytics-page-context";
+import { recordBookingSiteVisit } from "@/lib/booking-session";
 import { useScrollDepthTracking } from "@/components/analytics/use-scroll-depth-tracking";
 
 type GtagFunction = (
@@ -158,6 +159,12 @@ export function AnalyticsBootstrap() {
       writeStoredAttribution(merged);
       applyAttributionToInternalAnchors(merged);
     }
+
+    recordBookingSiteVisit({
+      attribution: merged,
+      pathname,
+      search,
+    });
 
     const context = derivePageContext(pathname);
     trackEvent(

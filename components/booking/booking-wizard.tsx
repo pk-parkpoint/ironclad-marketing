@@ -1,6 +1,25 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { parseAttribution } from "@/lib/analytics";
+import {
+  BOOKING_SCREEN_IDS,
+  buildBookingLeadPayload,
+  type BookingLeadPayload,
+  type BookingScreenId,
+} from "@/lib/booking-lead";
+import {
+  clearBookingAttempt,
+  getBookingSiteSession,
+  markBookingAbandoned,
+  markBookingApiSubmitted,
+  markBookingCompleted,
+  markBookingScreenVisited,
+  recordBookingSiteVisit,
+  startBookingAttempt,
+  updateBookingAttemptDraft,
+} from "@/lib/booking-session";
 import { BookingStepSelectIssue } from "./booking-step-select-issue";
 import { BookingStepSchedule } from "./booking-step-schedule";
 import { BookingStepContact } from "./booking-step-contact";
@@ -62,6 +81,8 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
 }
 
 export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
+  const pathname = usePathname() ?? "/";
+  const searchParams = useSearchParams();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<WizardFormData>(INITIAL_FORM_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -70,22 +91,132 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
-  const sessionIdRef = useRef<string>("");
+  const finalizedRef = useRef(false);
+  const formDataRef = useRef(INITIAL_FORM_DATA);
+  const currentStepRef = useRef(1);
+  const bookingIdRef = useRef<string | undefined>(undefined);
+  const pathnameRef = useRef(pathname);
+  const searchParamsRef = useRef(searchParams);
+  const sendAbandonmentRef = useRef<(args: { useBeacon: boolean }) => void>(() => {});
+
+  useEffect(() => {
+    formDataRef.current = formData;
+  }, [formData]);
+
+  useEffect(() => {
+    currentStepRef.current = currentStep;
+  }, [currentStep]);
+
+  useEffect(() => {
+    bookingIdRef.current = bookingId;
+  }, [bookingId]);
+
+  useEffect(() => {
+    pathnameRef.current = pathname;
+    searchParamsRef.current = searchParams;
+  }, [pathname, searchParams]);
+
+  function currentScreenId(stepNumber: number): BookingScreenId {
+    return BOOKING_SCREEN_IDS[Math.max(0, Math.min(stepNumber - 1, BOOKING_SCREEN_IDS.length - 1))]!;
+  }
+
+  function buildLeadPayload(status: "completed" | "abandoned"): BookingLeadPayload | null {
+    const attempt =
+      status === "completed"
+        ? markBookingCompleted(bookingIdRef.current)
+        : markBookingAbandoned(currentScreenId(currentStepRef.current));
+    const siteSession = getBookingSiteSession();
+    if (!attempt || !siteSession) {
+      return null;
+    }
+    return buildBookingLeadPayload({
+      attempt,
+      bookingId: bookingIdRef.current,
+      formData: formDataRef.current,
+      siteSession,
+      status,
+    });
+  }
+
+  async function sendCompletedNotification() {
+    if (finalizedRef.current) return;
+    const payload = buildLeadPayload("completed");
+    if (!payload) return;
+    finalizedRef.current = true;
+    await fetch("/api/bookings/notify", {
+      body: JSON.stringify(payload),
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+    }).catch(() => {});
+    clearBookingAttempt();
+  }
+
+  function sendAbandonment({ useBeacon }: { useBeacon: boolean }) {
+    if (finalizedRef.current) return;
+    const payload = buildLeadPayload("abandoned");
+    if (!payload) return;
+    finalizedRef.current = true;
+    const body = JSON.stringify(payload);
+
+    if (useBeacon && typeof navigator !== "undefined" && typeof navigator.sendBeacon === "function") {
+      navigator.sendBeacon("/api/bookings/abandon", new Blob([body], { type: "application/json" }));
+    } else {
+      fetch("/api/bookings/abandon", {
+        body,
+        headers: { "Content-Type": "application/json" },
+        keepalive: true,
+        method: "POST",
+      }).catch(() => {});
+    }
+
+    clearBookingAttempt();
+  }
+
+  sendAbandonmentRef.current = sendAbandonment;
+
+  function handleDismiss() {
+    sendAbandonment({ useBeacon: false });
+    onOpenChange(false);
+  }
 
   useEffect(() => {
     if (!open) return;
-    sessionIdRef.current = `ws_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+    finalizedRef.current = false;
+    formDataRef.current = INITIAL_FORM_DATA;
+    currentStepRef.current = 1;
+    bookingIdRef.current = undefined;
     setCurrentStep(1);
     setFormData(INITIAL_FORM_DATA);
     setIsSubmitting(false);
     setSubmitError(undefined);
     setBookingId(undefined);
-    // Start tracking this session for abandoned booking detection
-    fetch("/api/bookings/partial", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sessionId: sessionIdRef.current, data: {} }),
-    }).catch(() => {});
+    clearBookingAttempt();
+    const currentPathname = pathnameRef.current ?? "/";
+    const currentSearchParams = searchParamsRef.current;
+    recordBookingSiteVisit({
+      attribution: parseAttribution(new URLSearchParams(currentSearchParams.toString())),
+      pathname: currentPathname,
+      search: currentSearchParams.toString(),
+    });
+    startBookingAttempt(INITIAL_FORM_DATA);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    markBookingScreenVisited(currentScreenId(currentStep));
+  }, [currentStep, open]);
+
+  useEffect(() => {
+    if (!open) return;
+    function onPageHide() {
+      sendAbandonmentRef.current({ useBeacon: true });
+    }
+
+    window.addEventListener("pagehide", onPageHide);
+    return () => {
+      window.removeEventListener("pagehide", onPageHide);
+      sendAbandonmentRef.current({ useBeacon: true });
+    };
   }, [open]);
 
   useEffect(() => {
@@ -99,6 +230,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
       if (e.key === "Escape") {
         e.preventDefault();
         const prev = previousFocusRef.current;
+        sendAbandonmentRef.current({ useBeacon: false });
         onOpenChange(false);
         if (prev?.isConnected) setTimeout(() => prev.isConnected && prev.focus(), 0);
         return;
@@ -139,14 +271,8 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
   function updateFormData(updates: Partial<WizardFormData>) {
     setFormData((prev) => {
       const next = { ...prev, ...updates };
-      // Send partial data for abandoned booking tracking
-      if (sessionIdRef.current) {
-        fetch("/api/bookings/partial", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sessionId: sessionIdRef.current, data: next }),
-        }).catch(() => {});
-      }
+      formDataRef.current = next;
+      updateBookingAttemptDraft(next, Object.keys(updates) as Array<keyof WizardFormData>);
       return next;
     });
   }
@@ -196,15 +322,8 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
       if (!res.ok) throw new Error("Unable to submit booking.");
       const data = (await res.json()) as { bookingId?: string };
       setBookingId(data.bookingId);
+      markBookingApiSubmitted(data.bookingId);
       setIsSubmitting(false);
-      // Clear the abandon timer — booking is complete
-      if (sessionIdRef.current) {
-        fetch("/api/bookings/partial", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sessionId: sessionIdRef.current, completed: true }),
-        }).catch(() => {});
-      }
       return true;
     } catch {
       setSubmitError("Booking submission failed. Please try again or call/text us.");
@@ -230,7 +349,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
             ref={closeButtonRef}
             aria-label="Close booking modal"
             className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600"
-            onClick={() => onOpenChange(false)}
+            onClick={handleDismiss}
             type="button"
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -314,34 +433,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
               onUpdate={updateFormData}
               bookingId={bookingId}
               onDismiss={() => onOpenChange(false)}
-              onClose={() => {
-                // Send business notification with all data including step 4 optional fields
-                const timeLabels: Record<string, string> = {
-                  morning: "Morning", afternoon: "Afternoon", "all-day": "All Day", flexible: "Flexible",
-                };
-                fetch("/api/bookings/notify", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    customerName: `${formData.firstName} ${formData.lastName}`.trim(),
-                    phone: formData.phone,
-                    email: formData.email || undefined,
-                    serviceCategory: [formData.serviceCategory, formData.serviceDetail]
-                      .filter(Boolean)
-                      .map((s) => (s || "").replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()))
-                      .join(" > "),
-                    preferredDate: formData.selectedDate,
-                    preferredWindow: timeLabels[formData.timeOfDay || ""] || formData.timeOfDay,
-                    address: formData.addressFormatted,
-                    notes: formData.additionalNotes || undefined,
-                    propertyType: formData.propertyType,
-                    ownershipStatus: formData.ownershipStatus,
-                    gateCode: formData.gateCode || undefined,
-                    petsOnPremise: formData.petsOnPremise,
-                    contactPreference: formData.contactPreference.join(", "),
-                  }),
-                }).catch(() => {});
-              }}
+              onClose={() => { void sendCompletedNotification(); }}
             />
           )}
         </div>
@@ -349,7 +441,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
       <button
         aria-label="Close booking modal"
         className="absolute inset-0 -z-10"
-        onClick={() => onOpenChange(false)}
+        onClick={handleDismiss}
         type="button"
       />
     </div>
