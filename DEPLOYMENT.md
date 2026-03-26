@@ -25,7 +25,7 @@ gcloud run deploy ironclad-marketing \
   --region=us-central1 \
   --port=3000 \
   --allow-unauthenticated \
-  --set-env-vars="NEXT_PUBLIC_SITE_URL=https://ironcladtexas.com,NEXT_PUBLIC_PHONE=(512) 555-0199,NEXT_PUBLIC_TEXT_NUMBER=(512) 555-0199,NEXT_PUBLIC_CONTACT_EMAIL=info@ironcladtexas.com"
+  --set-env-vars="NEXT_PUBLIC_SITE_URL=https://ironcladtexas.com,NEXT_PUBLIC_PHONE=(833) 597-1932,NEXT_PUBLIC_TEXT_NUMBER=(833) 597-1932,NEXT_PUBLIC_CONTACT_EMAIL=info@ironcladtexas.com"
 ```
 
 After deploy, invalidate CDN cache:
