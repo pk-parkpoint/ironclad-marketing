@@ -132,9 +132,9 @@ export function BookingStepSchedule({ formData, onUpdate, onBack, onNext }: Prop
       </div>
 
       {/* Time of day */}
-      <div className="mt-5">
-        <p className="text-sm font-semibold text-ink">Preferred time of day</p>
-        <div className="mt-2 flex flex-wrap gap-2">
+      <div className="mt-6 flex flex-col items-center">
+        <p className="text-center text-sm font-semibold text-ink">Preferred time of day</p>
+        <div className="mt-3 flex flex-wrap justify-center gap-2">
           {TIME_OPTIONS.map((opt) => {
             const selected = formData.timeOfDay === opt.id;
             return (
@@ -163,7 +163,7 @@ export function BookingStepSchedule({ formData, onUpdate, onBack, onNext }: Prop
       )}
 
       {/* Navigation */}
-      <div className="mt-5 flex items-center gap-3">
+      <div className="mt-6 flex items-center justify-between gap-3">
         <button
           type="button"
           className="focus-ring rounded-full border border-gray-300 px-6 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50"
