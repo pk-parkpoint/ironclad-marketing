@@ -21,7 +21,7 @@ function normalizeE164(value: string | undefined): string | null {
 function toNorthAmericaDialHref(rawValue: string, scheme: "tel" | "sms"): string {
   const digits = rawValue.replace(/[^\d]/g, "");
   const normalized = digits.length === 10 ? digits : digits.slice(-10);
-  const resolved = normalized || "5125550199";
+  const resolved = normalized || "8335971932";
   return `${scheme}:+1${resolved}`;
 }
 
