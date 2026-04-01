@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import type { FocusEvent, MouseEvent } from "react";
 import { getPublicContactInfo } from "@/lib/contact";
 import { TOP_NAV_LINKS } from "@/lib/routes";
+import { LavaGlow } from "./lava-glow";
 
 function isNavLinkActive(currentPath: string, href: string): boolean {
   if (href === "/") return currentPath === "/";
@@ -265,22 +266,36 @@ export function SiteHeader() {
             </nav>
 
             <div className="flex items-center gap-3">
-              <Link
-                className="focus-ring hidden min-h-[44px] items-center justify-center whitespace-nowrap rounded-full border-2 border-[#1E2A38] bg-transparent px-5 py-2.5 text-[14px] font-semibold text-[#1E2A38] transition-colors hover:bg-[#1E2A38] hover:text-white hover:no-underline lg:inline-flex"
-                data-track-intent="book"
-                href="/book"
+              <LavaGlow
+                color1={[0.12, 0.16, 0.22]}
+                color2={[0.3, 0.35, 0.45]}
+                color3={[0.2, 0.25, 0.35]}
+                className="hidden rounded-full lg:inline-flex"
               >
-                Schedule Online
-              </Link>
+                <Link
+                  className="focus-ring min-h-[44px] items-center justify-center whitespace-nowrap rounded-full border-2 border-[#1E2A38] bg-transparent px-5 py-2.5 text-[14px] font-semibold text-[#1E2A38] transition-colors hover:bg-[#1E2A38] hover:text-white hover:no-underline inline-flex"
+                  data-track-intent="book"
+                  href="/book"
+                >
+                  Schedule Online
+                </Link>
+              </LavaGlow>
 
-              <a
-                className="focus-ring hidden min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#2563EB] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[#D03E04] hover:no-underline lg:inline-flex"
-                data-track-intent="phone"
-                href={phoneHref}
+              <LavaGlow
+                color1={[1.0, 0.72, 0.4]}
+                color2={[1.0, 0.85, 0.6]}
+                color3={[0.9, 0.55, 0.2]}
+                className="hidden rounded-full lg:inline-flex"
               >
-                <PhoneIcon className="h-4 w-4" />
-                {navPhoneLabel}
-              </a>
+                <a
+                  className="focus-ring min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#2563EB] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[#D03E04] hover:no-underline inline-flex"
+                  data-track-intent="phone"
+                  href={phoneHref}
+                >
+                  <PhoneIcon className="h-4 w-4" />
+                  {navPhoneLabel}
+                </a>
+              </LavaGlow>
 
               <button
                 aria-label={mobileNavOpen ? "Close navigation menu" : "Open navigation menu"}
