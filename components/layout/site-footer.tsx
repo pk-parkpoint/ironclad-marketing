@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getPublicContactInfo } from "@/lib/contact";
 import { ContactForm } from "./contact-form";
+import { SiteLogo } from "./site-logo";
 
 type FooterLink = {
   href: string;
@@ -174,15 +174,12 @@ export function SiteFooter() {
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1.5fr]">
             {/* Column 1 — Logo */}
             <div>
-              <Link className="inline-flex items-center gap-2 text-lg font-semibold text-white hover:no-underline" href="/">
-                <Image
-                  alt="Ironclad Plumbing logo"
-                  className="h-8 w-8"
-                  height={32}
-                  src="/media/ip-logo.svg"
-                  width={32}
-                />
-                Ironclad Plumbing
+              <Link
+                aria-label="Ironclad Plumbing home"
+                className="inline-flex items-center hover:no-underline"
+                href="/"
+              >
+                <SiteLogo className="h-auto w-[220px]" theme="light" />
               </Link>
               <p className="mt-4 text-[13px] text-[#9CA3AF]">
                 Austin&apos;s Most Trusted Plumber
