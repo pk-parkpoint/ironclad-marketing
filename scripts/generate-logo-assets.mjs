@@ -18,30 +18,33 @@ const variants = [
   {
     key: "clear-dark",
     background: null,
-    primary: "#10243B",
-    secondary: "#2563EB",
+    wordmark: "#1B4D8E",
   },
   {
     key: "clear-light",
     background: null,
-    primary: "#FFFFFF",
-    secondary: "#D9E9FF",
+    wordmark: "#FFFFFF",
   },
   {
     key: "white-dark",
     background: "#FFFFFF",
-    primary: "#10243B",
-    secondary: "#2563EB",
+    wordmark: "#1B4D8E",
   },
   {
     key: "blue-light",
-    background: "#0F2744",
-    primary: "#FFFFFF",
-    secondary: "#D9E9FF",
+    background: "#1B4D8E",
+    wordmark: "#FFFFFF",
   },
 ];
 
-function buildSvg({ background, primary, secondary }, iconBase64, fontBase64) {
+function buildSvg({ background, wordmark }, iconBase64, fontBase64) {
+  const iconX = 42;
+  const iconY = 58;
+  const iconSize = 204;
+  const textX = 286;
+  const centerY = iconY + iconSize / 2;
+  const lineOffset = 38;
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none">
   <style>
@@ -51,25 +54,18 @@ function buildSvg({ background, primary, secondary }, iconBase64, fontBase64) {
       font-style: normal;
       font-weight: 700;
     }
-    .wordmark-main {
-      fill: ${primary};
+    .wordmark-line {
+      fill: ${wordmark};
       font-family: "Garet Logo", sans-serif;
-      font-size: 124px;
+      font-size: 72px;
       font-weight: 700;
-      letter-spacing: -0.055em;
-    }
-    .wordmark-sub {
-      fill: ${secondary};
-      font-family: "Garet Logo", sans-serif;
-      font-size: 54px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: -0.03em;
     }
   </style>
   ${background ? `<rect x="0" y="0" width="${width}" height="${height}" rx="28" fill="${background}" />` : ""}
-  <image x="42" y="58" width="204" height="204" href="data:image/svg+xml;base64,${iconBase64}" />
-  <text x="286" y="152" class="wordmark-main">Ironclad</text>
-  <text x="293" y="226" class="wordmark-sub">PLUMBING</text>
+  <image x="${iconX}" y="${iconY}" width="${iconSize}" height="${iconSize}" href="data:image/svg+xml;base64,${iconBase64}" />
+  <text x="${textX}" y="${centerY - lineOffset}" class="wordmark-line" dominant-baseline="middle">IRONCLAD</text>
+  <text x="${textX}" y="${centerY + lineOffset}" class="wordmark-line" dominant-baseline="middle">PLUMBING</text>
 </svg>`;
 }
 
