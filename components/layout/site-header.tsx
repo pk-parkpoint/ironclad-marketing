@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { FocusEvent, MouseEvent } from "react";
 import { getPublicContactInfo } from "@/lib/contact";
 import { TOP_NAV_LINKS } from "@/lib/routes";
+import { SiteLogo } from "./site-logo";
 
 function isNavLinkActive(currentPath: string, href: string): boolean {
   if (href === "/") return currentPath === "/";
@@ -161,16 +161,16 @@ export function SiteHeader() {
           }`}
         >
           <div className="mx-auto flex h-[95px] w-full max-w-[1280px] items-center justify-between gap-6 px-6">
-            <Link className="focus-ring inline-flex shrink-0 items-center gap-2 text-lg font-semibold text-ink" href="/">
-              <Image
-                alt="Ironclad Plumbing logo"
-                className="h-8 w-8"
-                height={32}
+            <Link
+              aria-label="Ironclad Plumbing home"
+              className="focus-ring inline-flex shrink-0 items-center"
+              href="/"
+            >
+              <SiteLogo
+                className="h-auto w-[172px] sm:w-[212px] lg:w-[248px]"
                 priority
-                src="/media/ip-logo.svg"
-                width={32}
+                theme="dark"
               />
-              <span className="whitespace-nowrap">Ironclad Plumbing</span>
             </Link>
 
             <nav
