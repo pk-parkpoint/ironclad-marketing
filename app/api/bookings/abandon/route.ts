@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sendBusinessNotification } from "@/lib/booking-email";
+import { notifyConduitUpdate } from "@/lib/booking-conduit";
 import { type BookingLeadPayload } from "@/lib/booking-lead";
 import { parseJsonRequest, withServerContext } from "@/lib/booking-server";
 
@@ -14,15 +15,17 @@ export async function POST(request: Request) {
 
   const payload = withServerContext(body, request);
   const sent = await sendBusinessNotification(payload);
+  const conduit = await notifyConduitUpdate(payload);
   console.info("[booking-abandon]", {
     sent,
+    conduit,
     sessionId: payload.sessionId,
     status: payload.status,
   });
 
   if (!sent) {
-    return NextResponse.json({ sent: false }, { status: 500 });
+    return NextResponse.json({ sent: false, conduit }, { status: 500 });
   }
 
-  return NextResponse.json({ sent: true });
+  return NextResponse.json({ sent: true, conduit });
 }
