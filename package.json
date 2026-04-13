@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "deploy:prod": "bash scripts/deploy-production.sh",
+    "deploy:prod:dry-run": "IRONCLAD_DEPLOY_DRY_RUN=1 bash scripts/deploy-production.sh",
     "lint": "eslint",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
@@ -24,6 +26,7 @@
     "internal-links:audit": "tsx scripts/validate-internal-links.ts",
     "analytics:audit": "tsx scripts/validate-analytics.ts",
     "launch:prod:audit": "tsx scripts/validate-production-launch.ts",
+    "launch:prod:audit:strict": "PROD_REQUIRE_ANALYTICS=1 tsx scripts/validate-production-launch.ts",
     "og:generate": "tsx scripts/generate-og-images.ts",
     "test:e2e:cross-browser": "playwright test --project=chromium --project=firefox --project=webkit --workers=1",
     "test:e2e:cross-device": "playwright test tests/e2e/cross-device-smoke.spec.ts --project=chromium --project=mobile-chrome --project=ios-safari --project=ipad-safari --workers=1"

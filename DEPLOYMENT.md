@@ -19,23 +19,25 @@ Do NOT deploy from `conduit/websites/ironclad/`. That is a stale copy. It does n
 
 ```bash
 cd /path/to/ironclad-marketing
-gcloud run deploy ironclad-marketing \
-  --source=. \
-  --project=conduit-external-dev \
-  --region=us-central1 \
-  --port=3000 \
-  --allow-unauthenticated \
-  --set-env-vars="NEXT_PUBLIC_SITE_URL=https://ironcladtexas.com,NEXT_PUBLIC_PHONE=(833) 597-1932,NEXT_PUBLIC_TEXT_NUMBER=(833) 597-1932,NEXT_PUBLIC_CONTACT_EMAIL=info@ironcladtexas.com"
+npm run deploy:prod
 ```
 
-After deploy, invalidate CDN cache:
+This wrapper does four things the raw `gcloud run deploy` path does not:
+
+- refuses local deploys from the wrong repo
+- refuses local deploys from dirty or stale `main`
+- preserves the current Cloud Run env instead of clobbering missing keys
+- repairs the HTTP proxy mapping and invalidates CDN cache after deploy
+
+Use the dry-run guardrail check first if you want to inspect the env key set without deploying:
 
 ```bash
-gcloud compute url-maps invalidate-cdn-cache ironclad-url-map \
-  --path="/*" --global --quiet --project=conduit-external-dev
+npm run deploy:prod:dry-run
 ```
 
-Or use Cloud Build (once permissions are fixed):
+Do not use raw `gcloud run deploy --set-env-vars=...` for production. That path can silently wipe existing env vars and break the site.
+
+For CI / automated deploys, use Cloud Build from this repo root:
 
 ```bash
 gcloud builds submit --config=cloudbuild.yaml --project=conduit-external-dev .
@@ -52,6 +54,9 @@ curl -sI https://ironcladtexas.com/guides
 
 # Production smoke test
 npm run launch:prod:audit
+
+# Require analytics bootstrap once GTM/GA4 is actually configured
+npm run launch:prod:audit:strict
 ```
 
 CDN cache is 5 minutes. Invalidate after deploy or wait.
@@ -106,7 +111,10 @@ AUDIT_BASE_URL=https://ironcladtexas.com npm run phase0:live:audit
 
 ### How keys flow at deploy time
 
-`NEXT_PUBLIC_*` vars are inlined by Next.js at **build time**, not runtime. The `.env.production` file is uploaded to Cloud Build (allowed by `.gcloudignore`) so the build has access. Cloud Run env vars serve as runtime backup.
+`NEXT_PUBLIC_*` vars are inlined by Next.js at build time. The guarded deploy script merges the current live Cloud Run env with optional `.env.production` overrides, then deploys with `--env-vars-file` so existing production keys are preserved.
+When `.env.production` is missing, the deploy wrapper generates a temporary one from the live service config so the build still sees the correct public vars.
+
+Analytics is wired in code but not forced in the default production audit until live GTM / GA4 IDs are configured. Once those IDs exist, use `npm run launch:prod:audit:strict`.
 
 ## DNS and Secrets
 
@@ -118,5 +126,5 @@ GoDaddy credentials in Google Secret Manager (never committed):
 ## Notes
 
 - `vercel.json` is for header compatibility only — site is NOT on Vercel
-- `cloudbuild.yaml` defines the full deploy + CDN invalidation pipeline
+- `cloudbuild.yaml` now runs install, lint, build, analytics audit, guarded deploy, and post-deploy smoke validation
 - `app/api/health` is the post-deploy smoke endpoint

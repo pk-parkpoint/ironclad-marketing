@@ -28,6 +28,15 @@ function getEnv(name: string): string | undefined {
   return value.trim();
 }
 
+function envFlag(name: string): boolean {
+  const value = getEnv(name);
+  if (!value) {
+    return false;
+  }
+
+  return ["1", "true", "yes", "on"].includes(value.toLowerCase());
+}
+
 function joinRoute(baseUrl: string, route: string): string {
   return route === "/" ? baseUrl : `${baseUrl}${route}`;
 }
@@ -106,6 +115,7 @@ async function main() {
   const baseUrl = normalizeBaseUrl(getEnv("PROD_SITE_URL") ?? getEnv("NEXT_PUBLIC_SITE_URL"));
   const expectedBrand = getEnv("PROD_EXPECTED_BRAND") ?? "Ironclad Plumbing";
   const expectedMarket = getEnv("PROD_EXPECTED_MARKET") ?? "Austin";
+  const requireAnalytics = envFlag("PROD_REQUIRE_ANALYTICS");
 
   const parsedBase = new URL(baseUrl);
   assert(parsedBase.protocol === "https:", `base URL must be https. Got ${baseUrl}`);
@@ -183,8 +193,13 @@ async function main() {
   const hasGtm = homeHtml.includes("googletagmanager.com/gtm.js");
   const hasGtag = homeHtml.includes("googletagmanager.com/gtag/js");
   const hasDataLayer = homeHtml.includes("dataLayer");
-  assert(hasGtm || hasGtag, "home page is missing GTM/GA bootstrap scripts");
-  assert(hasDataLayer, "home page is missing dataLayer marker");
+  if (hasGtm || hasGtag) {
+    assert(hasDataLayer, "home page is missing dataLayer marker");
+  } else if (requireAnalytics) {
+    fail("home page is missing GTM/GA bootstrap scripts");
+  } else {
+    console.warn("production launch audit warning: home page is missing GTM/GA bootstrap scripts");
+  }
 
   for (const route of REQUIRED_ROUTES) {
     const routeUrl = joinRoute(baseUrl, route);

@@ -71,6 +71,22 @@ Optional overrides:
 - `PROD_SITE_URL` (defaults to `https://ironcladtexas.com`)
 - `PROD_EXPECTED_BRAND` (defaults to `Ironclad Plumbing`)
 - `PROD_EXPECTED_MARKET` (defaults to `Austin`)
+- `PROD_REQUIRE_ANALYTICS=1` to fail if GTM / GA4 bootstrap is missing
+
+## Production Deploy
+
+```bash
+npm run deploy:prod
+```
+
+Dry run:
+
+```bash
+npm run deploy:prod:dry-run
+```
+
+The deploy wrapper preserves live Cloud Run env vars, rejects local deploys from the wrong repo or dirty / stale `main`, repairs the HTTP proxy mapping, and invalidates CDN cache automatically.
+If `.env.production` is missing, it generates a temporary one from the live Cloud Run config so build-time `NEXT_PUBLIC_*` vars do not disappear.
 
 ## Cross-Browser / Device QA
 
