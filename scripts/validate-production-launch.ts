@@ -3,7 +3,7 @@ import dns from "node:dns/promises";
 const DEFAULT_BASE_URL = "https://ironcladtexas.com";
 const REQUIRED_ROUTES = ["/", "/plumbing", "/service-area", "/reviews", "/book", "/contact"];
 const BOOKING_PATH = "/api/bookings";
-const REQUIRED_BOOKING_STATUS = 202;
+const REQUIRED_BOOKING_STATUS = 201;
 
 function normalizeBaseUrl(raw?: string): string {
   return (raw ?? DEFAULT_BASE_URL).replace(/\/+$/, "");
@@ -30,6 +30,47 @@ function getEnv(name: string): string | undefined {
 
 function joinRoute(baseUrl: string, route: string): string {
   return route === "/" ? baseUrl : `${baseUrl}${route}`;
+}
+
+function normalizeComparableUrl(raw: string): string {
+  const parsed = new URL(raw);
+  if ((parsed.protocol === "https:" && parsed.port === "443") || (parsed.protocol === "http:" && parsed.port === "80")) {
+    parsed.port = "";
+  }
+  return parsed.toString().replace(/\/+$/, "");
+}
+
+function assertRedirectLocation(response: Response, requestUrl: string, expectedUrl: string, context: string): void {
+  assert(
+    [301, 302, 307, 308].includes(response.status),
+    `${context} must redirect. Got ${response.status}`,
+  );
+
+  const location = response.headers.get("location");
+  assert(!!location, `${context} redirect location is missing`);
+  assert(!location.includes(":443"), `${context} redirect location exposes :443 (${location})`);
+
+  const absoluteLocation = new URL(location, requestUrl).toString();
+  assert(
+    normalizeComparableUrl(absoluteLocation) === normalizeComparableUrl(expectedUrl),
+    `${context} redirect location was ${absoluteLocation}; expected ${expectedUrl}`,
+  );
+}
+
+function buildBookingSmokePayload() {
+  const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+
+  return {
+    address: {
+      formatted: "123 Test St, Austin, TX 78701",
+    },
+    contactPreference: "either",
+    customerName: "IC-081 Smoke Test",
+    phone: "+15125550123",
+    preferredDate: tomorrow,
+    preferredWindow: "Morning",
+    serviceCategory: "leak-detection",
+  };
 }
 
 async function fetchWithTimeout(url: string, init?: RequestInit): Promise<Response> {
@@ -75,17 +116,51 @@ async function main() {
   const httpUrl = new URL(baseUrl);
   httpUrl.protocol = "http:";
   const insecureResponse = await fetchWithTimeout(httpUrl.toString(), { redirect: "manual" });
-  assert(
-    [301, 302, 307, 308].includes(insecureResponse.status),
-    `http://${parsedBase.hostname} must redirect to HTTPS. Got ${insecureResponse.status}`,
+  assertRedirectLocation(
+    insecureResponse,
+    httpUrl.toString(),
+    baseUrl,
+    `http://${parsedBase.hostname}`,
   );
-  const insecureLocation = insecureResponse.headers.get("location");
-  assert(!!insecureLocation, `http://${parsedBase.hostname} redirect location is missing`);
 
   const insecureFollow = await fetchWithTimeout(httpUrl.toString(), { redirect: "follow" });
   assert(
-    insecureFollow.url.startsWith("https://"),
-    `http://${parsedBase.hostname} must resolve to an HTTPS URL. Final URL: ${insecureFollow.url}`,
+    normalizeComparableUrl(insecureFollow.url) === normalizeComparableUrl(baseUrl),
+    `http://${parsedBase.hostname} must resolve to ${baseUrl}. Final URL: ${insecureFollow.url}`,
+  );
+
+  const wwwUrl = new URL(baseUrl);
+  wwwUrl.hostname = `www.${parsedBase.hostname}`;
+
+  const wwwSecureResponse = await fetchWithTimeout(wwwUrl.toString(), { redirect: "manual" });
+  assertRedirectLocation(
+    wwwSecureResponse,
+    wwwUrl.toString(),
+    baseUrl,
+    `https://www.${parsedBase.hostname}`,
+  );
+
+  const wwwSecureFollow = await fetchWithTimeout(wwwUrl.toString(), { redirect: "follow" });
+  assert(
+    normalizeComparableUrl(wwwSecureFollow.url) === normalizeComparableUrl(baseUrl),
+    `https://www.${parsedBase.hostname} must resolve to ${baseUrl}. Final URL: ${wwwSecureFollow.url}`,
+  );
+
+  const wwwHttpUrl = new URL(wwwUrl.toString());
+  wwwHttpUrl.protocol = "http:";
+
+  const wwwInsecureResponse = await fetchWithTimeout(wwwHttpUrl.toString(), { redirect: "manual" });
+  assertRedirectLocation(
+    wwwInsecureResponse,
+    wwwHttpUrl.toString(),
+    baseUrl,
+    `http://www.${parsedBase.hostname}`,
+  );
+
+  const wwwInsecureFollow = await fetchWithTimeout(wwwHttpUrl.toString(), { redirect: "follow" });
+  assert(
+    normalizeComparableUrl(wwwInsecureFollow.url) === normalizeComparableUrl(baseUrl),
+    `http://www.${parsedBase.hostname} must resolve to ${baseUrl}. Final URL: ${wwwInsecureFollow.url}`,
   );
 
   const homeResponse = await fetchWithTimeout(baseUrl, { redirect: "follow" });
@@ -121,12 +196,7 @@ async function main() {
   const bookingResponse = await fetchWithTimeout(bookingUrl, {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      name: "IC-081 Smoke Test",
-      phone: "+15125550123",
-      service: "leak-detection",
-      source: "ic081_prod_audit",
-    }),
+    body: JSON.stringify(buildBookingSmokePayload()),
   });
   assert(
     bookingResponse.status === REQUIRED_BOOKING_STATUS,

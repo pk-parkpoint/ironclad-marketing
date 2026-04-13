@@ -21,6 +21,8 @@ export function middleware(request: NextRequest) {
   const rawHost =
     request.headers.get("x-forwarded-host") ?? request.headers.get("host") ?? url.host ?? "";
   const hostname = rawHost.split(",")[0]?.trim().split(":")[0]?.toLowerCase().replace(/\.$/, "") ?? "";
+  const rawProto = request.headers.get("x-forwarded-proto") ?? url.protocol ?? "https:";
+  const protocol = rawProto.split(",")[0]?.trim().toLowerCase().replace(/:$/, "") ?? "https";
 
   const isIroncladDomain = hostname === CANONICAL_HOST || hostname === `www.${CANONICAL_HOST}`;
 
@@ -33,6 +35,10 @@ export function middleware(request: NextRequest) {
   url.port = "";
 
   let shouldRedirect = false;
+
+  if (protocol !== "https") {
+    shouldRedirect = true;
+  }
 
   if (hostname === `www.${CANONICAL_HOST}`) {
     url.host = CANONICAL_HOST;
