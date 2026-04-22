@@ -48,7 +48,16 @@ function AnalyticsHead() {
     );
   }
 
-  return null;
+  return (
+    <Script
+      id="analytics-bootstrap-stub"
+      strategy="beforeInteractive"
+      dangerouslySetInnerHTML={{
+        __html:
+          "window.dataLayer = window.dataLayer || [];window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};",
+      }}
+    />
+  );
 }
 
 function AnalyticsBody() {
