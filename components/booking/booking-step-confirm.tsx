@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { trackLeadSubmitSuccess } from "@/lib/analytics";
+import { derivePageContext } from "@/lib/analytics-page-context";
 import type { WizardFormData } from "./booking-wizard";
 
 type Props = {
@@ -55,6 +57,21 @@ function PillToggle({
 
 export function BookingStepConfirm({ formData, onUpdate, bookingId, onClose, onDismiss }: Props) {
   const [showFarewell, setShowFarewell] = useState(false);
+  const hasTrackedSuccessRef = useRef(false);
+
+  useEffect(() => {
+    if (!bookingId || hasTrackedSuccessRef.current || typeof window === "undefined") {
+      return;
+    }
+
+    const pageContext = derivePageContext(window.location.pathname);
+    hasTrackedSuccessRef.current = true;
+    trackLeadSubmitSuccess({
+      city: pageContext.city,
+      formType: "booking_wizard",
+      service: formData.serviceDetail || formData.serviceCategory || "",
+    });
+  }, [bookingId, formData.serviceCategory, formData.serviceDetail]);
 
   useEffect(() => {
     if (!showFarewell) return;

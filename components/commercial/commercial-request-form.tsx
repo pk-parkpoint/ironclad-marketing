@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { trackLeadSubmitSuccess } from "@/lib/analytics";
 
 const fieldClass =
   "w-full rounded-[6px] border border-[#D1D5DB] bg-white px-4 py-3 text-sm text-[#111827] placeholder:text-[#9CA3AF] focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[rgba(37,99,235,0.2)]";
@@ -41,6 +42,11 @@ export function CommercialRequestForm() {
       return;
     }
 
+    trackLeadSubmitSuccess({
+      city: "Austin",
+      formType: "commercial_form",
+      service: "Commercial Plumbing",
+    });
     setState("success");
   }
 
