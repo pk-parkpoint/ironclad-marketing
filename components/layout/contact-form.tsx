@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { trackLeadSubmitSuccess } from "@/lib/analytics";
 
 const SERVICE_OPTIONS = [
   "Plumbing Repairs",
@@ -106,6 +107,11 @@ export function ContactForm({
       return;
     }
 
+    trackLeadSubmitSuccess({
+      city: serviceArea,
+      formType: "contact_form",
+      service: String(formData.get("service") || serviceInterest || ""),
+    });
     setSubmissionState("success");
   }
 

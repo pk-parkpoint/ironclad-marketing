@@ -16,6 +16,13 @@ export const SCROLL_DEPTH_THRESHOLDS = [25, 50, 75, 100] as const;
 export type AttributionKey = (typeof ATTRIBUTION_KEYS)[number];
 export type AttributionData = Partial<Record<AttributionKey, string>>;
 
+type TrackLeadSubmitSuccessInput = {
+  city?: string;
+  formType: "booking_wizard" | "contact_form" | "commercial_form";
+  pageUrl?: string;
+  service?: string;
+};
+
 export function parseAttribution(searchParams: URLSearchParams): AttributionData {
   const attribution: AttributionData = {};
   for (const key of ATTRIBUTION_KEYS) {
@@ -103,5 +110,63 @@ export function applyAttributionToInternalAnchors(attribution: AttributionData) 
     if (nextHref !== href) {
       anchor.setAttribute("href", nextHref);
     }
+  }
+}
+
+function readStoredAttribution(): AttributionData {
+  try {
+    const raw = window.localStorage.getItem(ATTRIBUTION_STORAGE_KEY);
+    if (!raw) {
+      return {};
+    }
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+    const attribution: AttributionData = {};
+    for (const key of ATTRIBUTION_KEYS) {
+      const value = parsed[key];
+      if (typeof value === "string" && value.trim()) {
+        attribution[key] = value;
+      }
+    }
+    return attribution;
+  } catch {
+    return {};
+  }
+}
+
+export function trackLeadSubmitSuccess({
+  city = "",
+  formType,
+  pageUrl = "",
+  service = "",
+}: TrackLeadSubmitSuccessInput) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  const searchParams = new URLSearchParams(window.location.search);
+  const attribution = mergeAttribution({
+    incoming: parseAttribution(searchParams),
+    stored: readStoredAttribution(),
+  });
+  const payload: Record<string, unknown> = {
+    city,
+    device_type: window.innerWidth < 768 ? "mobile" : window.innerWidth < 1024 ? "tablet" : "desktop",
+    form_type: formType,
+    page_url: pageUrl || `${window.location.pathname}${window.location.search}`,
+    service,
+  };
+
+  for (const key of ATTRIBUTION_KEYS) {
+    const value = attribution[key];
+    if (value) {
+      payload[key] = value;
+    }
+  }
+
+  window.dataLayer = window.dataLayer ?? [];
+  window.dataLayer.push({ event: "lead_submit_success", ...payload });
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", "lead_submit_success", payload);
   }
 }

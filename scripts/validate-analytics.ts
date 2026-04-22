@@ -32,11 +32,14 @@ function main() {
     "cta_click",
     "phone_click",
     "text_click",
+    "lead_submit_success",
     "booking_funnel_event",
     "scroll_depth",
     "faq_expand",
   ]) {
-    assertContains("analytics-bootstrap.tsx", analyticsRuntime, eventName);
+    const source = eventName === "lead_submit_success" ? analyticsLib : analyticsRuntime;
+    const fileLabel = eventName === "lead_submit_success" ? "lib/analytics.ts" : "analytics-bootstrap.tsx";
+    assertContains(fileLabel, source, eventName);
   }
 
   for (const attributionKey of [
@@ -57,7 +60,7 @@ function main() {
   assertContains("mobile-bottom-bar.tsx", mobileBottomBar, 'data-track-intent="text"');
   assertContains("plumbing/[slug]/page.tsx", servicePage, 'data-track-intent="phone"');
 
-  console.log("analytics audit passed: GA4/GTM bootstrap, event runtime, UTM keys, and CTA intents wired");
+  console.log("analytics audit passed: GA4/GTM bootstrap, runtime events, lead success tracking, UTM keys, and CTA intents wired");
 }
 
 main();
