@@ -58,34 +58,34 @@ export const LOCATIONS: LocationEntry[] = [
   {
     slug: "lakeway-tx",
     cityName: "Lakeway",
-    titleTag: "Plumber in Lakeway, TX | Ironclad Plumbing",
+    titleTag: "Lakeway Plumber for High-Finish Homes & Leak Detection | Ironclad Plumbing",
     metaDescription:
-      "Premium plumbing service for Lakeway homes, from fixtures to slab leak diagnostics.",
-    h1: "Lakeway Plumbing - Precision Service for Lake-Area Homes",
+      "Lakeway plumber serving Rough Hollow, Serene Hills, Flintrock Falls, and nearby neighborhoods with fixture installs, leak detection, water treatment, and detailed scheduling.",
+    h1: "Lakeway Plumbing With Clean Workmanship and Respect for the Home",
   },
   {
     slug: "bee-cave-tx",
     cityName: "Bee Cave",
-    titleTag: "Plumber in Bee Cave, TX | Ironclad Plumbing",
+    titleTag: "Bee Cave Plumber for Gas Lines, Water Quality & Repairs | Ironclad Plumbing",
     metaDescription:
-      "Licensed and insured Bee Cave plumbing service for repairs, gas lines, and emergencies.",
-    h1: "Bee Cave Plumbing - Licensed, Insured, Ready to Help",
+      "Bee Cave plumber serving Falconhead, Spanish Oaks, Bella Colinas, and nearby neighborhoods with gas lines, water treatment, water heaters, and clean repair work.",
+    h1: "Bee Cave Plumbing for Repairs, Gas Lines, Fixtures, and Water Quality",
   },
   {
     slug: "west-lake-hills-tx",
     cityName: "West Lake Hills",
-    titleTag: "Plumber in West Lake Hills, TX | Ironclad Plumbing",
+    titleTag: "West Lake Hills Plumber for Remodels & Leak Detection | Ironclad Plumbing",
     metaDescription:
-      "West Lake Hills plumbing built around transparency, precision, and respect for your home.",
-    h1: "West Lake Hills Plumbing - A Higher Standard",
+      "West Lake Hills plumber serving Treemont, Westwood, Mesa Oaks, and nearby neighborhoods with leak detection, remodel plumbing, water treatment, and discreet service windows.",
+    h1: "West Lake Hills Plumbing With Precision and Professionalism",
   },
   {
     slug: "rollingwood-tx",
     cityName: "Rollingwood",
-    titleTag: "Plumber in Rollingwood, TX | Ironclad Plumbing",
+    titleTag: "Rollingwood Plumber for Older Homes & Fixture Upgrades | Ironclad Plumbing",
     metaDescription:
-      "Rollingwood repairs, installations, and water treatment with written workmanship warranty.",
-    h1: "Rollingwood Plumbing - Professional Service, Personal Attention",
+      "Rollingwood plumber serving Hatley Drive, Rollingwood Drive, Riley Road, and nearby streets with leak detection, fixture upgrades, water heaters, and clear arrival windows.",
+    h1: "Rollingwood Plumbing With Clear Communication and Clean Execution",
   },
   {
     slug: "dripping-springs-tx",

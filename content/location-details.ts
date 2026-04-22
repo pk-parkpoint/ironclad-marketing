@@ -419,6 +419,373 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
   },
 };
 
+const LOCATION_DETAIL_OVERRIDES: Partial<Record<string, LocationDetail>> = {
+  "lakeway-tx": {
+    slug: "lakeway-tx",
+    heroDescription:
+      "Lakeway plumbing calls usually involve higher-finish kitchens and baths, long interior runs, recirculation loops, and water-quality tuning that needs more precision than a generic repair visit. We serve Rough Hollow, Serene Hills, Flintrock Falls, Old Lakeway, and The Hills with work that stays technically sound and visually clean.",
+    overviewHeading: "Lakeway Plumbing With Clean Workmanship and Respect for the Home",
+    overviewParagraphs: [
+      "Lakeway homeowners are usually not just trying to get water flowing again. They want a repair or upgrade that protects finished surfaces, preserves fixture quality, and avoids a sloppy installation story after the truck leaves.",
+      "That means we spend more time here on detailed fixture work, leak isolation in larger layouts, recirculation and hot-water-delivery complaints, and treatment planning that keeps scale from dulling premium hardware too early.",
+      "Because Lakeway sits in a defined west-side service corridor, we can usually give a clearer arrival window and a more organized next-step plan for leak, treatment, or fixture work instead of turning a single visit into a guessing exercise.",
+    ],
+    commonIssuesHeading: "Lakeway Plumbing Problems We See Most Often",
+    commonIssues: [
+      "Pressure and flow imbalance across multi-level homes with longer interior plumbing runs",
+      "Scale-related wear showing up early on premium fixtures and shower components",
+      "Hidden leak symptoms around slab edges, wall runs, or recirculation paths",
+      "Water-heater and recirculation complaints in larger homes with multiple simultaneous demand points",
+      "Treatment systems that need retuning after occupancy or fixture changes",
+    ],
+    neighborhoodHeading: "Lakeway Areas We Routinely Serve",
+    neighborhoodBody:
+      "Our Lakeway routes regularly include Rough Hollow, Serene Hills, Flintrock Falls, Old Lakeway, The Hills, and nearby lake-area neighborhoods where plumbing work has to balance performance, finish quality, and clean communication.",
+    neighborhoods: ["Rough Hollow", "Serene Hills", "Flintrock Falls", "Old Lakeway", "The Hills", "Lakeway Highlands"],
+    featuredServicesHeading: "Lakeway Services Homeowners Call Us For Most",
+    featuredServiceSlugs: ["fixtures", "water-treatment", "leak-detection"],
+    homeownerTipsHeading: "Lakeway Homeowner Tips Before the Next Problem Gets More Expensive",
+    homeownerTips: [
+      "Treat recurring low-flow or temperature complaints as a system-design question, not just a fixture issue.",
+      "Keep treatment maintenance current if you want premium fixtures and glass enclosures to stay cleaner longer.",
+      "Address small hidden-moisture signs early because larger homes can conceal leak damage for longer than expected.",
+      "Review recirculation and heater performance together when hot-water complaints start showing up in different parts of the home.",
+    ],
+    processHeading: "How Lakeway Service Usually Runs",
+    processSteps: [
+      {
+        number: "1",
+        title: "Confirm layout and finish sensitivity",
+        description: "We note whether the home has long runs, premium fixtures, recirculation, or remodel-sensitive areas before the visit starts.",
+      },
+      {
+        number: "2",
+        title: "Diagnose the real system condition",
+        description: "Technicians check the active symptom plus the pressure, water-quality, or heater conditions that often sit behind it in Lakeway homes.",
+      },
+      {
+        number: "3",
+        title: "Scope the cleanest repair path",
+        description: "You get written options that prioritize durable correction and minimize unnecessary disruption to the home.",
+      },
+      {
+        number: "4",
+        title: "Verify performance and document next steps",
+        description: "We test the finished work and document any treatment, maintenance, or follow-up action that protects long-term performance.",
+      },
+    ],
+    trustPoints: [
+      {
+        title: "High-finish fixture awareness",
+        description: "We work with the care Lakeway homes need when finish quality matters as much as function.",
+      },
+      {
+        title: "Water-quality and recirculation context",
+        description: "We look beyond the failed part and account for the system conditions that usually caused the complaint.",
+      },
+      {
+        title: "Organized west-corridor scheduling",
+        description: "Lakeway service is routed with practical windows and clear communication before arrival.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do you work on premium fixtures and specialty hardware in Lakeway?",
+        answer:
+          "Yes. We regularly handle higher-finish fixture installs and repairs where clean workmanship and manufacturer-aware installation details matter.",
+      },
+      {
+        question: "Can you help with hot-water delays in larger Lakeway homes?",
+        answer:
+          "Yes. We evaluate heater sizing, recirculation behavior, and fixture demand together so the fix addresses the real reason hot water is lagging.",
+      },
+      {
+        question: "Is water treatment worth it in Lakeway?",
+        answer:
+          "Usually, yes. Treatment helps protect heaters, valves, shower components, and premium finishes from the kind of hard-water wear we regularly see in Lakeway homes.",
+      },
+      {
+        question: "Do you document completed work and next steps?",
+        answer:
+          "Yes. We provide clear completion notes and warranty-backed follow-up guidance so the homeowner is not left guessing after service.",
+      },
+    ],
+  },
+  "bee-cave-tx": {
+    slug: "bee-cave-tx",
+    heroDescription:
+      "Bee Cave plumbing service often means supporting custom homes, outdoor living upgrades, gas-line work, and water-quality decisions that need more planning than a one-note repair visit. We serve Falconhead, Spanish Oaks, Bella Colinas, Homestead, and nearby neighborhoods with practical scopes and clean execution.",
+    overviewHeading: "Bee Cave Plumbing for Repairs, Gas Lines, Fixtures, and Water Quality",
+    overviewParagraphs: [
+      "Bee Cave homes create a different service profile than a dense older neighborhood. We frequently move between custom-home fixture work, outdoor kitchen and fire-feature gas lines, heater performance questions, and treatment planning meant to protect more expensive finishes.",
+      "That makes clarity important. Homeowners usually need to know whether the right answer is a targeted repair, a gas or fixture upgrade, or a treatment change that will prevent the same finish or scale issue from coming back.",
+      "Bee Cave also sits in a route pattern where we can usually bundle detailed diagnostics with responsive follow-through, which matters when the project touches multiple systems or a higher-spec home schedule.",
+    ],
+    commonIssuesHeading: "Bee Cave Plumbing Issues We See Repeatedly",
+    commonIssues: [
+      "Outdoor kitchen, fireplace, and grill projects that need pressure-tested gas-line extensions",
+      "Scale buildup on designer fixtures and shower systems in hard-water conditions",
+      "Water-heater strain in larger homes with multiple simultaneous demand points",
+      "Leak symptoms on longer runs or around recently upgraded fixture zones",
+      "Treatment systems that need to match actual usage rather than generic package sizing",
+    ],
+    neighborhoodHeading: "Bee Cave Areas We Routinely Cover",
+    neighborhoodBody:
+      "Our Bee Cave routes regularly include Falconhead, Spanish Oaks, Bella Colinas, Homestead, The Uplands, and nearby custom-home neighborhoods where gas work, fixture quality, and water treatment often intersect on the same service call.",
+    neighborhoods: ["Falconhead", "Spanish Oaks", "Bella Colinas", "Homestead", "The Uplands", "Rocky Creek"],
+    featuredServicesHeading: "Bee Cave Services Homeowners Request Most",
+    featuredServiceSlugs: ["gas-line-services", "water-treatment", "water-heaters"],
+    homeownerTipsHeading: "Bee Cave Homeowner Tips for Fewer Callback Problems",
+    homeownerTips: [
+      "Pressure-test gas additions whenever an outdoor appliance package changes.",
+      "Treat scale early if designer fixtures are already spotting or cartridge life is getting shorter.",
+      "Revisit heater sizing when a home adds baths, guests, or heavier seasonal occupancy.",
+      "Use one coordinated scope for leak, fixture, and treatment issues when they start showing up together.",
+    ],
+    processHeading: "How Bee Cave Service Usually Works",
+    processSteps: [
+      {
+        number: "1",
+        title: "Clarify project type",
+        description: "We confirm whether the call is repair, gas expansion, fixture work, heater performance, or water-quality driven before dispatch.",
+      },
+      {
+        number: "2",
+        title: "Inspect the surrounding system",
+        description: "Technicians check the related pressure, scale, gas, or fixture conditions so the repair scope reflects the full use case.",
+      },
+      {
+        number: "3",
+        title: "Present a durable plan",
+        description: "You get written options that match the home, the finish level, and the longer-term reliability goal.",
+      },
+      {
+        number: "4",
+        title: "Complete and verify",
+        description: "We test the completed work, confirm safe operation, and document the follow-up maintenance that keeps the same issue from returning.",
+      },
+    ],
+    trustPoints: [
+      {
+        title: "Strong fit for custom-home service",
+        description: "We regularly handle Bee Cave jobs where the plumbing work needs to respect finish quality and project sequencing.",
+      },
+      {
+        title: "Gas and water-quality context",
+        description: "We can connect outdoor-living gas work and hard-water planning instead of treating them like unrelated tasks.",
+      },
+      {
+        title: "Clear western-route scheduling",
+        description: "Bee Cave jobs are planned with realistic arrival windows and better pre-arrival communication.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do you handle gas lines for outdoor kitchens and fire features in Bee Cave?",
+        answer:
+          "Yes. Outdoor gas-line additions are a common Bee Cave request, and we pressure-test and document the work so the appliance side can be commissioned cleanly.",
+      },
+      {
+        question: "Can you help with fixture installs in custom homes?",
+        answer:
+          "Yes. We routinely handle fixture work where finish quality, compatibility, and clean final presentation matter just as much as function.",
+      },
+      {
+        question: "Is water treatment worth it in Bee Cave?",
+        answer:
+          "For many homes, yes. Hard-water scale shows up quickly on higher-end fixtures and heater components, so treatment often prevents repeat maintenance and finish wear.",
+      },
+      {
+        question: "Do you provide proactive inspections in Bee Cave?",
+        answer:
+          "Yes. Preventive inspections are useful in Bee Cave because gas, fixture, and treatment issues often show warning signs before they become expensive disruptions.",
+      },
+    ],
+  },
+  "west-lake-hills-tx": {
+    slug: "west-lake-hills-tx",
+    heroDescription:
+      "West Lake Hills plumbing work often means navigating older infrastructure, remodel-era upgrades, concealed access, and multi-level layouts without creating unnecessary disruption. We serve Westwood, Treemont, Mesa Oaks, Wildcat Club, and Las Lomas with careful diagnostics and polished execution.",
+    overviewHeading: "West Lake Hills Plumbing With Precision and Professionalism",
+    overviewParagraphs: [
+      "West Lake Hills homes often carry a combination of original plumbing decisions and newer remodel expectations. That mix changes the work: a leak, pressure complaint, or fixture issue can involve both aging infrastructure and high-finish surfaces at the same time.",
+      "We regularly handle concealed leak diagnostics, upper-level flow complaints, valve and supply updates during remodel phases, and treatment planning that protects kitchens and baths where hard-water wear shows up fast.",
+      "Because West Lake Hills sits close to our central-west routes, we can usually respond quickly while still keeping the work orderly, documented, and aligned with the level of finish homeowners expect.",
+    ],
+    commonIssuesHeading: "West Lake Hills Plumbing Calls We See Most Often",
+    commonIssues: [
+      "Leak detection in concealed wall, slab-edge, or difficult-access areas",
+      "Pressure and flow inconsistency across upper levels or remodeled bath groups",
+      "Aging shutoff, supply, and trim-support components in established homes",
+      "Hard-water wear affecting premium kitchen and bath fixtures",
+      "Drain and sewer concerns where older infrastructure meets renovation-era updates",
+    ],
+    neighborhoodHeading: "West Lake Hills Areas on Our Regular Routes",
+    neighborhoodBody:
+      "We routinely serve Westwood, Treemont, Mesa Oaks, Wildcat Club, Las Lomas, and nearby West Lake Hills pockets where the plumbing work often needs to respect remodel finishes and mixed-age system components.",
+    neighborhoods: ["Westwood", "Treemont", "Mesa Oaks", "Wildcat Club", "Las Lomas", "West Rim"],
+    featuredServicesHeading: "West Lake Hills Services We Most Often Recommend",
+    featuredServiceSlugs: ["leak-detection", "repairs", "water-treatment"],
+    homeownerTipsHeading: "West Lake Hills Homeowner Tips Before a Remodel or Leak Gets More Complicated",
+    homeownerTips: [
+      "Replace original shutoffs and supply components during remodel phases instead of waiting for them to fail later.",
+      "Investigate low-flow or pressure imbalance quickly when it starts showing up on upper levels or newer fixtures.",
+      "Add water treatment before installing premium fixture packages if scale is already visible elsewhere in the home.",
+      "Use targeted leak diagnostics first when moisture appears because opening multiple finished areas rarely starts as the smartest move.",
+    ],
+    processHeading: "How West Lake Hills Service Usually Runs",
+    processSteps: [
+      {
+        number: "1",
+        title: "Understand the access and finish conditions",
+        description: "We start by noting remodel sensitivity, concealed access points, and any schedule constraints before work begins.",
+      },
+      {
+        number: "2",
+        title: "Diagnose the underlying condition",
+        description: "Technicians inspect the visible symptom plus the pressure, supply, or drain conditions that usually sit behind it in West Lake Hills homes.",
+      },
+      {
+        number: "3",
+        title: "Set the least-disruptive repair path",
+        description: "You get written options designed to solve the problem cleanly without creating unnecessary disruption elsewhere in the home.",
+      },
+      {
+        number: "4",
+        title: "Document and protect the finish result",
+        description: "We verify the completed work and leave clear notes on any maintenance or follow-up that protects long-term reliability.",
+      },
+    ],
+    trustPoints: [
+      {
+        title: "Remodel-aware diagnostics",
+        description: "We understand how to approach plumbing problems in homes where finished surfaces and recent upgrades raise the stakes.",
+      },
+      {
+        title: "Precision before demolition",
+        description: "Leak-location and system checks help us keep the scope targeted when access is tight or finish quality matters.",
+      },
+      {
+        title: "Responsive central-west routing",
+        description: "West Lake Hills is close to our central routes, which helps us communicate tighter windows and priority handling for urgent calls.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do you coordinate plumbing work with remodeling timelines in West Lake Hills?",
+        answer:
+          "Yes. We regularly coordinate around remodel sequencing so fixture, valve, and rough-in work lands at the right time and does not create avoidable rework.",
+      },
+      {
+        question: "Can you troubleshoot low flow on upper levels?",
+        answer:
+          "Yes. We check supply pressure, layout, fixture restrictions, and regulator behavior so the diagnosis goes beyond the room where the complaint shows up.",
+      },
+      {
+        question: "What plumbing issue is most common in West Lake Hills?",
+        answer:
+          "Concealed leak concerns, pressure imbalance in multi-level homes, and upgrade work where older plumbing has to support newer finishes all show up frequently here.",
+      },
+      {
+        question: "Do you offer discreet service windows and clear communication?",
+        answer:
+          "Yes. We schedule with realistic windows and provide pre-arrival communication because that matters in West Lake Hills service environments.",
+      },
+    ],
+  },
+  "rollingwood-tx": {
+    slug: "rollingwood-tx",
+    heroDescription:
+      "Rollingwood plumbing service is usually about keeping older homes dependable without creating unnecessary disruption: hidden leaks, valve refreshes, fixture upgrades, and heater planning that needs to be handled cleanly and communicated clearly. We serve Hatley Drive, Nixon Drive, Rollingwood Drive, Riley Road, and nearby streets with a practical, polished process.",
+    overviewHeading: "Rollingwood Plumbing With Clear Communication and Clean Execution",
+    overviewParagraphs: [
+      "Rollingwood homes tend to reward careful planning more than dramatic repair language. A lot of the work here involves established plumbing systems that need targeted updates, clean fixture replacement, and leak response that stays controlled instead of turning into a larger mess.",
+      "We regularly see older shutoffs, concealed supply issues, heater replacement planning, and bath or kitchen fixture projects where the best result depends on solving adjacent reliability problems at the same time.",
+      "Because Rollingwood sits close to our central routes, we can usually keep arrival timing tighter and service more predictable, which is especially helpful when the homeowner wants the work finished with as little disruption as possible.",
+    ],
+    commonIssuesHeading: "Rollingwood Plumbing Problems We Handle Most Often",
+    commonIssues: [
+      "Concealed supply leaks and moisture problems in older wall and floor assemblies",
+      "Fixture and shutoff wear that shows up during planned kitchen or bath updates",
+      "Water-heater replacement planning in homes with aging equipment and tight utility spaces",
+      "Scale and pressure wear shortening the life of faucets, fill valves, and shower components",
+      "Drain and vent corrections uncovered when older homes go through partial remodel cycles",
+    ],
+    neighborhoodHeading: "Rollingwood Streets and Areas We Routinely Cover",
+    neighborhoodBody:
+      "We regularly serve homes around Hatley Drive, Nixon Drive, Rollingwood Drive, Riley Road, Edgegrove, and nearby central-west streets where established plumbing and remodel-sensitive finishes often meet in the same service call.",
+    neighborhoods: ["Hatley Drive", "Nixon Drive", "Rollingwood Drive", "Riley Road", "Edgegrove", "Bee Creek Road corridor"],
+    featuredServicesHeading: "Rollingwood Services Homeowners Ask For Most",
+    featuredServiceSlugs: ["leak-detection", "fixtures", "water-heaters"],
+    homeownerTipsHeading: "Rollingwood Homeowner Tips for Cleaner Repairs and Fewer Surprises",
+    homeownerTips: [
+      "Replace shutoffs and supply hardware together when upgrading fixtures in older baths or kitchens.",
+      "Treat hidden moisture early because small slow leaks can sit unnoticed behind finish work for longer than expected.",
+      "Plan heater replacement before a hard failure if the unit is already aging and utility access is tight.",
+      "Pair fixture refreshes with pressure and scale checks so new hardware lasts longer than the old set did.",
+    ],
+    processHeading: "How Rollingwood Service Usually Moves",
+    processSteps: [
+      {
+        number: "1",
+        title: "Confirm the age and sensitivity of the work area",
+        description: "We start by understanding the home's age, access limits, and whether the call ties into a planned update or an urgent failure.",
+      },
+      {
+        number: "2",
+        title: "Diagnose the adjacent reliability risks",
+        description: "Technicians inspect the active issue plus the stops, supply lines, or heater conditions that often turn a clean job into a callback when ignored.",
+      },
+      {
+        number: "3",
+        title: "Set a practical written scope",
+        description: "You get clear options that emphasize durable repair and clean execution instead of vague recommendations.",
+      },
+      {
+        number: "4",
+        title: "Finish cleanly and leave the next-step plan",
+        description: "We test the repair or install, clean the work area, and document the follow-up that keeps the same issue from resurfacing.",
+      },
+    ],
+    trustPoints: [
+      {
+        title: "Strong fit for established homes",
+        description: "We are comfortable working in Rollingwood houses where older plumbing needs targeted modernization instead of guesswork.",
+      },
+      {
+        title: "Communication-first service",
+        description: "Rollingwood homeowners usually want straight answers and a clean scope, and that is exactly how we run the job.",
+      },
+      {
+        title: "Fast central-route access",
+        description: "Rollingwood sits near our central dispatch pattern, which helps us keep schedules tighter on both urgent and planned work.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do you handle plumbing updates during bathroom or kitchen remodels in Rollingwood?",
+        answer:
+          "Yes. We regularly coordinate fixture placement, valve refreshes, and code-conscious rough-in adjustments during Rollingwood remodel work.",
+      },
+      {
+        question: "Can you locate hidden moisture quickly in an older Rollingwood home?",
+        answer:
+          "Yes. We use targeted leak diagnostics first so the repair scope can stay focused instead of opening more finish work than necessary.",
+      },
+      {
+        question: "What service call is most common in Rollingwood?",
+        answer:
+          "Hidden leaks, fixture-side reliability upgrades, and water-heater planning show up frequently because many Rollingwood homes are in that established-home maintenance cycle.",
+      },
+      {
+        question: "Do you provide warranty-backed repairs in Rollingwood?",
+        answer:
+          "Yes. Completed work is documented and backed by written workmanship coverage, with clear notes on any next-step maintenance.",
+      },
+    ],
+  },
+};
+
 function toReadableList(items: string[]): string {
   if (items.length <= 1) return items[0] ?? "";
   if (items.length === 2) return `${items[0]} and ${items[1]}`;
@@ -449,6 +816,11 @@ function buildFallbackProfile(location: LocationEntry): LocationProfile {
 }
 
 export function getLocationDetail(location: LocationEntry): LocationDetail {
+  const override = LOCATION_DETAIL_OVERRIDES[location.slug];
+  if (override) {
+    return override;
+  }
+
   const profile = LOCATION_PROFILE_BY_SLUG[location.slug] ?? buildFallbackProfile(location);
   const commonIssueSnippet = toReadableList(profile.commonIssues.slice(0, 2).map((entry) => entry.toLowerCase()));
   const neighborhoodSnippet = toReadableList(profile.neighborhoods.slice(0, 3));
