@@ -130,7 +130,7 @@ export const SERVICES: ServiceEntry[] = [
   {
     slug: "toilet-repair-installation",
     title: "Toilet Repair & Installation",
-    titleTag: "Toilet Repair & Installation in Austin, TX | Ironclad Plumbing",
+    titleTag: "Toilet Repair in Austin, TX | Ironclad Plumbing",
     metaDescription:
       "Running toilets, weak flushes, and new toilet installation handled same-day with upfront pricing in Austin.",
     h1: "Toilet Repair & Installation - Stop the Run, Fix the Flush",
