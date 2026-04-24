@@ -45,13 +45,7 @@ function assertMatches(html: string, pattern: RegExp, checkLabel: string) {
 async function main() {
   const baseUrl = (process.env.AUDIT_BASE_URL ?? "https://ironcladtexas.com").replace(/\/$/, "");
 
-  const noindexPaths = ["/book", "/careers"];
-  for (const path of noindexPaths) {
-    const html = await fetchHtml(baseUrl, path);
-    assertMatches(html, /meta name="robots" content="noindex, nofollow"/i, `scaffold ${path}`);
-  }
-
-  const indexablePaths = ["/about", "/contact", "/reviews"];
+  const indexablePaths = ["/about", "/book", "/careers", "/contact", "/reviews"];
   for (const path of indexablePaths) {
     const html = await fetchHtml(baseUrl, path);
     if (/meta name="robots" content="noindex/i.test(html)) {

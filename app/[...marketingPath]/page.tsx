@@ -27,7 +27,6 @@ type RouteProps = {
 };
 
 export const dynamicParams = false;
-const PHASE0_SCAFFOLD_NOINDEX_PATHS = new Set(["book", "careers"]);
 
 function getOgTemplateForPath(path: string): OgTemplate {
   if (path === "plumbing" || path.startsWith("plumbing/")) {
@@ -58,7 +57,6 @@ export async function generateMetadata({ params }: RouteProps) {
   const path = marketingPath.join("/");
   const page = STATIC_PAGE_BY_PATH.get(path);
   const content = MARKETING_PAGE_CONTENT[path];
-  const forceNoindex = PHASE0_SCAFFOLD_NOINDEX_PATHS.has(path);
 
   if (!page) {
     return {};
@@ -69,7 +67,7 @@ export async function generateMetadata({ params }: RouteProps) {
     description: page.metaDescription,
     path: `/${path}`,
     ogTemplate: getOgTemplateForPath(path),
-    robots: !forceNoindex && content
+    robots: content
       ? undefined
       : {
           index: false,
