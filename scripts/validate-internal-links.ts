@@ -1,8 +1,13 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
+import { BLOG_POSTS } from "../content/blog-posts";
 
 const APP_BUILD_DIR = path.join(process.cwd(), ".next", "server", "app");
 const ALLOWED_NON_PAGE_PATHS = new Set(["/favicon.ico", "/robots.txt", "/sitemap.xml"]);
+const REDIRECT_ONLY_ROUTES = new Set([
+  "/plumbing-guides",
+  ...BLOG_POSTS.map((post) => `/guides/${post.slug}`),
+]);
 
 type RouteAudit = {
   route: string;
@@ -130,6 +135,9 @@ function main() {
   }
 
   for (const audit of audits) {
+    if (REDIRECT_ONLY_ROUTES.has(audit.route)) {
+      continue;
+    }
     if (audit.bookingLinks < 2) {
       fail(`route ${audit.route} has ${audit.bookingLinks} booking links (minimum is 2)`);
     }
@@ -143,6 +151,9 @@ function main() {
   ];
 
   for (const audit of audits) {
+    if (REDIRECT_ONLY_ROUTES.has(audit.route)) {
+      continue;
+    }
     for (const rule of subPageHubRules) {
       if (audit.route.startsWith(rule.prefix)) {
         if (!audit.targets.includes(rule.hub)) {
