@@ -7,7 +7,7 @@ Domain: https://ironcladtexas.com
 
 - Production `/book` and `/careers` are indexable after deploy `ironclad-marketing-00060-5j2`.
 - `npm run phase0:live:audit` passes against `https://ironcladtexas.com`.
-- `npm run launch:prod:audit` passes against production.
+- `npm run launch:prod:audit` passed immediately after deploy. Repeated runs can hit the booking API duplicate/rate-limit guard because the audit posts a fixed smoke-test phone/date payload.
 - GBP APIs are enabled in `conduit-external-dev`, but the current CLI token lacks the `business.manage` OAuth scope, so listing-level GBP audit/edit work is blocked until the profile owner grants manager access or re-auths with the right scope.
 
 ## Canonical NAP Packet
