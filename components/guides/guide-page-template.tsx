@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import type { GuidePageData } from "@/content/guide-pages";
 import { GuideProgressBar } from "@/components/guides/guide-progress-bar";
@@ -26,6 +27,7 @@ function GuideRailVideo() {
 }
 
 export function GuidePageTemplate({ page }: { page: GuidePageData }) {
+  const hasQuickAnswerSection = page.html.includes(">Quick Answer<");
   const schemas = buildSchemaStack(
     buildBreadcrumbListSchema(buildBreadcrumbItems(page.path, page.title)),
     buildArticleSchema({
@@ -69,6 +71,11 @@ export function GuidePageTemplate({ page }: { page: GuidePageData }) {
         <section className="guide-layout-section">
           <div className="guide-layout-frame">
             <article className="guide-article-card">
+              {hasQuickAnswerSection ? null : (
+                <QuickAnswer className="m-8 mb-0">
+                  {page.description}
+                </QuickAnswer>
+              )}
               <div className="guide-article-content" dangerouslySetInnerHTML={{ __html: page.html }} />
 
               {page.relatedGuides.length > 0 ? (

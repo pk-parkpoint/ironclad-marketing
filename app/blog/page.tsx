@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { BLOG_POSTS } from "@/content/blog-posts";
 import { buildPageMetadata } from "@/lib/seo";
@@ -34,6 +35,11 @@ export default function BlogIndexPage() {
               Tips, guides, and behind-the-scenes updates from the Ironclad team. We write about what we
               see in the field. No filler, no clickbait.
             </p>
+            <QuickAnswer className="mt-6">
+              The Ironclad Plumbing blog explains Austin-specific plumbing issues in plain language, including water
+              heaters, slab leaks, hard water, maintenance, and emergency decisions. Each article is written to help
+              homeowners act sooner and compare options more clearly.
+            </QuickAnswer>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link className="focus-ring primary-button" href="/book">
                 Book Service

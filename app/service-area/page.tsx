@@ -4,12 +4,20 @@ import { CtaBanner } from "@/components/layout/cta-banner";
 import { Hero } from "@/components/layout/hero";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { QuickAnswer } from "@/components/seo/quick-answer";
+import { StructuredData } from "@/components/seo/structured-data";
 import { FaqAccordion } from "@/components/service/faq-accordion";
 import { ServiceGridTile } from "@/components/service/service-grid-tile";
 import { LOCATIONS } from "@/content/locations";
 import { SERVICES } from "@/content/services";
 import { getPublicContactInfo } from "@/lib/contact";
 import { buildPageMetadata } from "@/lib/seo";
+import {
+  buildBreadcrumbItems,
+  buildBreadcrumbListSchema,
+  buildFaqPageSchema,
+  buildSchemaStack,
+} from "@/lib/structured-data";
 
 export const metadata = buildPageMetadata({
   title: "Areas We Serve | Ironclad Plumbing - Greater Austin, TX",
@@ -44,10 +52,15 @@ const SERVICE_AREA_FAQS = [
 
 export default function ServiceAreaHubPage() {
   const contactInfo = getPublicContactInfo();
+  const schemas = buildSchemaStack(
+    buildBreadcrumbListSchema(buildBreadcrumbItems("/service-area", "Service Areas")),
+    buildFaqPageSchema(SERVICE_AREA_FAQS),
+  );
 
   return (
     <>
       <SiteHeader />
+      <StructuredData data={schemas} id="ld-service-area-hub" />
       <main>
         <Hero
           actions={[
@@ -72,6 +85,11 @@ export default function ServiceAreaHubPage() {
                 { label: "Service Areas" },
               ]}
             />
+            <QuickAnswer className="mt-6">
+              Ironclad Plumbing serves Austin and surrounding communities across Travis, Williamson, and Hays county
+              corridors. Homeowners get the same licensed technicians, written pricing, warranty-backed work, and clear
+              dispatch communication whether the job is in Austin, Round Rock, Georgetown, Cedar Park, or nearby cities.
+            </QuickAnswer>
           </div>
         </section>
 

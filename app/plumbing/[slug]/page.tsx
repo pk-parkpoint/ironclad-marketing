@@ -6,8 +6,11 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { StructuredData } from "@/components/seo/structured-data";
 import { ContactForm } from "@/components/layout/contact-form";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { ReviewsSection } from "@/components/service/review-carousel";
+import { ServiceDetailFaqs } from "@/components/service/service-detail-faqs";
 import { ServiceRelatedLinks } from "@/components/service/service-related-links";
+import { TrustIcon } from "@/components/service/trust-icon";
 import { BLOG_POSTS } from "@/content/blog-posts";
 import { LOCATIONS } from "@/content/locations";
 import { SERVICES } from "@/content/services";
@@ -72,25 +75,6 @@ const HERO_IMAGE_ALTS: Partial<Record<string, string>> = {
   emergency: "Emergency plumbing technician responding to urgent home service call",
 };
 
-function TrustIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="none"
-      height="18"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-      width="18"
-    >
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-      <path d="M22 4 12 14.01 9 11.01" />
-    </svg>
-  );
-}
-
 export default async function ServiceDetailPage({ params }: RouteProps) {
   const { slug } = await params;
   const service = SERVICES.find((entry) => entry.slug === slug);
@@ -153,6 +137,11 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
                 { label: service.title },
               ]}
             />
+            <QuickAnswer className="mt-6">
+              Ironclad provides {service.title.toLowerCase()} in Greater Austin with diagnosis first, written pricing before
+              work starts, and warranty-backed workmanship. We scope the cause, explain practical options, complete tested
+              work, and document next steps so homeowners know exactly what was done.
+            </QuickAnswer>
           </div>
         </section>
 
@@ -292,6 +281,7 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
 
         {/* ── Section 3: Reviews ── */}
         <ReviewsSection />
+        <ServiceDetailFaqs items={detail.faqs} serviceTitle={service.title} />
       </main>
       <SiteFooter />
     </>

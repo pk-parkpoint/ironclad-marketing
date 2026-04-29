@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Breadcrumbs, type BreadcrumbItem } from "@/components/layout/breadcrumbs";
 import { CtaBanner } from "@/components/layout/cta-banner";
 import { Hero, type HeroAction, type HeroBackgroundType } from "@/components/layout/hero";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { getPublicContactInfo } from "@/lib/contact";
 
 type PageScaffoldProps = {
@@ -111,6 +112,11 @@ export function PageScaffold({
           </div>
         </section>
       )}
+      <section className="bg-soft-background pb-6">
+        <div className="container-shell">
+          <QuickAnswer>{description}</QuickAnswer>
+        </div>
+      </section>
       <section className="section-block">
         <div className="container-shell card-shell p-6 md:p-8">
           {children}

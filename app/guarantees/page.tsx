@@ -1,5 +1,6 @@
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { GUARANTEES_PAGE_INTRO, GUARANTEES_PAGE_SECTIONS } from "@/content/guarantees-page";
 import { buildPageMetadata } from "@/lib/seo";
@@ -70,6 +71,11 @@ export default function GuaranteesPage() {
               The Ironclad Guarantee - In Writing, Not in Marketing Speak
             </h1>
             <p className="body-large max-w-[var(--max-readable-width)] text-muted">{GUARANTEES_PAGE_INTRO}</p>
+            <QuickAnswer>
+              Ironclad Plumbing gives Austin homeowners written service guarantees covering visit fees, callback
+              accountability, advice quality, quote-locked pricing, warranties, and lifetime support. These promises are
+              meant to make the service experience easier to compare before work begins.
+            </QuickAnswer>
           </div>
         </section>
 

@@ -2,6 +2,7 @@ import { CommercialRequestForm } from "@/components/commercial/commercial-reques
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { buildPageMetadata } from "@/lib/seo";
 import {
@@ -51,6 +52,11 @@ export default function CommercialPlumbingAustinPage() {
             <p className="body-large mt-4 max-w-[var(--max-readable-width)] text-muted">
               We support light commercial properties with triage-first service, clear scheduling, and insurance-aware documentation.
             </p>
+            <QuickAnswer className="mt-6">
+              Ironclad Plumbing supports light commercial plumbing in Austin for restaurants, retail spaces, offices, and
+              tenant improvements. We triage urgent issues, document scope clearly, and provide practical scheduling and
+              pricing communication for property and operations teams.
+            </QuickAnswer>
           </div>
         </section>
 

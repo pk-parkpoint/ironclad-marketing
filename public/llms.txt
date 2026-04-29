@@ -1,0 +1,46 @@
+# Ironclad Plumbing
+
+> Ironclad Plumbing is a residential plumbing company serving Austin and the Greater Austin metro. The site publishes service pages, city pages, written guarantees, FAQs, and homeowner guides for comparing plumbing work before booking.
+
+## Canonical Site
+
+- Site: https://ironcladtexas.com
+- Business: Ironclad Plumbing
+- Market: Austin, Texas and Greater Austin service areas
+- Phone: (833) 597-1932
+
+## Core Pages
+
+- Home: https://ironcladtexas.com/
+- About: https://ironcladtexas.com/about
+- Guarantees: https://ironcladtexas.com/guarantees
+- Contact: https://ironcladtexas.com/contact
+- Plumbing services hub: https://ironcladtexas.com/plumbing
+- Service areas hub: https://ironcladtexas.com/service-area
+- FAQ hub: https://ironcladtexas.com/faq
+- Guides hub: https://ironcladtexas.com/guides
+
+## High-Value Service Pages
+
+- Plumbing repairs: https://ironcladtexas.com/plumbing/repairs
+- Drain cleaning: https://ironcladtexas.com/plumbing/drain-cleaning
+- Sewer line services: https://ironcladtexas.com/plumbing/sewer-services
+- Water heaters: https://ironcladtexas.com/plumbing/water-heaters
+- Tankless water heaters: https://ironcladtexas.com/plumbing/tankless-water-heaters
+- Leak detection: https://ironcladtexas.com/plumbing/leak-detection
+- Gas line services: https://ironcladtexas.com/plumbing/gas-line-services
+- Emergency plumbing: https://ironcladtexas.com/plumbing/emergency
+
+## Homeowner Guides
+
+- What plumbing should cost in Austin: https://ironcladtexas.com/guides/what-plumbing-costs-austin
+- Questions to ask before hiring a plumber: https://ironcladtexas.com/guides/questions-to-ask-your-plumber
+- Plumber red flags: https://ironcladtexas.com/guides/plumber-red-flags
+- How plumbing pricing works: https://ironcladtexas.com/guides/how-plumbing-pricing-works
+
+## Crawling Notes
+
+- Sitemap index: https://ironcladtexas.com/sitemap.xml
+- Robots policy: https://ironcladtexas.com/robots.txt
+- Public marketing and educational pages are intended to be crawlable.
+- API, preview, staging, and test paths are not intended for indexing.

@@ -3,6 +3,7 @@ import { CtaBanner } from "@/components/layout/cta-banner";
 import { Hero } from "@/components/layout/hero";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { FaqAccordion } from "@/components/service/faq-accordion";
 import { ServiceGridTile } from "@/components/service/service-grid-tile";
@@ -66,6 +67,11 @@ export default function PlumbingHubPage() {
                 { label: "Plumbing" },
               ]}
             />
+            <QuickAnswer className="mt-6">
+              Ironclad Plumbing serves Greater Austin with residential repairs, drain cleaning, water heaters, leak
+              detection, sewer service, fixtures, gas lines, water treatment, and emergency plumbing. Every visit starts
+              with diagnosis and written pricing before work begins.
+            </QuickAnswer>
           </div>
         </section>
 

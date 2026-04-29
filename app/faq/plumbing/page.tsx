@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { FAQ_CATEGORIES, FAQ_ENTRIES, type FaqCategoryId } from "@/content/faqs";
 import { buildPageMetadata } from "@/lib/seo";
@@ -54,6 +55,11 @@ export default function PlumbingFaqPage() {
               Clear answers about pricing, scheduling, leaks, drains, water heaters, and what to expect when
               you hire Ironclad.
             </p>
+            <QuickAnswer className="mt-6">
+              Ironclad Plumbing publishes plumbing FAQs so Austin homeowners can understand service pricing, scheduling,
+              leaks, drains, water heaters, and repair decisions before speaking with a technician. Each answer is written
+              to help you compare options clearly.
+            </QuickAnswer>
 
             <div className="mt-8 flex flex-wrap gap-2">
               {FAQ_CATEGORIES.map((category) => (

@@ -6,6 +6,7 @@ import { Hero } from "@/components/layout/hero";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { ContactForm } from "@/components/layout/contact-form";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { CityRelatedGuides } from "@/components/service/city-related-guides";
 import { FaqAccordion } from "@/components/service/faq-accordion";
@@ -118,6 +119,11 @@ export default async function LocationDetailPage({ params }: RouteProps) {
                 { label: location.cityName },
               ]}
             />
+            <QuickAnswer className="mt-6">
+              Ironclad Plumbing serves {location.cityName}, Texas with residential plumbing diagnostics, repairs, drains,
+              water heaters, leak detection, and fixture work. We account for local infrastructure, explain the issue in
+              plain language, and provide written options before approved work starts.
+            </QuickAnswer>
           </div>
         </section>
 

@@ -28,28 +28,55 @@ export type MarketingPageContent = {
 export const MARKETING_PAGE_CONTENT: Record<string, MarketingPageContent> = {
   "about": {
     intro:
-      "Ironclad was built to give Austin homeowners a plumbing company that communicates clearly, prices work transparently, and stands behind every job in writing.",
+      "Most plumbing companies benefit when homeowners feel confused. Ironclad Plumbing was built around the opposite idea: publish the tools homeowners need to compare plumbing work, then back the service with written guarantees.",
     sections: [
       {
-        heading: "Our Standard",
+        heading: "The Home Services Industry Has a Trust Problem",
         paragraphs: [
-          "Every visit starts with diagnosis and a written estimate before work begins.",
-          "We protect your home, complete tested repairs, and leave documentation that is easy to understand.",
+          "The typical homeowner calls several plumbers, gets vague answers, meets a technician they cannot verify, and then has to choose from options that are hard to compare.",
+          "That confusion is not an accident. The less a customer knows about price, licensing, and scope, the easier it is to sell work they may not understand.",
         ],
       },
       {
-        heading: "How We Operate",
+        heading: "Radical Transparency as a Business Model",
+        paragraphs: [
+          "Ironclad Plumbing publishes what common plumbing services should cost in Austin, what questions to ask before hiring, and which sales tactics should make a homeowner pause.",
+          "Use those guides on us or on anyone else. We would rather compete in a market where the customer understands what they are buying.",
+        ],
+      },
+      {
+        heading: "Six Guarantees We Put in Writing",
+        paragraphs: [
+          "No service visit fees, one-hour callback accountability, family-member advice, quote-locked pricing, written warranties, and lifetime support are the operating promises behind the brand.",
+        ],
+      },
+      {
+        heading: "One Person. Diagnosis to Completion.",
+        paragraphs: [
+          "The person who diagnoses the issue is the person who explains the estimate, completes the work, tests the system, and documents the result.",
+          "Our model is designed to avoid the sales-tech handoff that leaves homeowners wondering who is responsible for the recommendation.",
+        ],
+      },
+      {
+        heading: "The Ironclad Consumer Toolkit",
         bullets: [
-          "Licensed and insured technicians",
-          "Upfront option-based pricing",
-          "Arrival windows with active communication",
-          "Written workmanship warranty",
+          "What Plumbing Should Cost in Austin",
+          "Questions to Ask Before You Hire Any Plumber",
+          "Red Flags to Watch For",
+          "How Plumbing Pricing Actually Works",
         ],
         paragraphs: [],
       },
+      {
+        heading: "Built for Austin Homes",
+        paragraphs: [
+          "Austin plumbing has its own pattern: hard water, slab foundations, older central lines, fast-growth suburbs, mature tree roots, and weather swings that expose weak plumbing quickly.",
+          "Ironclad Plumbing serves the Greater Austin market with that local context built into diagnostics, repair scopes, and customer education.",
+        ],
+      },
     ],
     ctaHeading: "Need plumbing help today?",
-    ctaBody: "Book online in under a minute or contact our team by phone or text.",
+    ctaBody: "Book online, call, or read the pricing guide first. We built Ironclad to win when homeowners can compare clearly.",
     pageType: "about",
   },
   "book": {

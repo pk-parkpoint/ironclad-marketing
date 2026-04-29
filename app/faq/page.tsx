@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { FAQ_CATEGORIES, FAQ_ENTRIES, type FaqCategoryId } from "@/content/faqs";
 import { buildPageMetadata } from "@/lib/seo";
@@ -55,6 +56,11 @@ export default function FaqHubPage() {
               Find answers to common questions about plumbing service, pricing, scheduling, and what to
               expect when you work with Ironclad.
             </p>
+            <QuickAnswer className="mt-6">
+              Ironclad Plumbing answers common Austin plumbing questions with direct guidance on pricing, scheduling,
+              repairs, drains, leaks, water heaters, and what happens during a service visit. Use this page to compare
+              options before you book or call.
+            </QuickAnswer>
 
             <div className="mt-8 flex flex-wrap gap-2">
               {FAQ_CATEGORIES.map((category) => (

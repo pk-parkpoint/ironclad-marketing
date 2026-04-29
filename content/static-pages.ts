@@ -35,8 +35,8 @@ export const STATIC_PAGES: StaticPageEntry[] = [
     path: "about",
     titleTag: "About Ironclad Plumbing | Austin Plumber With Integrity",
     metaDescription:
-      "Ironclad Plumbing was founded to bring transparency and modern service standards to Austin homeowners.",
-    h1: "Built on Integrity. Driven by Precision.",
+      "Ironclad Plumbing gives Austin homeowners published pricing guidance, clear questions to ask, written guarantees, and licensed plumbing service.",
+    h1: "We Built the Plumbing Company We'd Want to Hire",
     section: "Company",
   },
   {

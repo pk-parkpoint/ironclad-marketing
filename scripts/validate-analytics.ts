@@ -15,7 +15,9 @@ function main() {
   const envExample = read(".env.example");
   const layout = read("app/layout.tsx");
   const analyticsRuntime = read("components/analytics/analytics-bootstrap.tsx");
+  const analyticsEvents = read("components/analytics/analytics-events.ts");
   const analyticsLib = read("lib/analytics.ts");
+  const aiReferrers = read("lib/ai-referrers.ts");
   const siteHeader = read("components/layout/site-header.tsx");
   const mobileBottomBar = read("components/layout/mobile-bottom-bar.tsx");
   const servicePage = read("app/plumbing/[slug]/page.tsx");
@@ -36,10 +38,15 @@ function main() {
     "booking_funnel_event",
     "scroll_depth",
     "faq_expand",
+    "ai_referral_visit",
   ]) {
-    const source = eventName === "lead_submit_success" ? analyticsLib : analyticsRuntime;
-    const fileLabel = eventName === "lead_submit_success" ? "lib/analytics.ts" : "analytics-bootstrap.tsx";
+    const source = eventName === "lead_submit_success" ? analyticsLib : `${analyticsRuntime}\n${analyticsEvents}`;
+    const fileLabel = eventName === "lead_submit_success" ? "lib/analytics.ts" : "analytics runtime";
     assertContains(fileLabel, source, eventName);
+  }
+
+  for (const aiHost of ["chatgpt.com", "gemini.google.com", "perplexity.ai"]) {
+    assertContains("lib/ai-referrers.ts", aiReferrers, aiHost);
   }
 
   for (const attributionKey of [

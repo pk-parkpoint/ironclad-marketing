@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ResourceSearch } from "@/components/resources/resource-search";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { buildPageMetadata } from "@/lib/seo";
 import { buildBreadcrumbItems, buildBreadcrumbListSchema } from "@/lib/structured-data";
@@ -29,6 +30,11 @@ export default function ResourcesPage() {
             <p className="body-large mt-4 max-w-[var(--max-readable-width)] text-muted">
               Find the right guide quickly, then jump to related service pages when you need hands-on help.
             </p>
+            <QuickAnswer className="mt-6">
+              Ironclad Plumbing resources help Austin homeowners search practical guides by plumbing problem, service type,
+              maintenance topic, and buying decision. Use this page to find answers before comparing quotes or scheduling
+              service.
+            </QuickAnswer>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link className="focus-ring primary-button" href="/book">
                 Book Service

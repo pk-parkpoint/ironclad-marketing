@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { getBlogArticleDetails } from "@/content/blog-article-details";
 import { BLOG_POSTS } from "@/content/blog-posts";
@@ -102,6 +103,9 @@ export default async function BlogPostDetailPage({ params }: RouteProps) {
             <p className="text-sm font-semibold uppercase tracking-[0.12em] text-muted">Plumbing Guide</p>
             <h1 className="h1-display mt-4 max-w-[var(--max-readable-width)]">{post.h1}</h1>
             <p className="body-large mt-4 max-w-[var(--max-readable-width)] text-muted" data-speakable="hero">{body.dek}</p>
+            <QuickAnswer className="mt-6">
+              {body.dek}
+            </QuickAnswer>
             <p className="mt-6 text-sm text-muted">
               Published {details.publishedAt} | Updated {details.updatedAt} | Author: {details.author} | Technical
               Review: {details.reviewer}

@@ -12,23 +12,11 @@ import {
   parseAttribution,
 } from "@/lib/analytics";
 import { derivePageContext, getDeviceType } from "@/lib/analytics-page-context";
+import { getAiReferralContext } from "@/lib/ai-referrers";
 import { recordBookingSiteVisit } from "@/lib/booking-session";
+import { getCtaPosition, trackEvent } from "@/components/analytics/analytics-events";
 import { useScrollDepthTracking } from "@/components/analytics/use-scroll-depth-tracking";
 
-type GtagFunction = (
-  command: "event" | "config" | "js",
-  idOrEvent: string | Date,
-  params?: Record<string, unknown>,
-) => void;
-
-declare global {
-  interface Window {
-    dataLayer?: Array<Record<string, unknown>>;
-    gtag?: GtagFunction;
-  }
-}
-
-const HAS_GTM = Boolean(process.env.NEXT_PUBLIC_GTM_ID);
 const FAQ_KEY_PREFIX = "ironclad_faq_engaged:";
 
 function readStoredAttribution(): AttributionData {
@@ -61,21 +49,6 @@ function withAttribution(payload: Record<string, unknown>, attribution: Attribut
     if (attribution[key]) next[key] = attribution[key];
   }
   return next;
-}
-
-function getCtaPosition(element: Element): string {
-  if (element.closest("header")) return "header";
-  if (element.closest("footer")) return "footer";
-  if (element.closest("aside")) return "sidebar";
-  return "body";
-}
-
-function trackEvent(event: string, payload: Record<string, unknown>) {
-  window.dataLayer = window.dataLayer ?? [];
-  window.dataLayer.push({ event, ...payload });
-  if (!HAS_GTM && typeof window.gtag === "function") {
-    window.gtag("event", event, payload);
-  }
 }
 
 function markFaqEngaged(pathname: string) {
@@ -167,21 +140,27 @@ export function AnalyticsBootstrap() {
     });
 
     const context = derivePageContext(pathname);
+    const aiReferralContext = getAiReferralContext(document.referrer);
+    const pageViewPayload = withAttribution(
+      {
+        ...aiReferralContext,
+        page_url: `${pathname}${search ? `?${search}` : ""}`,
+        page_template: context.pageTemplate,
+        page_family: context.pageFamily,
+        service: context.service,
+        city: context.city,
+        source_page_family: context.pageFamily,
+        device_type: getDeviceType(),
+      },
+      merged,
+    );
     trackEvent(
       "page_view",
-      withAttribution(
-        {
-          page_url: `${pathname}${search ? `?${search}` : ""}`,
-          page_template: context.pageTemplate,
-          page_family: context.pageFamily,
-          service: context.service,
-          city: context.city,
-          source_page_family: context.pageFamily,
-          device_type: getDeviceType(),
-        },
-        merged,
-      ),
+      pageViewPayload,
     );
+    if (aiReferralContext.ai_referrer) {
+      trackEvent("ai_referral_visit", pageViewPayload);
+    }
   }, [pathname, search]);
 
   useEffect(() => {

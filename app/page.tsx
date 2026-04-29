@@ -6,6 +6,7 @@ import { FAQSection } from "@/components/layout/faq-section";
 import { GuaranteeBar } from "@/components/layout/guarantee-bar";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { HOME_FAQ_ITEMS } from "@/content/home-faqs";
 import { LOCATIONS } from "@/content/locations";
@@ -96,6 +97,15 @@ export default function Home() {
       <main id="main-content">
         <HomeHero reviewCount={REVIEW_COUNT} reviewHref={GOOGLE_REVIEW_LINK} />
         <GuaranteeBar />
+        <section className="bg-white py-8">
+          <div className="container-shell">
+            <QuickAnswer>
+              Ironclad Plumbing is an Austin residential plumber for same-day repairs, drains, water heaters, leaks,
+              fixtures, sewer issues, and emergency plumbing. We publish homeowner guides, give written pricing before
+              work starts, and back completed work with clear guarantees.
+            </QuickAnswer>
+          </div>
+        </section>
         <section className="bg-[#F9FAFB] pt-16 pb-20 home-deferred-section">
           <div className="mx-auto w-full max-w-[1280px] px-6">
             <h2 className="mb-10 text-center text-[32px] font-bold leading-[1.2] text-[#2563EB]">
