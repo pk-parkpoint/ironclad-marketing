@@ -109,6 +109,13 @@ AUDIT_BASE_URL=https://ironcladtexas.com npm run phase0:live:audit
 - **Env vars:** `NEXT_PUBLIC_FIREBASE_API_KEY`, `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`, `NEXT_PUBLIC_FIREBASE_PROJECT_ID`, `NEXT_PUBLIC_FIREBASE_APP_ID`
 - **GCP Console:** Firebase Console > Project Settings > `conduit-external-dev`
 
+### Public Booking / SchedAI
+
+- **Env vars:** `IRONCLAD_CONDUIT_API_BASE_URL`, `IRONCLAD_PUBLIC_BOOKING_TOKEN`
+- `IRONCLAD_CONDUIT_API_BASE_URL` should point at the Conduit API, for example `https://api.mainconduit.com`.
+- `IRONCLAD_PUBLIC_BOOKING_TOKEN` must be a valid public scheduling token for `ironclad-plumbing`; placeholder values such as `ironclad-plumbing` are rejected by the SchedAI facade.
+- `/book` uses these vars server-side to proxy `/api/scheduling/v3/availability/{search,hold,release,book}` without exposing the token in browser code.
+
 ### How keys flow at deploy time
 
 `NEXT_PUBLIC_*` vars are inlined by Next.js at build time. The guarded deploy script merges the current live Cloud Run env with optional `.env.production` overrides, then deploys with `--env-vars-file` so existing production keys are preserved.

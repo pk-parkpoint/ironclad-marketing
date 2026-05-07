@@ -72,6 +72,8 @@ required_keys = [
     "BOOKING_NOTIFY_EMAILS",
     "BOOKING_WEBHOOK_URL",
     "CONDUIT_FORM_SECRET",
+    "IRONCLAD_CONDUIT_API_BASE_URL",
+    "IRONCLAD_PUBLIC_BOOKING_TOKEN",
     "LEAD_WEBHOOK_URL",
     "NEXT_PUBLIC_CONTACT_EMAIL",
     "NEXT_PUBLIC_FIREBASE_API_KEY",
@@ -126,7 +128,7 @@ if source_env.exists():
         env_vars[key] = value
 
 for key, value in os.environ.items():
-    if key.startswith(("BOOKING_", "CONDUIT_", "LEAD_", "NEXT_PUBLIC_")):
+    if key.startswith(("BOOKING_", "CONDUIT_", "IRONCLAD_", "LEAD_", "NEXT_PUBLIC_")):
         env_vars[key] = value
 
 missing = [key for key in required_keys if not env_vars.get(key)]

@@ -60,6 +60,8 @@ export default defineConfig({
         BOOKING_WEBHOOK_URL: `${MOCK_URL}/webhooks/bookings`,
         BOOKING_CONFIRMATION_SMS_WEBHOOK_URL: `${MOCK_URL}/webhooks/booking-confirmation-sms`,
         BOOKING_CONFIRMATION_EMAIL_WEBHOOK_URL: `${MOCK_URL}/webhooks/booking-confirmation-email`,
+        IRONCLAD_CONDUIT_API_BASE_URL: "http://127.0.0.1:4011",
+        IRONCLAD_PUBLIC_BOOKING_TOKEN: "ironclad-test-token",
       },
       port: APP_PORT,
       reuseExistingServer: !process.env.CI,

@@ -3,12 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { trackLeadSubmitSuccess } from "@/lib/analytics";
 import { derivePageContext } from "@/lib/analytics-page-context";
-import type { WizardFormData } from "./booking-wizard";
+import type { BookingConfirmation, WizardFormData } from "./booking-wizard";
 
 type Props = {
   formData: WizardFormData;
   onUpdate: (updates: Partial<WizardFormData>) => void;
   bookingId?: string;
+  confirmation?: BookingConfirmation | null;
   onClose: () => void;
   onDismiss: () => void;
 };
@@ -55,12 +56,20 @@ function PillToggle({
   );
 }
 
-export function BookingStepConfirm({ formData, onUpdate, bookingId, onClose, onDismiss }: Props) {
+export function BookingStepConfirm({
+  formData,
+  onUpdate,
+  bookingId,
+  confirmation,
+  onClose,
+  onDismiss,
+}: Props) {
   const [showFarewell, setShowFarewell] = useState(false);
   const hasTrackedSuccessRef = useRef(false);
+  const displayBookingId = confirmation?.bookingId || bookingId;
 
   useEffect(() => {
-    if (!bookingId || hasTrackedSuccessRef.current || typeof window === "undefined") {
+    if (!displayBookingId || hasTrackedSuccessRef.current || typeof window === "undefined") {
       return;
     }
 
@@ -71,7 +80,7 @@ export function BookingStepConfirm({ formData, onUpdate, bookingId, onClose, onD
       formType: "booking_wizard",
       service: formData.serviceDetail || formData.serviceCategory || "",
     });
-  }, [bookingId, formData.serviceCategory, formData.serviceDetail]);
+  }, [displayBookingId, formData.serviceCategory, formData.serviceDetail]);
 
   useEffect(() => {
     if (!showFarewell) return;
@@ -88,7 +97,8 @@ export function BookingStepConfirm({ formData, onUpdate, bookingId, onClose, onD
   }
 
   if (showFarewell) {
-    const timeLabel = TIME_LABELS[formData.timeOfDay || ""] || formData.timeOfDay || "Flexible";
+    const timeLabel =
+      formData.selectedWindowLabel || TIME_LABELS[formData.timeOfDay || ""] || formData.timeOfDay || "Flexible";
     const dateLabel = formatDateLabel(formData.selectedDate);
     return (
       <div className="flex flex-1 flex-col items-center justify-center px-8 py-10 text-center">
@@ -121,6 +131,45 @@ export function BookingStepConfirm({ formData, onUpdate, bookingId, onClose, onD
         </div>
         <h3 className="mt-3 text-xl font-semibold text-gray-900">Your appointment is confirmed!</h3>
       </div>
+
+      {(displayBookingId || confirmation?.appointmentId || formData.selectedWindowLabel) && (
+        <div className="mt-5 rounded-xl border border-border bg-white p-4">
+          <dl className="space-y-3 text-sm">
+            {confirmation?.confirmationNumber && (
+              <div className="flex items-center justify-between gap-4">
+                <dt className="text-muted">Confirmation</dt>
+                <dd className="font-semibold text-ink">{confirmation.confirmationNumber}</dd>
+              </div>
+            )}
+            {displayBookingId && (
+              <div className="flex items-center justify-between gap-4">
+                <dt className="text-muted">Booking ID</dt>
+                <dd className="font-semibold text-ink">{displayBookingId}</dd>
+              </div>
+            )}
+            {confirmation?.appointmentId && (
+              <div className="flex items-center justify-between gap-4">
+                <dt className="text-muted">Appointment ID</dt>
+                <dd className="font-semibold text-ink">{confirmation.appointmentId}</dd>
+              </div>
+            )}
+            {formData.selectedWindowLabel && (
+              <div className="flex items-center justify-between gap-4">
+                <dt className="text-muted">Arrival window</dt>
+                <dd className="font-semibold text-ink">{formData.selectedWindowLabel}</dd>
+              </div>
+            )}
+          </dl>
+          {confirmation?.manageUrl && (
+            <a
+              className="focus-ring mt-4 inline-flex w-full justify-center rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+              href={confirmation.manageUrl}
+            >
+              Manage appointment
+            </a>
+          )}
+        </div>
+      )}
 
       {/* Optional extras */}
       <p className="mt-6 text-sm text-gray-500">

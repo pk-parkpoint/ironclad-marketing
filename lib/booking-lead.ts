@@ -169,7 +169,9 @@ export function normalizeOwnershipStatus(value: WizardFormData["ownershipStatus"
   return value === "other" ? "Someone Else" : "Property Owner";
 }
 
-export function normalizePreferredWindow(value: string | null): string {
+export function normalizePreferredWindow(formData: WizardFormData): string {
+  if (formData.selectedWindowLabel?.trim()) return formData.selectedWindowLabel.trim();
+  const value = formData.timeOfDay;
   if (!value) return NA;
   return TIME_LABELS[value] || titleCaseWords(value);
 }
@@ -214,7 +216,7 @@ export function buildBookingLeadPayload({
   const preferredDate =
     abandoned && !touchedFields.has("selectedDate") ? NA : normalizeValue(formData.selectedDate);
   const preferredWindow =
-    abandoned && !screensVisited.has("schedule_time") ? NA : normalizePreferredWindow(formData.timeOfDay);
+    abandoned && !screensVisited.has("schedule_time") ? NA : normalizePreferredWindow(formData);
   const notes =
     abandoned && !touchedFields.has("additionalNotes") ? NA : normalizeValue(formData.additionalNotes);
   const gateCode =

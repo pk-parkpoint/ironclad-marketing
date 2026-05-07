@@ -24,6 +24,8 @@ import { BookingStepSelectIssue } from "./booking-step-select-issue";
 import { BookingStepSchedule } from "./booking-step-schedule";
 import { BookingStepContact } from "./booking-step-contact";
 import { BookingStepConfirm } from "./booking-step-confirm";
+import { usePublicBookingFacade } from "./use-public-booking-facade";
+import type { PublicBookingWindow } from "@/lib/public-booking-facade";
 
 export type WizardFormData = {
   serviceCategory: string | null;
@@ -31,6 +33,12 @@ export type WizardFormData = {
   additionalNotes: string;
   selectedDate: string | null;
   timeOfDay: string | null;
+  selectedWindowId: string | null;
+  selectedOfferId: string | null;
+  selectedStartTime: string | null;
+  selectedEndTime: string | null;
+  selectedWindowLabel: string | null;
+  holdId: string | null;
   firstName: string;
   lastName: string;
   phone: string;
@@ -49,9 +57,19 @@ export type WizardFormData = {
   contactPreference: string[];
 };
 
+export type BookingConfirmation = {
+  bookingId: string;
+  appointmentId: string;
+  confirmationNumber?: string;
+  manageUrl?: string;
+};
+
 const INITIAL_FORM_DATA: WizardFormData = {
   serviceCategory: null, serviceDetail: null, additionalNotes: "",
   selectedDate: null, timeOfDay: "flexible",
+  selectedWindowId: null, selectedOfferId: null,
+  selectedStartTime: null, selectedEndTime: null,
+  selectedWindowLabel: null, holdId: null,
   firstName: "", lastName: "", phone: "", email: "",
   addressFormatted: "", street: "", city: "", state: "", zip: "",
   propertyType: "residential", ownershipStatus: "own",
@@ -88,6 +106,9 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | undefined>();
   const [bookingId, setBookingId] = useState<string | undefined>();
+  const [confirmation, setConfirmation] = useState<BookingConfirmation | null>(null);
+  const bookingFacade = usePublicBookingFacade();
+  const { book, bookError, holdWindow, releaseHold, reset, searchDate } = bookingFacade;
   const modalRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
@@ -190,6 +211,8 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
     setIsSubmitting(false);
     setSubmitError(undefined);
     setBookingId(undefined);
+    setConfirmation(null);
+    reset();
     clearBookingAttempt();
     const currentPathname = pathnameRef.current ?? "/";
     const currentSearchParams = searchParamsRef.current;
@@ -199,7 +222,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
       search: currentSearchParams.toString(),
     });
     startBookingAttempt(INITIAL_FORM_DATA);
-  }, [open]);
+  }, [open, reset]);
 
   useEffect(() => {
     if (!open) return;
@@ -220,6 +243,11 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
       }
     };
   }, [open]);
+
+  useEffect(() => {
+    if (open) return;
+    void releaseHold();
+  }, [open, releaseHold]);
 
   useEffect(() => {
     if (!open) return;
@@ -279,56 +307,56 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
     });
   }
 
+  function selectDate(date: string) {
+    const updates: Partial<WizardFormData> = {
+      holdId: null,
+      selectedDate: date,
+      selectedEndTime: null,
+      selectedOfferId: null,
+      selectedStartTime: null,
+      selectedWindowId: null,
+      selectedWindowLabel: null,
+    };
+    const nextFormData = { ...formDataRef.current, ...updates };
+    updateFormData(updates);
+    void releaseHold();
+    void searchDate(date, nextFormData);
+  }
+
+  async function selectWindow(window: PublicBookingWindow): Promise<boolean> {
+    const hold = await holdWindow(window);
+    if (!hold) return false;
+    const label = window.arrivalWindowLabel || window.displayLabel || null;
+    updateFormData({
+      holdId: hold.holdId,
+      selectedDate: window.startTime.slice(0, 10),
+      selectedEndTime: window.endTime,
+      selectedOfferId: window.offerId,
+      selectedStartTime: window.startTime,
+      selectedWindowId: window.windowId,
+      selectedWindowLabel: label,
+    });
+    return true;
+  }
+
+  function refreshSelectedDate() {
+    const selectedDate = formDataRef.current.selectedDate;
+    if (selectedDate) void searchDate(selectedDate, formDataRef.current);
+  }
+
   async function handleSubmit(): Promise<boolean> {
     setSubmitError(undefined);
     setIsSubmitting(true);
-    const timeLabels: Record<string, string> = {
-      morning: "Morning (8 AM - 12 PM)",
-      afternoon: "Afternoon (12 PM - 5 PM)",
-      flexible: "Flexible / Any Time",
-    };
-    const notesParts = [
-      formData.additionalNotes,
-      formData.propertyType === "commercial" ? "Property type: Commercial" : "",
-      formData.ownershipStatus === "other" ? "Ownership: Someone else owns this property" : "",
-      formData.petsOnPremise ? "Pets on premise" : "",
-    ].filter(Boolean);
-    const payload = {
-      serviceCategory: formData.serviceDetail || formData.serviceCategory || "other",
-      preferredDate: formData.selectedDate || new Date().toISOString().slice(0, 10),
-      preferredWindow: timeLabels[formData.timeOfDay || ""] || "Open Ended",
-      customerName: `${formData.firstName} ${formData.lastName}`.trim(),
-      phone: formData.phone,
-      email: formData.email || undefined,
-      address: {
-        formatted: formData.addressFormatted,
-        street: formData.street,
-        city: formData.city,
-        state: formData.state,
-        zip: formData.zip,
-        latitude: formData.latitude,
-        longitude: formData.longitude,
-      },
-      unitOrGateCode: formData.gateCode || undefined,
-      contactPreference: formData.contactPreference.includes("either")
-        ? ("either" as const)
-        : ((formData.contactPreference[0] || "either") as "call" | "text" | "either"),
-      notes: notesParts.join(". ") || undefined,
-    };
     try {
-      const res = await fetch("/api/bookings", {
-        body: JSON.stringify(payload),
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-      });
-      if (!res.ok) throw new Error("Unable to submit booking.");
-      const data = (await res.json()) as { bookingId?: string };
-      setBookingId(data.bookingId);
-      markBookingApiSubmitted(data.bookingId);
+      const booked = await book(formData);
+      if (!booked) throw new Error(bookError || "Unable to confirm appointment.");
+      setConfirmation(booked);
+      setBookingId(booked.bookingId);
+      markBookingApiSubmitted(booked.bookingId);
       setIsSubmitting(false);
       return true;
     } catch {
-      setSubmitError("Booking submission failed. Please try again or call/text us.");
+      setSubmitError("Appointment confirmation failed. Please try another time or call/text us.");
       setIsSubmitting(false);
       return false;
     }
@@ -411,7 +439,15 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
           {currentStep === 2 && (
             <BookingStepSchedule
               formData={formData}
+              windowsByDate={bookingFacade.windowsByDate}
+              loadingDate={bookingFacade.loadingDate}
+              searchError={bookingFacade.searchError}
+              holdError={bookingFacade.holdError}
+              remainingSeconds={bookingFacade.remainingSeconds}
               onUpdate={updateFormData}
+              onSelectDate={selectDate}
+              onSelectWindow={selectWindow}
+              onRefresh={refreshSelectedDate}
               onBack={() => setCurrentStep(1)}
               onNext={() => setCurrentStep(3)}
             />
@@ -426,7 +462,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
                 if (ok) setCurrentStep(4);
               }}
               isSubmitting={isSubmitting}
-              submitError={submitError}
+              submitError={submitError || bookingFacade.bookError || undefined}
             />
           )}
           {currentStep === 4 && (
@@ -434,6 +470,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
               formData={formData}
               onUpdate={updateFormData}
               bookingId={bookingId}
+              confirmation={confirmation}
               onDismiss={() => onOpenChange(false)}
               onClose={() => { void sendCompletedNotification(); }}
             />
