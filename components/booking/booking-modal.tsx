@@ -1,5 +1,18 @@
 "use client";
 
+/**
+ * @deprecated
+ * Legacy 5-step booking modal. Superseded by `BookingWizard`
+ * (`./booking-wizard.tsx`) which is the production widget mounted via
+ * `BookingWizardHost` from `app/layout.tsx`. This file:
+ *   - has no consumers in the live build (verified 2026-05-11 via grep);
+ *   - does NOT emit to `/api/bookings/abandon` (no abandonment telemetry);
+ *   - does NOT use the public booking AI scheduling facade.
+ *
+ * Kept for git-history reference only. Do not import, mount, or update it.
+ * Delete it whenever convenient.
+ */
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SERVICES } from "@/content/services";
 import { getPublicContactInfo } from "@/lib/contact";
@@ -164,6 +177,7 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
   });
 }
 
+/** @deprecated Use `BookingWizard` instead. See file header. */
 export function BookingModal({ open, initialServiceSlug, onOpenChange }: BookingModalProps) {
   const { phoneDisplay, phoneHref, smsHref } = getPublicContactInfo();
   const dayOptions = useMemo(() => buildDayOptions(), []);
