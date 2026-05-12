@@ -73,7 +73,11 @@ export function BookingStepSelectIssue({ formData, onUpdate, onNext }: Props) {
   function handleCategoryPick(catId: string, isEmergency: boolean) {
     if (timerRef.current) clearTimeout(timerRef.current);
     setPickedCategory(catId);
-    onUpdate({ serviceCategory: catId, serviceDetail: null, additionalNotes: "" });
+    // Note: we intentionally do NOT pass `additionalNotes: ""` here. That field
+    // is collected on step 4 (confirm_details). Marking it touched at step 1
+    // would prevent the abandoned-lead builder from reporting it as
+    // "Not Presented" when the customer leaves before reaching step 4.
+    onUpdate({ serviceCategory: catId, serviceDetail: null });
 
     timerRef.current = setTimeout(() => {
       if (isEmergency) {

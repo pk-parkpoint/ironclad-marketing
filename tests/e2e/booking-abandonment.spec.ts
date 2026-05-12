@@ -142,12 +142,14 @@ test("booking wizard sends captured contact data when abandoned before submit", 
   expect(payload.booking.serviceDisplay).toBe("Installations Replacements > Fixture");
   expect(payload.booking.preferredDate).not.toBe("NA");
   expect(payload.booking.preferredWindow).toBe("10:00 AM - 12:00 PM");
-  expect(payload.booking.notes).toBe("NA");
-  expect(payload.booking.gateCode).toBe("NA");
-  expect(payload.booking.propertyType).toBe("NA");
-  expect(payload.booking.ownershipStatus).toBe("NA");
-  expect(payload.booking.petsOnPremise).toBe("NA");
-  expect(payload.booking.contactPreference).toBe("NA");
+  // Confirm-details fields were never shown to this customer (abandoned at
+  // contact_info / step 3). They should report Not Presented, not NA.
+  expect(payload.booking.notes).toBe("Not Presented");
+  expect(payload.booking.gateCode).toBe("Not Presented");
+  expect(payload.booking.propertyType).toBe("Not Presented");
+  expect(payload.booking.ownershipStatus).toBe("Not Presented");
+  expect(payload.booking.petsOnPremise).toBe("Not Presented");
+  expect(payload.booking.contactPreference).toBe("Not Presented");
   expect(payload.tracking.bookingApiSubmitted).toBe("No");
   expect(payload.tracking.abandonmentScreen).toBe("contact_info");
   expect(payload.tracking.screensVisited).toEqual(["select_issue", "schedule_time", "contact_info"]);
@@ -212,4 +214,56 @@ test("booking wizard keeps step-four answers when abandoned after submit", async
     "contact_info",
     "confirm_details",
   ]);
+});
+
+test("empty-modal bounce reports NA for select-issue fields and Not Presented for later screens", async ({ page }) => {
+  // The customer opens the modal (auto-opens on /book) and dismisses it
+  // without picking a service. This produces the "all-NA" pattern seen in
+  // production-abandoned-booking emails. After the 2026-05-11 fix, fields
+  // collected on the screen the customer DID see (select_issue) report "NA"
+  // (saw + skipped) while fields on later, never-rendered screens report
+  // "Not Presented" so the operator can tell the two states apart.
+  let capturedPayload: CapturedAbandonmentPayload | null = null;
+
+  await mockSchedulingFacade(page);
+  await page.route("**/api/bookings/abandon", async (route) => {
+    capturedPayload = route.request().postDataJSON() as CapturedAbandonmentPayload;
+    await route.fulfill({
+      body: JSON.stringify({ sent: true }),
+      contentType: "application/json",
+      status: 200,
+    });
+  });
+
+  await page.goto("/book");
+  const dialog = page.getByRole("dialog", { name: "Request an Appointment" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole("heading", { name: /What do you need help with\?/i })).toBeVisible();
+
+  // Dismiss without engaging.
+  await dialog.getByRole("button", { name: "Close booking modal" }).first().click();
+
+  await expect.poll(() => capturedPayload !== null).toBeTruthy();
+  const payload = requireCapturedPayload(capturedPayload);
+
+  expect(payload.status).toBe("abandoned");
+  // Select-issue screen WAS shown — the empty fields are NA, not Not Presented.
+  expect(payload.booking.serviceCategory).toBe("NA");
+  expect(payload.booking.serviceDetail).toBe("NA");
+  expect(payload.booking.serviceDisplay).toBe("NA");
+  // Schedule / contact / confirm-details were never rendered → Not Presented.
+  expect(payload.booking.preferredDate).toBe("Not Presented");
+  expect(payload.booking.preferredWindow).toBe("Not Presented");
+  expect(payload.booking.customerName).toBe("Not Presented");
+  expect(payload.booking.phone).toBe("Not Presented");
+  expect(payload.booking.email).toBe("Not Presented");
+  expect(payload.booking.address).toBe("Not Presented");
+  expect(payload.booking.gateCode).toBe("Not Presented");
+  expect(payload.booking.propertyType).toBe("Not Presented");
+  expect(payload.booking.ownershipStatus).toBe("Not Presented");
+  expect(payload.booking.petsOnPremise).toBe("Not Presented");
+  expect(payload.booking.contactPreference).toBe("Not Presented");
+  expect(payload.booking.notes).toBe("Not Presented");
+  expect(payload.tracking.abandonmentScreen).toBe("select_issue");
+  expect(payload.tracking.screensVisited).toEqual(["select_issue"]);
 });

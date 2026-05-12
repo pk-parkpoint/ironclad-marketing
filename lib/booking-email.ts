@@ -8,7 +8,24 @@
 
 import { initializeApp, getApps, applicationDefault } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
-import { formatDurationMs, normalizeValue, type BookingLeadPayload } from "@/lib/booking-lead";
+import {
+  BOOKING_NA,
+  BOOKING_NOT_PRESENTED,
+  formatDurationMs,
+  normalizeValue,
+  type BookingLeadPayload,
+  type BookingScreenId,
+} from "@/lib/booking-lead";
+
+// Customer-facing labels for the four wizard screens. Used in the abandoned
+// email subject when the customer left no identifying info.
+const SCREEN_LABELS: Record<BookingScreenId | "NA", string> = {
+  select_issue: "Select Service",
+  schedule_time: "Schedule Time",
+  contact_info: "Contact Info",
+  confirm_details: "Confirm Details",
+  NA: "the booking modal",
+};
 
 function initAdmin() {
   if (getApps().length) return getFirestore();
@@ -54,8 +71,17 @@ function escapeHtml(value: string): string {
 
 function row(label: string, value: string | undefined | null): string {
   const display = formatValue(value);
-  const color = display === "NA" ? "#9ca3af" : "#1f2937";
-  return `<tr><td style="padding:6px 12px;font-weight:600;color:#374151;white-space:nowrap">${escapeHtml(label)}</td><td style="padding:6px 12px;color:${color}">${escapeHtml(display)}</td></tr>`;
+  // Visually differentiate the three states: real value (ink), saw + skipped
+  // ("NA", gray), and never reached ("Not Presented", gray italic).
+  let color = "#1f2937";
+  let fontStyle = "normal";
+  if (display === BOOKING_NA) {
+    color = "#9ca3af";
+  } else if (display === BOOKING_NOT_PRESENTED) {
+    color = "#9ca3af";
+    fontStyle = "italic";
+  }
+  return `<tr><td style="padding:6px 12px;font-weight:600;color:#374151;white-space:nowrap">${escapeHtml(label)}</td><td style="padding:6px 12px;color:${color};font-style:${fontStyle}">${escapeHtml(display)}</td></tr>`;
 }
 
 function textRow(label: string, value: string | undefined | null): string {
@@ -181,11 +207,27 @@ function buildEmail(details: BookingDetails) {
     </div>
   `;
 
-  const subject = details.status === "completed"
-    ? `New Booking: ${formatValue(details.booking.customerName)} - ${formatValue(details.booking.serviceDisplay)}`
-    : `Abandoned Booking: ${formatValue(details.booking.customerName !== "NA" ? details.booking.customerName : details.booking.phone)}`;
+  const subject =
+    details.status === "completed"
+      ? `New Booking: ${formatValue(details.booking.customerName)} - ${formatValue(details.booking.serviceDisplay)}`
+      : `Abandoned Booking: ${abandonedSubjectLabel(details)}`;
 
   return { subject, html, text: textLines };
+}
+
+// Pick the most useful identifier for an abandoned-booking subject line:
+// customer name -> phone -> service category -> "bounced at <screen>". Avoids
+// the unhelpful "Abandoned Booking: NA" header on empty-modal bounces.
+function abandonedSubjectLabel(details: BookingDetails): string {
+  const { booking, tracking } = details;
+  const isReal = (value: string | undefined | null): value is string =>
+    !!value && value !== BOOKING_NA && value !== BOOKING_NOT_PRESENTED;
+  if (isReal(booking.customerName)) return booking.customerName;
+  if (isReal(booking.phone)) return booking.phone;
+  if (isReal(booking.serviceDisplay)) return `${booking.serviceDisplay} (no contact info)`;
+  const screen = (tracking.abandonmentScreen as BookingScreenId | "NA") || "NA";
+  const screenLabel = SCREEN_LABELS[screen] || screen;
+  return `bounced at ${screenLabel}`;
 }
 
 export async function sendBusinessNotification(

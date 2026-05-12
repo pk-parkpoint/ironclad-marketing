@@ -15,6 +15,39 @@ export type BookingScreenId = (typeof BOOKING_SCREEN_IDS)[number];
 export type BookingLeadStatus = "completed" | "abandoned";
 export type BookingFieldKey = keyof WizardFormData;
 
+// Which wizard screen each form field lives on. Used by the abandoned-lead
+// builder to distinguish "user saw the screen and skipped this field" (NA)
+// from "user abandoned before this screen was ever rendered" (Not Presented).
+export const BOOKING_FIELD_SCREENS: Record<BookingFieldKey, BookingScreenId> = {
+  serviceCategory: "select_issue",
+  serviceDetail: "select_issue",
+  selectedDate: "schedule_time",
+  timeOfDay: "schedule_time",
+  selectedWindowId: "schedule_time",
+  selectedOfferId: "schedule_time",
+  selectedStartTime: "schedule_time",
+  selectedEndTime: "schedule_time",
+  selectedWindowLabel: "schedule_time",
+  holdId: "schedule_time",
+  firstName: "contact_info",
+  lastName: "contact_info",
+  phone: "contact_info",
+  email: "contact_info",
+  addressFormatted: "contact_info",
+  street: "contact_info",
+  city: "contact_info",
+  state: "contact_info",
+  zip: "contact_info",
+  latitude: "contact_info",
+  longitude: "contact_info",
+  propertyType: "confirm_details",
+  ownershipStatus: "confirm_details",
+  gateCode: "confirm_details",
+  petsOnPremise: "confirm_details",
+  contactPreference: "confirm_details",
+  additionalNotes: "confirm_details",
+};
+
 export type BookingSiteSession = {
   attribution: AttributionData;
   browser: string;
@@ -110,7 +143,12 @@ export type BookingLeadPayload = {
   };
 };
 
-const NA = "NA";
+// Sentinels for abandoned-lead field state. Exported so the email + Conduit
+// notifier render them consistently.
+export const BOOKING_NA = "NA";
+export const BOOKING_NOT_PRESENTED = "Not Presented";
+const NA = BOOKING_NA;
+const NOT_PRESENTED = BOOKING_NOT_PRESENTED;
 
 const TIME_LABELS: Record<string, string> = {
   afternoon: "Afternoon",
@@ -186,6 +224,46 @@ export function formatDurationMs(value: number): string {
   return `${minutes}m ${seconds}s`;
 }
 
+// Resolves a single booking-lead field for the abandoned/completed email.
+// Rules per CTO 2026-05-11:
+//   completed       -> always render the formatted value (no sentinels)
+//   abandoned + touched at least one source field -> render the formatted value
+//   abandoned + never touched + screen WAS visited -> "NA"   (saw + skipped)
+//   abandoned + never touched + screen NOT visited -> "Not Presented" (never saw)
+function resolveBookingField({
+  formatted,
+  sourceFields,
+  abandoned,
+  touchedFields,
+  screensVisited,
+}: {
+  formatted: string;
+  sourceFields: BookingFieldKey[];
+  abandoned: boolean;
+  touchedFields: Set<BookingFieldKey>;
+  screensVisited: Set<BookingScreenId>;
+}): string {
+  if (!abandoned) return formatted;
+  if (sourceFields.some((field) => touchedFields.has(field))) return formatted;
+  const screen = BOOKING_FIELD_SCREENS[sourceFields[0]];
+  return screen && screensVisited.has(screen) ? NA : NOT_PRESENTED;
+}
+
+function combineServiceDisplay(category: string, detail: string): string {
+  // Mirror the field-resolution rules at the composite level. If BOTH parts
+  // were never presented, the display is also Not Presented. If one is missing
+  // (NA/Not Presented) but the other is a real value, fall back to the real
+  // half so an abandoned-at-detail-pick lead still shows the category.
+  const sentinels = new Set([NA, NOT_PRESENTED]);
+  const categoryReal = !sentinels.has(category);
+  const detailReal = !sentinels.has(detail);
+  if (categoryReal && detailReal) return `${category} > ${detail}`;
+  if (categoryReal) return category;
+  if (detailReal) return detail;
+  if (category === NOT_PRESENTED && detail === NOT_PRESENTED) return NOT_PRESENTED;
+  return NA;
+}
+
 export function buildBookingLeadPayload({
   attempt,
   bookingId,
@@ -203,58 +281,82 @@ export function buildBookingLeadPayload({
   const bookingTime = Math.min(Math.max(now - attempt.bookingOpenedAt, 0), BOOKING_TIME_CAP_MS);
   const totalSessionDurationMs = Math.max(now - siteSession.siteStartedAt, 0);
   const timeOnSiteBeforeBookingMs = Math.max(attempt.bookingOpenedAt - siteSession.siteStartedAt, 0);
-  const customerName = `${formData.firstName} ${formData.lastName}`.trim();
+  const customerNameRaw = `${formData.firstName} ${formData.lastName}`.trim();
   const screensVisited = new Set(attempt.screensVisited);
   const touchedFields = new Set<BookingFieldKey>(attempt.touchedFields);
   const abandoned = status === "abandoned";
+  const resolveCtx = { abandoned, touchedFields, screensVisited };
+  const resolve = (formatted: string, sourceFields: BookingFieldKey[]) =>
+    resolveBookingField({ formatted, sourceFields, ...resolveCtx });
 
-  const serviceCategory =
-    abandoned && !touchedFields.has("serviceCategory") ? NA : humanizeServiceValue(formData.serviceCategory);
-  const serviceDetail =
-    abandoned && !touchedFields.has("serviceDetail") ? NA : humanizeServiceValue(formData.serviceDetail);
-  const serviceDisplayParts = [serviceCategory, serviceDetail].filter((value) => value !== NA);
-  const preferredDate =
-    abandoned && !touchedFields.has("selectedDate") ? NA : normalizeValue(formData.selectedDate);
-  const preferredWindow =
-    abandoned && !screensVisited.has("schedule_time") ? NA : normalizePreferredWindow(formData);
-  const notes =
-    abandoned && !touchedFields.has("additionalNotes") ? NA : normalizeValue(formData.additionalNotes);
-  const gateCode =
-    abandoned && !touchedFields.has("gateCode") ? NA : normalizeValue(formData.gateCode);
-  const propertyType =
-    abandoned && !touchedFields.has("propertyType") ? NA : normalizePropertyType(formData.propertyType);
-  const ownershipStatus =
-    abandoned && !touchedFields.has("ownershipStatus") ? NA : normalizeOwnershipStatus(formData.ownershipStatus);
-  const petsOnPremise =
-    abandoned && !touchedFields.has("petsOnPremise") ? NA : normalizeValue(formData.petsOnPremise);
-  const contactPreference =
-    abandoned && !touchedFields.has("contactPreference") ? NA : normalizeContactPreference(formData.contactPreference);
+  // Contact-info screen (step 3)
+  const customerName = resolve(normalizeValue(customerNameRaw), ["firstName", "lastName"]);
+  const firstName = resolve(normalizeValue(formData.firstName), ["firstName"]);
+  const lastName = resolve(normalizeValue(formData.lastName), ["lastName"]);
+  const phone = resolve(normalizeValue(formData.phone), ["phone"]);
+  const email = resolve(normalizeValue(formData.email), ["email"]);
+  const address = resolve(normalizeValue(formData.addressFormatted), ["addressFormatted"]);
+  // street/city/state/zip are only populated by Google Places when the user
+  // selects a suggestion; if they typed free-form, those stay blank. Tie all
+  // four to the same address-field touch so they share Not Presented vs NA.
+  const street = resolve(normalizeValue(formData.street), ["addressFormatted", "street"]);
+  const city = resolve(normalizeValue(formData.city), ["addressFormatted", "city"]);
+  const stateField = resolve(normalizeValue(formData.state), ["addressFormatted", "state"]);
+  const zip = resolve(normalizeValue(formData.zip), ["addressFormatted", "zip"]);
+
+  // Select-issue screen (step 1)
+  const serviceCategory = resolve(humanizeServiceValue(formData.serviceCategory), ["serviceCategory"]);
+  const serviceDetail = resolve(humanizeServiceValue(formData.serviceDetail), ["serviceDetail"]);
+  const serviceDisplay = combineServiceDisplay(serviceCategory, serviceDetail);
+
+  // Schedule-time screen (step 2)
+  const preferredDate = resolve(normalizeValue(formData.selectedDate), ["selectedDate"]);
+  // preferredWindow keys on whether the schedule screen was reached at all
+  // (the customer may pick a date but skip a window, in which case the visit
+  // counts as "saw and skipped" via selectedWindowLabel/timeOfDay).
+  const preferredWindow = resolve(normalizePreferredWindow(formData), [
+    "selectedWindowLabel",
+    "selectedWindowId",
+    "timeOfDay",
+    "selectedDate",
+  ]);
+
+  // Confirm-details screen (step 4) — only reachable after a successful book.
+  // Customers who abandon before submission will see these as Not Presented.
+  const notes = resolve(normalizeValue(formData.additionalNotes), ["additionalNotes"]);
+  const gateCode = resolve(normalizeValue(formData.gateCode), ["gateCode"]);
+  const propertyType = resolve(normalizePropertyType(formData.propertyType), ["propertyType"]);
+  const ownershipStatus = resolve(normalizeOwnershipStatus(formData.ownershipStatus), ["ownershipStatus"]);
+  const petsOnPremise = resolve(normalizeValue(formData.petsOnPremise), ["petsOnPremise"]);
+  const contactPreference = resolve(normalizeContactPreference(formData.contactPreference), ["contactPreference"]);
 
   return {
     booking: {
-      address: normalizeValue(formData.addressFormatted),
+      address,
       bookingId: normalizeValue(bookingId || attempt.bookingId),
-      city: normalizeValue(formData.city),
+      city,
       contactPreference,
-      customerName: normalizeValue(customerName),
-      email: normalizeValue(formData.email),
-      firstName: normalizeValue(formData.firstName),
+      customerName,
+      email,
+      firstName,
       gateCode,
-      lastName: normalizeValue(formData.lastName),
+      lastName,
       notes,
       ownershipStatus,
       petsOnPremise,
-      phone: normalizeValue(formData.phone),
-      photos: NA,
+      phone,
+      // No photo-upload control is rendered in the wizard, so the field is
+      // never offered to the customer.
+      photos: abandoned ? NOT_PRESENTED : NA,
       preferredDate,
       preferredWindow,
       propertyType,
       serviceCategory,
       serviceDetail,
-      serviceDisplay: serviceDisplayParts.length > 0 ? serviceDisplayParts.join(" > ") : NA,
-      state: normalizeValue(formData.state),
-      street: normalizeValue(formData.street),
-      zip: normalizeValue(formData.zip),
+      serviceDisplay,
+      state: stateField,
+      street,
+      zip,
     },
     businessKey: BOOKING_BUSINESS_KEY,
     serverContext: {
