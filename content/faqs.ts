@@ -36,7 +36,7 @@ export const FAQ_ENTRIES: FaqEntry[] = [
     category: "general",
     question: "Are you licensed and insured?",
     answer:
-      "Yes. We're licensed by the Texas State Board of Plumbing Examiners (TX #XXXXX) and carry general liability and workers' compensation insurance. Details at /licenses.",
+      "Yes. Ask for the Responsible Master Plumber name and license number, then verify active status with the Texas State Board of Plumbing Examiners. We carry insurance coverage for residential plumbing work. Details at /licenses.",
   },
   {
     category: "general",
@@ -82,7 +82,7 @@ export const FAQ_ENTRIES: FaqEntry[] = [
     category: "scheduling",
     question: "What are your hours?",
     answer:
-      "Emergency service is available 24/7 at /plumbing/emergency. Standard business hours are TBD.",
+      "Emergency service is available 24/7 at /plumbing/emergency. Standard scheduling support is available on weekdays and Saturdays; call or text for the current arrival window.",
   },
   {
     category: "water-heaters",
@@ -151,4 +151,3 @@ export const FAQ_ENTRIES: FaqEntry[] = [
       "Yes, emergency rates are higher than standard rates. We're transparent about the cost before we start any work.",
   },
 ];
-

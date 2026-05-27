@@ -1,4 +1,13 @@
-import { getSitemapBaseUrl } from "@/lib/sitemap-data";
+import {
+  buildArticleSitemapEntries,
+  buildCoreSitemapEntries,
+  buildGuideSitemapEntries,
+  buildImageSitemapEntries,
+  buildServiceAreaSitemapEntries,
+  buildServiceSitemapEntries,
+  getLatestLastModified,
+  getSitemapBaseUrl,
+} from "@/lib/sitemap-data";
 
 function escapeXml(value: string): string {
   return value
@@ -11,23 +20,27 @@ function escapeXml(value: string): string {
 
 export function GET() {
   const base = getSitemapBaseUrl();
-  const now = new Date().toISOString();
   const sitemapPaths = [
-    "/sitemaps/core.xml",
-    "/sitemaps/guides.xml",
-    "/sitemaps/services.xml",
-    "/sitemaps/service-areas.xml",
-    "/sitemaps/articles.xml",
-    "/sitemaps/images.xml",
+    { lastmod: getLatestLastModified(buildCoreSitemapEntries()), path: "/sitemaps/core.xml" },
+    { lastmod: getLatestLastModified(buildGuideSitemapEntries()), path: "/sitemaps/guides.xml" },
+    { lastmod: getLatestLastModified(buildServiceSitemapEntries()), path: "/sitemaps/services.xml" },
+    { lastmod: getLatestLastModified(buildServiceAreaSitemapEntries()), path: "/sitemaps/service-areas.xml" },
+    { lastmod: getLatestLastModified(buildArticleSitemapEntries()), path: "/sitemaps/articles.xml" },
+    { lastmod: getLatestLastModified(buildImageSitemapEntries().map((entry) => ({
+      changeFrequency: "monthly",
+      lastModified: "2026-04-23T00:00:00.000Z",
+      path: entry.pagePath,
+      priority: 0.5,
+    }))), path: "/sitemaps/images.xml" },
   ];
 
   const body = sitemapPaths
-    .map((path) => {
-      const loc = escapeXml(`${base}${path}`);
+    .map((entry) => {
+      const loc = escapeXml(`${base}${entry.path}`);
       return [
         "  <sitemap>",
         `    <loc>${loc}</loc>`,
-        `    <lastmod>${escapeXml(now)}</lastmod>`,
+        `    <lastmod>${escapeXml(entry.lastmod)}</lastmod>`,
         "  </sitemap>",
       ].join("\n");
     })

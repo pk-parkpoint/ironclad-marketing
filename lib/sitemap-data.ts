@@ -1,4 +1,5 @@
 import { GUIDE_ROUTE_PATHS } from "@/content/guides";
+import { TOP_QUESTIONS_GUIDE_PATH } from "@/content/aeo-top-questions";
 import { BLOG_POSTS } from "@/content/blog-posts";
 import { LOCATIONS } from "@/content/locations";
 import { STATIC_ROUTE_PATHS } from "@/lib/routes";
@@ -12,9 +13,19 @@ export type SitemapEntry = {
   priority: number;
 };
 
-/** Fixed deploy date — update when content changes substantially. Avoids noisy
- *  crawl signaling from stamping every URL with "right now" on each build. */
-const CONTENT_LAST_MODIFIED = "2026-03-16T00:00:00.000Z";
+const LASTMOD = {
+  articles: "2026-03-16T00:00:00.000Z",
+  core: "2026-05-26T00:00:00.000Z",
+  guides: "2026-05-26T00:00:00.000Z",
+  serviceAreas: "2026-04-23T00:00:00.000Z",
+  services: "2026-04-23T00:00:00.000Z",
+} as const;
+
+const ROUTE_LASTMOD_OVERRIDES: Record<string, string> = {
+  [TOP_QUESTIONS_GUIDE_PATH]: "2026-05-26T00:00:00.000Z",
+  "/faq/plumbing": "2026-05-26T00:00:00.000Z",
+  "/guides": "2026-05-26T00:00:00.000Z",
+};
 
 function normalizePath(path: string): string {
   if (!path) {
@@ -27,8 +38,11 @@ export function getSitemapBaseUrl(): string {
   return CANONICAL_ORIGIN.replace(/\/+$/, "");
 }
 
+function getRouteLastModified(path: string, fallback: string): string {
+  return ROUTE_LASTMOD_OVERRIDES[normalizePath(path)] ?? fallback;
+}
+
 export function buildCoreSitemapEntries(): SitemapEntry[] {
-  const lastModified = CONTENT_LAST_MODIFIED;
   const routes = [
     "/",
     "/commercial-plumbing/austin-tx",
@@ -37,51 +51,47 @@ export function buildCoreSitemapEntries(): SitemapEntry[] {
   ];
   return routes.map((path) => ({
     changeFrequency: path === "/" ? "daily" : "weekly",
-    lastModified,
+    lastModified: getRouteLastModified(path, LASTMOD.core),
     path,
     priority: path === "/" ? 1 : 0.85,
   }));
 }
 
 export function buildServiceSitemapEntries(): SitemapEntry[] {
-  const lastModified = CONTENT_LAST_MODIFIED;
   return SERVICES.map((service) => ({
     changeFrequency: "weekly",
-    lastModified,
+    lastModified: getRouteLastModified(`/plumbing/${service.slug}`, LASTMOD.services),
     path: `/plumbing/${service.slug}`,
     priority: 0.82,
   }));
 }
 
 export function buildServiceAreaSitemapEntries(): SitemapEntry[] {
-  const lastModified = CONTENT_LAST_MODIFIED;
   return LOCATIONS.map((location) => ({
     changeFrequency: "weekly",
-    lastModified,
+    lastModified: getRouteLastModified(`/service-area/${location.slug}`, LASTMOD.serviceAreas),
     path: `/service-area/${location.slug}`,
     priority: 0.8,
   }));
 }
 
 export function buildArticleSitemapEntries(): SitemapEntry[] {
-  const lastModified = CONTENT_LAST_MODIFIED;
   return BLOG_POSTS.map((post) => ({
     changeFrequency: "monthly",
-    lastModified,
+    lastModified: getRouteLastModified(`/blog/${post.slug}`, LASTMOD.articles),
     path: `/blog/${post.slug}`,
     priority: 0.68,
   }));
 }
 
 export function buildGuideSitemapEntries(): SitemapEntry[] {
-  const lastModified = CONTENT_LAST_MODIFIED;
-  const routes = ["/guides", ...GUIDE_ROUTE_PATHS];
+  const routes = ["/guides", TOP_QUESTIONS_GUIDE_PATH, ...GUIDE_ROUTE_PATHS];
 
   return routes.map((path) => ({
     changeFrequency: "weekly",
-    lastModified,
+    lastModified: getRouteLastModified(path, LASTMOD.guides),
     path,
-    priority: path === "/guides" ? 0.86 : 0.72,
+    priority: path === "/guides" ? 0.86 : path === TOP_QUESTIONS_GUIDE_PATH ? 0.78 : 0.72,
   }));
 }
 
@@ -135,4 +145,10 @@ export function buildSitemapGroups() {
     serviceAreas: buildServiceAreaSitemapEntries(),
     services: buildServiceSitemapEntries(),
   };
+}
+
+export function getLatestLastModified(entries: SitemapEntry[]): string {
+  return entries.reduce((latest, entry) => {
+    return Date.parse(entry.lastModified) > Date.parse(latest) ? entry.lastModified : latest;
+  }, "1970-01-01T00:00:00.000Z");
 }

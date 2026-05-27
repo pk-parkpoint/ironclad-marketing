@@ -1,5 +1,6 @@
 import { BLOG_POSTS } from "../content/blog-posts";
 import { GUIDE_ROUTE_PATHS } from "../content/guides";
+import { TOP_QUESTIONS_GUIDE_PATH } from "../content/aeo-top-questions";
 import { LOCATIONS } from "../content/locations";
 import { SERVICES } from "../content/services";
 import robots from "../app/robots";
@@ -67,6 +68,7 @@ function main() {
     ...LOCATIONS.map((location) => `/service-area/${location.slug}`),
     ...BLOG_POSTS.map((post) => `/blog/${post.slug}`),
     "/guides",
+    TOP_QUESTIONS_GUIDE_PATH,
     ...GUIDE_ROUTE_PATHS,
   ]);
   const expectedUrls = new Set([...expectedRoutes].map((route) => routeToUrl(baseUrl, route)));
@@ -98,6 +100,13 @@ function main() {
       fail(`missing sitemap URL: ${expectedUrl}`);
     }
   }
+
+  const topQuestionsEntry = sitemapEntries.find((entry) => entry.path === TOP_QUESTIONS_GUIDE_PATH);
+  assert(topQuestionsEntry, "top plumbing questions hub must be in sitemap");
+  assert(
+    topQuestionsEntry.lastModified.startsWith("2026-05-26"),
+    "top plumbing questions hub must carry its route-level lastmod",
+  );
 
   const robotsConfig = robots();
   const rules = asArray(robotsConfig.rules);

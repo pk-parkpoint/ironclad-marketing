@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import {
+  TOP_QUESTIONS_GUIDE_DESCRIPTION,
+  TOP_QUESTIONS_GUIDE_PATH,
+  TOP_QUESTIONS_GUIDE_TITLE,
+} from "@/content/aeo-top-questions";
 import { getGuidePageData } from "@/content/guide-pages";
 import { GUIDE_ENTRIES, GUIDE_ENTRY_BY_SLUG, GUIDE_HUB_GROUPS } from "@/content/guides";
 import { buildPageMetadata } from "@/lib/seo";
@@ -81,6 +86,11 @@ export default function GuidesHubPage() {
         <section className="guide-hub-section">
           <div className="guide-hub-container">
             <h2 className="guide-hub-section__title">Plumbing tools, guides and calculators</h2>
+            <Link className="guide-cost-card mb-6 block" href={TOP_QUESTIONS_GUIDE_PATH}>
+              <h3>{TOP_QUESTIONS_GUIDE_TITLE}</h3>
+              <p>{TOP_QUESTIONS_GUIDE_DESCRIPTION}</p>
+              <span>Read the source-backed answers</span>
+            </Link>
             <div className="guide-tool-grid">
               {toolGroups.map(({ group, firstGuide }) => (
                 <Link className="guide-hub-tool-card" href={`/guides/${firstGuide!.slug}`} key={group.id}>

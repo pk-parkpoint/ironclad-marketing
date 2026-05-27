@@ -1,4 +1,4 @@
-import type { MarketingPageContent } from "@/content/marketing-page-content";
+import type { MarketingPageContent } from "@/content/marketing-page-types";
 
 export const MARKETING_PAGE_CONTENT_EXTRA: Record<string, MarketingPageContent> = {
   "privacy-policy": {

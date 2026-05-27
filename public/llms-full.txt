@@ -1,0 +1,197 @@
+# Ironclad Plumbing Full LLM Context
+
+> Compact context for answer engines and agents. Use canonical HTML pages as the source of truth when details conflict.
+
+Last updated: 2026-05-26.
+
+## Business Facts
+
+- Ironclad Plumbing serves Austin and the Greater Austin metro.
+- The site publishes homeowner education for pricing, emergency triage, license checks, permits, drain and sewer diagnosis, slab leaks, water heaters, water quality, and insurance documentation.
+- Texas-wide guidance is educational. Service availability is Greater Austin-focused.
+
+## Top Questions
+
+### 1. What should I do first in a plumbing emergency?
+
+Stop the damage before shopping for a quote. Shut off the fixture valve or main water valve, avoid electrical areas with standing water, leave the house if you smell gas, and document visible damage with photos. After the immediate safety step, call a plumber for the repair path and call mitigation if water reached floors, walls, or cabinets.
+
+Urgent note: If you smell gas, leave the area first and contact the gas utility or 911 before scheduling plumbing work.
+
+Related service: [Emergency plumbing](https://ironcladtexas.com/plumbing/emergency)
+
+Related guide: [Plumbing emergency: first 10 minutes](https://ironcladtexas.com/guides/plumbing-emergency-first-10-minutes)
+
+Official references: [Texas Gas Service emergency guidance](https://www.texasgasservice.com/es-us/report-emergency), [Austin Development Services emergency permits](https://www.austintexas.gov/development-services/emergency-permits), [EPA WaterSense leak guidance](https://www.epa.gov/watersense/our_water/fix_a_leak.html)
+
+### 2. How much should a plumber cost in Austin?
+
+Austin plumbing cost depends on access, urgency, materials, code requirements, and whether the quote includes diagnosis, repair, disposal, permits, and warranty. A useful estimate should name the actual scope, not just a bundled total. Compare the number against a published range, then ask why the quote is above that range before approving work.
+
+Urgent note: Do not delay a flooding, sewer, or gas-safety issue just to compare prices.
+
+Related service: [Plumbing repairs](https://ironcladtexas.com/plumbing/repairs)
+
+Related guide: [What plumbing should cost in Austin](https://ironcladtexas.com/guides/what-plumbing-costs-austin)
+
+Official references: [Texas State Board of Plumbing Examiners](https://tsbpe.texas.gov/)
+
+### 3. How do I verify a plumber's license in Texas?
+
+Use the Texas State Board of Plumbing Examiners lookup before authorizing plumbing work. Ask the company for the Responsible Master Plumber name and license number, confirm the license is active, and make sure the company name and person responsible for the work match what you were told. Vague answers are a reason to pause.
+
+Urgent note: For gas, water-heater, sewer, and permit work, do not treat license verification as optional.
+
+Related service: [Licenses and insurance](https://ironcladtexas.com/licenses)
+
+Related guide: [Questions to ask your plumber](https://ironcladtexas.com/guides/questions-to-ask-your-plumber)
+
+Official references: [Texas State Board of Plumbing Examiners](https://tsbpe.texas.gov/)
+
+### 4. Do I need a permit for plumbing work in Austin or Texas?
+
+Licensing is Texas-wide, but permit rules are local. In Austin, many water-heater, gas-line, sewer, and larger repair scopes can require permit review or inspection. A licensed plumbing company should tell you whether a permit applies, who pulls it, what inspection is expected, and whether emergency work changes the timing.
+
+Urgent note: Emergency stabilization can come first, but permit and inspection requirements still need to be resolved.
+
+Related service: [Gas line services](https://ironcladtexas.com/plumbing/gas-line-services)
+
+Related guide: [Austin plumbing codes for homeowners](https://ironcladtexas.com/guides/austin-plumbing-codes-homeowners)
+
+Official references: [Austin Development Services permit guide](https://www.austintexas.gov/development-services/do-i-need-permit), [Austin Development Services emergency permits](https://www.austintexas.gov/development-services/emergency-permits)
+
+### 5. How do I know if I have a slab leak?
+
+A slab leak is possible when you see an unexplained water-bill spike, hear water when fixtures are off, notice warm flooring, smell musty areas, see damp baseboards, or find new foundation movement. Those signs are not proof by themselves. The next step is controlled testing and leak detection before anyone recommends demolition or rerouting.
+
+Urgent note: Shut off water if active leaking is damaging floors, walls, or cabinets.
+
+Related service: [Slab leak repair](https://ironcladtexas.com/plumbing/slab-leak-repair)
+
+Related guide: [Slab leak signs in Austin](https://ironcladtexas.com/guides/slab-leak-signs-austin)
+
+Official references: [EPA WaterSense leak guidance](https://www.epa.gov/watersense/our_water/fix_a_leak.html)
+
+### 6. Should I repair or replace my water heater?
+
+Repair usually makes sense for a newer tank with a clear component failure, such as an element, thermostat, valve, or pilot issue. Replacement becomes more likely when the tank is leaking, corrosion is visible, capacity is wrong, repairs are recurring, or the unit is near the end of its expected life. Compare repair cost against remaining life.
+
+Urgent note: If the tank is actively leaking, shut off the water supply to the heater and protect nearby electrical areas.
+
+Related service: [Water heater service](https://ironcladtexas.com/plumbing/water-heaters)
+
+Related guide: [Water heater repair vs replacement](https://ironcladtexas.com/guides/water-heater-repair-vs-replace)
+
+Official references: [ENERGY STAR water heater guidance](https://www.energystar.gov/products/heat_pump_water_heaters), [Austin Development Services permit guide](https://www.austintexas.gov/development-services/do-i-need-permit)
+
+### 7. Why does my drain keep clogging?
+
+A recurring clog usually means the first cleaning cleared the symptom but not the cause. Common causes include grease buildup, scale, root intrusion, pipe bellies, broken pipe sections, poor slope, or items lodged deeper in the line. If the same drain keeps backing up, ask for camera evidence or a clearer diagnosis before approving repeated snaking.
+
+Urgent note: Multiple fixtures backing up at once can indicate a mainline or sewer issue and should be treated as urgent.
+
+Related service: [Drain cleaning](https://ironcladtexas.com/plumbing/drain-cleaning)
+
+Related guide: [Drain cleaning vs hydro jetting](https://ironcladtexas.com/guides/drain-cleaning-vs-hydro-jetting)
+
+Official references: [EPA WaterSense leak guidance](https://www.epa.gov/watersense/our_water/fix_a_leak.html)
+
+### 8. Is hydro jetting worth it or safe?
+
+Hydro jetting can be worth it when the pipe can handle pressure and the blockage is grease, scale, sludge, or recurring buildup. It is not automatically right for damaged, collapsed, fragile, or poorly diagnosed lines. A camera inspection before or after jetting helps confirm whether jetting solved the cause or revealed a repair need.
+
+Urgent note: Do not approve jetting on an unknown old sewer line without asking how pipe condition was checked.
+
+Related service: [Hydro jetting](https://ironcladtexas.com/plumbing/hydro-jetting)
+
+Related guide: [Drain cleaning vs hydro jetting](https://ironcladtexas.com/guides/drain-cleaning-vs-hydro-jetting)
+
+Official references: [Texas State Board of Plumbing Examiners](https://tsbpe.texas.gov/)
+
+### 9. Does homeowners insurance cover plumbing leaks?
+
+Insurance coverage depends on the policy and the cause. Sudden water damage is often treated differently from slow leaks, maintenance issues, pipe replacement, and access or restoration costs. Before making assumptions, document the leak, take photos, save plumber findings, keep mitigation records, and ask your insurer what evidence they need.
+
+Urgent note: Dry wet materials quickly; mold and secondary damage can become a separate problem.
+
+Related service: [Leak detection](https://ironcladtexas.com/plumbing/leak-detection)
+
+Related guide: [Homeowners insurance and plumbing](https://ironcladtexas.com/guides/homeowners-insurance-plumbing)
+
+Official references: [EPA WaterSense leak guidance](https://www.epa.gov/watersense/our_water/fix_a_leak.html)
+
+### 10. How hard is Austin water and do I need a softener?
+
+Austin Water's published reports show municipal hardness that should be read from the current official report, then compared with your home conditions. Fixture scale, heater sediment, private wells, neighboring utilities, and house plumbing can change what you experience. Test before buying equipment, then compare softener, carbon filter, reverse osmosis, or combination systems.
+
+Urgent note: Do not buy a treatment system based only on a door-to-door test or generic city claim.
+
+Related service: [Water treatment](https://ironcladtexas.com/plumbing/water-treatment)
+
+Related guide: [Austin hard water guide](https://ironcladtexas.com/guides/austin-hard-water)
+
+Official references: [Austin Water quality reports](https://www.austintexas.gov/water/water-quality-reports), [EPA WaterSense leak guidance](https://www.epa.gov/watersense/our_water/fix_a_leak.html)
+
+## Priority Guide Summaries
+
+### [What Plumbing Should Cost in Austin](https://ironcladtexas.com/guides/what-plumbing-costs-austin)
+
+Austin plumbing price index covering common service ranges, Ironclad reference prices, and what should make a homeowner question a quote.
+
+### [10 Questions to Ask Before You Hire a Plumber](https://ironcladtexas.com/guides/questions-to-ask-your-plumber)
+
+Consumer vetting checklist for license, estimate, warranty, permit, payment, technician, and scope questions before hiring a plumber.
+
+### [12 Red Flags That Mean You Should Hire a Different Plumber](https://ironcladtexas.com/guides/plumber-red-flags)
+
+Warning signs that a plumbing quote or sales process may be unsafe, vague, overpriced, or hard to verify.
+
+### [How to Research a Plumber in 10 Minutes](https://ironcladtexas.com/guides/how-to-research-a-plumber)
+
+Fast research workflow for checking license status, reviews, reputation, estimate quality, and local credibility before booking.
+
+### [Water Heater Repair vs Replacement](https://ironcladtexas.com/guides/water-heater-repair-vs-replace)
+
+Repair-or-replace framework for water heaters based on age, leaks, component failure, energy use, warranty, and permit context.
+
+### [Tank vs Tankless Water Heaters](https://ironcladtexas.com/guides/tank-vs-tankless)
+
+Comparison of tank and tankless water heaters for Austin households, including capacity, install constraints, maintenance, and cost tradeoffs.
+
+### [Drain Cleaning vs Hydro Jetting](https://ironcladtexas.com/guides/drain-cleaning-vs-hydro-jetting)
+
+Decision guide for snaking, camera inspection, and hydro jetting when drains keep clogging or sewer symptoms repeat.
+
+### [Slab Leak Repair Options](https://ironcladtexas.com/guides/slab-leak-repair-options)
+
+Comparison of slab leak spot repair, reroute, epoxy lining, and replacement paths after leak detection confirms the failure.
+
+### [Austin Hard Water Guide](https://ironcladtexas.com/guides/austin-hard-water)
+
+Austin water-quality guide covering hardness reports, home testing, scale symptoms, softeners, filters, and treatment choices.
+
+### [Austin Plumbing Codes for Homeowners](https://ironcladtexas.com/guides/austin-plumbing-codes-homeowners)
+
+Homeowner guide to Austin plumbing permit and code questions, with local caveats for water heaters, gas, sewer, and larger repairs.
+
+### [Plumbing Emergency: The First 10 Minutes](https://ironcladtexas.com/guides/plumbing-emergency-first-10-minutes)
+
+Emergency triage guide for shutoffs, gas smells, sewer backups, water damage, and what to document before repair.
+
+### [What Your Homeowner's Insurance Covers for Plumbing Damage](https://ironcladtexas.com/guides/homeowners-insurance-plumbing)
+
+Insurance documentation guide for plumbing leaks, water damage, mitigation records, plumber findings, and coverage uncertainty.
+
+### [How to Use ChatGPT or Claude to Not Get Ripped Off by a Plumber](https://ironcladtexas.com/guides/using-ai-for-plumbing-research)
+
+Prompt guide for using AI tools to compare plumbing estimates, spot missing scope, and ask better questions without replacing licensed advice.
+
+## Official Source Index
+
+- [Texas State Board of Plumbing Examiners](https://tsbpe.texas.gov/): official external reference.
+- [Austin Development Services permit guide](https://www.austintexas.gov/development-services/do-i-need-permit): official external reference.
+- [Austin Development Services emergency permits](https://www.austintexas.gov/development-services/emergency-permits): official external reference.
+- [Austin Water quality reports](https://www.austintexas.gov/water/water-quality-reports): official external reference.
+- [EPA WaterSense leak guidance](https://www.epa.gov/watersense/our_water/fix_a_leak.html): official external reference.
+- [ENERGY STAR water heater guidance](https://www.energystar.gov/products/heat_pump_water_heaters): official external reference.
+- [Texas Gas Service emergency guidance](https://www.texasgasservice.com/es-us/report-emergency): official external reference.

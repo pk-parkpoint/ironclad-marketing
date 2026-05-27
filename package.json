@@ -22,6 +22,8 @@
     "ssr:audit": "tsx scripts/validate-ssr-rendering.ts",
     "phase0:live:audit": "tsx scripts/validate-phase0-live.ts",
     "sitemap-robots:audit": "tsx scripts/validate-sitemap-robots.ts",
+    "llms:generate": "tsx scripts/generate-llms.ts",
+    "llms:audit": "tsx scripts/validate-llms.ts",
     "search-visibility:audit": "tsx scripts/validate-search-visibility.ts",
     "internal-links:audit": "tsx scripts/validate-internal-links.ts",
     "analytics:audit": "tsx scripts/validate-analytics.ts",

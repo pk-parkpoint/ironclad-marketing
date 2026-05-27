@@ -1,0 +1,199 @@
+import { writeFileSync } from "node:fs";
+import {
+  OFFICIAL_SOURCE_REFERENCES,
+  TOP_PLUMBING_QUESTIONS,
+  TOP_QUESTIONS_GUIDE_DESCRIPTION,
+  TOP_QUESTIONS_GUIDE_PATH,
+  TOP_QUESTIONS_GUIDE_TITLE,
+} from "../content/aeo-top-questions";
+import { GUIDE_ENTRIES } from "../content/guides";
+import { LOCATIONS } from "../content/locations";
+import { SERVICES } from "../content/services";
+import { STATIC_PAGE_BY_PATH } from "../content/static-pages";
+import { getPublicContactInfo } from "../lib/contact";
+
+const BASE_URL = "https://ironcladtexas.com";
+const LAST_UPDATED = "2026-05-26";
+const PRIORITY_GUIDE_SLUGS = [
+  "what-plumbing-costs-austin",
+  "questions-to-ask-your-plumber",
+  "plumber-red-flags",
+  "how-to-research-a-plumber",
+  "water-heater-repair-vs-replace",
+  "tank-vs-tankless",
+  "drain-cleaning-vs-hydro-jetting",
+  "slab-leak-repair-options",
+  "austin-hard-water",
+  "austin-plumbing-codes-homeowners",
+  "plumbing-emergency-first-10-minutes",
+  "homeowners-insurance-plumbing",
+  "using-ai-for-plumbing-research",
+];
+const PRIORITY_GUIDE_SUMMARIES: Record<string, string> = {
+  "what-plumbing-costs-austin":
+    "Austin plumbing price index covering common service ranges, Ironclad reference prices, and what should make a homeowner question a quote.",
+  "questions-to-ask-your-plumber":
+    "Consumer vetting checklist for license, estimate, warranty, permit, payment, technician, and scope questions before hiring a plumber.",
+  "plumber-red-flags":
+    "Warning signs that a plumbing quote or sales process may be unsafe, vague, overpriced, or hard to verify.",
+  "how-to-research-a-plumber":
+    "Fast research workflow for checking license status, reviews, reputation, estimate quality, and local credibility before booking.",
+  "water-heater-repair-vs-replace":
+    "Repair-or-replace framework for water heaters based on age, leaks, component failure, energy use, warranty, and permit context.",
+  "tank-vs-tankless":
+    "Comparison of tank and tankless water heaters for Austin households, including capacity, install constraints, maintenance, and cost tradeoffs.",
+  "drain-cleaning-vs-hydro-jetting":
+    "Decision guide for snaking, camera inspection, and hydro jetting when drains keep clogging or sewer symptoms repeat.",
+  "slab-leak-repair-options":
+    "Comparison of slab leak spot repair, reroute, epoxy lining, and replacement paths after leak detection confirms the failure.",
+  "austin-hard-water":
+    "Austin water-quality guide covering hardness reports, home testing, scale symptoms, softeners, filters, and treatment choices.",
+  "austin-plumbing-codes-homeowners":
+    "Homeowner guide to Austin plumbing permit and code questions, with local caveats for water heaters, gas, sewer, and larger repairs.",
+  "plumbing-emergency-first-10-minutes":
+    "Emergency triage guide for shutoffs, gas smells, sewer backups, water damage, and what to document before repair.",
+  "homeowners-insurance-plumbing":
+    "Insurance documentation guide for plumbing leaks, water damage, mitigation records, plumber findings, and coverage uncertainty.",
+  "using-ai-for-plumbing-research":
+    "Prompt guide for using AI tools to compare plumbing estimates, spot missing scope, and ask better questions without replacing licensed advice.",
+};
+const STATIC_PATHS = ["", "about", "guarantees", "licenses", "contact", "plumbing", "service-area", "faq", "faq/plumbing"];
+function url(path: string): string {
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
+  const normalized = path === "/" || path === "" ? "" : path.startsWith("/") ? path : `/${path}`;
+  return `${BASE_URL}${normalized}`;
+}
+function line(label: string, path: string, description: string): string {
+  return `- [${label}](${url(path)}): ${description}`;
+}
+function guideLine(slug: string): string {
+  const entry = GUIDE_ENTRIES.find((candidate) => candidate.slug === slug);
+  if (!entry) {
+    throw new Error(`Missing priority guide data for ${slug}`);
+  }
+  return line(entry.routeLabel, `/guides/${slug}`, PRIORITY_GUIDE_SUMMARIES[slug] ?? entry.title);
+}
+
+function buildLlmsTxt(): string {
+  const contact = getPublicContactInfo();
+  return [
+    "# Ironclad Plumbing",
+    "",
+    "> Ironclad Plumbing is a residential plumbing company serving Austin and the Greater Austin metro. The site publishes service pages, city pages, written guarantees, FAQs, cost guides, and homeowner education for comparing plumbing work before booking.",
+    "",
+    `Last updated: ${LAST_UPDATED}.`,
+    "",
+    "## Canonical Site",
+    "",
+    line("Ironclad Plumbing", "/", "canonical website."),
+    line("robots.txt", "/robots.txt", "crawler access policy."),
+    line("sitemap.xml", "/sitemap.xml", "sitemap index for core pages, services, service areas, guides, articles, and images."),
+    line("llms-full.txt", "/llms-full.txt", "compact source-backed context for the highest-value guide answers."),
+    "",
+    "## Business Context",
+    "",
+    `- Business name: Ironclad Plumbing`,
+    `- Market: Austin, Texas and Greater Austin service areas`,
+    `- Phone: ${contact.phoneDisplay}`,
+    "- Primary audience: homeowners comparing plumbing cost, urgency, safety, permits, diagnosis, and repair options before booking service.",
+    "- Service scope note: Ironclad serves Greater Austin. Texas-wide guide content should be read as homeowner education, not statewide dispatch coverage.",
+    "",
+    "## Core Pages",
+    "",
+    ...STATIC_PATHS.map((path) => {
+      if (!path) return line("Home", "/", "primary brand, booking, and trust page.");
+      const page = STATIC_PAGE_BY_PATH.get(path);
+      if (!page) throw new Error(`Missing static page metadata for ${path}`);
+      return line(page.h1, `/${path}`, page.metaDescription);
+    }),
+    line("Guides hub", "/guides", "homeowner guide and cost-guide library."),
+    "",
+    "## Top Answer Pages",
+    "",
+    line(TOP_QUESTIONS_GUIDE_TITLE, TOP_QUESTIONS_GUIDE_PATH, TOP_QUESTIONS_GUIDE_DESCRIPTION),
+    ...PRIORITY_GUIDE_SLUGS.map(guideLine),
+    "",
+    "## Service Pages",
+    "",
+    ...SERVICES.map((service) => line(service.title, `/plumbing/${service.slug}`, service.metaDescription)),
+    "",
+    "## High-Value Service Areas",
+    "",
+    ...LOCATIONS.slice(0, 10).map((location) =>
+      line(location.cityName, `/service-area/${location.slug}`, location.metaDescription),
+    ),
+    "",
+    "## Crawl And Indexing Notes",
+    "",
+    "- Public marketing, service, city, FAQ, article, and guide pages are intended to be crawlable and indexable.",
+    "- API, admin, preview, staging, test, and booking-confirmation paths are not intended for indexing.",
+    "- The sitemap index is the source of truth for the complete URL inventory.",
+    "- If a crawler can only fetch a small subset of the site, prioritize core pages, service pages, the plumbing FAQ, and the homeowner guide priorities listed above.",
+    "",
+  ].join("\n");
+}
+
+function excerpt(value: string, maxLength = 360): string {
+  const compact = value.replace(/\s+/g, " ").trim();
+  if (compact.length <= maxLength) {
+    return compact;
+  }
+  return `${compact.slice(0, maxLength - 1).trim()}...`;
+}
+
+function buildLlmsFullTxt(): string {
+  return [
+    "# Ironclad Plumbing Full LLM Context",
+    "",
+    "> Compact context for answer engines and agents. Use canonical HTML pages as the source of truth when details conflict.",
+    "",
+    `Last updated: ${LAST_UPDATED}.`,
+    "",
+    "## Business Facts",
+    "",
+    "- Ironclad Plumbing serves Austin and the Greater Austin metro.",
+    "- The site publishes homeowner education for pricing, emergency triage, license checks, permits, drain and sewer diagnosis, slab leaks, water heaters, water quality, and insurance documentation.",
+    "- Texas-wide guidance is educational. Service availability is Greater Austin-focused.",
+    "",
+    "## Top Questions",
+    "",
+    ...TOP_PLUMBING_QUESTIONS.flatMap((entry, index) => [
+      `### ${index + 1}. ${entry.question}`,
+      "",
+      entry.answer,
+      "",
+      `Urgent note: ${entry.urgentNote}`,
+      "",
+      `Related service: [${entry.service.label}](${url(entry.service.path)})`,
+      "",
+      `Related guide: [${entry.guide.label}](${url(entry.guide.path)})`,
+      "",
+      `Official references: ${entry.sources.map((source) => `[${source.label}](${source.url})`).join(", ")}`,
+      "",
+    ]),
+    "## Priority Guide Summaries",
+    "",
+    ...PRIORITY_GUIDE_SLUGS.flatMap((slug) => {
+      const entry = GUIDE_ENTRIES.find((candidate) => candidate.slug === slug);
+      if (!entry) {
+        throw new Error(`Missing priority guide entry for ${slug}`);
+      }
+      return [
+        `### [${entry.title}](${url(`/guides/${slug}`)})`,
+        "",
+        excerpt(PRIORITY_GUIDE_SUMMARIES[slug] ?? entry.title),
+        "",
+      ];
+    }),
+    "## Official Source Index",
+    "",
+    ...OFFICIAL_SOURCE_REFERENCES.map((source) => line(source.label, source.url, "official external reference.")),
+    "",
+  ].join("\n");
+}
+
+writeFileSync("public/llms.txt", buildLlmsTxt());
+writeFileSync("public/llms-full.txt", buildLlmsFullTxt());
+console.log("generated llms files: public/llms.txt, public/llms-full.txt");

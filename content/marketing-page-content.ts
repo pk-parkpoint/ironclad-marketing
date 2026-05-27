@@ -1,29 +1,7 @@
 import { MARKETING_PAGE_CONTENT_EXTRA } from "@/content/marketing-page-content-extra";
+import type { MarketingPageContent } from "@/content/marketing-page-types";
 
-export type MarketingPageSection = {
-  heading: string;
-  paragraphs: string[];
-  bullets?: string[];
-};
-
-export type MarketingPageContent = {
-  intro: string;
-  sections: MarketingPageSection[];
-  ctaHeading: string;
-  ctaBody: string;
-  showContactForm?: boolean;
-  pageType?:
-    | "about"
-    | "book"
-    | "careers"
-    | "contact"
-    | "financing"
-    | "legal"
-    | "offers"
-    | "process"
-    | "reviews"
-    | "trust";
-};
+export type { MarketingPageContent } from "@/content/marketing-page-types";
 
 export const MARKETING_PAGE_CONTENT: Record<string, MarketingPageContent> = {
   "about": {
@@ -162,14 +140,15 @@ export const MARKETING_PAGE_CONTENT: Record<string, MarketingPageContent> = {
   },
   "licenses": {
     intro:
-      "Ironclad maintains the licensing and insurance standards expected for residential plumbing work across the Greater Austin service area.",
+      "Ironclad maintains the licensing and insurance standards expected for residential plumbing work across the Greater Austin service area. Before approving work, homeowners should be able to verify the Responsible Master Plumber and active license status with the Texas State Board of Plumbing Examiners.",
     sections: [
       {
-        heading: "Proof and Compliance",
+        heading: "What to Verify",
         bullets: [
-          "Responsible Master Plumber oversight",
-          "Current insurance coverage",
-          "Code-aligned installation and repair practices",
+          "Ask for the Responsible Master Plumber name and license number before major work begins",
+          "Use the TSBPE license lookup at tsbpe.texas.gov to confirm active status",
+          "Confirm current insurance coverage and code-aligned repair or installation practices",
+          "For permit-sensitive work, ask who pulls the permit and how inspection is handled",
         ],
         paragraphs: [],
       },
