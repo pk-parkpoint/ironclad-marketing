@@ -53,6 +53,13 @@ function asArray<T>(value: T | T[] | undefined): T[] {
 
 function main() {
   const baseUrl = getBaseUrl();
+  const requiredAllowedCrawlerTokens = [
+    "OAI-SearchBot",
+    "Claude-SearchBot",
+    "ChatGPT-User",
+    "Claude-User",
+    "Google-Extended",
+  ];
   const expectedRoutes = new Set<string>([
     "/",
     ...STATIC_ROUTE_PATHS.map((path) => normalizePath(path)),
@@ -95,6 +102,25 @@ function main() {
   const robotsConfig = robots();
   const rules = asArray(robotsConfig.rules);
   assert(rules.length > 0, "robots rules must be defined");
+
+  const allowedCrawlerTokens = new Set<string>();
+  for (const rule of rules) {
+    const allowPaths = asArray(rule.allow);
+    if (!allowPaths.includes("/")) {
+      continue;
+    }
+
+    for (const userAgent of asArray(rule.userAgent)) {
+      allowedCrawlerTokens.add(userAgent);
+    }
+  }
+
+  for (const crawlerToken of requiredAllowedCrawlerTokens) {
+    assert(
+      allowedCrawlerTokens.has(crawlerToken),
+      `robots must explicitly allow '${crawlerToken}'`,
+    );
+  }
 
   const wildcardRule = rules.find((rule) => {
     const userAgent = rule.userAgent;

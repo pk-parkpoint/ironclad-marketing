@@ -15,6 +15,15 @@ const AI_CRAWLERS = [
   "CCBot",
 ] as const;
 
+const USER_TRIGGERED_AI_FETCHERS = [
+  "ChatGPT-User",
+  "Claude-User",
+] as const;
+
+const AI_PRODUCT_TOKENS = [
+  "Google-Extended",
+] as const;
+
 function getBaseUrl(): string {
   // Canonicalize robots.txt to the production origin to avoid indexing duplicates (www, preview domains).
   return CANONICAL_ORIGIN;
@@ -31,6 +40,10 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: [...AI_CRAWLERS],
+        allow: "/",
+      },
+      {
+        userAgent: [...USER_TRIGGERED_AI_FETCHERS, ...AI_PRODUCT_TOKENS],
         allow: "/",
       },
       {

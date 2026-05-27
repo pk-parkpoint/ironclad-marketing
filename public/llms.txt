@@ -1,46 +1,115 @@
 # Ironclad Plumbing
 
-> Ironclad Plumbing is a residential plumbing company serving Austin and the Greater Austin metro. The site publishes service pages, city pages, written guarantees, FAQs, and homeowner guides for comparing plumbing work before booking.
+> Ironclad Plumbing is a residential plumbing company serving Austin and the Greater Austin metro. The site publishes service pages, city pages, written guarantees, FAQs, cost guides, and homeowner education for comparing plumbing work before booking.
+
+Last updated: 2026-05-26.
 
 ## Canonical Site
 
-- Site: https://ironcladtexas.com
-- Business: Ironclad Plumbing
+- [Ironclad Plumbing](https://ironcladtexas.com/): canonical website.
+- [robots.txt](https://ironcladtexas.com/robots.txt): crawler access policy.
+- [sitemap.xml](https://ironcladtexas.com/sitemap.xml): sitemap index for core pages, services, service areas, guides, articles, and images.
+
+## Business Context
+
+- Business name: Ironclad Plumbing
 - Market: Austin, Texas and Greater Austin service areas
 - Phone: (833) 597-1932
+- Primary audience: homeowners comparing plumbing cost, urgency, safety, permits, diagnosis, and repair options before booking service.
+- Service scope note: Ironclad serves Greater Austin. Texas-wide guide content should be read as homeowner education, not statewide dispatch coverage.
 
 ## Core Pages
 
-- Home: https://ironcladtexas.com/
-- About: https://ironcladtexas.com/about
-- Guarantees: https://ironcladtexas.com/guarantees
-- Contact: https://ironcladtexas.com/contact
-- Plumbing services hub: https://ironcladtexas.com/plumbing
-- Service areas hub: https://ironcladtexas.com/service-area
-- FAQ hub: https://ironcladtexas.com/faq
-- Guides hub: https://ironcladtexas.com/guides
+- [Home](https://ironcladtexas.com/): primary brand, booking, and trust page.
+- [About](https://ironcladtexas.com/about): company positioning and operating model.
+- [Guarantees](https://ironcladtexas.com/guarantees): written customer commitments.
+- [Licenses and insurance](https://ironcladtexas.com/licenses): trust and credential page.
+- [Contact](https://ironcladtexas.com/contact): phone, text, and contact options.
+- [Plumbing services hub](https://ironcladtexas.com/plumbing): index of residential plumbing services.
+- [Service areas hub](https://ironcladtexas.com/service-area): Greater Austin city pages.
+- [FAQ hub](https://ironcladtexas.com/faq): general FAQ index.
+- [Plumbing FAQ](https://ironcladtexas.com/faq/plumbing): crawlable Q&A about pricing, scheduling, leaks, drains, water heaters, and emergencies.
+- [Guides hub](https://ironcladtexas.com/guides): homeowner guide and cost-guide library.
 
-## High-Value Service Pages
+## Service Pages
 
-- Plumbing repairs: https://ironcladtexas.com/plumbing/repairs
-- Drain cleaning: https://ironcladtexas.com/plumbing/drain-cleaning
-- Sewer line services: https://ironcladtexas.com/plumbing/sewer-services
-- Water heaters: https://ironcladtexas.com/plumbing/water-heaters
-- Tankless water heaters: https://ironcladtexas.com/plumbing/tankless-water-heaters
-- Leak detection: https://ironcladtexas.com/plumbing/leak-detection
-- Gas line services: https://ironcladtexas.com/plumbing/gas-line-services
-- Emergency plumbing: https://ironcladtexas.com/plumbing/emergency
+- [Plumbing repairs](https://ironcladtexas.com/plumbing/repairs): leaks, toilets, fixture issues, and general repairs.
+- [Drain cleaning](https://ironcladtexas.com/plumbing/drain-cleaning): slow drains and recurring clogs.
+- [Sewer line services](https://ironcladtexas.com/plumbing/sewer-services): sewer diagnostics, repair, and replacement.
+- [Water heaters](https://ironcladtexas.com/plumbing/water-heaters): tank water heater service.
+- [Tankless water heaters](https://ironcladtexas.com/plumbing/tankless-water-heaters): tankless assessment and installation.
+- [Leak detection](https://ironcladtexas.com/plumbing/leak-detection): slab, wall, ceiling, and hidden leak diagnostics.
+- [Gas line services](https://ironcladtexas.com/plumbing/gas-line-services): gas testing, repair, and appliance lines.
+- [Fixtures](https://ironcladtexas.com/plumbing/fixtures): faucet, sink, toilet, shower, and tub work.
+- [Water treatment](https://ironcladtexas.com/plumbing/water-treatment): water softeners, filtration, and Austin hard-water support.
+- [Emergency plumbing](https://ironcladtexas.com/plumbing/emergency): burst pipes, sewer backups, gas smells, and urgent failures.
+- [Slab leak repair](https://ironcladtexas.com/plumbing/slab-leak-repair): slab leak detection, spot repair, and reroutes.
+- [Water heater repair](https://ironcladtexas.com/plumbing/water-heater-repair): no-hot-water and component repair.
+- [Water heater installation](https://ironcladtexas.com/plumbing/water-heater-installation): tank and tankless installation.
+- [Sewer camera inspection](https://ironcladtexas.com/plumbing/sewer-camera-inspection): camera diagnostics for sewer issues.
+- [Trenchless sewer repair](https://ironcladtexas.com/plumbing/trenchless-sewer-repair): CIPP lining and lower-disruption sewer repair.
+- [Toilet repair and installation](https://ironcladtexas.com/plumbing/toilet-repair-installation): running toilets, weak flushes, and installs.
+- [Faucet and sink repair](https://ironcladtexas.com/plumbing/faucet-sink-repair-installation): faucet and sink repair or replacement.
+- [Garbage disposal services](https://ironcladtexas.com/plumbing/garbage-disposal-repair-installation): disposal repair and replacement.
+- [Hydro jetting](https://ironcladtexas.com/plumbing/hydro-jetting): high-pressure drain and sewer cleaning.
 
-## Homeowner Guides
+## Homeowner Guide Priorities
 
-- What plumbing should cost in Austin: https://ironcladtexas.com/guides/what-plumbing-costs-austin
-- Questions to ask before hiring a plumber: https://ironcladtexas.com/guides/questions-to-ask-your-plumber
-- Plumber red flags: https://ironcladtexas.com/guides/plumber-red-flags
-- How plumbing pricing works: https://ironcladtexas.com/guides/how-plumbing-pricing-works
+- [What plumbing should cost in Austin](https://ironcladtexas.com/guides/what-plumbing-costs-austin): master price index.
+- [How plumbing pricing works](https://ironcladtexas.com/guides/how-plumbing-pricing-works): parts, labor, overhead, and margin.
+- [Plumbing pricing tricks](https://ironcladtexas.com/guides/plumbing-pricing-tricks): pricing red flags.
+- [Questions to ask before hiring a plumber](https://ironcladtexas.com/guides/questions-to-ask-your-plumber): consumer vetting guide.
+- [Plumber red flags](https://ironcladtexas.com/guides/plumber-red-flags): warning signs before and during a service visit.
+- [How to research a plumber](https://ironcladtexas.com/guides/how-to-research-a-plumber): quick license, review, and reputation checks.
+- [How to read a plumbing estimate](https://ironcladtexas.com/guides/how-to-read-a-plumbing-estimate): scope and line-item review.
+- [Water heater repair vs replacement](https://ironcladtexas.com/guides/water-heater-repair-vs-replace): repair or replace decision.
+- [Tank vs tankless water heaters](https://ironcladtexas.com/guides/tank-vs-tankless): system comparison for Austin homes.
+- [Drain cleaning vs hydro jetting](https://ironcladtexas.com/guides/drain-cleaning-vs-hydro-jetting): when each method makes sense.
+- [Sewer repair options compared](https://ironcladtexas.com/guides/sewer-repair-options-compared): sewer spot repair, replacement, and trenchless options.
+- [Slab leak repair options](https://ironcladtexas.com/guides/slab-leak-repair-options): spot repair, reroute, and other paths.
+- [Austin hard water guide](https://ironcladtexas.com/guides/austin-hard-water): local hardness and treatment decisions.
+- [Austin plumbing codes for homeowners](https://ironcladtexas.com/guides/austin-plumbing-codes-homeowners): permit and code basics.
+- [Winter plumbing prep for Austin](https://ironcladtexas.com/guides/winter-plumbing-prep-austin): freeze preparation.
+- [How to read your Austin Water bill](https://ironcladtexas.com/guides/how-to-read-austin-water-bill): bill spikes and leak signals.
+- [When to DIY vs call a plumber](https://ironcladtexas.com/guides/when-diy-vs-call-plumber): homeowner-safe tasks and pro-only work.
+- [Homeowners insurance and plumbing](https://ironcladtexas.com/guides/homeowners-insurance-plumbing): claim documentation and likely coverage boundaries.
+- [Plumbing emergency: first 10 minutes](https://ironcladtexas.com/guides/plumbing-emergency-first-10-minutes): shutoffs, triage, and emergency calls.
+- [Using AI for plumbing research](https://ironcladtexas.com/guides/using-ai-for-plumbing-research): prompts for comparing estimates and avoiding bad decisions.
 
-## Crawling Notes
+## Cost Guides
 
-- Sitemap index: https://ironcladtexas.com/sitemap.xml
-- Robots policy: https://ironcladtexas.com/robots.txt
-- Public marketing and educational pages are intended to be crawlable.
-- API, preview, staging, and test paths are not intended for indexing.
+- [Drain cleaning cost in Austin](https://ironcladtexas.com/guides/drain-cleaning-cost-austin)
+- [Mainline drain cleaning cost in Austin](https://ironcladtexas.com/guides/mainline-drain-cleaning-cost-austin)
+- [Water heater replacement cost in Austin](https://ironcladtexas.com/guides/water-heater-replacement-cost-austin)
+- [Tankless water heater install cost in Austin](https://ironcladtexas.com/guides/tankless-water-heater-install-cost-austin)
+- [Sewer camera inspection cost in Austin](https://ironcladtexas.com/guides/sewer-camera-inspection-cost-austin)
+- [Sewer repair cost in Austin](https://ironcladtexas.com/guides/sewer-repair-cost-austin)
+- [Leak detection cost in Austin](https://ironcladtexas.com/guides/leak-detection-cost-austin)
+- [Slab leak spot repair cost in Austin](https://ironcladtexas.com/guides/slab-leak-spot-repair-cost-austin)
+- [Slab leak reroute cost in Austin](https://ironcladtexas.com/guides/slab-leak-reroute-cost-austin)
+- [Hydro jetting cost in Austin](https://ironcladtexas.com/guides/hydro-jetting-cost-austin)
+- [Gas line installation cost in Austin](https://ironcladtexas.com/guides/gas-line-installation-cost-austin)
+- [Emergency plumber cost in Austin](https://ironcladtexas.com/guides/emergency-plumber-cost-austin)
+- [Repipe cost in Austin](https://ironcladtexas.com/guides/repipe-cost-austin)
+- [Trenchless sewer lining cost in Austin](https://ironcladtexas.com/guides/trenchless-sewer-lining-cost-austin)
+- [Backflow preventer cost in Austin](https://ironcladtexas.com/guides/backflow-preventer-cost-austin)
+
+## High-Value Service Areas
+
+- [Austin](https://ironcladtexas.com/service-area/austin-tx)
+- [Round Rock](https://ironcladtexas.com/service-area/round-rock-tx)
+- [Georgetown](https://ironcladtexas.com/service-area/georgetown-tx)
+- [Pflugerville](https://ironcladtexas.com/service-area/pflugerville-tx)
+- [Cedar Park](https://ironcladtexas.com/service-area/cedar-park-tx)
+- [Leander](https://ironcladtexas.com/service-area/leander-tx)
+- [Lakeway](https://ironcladtexas.com/service-area/lakeway-tx)
+- [Bee Cave](https://ironcladtexas.com/service-area/bee-cave-tx)
+- [Buda](https://ironcladtexas.com/service-area/buda-tx)
+- [Kyle](https://ironcladtexas.com/service-area/kyle-tx)
+
+## Crawl And Indexing Notes
+
+- Public marketing, service, city, FAQ, article, and guide pages are intended to be crawlable and indexable.
+- API, admin, preview, staging, test, and booking-confirmation paths are not intended for indexing.
+- The sitemap index is the source of truth for the complete URL inventory.
+- If a crawler can only fetch a small subset of the site, prioritize core pages, service pages, the plumbing FAQ, and the homeowner guide priorities listed above.
