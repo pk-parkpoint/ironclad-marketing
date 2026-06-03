@@ -16,48 +16,51 @@ const inter = Inter({
 
 const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID?.trim();
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID?.trim();
+const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID?.trim() || "AW-18207846861";
+
+function GoogleTagHead() {
+  const configCalls = [
+    `gtag('config',${JSON.stringify(GOOGLE_ADS_ID)});`,
+    GA4_MEASUREMENT_ID
+      ? `gtag('config',${JSON.stringify(GA4_MEASUREMENT_ID)},{send_page_view:false});`
+      : "",
+  ].join("");
+
+  return (
+    <>
+      <Script
+        id="google-ads-tag"
+        src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GOOGLE_ADS_ID)}`}
+        strategy="afterInteractive"
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());${configCalls}`,
+        }}
+      />
+    </>
+  );
+}
 
 function AnalyticsHead() {
   if (GTM_ID) {
     return (
-      <Script
-        id="gtm-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`,
-        }}
-      />
-    );
-  }
-
-  if (GA4_MEASUREMENT_ID) {
-    return (
       <>
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script
-          id="gtag-init"
+          id="gtm-init"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','${GA4_MEASUREMENT_ID}',{send_page_view:false});`,
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`,
           }}
         />
+        <GoogleTagHead />
       </>
     );
   }
 
-  return (
-    <Script
-      id="analytics-bootstrap-stub"
-      strategy="beforeInteractive"
-      dangerouslySetInnerHTML={{
-        __html:
-          "window.dataLayer = window.dataLayer || [];window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};",
-      }}
-    />
-  );
+  return <GoogleTagHead />;
 }
 
 function AnalyticsBody() {
@@ -163,7 +166,7 @@ export default function RootLayout({
         <meta name="geo.placename" content="Austin" />
         <meta name="geo.position" content="30.2672;-97.7431" />
         <meta name="ICBM" content="30.2672, -97.7431" />
-        {(GTM_ID || GA4_MEASUREMENT_ID) ? <link rel="preconnect" href="https://www.googletagmanager.com" /> : null}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link
           rel="preload"
           as="image"

@@ -1,6 +1,7 @@
 import dns from "node:dns/promises";
 
 const DEFAULT_BASE_URL = "https://ironcladtexas.com";
+const GOOGLE_ADS_ID = "AW-18207846861";
 const REQUIRED_ROUTES = ["/", "/plumbing", "/service-area", "/reviews", "/book", "/contact"];
 const BOOKING_PATH = "/api/bookings";
 const REQUIRED_BOOKING_STATUS = 201;
@@ -193,6 +194,7 @@ async function main() {
   const hasGtm = homeHtml.includes("googletagmanager.com/gtm.js");
   const hasGtag = homeHtml.includes("googletagmanager.com/gtag/js");
   const hasDataLayer = homeHtml.includes("dataLayer");
+  const hasGoogleAdsTag = homeHtml.includes(GOOGLE_ADS_ID);
   if (hasGtm || hasGtag) {
     assert(hasDataLayer, "home page is missing dataLayer marker");
   } else if (requireAnalytics) {
@@ -200,6 +202,7 @@ async function main() {
   } else {
     console.warn("production launch audit warning: home page is missing GTM/GA bootstrap scripts");
   }
+  assert(hasGoogleAdsTag, `home page is missing Google Ads tag ${GOOGLE_ADS_ID}`);
 
   for (const route of REQUIRED_ROUTES) {
     const routeUrl = joinRoute(baseUrl, route);

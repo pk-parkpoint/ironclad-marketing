@@ -24,10 +24,13 @@ function main() {
 
   assertContains(".env.example", envExample, "NEXT_PUBLIC_GA4_MEASUREMENT_ID");
   assertContains(".env.example", envExample, "NEXT_PUBLIC_GTM_ID");
+  assertContains(".env.example", envExample, "NEXT_PUBLIC_GOOGLE_ADS_ID");
 
   assertContains("app/layout.tsx", layout, "AnalyticsBootstrap");
   assertContains("app/layout.tsx", layout, "NEXT_PUBLIC_GTM_ID");
   assertContains("app/layout.tsx", layout, "NEXT_PUBLIC_GA4_MEASUREMENT_ID");
+  assertContains("app/layout.tsx", layout, "NEXT_PUBLIC_GOOGLE_ADS_ID");
+  assertContains("app/layout.tsx", layout, "AW-18207846861");
 
   for (const eventName of [
     "page_view",
@@ -67,7 +70,7 @@ function main() {
   assertContains("mobile-bottom-bar.tsx", mobileBottomBar, 'data-track-intent="text"');
   assertContains("plumbing/[slug]/page.tsx", servicePage, 'data-track-intent="phone"');
 
-  console.log("analytics audit passed: GA4/GTM bootstrap, runtime events, lead success tracking, UTM keys, and CTA intents wired");
+  console.log("analytics audit passed: GA4/GTM/Google Ads bootstrap, runtime events, lead success tracking, UTM keys, and CTA intents wired");
 }
 
 main();
