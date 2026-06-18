@@ -13,7 +13,7 @@ export function GuaranteeBar() {
   return (
     <section className="bg-[#111827] flex flex-col justify-center h-[261px] overflow-hidden w-full">
       <h2 className="text-center text-[32px] font-bold leading-[1.2] text-[#FFFFFF] mb-6">
-        Our Guarantee
+        Our Ironclad Guarantee
       </h2>
       <div className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-y-0 left-0 w-10 md:w-20 bg-gradient-to-r from-[#111827] to-transparent z-10" />

@@ -76,7 +76,7 @@ export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.225)_0%,rgba(0,0,0,0.525)_100%)]" />
 
       <div className="relative mx-auto flex min-h-[480px] w-full max-w-[1280px] items-center px-6 py-4 md:min-h-[580px] md:py-8">
-        <div className="w-full text-center [font-family:var(--font-inter)] md:max-w-[60%] md:text-left">
+        <div className="w-full text-center [font-family:var(--font-inter)] md:max-w-[760px] md:text-left lg:max-w-[78%] xl:max-w-[72%]">
           <Link
             className="focus-ring inline-flex items-center gap-2 rounded-full bg-[rgba(0,0,0,0.3)] px-4 py-2 text-[#FFFFFF] transition-colors duration-200 hover:bg-[rgba(0,0,0,0.45)] hover:no-underline"
             href={reviewHref}
@@ -95,10 +95,12 @@ export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
           </Link>
 
           <h1
-            className="mt-5 text-[40px] font-bold leading-[1.15] tracking-[-0.02em] text-[#FFFFFF] md:text-[64px]"
+            className="mt-5 text-[40px] font-bold leading-[1.15] tracking-[-0.02em] text-[#FFFFFF] md:text-[52px] lg:text-[56px] xl:text-[64px]"
             style={{ textShadow: "0 1px 4px rgba(0, 0, 0, 0.5)" }}
           >
-            The Plumber Austin Trusts.
+            Leak No Further.
+            <br />
+            <span className="md:whitespace-nowrap">The Plumber Austin Trusts.</span>
           </h1>
           <p
             className="mt-2.5 text-[18px] font-normal leading-[1.6] text-[rgba(255,255,255,0.9)] md:text-[20px]"
@@ -110,7 +112,7 @@ export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
 
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center md:justify-start">
             <a
-              className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-transparent bg-[#D03E04] px-7 py-[14px] text-[16px] font-semibold text-white transition-colors hover:border-[#D03E04] hover:bg-white hover:text-[#D03E04] hover:no-underline sm:w-auto"
+              className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-[rgba(110,210,150,0.40)] bg-[rgba(6,118,75,0.55)] px-7 py-[14px] text-[16px] font-semibold text-[#7FE0AD] shadow-[0_16px_32px_rgba(0,0,0,0.35),0_4px_10px_rgba(6,118,75,0.28)] transition-[background-color,border-color,color,box-shadow,transform] hover:-translate-y-0.5 hover:border-[rgba(110,210,150,0.56)] hover:bg-[rgba(6,118,75,0.70)] hover:text-[#A8F2C9] hover:shadow-[0_20px_40px_rgba(0,0,0,0.42),0_6px_14px_rgba(6,118,75,0.34)] hover:no-underline sm:w-auto"
               href="tel:+18335971932"
             >
               <PhoneIcon />
@@ -120,7 +122,7 @@ export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
               className="focus-ring inline-flex w-full items-center justify-center rounded-full border-2 border-white bg-transparent px-7 py-[14px] text-[16px] font-semibold text-white transition-colors hover:bg-white hover:text-[#1E2A38] hover:no-underline sm:w-auto"
               href="/book"
             >
-              Schedule Online
+              Schedule Now
             </Link>
           </div>
         </div>

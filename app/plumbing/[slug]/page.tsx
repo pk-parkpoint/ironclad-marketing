@@ -188,7 +188,7 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
 
               <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                 <a
-                  className="focus-ring inline-flex items-center justify-center rounded-full border-2 border-transparent bg-[#D03E04] px-7 py-[14px] text-[16px] font-semibold text-white transition-colors hover:border-[#D03E04] hover:bg-white hover:text-[#D03E04] hover:no-underline"
+                  className="focus-ring inline-flex items-center justify-center rounded-full border-2 border-transparent bg-[#D03E04] px-7 py-[14px] text-[16px] font-semibold text-white shadow-[0_16px_32px_rgba(0,0,0,0.35),0_4px_10px_rgba(0,0,0,0.22)] transition-[background-color,border-color,color,box-shadow,transform] hover:-translate-y-0.5 hover:border-[#D03E04] hover:bg-white hover:text-[#D03E04] hover:shadow-[0_20px_40px_rgba(0,0,0,0.42),0_6px_14px_rgba(0,0,0,0.26)] hover:no-underline"
                   data-track-intent="phone"
                   href={phoneHref}
                 >
@@ -199,7 +199,7 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
                   data-track-intent="book"
                   href="/book"
                 >
-                  Schedule Online
+                  Schedule Now
                 </Link>
               </div>
             </div>

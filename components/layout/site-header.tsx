@@ -270,11 +270,11 @@ export function SiteHeader() {
                 data-track-intent="book"
                 href="/book"
               >
-                Schedule Online
+                Schedule Now
               </Link>
 
               <a
-                className="focus-ring hidden min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#2563EB] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[#D03E04] hover:no-underline lg:inline-flex"
+                className="focus-ring hidden min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#2563EB] px-5 py-2.5 text-[14px] font-semibold text-white shadow-[0_10px_22px_rgba(30,42,56,0.22),0_3px_8px_rgba(37,99,235,0.28)] transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-[#D03E04] hover:shadow-[0_14px_28px_rgba(30,42,56,0.28),0_4px_10px_rgba(208,62,4,0.3)] hover:no-underline lg:inline-flex"
                 data-track-intent="phone"
                 href={phoneHref}
               >
@@ -346,7 +346,7 @@ export function SiteHeader() {
 
           <div className="border-b border-[#E5E7EB] px-5 py-4">
             <a
-              className="focus-ring inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg bg-[#2563EB] px-5 py-2.5 text-[14px] font-semibold text-white transition-colors hover:bg-[#1D4ED8] hover:no-underline"
+              className="focus-ring inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg bg-[#2563EB] px-5 py-2.5 text-[14px] font-semibold text-white shadow-[0_10px_22px_rgba(30,42,56,0.22),0_3px_8px_rgba(37,99,235,0.28)] transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-[#1D4ED8] hover:shadow-[0_14px_28px_rgba(30,42,56,0.28),0_4px_10px_rgba(37,99,235,0.32)] hover:no-underline"
               data-track-intent="phone"
               href={phoneHref}
               onClick={() => setMobileNavOpen(false)}
@@ -408,7 +408,7 @@ export function SiteHeader() {
               href="/book"
               onClick={() => setMobileNavOpen(false)}
             >
-              Schedule Online
+              Schedule Now
             </Link>
           </div>
         </div>

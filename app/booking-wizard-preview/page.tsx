@@ -27,7 +27,7 @@ export default function BookingWizardPreview() {
             Book Service
           </Link>
           <Link className="secondary-button px-6 py-3 text-sm" href="/book">
-            Schedule Online
+            Schedule Now
           </Link>
         </div>
       </main>
