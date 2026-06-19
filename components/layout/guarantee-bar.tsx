@@ -11,11 +11,11 @@ export function GuaranteeBar() {
   const items = [...GUARANTEES, ...GUARANTEES];
 
   return (
-    <section className="bg-[#111827] flex flex-col justify-center h-[261px] overflow-hidden w-full">
-      <h2 className="text-center text-[32px] font-bold leading-[1.2] text-[#FFFFFF] mb-6">
+    <section className="grid h-[261px] w-full grid-rows-[1fr_auto_1fr_auto_1.5fr] overflow-hidden bg-[#111827]">
+      <h2 className="row-start-2 text-center text-[32px] font-bold leading-[1.2] text-[#FFFFFF]">
         Our Ironclad Guarantee
       </h2>
-      <div className="relative overflow-hidden">
+      <div className="relative row-start-4 overflow-hidden">
         <div className="pointer-events-none absolute inset-y-0 left-0 w-10 md:w-20 bg-gradient-to-r from-[#111827] to-transparent z-10" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-10 md:w-20 bg-gradient-to-l from-[#111827] to-transparent z-10" />
         <div className="flex items-center gap-12 md:gap-16 w-max animate-[marquee-scroll_60s_linear_infinite] hover:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:flex-wrap motion-reduce:justify-center motion-reduce:w-full motion-reduce:gap-x-12 motion-reduce:gap-y-8">
