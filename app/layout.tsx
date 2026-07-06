@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from "next";
 import Script from "next/script";
 import { AnalyticsBootstrap } from "@/components/analytics/analytics-bootstrap";

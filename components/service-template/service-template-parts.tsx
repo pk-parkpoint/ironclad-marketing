@@ -58,12 +58,12 @@ export function StarRating({ variant }: { variant: "google" | "review" }) {
 
 export function GoogleRatingBadge() {
   return (
-    <a className="dc-google-badge" href="/reviews">
+    <Link className="dc-google-badge" href="/reviews">
       <GoogleGIcon />
       <StarRating variant="google" />
       <span>4.9 out of 5 · 142 reviews</span>
       <ChevronDownIcon className="dc-google-chevron" />
-    </a>
+    </Link>
   );
 }
 
