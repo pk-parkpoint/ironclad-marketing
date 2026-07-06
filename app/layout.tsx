@@ -7,6 +7,7 @@ import { MobileBottomBar } from "@/components/layout/mobile-bottom-bar";
 import { CANONICAL_ORIGIN } from "@/lib/site-url";
 import { Suspense } from "react";
 import "./globals.css";
+import "./service-page-template.css";
 import "./service-page-template.tokens.css";
 
 const inter = Inter({

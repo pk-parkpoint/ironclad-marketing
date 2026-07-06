@@ -330,6 +330,18 @@
   --type-btn-sticky-size: 15.5px; --type-btn-sticky-weight: 700; /* mobile sticky buttons */
   --type-link-inline-size: 15px; --type-link-inline-weight: 700; /* "Read all reviews →" */
 
+  /* Implementation tokens for values specified in the redlines but missing as named tokens. */
+  --type-why-body-size: 17px;
+  --type-radar-label-size: 14px;
+  --type-cta-badge-letter-spacing: 0.02em;
+  --state-active-opacity: 0.85;
+  --motion-reveal-duration: 450ms;
+  --motion-reveal-stagger: 70ms;
+  --motion-reveal-offset-y: 12px;
+  --motion-pulse-opacity-start: 0.65;
+  --motion-pulse-scale-start: 0.55;
+  --motion-pulse-scale-end: 1.7;
+
   /* ---------------------------------------------------------------------------
      12. SPACING
      The design mixes a coarse scale with many one-off px values. Use the scale
