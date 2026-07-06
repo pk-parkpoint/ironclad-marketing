@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { getPublicContactInfo } from "@/lib/contact";
 
 export const OPEN_BOOKING_MODAL_EVENT = "ironclad:open-booking-modal";
@@ -8,6 +8,7 @@ type OpenBookingModalDetail = { serviceSlug?: string };
 
 export function MobileBottomBar() {
   const router = useRouter();
+  const pathname = usePathname();
   const { smsHref } = getPublicContactInfo();
 
   function handleBookService() {
@@ -20,6 +21,10 @@ export function MobileBottomBar() {
     if (!bookingEvent.defaultPrevented) {
       router.push("/book");
     }
+  }
+
+  if (pathname === "/plumbing/drain-cleaning") {
+    return null;
   }
 
   return (

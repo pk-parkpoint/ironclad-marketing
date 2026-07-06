@@ -44,8 +44,17 @@ export function ServiceTemplateEffects() {
       },
       { threshold: 0.25 },
     );
-    revealNodes.forEach((node, index) => {
-      node.style.setProperty("--reveal-index", String(index));
+    const groupedRevealNodes = new Set<HTMLElement>();
+    root.querySelectorAll<HTMLElement>("[data-reveal-group]").forEach((group) => {
+      Array.from(group.querySelectorAll<HTMLElement>("[data-reveal]")).forEach((node, index) => {
+        groupedRevealNodes.add(node);
+        node.style.setProperty("--reveal-index", String(index));
+      });
+    });
+    revealNodes.forEach((node) => {
+      if (!groupedRevealNodes.has(node)) {
+        node.style.setProperty("--reveal-index", "0");
+      }
       revealObserver.observe(node);
     });
 

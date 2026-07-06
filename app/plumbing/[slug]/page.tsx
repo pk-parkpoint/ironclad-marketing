@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { StructuredData } from "@/components/seo/structured-data";
 import { ContactForm } from "@/components/layout/contact-form";
 import { QuickAnswer } from "@/components/seo/quick-answer";
+import { DrainCleaningPage } from "@/components/service-template/drain-cleaning-page";
 import { ReviewsSection } from "@/components/service/review-carousel";
 import { ServiceDetailFaqs } from "@/components/service/service-detail-faqs";
 import { ServiceRelatedLinks } from "@/components/service/service-related-links";
@@ -85,7 +86,10 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
 
   const { phoneDisplay, phoneHref } = getPublicContactInfo();
   const detail = getServiceDetail(service);
-  const heroImage = HERO_IMAGES[service.slug] || "/media/services/plumbing-repairs.jpg";
+  const heroImage =
+    service.slug === "drain-cleaning"
+      ? "/media/services/ironclad-team-hero.png"
+      : HERO_IMAGES[service.slug] || "/media/services/plumbing-repairs.jpg";
   const pagePath = `/plumbing/${service.slug}`;
   const labelText = `Austin ${service.title} Services`.toUpperCase();
   const relatedServices = SERVICES.filter((entry) => entry.slug !== service.slug).slice(0, 4);
@@ -126,6 +130,9 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
     <>
       <SiteHeader />
       <StructuredData data={schemas} id={`ld-service-${service.slug}`} />
+      {service.slug === "drain-cleaning" ? (
+        <DrainCleaningPage phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
+      ) : (
       <main>
         <section className="bg-soft-background pt-6">
           <div className="container-shell">
@@ -283,6 +290,7 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
         <ReviewsSection />
         <ServiceDetailFaqs items={detail.faqs} serviceTitle={service.title} />
       </main>
+      )}
       <SiteFooter />
     </>
   );
