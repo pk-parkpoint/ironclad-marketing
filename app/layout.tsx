@@ -7,6 +7,7 @@ import { MobileBottomBar } from "@/components/layout/mobile-bottom-bar";
 import { CANONICAL_ORIGIN } from "@/lib/site-url";
 import { Suspense } from "react";
 import "./globals.css";
+import "./service-page-template.tokens.css";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -166,6 +167,12 @@ export default function RootLayout({
         <meta name="geo.placename" content="Austin" />
         <meta name="geo.position" content="30.2672;-97.7431" />
         <meta name="ICBM" content="30.2672, -97.7431" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@600;700&display=swap"
+          rel="stylesheet"
+        />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link
           rel="preload"

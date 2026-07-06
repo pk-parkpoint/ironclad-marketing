@@ -1,0 +1,388 @@
+/* Scoped token mapping generated from design-handoff/tokens.css. Canonical values live there. */
+/* =============================================================================
+   IRONCLAD — SERVICE PAGE TEMPLATE · DESIGN TOKENS
+   Single source of truth. A value not in this file does not exist.
+   Reference instance: Drain Cleaning. This page is the template for EVERY service.
+
+   SCOPE: The promo bar, header/nav, and footer are EXISTING SITE CHROME and are
+   OUT OF SCOPE (engineering keeps production components). Their tokens are still
+   listed at the end under "CHROME (reference only)" so the reference PNGs are
+   reproducible, but do not rebuild them.
+
+   Values that differ desktop vs mobile carry -desktop / -mobile variants.
+   The design uses fluid clamp() for section rhythm and headings; each token
+   below gives the clamp AND the resolved endpoints at 390px and 1440px in a
+   comment. Alpha is baked into 8-digit hex where a solid-over color is known;
+   overlays on photography / mixed backgrounds keep rgba()/color-mix() because
+   the backdrop varies.
+   ============================================================================= */
+
+.dc-root {
+
+  /* ---------------------------------------------------------------------------
+     1. BRAND ACCENT  (themeable per service — this is the ONE knob that recolors
+        the template. Drain Cleaning = #2F8FE0. Swap this + the two button
+        gradients below to re-skin for another service.)
+     --------------------------------------------------------------------------- */
+  --color-accent-primary: #2F8FE0;
+
+  /* Accent tints — expressed against the accent so they track a theme change.
+     (Percent = amount of accent; remainder is the second color.) */
+  --color-accent-on-white-hover: color-mix(in srgb, var(--color-accent-primary) 55%, #FFFFFF); /* why-item hover heading */
+  --color-accent-eyebrow-on-navy: color-mix(in srgb, var(--color-accent-primary) 75%, #FFFFFF); /* process eyebrow */
+  --color-accent-eyebrow-on-black: color-mix(in srgb, var(--color-accent-primary) 78%, #FFFFFF); /* why eyebrow */
+  --color-accent-ring-dashed: color-mix(in srgb, var(--color-accent-primary) 40%, #FFFFFF);      /* area dashed ring */
+  --color-accent-glow-16: color-mix(in srgb, var(--color-accent-primary) 16%, transparent);      /* process/CTA-badge glow */
+  --color-accent-glow-18: color-mix(in srgb, var(--color-accent-primary) 18%, transparent);      /* hero glow, area pulse fill */
+  --color-accent-glow-20: color-mix(in srgb, var(--color-accent-primary) 20%, transparent);      /* why glow */
+  --color-accent-tint-22: color-mix(in srgb, var(--color-accent-primary) 22%, transparent);      /* callout icon bg, process node ring */
+  --color-accent-border-40: color-mix(in srgb, var(--color-accent-primary) 40%, transparent);    /* CTA badge border */
+
+  /* ---------------------------------------------------------------------------
+     2. CALL / PHONE BUTTON  (green — the "call now" action, appears many places)
+     --------------------------------------------------------------------------- */
+  --gradient-call: linear-gradient(180deg, #46A862 0%, #2F8C4D 100%);
+  --color-call-shadow: #2F8C4DD9;   /* rgba(47,140,77,.85) */
+
+  /* ---------------------------------------------------------------------------
+     3. SURFACES / BACKGROUNDS
+     --------------------------------------------------------------------------- */
+  --color-bg-page: #FFFFFF;              /* body + white sections (signs, reviews) */
+  --color-bg-card: #FFFFFF;              /* service card, review card, faq item */
+  --color-surface-sand-1: #F6F1E9;       /* services section background (warm) */
+  --color-surface-sand-2: #F3EDE3;       /* FAQ section background (warm)  [== legacy --sand] */
+  --color-surface-slot: #EEE7D8;         /* image-slot placeholder fill (user photo goes here) */
+
+  --color-bg-navy: #16202B;              /* guarantee strip, signs callout, final CTA */
+  --color-bg-navy-process: #1E2A38;      /* process section */
+  --color-bg-ink: #12181F;               /* why-ironclad section (near-black) */
+  --color-ink-900: #1A2330;              /* ink button base, dark headings */
+  --color-ink-hover: #0F1822;            /* ink button hover */
+
+  /* Hero background gradient (navy, behind the team photo) */
+  --gradient-hero-base: linear-gradient(115deg, #1E2A38 0%, #16202B 60%, #11191F 100%);
+  /* Hero photo scrim (left→right, over the photo so left-side text stays legible) */
+  --gradient-hero-scrim: linear-gradient(100deg, rgba(15,23,29,.95) 0%, rgba(17,25,31,.9) 30%, rgba(17,25,31,.6) 58%, rgba(17,25,31,.2) 80%, rgba(17,25,31,.04) 100%);
+
+  /* ---------------------------------------------------------------------------
+     4. TEXT COLORS
+     --------------------------------------------------------------------------- */
+  --color-text-primary: #1E2A38;         /* body base; text on white CTA button */
+  --color-text-heading: #1A2330;         /* all section headings on light bg */
+  --color-text-body: #5C6675;            /* section intros, sign descriptions */
+  --color-text-body-2: #56636E;          /* faq answers */
+  --color-text-muted: #62707D;           /* review subtitle, area subtitle */
+  --color-text-review: #39454F;          /* review quote body */
+  --color-text-chip: #36434F;            /* service-area chip label */
+  --color-text-review-time: #8A97A3;     /* review timestamp */
+  --color-text-on-dark: #FFFFFF;         /* headings/labels on navy/ink */
+  --color-text-on-dark-body: #9DAAB6;    /* why body copy */
+  --color-text-on-dark-body-2: #A9B7C3;  /* process body, callout subtext */
+  --color-text-guarantee-proof: #9FB0BE; /* guarantee sub-line */
+  --color-text-hero-sub: #D2DCE5;        /* hero subtitle */
+  --color-text-cta-sub: #C4D0DB;         /* final-CTA body */
+  --color-text-map-dot: #C2CDD7;         /* service-area map dots */
+
+  /* ---------------------------------------------------------------------------
+     5. BORDERS / HAIRLINES
+     --------------------------------------------------------------------------- */
+  --color-border-sand: #E9E4DA;          /* signs list rules */
+  --color-border-card-warm: #E7DFCF;     /* service card border */
+  --color-border-card-cool: #EAEEF2;     /* review card border */
+  --color-border-divider-cool: #EFF2F5;  /* review card inner divider */
+  --color-border-chip: #E0E6EC;          /* service-area chip border */
+  --color-border-ring: #E2E8ED;          /* service-area map rings */
+  --color-border-faq: #E4DDD0;           /* faq item border */
+  --color-border-sticky: #E6EBF0;        /* mobile sticky bar top border */
+  --border-on-dark-hairline: 1px solid rgba(255,255,255,.10);  /* why-item rules */
+  --border-on-dark-strong:   2px solid rgba(255,255,255,.16);  /* process step top rule */
+  --color-divider-stat-desktop: rgba(255,255,255,.16);         /* stat strip column divider (desktop) */
+  --color-divider-stat-mobile: rgba(255,255,255,.20);          /* stat strip row divider (mobile) */
+
+  /* Overlay whites (glass badge + outline button on hero) */
+  --color-glass-fill: rgba(255,255,255,.16);
+  --color-glass-border: rgba(255,255,255,.28);
+  --color-outline-on-photo: rgba(255,255,255,.55);
+  --color-hero-badge-chevron: rgba(255,255,255,.7);
+  --color-stat-label-on-accent: rgba(255,255,255,.82);
+
+  /* ---------------------------------------------------------------------------
+     6. STARS / RATING
+     --------------------------------------------------------------------------- */
+  --color-star-google: #FBBC05;          /* hero Google rating badge stars */
+  --color-star-review: #F5A623;          /* review card stars */
+  /* Google "G" logo quadrants (hero badge) */
+  --color-google-blue: #4285F4;
+  --color-google-green: #34A853;
+  --color-google-yellow: #FBBC05;
+  --color-google-red: #EA4335;
+
+  /* ---------------------------------------------------------------------------
+     7. RADII
+     --------------------------------------------------------------------------- */
+  --radius-pill: 999px;                  /* badges, area chips, hero glass badge */
+  --radius-hero-btn: 24px;               /* hero call + schedule buttons */
+  --radius-card: 18px;                   /* service card, review card, signs callout */
+  --radius-faq: 14px;                    /* faq item */
+  --radius-icon-box: 13px;               /* signs callout warning-icon square */
+  --radius-btn: 12px;                    /* call/schedule buttons (callout, area, CTA, sticky) */
+  --radius-btn-ink: 10px;                /* "Schedule drain cleaning" ink button */
+  --radius-circle: 50%;                  /* avatars, area pin, process node */
+
+  /* ---------------------------------------------------------------------------
+     8. SHADOWS
+     --------------------------------------------------------------------------- */
+  --shadow-card: 0 18px 42px -32px rgba(30,42,56,.5);        /* service card rest */
+  --shadow-card-hover: 0 28px 52px -30px rgba(30,42,56,.55); /* service card hover */
+  --shadow-review: 0 18px 40px -28px rgba(30,42,56,.35);     /* review card */
+  --shadow-call-lg: 0 16px 34px -12px rgba(47,140,77,.85);   /* hero green call btn */
+  --shadow-call-md: 0 14px 30px -12px rgba(47,140,77,.85);   /* signs-callout green btn */
+  --shadow-sticky-bar: 0 -8px 24px -12px rgba(30,42,56,.25); /* mobile sticky bar */
+  --shadow-accent-btn: 0 16px 34px -12px var(--color-accent-primary);  /* final-CTA schedule btn */
+  --shadow-accent-btn-2: 0 16px 32px -14px var(--color-accent-primary);/* area schedule btn */
+  --shadow-accent-pin: 0 12px 28px -10px var(--color-accent-primary);  /* area map pin */
+  --text-shadow-hero-title: 0 2px 26px rgba(10,16,22,.6);
+  --text-shadow-hero-sub: 0 1px 14px rgba(10,16,22,.5);
+
+  /* ---------------------------------------------------------------------------
+     9. Z-INDEX
+     --------------------------------------------------------------------------- */
+  --z-hero-content: 2;
+  --z-header: 40;       /* existing sticky header (chrome) */
+  --z-sticky-cta: 60;   /* mobile sticky call/book bar */
+
+  /* ---------------------------------------------------------------------------
+     10. MOTION  (every duration/easing used anywhere)
+     --------------------------------------------------------------------------- */
+  --motion-svc-title: color .18s ease;                          /* card title recolor */
+  --motion-card: transform .2s ease, box-shadow .2s ease;       /* card lift */
+  --motion-ink-btn: background .2s ease;                        /* ink button hover */
+  --motion-arrow: transform .2s ease;                           /* ink button arrow nudge */
+  --motion-why-item: padding-left .2s ease;                     /* why-item hover indent */
+  --motion-chevron: transform .25s ease;                        /* faq chevron rotate */
+  --motion-pulse: 3s ease-out infinite;                         /* area map pulse ring */
+  --dur-fast: .18s;
+  --dur-base: .2s;
+  --dur-slow: .25s;
+  --ease-standard: ease;
+
+  /* ---------------------------------------------------------------------------
+     11. TYPOGRAPHY
+     Family: headings + all Schibsted-Grotesk numerals use the display family.
+     Body uses the OS system stack (San Francisco / Segoe / system-ui).
+     NOTE: Hanken Grotesk is loaded by the page but is NOT referenced anywhere;
+     confirm intent or drop the load (see fonts.md).
+     --------------------------------------------------------------------------- */
+  --font-family-display: 'Schibsted Grotesk', system-ui, sans-serif;
+  --font-family-body: -apple-system, 'SF Pro Display', 'SF Pro Text', BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* ---- Display / hero ---- */
+  /* Hero H1 — body family, extrabold. Mobile size is a hard override at <=640px. */
+  --type-hero-title-size-desktop: 50px;
+  --type-hero-title-size-mobile: 37px;
+  --type-hero-title-weight: 800;
+  --type-hero-title-line-height: 1.06;
+  --type-hero-title-letter-spacing: -0.025em;
+
+  --type-hero-sub-size-desktop: 18px;
+  --type-hero-sub-size-mobile: 18px;
+  --type-hero-sub-weight: 400;
+  --type-hero-sub-line-height: 1.55;
+
+  /* ---- Section headings (display family) ---- */
+  /* display-why: clamp(40px,5vw,68px) → 390:40  1440:68 */
+  --type-display-why-size: clamp(40px, 5vw, 68px);
+  --type-display-why-size-desktop: 68px;
+  --type-display-why-size-mobile: 40px;
+  --type-display-why-weight: 700;
+  --type-display-why-line-height: 1.0;
+  --type-display-why-letter-spacing: -0.03em;
+
+  /* display-process: clamp(40px,4.8vw,64px) → 390:40  1440:64 */
+  --type-display-process-size: clamp(40px, 4.8vw, 64px);
+  --type-display-process-size-desktop: 64px;
+  --type-display-process-size-mobile: 40px;
+  --type-display-process-weight: 700;
+  --type-display-process-line-height: 1.0;
+  --type-display-process-letter-spacing: -0.03em;
+
+  /* title-lg: clamp(32px,3.8vw,46px) → 390:32  1440:46  (signs, services) */
+  --type-title-lg-size: clamp(32px, 3.8vw, 46px);
+  --type-title-lg-size-desktop: 46px;
+  --type-title-lg-size-mobile: 32px;
+  --type-title-lg-weight: 700;
+  --type-title-lg-line-height: 1.06;
+  --type-title-lg-letter-spacing: -0.024em;
+
+  /* title-md: clamp(30px,3.4vw,40px) → 390:30  1440:40  (guarantee, reviews, area, faq, cta) */
+  --type-title-md-size: clamp(30px, 3.4vw, 40px);
+  --type-title-md-size-desktop: 40px;
+  --type-title-md-size-mobile: 30px;
+  --type-title-md-weight: 700;
+  --type-title-md-line-height: 1.1;
+  --type-title-md-letter-spacing: -0.022em;
+
+  /* ---- Sub-headings (display family) ---- */
+  /* sign number: clamp(34px,3.4vw,46px) → 390:34  1440:46 */
+  --type-sign-number-size: clamp(34px, 3.4vw, 46px);
+  --type-sign-number-size-desktop: 46px;
+  --type-sign-number-size-mobile: 34px;
+  --type-sign-number-weight: 700;
+  --type-sign-number-line-height: 1.05;
+  --type-sign-number-letter-spacing: -0.02em;
+
+  /* sign h3: clamp(20px,2.2vw,24px) → 390:20  1440:24 */
+  --type-sign-title-size: clamp(20px, 2.2vw, 24px);
+  --type-sign-title-size-desktop: 24px;
+  --type-sign-title-size-mobile: 20px;
+  --type-sign-title-weight: 600;
+  --type-sign-title-line-height: 1.2;
+  --type-sign-title-letter-spacing: -0.014em;
+
+  /* service card h3: clamp(19px,2vw,21px) → 390:19  1440:21 */
+  --type-card-title-size: clamp(19px, 2vw, 21px);
+  --type-card-title-size-desktop: 21px;
+  --type-card-title-size-mobile: 19px;
+  --type-card-title-weight: 600;
+  --type-card-title-line-height: 1.22;
+  --type-card-title-letter-spacing: -0.012em;
+
+  /* why h3: clamp(21px,2vw,27px) → 390:21  1440:27 */
+  --type-why-title-size: clamp(21px, 2vw, 27px);
+  --type-why-title-size-desktop: 27px;
+  --type-why-title-size-mobile: 21px;
+  --type-why-title-weight: 700;
+  --type-why-title-line-height: 1.15;
+  --type-why-title-letter-spacing: -0.018em;
+
+  --type-why-number-size: 20px;   /* why list 01–04 */
+  --type-why-number-weight: 700;
+
+  /* process step number: clamp(54px,4.6vw,76px) → 390:54  1440:66.24  (max 76 @>=1652px) */
+  --type-process-number-size: clamp(54px, 4.6vw, 76px);
+  --type-process-number-size-desktop: 66.24px;
+  --type-process-number-size-mobile: 54px;
+  --type-process-number-weight: 700;
+  --type-process-number-line-height: 0.9;
+  --type-process-number-letter-spacing: -0.03em;
+
+  --type-process-title-size: 21px;  /* process step h3, fixed */
+  --type-process-title-weight: 700;
+  --type-process-title-line-height: 1.2;
+  --type-process-title-letter-spacing: -0.015em;
+
+  /* stat number: clamp(58px,7vw,104px) → 390:58  1440:100.8  (max 104 @>=1486px) */
+  --type-stat-number-size: clamp(58px, 7vw, 104px);
+  --type-stat-number-size-desktop: 100.8px;
+  --type-stat-number-size-mobile: 58px;
+  --type-stat-number-weight: 700;
+  --type-stat-number-line-height: 0.95;
+  --type-stat-number-letter-spacing: -0.04em;
+
+  --type-stat-label-size: 13.5px;
+  --type-stat-label-weight: 700;
+  --type-stat-label-letter-spacing: 0.14em;   /* uppercase */
+
+  --type-eyebrow-size: 13px;                    /* why / process eyebrow */
+  --type-eyebrow-weight: 800;
+  --type-eyebrow-letter-spacing: 0.16em;        /* uppercase */
+
+  /* ---- Body ---- */
+  --type-body-lg-size: 17.5px;   /* section intros (signs, services) */
+  --type-body-lg-weight: 400;
+  --type-body-lg-line-height: 1.65;
+
+  --type-body-md-size: 16px;     /* sign descriptions; area subtitle is 16px too */
+  --type-body-md-weight: 400;
+  --type-body-md-line-height: 1.6;
+
+  --type-body-sm-size: 15px;     /* service desc, review body, why body, process body, faq answer */
+  --type-body-sm-weight: 400;
+  /* line-heights vary by use: svc 1.56 · review 1.62 · why 1.55 · process 1.6 · faq 1.64 — see specs */
+
+  /* ---- Component-specific text ---- */
+  --type-guarantee-label-size: 17px;   --type-guarantee-label-weight: 700;   /* lh 1.3 */
+  --type-guarantee-proof-size: 13.5px; --type-guarantee-proof-weight: 400;   /* lh 1.45 */
+  --type-callout-title-size: 17px;     --type-callout-title-weight: 700;
+  --type-callout-sub-size: 15px;       --type-callout-sub-weight: 400;
+  --type-review-name-size: 14.5px;     --type-review-name-weight: 700;
+  --type-review-time-size: 12.5px;     --type-review-time-weight: 400;
+  --type-review-meta-size: 15.5px;     --type-review-meta-weight: 600;       /* "4.9 / 5 · 142 Google reviews" */
+  --type-chip-size: 14px;              --type-chip-weight: 600;              /* service-area chip */
+  --type-faq-q-size: 16.5px;           --type-faq-q-weight: 700;
+  --type-cta-body-size: 18px;          --type-cta-body-weight: 400;
+  --type-cta-badge-size: 13.5px;       --type-cta-badge-weight: 700;         /* ls .02em */
+  --type-hero-badge-size: 14px;        --type-hero-badge-weight: 600;
+  --type-hero-trust-size: 14px;        --type-hero-trust-weight: 600;
+
+  /* ---- Buttons (all weights/sizes) ---- */
+  --type-btn-hero-size: 16px;   --type-btn-hero-weight: 700;     /* hero call + schedule */
+  --type-btn-ink-size: 15.5px;  --type-btn-ink-weight: 600;      /* "Schedule drain cleaning" */
+  --type-btn-area-size: 15.5px; --type-btn-area-weight: 700;
+  --type-btn-cta-size: 17px;    --type-btn-cta-weight: 700;      /* final CTA buttons */
+  --type-btn-callout-size: 16px;--type-btn-callout-weight: 700;  /* signs callout call btn */
+  --type-btn-sticky-size: 15.5px; --type-btn-sticky-weight: 700; /* mobile sticky buttons */
+  --type-link-inline-size: 15px; --type-link-inline-weight: 700; /* "Read all reviews →" */
+
+  /* ---------------------------------------------------------------------------
+     12. SPACING
+     The design mixes a coarse scale with many one-off px values. Use the scale
+     for gaps/margins; one-off box paddings not on the scale are allowed raw px
+     in specs (per handoff rules). Values below are the ones actually used.
+     --------------------------------------------------------------------------- */
+  --space-2: 2px;   --space-3: 3px;   --space-6: 6px;   --space-8: 8px;
+  --space-9: 9px;   --space-10: 10px; --space-11: 11px; --space-12: 12px;
+  --space-14: 14px; --space-16: 16px; --space-18: 18px; --space-20: 20px;
+  --space-22: 22px; --space-24: 24px; --space-26: 26px; --space-28: 28px;
+  --space-30: 30px; --space-32: 32px; --space-40: 40px; --space-54: 54px;
+
+  /* Global horizontal page gutter (inside every max-width container) */
+  --page-gutter-desktop: 28px;
+  --page-gutter-mobile: 20px;   /* hero at <=640; most sections keep 28px — see responsive.md */
+
+  /* Max content widths per section (centered, margin:0 auto) */
+  --maxw-hero: 1240px;
+  --maxw-guarantee: 1240px;
+  --maxw-signs: 1140px;
+  --maxw-services: 1180px;
+  --maxw-reviews: 1200px;
+  --maxw-why: 1240px;
+  --maxw-process: 1240px;
+  --maxw-areas: 1160px;
+  --maxw-faq: 840px;
+  --maxw-cta: 760px;
+
+  /* ---- Section vertical rhythm (fluid). endpoints: 390px → 1440px ---- */
+  --space-section-y:        clamp(48px, 4.5vw, 68px);  /* 48 → 64.8 (max 68 @>=1512)  guarantee/reviews/areas/faq/cta */
+  --space-section-y-lg:     clamp(52px, 5vw, 76px);    /* 52 → 72   (max 76 @>=1520)  signs/services */
+  --space-section-y-process:clamp(56px, 6vw, 96px);    /* 56 → 86.4 (max 96 @>=1600)  process */
+  --space-section-y-why-top:clamp(56px, 6vw, 100px);   /* 56 → 86.4 (max 100 @>=1667) why top */
+  --space-section-y-why-bot:clamp(52px, 5vw, 88px);    /* 52 → 72   (max 88 @>=1760)  why bottom */
+  --space-stat-cell-y:      clamp(34px, 3.6vw, 52px);  /* 34 → 51.84 (max 52 @>=1445) stat strip cell */
+
+  /* ---- Block-level rhythm (fluid) ---- */
+  --space-heading-gap:   clamp(28px, 3vw, 40px);   /* 28 → 40   h2 margin-bottom (guarantee/faq) */
+  --space-block-gap:     clamp(34px, 3.5vw, 48px); /* 34 → 48   signs list top / services grid top */
+  --space-callout-gap:   clamp(30px, 3vw, 42px);   /* 30 → 42   signs callout margin-top */
+  --space-inkbtn-gap:    clamp(30px, 3.4vw, 44px); /* 30 → 44   ink button wrapper margin-top */
+  --space-process-hd-gap:clamp(40px, 5vw, 68px);   /* 40 → 68   process header margin-bottom */
+  --space-why-col-gap:   clamp(40px, 6vw, 100px);  /* 40 → 86.4 (max 100 @>=1667) why-split column gap */
+
+  /* ---- Grid gaps (fixed) ---- */
+  --gap-guarantee-desktop: 26px;      /* 4-col */
+  --gap-guarantee-t1240: 26px 34px;   /* 2-col @<=1240 */
+  --gap-guarantee-t820: 26px 18px;    /* 2-col @<=820 */
+  --gap-guarantee-t640: 24px 14px;    /* 2-col @<=640 */
+  --gap-services: 22px;               /* svc grid */
+  --gap-reviews: 22px;                /* reviews grid */
+  --gap-process-desktop: 40px;        /* 4-col */
+  --gap-process-t1080: 44px 36px;     /* 2-col @<=1080 */
+  --gap-areas-split: 54px;            /* area 2-col */
+  --gap-chips: 10px;                  /* area chip wrap */
+}
