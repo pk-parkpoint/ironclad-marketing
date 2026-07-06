@@ -60,6 +60,10 @@ export function SiteHeader() {
   const navRef = useRef<HTMLElement | null>(null);
   const { phoneDisplay, phoneHref } = getPublicContactInfo();
   const navPhoneLabel = phoneDisplay;
+  const usesServiceTemplate = pathname === "/plumbing/drain-cleaning";
+  const desktopNavDisplay = usesServiceTemplate ? "xl:flex" : "lg:flex";
+  const desktopActionDisplay = usesServiceTemplate ? "xl:inline-flex" : "lg:inline-flex";
+  const mobileNavDisplay = usesServiceTemplate ? "xl:hidden" : "lg:hidden";
 
   function handleNavItemEnter(event: MouseEvent<HTMLElement> | FocusEvent<HTMLElement>) {
     const nav = navRef.current;
@@ -175,7 +179,7 @@ export function SiteHeader() {
 
             <nav
               aria-label="Primary"
-              className="relative hidden items-center gap-5 text-[15px] font-medium lg:flex"
+              className={`relative hidden items-center gap-5 text-[15px] font-medium ${desktopNavDisplay}`}
               onMouseLeave={handleNavLeave}
               ref={navRef}
             >
@@ -266,7 +270,7 @@ export function SiteHeader() {
 
             <div className="flex items-center gap-3">
               <Link
-                className="focus-ring hidden min-h-[44px] items-center justify-center whitespace-nowrap rounded-full border-2 border-[#1E2A38] bg-transparent px-5 py-2.5 text-[14px] font-semibold text-[#1E2A38] transition-colors hover:bg-[#1E2A38] hover:text-white hover:no-underline lg:inline-flex"
+                className={`focus-ring hidden min-h-[44px] items-center justify-center whitespace-nowrap rounded-full border-2 border-[#1E2A38] bg-transparent px-5 py-2.5 text-[14px] font-semibold text-[#1E2A38] transition-colors hover:bg-[#1E2A38] hover:text-white hover:no-underline ${desktopActionDisplay}`}
                 data-track-intent="book"
                 href="/book"
               >
@@ -274,7 +278,7 @@ export function SiteHeader() {
               </Link>
 
               <a
-                className="focus-ring hidden min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#2563EB] px-5 py-2.5 text-[14px] font-semibold text-white shadow-[0_10px_22px_rgba(30,42,56,0.22),0_3px_8px_rgba(37,99,235,0.28)] transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-[#D03E04] hover:shadow-[0_14px_28px_rgba(30,42,56,0.28),0_4px_10px_rgba(208,62,4,0.3)] hover:no-underline lg:inline-flex"
+                className={`focus-ring hidden min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#2563EB] px-5 py-2.5 text-[14px] font-semibold text-white shadow-[0_10px_22px_rgba(30,42,56,0.22),0_3px_8px_rgba(37,99,235,0.28)] transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-[#D03E04] hover:shadow-[0_14px_28px_rgba(30,42,56,0.28),0_4px_10px_rgba(208,62,4,0.3)] hover:no-underline ${desktopActionDisplay}`}
                 data-track-intent="phone"
                 href={phoneHref}
               >
@@ -285,7 +289,7 @@ export function SiteHeader() {
               <button
                 aria-label={mobileNavOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={mobileNavOpen}
-                className="focus-ring inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background text-ink lg:hidden"
+                className={`focus-ring inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background text-ink ${mobileNavDisplay}`}
                 onClick={() => setMobileNavOpen((current) => !current)}
                 type="button"
               >
@@ -308,7 +312,7 @@ export function SiteHeader() {
 
       <div
         aria-hidden={!mobileNavOpen}
-        className={`fixed inset-0 z-50 overflow-hidden transition-opacity duration-200 motion-reduce:transition-none lg:hidden ${
+        className={`fixed inset-0 z-50 overflow-hidden transition-opacity duration-200 motion-reduce:transition-none ${mobileNavDisplay} ${
           mobileNavOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         inert={!mobileNavOpen}

@@ -1,0 +1,202 @@
+{
+  "base": [
+    {
+      "actualHeight": 8358,
+      "actualWidth": 1440,
+      "diffPath": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/diff-residual-desktop.png",
+      "mismatchedPixels": 3006322,
+      "percent": 24.978746244449763,
+      "referenceHeight": 7181,
+      "referenceWidth": 1440,
+      "actual": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/actual-desktop.png",
+      "name": "desktop"
+    },
+    {
+      "actualHeight": 13885,
+      "actualWidth": 390,
+      "diffPath": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/diff-residual-mobile.png",
+      "mismatchedPixels": 1871284,
+      "percent": 34.55645734651856,
+      "referenceHeight": 11741,
+      "referenceWidth": 390,
+      "actual": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/actual-mobile.png",
+      "name": "mobile"
+    }
+  ],
+  "states": [
+    {
+      "action": "hover",
+      "name": "hero-call-hover",
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/states/hero-call-hover.png",
+      "selector": ".dc-hero-ctas .dc-btn--call"
+    },
+    {
+      "action": "focus",
+      "name": "hero-call-focus",
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/states/hero-call-focus.png",
+      "selector": ".dc-hero-ctas .dc-btn--call"
+    },
+    {
+      "action": "hover",
+      "name": "hero-outline-hover",
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/states/hero-outline-hover.png",
+      "selector": ".dc-hero-ctas .dc-btn--outline"
+    },
+    {
+      "action": "hover",
+      "name": "service-card-hover",
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/states/service-card-hover.png",
+      "selector": ".dc-service-card"
+    },
+    {
+      "action": "hover",
+      "name": "ink-button-hover",
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/states/ink-button-hover.png",
+      "selector": ".dc-btn--ink"
+    },
+    {
+      "action": "focus",
+      "name": "reviews-link-focus",
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/states/reviews-link-focus.png",
+      "selector": ".dc-inline-link"
+    },
+    {
+      "action": "hover",
+      "name": "faq-summary-hover",
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/states/faq-summary-hover.png",
+      "selector": ".dc-faq-item summary"
+    },
+    {
+      "action": "focus",
+      "name": "faq-summary-focus",
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/states/faq-summary-focus.png",
+      "selector": ".dc-faq-item summary"
+    },
+    {
+      "action": "hover",
+      "name": "area-schedule-hover",
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/states/area-schedule-hover.png",
+      "selector": ".dc-area-copy .dc-btn--schedule"
+    },
+    {
+      "action": "focus",
+      "name": "final-call-focus",
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/states/final-call-focus.png",
+      "selector": ".dc-final-cta .dc-btn--white"
+    }
+  ],
+  "sweep": [
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-768.png",
+      "width": 768,
+      "clientWidth": 768,
+      "scrollWidth": 768,
+      "viewportWidth": 768
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-1024.png",
+      "width": 1024,
+      "clientWidth": 1024,
+      "scrollWidth": 1024,
+      "viewportWidth": 1024
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-639.png",
+      "width": 639,
+      "clientWidth": 639,
+      "scrollWidth": 639,
+      "viewportWidth": 639
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-640.png",
+      "width": 640,
+      "clientWidth": 640,
+      "scrollWidth": 640,
+      "viewportWidth": 640
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-641.png",
+      "width": 641,
+      "clientWidth": 641,
+      "scrollWidth": 641,
+      "viewportWidth": 641
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-819.png",
+      "width": 819,
+      "clientWidth": 819,
+      "scrollWidth": 819,
+      "viewportWidth": 819
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-820.png",
+      "width": 820,
+      "clientWidth": 820,
+      "scrollWidth": 820,
+      "viewportWidth": 820
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-821.png",
+      "width": 821,
+      "clientWidth": 821,
+      "scrollWidth": 821,
+      "viewportWidth": 821
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-1079.png",
+      "width": 1079,
+      "clientWidth": 1079,
+      "scrollWidth": 1079,
+      "viewportWidth": 1079
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-1080.png",
+      "width": 1080,
+      "clientWidth": 1080,
+      "scrollWidth": 1080,
+      "viewportWidth": 1080
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-1081.png",
+      "width": 1081,
+      "clientWidth": 1081,
+      "scrollWidth": 1081,
+      "viewportWidth": 1081
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-1239.png",
+      "width": 1239,
+      "clientWidth": 1239,
+      "scrollWidth": 1239,
+      "viewportWidth": 1239
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-1240.png",
+      "width": 1240,
+      "clientWidth": 1240,
+      "scrollWidth": 1240,
+      "viewportWidth": 1240
+    },
+    {
+      "horizontalOverflow": false,
+      "screenshot": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/qa/sweep-1241.png",
+      "width": 1241,
+      "clientWidth": 1241,
+      "scrollWidth": 1241,
+      "viewportWidth": 1241
+    }
+  ]
+}

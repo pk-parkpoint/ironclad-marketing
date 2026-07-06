@@ -53,6 +53,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.10",
+    "pixelmatch": "^7.2.0",
+    "pngjs": "^7.0.0",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5"
