@@ -11,6 +11,18 @@ function setSecurityHeaders(response: NextResponse): void {
   response.headers.delete("X-Powered-By");
 }
 
+function isStaticAsset(pathname: string): boolean {
+  return (
+    pathname.startsWith("/hero/") ||
+    pathname.startsWith("/media/") ||
+    pathname.startsWith("/og/") ||
+    pathname.startsWith("/brands/") ||
+    pathname === "/apple-icon.png" ||
+    pathname === "/icon.svg" ||
+    pathname === "/manifest.json"
+  );
+}
+
 // Enforce a single canonical hostname and path shape to reduce duplicate indexing
 // (e.g. www vs apex, and trailing-slash variants).
 export function middleware(request: NextRequest) {
@@ -58,7 +70,12 @@ export function middleware(request: NextRequest) {
 
   if (!shouldRedirect) {
     const response = NextResponse.next();
-    response.headers.set("Cache-Control", "public, max-age=300, s-maxage=300, stale-while-revalidate=60");
+    const cacheControl = isStaticAsset(url.pathname)
+      ? "public, max-age=31536000, immutable"
+      : "public, max-age=300, s-maxage=300, stale-while-revalidate=60";
+
+    response.headers.set("Cache-Control", cacheControl);
+    response.headers.set("CDN-Cache-Control", cacheControl);
     setSecurityHeaders(response);
     return response;
   }

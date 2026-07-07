@@ -182,6 +182,13 @@ export default function RootLayout({
           as="image"
           href="/hero/ironclad-hero-poster.jpg"
         />
+        <link
+          rel="preload"
+          as="video"
+          href="/media/hero-video.mp4"
+          type="video/mp4"
+          media="(prefers-reduced-motion: no-preference)"
+        />
         <Script
           id="booking-link-preboot"
           strategy="beforeInteractive"
