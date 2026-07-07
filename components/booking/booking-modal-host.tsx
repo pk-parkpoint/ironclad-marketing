@@ -15,7 +15,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { BookingModal } from "@/components/booking/booking-modal";
-import { OPEN_BOOKING_MODAL_EVENT } from "@/components/layout/mobile-bottom-bar";
+import { OPEN_BOOKING_MODAL_EVENT } from "@/lib/booking-events";
 
 type BookingModalOpenDetail = {
   serviceSlug?: string;

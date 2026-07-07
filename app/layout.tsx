@@ -5,6 +5,7 @@ import { AnalyticsBootstrap } from "@/components/analytics/analytics-bootstrap";
 import { BookingWizardHost } from "@/components/booking/booking-wizard-host";
 import { Inter } from "next/font/google";
 import { MobileBottomBar } from "@/components/layout/mobile-bottom-bar";
+import { BOOKING_PREBOOT_SCRIPT } from "@/lib/booking-preboot-script";
 import { CANONICAL_ORIGIN } from "@/lib/site-url";
 import { Suspense } from "react";
 import "./globals.css";
@@ -181,14 +182,19 @@ export default function RootLayout({
           as="image"
           href="/hero/ironclad-hero-poster.jpg"
         />
+        <Script
+          id="booking-link-preboot"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: BOOKING_PREBOOT_SCRIPT }}
+        />
         <AnalyticsHead />
       </head>
       <body className={`${inter.variable} antialiased pb-24 md:pb-0`}>
-        <AnalyticsBody />
-        {children}
         <Suspense fallback={null}>
           <BookingWizardHost />
         </Suspense>
+        <AnalyticsBody />
+        {children}
         <MobileBottomBar />
       </body>
     </html>

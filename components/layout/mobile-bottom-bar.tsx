@@ -2,9 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { getPublicContactInfo } from "@/lib/contact";
-
-export const OPEN_BOOKING_MODAL_EVENT = "ironclad:open-booking-modal";
-type OpenBookingModalDetail = { serviceSlug?: string };
+import { dispatchOpenBookingModal } from "@/lib/booking-events";
 
 export function MobileBottomBar() {
   const router = useRouter();
@@ -12,13 +10,7 @@ export function MobileBottomBar() {
   const { smsHref } = getPublicContactInfo();
 
   function handleBookService() {
-    const bookingEvent = new CustomEvent<OpenBookingModalDetail>(OPEN_BOOKING_MODAL_EVENT, {
-      cancelable: true,
-    });
-
-    window.dispatchEvent(bookingEvent);
-
-    if (!bookingEvent.defaultPrevented) {
+    if (!dispatchOpenBookingModal({}, { queueIfUnhandled: true })) {
       router.push("/book");
     }
   }

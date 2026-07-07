@@ -13,6 +13,7 @@ import {
 } from "@/lib/analytics";
 import { derivePageContext, getDeviceType } from "@/lib/analytics-page-context";
 import { getAiReferralContext } from "@/lib/ai-referrers";
+import { maybeOpenBookingLink } from "@/lib/booking-events";
 import { recordBookingSiteVisit } from "@/lib/booking-session";
 import { getCtaPosition, trackEvent } from "@/components/analytics/analytics-events";
 import { useScrollDepthTracking } from "@/components/analytics/use-scroll-depth-tracking";
@@ -173,6 +174,7 @@ export function AnalyticsBootstrap() {
 
       const href = anchor.getAttribute("href") ?? "";
       const label = anchor.textContent?.trim() ?? "";
+      const bookingLinkDetail = maybeOpenBookingLink(event, anchor);
       const context = derivePageContext(pathname);
       const attribution = readStoredAttribution();
       const payload = withAttribution(
@@ -195,7 +197,7 @@ export function AnalyticsBootstrap() {
       trackEvent("cta_click", payload);
       if (href.startsWith("tel:")) trackEvent("phone_click", payload);
       if (href.startsWith("sms:")) trackEvent("text_click", payload);
-      if (href.startsWith("/book")) {
+      if (bookingLinkDetail) {
         trackEvent("book_click", payload);
         trackEvent("booking_funnel_event", { ...payload, step: "entry_click" });
       }
