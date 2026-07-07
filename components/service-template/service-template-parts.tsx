@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   AlertTriangle,
@@ -126,7 +127,23 @@ export function SignsCallout({ phoneDisplay, phoneHref }: { phoneDisplay: string
   );
 }
 
-export function ImageSlot({ caption, title }: { caption?: string; title: string }) {
+export function ImageSlot({ caption, imageSrc, title }: { caption?: string; imageSrc?: string; title: string }) {
+  if (imageSrc) {
+    return (
+      <div className="dc-image-slot dc-image-slot--photo">
+        <Image
+          alt={caption ?? title}
+          className="dc-service-card-img"
+          decoding="async"
+          fill
+          loading="lazy"
+          sizes="(min-width: 1080px) 360px, (min-width: 720px) 45vw, 100vw"
+          src={imageSrc}
+        />
+      </div>
+    );
+  }
+
   return (
     <div aria-label={`${title} photo pending`} className="dc-image-slot" role="img">
       <ImageIcon aria-hidden="true" />
@@ -135,10 +152,20 @@ export function ImageSlot({ caption, title }: { caption?: string; title: string 
   );
 }
 
-export function ServiceCard({ body, caption, title }: { body: string; caption?: string; title: string }) {
+export function ServiceCard({
+  body,
+  caption,
+  imageSrc,
+  title,
+}: {
+  body: string;
+  caption?: string;
+  imageSrc?: string;
+  title: string;
+}) {
   return (
     <article className="dc-service-card">
-      <ImageSlot caption={caption} title={title} />
+      <ImageSlot caption={caption} imageSrc={imageSrc} title={title} />
       <div className="dc-service-card-copy">
         <h3 className="dc-service-card-title">{title}</h3>
         <p>{body}</p>

@@ -81,3 +81,26 @@ Verification run: `BASE_URL=http://127.0.0.1:3027 node scripts/verify-service-pa
 Intermediate-width sweep: PASS after route-scoped header breakpoint adjustment. Widths checked: `639`, `640`, `641`, `768`, `819`, `820`, `821`, `1024`, `1079`, `1080`, `1081`, `1239`, `1240`, `1241`. No horizontal overflow in final `verification-summary.json`.
 
 Interaction states: PASS by artifact. Screenshots saved in `design-handoff/screens/service-page/states/` for hero call hover/focus, outline hover, service card hover, ink button hover, reviews link focus, FAQ hover/focus, area schedule hover, and final call focus.
+
+## PPC Variant Expansion - 2026-07-06
+
+- Imported the supplied PPC handoff ZIP into `design-handoff/ppc-variants/`.
+- Wired `/plumbing/[slug]` to prefer PPC variant sheets for the 20 handoff slugs and fall back to the legacy service page for existing non-PPC slugs.
+- Kept the shared drain-cleaning template and team hero photo for every variant.
+- Service-card images now use the six supplied drain-cleaning photos across every PPC variant.
+- Per handoff scope, only SEO title/meta, Hero, Section 2 Signs, and Section 3 Services change per variant. Shared guarantee, reviews, why, stats, process, service-area, FAQ, final CTA, sticky CTA, phone, and offer remain unchanged.
+- QA artifacts were generated locally and intentionally not committed to avoid shipping large screenshot files.
+
+Variant browser QA: PASS. Checked all 20 URLs at desktop `1440x900` and mobile `390x844`: expected title tag, hero title, hero subtitle, signs title, services title, shared `ironclad-team-hero.png`, and no horizontal overflow.
+
+Build proof: `npm run lint` PASS, `npm run build` PASS.
+
+Note: the strict original PNG references predate this PPC copy update. The previous source-vs-reference residual remains a package/reference issue unless new reference PNGs are supplied for the updated copy.
+
+## PPC Service-Card Images - 2026-07-06
+
+- Added six supplied drain-cleaning service-card photos under `public/media/services/drain-cleaning/`.
+- Wired those six images into the service-card template and every PPC variant.
+- Images use `next/image` with `loading="lazy"`, `decoding="async"`, no `priority`, and responsive `sizes` so they do not block the initial hero paint.
+- Browser proof: all 20 PPC URLs checked at desktop `1440x900` and mobile `390x844`; each rendered six `.dc-service-card-img` nodes, all six were lazy-loaded, and no horizontal overflow was detected.
+- Desktop network proof for `/plumbing/drain-cleaning`: service-card image requests selected the `w=384` optimized variants.

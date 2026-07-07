@@ -760,9 +760,28 @@
   font-weight: var(--type-image-placeholder-weight);
   gap: var(--space-9);
   justify-content: center;
+  overflow: hidden;
   padding: var(--space-16);
+  position: relative;
   text-align: center;
   width: 100%;
+}
+
+.dc-image-slot--photo {
+  padding: 0;
+}
+
+.dc-image-slot--photo::after {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.04) 48%, rgba(11, 28, 45, 0.14) 100%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.dc-service-card-img {
+  object-fit: cover;
 }
 
 .dc-image-slot svg {

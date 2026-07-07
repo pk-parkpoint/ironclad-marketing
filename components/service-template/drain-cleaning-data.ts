@@ -1,7 +1,38 @@
-export const DRAIN_CLEANING_TEMPLATE = {
+type TextPair = readonly [string, string];
+type ServiceCard = readonly [string, string, string, string?];
+
+export type DrainCleaningTemplateContent = {
   hero: {
-    title: "Fast, Expert Drain Cleaning in Austin",
-    subtitle: "24/7 help from our licensed plumbers, with clear pricing and an ironclad warranty",
+    title: string;
+    subhead: string;
+    supportLine: string;
+    image: string;
+    imageAlt: string;
+  };
+  guarantees: readonly TextPair[];
+  signs: {
+    title: string;
+    intro: string;
+    items: readonly TextPair[];
+  };
+  services: {
+    title: string;
+    intro: string;
+    cards: readonly ServiceCard[];
+  };
+  reviews: readonly (readonly [string, string, string, string])[];
+  why: readonly TextPair[];
+  stats: readonly TextPair[];
+  process: readonly TextPair[];
+  areas: readonly string[];
+  faqs: readonly TextPair[];
+};
+
+export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
+  hero: {
+    title: "Fast, Reliable Drain Cleaning",
+    subhead: "Water you waiting for?",
+    supportLine: "Slow drains, clogs, and backups cleared fast, with a full cleanup before we leave.",
     image: "/media/services/ironclad-team-hero.png",
     imageAlt: "The Ironclad Plumbing team beside their service truck in Austin",
   },
@@ -43,31 +74,37 @@ export const DRAIN_CLEANING_TEMPLATE = {
         "Kitchen & bathroom sink drains",
         "Grease, soap scum, and hair build up in the sinks you use most. We clear the line and get water moving freely again.",
         "Photo: clearing a kitchen sink drain",
+        "/media/services/drain-cleaning/01_kitchen_bathroom_sink_drains.png",
       ],
       [
         "Shower, tub & floor drains",
         "Standing water and slow bathroom drains cleared out, including the floor drains that only act up when it rains.",
         "Photo: shower or tub drain",
+        "/media/services/drain-cleaning/02_shower_tub_floor_drains.png",
       ],
       [
         "Toilet & fixture clogs",
         "Clogged toilets, laundry standpipes, and the fixtures that keep backing up, cleared without the mess.",
         "Photo: toilet or fixture repair",
+        "/media/services/drain-cleaning/03_toilet_fixture_clogs.png",
       ],
       [
         "Main line & sewer clogs",
         "When the whole house drains slow, the blockage is in the main line. We locate it and clear it at the source.",
         "Photo: main line cleanout",
+        "/media/services/drain-cleaning/04_main_line_sewer_clogs.png",
       ],
       [
         "Hydro jetting",
         "A high-pressure water jet scours grease, scale, and tree roots off the pipe walls, not just poking a hole through the clog.",
         "Photo: hydro jetting equipment",
+        "/media/services/drain-cleaning/05_hydro_jetting.png",
       ],
       [
         "Sewer camera inspection",
         "An HD camera down the line shows exactly what's going on, so you're not paying to guess at the problem.",
         "Photo: sewer camera inspection",
+        "/media/services/drain-cleaning/06_sewer_camera_inspection.png",
       ],
     ],
   },
@@ -148,4 +185,4 @@ export const DRAIN_CLEANING_TEMPLATE = {
       "For one minor clog, try a plunger or clear visible debris near the opening. Skip the harsh chemical drain cleaners, they can damage pipes. If it keeps returning, hits multiple drains, or causes a backup, call a plumber.",
     ],
   ],
-} as const;
+};

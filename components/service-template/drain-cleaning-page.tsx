@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { DRAIN_CLEANING_TEMPLATE as content } from "./drain-cleaning-data";
+import { DRAIN_CLEANING_TEMPLATE as defaultContent, type DrainCleaningTemplateContent } from "./drain-cleaning-data";
 import { ReferenceChrome } from "./reference-chrome";
 import { ServiceTemplateEffects } from "./service-template-effects";
 import {
@@ -22,13 +22,20 @@ import {
 } from "./service-template-parts";
 
 type DrainCleaningPageProps = {
+  bookingHref?: string;
+  content?: DrainCleaningTemplateContent;
   phoneDisplay: string;
   phoneHref: string;
 };
 
-const BOOKING_HREF = "/book?service=drain-cleaning";
+const DEFAULT_BOOKING_HREF = "/book?service=drain-cleaning";
 
-export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPageProps) {
+export function DrainCleaningPage({
+  bookingHref = DEFAULT_BOOKING_HREF,
+  content = defaultContent,
+  phoneDisplay,
+  phoneHref,
+}: DrainCleaningPageProps) {
   return (
     <div className="dc-root" id="dc-root">
       <ReferenceChrome phoneDisplay={phoneDisplay} phoneHref={phoneHref}>
@@ -51,15 +58,16 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
           <GoogleRatingBadge />
           <h1 data-slot="hero-title">{content.hero.title}</h1>
           <p className="dc-hero-subtitle" data-slot="hero-subtitle">
-            24/7 help from our licensed plumbers, with clear pricing <br />
-            and an ironclad warranty
+            {content.hero.subhead}{" "}
+            <br />
+            {content.hero.supportLine}
           </p>
           <TrustRow />
           <div className="dc-hero-ctas">
             <TemplateButton href={phoneHref} icon="phone" variant="call">
               {phoneDisplay}
             </TemplateButton>
-            <TemplateButton href={BOOKING_HREF} variant="outline">
+            <TemplateButton href={bookingHref} variant="outline">
               Schedule Now
             </TemplateButton>
           </div>
@@ -103,12 +111,12 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
             {content.services.intro}
           </p>
           <div className="dc-service-grid">
-            {content.services.cards.map(([title, body, caption]) => (
-              <ServiceCard body={body} caption={caption} key={title} title={title} />
+            {content.services.cards.map(([title, body, caption, imageSrc]) => (
+              <ServiceCard body={body} caption={caption} imageSrc={imageSrc} key={title} title={title} />
             ))}
           </div>
           <div className="dc-ink-button-row">
-            <TemplateButton href={BOOKING_HREF} icon="arrow" variant="ink">
+            <TemplateButton href={bookingHref} icon="arrow" variant="ink">
               Schedule drain cleaning
             </TemplateButton>
           </div>
@@ -179,7 +187,7 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
                 <AreaChip key={area}>{area}</AreaChip>
               ))}
             </div>
-            <TemplateButton href={BOOKING_HREF} variant="schedule">
+            <TemplateButton href={bookingHref} variant="schedule">
               Schedule Drain Cleaning Near You
             </TemplateButton>
           </div>
@@ -205,7 +213,7 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
           </h2>
           <p>Book online in 60 seconds or call for fast drain cleaning in Austin.</p>
           <div className="dc-cta-buttons">
-            <TemplateButton href={BOOKING_HREF} variant="schedule">
+            <TemplateButton href={bookingHref} variant="schedule">
               Schedule Drain Cleaning
             </TemplateButton>
             <TemplateButton href={phoneHref} icon="phone" variant="white">
@@ -221,7 +229,7 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
         <TemplateButton href={phoneHref} icon="phone" variant="stickyCall">
           {phoneDisplay}
         </TemplateButton>
-        <TemplateButton href={BOOKING_HREF} variant="stickySchedule">
+        <TemplateButton href={bookingHref} variant="stickySchedule">
           Schedule Online
         </TemplateButton>
       </div>
