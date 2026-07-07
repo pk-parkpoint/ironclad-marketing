@@ -15,6 +15,14 @@ type ActiveHold = PublicBookingHoldResponse & { startTime: string; endTime: stri
 
 const DURATION_ESTIMATE_MINUTES = 90;
 
+const SCHEDULER_SERVICE_TYPE_BY_SELECTION: Record<string, string> = {
+  "clear-a-blockage": "drain_cleaning",
+  "fix-a-leak": "leak_detection_repair",
+  "leaks-blockages-sewer": "drain_cleaning",
+  "other-issue": "leak_detection_repair",
+  "sewer-main-line": "drain_cleaning",
+};
+
 function secondsUntil(expiresAt?: string | null, ttlSeconds?: number): number {
   if (expiresAt) {
     return Math.max(0, Math.ceil((new Date(expiresAt).getTime() - Date.now()) / 1000));
@@ -39,6 +47,11 @@ function buildIssueSummary(formData: WizardFormData): string {
     .join(" > ");
   const notes = formData.additionalNotes.trim();
   return [service || "Plumbing Service", notes].filter(Boolean).join(". ");
+}
+
+function schedulerServiceType(formData: WizardFormData): string | undefined {
+  const selected = formData.serviceDetail || formData.serviceCategory;
+  return selected ? SCHEDULER_SERVICE_TYPE_BY_SELECTION[selected] || selected : undefined;
 }
 
 function buildBookPayload(formData: WizardFormData) {
@@ -128,7 +141,7 @@ export function usePublicBookingFacade() {
         durationEstimateMinutes: DURATION_ESTIMATE_MINUTES,
         issueSummary: buildIssueSummary(formData),
         maxResults: 8,
-        serviceType: formData.serviceDetail || formData.serviceCategory || undefined,
+        serviceType: schedulerServiceType(formData),
       });
       setWindowsByDate((current) => ({
         ...current,
