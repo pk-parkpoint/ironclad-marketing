@@ -385,3 +385,97 @@
   --gap-areas-split: 54px;            /* area 2-col */
   --gap-chips: 10px;                  /* area chip wrap */
 }
+
+/* =============================================================================
+   REVIEWS PAGE ADDITIONS  (/reviews)
+   Extends the shared token set above. Values unique to the reviews screen:
+   hero headline size, rating-summary, review slider, review wall, slider arrow.
+   Desktop/mobile variants carry -desktop / -mobile suffixes.
+   ============================================================================= */
+:root {
+
+  /* ---- Hero (reviews variant — display family, larger than service-page hero) ---- */
+  --type-hero-title-reviews-size-desktop: 64px;
+  --type-hero-title-reviews-size-mobile: 44px;
+  --type-hero-title-reviews-weight: 800;
+  --type-hero-title-reviews-line-height: 1.02;
+  --type-hero-title-reviews-letter-spacing: -0.03em;
+  --color-hero-accent-span: #8CC1EE;   /* "Leak No Further." — accent 70% + white; recolor with theme */
+
+  /* ---- Rating summary ---- */
+  --type-summary-score-size-desktop: 108px;
+  --type-summary-score-size-mobile: 80px;
+  --type-summary-score-weight: 800;
+  --type-summary-score-line-height: 0.9;
+  --type-summary-score-letter-spacing: -0.04em;
+  --color-rating-track: #E6DECF;       /* empty bar track on sand */
+  --color-rating-pct: #94A0AB;         /* right-aligned pct label */
+  /* fill color = --color-star-review (#F5A623); label color = --color-text-muted */
+
+  /* ---- Section headings (reviews screen, display family) ---- */
+  /* title-reviews: "What Our Customers Are Saying" */
+  --type-title-reviews-size-desktop: 50px;
+  --type-title-reviews-size-mobile: 34px;
+  --type-title-reviews-weight: 800;
+  --type-title-reviews-line-height: 1.04;
+  --type-title-reviews-letter-spacing: -0.028em;
+  /* title-wall: "More Reviews From Around Austin" */
+  --type-title-wall-size-desktop: 42px;
+  --type-title-wall-size-mobile: 30px;
+  --type-title-wall-weight: 800;
+  --type-title-wall-line-height: 1.06;
+  --type-title-wall-letter-spacing: -0.026em;
+  /* title-band: "Ready to join them?" (on navy) */
+  --type-title-band-size-desktop: 38px;
+  --type-title-band-size-mobile: 28px;
+  --type-title-band-weight: 700;
+  --type-title-band-line-height: 1.08;
+  --type-title-band-letter-spacing: -0.022em;
+  /* display-cta: "Water You Waiting For?" (final CTA, on sand) */
+  --type-display-cta-size-desktop: 52px;
+  --type-display-cta-size-mobile: 36px;
+  --type-display-cta-weight: 800;
+  --type-display-cta-line-height: 1.02;
+  --type-display-cta-letter-spacing: -0.03em;
+  --color-text-band-body: #B7C4CF;     /* booking-band paragraph on navy */
+
+  /* ---- Review slider ---- */
+  --radius-slider-card: 20px;
+  --shadow-slider-card: 0 20px 44px -30px rgba(30,42,56,.4);
+  --slider-card-w-desktop: 380px;      /* flex-basis */
+  --slider-card-w-mobile: 300px;
+  --gap-slider-desktop: 24px;
+  --gap-slider-mobile: 16px;
+  --slider-card-pad-desktop: 30px;
+  --slider-card-pad-mobile: 26px;
+  --size-slider-avatar: 46px;          /* mobile 44 */
+  /* per-review avatar colors (cycle) */
+  --color-avatar-green: #1E9E5A;
+  --color-avatar-blue: #2F7FD1;
+  --color-avatar-red: #E4572E;
+  --color-avatar-amber: #E0A419;
+  --color-avatar-purple: #7A4FD1;
+
+  /* ---- Slider arrow buttons ---- */
+  --size-slider-arrow: 52px;
+  --color-slider-arrow-border: #E1E7EC;
+  --shadow-slider-arrow: 0 14px 30px -14px rgba(30,42,56,.4);
+  /* hover fill = --color-bg-navy-process (#1E2A38); chevron rest = --color-text-heading, hover #FFFFFF */
+
+  /* ---- Review wall ---- */
+  --shadow-wall-card: 0 16px 38px -30px rgba(30,42,56,.4);
+  --wall-columns-desktop: 3;
+  --gap-wall: 24px;
+  --size-wall-avatar: 42px;
+
+  /* ---- Final-CTA / accent tints on sand ---- */
+  --color-accent-tint-14: color-mix(in srgb, var(--color-accent-primary) 14%, transparent);
+  --color-accent-border-34: color-mix(in srgb, var(--color-accent-primary) 34%, transparent);
+  --color-accent-text-on-sand: #2472B8;  /* badge text + a:hover on light */
+  --color-border-cta-warm: #DCD3C3;       /* white-bordered call button on sand */
+
+  /* ---- Motion (reviews) ---- */
+  --motion-slider-arrow: background .18s ease, border-color .18s ease, transform .18s ease;
+  --motion-rev-card: transform .2s ease, box-shadow .2s ease;   /* slider + wall card lift */
+  --scroll-slider: smooth;   /* scroll-behavior on .rev-track; arrows call scrollBy() one card */
+}

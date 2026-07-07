@@ -15,7 +15,7 @@ export function MobileBottomBar() {
     }
   }
 
-  if (pathname === "/plumbing/drain-cleaning") {
+  if (pathname === "/plumbing/drain-cleaning" || pathname === "/reviews") {
     return null;
   }
 

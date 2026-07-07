@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-07-07T20:12:21.422Z",
+  "results": [
+    {
+      "name": "desktop",
+      "ref": "1440x3806",
+      "actual": "1440x3799",
+      "canvas": "1440x3806",
+      "differingPixels": 324522,
+      "percent": 5.921242774566474
+    },
+    {
+      "name": "mobile",
+      "ref": "390x4660",
+      "actual": "390x4660",
+      "canvas": "390x4660",
+      "differingPixels": 179761,
+      "percent": 9.891108176515901
+    }
+  ]
+}

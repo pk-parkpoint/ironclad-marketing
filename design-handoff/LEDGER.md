@@ -104,3 +104,80 @@ Note: the strict original PNG references predate this PPC copy update. The previ
 - Images use `next/image` with `loading="lazy"`, `decoding="async"`, no `priority`, and responsive `sizes` so they do not block the initial hero paint.
 - Browser proof: all 20 PPC URLs checked at desktop `1440x900` and mobile `390x844`; each rendered six `.dc-service-card-img` nodes, all six were lazy-loaded, and no horizontal overflow was detected.
 - Desktop network proof for `/plumbing/drain-cleaning`: service-card image requests selected the `w=384` optimized variants.
+
+## Reviews Page Ledger - 2026-07-07
+
+Implemented route: `/reviews`  
+Verification run: `BASE_URL=http://127.0.0.1:3028` with Playwright Chromium, DPR 1.
+
+| Screen | Format | Element | Property | Spec (token/px) | Implemented (token/px) | Diff | Deviation + justification |
+|---|---|---|---|---|---|---|---|
+| reviews-page | desktop | Page route | route/chrome | `/reviews`, existing chrome shown for parity | dedicated `app/reviews`, page-local chrome in `.dc-root` | PASS | Shared production chrome does not match the reference PNG; page-local chrome retained for this route only. |
+| reviews-page | desktop | Page | background | `--color-bg-page` | `--color-bg-page` | PASS | none |
+| reviews-page | desktop | Header logo | asset/size | logo `h44` | `/media/logo/ironclad-logo-clear-dark.svg`, `h44` | RESIDUAL | Package PNG logo is a preview stand-in; production keeps live vector logo. |
+| reviews-page | desktop | Hero | image | `assets/ironclad-team-hero.png`, `object-position:78% center` | `/media/services/ironclad-team-hero.png`, `object-position:78% center` | PASS | Asset already existed in the live repo. |
+| reviews-page | desktop | Hero | padding/scrim | `104px 28px 108px`, `--gradient-reviews-hero-scrim-desktop` | `104px 28px 108px`, `--gradient-reviews-hero-scrim-desktop` | PASS | none |
+| reviews-page | desktop | Hero title | type/color | `--type-hero-title-reviews-size-desktop`, `--color-hero-accent-span` | same tokens | PASS | none |
+| reviews-page | desktop | Hero CTAs | visual | `--gradient-call`, `--radius-hero-btn`, `16px 28px` | same tokens | PASS | none |
+| reviews-page | desktop | Rating summary | grid/padding | `0.85fr 1.15fr`, `gap 80px`, `72px 28px` | same values | PASS | none |
+| reviews-page | desktop | Rating bars | values | `96/3/1/0/0%`, `--color-rating-track`, `--color-star-review` | same values/tokens | PASS | none |
+| reviews-page | desktop | Review slider | cards | `flex-basis 380px`, `gap 24px`, `--radius-slider-card` | same values/tokens | PASS | none |
+| reviews-page | desktop | Slider arrows | size/state | `52px`, hover navy/white, focus ring | same values/tokens | PASS | State screenshot committed. |
+| reviews-page | desktop | Booking band | layout | row, `64px 28px`, `gap 32px` | same values | PASS | none |
+| reviews-page | desktop | Review wall | layout | `columns:3`, `gap 24px` | same values | PASS | none |
+| reviews-page | desktop | Final CTA | padding/type | `80px 28px`, `--type-display-cta-size-desktop` | same values/tokens | PASS | none |
+| reviews-page | desktop | Footer logo | asset/size | logo `h40` | `/media/logo/ironclad-logo-clear-light.svg`, `h40` | RESIDUAL | Package PNG logo is a preview stand-in; production keeps live vector logo. |
+| reviews-page | mobile | Header | layout | sticky chrome, logo `h34` + phone pill | same layout with production SVG logo | RESIDUAL | Keeping sticky header per spec; full-page reference capture handles sticky header differently. |
+| reviews-page | mobile | Hero | image | `assets/ironclad-team-hero.png`, `object-position:72% center` | `/media/services/ironclad-team-hero.png`, `object-position:72% center` | PASS | Asset already existed in the live repo. |
+| reviews-page | mobile | Hero | padding/type | `56px 20px 60px`, `--type-hero-title-reviews-size-mobile` | same values/tokens | PASS | none |
+| reviews-page | mobile | Rating summary | layout | centered, bars max `340px` | centered, bars max `340px` | PASS | none |
+| reviews-page | mobile | Slider | layout | card `300px`, `gap 16px`, arrows hidden | same values | PASS | none |
+| reviews-page | mobile | Booking band | layout | column, `44px 20px` | same values | PASS | none |
+| reviews-page | mobile | Review wall | content/layout | first 5 cards, single column | Brian/Nicole/Tom/Carlos/Frank, single column | PASS | none |
+| reviews-page | mobile | Final CTA | layout | column CTAs, `52px 20px` | same values | PASS | none |
+| reviews-page | mobile | Sticky CTA | fixed bar | `bottom:0`, `--z-sticky-cta`, `10px 14px` | same tokens, body reserve `51px` | PASS | Reserve avoids covering footer content. |
+| reviews-page | mobile | Global mobile bar | visibility | reviews page uses its own sticky CTA | hidden on `/reviews` | PASS | Prevents duplicate bottom bars. |
+
+### Reviews Page Conflicts
+
+| File | Element | Conflict | Handling |
+|---|---|---|---|
+| `design-handoff/reviews-page-README.md` | Logo assets | Bundled `ironclad-logo-dark.png` and `ironclad-logo-light.png` are local preview stand-ins; README says production should keep real vector logos. | Kept production SVG logos under `/media/logo/`. |
+| `design-handoff/screens/reviews-page/spec-mobile.md` and `SCREEN-NOTES.md` | Reference dimensions | Some notes refer to a `390x4663` mobile reference, while the corrected package image is `390x4660`. | Diffed against the actual `390x4660` PNG. |
+| `design-handoff/screens/reviews-page/source-mobile.html` | Sticky CTA | Source uses full-page capture behavior that differs from live fixed positioning. | Implemented fixed CTA per spec and added page reserve. |
+| `components/layout/site-header.tsx` / `site-footer.tsx` vs reference | Chrome | Shared live chrome is taller/different from the supplied reviews reference. | Used page-local reviews chrome for parity on `/reviews` only. |
+| `source-*.html` | Privacy link | Source uses `/privacy`, while the live repo route is `/privacy-policy`. | Used `/privacy-policy`. |
+
+### Reviews Page Missing Assets
+
+No assets are missing from the corrected package at `/Users/15237/Downloads/reviews-page-handoff`, and no required production asset is missing from the live repo.
+
+| Asset | Corrected package status | Live repo handling |
+|---|---|---|
+| `assets/ironclad-team-hero.png` | Present | Existing `/public/media/services/ironclad-team-hero.png` used by all service pages and `/reviews`. |
+| `assets/ironclad-logo-dark.png` | Present preview stand-in | Not shipped in app; production SVG `/media/logo/ironclad-logo-clear-dark.svg` used. |
+| `assets/ironclad-logo-light.png` | Present preview stand-in | Not shipped in app; production SVG `/media/logo/ironclad-logo-clear-light.svg` used. |
+| `assets/ironclad-mark.png` | Present | Copied to handoff artifacts only; production already has brand mark assets. |
+
+Previously missing from the earlier `/Users/15237/Downloads/handoff 3` package: `assets/ironclad-team-hero.png`, `assets/ironclad-logo-dark.png`, `assets/ironclad-logo-light.png`, and `assets/ironclad-mark.png`.
+
+### Reviews Page Package Defects
+
+| Defect | Impact | Handling |
+|---|---|---|
+| Logo PNGs are self-contained preview stand-ins while production is instructed to keep vector logos. | Logo regions cannot reach zero pixel diff without violating production guidance. | Kept SVG logos and logged residual. |
+| Mobile sticky header/full-page capture behavior differs from the spec wording. | Mobile diff retains sticky-header residual. | Kept sticky header per spec. |
+| Strict `0.5%` visual gate remains unreachable with the documented chrome/logo conflicts. | Cannot report strict design parity pass. | Residual diff artifacts committed. |
+
+### Reviews Page Diff Results
+
+| Screen | Format | Result | Pixels differing | Notes |
+|---|---|---:|---:|---|
+| reviews-page | desktop | FAIL package residual documented | `5.921242774566474%` | `design-handoff/screens/reviews-page/diff-desktop.png` |
+| reviews-page | mobile | FAIL package residual documented | `9.891108176515901%` | `design-handoff/screens/reviews-page/diff-mobile.png` |
+
+Intermediate-width sweep: PASS. Widths checked: `639`, `640`, `641`, `767`, `768`, `769`, `819`, `820`, `821`, `959`, `960`, `961`, `1023`, `1024`, `1025`, `1439`, `1440`, `1441`. No horizontal overflow.
+
+Interaction states: PASS by artifact. Screenshots saved in `design-handoff/screens/reviews-page/states/` for book-service hover, schedule focus, and slider-arrow hover.
+
+Build proof: `npm run lint` PASS, `npm run build` PASS.

@@ -307,6 +307,16 @@ main {
   }
 }
 
+body:has(.reviews-page-root) {
+  padding-bottom: 0;
+}
+
+@media (max-width: 767px) {
+  body:has(.reviews-page-root) {
+    padding-bottom: 51px;
+  }
+}
+
 .guide-progress-bar {
   position: fixed;
   top: 0;

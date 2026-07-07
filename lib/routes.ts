@@ -49,6 +49,7 @@ export const DEDICATED_MARKETING_PATHS = new Set([
   "guides",
   "plumbing",
   "plumbing-guides",
+  "reviews",
   "service-area",
 ]);
 

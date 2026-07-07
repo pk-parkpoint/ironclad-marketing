@@ -80,3 +80,23 @@ Progressive enhancement: without JS the native `<details>` still work (independe
 
 ## Screens with no motion
 Signs list, process steps, footer, promo bar/header are **static** apart from the shared button/link hover+focus states above. No section is fully bare of the global focus-ring requirement.
+
+---
+
+## REVIEWS PAGE MOTION  (/reviews)
+
+| ID | Screen/Component | Trigger | Property | From → To | Duration/Easing (token) | Exact CSS |
+|---|---|---|---|---|---|---|
+| revcard-hover | SliderCard | hover | transform, box-shadow | `0, --shadow-slider-card` → `translateY(-4px), 0 30px 56px -34px rgba(30,42,56,.55)` | `--motion-rev-card` | `.rev-card{transition:transform .2s ease,box-shadow .2s ease}` |
+| wallcard-hover | WallCard | hover | transform, box-shadow | `0, --shadow-wall-card` → `translateY(-3px), 0 24px 48px -32px rgba(30,42,56,.5)` | `--motion-rev-card` | same transition on `.wall-card` |
+| arrow-hover | SliderArrow | hover | background, border-color, transform, (child) stroke | white→`#1E2A38`, scale `1→1.06`, chevron `#1A2330→#FFF` | `--motion-slider-arrow` | `.arw{transition:background .18s ease,border-color .18s ease,transform .18s ease} .arw:hover svg{stroke:#fff}` |
+| arrow-focus | SliderArrow | focus-visible | outline | none → `2px solid --color-accent-primary` (offset 2) | none | `:focus-visible{outline:2px solid var(--color-accent-primary);outline-offset:2px}` |
+| ink-hover | Button/Ink ("Book your service") | hover | background, (arrow) translateX | `#1A2330→#0F1822`, arrow `0→3px` | `--motion-ink-btn` / `--motion-arrow` | as service-page Button/Ink |
+| slider-scroll | .rev-track | arrow click / swipe | scrollLeft | ±(cardWidth + gap) | `scroll-behavior:smooth` | `track.scrollBy({left:±step,behavior:'smooth'})`; step = card.getBoundingClientRect().width + gap |
+| slider-snap | .rev-track | scroll settle | — | nearest card edge | native | `scroll-snap-type:x mandatory` + card `scroll-snap-align:start` (desktop) / `center` (mobile) |
+
+**Notes**
+- The slider is a native scroll-snap carousel; arrows are progressive enhancement (swipe works with JS off). No autoplay.
+- Buttons/links reuse the global button hover/focus/active + link focus rows defined earlier in this file (Call-green, Outline, White, Schedule-accent all apply the standard `filter:brightness(.95)` hover + `translateY(1px)` active + focus ring).
+- Rating summary bars, badges, and the Google "G" marks are **static**.
+- Respect `prefers-reduced-motion: reduce` → keep hover color/shadow changes but drop transforms; the reference PNGs show the static rest state.

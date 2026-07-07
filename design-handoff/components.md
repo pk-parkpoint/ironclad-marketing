@@ -295,3 +295,95 @@ One component, five visual variants. Shared box model unless noted.
 **Global link defaults:** define `a{color:inherit}` reset (as in source) and set body link color/hover from the palette so authored links are never browser-default blue: `a{color:--color-accent-primary}`, `a:hover{color:color-mix(in srgb,--color-accent-primary 80%,#000)}` — except the many `<a>` that are styled buttons/nav (which set their own color).
 
 **Format differences:** identical; on reviews the link drops below the heading block when the header row wraps ≤ ~560px.
+
+---
+
+# REVIEWS PAGE COMPONENTS  (/reviews)
+
+Components unique to the reviews screen. Buttons (Call-green, Outline-photo, Ink, White, Schedule-accent, White-bordered), GoogleRatingBadge, and the promo/header/footer chrome are defined earlier in this file and reused as-is.
+
+## RatingBar
+
+**Appears on:** reviews-page (rating summary ×5)
+
+**Anatomy:** row = star label + track (with fill) + pct label
+
+**Layout:** `display:flex; align-items:center; gap:14px` (mobile 12). Label `width:44px` (mobile 42), left. Track `flex:1; height:10px; border-radius:999px; overflow:hidden`. Pct label `width:40px` (mobile 36), right.
+
+**Styling:** track bg `--color-rating-track`; fill `height:100%; border-radius:999px; background:--color-star-review; width:{pct}`. Label `--type` 13.5/700 `--color-text-muted`; pct 13/600 `--color-rating-pct`.
+
+**Content slots:** label text ("5 star"…"1 star"); fill width % (96/3/1/0/0); pct text.
+
+**States:** default only. hover N/A · focus-visible N/A · active N/A · disabled N/A · loading N/A (static bar).
+
+**Format differences:** desktop gap 14 / label 44 / pct 40; mobile gap 12 / label 42 / pct 36, whole group `max-width:340px; margin:0 auto` (centered).
+
+## SliderCard
+
+**Appears on:** reviews-page (review slider ×8)
+
+**Anatomy:** container → [header row: (avatar + name/time) · Google "G"] → star row → quote `<p>`
+
+**Layout:** `flex:0 0 380px` (mobile 300), `scroll-snap-align:start` (mobile center), flex column. Padding 30 (mobile 26). Header row `display:flex; align-items:center; justify-content:space-between; gap:12; margin-bottom:18` (mobile 16). Avatar+name group `display:flex; align-items:center; gap:12` (mobile 11). Star row `display:flex; gap:2; margin-bottom:14`.
+
+**Styling:** bg `--color-bg-card`; border 1px `--color-border-card-cool`; radius `--radius-slider-card` (20); shadow `--shadow-slider-card`.
+
+**Content slots:** avatar 46 circle (mobile 44), bg = per-review avatar color, initial 18/700 (mobile 17) `--color-text-on-dark`; name `--type-review-name` bumped to 15.5/700 desktop (15 mobile) `--color-text-heading`; time `--type-review-time` 12.5/400 (12 mobile) `--color-text-review-time`; Google "G" 22px (mobile 20); 5 stars 17px `--color-star-review` (mobile 16); quote 15/400/1.62 (mobile 14.5) `--color-text-review`, **no line clamp** (full quote shown, card grows).
+
+**States**
+
+| State | What changes | Transition |
+|---|---|---|
+| default | rest shadow `--shadow-slider-card` | — |
+| **hover** | `transform:translateY(-4px)`, shadow → `0 30px 56px -34px rgba(30,42,56,.55)` | `--motion-rev-card` |
+| focus-visible | N/A (card is not focusable; links inside follow their own) | — |
+| active | N/A | — |
+| disabled / loading / empty | N/A | — |
+
+**Format differences:** as noted inline (basis 380→300, gap 24→16, snap start→center, pad 30→26, avatar 46→44, sizes step down).
+
+## SliderArrow
+
+**Appears on:** reviews-page (slider prev / next) — **desktop only**
+
+**Anatomy:** round `<button>` + chevron `<svg>`
+
+**Layout:** 52×52 circle, `position:absolute; top:50%; transform:translateY(-50%); z-index:5`; `.prev{left:-8px}` `.next{right:-8px}`. Flex-center, `padding:0`. Chevron 22px.
+
+**Styling:** bg #FFFFFF; border 1.5px `--color-slider-arrow-border`; radius `--radius-circle`; shadow `--shadow-slider-arrow`; chevron stroke `--color-text-heading` 2.3.
+
+**Behavior:** click → `track.scrollBy({left: ±(cardWidth+gap), behavior:'smooth'})` (one card).
+
+**States**
+
+| State | What changes | Transition |
+|---|---|---|
+| default | white fill, chevron `--color-text-heading` | — |
+| **hover** | bg → `--color-bg-navy-process` (#1E2A38), border-color same, `transform:translateY(-50%) scale(1.06)`, chevron stroke → #FFFFFF | `--motion-slider-arrow` |
+| **focus-visible** | **PRESCRIBED:** `outline:2px solid --color-accent-primary; outline-offset:2px` | none |
+| active | PRESCRIBED: drop scale to 1.0 | `--dur-fast` |
+| disabled | N/A (track loops via scroll; arrows never disabled in this design) | — |
+
+**Format differences:** **hidden < 640** (`.rev-arrows{display:none}`); slider becomes swipe-only on mobile.
+
+## WallCard
+
+**Appears on:** reviews-page (review wall — 9 desktop / 5 mobile)
+
+**Anatomy:** container → [header row: (avatar + name/time) · star row] → quote `<p>`
+
+**Layout:** inside `columns:3` (desktop) → `break-inside:avoid; margin-bottom:24px`; mobile single flex column gap 16. Padding 26 (mobile 24). Header `display:flex; align-items:center; justify-content:space-between; gap:12; margin-bottom:14`. Avatar+name group `gap:11`. Star row `display:flex; gap:1.5`.
+
+**Styling:** bg `--color-bg-card`; border 1px `--color-border-card-cool`; radius `--radius-card` (18); shadow `--shadow-wall-card`.
+
+**Content slots:** avatar 42 circle, per-review color, initial 700 `--color-text-on-dark`; name 14.5/700 `--color-text-heading`; time 12/400 `--color-text-review-time`; 5 stars 14px `--color-star-review`; quote 14.5/400/1.62 `--color-text-review`, no clamp.
+
+**States**
+
+| State | What changes | Transition |
+|---|---|---|
+| default | rest shadow `--shadow-wall-card` | — |
+| **hover** | `transform:translateY(-3px)`, shadow → `0 24px 48px -32px rgba(30,42,56,.5)` | `--motion-rev-card` |
+| focus-visible / active / disabled / loading / empty | N/A | — |
+
+**Format differences:** desktop `columns:3` masonry (column-first visual order); mobile single column, first 5 cards only (Brian H., Nicole F., Tom S., Carlos M., Frank O.).

@@ -428,3 +428,69 @@
   --gap-areas-split: 54px;            /* area 2-col */
   --gap-chips: 10px;                  /* area chip wrap */
 }
+
+/* Reviews page additions, sourced from design-handoff/tokens.css. */
+.dc-root {
+  --color-accent-primary-reviews: var(--color-accent-primary);
+  --color-bg-page: #FFFFFF;
+  --color-bg-navy: #16202B;
+  --color-text-heading: #1A2330;
+  --color-text-review: #39454F;
+  --color-text-review-time: #8A97A3;
+  --color-text-primary: #1E2A38;
+  --color-text-hero-sub: #D2DCE5;
+  --color-surface-sand-1: #F6F1E9;
+  --color-hero-accent-span: #8CC1EE;
+  --color-glass-fill: #FFFFFF20;
+  --color-glass-border: #FFFFFF3D;
+  --color-outline-on-photo: #FFFFFF78;
+  --color-ink-900: #0F1822;
+  --color-ink-hover: #1B2733;
+  --color-rating-track: #E6DECF;
+  --color-rating-pct: #94A0AB;
+  --color-text-band-body: #B7C4CF;
+  --color-accent-tint-14: color-mix(in srgb, var(--color-accent-primary) 14%, transparent);
+  --color-accent-border-34: color-mix(in srgb, var(--color-accent-primary) 34%, transparent);
+  --color-accent-text-on-sand: #2472B8;
+  --color-border-cta-warm: #DCD3C3;
+  --color-slider-arrow-border: #E1E7EC;
+  --color-avatar-green: #1E9E5A;
+  --color-avatar-blue: #2F7FD1;
+  --color-avatar-orange: #E4572E;
+  --color-avatar-gold: #E0A419;
+  --color-avatar-purple: #7A4FD1;
+  --gradient-call: linear-gradient(180deg, #46A862, #2F8C4D);
+  --gradient-accent-button: linear-gradient(180deg, #3D9BE9, #2F7FD1);
+  --gradient-reviews-hero-scrim-desktop: linear-gradient(100deg, #0F171DF5 0%, #11191FE6 32%, #11191F94 60%, #11191F2E 82%, #11191F05 100%);
+  --gradient-reviews-hero-scrim-mobile: linear-gradient(180deg, #0F171DB3 0%, #11191FD1 55%, #11191FF2 100%);
+  --font-reviews-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --leading-reviews-normal: normal;
+  --motion-fast: all .2s ease;
+  --motion-slider-arrow: background .18s ease, border-color .18s ease, transform .18s ease;
+  --motion-rev-card: transform .2s ease, box-shadow .2s ease;
+  --radius-slider-card: 20px;
+  --radius-review-card: 18px;
+  --shadow-call-lg: 0 18px 34px -18px #168B52CC;
+  --shadow-slider-card: 0 20px 44px -30px #1E2A3866;
+  --shadow-wall-card: 0 16px 38px -30px #1E2A3866;
+  --shadow-slider-arrow: 0 14px 30px -14px #1E2A3866;
+  --shadow-accent-btn: 0 14px 28px -16px #2F7FD1CC;
+  --shadow-sticky-bar: 0 -10px 30px -18px #1E2A3866;
+  --text-shadow-hero-title: 0 2px 26px #0A101699;
+  --text-shadow-hero-sub: 0 1px 18px #0A101673;
+  --scroll-slider: smooth;
+  --type-hero-title-reviews-size-desktop: 64px;
+  --type-hero-title-reviews-size-mobile: 44px;
+  --type-hero-sub-size-desktop: 19px;
+  --type-hero-sub-size-mobile: 16.5px;
+  --type-summary-score-size-desktop: 108px;
+  --type-summary-score-size-mobile: 80px;
+  --type-title-reviews-size-desktop: 50px;
+  --type-title-reviews-size-mobile: 34px;
+  --type-title-wall-size-desktop: 42px;
+  --type-title-wall-size-mobile: 30px;
+  --type-title-band-size-desktop: 38px;
+  --type-title-band-size-mobile: 28px;
+  --type-display-cta-size-desktop: 52px;
+  --type-display-cta-size-mobile: 36px;
+}

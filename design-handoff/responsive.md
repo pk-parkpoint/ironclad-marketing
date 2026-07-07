@@ -95,3 +95,31 @@ Column counts are listed as: **base(≥1241) → ≤1240 → ≤1080 → ≤820 
 - **Footer:** 4-column grid `1.4fr 1fr 1fr 1fr` → **2-col ≤820** (gap 36) → **1-col ≤640** (gap 34). Bottom legal row wraps.
 
 Nothing is left "adjust as needed" — every width from 390 to beyond 1440 resolves to one of the states above.
+
+---
+
+## 5. Reviews page (`/reviews`) — per-screen reflow
+
+**Breakpoints:** 390 base · 640 · 820 · 960 · 1440. Beyond 1440 every section stays centered at its own max-width (hero/band 1080–1240, slider 1280, wall 1200, CTA 760); section background colors remain full-bleed. Side gutters 28px desktop / 20px mobile. Type uses discrete per-breakpoint sizes (no fluid clamp on this screen).
+
+**Section max-widths (centered):** hero 1240 · rating-summary 1080 · slider 1280 · booking-band 1080 · wall 1200 · final-cta 760.
+
+| Range | Hero | Rating summary | Slider | Booking band | Wall | CTA rows |
+|---|---|---|---|---|---|---|
+| **≥1440** | h1 64; CTA row inline | 2-col `0.85fr 1.15fr`, gap 80 | cards 380, ~3 visible + peek; arrows shown | row space-between | `columns:3` | inline |
+| **960–1439** | same (h1 64) | 2-col (gap shrinks fluidly with container) | cards 380, ~2–3 visible; arrows shown | row | `columns:3` (narrower) | inline |
+| **820–959** | same | **1-col centered**, bars `max-width:440` centered | cards 380, ~2 visible; arrows shown | row (may wrap) | **`columns:2`** | inline |
+| **640–819** | same | 1-col centered | cards 380; arrows shown | wraps to stack | `columns:2` | stacks begin |
+| **≤639 (→390)** | h1 44; photo obj-pos 72%; vertical scrim; CTA col full-width | 1-col centered, bars `max-width:340` | **card 300, gap 16, snap center, arrows HIDDEN** | **col stack**, buttons full-width | **1 column, 9→5 cards** | **col stack**, full-width |
+
+**Element-level reflow**
+- **Hero:** `object-position` 78%→72% at ≤640; scrim swaps from left→right horizontal gradient to top→bottom vertical (darker bottom). h1 64→44; subtitle 19→16.5; CTA row → full-width column.
+- **Rating summary:** grid collapses to one centered column at ≤960 (`.summary-split{grid-template-columns:1fr; text-align:center}`); score 108→80; bar group centers (`max-width` 440 ≤960, 340 ≤640).
+- **Slider:** `.rev-arrows{display:none}` ≤640; card basis 380→300; gap 24→16; `scroll-snap-align` start→center so the active card centers with peeks both sides. GoogleAllLink may wrap to 2 lines.
+- **Booking band:** flex row → column ≤640; radial glow dropped at mobile; buttons full-width.
+- **Wall:** `columns:3` → `columns:2` ≤960 → single flex column ≤640; **mobile shows 5 of 9 cards** (first five in DOM order).
+- **Final CTA:** button row → column; h2 52→36.
+- **Sticky CTA:** hidden > 820; `display:flex` fixed-bottom ≤820 (green Call + accent Schedule, `flex:1` each). Add ~68px bottom padding to the last section on ≤820 so it isn't covered.
+- **Chrome:** header nav + outline hidden ≤640 (logo 44→34); footer 4-col → 2-col ≤820 → 1-col ≤640 (as §4 above).
+
+Nothing on this screen is left "adjust as needed"; every width 390→beyond-1440 maps to a row above.
