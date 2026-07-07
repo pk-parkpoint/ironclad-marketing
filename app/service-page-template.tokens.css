@@ -341,6 +341,36 @@
   --motion-pulse-opacity-start: 0.65;
   --motion-pulse-scale-start: 0.55;
   --motion-pulse-scale-end: 1.7;
+  --color-image-placeholder-icon: #BBAD8F;
+  --color-image-placeholder-text: #A2937A;
+  --type-image-placeholder-size: 13px;
+  --type-image-placeholder-weight: 600;
+  --color-chrome-header-border: #EDF1F4;
+  --color-chrome-nav: #34414D;
+  --color-chrome-nav-muted: #9AA7B2;
+  --color-chrome-outline-border: #D7DEE5;
+  --color-chrome-footer: #0F1822;
+  --color-chrome-footer-muted: #9DAAB6;
+  --color-chrome-footer-dim: #6E7C88;
+  --color-chrome-footer-divider: rgba(255,255,255,.08);
+  --gradient-chrome-phone: linear-gradient(180deg, #3D9BE9, #2F7FD1);
+  --shadow-chrome-phone: 0 10px 22px -10px rgba(47,127,209,.8);
+  --type-chrome-promo-size: 13.5px;
+  --type-chrome-promo-weight: 600;
+  --type-chrome-promo-letter-spacing: 0.01em;
+  --type-chrome-nav-size: 16px;
+  --type-chrome-nav-weight: 600;
+  --type-chrome-button-size: 15px;
+  --type-chrome-button-weight: 700;
+  --type-chrome-phone-mobile-size: 14px;
+  --type-chrome-footer-body-size: 14.5px;
+  --type-chrome-footer-phone-size: 18px;
+  --type-chrome-footer-note-size: 13px;
+  --type-chrome-footer-heading-size: 13px;
+  --type-chrome-footer-heading-weight: 700;
+  --type-chrome-footer-heading-letter-spacing: 0.1em;
+  --type-chrome-footer-legal-size: 13px;
+  --state-chrome-separator-opacity: 0.4;
 
   /* ---------------------------------------------------------------------------
      12. SPACING

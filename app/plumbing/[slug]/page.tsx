@@ -57,7 +57,6 @@ export async function generateMetadata({ params }: RouteProps) {
   });
 }
 
-/* Map slugs to hero background images */
 const HERO_IMAGES: Record<string, string> = {
   repairs: "/media/services/plumbing-repairs.jpg",
   "drain-cleaning": "/media/services/drain-cleaning.jpg",
@@ -120,19 +119,24 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
     }),
   );
 
-  /* Build sign cards from symptoms (take first 4 for the 2-col grid) */
   const signCards = detail.symptoms.slice(0, 4).map((symptom) => ({
     title: symptom.split(" ").slice(0, 3).join(" "),
     description: symptom,
   }));
 
+  if (service.slug === "drain-cleaning") {
+    return (
+      <>
+        <StructuredData data={schemas} id={`ld-service-${service.slug}`} />
+        <DrainCleaningPage phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
+      </>
+    );
+  }
+
   return (
     <>
       <SiteHeader />
       <StructuredData data={schemas} id={`ld-service-${service.slug}`} />
-      {service.slug === "drain-cleaning" ? (
-        <DrainCleaningPage phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
-      ) : (
       <main>
         <section className="bg-soft-background pt-6">
           <div className="container-shell">
@@ -290,7 +294,6 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
         <ReviewsSection />
         <ServiceDetailFaqs items={detail.faqs} serviceTitle={service.title} />
       </main>
-      )}
       <SiteFooter />
     </>
   );

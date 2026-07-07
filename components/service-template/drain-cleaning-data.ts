@@ -42,26 +42,32 @@ export const DRAIN_CLEANING_TEMPLATE = {
       [
         "Kitchen & bathroom sink drains",
         "Grease, soap scum, and hair build up in the sinks you use most. We clear the line and get water moving freely again.",
+        "Photo: clearing a kitchen sink drain",
       ],
       [
         "Shower, tub & floor drains",
         "Standing water and slow bathroom drains cleared out, including the floor drains that only act up when it rains.",
+        "Photo: shower or tub drain",
       ],
       [
         "Toilet & fixture clogs",
         "Clogged toilets, laundry standpipes, and the fixtures that keep backing up, cleared without the mess.",
+        "Photo: toilet or fixture repair",
       ],
       [
         "Main line & sewer clogs",
         "When the whole house drains slow, the blockage is in the main line. We locate it and clear it at the source.",
+        "Photo: main line cleanout",
       ],
       [
         "Hydro jetting",
         "A high-pressure water jet scours grease, scale, and tree roots off the pipe walls, not just poking a hole through the clog.",
+        "Photo: hydro jetting equipment",
       ],
       [
         "Sewer camera inspection",
         "An HD camera down the line shows exactly what's going on, so you're not paying to guess at the problem.",
+        "Photo: sewer camera inspection",
       ],
     ],
   },

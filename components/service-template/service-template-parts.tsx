@@ -3,6 +3,7 @@ import {
   AlertTriangle,
   ArrowRight,
   Home,
+  ImageIcon,
   MapPin,
   Phone,
   ShieldCheck,
@@ -125,14 +126,19 @@ export function SignsCallout({ phoneDisplay, phoneHref }: { phoneDisplay: string
   );
 }
 
-export function ImageSlot({ title }: { title: string }) {
-  return <div aria-label={`${title} photo pending`} className="dc-image-slot" role="img" />;
+export function ImageSlot({ caption, title }: { caption?: string; title: string }) {
+  return (
+    <div aria-label={`${title} photo pending`} className="dc-image-slot" role="img">
+      <ImageIcon aria-hidden="true" />
+      {caption ? <span>{caption}</span> : null}
+    </div>
+  );
 }
 
-export function ServiceCard({ title, body }: { title: string; body: string }) {
+export function ServiceCard({ body, caption, title }: { body: string; caption?: string; title: string }) {
   return (
     <article className="dc-service-card">
-      <ImageSlot title={title} />
+      <ImageSlot caption={caption} title={title} />
       <div className="dc-service-card-copy">
         <h3 className="dc-service-card-title">{title}</h3>
         <p>{body}</p>

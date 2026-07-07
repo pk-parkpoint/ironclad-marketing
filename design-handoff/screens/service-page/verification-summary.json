@@ -1,22 +1,22 @@
 {
   "base": [
     {
-      "actualHeight": 8358,
+      "actualHeight": 7186,
       "actualWidth": 1440,
       "diffPath": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/diff-residual-desktop.png",
-      "mismatchedPixels": 3006322,
-      "percent": 24.978746244449763,
+      "mismatchedPixels": 260254,
+      "percent": 2.5150562822772673,
       "referenceHeight": 7181,
       "referenceWidth": 1440,
       "actual": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/actual-desktop.png",
       "name": "desktop"
     },
     {
-      "actualHeight": 13885,
+      "actualHeight": 11744,
       "actualWidth": 390,
       "diffPath": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/diff-residual-mobile.png",
-      "mismatchedPixels": 1871284,
-      "percent": 34.55645734651856,
+      "mismatchedPixels": 210741,
+      "percent": 4.601171138126179,
       "referenceHeight": 11741,
       "referenceWidth": 390,
       "actual": "/Users/15237/conduit-agents/ironclad-marketing-drain-redesign/design-handoff/screens/service-page/actual-mobile.png",

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { DRAIN_CLEANING_TEMPLATE as content } from "./drain-cleaning-data";
+import { ReferenceChrome } from "./reference-chrome";
 import { ServiceTemplateEffects } from "./service-template-effects";
 import {
   AreaChip,
@@ -29,9 +30,11 @@ const BOOKING_HREF = "/book?service=drain-cleaning";
 
 export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPageProps) {
   return (
-    <main className="dc-root" id="dc-root">
-      <ServiceTemplateEffects />
-      <section className="dc-hero" id="hero-section">
+    <div className="dc-root" id="dc-root">
+      <ReferenceChrome phoneDisplay={phoneDisplay} phoneHref={phoneHref}>
+        <ServiceTemplateEffects />
+        <main>
+          <section className="dc-hero" id="hero-section">
         <Image
           alt={content.hero.imageAlt}
           className="dc-hero-img"
@@ -40,6 +43,7 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
           priority
           sizes="100vw"
           src={content.hero.image}
+          unoptimized
         />
         <div className="dc-hero-scrim" />
         <div className="dc-hero-glow" />
@@ -60,9 +64,9 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
             </TemplateButton>
           </div>
         </div>
-      </section>
+          </section>
 
-      <section className="dc-guarantee" id="guarantees">
+          <section className="dc-guarantee" id="guarantees">
         <div className="dc-container dc-container--guarantee">
           <h2 className="dc-section-title-md">Our Ironclad Guarantee</h2>
           <div className="dc-guarantee-grid" data-reveal-group>
@@ -71,9 +75,9 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
             ))}
           </div>
         </div>
-      </section>
+          </section>
 
-      <section className="dc-signs">
+          <section className="dc-signs">
         <div className="dc-container dc-container--signs">
           <h2 className="dc-section-title-lg" data-slot="signs-title">
             {content.signs.title}
@@ -88,9 +92,9 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
           </div>
           <SignsCallout phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
         </div>
-      </section>
+          </section>
 
-      <section className="dc-services">
+          <section className="dc-services">
         <div className="dc-container dc-container--services">
           <h2 className="dc-section-title-lg" data-slot="services-title">
             {content.services.title}
@@ -99,8 +103,8 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
             {content.services.intro}
           </p>
           <div className="dc-service-grid">
-            {content.services.cards.map(([title, body]) => (
-              <ServiceCard body={body} key={title} title={title} />
+            {content.services.cards.map(([title, body, caption]) => (
+              <ServiceCard body={body} caption={caption} key={title} title={title} />
             ))}
           </div>
           <div className="dc-ink-button-row">
@@ -109,9 +113,9 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
             </TemplateButton>
           </div>
         </div>
-      </section>
+          </section>
 
-      <section className="dc-container dc-container--reviews" id="reviews">
+          <section className="dc-container dc-container--reviews" id="reviews">
         <div className="dc-reviews-header">
           <div>
             <h2 className="dc-section-title-md">Austin Homeowners Trust Ironclad</h2>
@@ -124,9 +128,9 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
             <ReviewCard initial={initial} key={name} name={name} quote={quote} time={time} />
           ))}
         </div>
-      </section>
+          </section>
 
-      <section className="dc-why">
+          <section className="dc-why">
         <div className="dc-container dc-container--why">
           <div className="dc-why-split">
             <div className="dc-why-left">
@@ -146,9 +150,9 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
             <StatCell key={label} label={label} value={value} />
           ))}
         </div>
-      </section>
+          </section>
 
-      <section className="dc-process">
+          <section className="dc-process">
         <div className="dc-container dc-container--process">
           <div className="dc-process-header">
             <Eyebrow variant="navy">Our Process</Eyebrow>
@@ -160,9 +164,9 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
             ))}
           </div>
         </div>
-      </section>
+          </section>
 
-      <section className="dc-container dc-container--areas" id="areas">
+          <section className="dc-container dc-container--areas" id="areas">
         <div className="dc-area-split">
           <RadarGraphic />
           <div className="dc-area-copy">
@@ -180,9 +184,9 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
             </TemplateButton>
           </div>
         </div>
-      </section>
+          </section>
 
-      <section className="dc-faq-section">
+          <section className="dc-faq-section">
         <div className="dc-container dc-container--faq">
           <h2 className="dc-section-title-md">Drain Cleaning FAQ</h2>
           <div className="dc-faq-list">
@@ -191,9 +195,9 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
             ))}
           </div>
         </div>
-      </section>
+          </section>
 
-      <section className="dc-final-cta">
+          <section className="dc-final-cta">
         <div className="dc-container dc-container--cta">
           <span className="dc-cta-badge">10% off your first service</span>
           <h2 className="dc-section-title-md" data-slot="cta-title">
@@ -209,7 +213,9 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
             </TemplateButton>
           </div>
         </div>
-      </section>
+          </section>
+        </main>
+      </ReferenceChrome>
 
       <div className="dc-sticky-cta">
         <TemplateButton href={phoneHref} icon="phone" variant="stickyCall">
@@ -219,6 +225,6 @@ export function DrainCleaningPage({ phoneDisplay, phoneHref }: DrainCleaningPage
           Schedule Online
         </TemplateButton>
       </div>
-    </main>
+    </div>
   );
 }
