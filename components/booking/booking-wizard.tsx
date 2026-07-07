@@ -86,7 +86,7 @@ const STEPS = [
   { number: 4, label: "Confirm Details" },
 ];
 
-type BookingWizardProps = {
+export type BookingWizardProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   initialServiceSlug?: string;
@@ -510,17 +510,28 @@ function StepProgress({
   currentStep: number;
   onGoToStep: (step: number) => void;
 }) {
-  const fillClass = joinClasses(
-    styles.progressFill,
-    currentStep === 2 && styles.progressFillStep2,
-    currentStep === 3 && styles.progressFillStep3,
-    currentStep >= 4 && styles.progressFillStep4,
-  );
+  const completedSegments = Math.max(0, Math.min(currentStep - 1, STEPS.length - 1));
+  const segmentPositionClasses = [
+    styles.progressSegmentOne,
+    styles.progressSegmentTwo,
+    styles.progressSegmentThree,
+  ];
 
   return (
     <div className={styles.progress} aria-label={`Step ${currentStep} of 4`}>
       <div className={styles.progressTrack} aria-hidden="true">
-        <div className={fillClass} />
+        {segmentPositionClasses.map((segmentClass, index) => (
+          <span
+            className={joinClasses(
+              styles.progressSegment,
+              segmentClass,
+              index < completedSegments && styles.progressSegmentComplete,
+            )}
+            key={segmentClass}
+          >
+            <span className={styles.progressSegmentFill} />
+          </span>
+        ))}
       </div>
       <div className={styles.progressNodes}>
         {STEPS.map((step) => {

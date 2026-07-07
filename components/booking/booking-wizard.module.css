@@ -245,6 +245,9 @@
   --radius-caldaycell:  12px;   /* calendar day hit cell */
   --radius-checkbox:    7px;    /* consent/pets checkbox */
   --radius-progress-rail: 3px;  /* progress rail and fill */
+  --size-progress-node: 34px;
+  --size-progress-rail: 3px;
+  --gap-progress-node-rail: 2px;
 
   /* ------------------------------------------------------------------ */
   /* BORDERS                                                             */
@@ -310,7 +313,7 @@
   --motion-fast:      all 0.2s ease;                       /* buttons, chips, hovers */
   --motion-spring:    all 0.22s cubic-bezier(0.22, 1, 0.36, 1); /* option/day/slot selection */
   --motion-field:     border-color 0.2s, box-shadow 0.25s, background 0.2s; /* input focus */
-  --motion-fill:      width 0.7s cubic-bezier(0.22, 1, 0.36, 1); /* progress rail fill */
+  --motion-fill:      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); /* progress rail fill */
   --motion-node:      all 0.45s cubic-bezier(0.22, 1, 0.36, 1);  /* step node state change */
   --motion-screen:    0.5s cubic-bezier(0.22, 1, 0.36, 1);       /* step-to-step wipe */
   --motion-rise:      0.4s ease;                            /* riseIn reveals */
@@ -553,47 +556,61 @@
 .progress {
   position: relative;
   padding-top: 0;
+  --progress-node-radius: calc(var(--size-progress-node) / 2);
+  --progress-segment-offset: calc(var(--progress-node-radius) + var(--gap-progress-node-rail));
 }
 
 .progressTrack {
   position: absolute;
-  top: 16px;
-  left: 12.5%;
-  right: 12.5%;
-  height: 3px;
-  border-radius: var(--radius-progress-rail);
+  top: calc((var(--size-progress-node) - var(--size-progress-rail)) / 2);
+  left: 0;
+  right: 0;
+  z-index: 0;
+  height: var(--size-progress-rail);
+  pointer-events: none;
 }
 
-.progressTrack {
-  background: var(--color-track-bg);
-  overflow: hidden;
-}
-
-.progressFill {
+.progressSegment {
   position: absolute;
-  inset: 0 auto 0 0;
+  top: 0;
   height: 100%;
-  right: auto;
-  width: 0;
+  overflow: hidden;
   border-radius: var(--radius-progress-rail);
+  background: var(--color-track-bg);
+}
+
+.progressSegmentOne {
+  left: calc(12.5% + var(--progress-segment-offset));
+  right: calc(62.5% + var(--progress-segment-offset));
+}
+
+.progressSegmentTwo {
+  left: calc(37.5% + var(--progress-segment-offset));
+  right: calc(37.5% + var(--progress-segment-offset));
+}
+
+.progressSegmentThree {
+  left: calc(62.5% + var(--progress-segment-offset));
+  right: calc(12.5% + var(--progress-segment-offset));
+}
+
+.progressSegmentFill {
+  position: absolute;
+  inset: 0;
   background: var(--gradient-progress-fill);
   box-shadow: var(--shadow-progress-fill);
+  transform: scaleX(0);
+  transform-origin: left center;
   transition: var(--motion-fill);
 }
 
-.progressFillStep2 {
-  width: 33.4%;
-}
-
-.progressFillStep3 {
-  width: 66.7%;
-}
-
-.progressFillStep4 {
-  width: 100%;
+.progressSegmentComplete .progressSegmentFill {
+  transform: scaleX(1);
 }
 
 .progressNodes {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
@@ -607,8 +624,8 @@
 
 .stepNode {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: var(--size-progress-node);
+  height: var(--size-progress-node);
   place-items: center;
   border: 1.5px solid var(--color-card-border);
   border-radius: var(--radius-pill);
