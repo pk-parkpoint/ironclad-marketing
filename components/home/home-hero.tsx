@@ -68,6 +68,7 @@ export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
           priority
           sizes="100vw"
           src="/hero/ironclad-hero-poster.jpg"
+          unoptimized
         />
       </div>
 
