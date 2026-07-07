@@ -334,7 +334,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
   }
 
   async function selectWindow(window: PublicBookingWindow): Promise<boolean> {
-    const hold = await holdWindow(window);
+    const hold = await holdWindow(window, formDataRef.current);
     if (!hold) return false;
     const label = window.arrivalWindowLabel || window.displayLabel || null;
     updateFormData({

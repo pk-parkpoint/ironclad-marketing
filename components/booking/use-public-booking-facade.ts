@@ -155,14 +155,17 @@ export function usePublicBookingFacade() {
   }, []);
 
   const holdWindow = useCallback(
-    async (window: PublicBookingWindow) => {
+    async (window: PublicBookingWindow, formData: WizardFormData) => {
       await releaseHold();
       setHoldError(null);
       setBookError(null);
       try {
         const hold = await holdPublicBookingWindow({
+          durationEstimateMinutes: DURATION_ESTIMATE_MINUTES,
           idempotencyKey: `${window.offerId}-${Date.now()}`,
+          issueSummary: buildIssueSummary(formData),
           offerId: window.offerId,
+          serviceType: schedulerServiceType(formData),
           windowId: window.windowId,
         });
         const active = { ...hold, startTime: window.startTime, endTime: window.endTime };

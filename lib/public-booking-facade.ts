@@ -79,9 +79,12 @@ export function searchPublicBookingAvailability(request: {
 }
 
 export function holdPublicBookingWindow(request: {
+  durationEstimateMinutes?: number;
   windowId: string;
   offerId: string;
   idempotencyKey: string;
+  issueSummary?: string;
+  serviceType?: string;
 }): Promise<PublicBookingHoldResponse> {
   return postFacade("hold", request);
 }
