@@ -33,3 +33,21 @@ test("location booking links with query strings open the wizard in place", async
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
   expect(new URL(page.url()).pathname).toBe("/service-area/austin-tx");
 });
+
+test("standard service page booking links open the wizard in place", async ({ page }) => {
+  await page.goto("/plumbing/repairs");
+
+  await page.getByRole("link", { name: "Schedule Now" }).first().click();
+
+  await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
+  expect(new URL(page.url()).pathname).toBe("/plumbing/repairs");
+});
+
+test("service template booking links open the wizard in place", async ({ page }) => {
+  await page.goto("/plumbing/drain-cleaning");
+
+  await page.getByRole("link", { name: "Schedule Now" }).first().click();
+
+  await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
+  expect(new URL(page.url()).pathname).toBe("/plumbing/drain-cleaning");
+});

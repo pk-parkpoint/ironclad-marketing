@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { WizardFormData } from "./booking-wizard";
+import styles from "./booking-wizard.module.css";
 
 type GoogleAddressComponent = {
   long_name: string;
@@ -100,7 +101,11 @@ type Props = {
 };
 
 const inputClass =
-  "mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 outline-none transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500";
+  styles.fieldControl;
+
+function fieldGroupClass(hasError?: string) {
+  return `${styles.fieldGroup} ${hasError ? styles.fieldError : ""}`;
+}
 
 export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSubmitting, submitError }: Props) {
   const [errors, setErrors] = useState<FormErrors>({});
@@ -174,42 +179,45 @@ export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSub
   }
 
   return (
-    <div className="flex-1 overflow-y-auto px-8 py-6">
-      <h3 className="text-2xl font-semibold text-gray-900">Enter your information</h3>
-      <p className="mt-1 text-sm text-gray-500">So we can reach you about your appointment.</p>
+    <div data-testid="booking-step-3">
+      <h1 className={styles.heading}>Enter your information</h1>
+      <p className={styles.subcopy}>So we can reach you about your appointment.</p>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <div>
-          <label className={`text-sm font-medium ${errors.firstName ? "text-red-600" : "text-gray-600"}`}>
+      <div className={styles.fieldGrid}>
+        <div className={fieldGroupClass(errors.firstName)}>
+          <label className={styles.fieldLabel} htmlFor="booking-first-name">
             First name
           </label>
           <input
+            id="booking-first-name"
             className={inputClass}
             type="text"
             value={formData.firstName}
             onChange={(e) => { onUpdate({ firstName: e.target.value }); clearError("firstName"); }}
           />
-          {errors.firstName && <span className="mt-1 block text-xs text-red-600">{errors.firstName}</span>}
+          {errors.firstName && <span className={styles.errorMessage}>{errors.firstName}</span>}
         </div>
 
-        <div>
-          <label className={`text-sm font-medium ${errors.lastName ? "text-red-600" : "text-gray-600"}`}>
+        <div className={fieldGroupClass(errors.lastName)}>
+          <label className={styles.fieldLabel} htmlFor="booking-last-name">
             Last name
           </label>
           <input
+            id="booking-last-name"
             className={inputClass}
             type="text"
             value={formData.lastName}
             onChange={(e) => { onUpdate({ lastName: e.target.value }); clearError("lastName"); }}
           />
-          {errors.lastName && <span className="mt-1 block text-xs text-red-600">{errors.lastName}</span>}
+          {errors.lastName && <span className={styles.errorMessage}>{errors.lastName}</span>}
         </div>
 
-        <div>
-          <label className={`text-sm font-medium ${errors.phone ? "text-red-600" : "text-gray-600"}`}>
+        <div className={fieldGroupClass(errors.phone)}>
+          <label className={styles.fieldLabel} htmlFor="booking-phone">
             Phone number
           </label>
           <input
+            id="booking-phone"
             className={inputClass}
             type="tel"
             inputMode="tel"
@@ -217,28 +225,30 @@ export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSub
             onChange={(e) => { onUpdate({ phone: formatPhone(e.target.value) }); clearError("phone"); }}
             placeholder="(833) 597-1932"
           />
-          {errors.phone && <span className="mt-1 block text-xs text-red-600">{errors.phone}</span>}
+          {errors.phone && <span className={styles.errorMessage}>{errors.phone}</span>}
         </div>
 
-        <div>
-          <label className={`text-sm font-medium ${errors.email ? "text-red-600" : "text-gray-600"}`}>
+        <div className={fieldGroupClass(errors.email)}>
+          <label className={styles.fieldLabel} htmlFor="booking-email">
             Email (optional)
           </label>
           <input
+            id="booking-email"
             className={inputClass}
             type="email"
             value={formData.email}
             onChange={(e) => { onUpdate({ email: e.target.value }); clearError("email"); }}
             placeholder="name@example.com"
           />
-          {errors.email && <span className="mt-1 block text-xs text-red-600">{errors.email}</span>}
+          {errors.email && <span className={styles.errorMessage}>{errors.email}</span>}
         </div>
 
-        <div className="sm:col-span-2">
-          <label className={`text-sm font-medium ${errors.addressFormatted ? "text-red-600" : "text-gray-600"}`}>
+        <div className={`${fieldGroupClass(errors.addressFormatted)} ${styles.fieldSpan}`}>
+          <label className={styles.fieldLabel} htmlFor="booking-address">
             Service address
           </label>
           <input
+            id="booking-address"
             ref={addressRef}
             autoComplete="off"
             className={inputClass}
@@ -248,40 +258,40 @@ export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSub
             placeholder="Start typing your address"
           />
           {errors.addressFormatted && (
-            <span className="mt-1 block text-xs text-red-600">{errors.addressFormatted}</span>
+            <span className={styles.errorMessage}>{errors.addressFormatted}</span>
           )}
         </div>
       </div>
 
       {/* Consent */}
-      <label className="mt-6 flex items-start gap-3 text-xs text-gray-500 leading-relaxed">
+      <label className={`${styles.checkboxRow} mt-6`}>
         <input
           type="checkbox"
           checked={consented}
           onChange={(e) => { setConsented(e.target.checked); if (e.target.checked) setConsentError(false); }}
           className="mt-0.5 h-4 w-4 rounded border-gray-300"
         />
-        <span>
+        <span className={styles.checkboxCaption}>
           By continuing, I consent to receive communications regarding my service request via phone, text, or
           email and agree to the terms of service and privacy policy.
         </span>
       </label>
-      {consentError && <p className="mt-1 text-xs text-red-600">Please accept to continue.</p>}
+      {consentError && <p className={styles.errorMessage}>Please accept to continue.</p>}
 
-      {submitError && <p className="mt-4 text-sm text-red-600">{submitError}</p>}
+      {submitError && <p className={styles.errorMessage}>{submitError}</p>}
 
       {/* Navigation */}
-      <div className="mt-6 flex items-center gap-3">
+      <div className={styles.buttonRow}>
         <button
           type="button"
-          className="focus-ring rounded-full border border-gray-300 px-6 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50"
+          className={styles.secondaryButton}
           onClick={onBack}
         >
           Back
         </button>
         <button
           type="button"
-          className="focus-ring rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+          className={styles.primaryButton}
           disabled={isSubmitting}
           onClick={handleSubmit}
         >

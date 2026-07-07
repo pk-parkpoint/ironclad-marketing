@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { trackLeadSubmitSuccess } from "@/lib/analytics";
 import { derivePageContext } from "@/lib/analytics-page-context";
 import type { BookingConfirmation, WizardFormData } from "./booking-wizard";
+import styles from "./booking-wizard.module.css";
 
 type Props = {
   formData: WizardFormData;
@@ -37,16 +38,12 @@ function PillToggle({
   onChange: (id: string) => void;
 }) {
   return (
-    <div className="flex gap-2">
+    <div className={styles.chipRow}>
       {options.map((opt) => (
         <button
           key={opt.id}
           type="button"
-          className={`focus-ring rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
-            value === opt.id
-              ? "border-blue-600 bg-blue-50 text-blue-700"
-              : "border-gray-200 text-gray-600 hover:border-gray-400"
-          }`}
+          className={`${styles.chip} ${value === opt.id ? styles.chipSelected : ""}`}
           onClick={() => onChange(opt.id)}
         >
           {opt.label}
@@ -101,68 +98,60 @@ export function BookingStepConfirm({
       formData.selectedWindowLabel || TIME_LABELS[formData.timeOfDay || ""] || formData.timeOfDay || "Flexible";
     const dateLabel = formatDateLabel(formData.selectedDate);
     return (
-      <div className="flex flex-1 flex-col items-center justify-center px-8 py-10 text-center">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-          <svg className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m5 13 4 4L19 7" />
-          </svg>
-        </div>
-        <h3 className="mt-5 text-xl font-semibold text-gray-900">
+      <div className={styles.farewell}>
+        <div className={styles.checkBadge}>✓</div>
+        <h1 className={styles.farewellTitle}>
           Thank you for trusting Ironclad Plumbing
-        </h3>
-        <p className="mt-3 max-w-sm text-sm leading-relaxed text-gray-500">
-          Your <span className="font-medium text-gray-700">{timeLabel}</span> appointment on{" "}
-          <span className="font-medium text-gray-700">{dateLabel}</span> is confirmed.
+        </h1>
+        <p className={styles.farewellCopy}>
+          Your <strong>{timeLabel}</strong> appointment on{" "}
+          <strong>{dateLabel}</strong> is confirmed.
           Please feel free to contact us at any time with further questions. Our team will be in touch.
         </p>
-        <p className="mt-6 text-xs text-gray-400">This window will close automatically.</p>
+        <p className={styles.farewellFootnote}>This window will close automatically.</p>
       </div>
     );
   }
 
   return (
-    <div className="flex-1 overflow-y-auto px-8 py-6">
+    <div className={styles.confirmStack} data-testid="booking-step-4">
       {/* Confirmation banner */}
-      <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-          <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m5 13 4 4L19 7" />
-          </svg>
-        </div>
-        <h3 className="mt-3 text-xl font-semibold text-gray-900">Your appointment is confirmed!</h3>
+      <div className={styles.confirmationBanner}>
+        <div className={styles.checkBadge}>✓</div>
+        <h1 className={styles.confirmationTitle}>Your appointment is confirmed!</h1>
       </div>
 
       {(displayBookingId || confirmation?.appointmentId || formData.selectedWindowLabel) && (
-        <div className="mt-5 rounded-xl border border-border bg-white p-4">
-          <dl className="space-y-3 text-sm">
+        <div className={styles.summaryCard}>
+          <dl>
             {confirmation?.confirmationNumber && (
-              <div className="flex items-center justify-between gap-4">
-                <dt className="text-muted">Confirmation</dt>
-                <dd className="font-semibold text-ink">{confirmation.confirmationNumber}</dd>
+              <div className={styles.summaryRow}>
+                <dt className={styles.summaryLabel}>Confirmation</dt>
+                <dd className={styles.summaryValue}>{confirmation.confirmationNumber}</dd>
               </div>
             )}
             {displayBookingId && (
-              <div className="flex items-center justify-between gap-4">
-                <dt className="text-muted">Booking ID</dt>
-                <dd className="font-semibold text-ink">{displayBookingId}</dd>
+              <div className={styles.summaryRow}>
+                <dt className={styles.summaryLabel}>Booking ID</dt>
+                <dd className={styles.summaryValue}>{displayBookingId}</dd>
               </div>
             )}
             {confirmation?.appointmentId && (
-              <div className="flex items-center justify-between gap-4">
-                <dt className="text-muted">Appointment ID</dt>
-                <dd className="font-semibold text-ink">{confirmation.appointmentId}</dd>
+              <div className={styles.summaryRow}>
+                <dt className={styles.summaryLabel}>Appointment ID</dt>
+                <dd className={styles.summaryValue}>{confirmation.appointmentId}</dd>
               </div>
             )}
             {formData.selectedWindowLabel && (
-              <div className="flex items-center justify-between gap-4">
-                <dt className="text-muted">Arrival window</dt>
-                <dd className="font-semibold text-ink">{formData.selectedWindowLabel}</dd>
+              <div className={`${styles.summaryRow} ${styles.summaryRowLast}`}>
+                <dt className={styles.summaryLabel}>Arrival window</dt>
+                <dd className={styles.summaryValue}>{formData.selectedWindowLabel}</dd>
               </div>
             )}
           </dl>
           {confirmation?.manageUrl && (
             <a
-              className="focus-ring mt-4 inline-flex w-full justify-center rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+              className={`${styles.primaryButton} ${styles.primaryButtonWide}`}
               href={confirmation.manageUrl}
             >
               Manage appointment
@@ -172,15 +161,17 @@ export function BookingStepConfirm({
       )}
 
       {/* Optional extras */}
-      <p className="mt-6 text-sm text-gray-500">
+      <p className={styles.helperLine}>
         These fields are optional but help our technician prepare for your visit.
       </p>
 
       {/* Additional notes */}
-      <div className="mt-4">
-        <label className="text-sm font-medium text-gray-600">Anything we should know before arrival?</label>
+      <div className={styles.optionalGroup}>
+      <div>
+        <label className={styles.optionalLabel} htmlFor="booking-notes">Anything we should know before arrival?</label>
         <textarea
-          className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 outline-none transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          id="booking-notes"
+          className={`${styles.fieldControl} ${styles.textarea}`}
           rows={3}
           onChange={(e) => onUpdate({ additionalNotes: e.target.value })}
           placeholder="Special access instructions, details about the issue, etc."
@@ -189,9 +180,9 @@ export function BookingStepConfirm({
       </div>
 
       {/* Property type */}
-      <div className="mt-5">
-        <label className="text-sm font-medium text-gray-600">Property type</label>
-        <div className="mt-2">
+      <div>
+        <p className={styles.groupLabel}>Property type</p>
+        <div>
           <PillToggle
             options={[
               { id: "residential", label: "Residential" },
@@ -204,9 +195,9 @@ export function BookingStepConfirm({
       </div>
 
       {/* Ownership */}
-      <div className="mt-5">
-        <label className="text-sm font-medium text-gray-600">Ownership</label>
-        <div className="mt-2">
+      <div>
+        <p className={styles.groupLabel}>Ownership</p>
+        <div>
           <PillToggle
             options={[
               { id: "own", label: "I own this property" },
@@ -219,10 +210,11 @@ export function BookingStepConfirm({
       </div>
 
       {/* Gate code */}
-      <div className="mt-5">
-        <label className="text-sm font-medium text-gray-600">Gate code(s)</label>
+      <div className={styles.fieldGroup}>
+        <label className={styles.fieldLabel} htmlFor="booking-gate-code">Gate code(s)</label>
         <input
-          className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 outline-none transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          id="booking-gate-code"
+          className={styles.fieldControl}
           type="text"
           value={formData.gateCode}
           onChange={(e) => onUpdate({ gateCode: e.target.value })}
@@ -231,25 +223,25 @@ export function BookingStepConfirm({
       </div>
 
       {/* Pets */}
-      <label className="mt-5 flex items-center gap-3 text-sm text-gray-700">
+      <label className={styles.checkboxRow}>
         <input
           type="checkbox"
           checked={formData.petsOnPremise}
           onChange={(e) => onUpdate({ petsOnPremise: e.target.checked })}
           className="h-4 w-4 rounded border-gray-300"
         />
-        Pets on premise
+        <span className={styles.checkboxCaption}>Pets on premise</span>
       </label>
 
       {/* Contact preference */}
-      <div className="mt-5">
-        <label className="text-sm font-medium text-gray-600">Contact preference</label>
-        <div className="mt-2 flex flex-wrap gap-3">
+      <div>
+        <p className={styles.groupLabel}>Contact preference</p>
+        <div className={styles.radioRow}>
           {["Call", "Text", "Either"].map((label) => {
             const value = label.toLowerCase();
             const selected = formData.contactPreference[0] === value;
             return (
-              <label key={value} className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+              <label key={value} className={styles.radioChoice}>
                 <input
                   type="radio"
                   name="contactPreference"
@@ -265,13 +257,12 @@ export function BookingStepConfirm({
       </div>
 
       {/* Done */}
-      <div className="mt-6">
         <button
           type="button"
-          className="focus-ring rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+          className={`${styles.primaryButton} ${styles.primaryButtonLarge}`}
           onClick={handleDone}
         >
-          Done
+          Submit Additional Details
         </button>
       </div>
     </div>

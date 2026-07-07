@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { parseAttribution } from "@/lib/analytics";
+import { getPublicContactInfo } from "@/lib/contact";
 import {
   BOOKING_SCREEN_IDS,
   buildBookingLeadPayload,
@@ -26,6 +28,7 @@ import { BookingStepContact } from "./booking-step-contact";
 import { BookingStepConfirm } from "./booking-step-confirm";
 import { usePublicBookingFacade } from "./use-public-booking-facade";
 import type { PublicBookingWindow } from "@/lib/public-booking-facade";
+import styles from "./booking-wizard.module.css";
 
 export type WizardFormData = {
   serviceCategory: string | null;
@@ -98,10 +101,15 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
   });
 }
 
+function joinClasses(...classes: Array<string | false | null | undefined>): string {
+  return classes.filter(Boolean).join(" ");
+}
+
 export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
   const pathname = usePathname() ?? "/";
   const searchParams = useSearchParams();
   const [currentStep, setCurrentStep] = useState(1);
+  const [direction, setDirection] = useState<"forward" | "back">("forward");
   const [formData, setFormData] = useState<WizardFormData>(INITIAL_FORM_DATA);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | undefined>();
@@ -119,6 +127,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
   const pathnameRef = useRef(pathname);
   const searchParamsRef = useRef(searchParams);
   const sendAbandonmentRef = useRef<(args: { useBeacon: boolean }) => void>(() => {});
+  const { phoneDisplay, phoneHref } = getPublicContactInfo();
 
   useEffect(() => {
     formDataRef.current = formData;
@@ -206,6 +215,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
     formDataRef.current = INITIAL_FORM_DATA;
     currentStepRef.current = 1;
     bookingIdRef.current = undefined;
+    setDirection("forward");
     setCurrentStep(1);
     setFormData(INITIAL_FORM_DATA);
     setIsSubmitting(false);
@@ -362,127 +372,181 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
     }
   }
 
+  function moveToStep(step: number) {
+    setDirection(step < currentStepRef.current ? "back" : "forward");
+    setCurrentStep(step);
+  }
+
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[1000] flex items-end justify-center bg-black/45 p-0 sm:items-center sm:p-4">
-      <div
-        ref={modalRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="booking-wizard-title"
-        aria-describedby="booking-wizard-desc"
-        className="booking-modal-sheet flex h-[100dvh] w-full max-w-[600px] flex-col bg-background shadow-lg sm:h-auto sm:max-h-[96vh] sm:rounded-[var(--radius-modal)]"
-      >
-        <div className="flex items-center justify-end px-5 pt-4 pb-0">
-          <button
-            ref={closeButtonRef}
-            aria-label="Close booking modal"
-            className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600"
-            onClick={handleDismiss}
-            type="button"
-          >
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-          </button>
-          <h2 className="sr-only" id="booking-wizard-title">Request an Appointment</h2>
-        </div>
-        <p className="sr-only" id="booking-wizard-desc">
-          Booking request dialog. Press Escape to close.
-        </p>
-        <p aria-live="polite" className="sr-only">
-          {`Step ${currentStep} of 4.`}
-        </p>
-
-        {/* Progress Bar */}
-        <div className="px-5 pb-4">
-          <div className="relative flex justify-between">
-            {/* Connecting lines — positioned through center of circles */}
-            <div className="absolute left-0 right-0 top-3.5 flex px-[14px]">
-              {STEPS.slice(1).map((s, i) => (
-                <div key={s.number} className={`h-0.5 flex-1 ${currentStep > i + 1 ? "bg-blue-600" : "bg-gray-200"}`} />
-              ))}
+    <div
+      ref={modalRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="booking-wizard-title"
+      aria-describedby="booking-modal-description"
+      className={styles.page}
+    >
+      <div className={styles.blobA} aria-hidden="true" />
+      <div className={styles.blobB} aria-hidden="true" />
+      <div className={styles.stack}>
+        <div className={styles.brandHeader}>
+          <div className={styles.brandMarkRow}>
+            <Image
+              className={styles.brandMark}
+              src="/ironclad-booking/ironclad-mark.png"
+              alt=""
+              width={66}
+              height={66}
+              priority
+            />
+            <div className={styles.wordmark} aria-label="Ironclad Plumbing">
+              <span>IRONCLAD</span>
+              <span>PLUMBING</span>
             </div>
-            {/* Circles + labels */}
-            {STEPS.map((s) => (
-              <div key={s.number} className="relative z-10 flex flex-col items-center gap-1">
-                <div
-                  className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold transition-colors ${
-                    currentStep > s.number
-                      ? "bg-blue-600 text-white"
-                      : currentStep === s.number
-                        ? "bg-blue-600 text-white"
-                        : "border border-gray-300 bg-white text-gray-400"
-                  }`}
-                >
-                  {currentStep > s.number ? (
-                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m5 13 4 4L19 7" />
-                    </svg>
-                  ) : (
-                    s.number
-                  )}
-                </div>
-                <span className={`text-[10px] font-medium ${currentStep >= s.number ? "text-blue-600" : "text-gray-400"}`}>
-                  {s.label}
-                </span>
-              </div>
-            ))}
+          </div>
+          <div className={styles.trustBar} aria-label="Ironclad Plumbing trust signals">
+            <span>
+              <span className={styles.trustStars}>★★★★★</span>{" "}
+              <span className={styles.trustStrong}>5.0</span> · 142 Google reviews
+            </span>
+            <span className={styles.trustBullet}>•</span>
+            <span className={styles.trustItem}>Locally Owned</span>
+            <span className={styles.trustBullet}>•</span>
+            <span className={styles.trustItem}>24/7 Service</span>
+            <span className={styles.trustBullet}>•</span>
+            <span className={styles.trustItem}>Licensed &amp; Insured</span>
+            <span className={styles.trustBullet}>•</span>
+            <a className={styles.trustPhone} href={phoneHref}>
+              {phoneDisplay}
+            </a>
           </div>
         </div>
+        <section className={styles.frame} aria-label="Booking wizard">
+          <div className={styles.panel}>
+            <header className={styles.header}>
+              <button
+                ref={closeButtonRef}
+                aria-label="Close booking modal"
+                className={styles.closeButton}
+                onClick={handleDismiss}
+                type="button"
+              >
+                ×
+              </button>
+              <h2 className="sr-only" id="booking-wizard-title">
+                Request an Appointment
+              </h2>
+              <StepProgress currentStep={currentStep} onGoToStep={moveToStep} />
+            </header>
+            <p className="sr-only" id="booking-modal-description">
+              Booking request dialog. Press Escape to close.
+            </p>
+            <p aria-live="polite" className="sr-only">
+              {`Step ${currentStep} of 4.`}
+            </p>
 
-        <div key={currentStep} className="animate-fade-in flex min-h-0 flex-1 flex-col overflow-y-auto">
-          {currentStep === 1 && (
-            <BookingStepSelectIssue formData={formData} onUpdate={updateFormData} onNext={() => setCurrentStep(2)} />
-          )}
-          {currentStep === 2 && (
-            <BookingStepSchedule
-              formData={formData}
-              windowsByDate={bookingFacade.windowsByDate}
-              loadingDate={bookingFacade.loadingDate}
-              searchError={bookingFacade.searchError}
-              holdError={bookingFacade.holdError}
-              remainingSeconds={bookingFacade.remainingSeconds}
-              onUpdate={updateFormData}
-              onSelectDate={selectDate}
-              onSelectWindow={selectWindow}
-              onRefresh={refreshSelectedDate}
-              onBack={() => setCurrentStep(1)}
-              onNext={() => setCurrentStep(3)}
-            />
-          )}
-          {currentStep === 3 && (
-            <BookingStepContact
-              formData={formData}
-              onUpdate={updateFormData}
-              onBack={() => setCurrentStep(2)}
-              onSubmit={async () => {
-                const ok = await handleSubmit();
-                if (ok) setCurrentStep(4);
-              }}
-              isSubmitting={isSubmitting}
-              submitError={submitError || bookingFacade.bookError || undefined}
-            />
-          )}
-          {currentStep === 4 && (
-            <BookingStepConfirm
-              formData={formData}
-              onUpdate={updateFormData}
-              bookingId={bookingId}
-              confirmation={confirmation}
-              onDismiss={() => onOpenChange(false)}
-              onClose={() => { void sendCompletedNotification(); }}
-            />
-          )}
-        </div>
+            <div className={styles.body}>
+              <div
+                key={currentStep}
+                className={joinClasses(styles.stepContent, direction === "back" && styles.stepContentBack)}
+              >
+                {currentStep === 1 && (
+                  <BookingStepSelectIssue formData={formData} onUpdate={updateFormData} onNext={() => moveToStep(2)} />
+                )}
+                {currentStep === 2 && (
+                  <BookingStepSchedule
+                    formData={formData}
+                    windowsByDate={bookingFacade.windowsByDate}
+                    loadingDate={bookingFacade.loadingDate}
+                    searchError={bookingFacade.searchError}
+                    holdError={bookingFacade.holdError}
+                    remainingSeconds={bookingFacade.remainingSeconds}
+                    onUpdate={updateFormData}
+                    onSelectDate={selectDate}
+                    onSelectWindow={selectWindow}
+                    onRefresh={refreshSelectedDate}
+                    onBack={() => moveToStep(1)}
+                    onNext={() => moveToStep(3)}
+                  />
+                )}
+                {currentStep === 3 && (
+                  <BookingStepContact
+                    formData={formData}
+                    onUpdate={updateFormData}
+                    onBack={() => moveToStep(2)}
+                    onSubmit={async () => {
+                      const ok = await handleSubmit();
+                      if (ok) moveToStep(4);
+                    }}
+                    isSubmitting={isSubmitting}
+                    submitError={submitError || bookingFacade.bookError || undefined}
+                  />
+                )}
+                {currentStep === 4 && (
+                  <BookingStepConfirm
+                    formData={formData}
+                    onUpdate={updateFormData}
+                    bookingId={bookingId}
+                    confirmation={confirmation}
+                    onDismiss={() => onOpenChange(false)}
+                    onClose={() => { void sendCompletedNotification(); }}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-      <button
-        aria-label="Close booking modal"
-        className="absolute inset-0 -z-10"
-        onClick={handleDismiss}
-        type="button"
-      />
+    </div>
+  );
+}
+
+function StepProgress({
+  currentStep,
+  onGoToStep,
+}: {
+  currentStep: number;
+  onGoToStep: (step: number) => void;
+}) {
+  const fillClass = joinClasses(
+    styles.progressFill,
+    currentStep === 2 && styles.progressFillStep2,
+    currentStep === 3 && styles.progressFillStep3,
+    currentStep >= 4 && styles.progressFillStep4,
+  );
+
+  return (
+    <div className={styles.progress} aria-label={`Step ${currentStep} of 4`}>
+      <div className={styles.progressTrack} aria-hidden="true">
+        <div className={fillClass} />
+      </div>
+      <div className={styles.progressNodes}>
+        {STEPS.map((step) => {
+          const isDone = step.number < currentStep;
+          const isActive = step.number === currentStep;
+
+          return (
+            <div className={styles.progressNodeColumn} key={step.number}>
+              <button
+                type="button"
+                className={joinClasses(styles.stepNode, isDone && styles.stepNodeDone, isActive && styles.stepNodeActive)}
+                aria-label={isDone ? `Return to ${step.label}` : step.label}
+                disabled={!isDone}
+                onClick={() => isDone && onGoToStep(step.number)}
+              >
+                {isDone ? "✓" : step.number}
+              </button>
+              <span
+                className={joinClasses(styles.stepLabel, isDone && styles.stepLabelDone, isActive && styles.stepLabelActive)}
+              >
+                {step.label}
+              </span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -21,6 +21,8 @@ function main() {
   const siteHeader = read("components/layout/site-header.tsx");
   const mobileBottomBar = read("components/layout/mobile-bottom-bar.tsx");
   const servicePage = read("app/plumbing/[slug]/page.tsx");
+  const serviceStandardPage = read("components/service/service-standard-page.tsx");
+  const serviceTemplateParts = read("components/service-template/service-template-parts.tsx");
 
   assertContains(".env.example", envExample, "NEXT_PUBLIC_GA4_MEASUREMENT_ID");
   assertContains(".env.example", envExample, "NEXT_PUBLIC_GTM_ID");
@@ -68,7 +70,11 @@ function main() {
   assertContains("site-header.tsx", siteHeader, 'data-track-intent="phone"');
   assertContains("site-header.tsx", siteHeader, 'data-track-intent="book"');
   assertContains("mobile-bottom-bar.tsx", mobileBottomBar, 'data-track-intent="text"');
-  assertContains("plumbing/[slug]/page.tsx", servicePage, 'data-track-intent="phone"');
+  assertContains(
+    "service phone CTAs",
+    `${servicePage}\n${serviceStandardPage}\n${serviceTemplateParts}`,
+    'data-track-intent="phone"',
+  );
 
   console.log("analytics audit passed: GA4/GTM/Google Ads bootstrap, runtime events, lead success tracking, UTM keys, and CTA intents wired");
 }

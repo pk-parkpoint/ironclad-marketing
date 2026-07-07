@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import type { WizardFormData } from "./booking-wizard";
+import styles from "./booking-wizard.module.css";
 
 const CATEGORIES = [
   {
@@ -46,13 +47,9 @@ type Props = {
 
 function RadioCircle({ selected }: { selected: boolean }) {
   return (
-    <div
-      className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-150 ${
-        selected ? "border-blue-600 bg-blue-600" : "border-gray-300"
-      }`}
-    >
-      {selected && <div className="h-2 w-2 rounded-full bg-white" />}
-    </div>
+    <span className={`${styles.radioDot} ${selected ? styles.radioDotSelected : ""}`} aria-hidden="true">
+      <span className={styles.radioDotInner} />
+    </span>
   );
 }
 
@@ -106,11 +103,11 @@ export function BookingStepSelectIssue({ formData, onUpdate, onNext }: Props) {
   // Section A — Pick a category
   if (section === "category") {
     return (
-      <div className="flex-1 overflow-y-auto px-8 py-6">
-        <h3 className="text-2xl font-semibold text-gray-900">What do you need help with?</h3>
-        <p className="mt-1 text-sm text-gray-500">Select the option that best describes your situation.</p>
+      <div data-testid="booking-step-1">
+        <h1 className={styles.heading}>What do you need help with?</h1>
+        <p className={styles.subcopy}>Select the option that best describes your situation.</p>
 
-        <div className="mt-6 space-y-3">
+        <div className={styles.optionList}>
           {CATEGORIES.map((cat) => {
             const selected = pickedCategory === cat.id;
             const isEmergency = "emergency" in cat && cat.emergency;
@@ -118,18 +115,14 @@ export function BookingStepSelectIssue({ formData, onUpdate, onNext }: Props) {
               <button
                 key={cat.id}
                 type="button"
-                className={`focus-ring flex w-full items-start gap-4 rounded-xl border p-4 text-left transition-all duration-150 ${
-                  selected
-                    ? "border-blue-600 bg-blue-50/50"
-                    : "border-gray-200 bg-white hover:border-gray-400"
-                }`}
+                className={`${styles.optionCard} ${selected ? styles.optionCardSelected : ""}`}
                 onClick={() => handleCategoryPick(cat.id, !!isEmergency)}
               >
                 <RadioCircle selected={selected} />
-                <div>
-                  <span className="text-sm font-semibold text-gray-900">{cat.label}</span>
-                  <p className="mt-0.5 text-sm text-gray-500">{cat.description}</p>
-                </div>
+                <span className={styles.optionText}>
+                  <span className={styles.optionTitle}>{cat.label}</span>
+                  <span className={styles.optionDescription}>{cat.description}</span>
+                </span>
               </button>
             );
           })}
@@ -144,29 +137,25 @@ export function BookingStepSelectIssue({ formData, onUpdate, onNext }: Props) {
       ? "Can you tell us a bit more?"
       : "What needs installing or replacing?";
   return (
-    <div className="flex-1 overflow-y-auto px-8 py-6">
-      <h3 className="text-2xl font-semibold text-gray-900">{heading}</h3>
-      <p className="mt-1 text-sm text-gray-500">This helps us send the right technician.</p>
+    <div data-testid="booking-step-1-detail">
+      <h1 className={styles.heading}>{heading}</h1>
+      <p className={styles.subcopy}>This helps us send the right technician.</p>
 
-      <div className="mt-6 space-y-3">
+      <div className={styles.optionList}>
         {(details || []).map((detail) => {
           const selected = pickedDetail === detail.id;
           return (
             <button
               key={detail.id}
               type="button"
-              className={`focus-ring flex w-full items-start gap-4 rounded-xl border p-4 text-left transition-all duration-150 ${
-                selected
-                  ? "border-blue-600 bg-blue-50/50"
-                  : "border-gray-200 bg-white hover:border-gray-400"
-              }`}
+              className={`${styles.optionCard} ${selected ? styles.optionCardSelected : ""}`}
               onClick={() => handleDetailPick(detail.id)}
             >
               <RadioCircle selected={selected} />
-              <div>
-                <span className="text-sm font-semibold text-gray-900">{detail.label}</span>
-                <p className="mt-0.5 text-sm text-gray-500">{detail.description}</p>
-              </div>
+              <span className={styles.optionText}>
+                <span className={styles.optionTitle}>{detail.label}</span>
+                <span className={styles.optionDescription}>{detail.description}</span>
+              </span>
             </button>
           );
         })}
@@ -174,7 +163,7 @@ export function BookingStepSelectIssue({ formData, onUpdate, onNext }: Props) {
 
       <button
         type="button"
-        className="mt-5 text-sm font-medium text-gray-500 hover:text-gray-700"
+        className={styles.ghostButton}
         onClick={handleBack}
       >
         &larr; Back

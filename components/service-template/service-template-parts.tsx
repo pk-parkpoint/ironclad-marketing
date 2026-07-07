@@ -25,6 +25,7 @@ export function TemplateButton({
   icon?: "phone" | "arrow";
 }) {
   const className = `dc-btn dc-btn--${variant}`;
+  const trackIntent = icon === "phone" ? "phone" : href.startsWith("/book") ? "book" : undefined;
   const content = (
     <>
       {icon === "phone" ? <Phone aria-hidden="true" className="dc-btn-icon" /> : null}
@@ -35,14 +36,14 @@ export function TemplateButton({
 
   if (href.startsWith("/")) {
     return (
-      <Link className={className} href={href}>
+      <Link className={className} data-track-intent={trackIntent} href={href}>
         {content}
       </Link>
     );
   }
 
   return (
-    <a className={className} href={href}>
+    <a className={className} data-track-intent={trackIntent} href={href}>
       {content}
     </a>
   );
