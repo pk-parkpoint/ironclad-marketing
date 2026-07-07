@@ -172,7 +172,7 @@ export default function Home() {
                 <h2 className="text-center text-[32px] font-bold leading-[1.2] text-[#2563EB]">
                   Proudly Serving These Areas
                 </h2>
-                <details className="group mt-6 overflow-hidden rounded-[var(--radius-card)] border border-border bg-white/90">
+                <details open className="group mt-6 overflow-hidden rounded-[var(--radius-card)] border border-border bg-white/90">
                   <summary className="flex h-[58px] cursor-pointer list-none items-center justify-between gap-4 bg-cta-blue px-5 text-sm font-semibold text-white">
                     <span>See All Areas We Are Serving</span>
                     <span className="text-white/80 transition group-open:rotate-180" aria-hidden="true">
