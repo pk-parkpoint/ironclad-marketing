@@ -40,8 +40,7 @@ export function DrainCleaningPage({
   const hasHeroCtaOverride = Boolean(content.hero.primaryCtaLabel || content.hero.secondaryCtaLabel);
 
   return (
-    <div className="dc-root" id="dc-root">
-      <ReferenceChrome phoneDisplay={phoneDisplay} phoneHref={phoneHref}>
+    <ReferenceChrome phoneDisplay={phoneDisplay} phoneHref={phoneHref}>
         <ServiceTemplateEffects />
         <main>
           <section className="dc-hero" id="hero-section">
@@ -251,7 +250,6 @@ export function DrainCleaningPage({
         </div>
           </section>
         </main>
-      </ReferenceChrome>
 
       <div className="dc-sticky-cta">
         <TemplateButton href={phoneHref} icon="phone" variant="stickyCall">
@@ -261,6 +259,6 @@ export function DrainCleaningPage({
           Schedule Online
         </TemplateButton>
       </div>
-    </div>
+    </ReferenceChrome>
   );
 }

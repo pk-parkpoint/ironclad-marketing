@@ -60,10 +60,9 @@ export function SiteHeader() {
   const navRef = useRef<HTMLElement | null>(null);
   const { phoneDisplay, phoneHref } = getPublicContactInfo();
   const navPhoneLabel = phoneDisplay;
-  const usesServiceTemplate = pathname === "/plumbing/drain-cleaning";
-  const desktopNavDisplay = usesServiceTemplate ? "xl:flex" : "lg:flex";
-  const desktopActionDisplay = usesServiceTemplate ? "xl:inline-flex" : "lg:inline-flex";
-  const mobileNavDisplay = usesServiceTemplate ? "xl:hidden" : "lg:hidden";
+  const desktopNavDisplay = "lg:flex";
+  const desktopActionDisplay = "lg:inline-flex";
+  const mobileNavDisplay = "lg:hidden";
 
   function handleNavItemEnter(event: MouseEvent<HTMLElement> | FocusEvent<HTMLElement>) {
     const nav = navRef.current;

@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ChevronDown, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import { SiteLogo } from "@/components/layout/site-logo";
+import { SiteHeader } from "@/components/layout/site-header";
 
 type ReferenceChromeProps = {
   children: React.ReactNode;
@@ -8,12 +9,6 @@ type ReferenceChromeProps = {
   phoneHref: string;
 };
 
-const NAV_LINKS = [
-  ["Plumbing", "/plumbing"],
-  ["Service Areas", "/service-area"],
-  ["Guides", "/guides"],
-  ["About Us", "/about"],
-] as const;
 const QUICK_LINKS = [
   ["Reviews", "#reviews"],
   ["Guarantees", "#guarantees"],
@@ -35,40 +30,6 @@ const AREAS = [
   ["Georgetown, TX", "/service-area/georgetown-tx"],
   ["View all areas →", "/service-area"],
 ] as const;
-
-function ChromeHeader({ phoneDisplay, phoneHref }: Pick<ReferenceChromeProps, "phoneDisplay" | "phoneHref">) {
-  return (
-    <div className="dc-chrome-sticky">
-      <Link className="dc-chrome-promo" href="/book">
-        First-time customer? Get 10% off your first service <span>→</span>
-      </Link>
-      <header className="dc-chrome-header">
-        <div className="dc-chrome-header-inner">
-          <Link aria-label="Ironclad Plumbing home" className="dc-chrome-logo" href="/">
-            <SiteLogo priority theme="dark" />
-          </Link>
-          <nav aria-label="Primary" className="dc-chrome-nav">
-            {NAV_LINKS.map(([label, href]) => (
-              <Link href={href} key={label}>
-                {label}
-                <ChevronDown aria-hidden="true" />
-              </Link>
-            ))}
-          </nav>
-          <div className="dc-chrome-actions">
-            <Link className="dc-chrome-outline" href="/book">
-              Schedule Now <span className="dc-chrome-book-sep">|</span> 24/7
-            </Link>
-            <a className="dc-chrome-phone" href={phoneHref}>
-              <Phone aria-hidden="true" />
-              {phoneDisplay}
-            </a>
-          </div>
-        </div>
-      </header>
-    </div>
-  );
-}
 
 function ChromeFooter({ phoneDisplay, phoneHref }: Pick<ReferenceChromeProps, "phoneDisplay" | "phoneHref">) {
   return (
@@ -121,9 +82,11 @@ function ChromeFooter({ phoneDisplay, phoneHref }: Pick<ReferenceChromeProps, "p
 export function ReferenceChrome({ children, phoneDisplay, phoneHref }: ReferenceChromeProps) {
   return (
     <>
-      <ChromeHeader phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
-      {children}
-      <ChromeFooter phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
+      <SiteHeader />
+      <div className="dc-root" id="dc-root">
+        {children}
+        <ChromeFooter phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
+      </div>
     </>
   );
 }
