@@ -13,9 +13,14 @@
 - **Meta description:** Fast, reliable drain cleaning in Austin. We clear clogs and backups the same day, with upfront pricing and a written warranty. Call Ironclad today.
 
 ## Hero  `data-slot="hero-title" / "hero-subtitle"`
-- **H1 (keyword):** Fast, Reliable Drain Cleaning
-- **Subhead (pun):** Water you waiting for?
-- **Support line:** Slow drains, clogs, and backups cleared fast, with a full cleanup before we leave.
+- **Eyebrow:** Drain Cleaning · Austin, TX
+- **H1 (keyword):** Fast, Expert Drain Cleaning in Austin
+- **Subhead (pun):** Same day help from our licensed plumbers, with clear pricing and a written warranty.
+- **Support line:**
+- **Trust badge:** 4.9 on Google · 142 reviews
+- **Chip:** We answer 24/7
+- **Primary CTA:** Schedule drain cleaning
+- **Secondary CTA:** Call (833) 597-1932
 - **Hero image:** unchanged — reuse the base team photo (no new photo).
 
 ## Section 2 — Signs  `data-slot="signs-title"`

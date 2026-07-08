@@ -33,10 +33,11 @@ test("IC-076 cross-device smoke: sticky header, no horizontal overflow, and mobi
   }
 
   await expect(mobileBottomBar).toBeVisible();
-  await page.getByRole("button", { name: "Book Service" }).first().click();
+  await page.getByRole("link", { name: "Book Service" }).first().click();
 
   const dialog = page.getByRole("dialog", { name: "Request an Appointment" });
   await expect(dialog).toBeVisible();
+  await expect(page).toHaveURL(/\/book(?:\?|$)/);
 
   const [dialogHeight, viewportHeight] = await Promise.all([
     dialog.evaluate((element) => element.getBoundingClientRect().height),

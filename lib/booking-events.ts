@@ -1,6 +1,7 @@
 export const OPEN_BOOKING_MODAL_EVENT = "ironclad:open-booking-modal";
 
 export type OpenBookingModalDetail = {
+  bookingPath?: string;
   serviceSlug?: string;
 };
 
@@ -52,6 +53,10 @@ function normalizedPathname(pathname: string): string {
   return pathname.replace(/\/+$/, "") || "/";
 }
 
+function bookingPath(url: URL): string {
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
 export function getBookingLinkDetail(anchor: HTMLAnchorElement): OpenBookingModalDetail | null {
   const href = anchor.getAttribute("href");
   if (!href) return null;
@@ -67,6 +72,7 @@ export function getBookingLinkDetail(anchor: HTMLAnchorElement): OpenBookingModa
   if (normalizedPathname(url.pathname) !== "/book") return null;
 
   return {
+    bookingPath: bookingPath(url),
     serviceSlug: url.searchParams.get("service") || undefined,
   };
 }

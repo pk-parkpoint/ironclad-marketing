@@ -1,15 +1,15 @@
-# 04. Emergency plumber — content update sheet
+# 04. Emergency Plumbing — content update sheet
 
 **Base template:** Drain Cleaning (see `handoff/screens/service-page/`). Build this page from the base template and change **only** the fields below. Everything else — layout, styling, and all other sections — is identical to the base.
 
 **Applies to BOTH formats:** desktop 1440 (`spec-desktop.md`) and mobile 390 (`spec-mobile.md`). The text content is the same in both; only the layout differs, and that is already defined in the base specs. Preview any keyword at either width in `Service Pages - PPC Variants.dc.html` (PPC Variant switcher).
 
-**Suggested page slug:** `/plumbing/emergency-plumber`
+**Suggested page slug:** `/plumbing/emergency`
 
 ---
 
 ## SEO (`<head>`)
-- **Title tag:** 24/7 Emergency Plumber in Austin | Ironclad Plumbing
+- **Title tag:** 24/7 Emergency Plumbing in Austin | Ironclad Plumbing
 - **Meta description:** Need an emergency plumber in Austin? Ironclad answers 24/7 for burst pipes, floods, and no-water calls. Fast response, upfront pricing. Call now.
 
 ## Hero  `data-slot="hero-title" / "hero-subtitle"`

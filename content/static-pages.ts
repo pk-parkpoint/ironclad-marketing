@@ -9,10 +9,10 @@ export type StaticPageEntry = {
 export const STATIC_PAGES: StaticPageEntry[] = [
   {
     path: "plumbing",
-    titleTag: "Plumbing Services in Austin, TX | Ironclad Plumbing",
+    titleTag: "Plumber in Austin, TX | Ironclad Plumbing",
     metaDescription:
-      "Full-service plumbing in Greater Austin with clear pricing and workmanship guarantees.",
-    h1: "Austin Plumbing Services - Every Job, One Standard",
+      "Ironclad Plumbing serves Greater Austin with repairs, drain cleaning, water heaters, leak detection, sewer, and 24/7 emergency plumbing. Upfront pricing.",
+    h1: "Complete Plumbing Services Across Greater Austin",
     section: "Plumbing Hub",
   },
   {

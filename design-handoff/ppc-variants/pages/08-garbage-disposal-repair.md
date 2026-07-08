@@ -1,15 +1,15 @@
-# 08. Garbage disposal repair — content update sheet
+# 08. Garbage Disposal Services — content update sheet
 
 **Base template:** Drain Cleaning (see `handoff/screens/service-page/`). Build this page from the base template and change **only** the fields below. Everything else — layout, styling, and all other sections — is identical to the base.
 
 **Applies to BOTH formats:** desktop 1440 (`spec-desktop.md`) and mobile 390 (`spec-mobile.md`). The text content is the same in both; only the layout differs, and that is already defined in the base specs. Preview any keyword at either width in `Service Pages - PPC Variants.dc.html` (PPC Variant switcher).
 
-**Suggested page slug:** `/plumbing/garbage-disposal-repair`
+**Suggested page slug:** `/plumbing/garbage-disposal-repair-installation`
 
 ---
 
 ## SEO (`<head>`)
-- **Title tag:** Garbage Disposal Repair Austin | Ironclad Plumbing
+- **Title tag:** Garbage Disposal Services in Austin | Ironclad Plumbing
 - **Meta description:** Garbage disposal jammed or leaking? Fast, reliable repair in Austin from Ironclad. Upfront pricing, on time, guaranteed. Call or book online.
 
 ## Hero  `data-slot="hero-title" / "hero-subtitle"`

@@ -1,4 +1,4 @@
-# 17. Sewer / drain jetting (hydro jetting) — content update sheet
+# 17. Hydro Jetting — content update sheet
 
 **Base template:** Drain Cleaning (see `handoff/screens/service-page/`). Build this page from the base template and change **only** the fields below. Everything else — layout, styling, and all other sections — is identical to the base.
 
@@ -13,7 +13,7 @@
 - **Meta description:** Recurring clogs in Austin? Ironclad's hydro jetting clears grease, roots, and buildup a snake can't reach. Upfront pricing. Call today.
 
 ## Hero  `data-slot="hero-title" / "hero-subtitle"`
-- **H1 (keyword):** Expert, Reliable Drain & Sewer Jetting
+- **H1 (keyword):** Expert, Reliable Hydro Jetting
 - **Subhead (pun):** Water you waiting for?
 - **Support line:** High-pressure jetting that clears grease, roots, and buildup a snake can't reach.
 - **Hero image:** unchanged — reuse the base team photo (no new photo).

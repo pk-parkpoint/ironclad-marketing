@@ -33,6 +33,11 @@ const VARIANT_FILES = [
   "18-gas-line-service.md",
   "19-bathroom-plumbing.md",
   "20-water-treatment.md",
+  "21-plumbing-repairs.md",
+  "22-water-heaters.md",
+  "23-fixtures.md",
+  "24-sewer-camera-inspection.md",
+  "25-trenchless-sewer-repair.md",
 ] as const;
 
 const VARIANT_DIR = path.join(process.cwd(), "design-handoff/ppc-variants/pages");
@@ -55,8 +60,14 @@ function requiredMatch(markdown: string, pattern: RegExp, label: string, fileNam
 }
 
 function requiredField(markdown: string, label: string, fileName: string): string {
-  const pattern = new RegExp(`- \\*\\*${escapeRegExp(label)}:\\*\\*\\s*(.+)`);
+  const pattern = new RegExp(`- \\*\\*${escapeRegExp(label)}:\\*\\*[ \\t]*(.+)`);
   return requiredMatch(markdown, pattern, label, fileName);
+}
+
+function optionalField(markdown: string, label: string): string | undefined {
+  const pattern = new RegExp(`- \\*\\*${escapeRegExp(label)}:\\*\\*[ \\t]*([^\\n]*)`);
+  const value = markdown.match(pattern)?.[1]?.trim();
+  return value || undefined;
 }
 
 function markdownBlock(markdown: string, headingPrefix: string, fileName: string): string {
@@ -94,8 +105,13 @@ function parseVariant(fileName: string): PpcServiceVariant {
     ...DRAIN_CLEANING_TEMPLATE,
     hero: {
       ...DRAIN_CLEANING_TEMPLATE.hero,
+      chipLabel: optionalField(markdown, "Chip"),
+      eyebrow: optionalField(markdown, "Eyebrow"),
+      primaryCtaLabel: optionalField(markdown, "Primary CTA"),
+      ratingLabel: optionalField(markdown, "Trust badge"),
+      secondaryCtaLabel: optionalField(markdown, "Secondary CTA"),
       subhead: requiredField(markdown, "Subhead (pun)", fileName),
-      supportLine: requiredField(markdown, "Support line", fileName),
+      supportLine: optionalField(markdown, "Support line") ?? "",
       title: heroTitle,
     },
     services: {

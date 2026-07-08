@@ -20,9 +20,9 @@ import {
 } from "@/lib/structured-data";
 
 export const metadata = buildPageMetadata({
-  title: "Plumbing Services in Austin, TX | Ironclad Plumbing",
+  title: "Plumber in Austin, TX | Ironclad Plumbing",
   description:
-    "Full-service plumbing in Greater Austin with upfront pricing, licensed technicians, and written workmanship warranties.",
+    "Ironclad Plumbing serves Greater Austin with repairs, drain cleaning, water heaters, leak detection, sewer, and 24/7 emergency plumbing. Upfront pricing.",
   path: "/plumbing",
   ogTemplate: "service",
 });
@@ -52,9 +52,9 @@ export default function PlumbingHubPage() {
           ]}
           alignment="left"
           backgroundType="gradient"
-          eyebrow="Plumbing Hub"
+          eyebrow="PLUMBING HUB"
           heading="Complete Plumbing Services Across Greater Austin"
-          subtitle="From emergency repairs to full system upgrades, Ironclad delivers licensed plumbing with clear pricing, clean workmanship, and a written warranty."
+          subtitle="From emergency repairs to full system upgrades, Ironclad delivers licensed plumbing with upfront pricing, clean workmanship, and a written warranty."
           trustChips={["Same-Day Availability", "Upfront Pricing", "Warranty-Backed Work"]}
         />
 
@@ -68,9 +68,10 @@ export default function PlumbingHubPage() {
               ]}
             />
             <QuickAnswer className="mt-6">
-              Ironclad Plumbing serves Greater Austin with residential repairs, drain cleaning, water heaters, leak
-              detection, sewer service, fixtures, gas lines, water treatment, and emergency plumbing. Every visit starts
-              with diagnosis and written pricing before work begins.
+              Ironclad Plumbing serves Greater Austin with plumbing repairs, drain cleaning, water heaters, leak
+              detection, sewer service, fixtures, gas lines, water treatment, and 24/7 emergency plumbing. Every visit
+              starts with a diagnosis and written pricing before any work begins, and every job is backed by our written
+              warranty.
             </QuickAnswer>
           </div>
         </section>

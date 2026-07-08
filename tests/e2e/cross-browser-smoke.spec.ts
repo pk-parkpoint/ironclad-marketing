@@ -17,8 +17,9 @@ test("IC-075 homepage and booking modal smoke without runtime errors", async ({ 
   await expect(page.getByRole("heading", { level: 1 }).first()).toBeVisible();
 
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.getByRole("button", { name: "Book Service" }).click();
+  await page.getByRole("link", { name: "Book Service" }).click();
   await expect(page.getByRole("dialog", { name: "Request an Appointment" })).toBeVisible();
+  await expect(page).toHaveURL(/\/book(?:\?|$)/);
 
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog", { name: "Request an Appointment" })).toBeHidden();

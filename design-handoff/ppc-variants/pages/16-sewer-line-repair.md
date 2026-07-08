@@ -1,15 +1,15 @@
-# 16. Sewer line repair / replacement — content update sheet
+# 16. Sewer Line Services — content update sheet
 
 **Base template:** Drain Cleaning (see `handoff/screens/service-page/`). Build this page from the base template and change **only** the fields below. Everything else — layout, styling, and all other sections — is identical to the base.
 
 **Applies to BOTH formats:** desktop 1440 (`spec-desktop.md`) and mobile 390 (`spec-mobile.md`). The text content is the same in both; only the layout differs, and that is already defined in the base specs. Preview any keyword at either width in `Service Pages - PPC Variants.dc.html` (PPC Variant switcher).
 
-**Suggested page slug:** `/plumbing/sewer-line-repair`
+**Suggested page slug:** `/plumbing/sewer-services`
 
 ---
 
 ## SEO (`<head>`)
-- **Title tag:** Sewer Line Repair in Austin | Ironclad Plumbing
+- **Title tag:** Sewer Line Services in Austin | Ironclad Plumbing
 - **Meta description:** Sewer line trouble in Austin? Ironclad runs a camera inspection, shows you the problem, and repairs it right. Upfront pricing. Call now.
 
 ## Hero  `data-slot="hero-title" / "hero-subtitle"`

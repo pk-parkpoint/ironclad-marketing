@@ -12,8 +12,8 @@ export const SERVICES: ServiceEntry[] = [
     title: "Plumbing Repairs",
     titleTag: "Plumbing Repairs in Austin, TX | Ironclad Plumbing",
     metaDescription:
-      "Leaky faucets, running toilets, burst pipes - repaired right the first time with upfront pricing.",
-    h1: "Plumbing Repairs That Last",
+      "Need a plumbing repair in Austin? Ironclad fixes leaks, valves, toilets, and low pressure fast, with upfront pricing and a written warranty. Call today.",
+    h1: "Fast, Reliable Plumbing Repairs",
   },
   {
     slug: "drain-cleaning",
@@ -26,7 +26,7 @@ export const SERVICES: ServiceEntry[] = [
   {
     slug: "sewer-services",
     title: "Sewer Line Services",
-    titleTag: "Sewer Line Repair in Austin, TX | Ironclad Plumbing",
+    titleTag: "Sewer Line Services in Austin, TX | Ironclad Plumbing",
     metaDescription:
       "Sewer camera inspections, trenchless repair, and full-line replacement with minimal disruption.",
     h1: "Sewer Line Services - Accurate Diagnosis, Lasting Repair",
@@ -34,10 +34,10 @@ export const SERVICES: ServiceEntry[] = [
   {
     slug: "water-heaters",
     title: "Water Heaters",
-    titleTag: "Water Heater Service in Austin, TX | Ironclad Plumbing",
+    titleTag: "Water Heaters in Austin, TX | Ironclad Plumbing",
     metaDescription:
-      "Tank water heater repair, replacement, and installation with same-day Austin service.",
-    h1: "Water Heater Service - Repair, Replace, or Upgrade",
+      "Water heater repair, replacement, and tankless upgrades in Austin. Ironclad sizes it right and installs to code, with upfront pricing. Call today.",
+    h1: "Expert Water Heater Service in Austin",
   },
   {
     slug: "tankless-water-heaters",
@@ -58,7 +58,7 @@ export const SERVICES: ServiceEntry[] = [
   {
     slug: "gas-line-services",
     title: "Gas Line Services",
-    titleTag: "Gas Line Service in Austin, TX | Ironclad Plumbing",
+    titleTag: "Gas Line Services in Austin, TX | Ironclad Plumbing",
     metaDescription:
       "Licensed residential gas leak testing, repair, and installations for appliances and outdoor features.",
     h1: "Gas Line Services - Safe, Code-Compliant, Tested",
@@ -66,10 +66,10 @@ export const SERVICES: ServiceEntry[] = [
   {
     slug: "fixtures",
     title: "Fixtures",
-    titleTag: "Fixture Service in Austin, TX | Ironclad Plumbing",
+    titleTag: "Fixture Install & Repair in Austin | Ironclad Plumbing",
     metaDescription:
-      "Faucets, sinks, toilets, showers, and tubs installed correctly with clean workmanship.",
-    h1: "Fixture Installation & Repair - The Details Matter",
+      "Faucet, sink, tub, shower, and toilet work in Austin. Ironclad installs and repairs fixtures clean and right, with upfront pricing. Call today.",
+    h1: "Expert Fixture Installation & Repair",
   },
   {
     slug: "water-treatment",
@@ -114,23 +114,23 @@ export const SERVICES: ServiceEntry[] = [
   {
     slug: "sewer-camera-inspection",
     title: "Sewer Camera Inspection",
-    titleTag: "Sewer Camera Inspection in Austin, TX | Ironclad Plumbing",
+    titleTag: "Sewer Camera Inspection in Austin | Ironclad Plumbing",
     metaDescription:
-      "HD sewer camera inspection in Austin to diagnose root intrusion, pipe damage, bellied lines, and blockages before repair.",
-    h1: "Sewer Camera Inspection - See What's Really Going On",
+      "Recurring backups in Austin? Ironclad runs a sewer camera inspection and shows you the problem before any work begins. Upfront pricing. Call today.",
+    h1: "Expert Sewer Camera Inspection",
   },
   {
     slug: "trenchless-sewer-repair",
     title: "Trenchless Sewer Repair",
-    titleTag: "Trenchless Sewer Repair in Austin, TX | Ironclad Plumbing",
+    titleTag: "Trenchless Sewer Repair in Austin | Ironclad Plumbing",
     metaDescription:
-      "Trenchless pipe lining and pipe bursting in Austin. Repair your sewer line without destroying your yard or landscaping.",
-    h1: "Trenchless Sewer Repair - Fix the Line, Keep the Yard",
+      "Trenchless sewer repair in Austin means a new line with little to no digging. Ironclad spares your yard, with upfront pricing. Call today.",
+    h1: "Expert Trenchless Sewer Repair",
   },
   {
     slug: "toilet-repair-installation",
     title: "Toilet Repair & Installation",
-    titleTag: "Toilet Repair in Austin, TX | Ironclad Plumbing",
+    titleTag: "Toilet Repair & Installation in Austin | Ironclad Plumbing",
     metaDescription:
       "Running toilets, weak flushes, and new toilet installation handled same-day with upfront pricing in Austin.",
     h1: "Toilet Repair & Installation - Stop the Run, Fix the Flush",
@@ -138,7 +138,7 @@ export const SERVICES: ServiceEntry[] = [
   {
     slug: "faucet-sink-repair-installation",
     title: "Faucet & Sink Services",
-    titleTag: "Faucet & Sink Repair in Austin, TX | Ironclad Plumbing",
+    titleTag: "Faucet & Sink Services in Austin | Ironclad Plumbing",
     metaDescription:
       "Dripping faucets, leaking sinks, and new installations repaired or replaced with precision in Austin homes.",
     h1: "Faucet & Sink Repair - End the Drip, Upgrade the Function",
@@ -146,7 +146,7 @@ export const SERVICES: ServiceEntry[] = [
   {
     slug: "garbage-disposal-repair-installation",
     title: "Garbage Disposal Services",
-    titleTag: "Garbage Disposal Repair & Install | Austin, TX | Ironclad",
+    titleTag: "Garbage Disposal Services in Austin | Ironclad Plumbing",
     metaDescription:
       "Garbage disposal repair, replacement, and new installation in Austin. Jammed, leaking, or dead units fixed same-day.",
     h1: "Garbage Disposal Repair & Installation - Quick Fix, Clean Sink",

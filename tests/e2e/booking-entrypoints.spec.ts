@@ -9,16 +9,27 @@ async function clickBookingTrigger(page: Page, name = "Schedule Now") {
     await link.click();
     return;
   } catch {
-    await page.getByRole("button", { name: "Book Service" }).click();
+    const bookLink = page.getByRole("link", { name: "Book Service" }).first();
+    try {
+      await bookLink.waitFor({ state: "visible", timeout: 1500 });
+      await bookLink.click();
+      return;
+    } catch {
+      await page.getByRole("button", { name: "Book Service" }).click();
+    }
   }
 }
 
-test("booking links open the wizard without waiting for route navigation", async ({ page }) => {
+test("booking links open the wizard on the book route and preserve browser back", async ({ page }) => {
   await page.goto("/");
 
   await clickBookingTrigger(page);
 
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
+  expect(new URL(page.url()).pathname).toBe("/book");
+
+  await page.goBack();
+  await expect(page.getByRole("dialog", { name: dialogName })).toBeHidden();
   expect(new URL(page.url()).pathname).toBe("/");
 });
 
@@ -34,9 +45,11 @@ test("booking links show an immediate loading shell while the wizard chunk loads
 
   await clickBookingTrigger(page);
 
-  await expect(page.getByRole("dialog", { name: "Opening booking" })).toBeVisible({ timeout: 1000 });
+  await expect(page.locator("#ironclad-booking-preboot-shell, [aria-labelledby='booking-wizard-loading-title']").first()).toBeVisible({
+    timeout: 1000,
+  });
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
-  expect(new URL(page.url()).pathname).toBe("/");
+  expect(new URL(page.url()).pathname).toBe("/book");
 });
 
 test("booking links reopen the wizard after closing on the book route", async ({ page }) => {
@@ -53,29 +66,37 @@ test("booking links reopen the wizard after closing on the book route", async ({
   expect(new URL(page.url()).pathname).toBe("/book");
 });
 
-test("location booking links with query strings open the wizard in place", async ({ page }) => {
+test("location booking links with query strings open the wizard on the book route", async ({ page }) => {
   await page.goto("/service-area/austin-tx");
 
   await clickBookingTrigger(page, "Book in Austin");
 
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
+  const url = new URL(page.url());
+  expect(url.pathname).toBe("/book");
+  expect(url.searchParams.get("location")).toBe("austin-tx");
+
+  await page.goBack();
+  await expect(page.getByRole("dialog", { name: dialogName })).toBeHidden();
   expect(new URL(page.url()).pathname).toBe("/service-area/austin-tx");
 });
 
-test("standard service page booking links open the wizard in place", async ({ page }) => {
+test("standard service page booking links open the wizard on the book route", async ({ page }) => {
   await page.goto("/plumbing/repairs");
 
   await clickBookingTrigger(page);
 
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
-  expect(new URL(page.url()).pathname).toBe("/plumbing/repairs");
+  expect(new URL(page.url()).pathname).toBe("/book");
 });
 
-test("service template booking links open the wizard in place", async ({ page }) => {
+test("service template booking links preserve service query on the book route", async ({ page }) => {
   await page.goto("/plumbing/drain-cleaning");
 
-  await clickBookingTrigger(page);
+  await page.getByRole("link", { name: "Schedule drain cleaning" }).first().click();
 
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
-  expect(new URL(page.url()).pathname).toBe("/plumbing/drain-cleaning");
+  const url = new URL(page.url());
+  expect(url.pathname).toBe("/book");
+  expect(url.searchParams.get("service")).toBe("drain-cleaning");
 });

@@ -10,6 +10,19 @@ export const BOOKING_PREBOOT_SCRIPT = `
     return pathname.replace(/\\/+$/, "") || "/";
   }
 
+  function bookingPath(url) {
+    return url.pathname + url.search + url.hash;
+  }
+
+  function currentPath() {
+    return window.location.pathname + window.location.search + window.location.hash;
+  }
+
+  function pushBookingPath(path) {
+    if (!path || currentPath() === path) return;
+    window.history.pushState({ ironcladBooking: true }, "", path);
+  }
+
   function bookingDetail(anchor) {
     var href = anchor.getAttribute("href");
     if (!href) return null;
@@ -25,6 +38,7 @@ export const BOOKING_PREBOOT_SCRIPT = `
     if (normalizedPathname(url.pathname) !== "/book") return null;
 
     return {
+      bookingPath: bookingPath(url),
       serviceSlug: url.searchParams.get("service") || undefined
     };
   }
@@ -106,6 +120,7 @@ export const BOOKING_PREBOOT_SCRIPT = `
     window.dispatchEvent(bookingEvent);
     if (!bookingEvent.defaultPrevented) {
       window.__ironcladPendingBookingOpen = detail;
+      pushBookingPath(detail.bookingPath);
     }
 
     event.preventDefault();

@@ -1,15 +1,15 @@
-# 10. Faucet repair / install — content update sheet
+# 10. Faucet & Sink Services — content update sheet
 
 **Base template:** Drain Cleaning (see `handoff/screens/service-page/`). Build this page from the base template and change **only** the fields below. Everything else — layout, styling, and all other sections — is identical to the base.
 
 **Applies to BOTH formats:** desktop 1440 (`spec-desktop.md`) and mobile 390 (`spec-mobile.md`). The text content is the same in both; only the layout differs, and that is already defined in the base specs. Preview any keyword at either width in `Service Pages - PPC Variants.dc.html` (PPC Variant switcher).
 
-**Suggested page slug:** `/plumbing/faucet-repair`
+**Suggested page slug:** `/plumbing/faucet-sink-repair-installation`
 
 ---
 
 ## SEO (`<head>`)
-- **Title tag:** Faucet Repair & Install Austin | Ironclad Plumbing
+- **Title tag:** Faucet & Sink Services in Austin | Ironclad Plumbing
 - **Meta description:** Leaky faucet or new fixture in Austin? Ironclad handles repair and install cleanly, with upfront pricing and a written warranty. Call now.
 
 ## Hero  `data-slot="hero-title" / "hero-subtitle"`

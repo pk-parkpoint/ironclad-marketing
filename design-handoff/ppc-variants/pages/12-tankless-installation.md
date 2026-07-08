@@ -1,15 +1,15 @@
-# 12. Tankless water heater install — content update sheet
+# 12. Tankless Water Heaters — content update sheet
 
 **Base template:** Drain Cleaning (see `handoff/screens/service-page/`). Build this page from the base template and change **only** the fields below. Everything else — layout, styling, and all other sections — is identical to the base.
 
 **Applies to BOTH formats:** desktop 1440 (`spec-desktop.md`) and mobile 390 (`spec-mobile.md`). The text content is the same in both; only the layout differs, and that is already defined in the base specs. Preview any keyword at either width in `Service Pages - PPC Variants.dc.html` (PPC Variant switcher).
 
-**Suggested page slug:** `/plumbing/tankless-installation`
+**Suggested page slug:** `/plumbing/tankless-water-heaters`
 
 ---
 
 ## SEO (`<head>`)
-- **Title tag:** Tankless Water Heater Install Austin | Ironclad
+- **Title tag:** Tankless Water Heaters in Austin | Ironclad Plumbing
 - **Meta description:** Tankless water heater installation in Austin. Endless hot water, lower bills, installed by licensed pros. Upfront pricing. Call Ironclad.
 
 ## Hero  `data-slot="hero-title" / "hero-subtitle"`

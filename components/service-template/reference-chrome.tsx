@@ -18,7 +18,7 @@ const QUICK_LINKS = [
   ["Reviews", "#reviews"],
   ["Guarantees", "#guarantees"],
   ["Service Areas", "#areas"],
-  ["Privacy Policy", "/privacy"],
+  ["Privacy Policy", "/privacy-policy"],
   ["Terms", "/terms"],
 ] as const;
 const SERVICES = [

@@ -59,13 +59,19 @@ export function StarRating({ variant }: { variant: "google" | "review" }) {
   );
 }
 
-export function GoogleRatingBadge() {
+export function GoogleRatingBadge({ label = "4.9 out of 5 · 142 reviews", simple = false }: { label?: string; simple?: boolean }) {
   return (
     <Link className="dc-google-badge" href="/reviews">
-      <GoogleGIcon />
-      <StarRating variant="google" />
-      <span>4.9 out of 5 · 142 reviews</span>
-      <ChevronDownIcon className="dc-google-chevron" />
+      {simple ? (
+        <span>{`\u2605 ${label}`}</span>
+      ) : (
+        <>
+          <GoogleGIcon />
+          <StarRating variant="google" />
+        </>
+      )}
+      {simple ? null : <span>{label}</span>}
+      {simple ? null : <ChevronDownIcon className="dc-google-chevron" />}
     </Link>
   );
 }

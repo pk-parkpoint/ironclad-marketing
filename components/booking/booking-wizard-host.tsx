@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { BookingWizardProps } from "./booking-wizard";
 import {
   OPEN_BOOKING_MODAL_EVENT,
@@ -17,6 +17,10 @@ function preloadBookingWizard() {
   return bookingWizardImport;
 }
 
+function pathWithoutHash(path: string): string {
+  return path.split("#", 1)[0] || "/";
+}
+
 const LazyBookingWizard = dynamic<BookingWizardProps>(
   () => preloadBookingWizard().then((mod) => mod.BookingWizard),
   { loading: () => <BookingWizardLoadingShell />, ssr: false },
@@ -24,13 +28,27 @@ const LazyBookingWizard = dynamic<BookingWizardProps>(
 
 export function BookingWizardHost() {
   const pathname = usePathname();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const search = searchParams.toString();
   const [open, setOpen] = useState(false);
   const [initialServiceSlug, setInitialServiceSlug] = useState<string | undefined>();
+  const clickOpenedBookingPathRef = useRef<string | null>(null);
 
   useEffect(() => {
+    function currentBrowserPath() {
+      return `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    }
+
+    function routeToBooking(detail?: OpenBookingModalDetail) {
+      const bookingPath = detail?.bookingPath;
+      if (!bookingPath || currentBrowserPath() === bookingPath) return;
+      router.push(bookingPath);
+    }
+
     function openWithDetail(detail?: OpenBookingModalDetail) {
+      clickOpenedBookingPathRef.current = detail?.bookingPath ? pathWithoutHash(detail.bookingPath) : null;
+      routeToBooking(detail);
       void preloadBookingWizard();
       setInitialServiceSlug(detail?.serviceSlug);
       setOpen(true);
@@ -46,7 +64,7 @@ export function BookingWizardHost() {
     const pendingDetail = takePendingOpenBookingModal();
     if (pendingDetail) openWithDetail(pendingDetail);
     return () => window.removeEventListener(OPEN_BOOKING_MODAL_EVENT, onOpen as EventListener);
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (open) window.__ironcladHideBookingPreboot?.();
@@ -57,8 +75,20 @@ export function BookingWizardHost() {
     void preloadBookingWizard();
     const query = new URLSearchParams(search);
     setInitialServiceSlug(query.get("service") || undefined);
+    const currentBookingPath = `${pathname}${search ? `?${search}` : ""}`;
+    if (clickOpenedBookingPathRef.current === currentBookingPath) {
+      clickOpenedBookingPathRef.current = null;
+      return;
+    }
     setOpen(true);
   }, [pathname, search]);
+
+  useEffect(() => {
+    if (pathname !== "/book") {
+      clickOpenedBookingPathRef.current = null;
+      setOpen(false);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     function preloadOnIntent(event: Event) {

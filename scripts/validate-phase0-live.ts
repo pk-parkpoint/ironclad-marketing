@@ -62,7 +62,7 @@ async function main() {
     {
       label: "service page (core)",
       path: "/plumbing/repairs",
-      requiredPatterns: [/Plumbing Repairs That Last/i, /application\/ld\+json/i, /Related Services and Resources/i],
+      requiredPatterns: [/Fast, Reliable Plumbing Repairs/i, /application\/ld\+json/i, /Our Ironclad Guarantee/i],
     },
     {
       label: "service page (new)",

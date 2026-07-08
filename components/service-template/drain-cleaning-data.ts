@@ -3,6 +3,11 @@ type ServiceCard = readonly [string, string, string, string?];
 
 export type DrainCleaningTemplateContent = {
   hero: {
+    chipLabel?: string;
+    eyebrow?: string;
+    primaryCtaLabel?: string;
+    ratingLabel?: string;
+    secondaryCtaLabel?: string;
     title: string;
     subhead: string;
     supportLine: string;

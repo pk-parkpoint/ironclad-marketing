@@ -1,15 +1,15 @@
-# 03. Clogged toilet / toilet repair — content update sheet
+# 03. Toilet Repair & Installation — content update sheet
 
 **Base template:** Drain Cleaning (see `handoff/screens/service-page/`). Build this page from the base template and change **only** the fields below. Everything else — layout, styling, and all other sections — is identical to the base.
 
 **Applies to BOTH formats:** desktop 1440 (`spec-desktop.md`) and mobile 390 (`spec-mobile.md`). The text content is the same in both; only the layout differs, and that is already defined in the base specs. Preview any keyword at either width in `Service Pages - PPC Variants.dc.html` (PPC Variant switcher).
 
-**Suggested page slug:** `/plumbing/toilet-repair`
+**Suggested page slug:** `/plumbing/toilet-repair-installation`
 
 ---
 
 ## SEO (`<head>`)
-- **Title tag:** Toilet Repair in Austin, TX | Ironclad Plumbing
+- **Title tag:** Toilet Repair & Installation in Austin | Ironclad Plumbing
 - **Meta description:** Toilet overflowing or won't flush? Fast, reliable toilet repair in Austin from Ironclad. Upfront pricing, on time, guaranteed. Call today.
 
 ## Hero  `data-slot="hero-title" / "hero-subtitle"`

@@ -1,15 +1,15 @@
-# 18. Gas line repair / install — content update sheet
+# 18. Gas Line Services — content update sheet
 
 **Base template:** Drain Cleaning (see `handoff/screens/service-page/`). Build this page from the base template and change **only** the fields below. Everything else — layout, styling, and all other sections — is identical to the base.
 
 **Applies to BOTH formats:** desktop 1440 (`spec-desktop.md`) and mobile 390 (`spec-mobile.md`). The text content is the same in both; only the layout differs, and that is already defined in the base specs. Preview any keyword at either width in `Service Pages - PPC Variants.dc.html` (PPC Variant switcher).
 
-**Suggested page slug:** `/plumbing/gas-line-service`
+**Suggested page slug:** `/plumbing/gas-line-services`
 
 ---
 
 ## SEO (`<head>`)
-- **Title tag:** Gas Line Repair & Install Austin | Ironclad Plumbing
+- **Title tag:** Gas Line Services in Austin | Ironclad Plumbing
 - **Meta description:** Gas line repair or install in Austin by licensed pros. Code-compliant, safety-tested, upfront pricing. Ironclad answers 24/7. Call now.
 
 ## Hero  `data-slot="hero-title" / "hero-subtitle"`

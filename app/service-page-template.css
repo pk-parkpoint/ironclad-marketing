@@ -448,6 +448,15 @@
   text-wrap: balance;
 }
 
+.dc-hero-eyebrow {
+  color: var(--color-text-on-dark);
+  font-size: var(--type-eyebrow-size);
+  font-weight: var(--type-eyebrow-weight);
+  letter-spacing: .08em;
+  margin-bottom: 20px;
+  text-shadow: var(--text-shadow-hero-sub);
+}
+
 .dc-hero-subtitle {
   color: var(--color-text-hero-sub);
   font-size: var(--type-hero-sub-size-desktop);
@@ -477,6 +486,28 @@
 .dc-hero-trust svg {
   height: 17px;
   width: 17px;
+}
+
+.dc-hero-proof-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 26px 0 0;
+  pointer-events: auto;
+}
+
+.dc-hero-chip {
+  backdrop-filter: blur(8px);
+  background: var(--color-glass-fill);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-on-dark);
+  display: inline-flex;
+  font-size: var(--type-hero-badge-size);
+  font-weight: var(--type-hero-badge-weight);
+  padding: 9px 16px;
+  white-space: nowrap;
 }
 
 .dc-hero-ctas {

@@ -36,6 +36,9 @@ export function DrainCleaningPage({
   phoneDisplay,
   phoneHref,
 }: DrainCleaningPageProps) {
+  const hasHeroCopyOverride = Boolean(content.hero.eyebrow || content.hero.ratingLabel || content.hero.chipLabel);
+  const hasHeroCtaOverride = Boolean(content.hero.primaryCtaLabel || content.hero.secondaryCtaLabel);
+
   return (
     <div className="dc-root" id="dc-root">
       <ReferenceChrome phoneDisplay={phoneDisplay} phoneHref={phoneHref}>
@@ -55,21 +58,46 @@ export function DrainCleaningPage({
         <div className="dc-hero-scrim" />
         <div className="dc-hero-glow" />
         <div className="dc-hero-inner">
-          <GoogleRatingBadge />
+          {content.hero.eyebrow ? <div className="dc-hero-eyebrow">{content.hero.eyebrow}</div> : <GoogleRatingBadge />}
           <h1 data-slot="hero-title">{content.hero.title}</h1>
           <p className="dc-hero-subtitle" data-slot="hero-subtitle">
-            {content.hero.subhead}{" "}
-            <br />
-            {content.hero.supportLine}
+            {content.hero.subhead}
+            {content.hero.supportLine ? (
+              <>
+                {" "}
+                <br />
+                {content.hero.supportLine}
+              </>
+            ) : null}
           </p>
-          <TrustRow />
+          {hasHeroCopyOverride ? (
+            <div className="dc-hero-proof-row">
+              <GoogleRatingBadge label={content.hero.ratingLabel} simple={Boolean(content.hero.ratingLabel)} />
+              {content.hero.chipLabel ? <span className="dc-hero-chip">{content.hero.chipLabel}</span> : null}
+            </div>
+          ) : (
+            <TrustRow />
+          )}
           <div className="dc-hero-ctas">
-            <TemplateButton href={phoneHref} icon="phone" variant="call">
-              {phoneDisplay}
-            </TemplateButton>
-            <TemplateButton href={bookingHref} variant="outline">
-              Schedule Now
-            </TemplateButton>
+            {hasHeroCtaOverride ? (
+              <>
+                <TemplateButton href={bookingHref} variant="outline">
+                  {content.hero.primaryCtaLabel ?? "Schedule Now"}
+                </TemplateButton>
+                <TemplateButton href={phoneHref} icon="phone" variant="call">
+                  {content.hero.secondaryCtaLabel ?? phoneDisplay}
+                </TemplateButton>
+              </>
+            ) : (
+              <>
+                <TemplateButton href={phoneHref} icon="phone" variant="call">
+                  {phoneDisplay}
+                </TemplateButton>
+                <TemplateButton href={bookingHref} variant="outline">
+                  Schedule Now
+                </TemplateButton>
+              </>
+            )}
           </div>
         </div>
           </section>
