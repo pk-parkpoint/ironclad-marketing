@@ -200,10 +200,12 @@ export function normalizeContactPreference(value: string[]): string {
 }
 
 export function normalizePropertyType(value: WizardFormData["propertyType"]): string {
+  if (!value) return NA;
   return value === "commercial" ? "Commercial" : "Residential";
 }
 
 export function normalizeOwnershipStatus(value: WizardFormData["ownershipStatus"]): string {
+  if (!value) return NA;
   return value === "other" ? "Someone Else" : "Property Owner";
 }
 

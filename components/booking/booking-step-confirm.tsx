@@ -41,7 +41,7 @@ function PillToggle({
   onChange,
 }: {
   options: Array<{ id: string; label: string }>;
-  value: string;
+  value: string | null;
   onChange: (id: string) => void;
 }) {
   return (
@@ -50,6 +50,7 @@ function PillToggle({
         <button
           key={opt.id}
           type="button"
+          aria-pressed={value === opt.id}
           className={`${styles.chip} ${value === opt.id ? styles.chipSelected : ""}`}
           onClick={() => onChange(opt.id)}
         >
@@ -157,7 +158,7 @@ export function BookingStepConfirm({
       {/* Additional notes */}
       <div className={styles.optionalGroup}>
       <div>
-        <label className={styles.optionalLabel} htmlFor="booking-notes">Anything else we should know before arrivals?</label>
+        <label className={styles.optionalLabel} htmlFor="booking-notes">Anything else we should know before arrival?</label>
         <textarea
           id="booking-notes"
           className={`${styles.fieldControl} ${styles.textarea}`}

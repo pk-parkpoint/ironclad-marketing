@@ -19,7 +19,7 @@ function preloadBookingWizard() {
 
 const LazyBookingWizard = dynamic<BookingWizardProps>(
   () => preloadBookingWizard().then((mod) => mod.BookingWizard),
-  { loading: () => null, ssr: false },
+  { loading: () => <BookingWizardLoadingShell />, ssr: false },
 );
 
 export function BookingWizardHost() {
@@ -93,4 +93,32 @@ export function BookingWizardHost() {
   }
 
   return <LazyBookingWizard initialServiceSlug={initialServiceSlug} onOpenChange={setOpen} open={open} />;
+}
+
+function BookingWizardLoadingShell() {
+  return (
+    <div
+      aria-labelledby="booking-wizard-loading-title"
+      aria-modal="true"
+      className="fixed inset-0 z-[1000] grid min-h-[100dvh] place-items-center overflow-hidden bg-[radial-gradient(circle_at_18%_0%,#dbeafe,transparent_52%),linear-gradient(180deg,#eef5ff,#dbe7f7)] px-4 py-10"
+      role="dialog"
+    >
+      <div className="w-full max-w-[640px] rounded-[27px] bg-[linear-gradient(150deg,#fffffff2,#bfdbfeb3_32%,#2563eb73_62%,#ffffffe6)] p-[1.5px] shadow-[0_34px_90px_-22px_rgba(22,35,58,0.38),0_4px_18px_rgba(22,35,58,0.10)]">
+        <div className="rounded-[25.5px] border border-white/55 bg-white/75 px-6 py-8 text-center shadow-sm backdrop-blur-xl">
+          <p className="mx-auto h-12 w-12 animate-pulse rounded-full bg-blue-100" aria-hidden="true" />
+          <h2 id="booking-wizard-loading-title" className="mt-5 text-xl font-semibold text-[#16233a]">
+            Opening booking
+          </h2>
+          <p className="mt-2 text-sm font-medium text-[#4b5f7a]">
+            Loading available appointment steps...
+          </p>
+          <div className="mt-6 grid grid-cols-4 gap-3" aria-hidden="true">
+            {[0, 1, 2, 3].map((index) => (
+              <span className="h-2 rounded-full bg-blue-100" key={index} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
