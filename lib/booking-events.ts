@@ -7,6 +7,7 @@ export type OpenBookingModalDetail = {
 declare global {
   interface Window {
     __ironcladPendingBookingOpen?: OpenBookingModalDetail | null;
+    __ironcladHideBookingPreboot?: () => void;
   }
 }
 

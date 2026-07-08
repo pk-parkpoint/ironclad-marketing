@@ -49,6 +49,10 @@ export function BookingWizardHost() {
   }, []);
 
   useEffect(() => {
+    if (open) window.__ironcladHideBookingPreboot?.();
+  }, [open]);
+
+  useEffect(() => {
     if (pathname !== "/book") return;
     void preloadBookingWizard();
     const query = new URLSearchParams(search);
