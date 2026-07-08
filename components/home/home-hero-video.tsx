@@ -11,14 +11,14 @@ export function HomeHeroVideo() {
       preload="auto"
     >
       <source
-        media="(prefers-reduced-motion: no-preference)"
-        src="/media/hero-video.mp4"
+        media="(min-width: 768px) and (prefers-reduced-motion: no-preference)"
+        src="/media/hero-video-desktop.mp4"
         type="video/mp4"
       />
       <source
-        media="(prefers-reduced-motion: no-preference)"
-        src="/hero/ironclad-hero-bg.webm"
-        type="video/webm"
+        media="(max-width: 767px) and (prefers-reduced-motion: no-preference)"
+        src="/media/hero-video.mp4"
+        type="video/mp4"
       />
     </video>
   );

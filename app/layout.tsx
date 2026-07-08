@@ -185,9 +185,9 @@ export default function RootLayout({
         <link
           rel="preload"
           as="video"
-          href="/media/hero-video.mp4"
+          href="/media/hero-video-desktop.mp4"
           type="video/mp4"
-          media="(prefers-reduced-motion: no-preference)"
+          media="(min-width: 768px) and (prefers-reduced-motion: no-preference)"
         />
         <Script
           id="booking-link-preboot"
