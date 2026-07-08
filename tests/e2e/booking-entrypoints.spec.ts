@@ -22,6 +22,23 @@ test("booking links open the wizard without waiting for route navigation", async
   expect(new URL(page.url()).pathname).toBe("/");
 });
 
+test("booking links show an immediate loading shell while the wizard chunk loads", async ({ page }) => {
+  await page.route("**/_next/static/chunks/**", async (route) => {
+    if (route.request().url().includes("booking-wizard")) {
+      await new Promise((resolve) => setTimeout(resolve, 1200));
+    }
+    await route.continue();
+  });
+
+  await page.goto("/");
+
+  await clickBookingTrigger(page);
+
+  await expect(page.getByRole("dialog", { name: "Opening booking" })).toBeVisible({ timeout: 1000 });
+  await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
+  expect(new URL(page.url()).pathname).toBe("/");
+});
+
 test("booking links reopen the wizard after closing on the book route", async ({ page }) => {
   await page.goto("/book");
 
