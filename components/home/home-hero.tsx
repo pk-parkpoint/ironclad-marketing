@@ -113,7 +113,7 @@ export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
 
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center md:justify-start">
             <a
-              className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-[rgba(110,210,150,0.40)] bg-[rgba(6,118,75,0.55)] px-7 py-[14px] text-[16px] font-semibold text-[#7FE0AD] shadow-[0_16px_32px_rgba(0,0,0,0.35),0_4px_10px_rgba(6,118,75,0.28)] transition-[background-color,border-color,color,box-shadow,transform] hover:-translate-y-0.5 hover:border-[rgba(110,210,150,0.56)] hover:bg-[rgba(6,118,75,0.70)] hover:text-[#A8F2C9] hover:shadow-[0_20px_40px_rgba(0,0,0,0.42),0_6px_14px_rgba(6,118,75,0.34)] hover:no-underline sm:w-auto"
+              className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-[rgba(147,197,253,0.44)] bg-[#2563EB] px-7 py-[14px] text-[16px] font-semibold text-white shadow-[0_16px_34px_rgba(37,99,235,0.42),0_6px_14px_rgba(2,6,23,0.28),inset_0_1px_0_rgba(255,255,255,0.34)] transition-[background-color,border-color,color,box-shadow,transform] hover:-translate-y-0.5 hover:border-[rgba(191,219,254,0.72)] hover:bg-[#1D4ED8] hover:text-white hover:shadow-[0_22px_44px_rgba(37,99,235,0.50),0_8px_18px_rgba(2,6,23,0.34),inset_0_1px_0_rgba(255,255,255,0.42)] hover:no-underline sm:w-auto"
               href="tel:+18335971932"
             >
               <PhoneIcon />
