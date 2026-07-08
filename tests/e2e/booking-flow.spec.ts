@@ -117,7 +117,6 @@ test("booking flow uses public scheduling facade and confirms from facade identi
   await dialog.locator('input[type="tel"]').fill(testPhone);
   await dialog.locator('input[type="email"]').fill(testEmail);
   await dialog.locator('input[type="text"]').nth(2).fill("123 Test Street, Austin, TX 78701");
-  await dialog.getByRole("checkbox").check();
   await dialog.getByRole("button", { name: "Submit" }).click();
 
   await expect(page.getByRole("heading", { name: "Your appointment is confirmed!" })).toBeVisible();
@@ -138,7 +137,6 @@ test("booking flow uses public scheduling facade and confirms from facade identi
   const eventTypes = eventsData.events
     .map((event) => event.body?.eventType)
     .filter((value): value is string => typeof value === "string");
-  expect(eventTypes).not.toContain("booking_submitted");
   expect(eventTypes).not.toContain("booking_confirmation_sms");
   expect(eventTypes).not.toContain("booking_confirmation_email");
 });

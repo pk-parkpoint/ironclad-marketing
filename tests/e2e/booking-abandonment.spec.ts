@@ -178,7 +178,6 @@ test("booking wizard keeps step-four answers when abandoned after submit", async
   await dialog.locator('input[type="tel"]').fill(testPhone);
   await dialog.locator('input[type="email"]').fill(testEmail);
   await textInputs.nth(2).fill("456 Test Avenue, Austin, TX 78702");
-  await dialog.locator('input[type="checkbox"]').check();
   await dialog.getByRole("button", { name: "Submit" }).click();
 
   await expect(dialog.getByRole("heading", { name: /Your appointment is confirmed!/i })).toBeVisible();

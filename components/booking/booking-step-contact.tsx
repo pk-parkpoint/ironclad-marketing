@@ -109,8 +109,6 @@ function fieldGroupClass(hasError?: string) {
 
 export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSubmitting, submitError }: Props) {
   const [errors, setErrors] = useState<FormErrors>({});
-  const [consented, setConsented] = useState(false);
-  const [consentError, setConsentError] = useState(false);
   const addressRef = useRef<HTMLInputElement | null>(null);
   const autocompleteRef = useRef<GoogleAutocompleteInstance | null>(null);
   const sessionTokenRef = useRef<GoogleSessionToken | null>(null);
@@ -170,10 +168,6 @@ export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSub
 
   function handleSubmit() {
     const valid = validate();
-    if (!consented) {
-      setConsentError(true);
-      return;
-    }
     if (!valid) return;
     onSubmit();
   }
@@ -262,21 +256,6 @@ export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSub
           )}
         </div>
       </div>
-
-      {/* Consent */}
-      <label className={`${styles.checkboxRow} mt-6`}>
-        <input
-          type="checkbox"
-          checked={consented}
-          onChange={(e) => { setConsented(e.target.checked); if (e.target.checked) setConsentError(false); }}
-          className="mt-0.5 h-4 w-4 rounded border-gray-300"
-        />
-        <span className={styles.checkboxCaption}>
-          By continuing, I consent to receive communications regarding my service request via phone, text, or
-          email and agree to the terms of service and privacy policy.
-        </span>
-      </label>
-      {consentError && <p className={styles.errorMessage}>Please accept to continue.</p>}
 
       {submitError && <p className={styles.errorMessage}>{submitError}</p>}
 

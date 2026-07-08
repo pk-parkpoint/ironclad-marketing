@@ -243,7 +243,7 @@
   --radius-navbtn:      11px;   /* calendar prev/next */
   --radius-pill:        999px;  /* buttons, chips, toggle, trust bar */
   --radius-caldaycell:  12px;   /* calendar day hit cell */
-  --radius-checkbox:    7px;    /* consent/pets checkbox */
+  --radius-checkbox:    7px;    /* pets checkbox */
   --radius-progress-rail: 3px;  /* progress rail and fill */
   --size-progress-node: 34px;
   --size-progress-rail: 3px;
@@ -275,7 +275,8 @@
   --shadow-option-hover: 0 14px 30px -14px var(--color-accent-shadow), 0 2px 6px #0206170F;
   --shadow-slot-sel:   0 10px 24px -12px var(--color-accent-shadow), 0 0 0 4px var(--color-accent-ring);
   --shadow-chip-sel:   0 8px 18px -10px var(--color-accent-shadow), 0 0 0 3px var(--color-accent-ring);
-  --shadow-field-focus: 0 8px 20px -14px var(--color-accent-shadow); /* lift only; underline is border-image */
+  --shadow-field-focus: 0 8px 20px -14px var(--color-accent-shadow);
+  --shadow-field-focus-inset: inset 0 calc(-1 * var(--field-underline-width)) 0 0 var(--color-accent-primary), var(--shadow-field-focus);
   --shadow-field-error: 0 0 0 4px var(--color-error-ring);
   --shadow-trustbar:   0 14px 34px -20px #02061773;
   --shadow-brandmark:  0 12px 30px -12px #0F285080;
@@ -1184,10 +1185,8 @@
 }
 
 .fieldControl:focus {
-  border-image: var(--gradient-field-underline) 1;
-  border-image-width: 0 0 var(--field-underline-width) 0;
   background: var(--color-input-bg-focus);
-  box-shadow: var(--shadow-field-focus);
+  box-shadow: var(--shadow-field-focus-inset);
 }
 
 .fieldError .fieldLabel {
@@ -1200,8 +1199,7 @@
 }
 
 .fieldError .fieldControl:focus {
-  border-image: var(--gradient-field-underline) 1;
-  border-image-width: 0 0 var(--field-underline-width) 0;
+  box-shadow: var(--shadow-field-focus-inset);
 }
 
 .errorMessage {
