@@ -145,6 +145,13 @@ test("booking flow uses public scheduling facade and confirms from facade identi
   await expect(confirmStep.getByText("booking-1")).not.toBeVisible();
   await expect(confirmStep.getByText("appointment-1")).not.toBeVisible();
   await expect(confirmStep.getByRole("link", { name: "Manage appointment" })).not.toBeVisible();
+  await expect(confirmStep.getByRole("button", { name: "Residential" })).toHaveAttribute("aria-pressed", "false");
+  await expect(confirmStep.getByRole("button", { name: "Commercial" })).toHaveAttribute("aria-pressed", "false");
+  await expect(confirmStep.getByRole("button", { name: "I own this property" })).toHaveAttribute("aria-pressed", "false");
+  await expect(confirmStep.getByRole("button", { name: "Someone else owns" })).toHaveAttribute("aria-pressed", "false");
+  await expect(confirmStep.getByRole("radio", { name: "Call" })).not.toBeChecked();
+  await expect(confirmStep.getByRole("radio", { name: "Text" })).not.toBeChecked();
+  await expect(confirmStep.getByRole("radio", { name: "Either" })).not.toBeChecked();
 
   expect(facadeCalls).toEqual(expect.arrayContaining(["search", "hold", "book"]));
   expect(retiredBookingCalls).toEqual([]);

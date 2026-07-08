@@ -52,8 +52,8 @@ export type WizardFormData = {
   zip: string;
   latitude?: number;
   longitude?: number;
-  propertyType: "residential" | "commercial";
-  ownershipStatus: "own" | "other";
+  propertyType: "residential" | "commercial" | null;
+  ownershipStatus: "own" | "other" | null;
   gateCode: string;
   petsOnPremise: boolean;
   contactPreference: string[];
@@ -74,8 +74,8 @@ const INITIAL_FORM_DATA: WizardFormData = {
   selectedWindowLabel: null, holdId: null,
   firstName: "", lastName: "", phone: "", email: "",
   addressFormatted: "", street: "", city: "", state: "", zip: "",
-  propertyType: "residential", ownershipStatus: "own",
-  gateCode: "", petsOnPremise: false, contactPreference: ["either"],
+  propertyType: null, ownershipStatus: null,
+  gateCode: "", petsOnPremise: false, contactPreference: [],
 };
 
 const STEPS = [
@@ -118,6 +118,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
   const bookingFacade = usePublicBookingFacade();
   const { book, bookError, holdWindow, releaseHold, reset, searchDate } = bookingFacade;
   const modalRef = useRef<HTMLDivElement | null>(null);
+  const bodyRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const finalizedRef = useRef(false);
@@ -263,7 +264,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
     previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const rafId = requestAnimationFrame(() => closeButtonRef.current?.focus());
+    const rafId = requestAnimationFrame(() => closeButtonRef.current?.focus({ preventScroll: true }));
 
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
@@ -306,6 +307,12 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
       if (prev?.isConnected) requestAnimationFrame(() => prev.isConnected && prev.focus());
     };
   }, [onOpenChange, open]);
+
+  useEffect(() => {
+    if (!open) return;
+    bodyRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    modalRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [currentStep, open]);
 
   function updateFormData(updates: Partial<WizardFormData>) {
     setFormData((prev) => {
@@ -387,6 +394,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
       aria-describedby="booking-modal-description"
       className={styles.page}
       data-theme={theme}
+      tabIndex={-1}
     >
       <div className={styles.blobA} aria-hidden="true" />
       <div className={styles.blobB} aria-hidden="true" />
@@ -407,14 +415,28 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
             </div>
           </div>
           <div className={styles.trustBar} aria-label="Ironclad Plumbing trust signals">
-            <span>
-              <span className={styles.trustStars}>★★★★★</span>{" "}
-              <span className={styles.trustStrong}>4.9/5</span> · 142 Google, Yelp, and Nextdoor reviews
+            <span className={styles.trustTrack}>
+              <span className={styles.trustGroup}>
+                <span>
+                  <span className={styles.trustStars}>★★★★★</span>{" "}
+                  <span className={styles.trustStrong}>4.9/5</span> · 142 Google, Yelp, and Nextdoor reviews
+                </span>
+                <span className={styles.trustBullet}>•</span>
+                <span className={styles.trustItem}>Locally Owned</span>
+                <span className={styles.trustBullet}>•</span>
+                <span className={styles.trustItem}>Licensed &amp; Insured</span>
+              </span>
+              <span className={`${styles.trustGroup} ${styles.trustGroupDuplicate}`} aria-hidden="true">
+                <span>
+                  <span className={styles.trustStars}>★★★★★</span>{" "}
+                  <span className={styles.trustStrong}>4.9/5</span> · 142 Google, Yelp, and Nextdoor reviews
+                </span>
+                <span className={styles.trustBullet}>•</span>
+                <span className={styles.trustItem}>Locally Owned</span>
+                <span className={styles.trustBullet}>•</span>
+                <span className={styles.trustItem}>Licensed &amp; Insured</span>
+              </span>
             </span>
-            <span className={styles.trustBullet}>•</span>
-            <span className={styles.trustItem}>Locally Owned</span>
-            <span className={styles.trustBullet}>•</span>
-            <span className={styles.trustItem}>Licensed &amp; Insured</span>
           </div>
         </div>
         <section className={styles.frame} aria-label="Booking wizard">
@@ -441,7 +463,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
               {`Step ${currentStep} of 4.`}
             </p>
 
-            <div className={styles.body}>
+            <div className={styles.body} ref={bodyRef}>
               <div
                 key={currentStep}
                 className={joinClasses(styles.stepContent, direction === "back" && styles.stepContentBack)}
