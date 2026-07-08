@@ -189,9 +189,8 @@ export default function RootLayout({
           type="video/mp4"
           media="(min-width: 768px) and (prefers-reduced-motion: no-preference)"
         />
-        <Script
+        <script
           id="booking-link-preboot"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: BOOKING_PREBOOT_SCRIPT }}
         />
         <AnalyticsHead />
