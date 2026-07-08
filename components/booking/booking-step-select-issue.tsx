@@ -119,7 +119,7 @@ export function BookingStepSelectIssue({ formData, onUpdate, onNext }: Props) {
     return (
       <div data-testid="booking-step-1">
         <h1 className={styles.heading}>What do you need help with?</h1>
-        <p className={styles.subcopy}>Select the option that best describes your situation.</p>
+        <p className={styles.subcopy}>Pick what best describes your situation</p>
 
         <div className={styles.optionList}>
           {CATEGORIES.map((cat) => {

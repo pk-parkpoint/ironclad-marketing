@@ -157,7 +157,7 @@ export function BookingStepConfirm({
       {/* Additional notes */}
       <div className={styles.optionalGroup}>
       <div>
-        <label className={styles.optionalLabel} htmlFor="booking-notes">Anything we should know before arrival?</label>
+        <label className={styles.optionalLabel} htmlFor="booking-notes">Anything else we should know before arrivals?</label>
         <textarea
           id="booking-notes"
           className={`${styles.fieldControl} ${styles.textarea}`}
