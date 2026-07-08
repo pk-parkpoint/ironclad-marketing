@@ -175,7 +175,7 @@ export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSub
   return (
     <div data-testid="booking-step-3">
       <h1 className={styles.heading}>Enter your information</h1>
-      <p className={styles.subcopy}>So we can reach you about your appointment.</p>
+      <p className={styles.subcopy}>To confirm your visit</p>
 
       <div className={styles.fieldGrid}>
         <div className={fieldGroupClass(errors.firstName)}>

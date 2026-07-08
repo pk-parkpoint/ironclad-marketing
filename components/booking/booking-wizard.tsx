@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { parseAttribution } from "@/lib/analytics";
-import { getPublicContactInfo } from "@/lib/contact";
 import {
   BOOKING_SCREEN_IDS,
   buildBookingLeadPayload,
@@ -115,6 +114,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
   const [submitError, setSubmitError] = useState<string | undefined>();
   const [bookingId, setBookingId] = useState<string | undefined>();
   const [confirmation, setConfirmation] = useState<BookingConfirmation | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const bookingFacade = usePublicBookingFacade();
   const { book, bookError, holdWindow, releaseHold, reset, searchDate } = bookingFacade;
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -127,7 +127,6 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
   const pathnameRef = useRef(pathname);
   const searchParamsRef = useRef(searchParams);
   const sendAbandonmentRef = useRef<(args: { useBeacon: boolean }) => void>(() => {});
-  const { phoneDisplay, phoneHref } = getPublicContactInfo();
 
   useEffect(() => {
     formDataRef.current = formData;
@@ -387,6 +386,7 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
       aria-labelledby="booking-wizard-title"
       aria-describedby="booking-modal-description"
       className={styles.page}
+      data-theme={theme}
     >
       <div className={styles.blobA} aria-hidden="true" />
       <div className={styles.blobB} aria-hidden="true" />
@@ -409,18 +409,12 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
           <div className={styles.trustBar} aria-label="Ironclad Plumbing trust signals">
             <span>
               <span className={styles.trustStars}>★★★★★</span>{" "}
-              <span className={styles.trustStrong}>5.0</span> · 142 Google reviews
+              <span className={styles.trustStrong}>4.9/5</span> · 142 Google, Yelp, and Nextdoor reviews
             </span>
             <span className={styles.trustBullet}>•</span>
             <span className={styles.trustItem}>Locally Owned</span>
             <span className={styles.trustBullet}>•</span>
-            <span className={styles.trustItem}>24/7 Service</span>
-            <span className={styles.trustBullet}>•</span>
             <span className={styles.trustItem}>Licensed &amp; Insured</span>
-            <span className={styles.trustBullet}>•</span>
-            <a className={styles.trustPhone} href={phoneHref}>
-              {phoneDisplay}
-            </a>
           </div>
         </div>
         <section className={styles.frame} aria-label="Booking wizard">
@@ -498,6 +492,19 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
             </div>
           </div>
         </section>
+        <div className={styles.themeToggle} aria-label="Booking wizard theme">
+          {(["light", "dark"] as const).map((mode) => (
+            <button
+              aria-pressed={theme === mode}
+              className={joinClasses(styles.themeToggleButton, theme === mode && styles.themeToggleButtonActive)}
+              key={mode}
+              onClick={() => setTheme(mode)}
+              type="button"
+            >
+              {mode === "light" ? "Light Mode" : "Dark Mode"}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

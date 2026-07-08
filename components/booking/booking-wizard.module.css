@@ -336,13 +336,48 @@
    Only tokens that change are redeclared; everything else inherits :root.
    ========================================================================== */
 
+.page[data-theme="dark"] {
+  --color-text-primary:   #EDF2FA;
+  --color-text-muted:     #96A4BA;
+  --color-text-faint:     #5B6A82;
+  --color-brand-wordmark: #EEF3FA;
+
+  --color-panel:          #0F172A9E;
+  --color-panel-sheen:    #94C5FF1A;
+  --color-card-bg:        #FFFFFF0B;
+  --color-card-border:    #FFFFFF1C;
+  --color-hover-bg:       #60A5FA1A;
+  --color-input-bg:       #FFFFFF0D;
+  --color-input-bg-focus: #FFFFFF17;
+  --color-input-border:   #FFFFFF24;
+  --color-track-bg:       #FFFFFF1F;
+  --color-divider:        #FFFFFF14;
+  --color-node-bg:        #FFFFFF0F;
+  --color-skeleton-a:     #FFFFFF0D;
+  --color-skeleton-b:     #FFFFFF1C;
+  --color-success-bg:     #22C55E17;
+  --color-success-border: #22C55E47;
+
+  --gradient-frame:  linear-gradient(150deg, #94C5FF8C, #3B82F640 30%, #94A3B824 55%, #60A5FA80);
+  --gradient-page:   radial-gradient(1000px 700px at 18% -12%, #2563EB3D, transparent 60%),
+                     radial-gradient(800px 560px at 108% 18%, #38BDF824, transparent 55%),
+                     linear-gradient(180deg, #0B1224, #080D1A);
+  --gradient-blob-a: radial-gradient(circle at 35% 35%, #2563EBAA, transparent 70%);
+  --gradient-blob-b: radial-gradient(circle at 60% 60%, #38BDF880, transparent 70%);
+
+  --shadow-frame:  0 40px 110px -24px #000000BF, 0 0 70px -24px var(--color-accent-shadow);
+  --shadow-card:   0 1px 2px #00000040, 0 8px 22px -14px #00000080;
+}
+
 .page {
   position: fixed;
   inset: 0;
   z-index: 1000;
   display: grid;
+  width: 100vw;
   min-height: 100dvh;
   place-items: center;
+  overflow-x: clip;
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 48px 20px;
@@ -452,8 +487,8 @@
 }
 
 .trustStrong {
-  color: var(--color-text-primary);
-  font-weight: var(--type-trust-strong-weight);
+  color: var(--color-text-muted);
+  font-weight: var(--type-trust-weight);
 }
 
 .trustBullet {
@@ -461,7 +496,7 @@
 }
 
 .trustItem {
-  color: var(--color-text-primary);
+  color: var(--color-text-muted);
 }
 
 .trustPhone {
@@ -527,13 +562,19 @@
   height: 34px;
   place-items: center;
   padding: 0;
-  border: 1px solid transparent;
+  border: 1px solid var(--color-card-border);
   border-radius: var(--radius-pill);
-  background: transparent;
+  background: var(--color-card-bg);
   color: var(--color-text-muted);
   cursor: pointer;
   font-size: var(--type-close-size);
   transition: var(--motion-fast);
+}
+
+.closeButton::after {
+  position: absolute;
+  inset: -5px;
+  content: "";
 }
 
 .closeButton:hover {
@@ -541,6 +582,46 @@
   background: var(--color-hover-bg);
   color: var(--color-text-primary);
   transform: rotate(90deg);
+}
+
+.themeToggle {
+  z-index: var(--z-toggle);
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: var(--border-card);
+  border-radius: var(--radius-pill);
+  background: var(--color-panel);
+  box-shadow: 0 6px 18px -8px #02061759;
+  backdrop-filter: blur(16px);
+}
+
+.themeToggleButton {
+  padding: 7px 16px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-family: var(--font-family-ui);
+  font-size: 13px;
+  font-weight: 650;
+  transition: all 0.25s ease;
+}
+
+.themeToggleButton:hover {
+  color: var(--color-text-primary);
+}
+
+.themeToggleButton:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
+.themeToggleButtonActive {
+  background: var(--gradient-cta);
+  box-shadow: var(--shadow-toggle-active);
+  color: var(--color-text-on-accent);
 }
 
 .closeButton:focus-visible {
@@ -1543,6 +1624,81 @@
 
   .textarea {
     font-size: var(--type-textarea-size-mobile);
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    align-items: start;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    min-height: 100dvh;
+    padding: 14px 14px max(40px, env(safe-area-inset-bottom));
+    overscroll-behavior-y: contain;
+  }
+
+  .stack {
+    justify-self: stretch;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 14px;
+  }
+
+  .blobA,
+  .blobB {
+    position: fixed;
+  }
+
+  .brandHeader {
+    align-self: stretch;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 14px;
+  }
+
+  .brandMark {
+    width: 46px;
+    height: 46px;
+  }
+
+  .wordmark {
+    font-size: 19px;
+  }
+
+  .trustBar {
+    align-self: stretch;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-mask-image: linear-gradient(90deg, #000 76%, transparent 97%);
+    mask-image: linear-gradient(90deg, #000 76%, transparent 97%);
+  }
+
+  .trustBar > * {
+    flex: 0 0 auto;
+  }
+
+  .frame {
+    width: min(640px, calc(100vw - 28px));
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .body {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .themeToggle {
+    max-width: calc(100vw - 28px);
+    margin-top: 4px;
   }
 }
 
