@@ -20,6 +20,17 @@ function nextDateId(offsetDays: number): string {
   return date.toISOString().slice(0, 10);
 }
 
+function longDateLabel(iso: string): string {
+  const [year, month, day] = iso.split("-").map((part) => Number.parseInt(part, 10));
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
 test("booking flow uses public scheduling facade and confirms from facade identifiers", async ({ page, request }) => {
   const uniqueSuffix = Math.floor(Math.random() * 9000) + 1000;
   const testPhone = `512555${uniqueSuffix}`;
@@ -120,13 +131,20 @@ test("booking flow uses public scheduling facade and confirms from facade identi
   await dialog.getByRole("button", { name: "Submit" }).click();
 
   await expect(page.getByRole("heading", { name: "Your appointment is confirmed!" })).toBeVisible();
-  await expect(page.getByText("IC-1234")).toBeVisible();
-  await expect(page.getByText("appointment-1")).toBeVisible();
-  await expect(page.getByText("9:00 AM - 12:00 PM")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Manage appointment" })).toHaveAttribute(
-    "href",
-    "https://app.mainconduit.com/s/manage-token",
-  );
+  const confirmStep = page.getByTestId("booking-step-4");
+  await expect(confirmStep.getByText("Confirmation")).toBeVisible();
+  await expect(confirmStep.getByText("IC-1234")).toBeVisible();
+  await expect(confirmStep.getByText("Issue")).toBeVisible();
+  await expect(confirmStep.getByText("Fix a Leak")).toBeVisible();
+  await expect(confirmStep.getByText("Date")).toBeVisible();
+  await expect(confirmStep.getByText(longDateLabel(appointmentDate))).toBeVisible();
+  await expect(confirmStep.getByText("Arrival window")).toBeVisible();
+  await expect(confirmStep.getByText("9:00 AM - 12:00 PM")).toBeVisible();
+  await expect(confirmStep.getByText("Booking ID")).not.toBeVisible();
+  await expect(confirmStep.getByText("Appointment ID")).not.toBeVisible();
+  await expect(confirmStep.getByText("booking-1")).not.toBeVisible();
+  await expect(confirmStep.getByText("appointment-1")).not.toBeVisible();
+  await expect(confirmStep.getByRole("link", { name: "Manage appointment" })).not.toBeVisible();
 
   expect(facadeCalls).toEqual(expect.arrayContaining(["search", "hold", "book"]));
   expect(retiredBookingCalls).toEqual([]);

@@ -1162,6 +1162,10 @@
   line-height: var(--type-label-line-height);
 }
 
+.groupLabel {
+  margin: 0 0 9px;
+}
+
 .fieldControl {
   width: 100%;
   height: var(--control-field-height);
@@ -1241,7 +1245,7 @@
 }
 
 .confirmationBanner {
-  padding: 26px 20px;
+  padding: 18px 20px;
   border: 1px solid var(--color-success-border);
   border-radius: var(--radius-card);
   background: var(--color-success-bg);
@@ -1252,10 +1256,10 @@
 
 .checkBadge {
   display: grid;
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   place-items: center;
-  margin: 0 auto 14px;
+  margin: 0 auto 10px;
   border-radius: var(--radius-pill);
   background: var(--color-success-badge-bg);
   color: var(--color-success-ink);
@@ -1272,8 +1276,8 @@
 }
 
 .summaryCard {
-  margin-top: 16px;
-  padding: 8px 18px 16px;
+  margin-top: 12px;
+  padding: 6px 18px 12px;
   border: var(--border-card);
   border-radius: var(--radius-card);
   background: var(--color-card-bg);
@@ -1285,7 +1289,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 16px;
-  padding: 11px 0;
+  padding: 8px 0;
   border-bottom: 1px solid var(--color-divider);
 }
 
@@ -1307,7 +1311,7 @@
 }
 
 .helperLine {
-  margin: 20px 2px 16px;
+  margin: 14px 2px 10px;
   color: var(--color-text-muted);
   font-size: var(--type-option-desc-size-desktop);
   font-weight: var(--type-option-desc-weight);
@@ -1317,7 +1321,7 @@
 .optionalGroup {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
 }
 
 .optionalLabel {
@@ -1339,7 +1343,7 @@
 }
 
 .chip {
-  padding: 9px 18px;
+  padding: 7px 16px;
   border: 1.5px solid var(--color-card-border);
   border-radius: var(--radius-pill);
   background: var(--color-card-bg);
@@ -1370,6 +1374,21 @@
   background: var(--color-accent-soft-bg);
   box-shadow: var(--shadow-chip-sel);
   color: var(--color-accent-primary);
+}
+
+.confirmStack .fieldControl {
+  height: 40px;
+  padding: 10px 14px;
+}
+
+.confirmStack .textarea {
+  min-height: 92px;
+  resize: none;
+}
+
+.confirmStack .primaryButtonLarge {
+  min-height: 40px;
+  padding: 10px 28px;
 }
 
 .checkboxButton {

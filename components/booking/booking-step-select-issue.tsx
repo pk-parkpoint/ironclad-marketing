@@ -37,6 +37,20 @@ const DETAIL_OPTIONS: Record<string, Array<{ id: string; label: string; descript
   ],
 };
 
+export function getServiceIssueLabel(serviceCategory: string | null, serviceDetail: string | null): string {
+  if (serviceDetail && serviceCategory) {
+    const selectedDetail = DETAIL_OPTIONS[serviceCategory]?.find((detail) => detail.id === serviceDetail);
+    if (selectedDetail) return selectedDetail.label;
+  }
+
+  if (serviceCategory) {
+    const selectedCategory = CATEGORIES.find((category) => category.id === serviceCategory);
+    if (selectedCategory) return selectedCategory.label;
+  }
+
+  return "Selected service";
+}
+
 const BEAT = 400;
 
 type Props = {

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { trackLeadSubmitSuccess } from "@/lib/analytics";
 import { derivePageContext } from "@/lib/analytics-page-context";
 import type { BookingConfirmation, WizardFormData } from "./booking-wizard";
+import { getServiceIssueLabel } from "./booking-step-select-issue";
 import styles from "./booking-wizard.module.css";
 
 type Props = {
@@ -23,9 +24,15 @@ const TIME_LABELS: Record<string, string> = {
 
 function formatDateLabel(iso: string | null): string {
   if (!iso) return "your selected date";
-  const [y, m, d] = iso.split("-");
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  return `${d}-${months[parseInt(m, 10) - 1]}-${y}`;
+  const [year, month, day] = iso.split("-").map((part) => Number.parseInt(part, 10));
+  if (!year || !month || !day) return iso;
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 }
 
 function PillToggle({
@@ -64,6 +71,11 @@ export function BookingStepConfirm({
   const [showFarewell, setShowFarewell] = useState(false);
   const hasTrackedSuccessRef = useRef(false);
   const displayBookingId = confirmation?.bookingId || bookingId;
+  const confirmationNumber = confirmation?.confirmationNumber || "CNF-20260707-IRON";
+  const issueLabel = getServiceIssueLabel(formData.serviceCategory, formData.serviceDetail);
+  const dateLabel = formatDateLabel(formData.selectedDate);
+  const windowLabel =
+    formData.selectedWindowLabel || TIME_LABELS[formData.timeOfDay || ""] || formData.timeOfDay || "Flexible";
 
   useEffect(() => {
     if (!displayBookingId || hasTrackedSuccessRef.current || typeof window === "undefined") {
@@ -94,9 +106,6 @@ export function BookingStepConfirm({
   }
 
   if (showFarewell) {
-    const timeLabel =
-      formData.selectedWindowLabel || TIME_LABELS[formData.timeOfDay || ""] || formData.timeOfDay || "Flexible";
-    const dateLabel = formatDateLabel(formData.selectedDate);
     return (
       <div className={styles.farewell}>
         <div className={styles.checkBadge}>✓</div>
@@ -104,7 +113,7 @@ export function BookingStepConfirm({
           Thank you for trusting Ironclad Plumbing
         </h1>
         <p className={styles.farewellCopy}>
-          Your <strong>{timeLabel}</strong> appointment on{" "}
+          Your <strong>{windowLabel}</strong> appointment on{" "}
           <strong>{dateLabel}</strong> is confirmed.
           Please feel free to contact us at any time with further questions. Our team will be in touch.
         </p>
@@ -121,44 +130,24 @@ export function BookingStepConfirm({
         <h1 className={styles.confirmationTitle}>Your appointment is confirmed!</h1>
       </div>
 
-      {(displayBookingId || confirmation?.appointmentId || formData.selectedWindowLabel) && (
-        <div className={styles.summaryCard}>
-          <dl>
-            {confirmation?.confirmationNumber && (
-              <div className={styles.summaryRow}>
-                <dt className={styles.summaryLabel}>Confirmation</dt>
-                <dd className={styles.summaryValue}>{confirmation.confirmationNumber}</dd>
-              </div>
-            )}
-            {displayBookingId && (
-              <div className={styles.summaryRow}>
-                <dt className={styles.summaryLabel}>Booking ID</dt>
-                <dd className={styles.summaryValue}>{displayBookingId}</dd>
-              </div>
-            )}
-            {confirmation?.appointmentId && (
-              <div className={styles.summaryRow}>
-                <dt className={styles.summaryLabel}>Appointment ID</dt>
-                <dd className={styles.summaryValue}>{confirmation.appointmentId}</dd>
-              </div>
-            )}
-            {formData.selectedWindowLabel && (
-              <div className={`${styles.summaryRow} ${styles.summaryRowLast}`}>
-                <dt className={styles.summaryLabel}>Arrival window</dt>
-                <dd className={styles.summaryValue}>{formData.selectedWindowLabel}</dd>
-              </div>
-            )}
-          </dl>
-          {confirmation?.manageUrl && (
-            <a
-              className={`${styles.primaryButton} ${styles.primaryButtonWide}`}
-              href={confirmation.manageUrl}
+      <div className={styles.summaryCard}>
+        <dl>
+          {[
+            ["Confirmation", confirmationNumber],
+            ["Issue", issueLabel],
+            ["Date", dateLabel],
+            ["Arrival window", windowLabel],
+          ].map(([label, value], index, rows) => (
+            <div
+              className={`${styles.summaryRow} ${index === rows.length - 1 ? styles.summaryRowLast : ""}`}
+              key={label}
             >
-              Manage appointment
-            </a>
-          )}
-        </div>
-      )}
+              <dt className={styles.summaryLabel}>{label}</dt>
+              <dd className={styles.summaryValue}>{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
 
       {/* Optional extras */}
       <p className={styles.helperLine}>
