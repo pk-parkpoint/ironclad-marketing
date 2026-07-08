@@ -106,7 +106,7 @@ test("booking flow uses public scheduling facade and confirms from facade identi
   await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
 
   await page.getByRole("button", { name: /Tomorrow/i }).click();
-  await page.getByRole("button", { name: "10:00 AM - 12:00 PM" }).click();
+  await page.getByRole("button", { name: "9:00 AM - 12:00 PM" }).click();
   await expect(page.getByText(/This time is reserved for/)).toBeVisible();
   await page.getByRole("button", { name: "Continue" }).click();
 
@@ -123,7 +123,7 @@ test("booking flow uses public scheduling facade and confirms from facade identi
   await expect(page.getByRole("heading", { name: "Your appointment is confirmed!" })).toBeVisible();
   await expect(page.getByText("IC-1234")).toBeVisible();
   await expect(page.getByText("appointment-1")).toBeVisible();
-  await expect(page.getByText("10:00 AM - 12:00 PM")).toBeVisible();
+  await expect(page.getByText("9:00 AM - 12:00 PM")).toBeVisible();
   await expect(page.getByRole("link", { name: "Manage appointment" })).toHaveAttribute(
     "href",
     "https://app.mainconduit.com/s/manage-token",

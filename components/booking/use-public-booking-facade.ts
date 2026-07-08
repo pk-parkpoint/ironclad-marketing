@@ -14,6 +14,13 @@ import type { BookingConfirmation, WizardFormData } from "./booking-wizard";
 type ActiveHold = PublicBookingHoldResponse & { startTime: string; endTime: string };
 
 const DURATION_ESTIMATE_MINUTES = 90;
+const SEARCH_MAX_RESULTS = 24;
+
+const ARRIVAL_WINDOWS = [
+  { endHour: 12, key: "morning", label: "9:00 AM - 12:00 PM", startHour: 9 },
+  { endHour: 15, key: "midday", label: "12:00 PM - 3:00 PM", startHour: 12 },
+  { endHour: 18, key: "afternoon", label: "3:00 PM - 6:00 PM", startHour: 15 },
+] as const;
 
 const SCHEDULER_SERVICE_TYPE_BY_SELECTION: Record<string, string> = {
   "clear-a-blockage": "drain_cleaning",
@@ -52,6 +59,39 @@ function buildIssueSummary(formData: WizardFormData): string {
 function schedulerServiceType(formData: WizardFormData): string | undefined {
   const selected = formData.serviceDetail || formData.serviceCategory;
   return selected ? SCHEDULER_SERVICE_TYPE_BY_SELECTION[selected] || selected : undefined;
+}
+
+function windowHour(value: string): number | null {
+  const match = value.match(/T(\d{2}):/);
+  return match ? Number(match[1]) : null;
+}
+
+function withHour(value: string, hour: number): string {
+  return value.replace(/T\d{2}:\d{2}:\d{2}/, `T${String(hour).padStart(2, "0")}:00:00`);
+}
+
+function customerArrivalWindows(windows: PublicBookingWindow[]): PublicBookingWindow[] {
+  const collapsed: PublicBookingWindow[] = [];
+  for (const slot of ARRIVAL_WINDOWS) {
+    const window = windows.find((candidate) => {
+      const hour = windowHour(candidate.startTime);
+      return hour !== null && hour >= slot.startHour && hour < slot.endHour;
+    });
+    if (!window) continue;
+    collapsed.push({
+      ...window,
+      arrivalWindowLabel: slot.label,
+      displayLabel: slot.label,
+      endTime: withHour(window.endTime, slot.endHour),
+      offerId: `${slot.key}:${window.offerId}`,
+      startTime: withHour(window.startTime, slot.startHour),
+    });
+  }
+  return collapsed;
+}
+
+function schedulerOfferId(offerId: string): string {
+  return offerId.replace(/^(morning|midday|afternoon):/, "");
 }
 
 function buildBookPayload(formData: WizardFormData) {
@@ -140,12 +180,12 @@ export function usePublicBookingFacade() {
         date,
         durationEstimateMinutes: DURATION_ESTIMATE_MINUTES,
         issueSummary: buildIssueSummary(formData),
-        maxResults: 8,
+        maxResults: SEARCH_MAX_RESULTS,
         serviceType: schedulerServiceType(formData),
       });
       setWindowsByDate((current) => ({
         ...current,
-        [date]: response.windows.filter((window) => window.isAvailable),
+        [date]: customerArrivalWindows(response.windows.filter((window) => window.isAvailable)),
       }));
     } catch (error) {
       setSearchError(friendlyError("Unable to load available appointment times.", error));
@@ -160,11 +200,12 @@ export function usePublicBookingFacade() {
       setHoldError(null);
       setBookError(null);
       try {
+        const offerId = schedulerOfferId(window.offerId);
         const hold = await holdPublicBookingWindow({
           durationEstimateMinutes: DURATION_ESTIMATE_MINUTES,
-          idempotencyKey: `${window.offerId}-${Date.now()}`,
+          idempotencyKey: `${offerId}-${Date.now()}`,
           issueSummary: buildIssueSummary(formData),
-          offerId: window.offerId,
+          offerId,
           serviceType: schedulerServiceType(formData),
           windowId: window.windowId,
         });

@@ -520,6 +520,7 @@
   position: absolute;
   top: 16px;
   right: 16px;
+  z-index: 3;
   display: grid;
   width: 34px;
   height: 34px;
@@ -556,6 +557,7 @@
 .progress {
   position: relative;
   padding-top: 0;
+  pointer-events: none;
   --progress-node-radius: calc(var(--size-progress-node) / 2);
   --progress-segment-offset: calc(var(--progress-node-radius) + var(--gap-progress-node-rail));
 }
@@ -627,6 +629,7 @@
   width: var(--size-progress-node);
   height: var(--size-progress-node);
   place-items: center;
+  pointer-events: auto;
   border: 1.5px solid var(--color-card-border);
   border-radius: var(--radius-pill);
   background: var(--color-node-bg);

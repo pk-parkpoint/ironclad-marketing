@@ -91,7 +91,7 @@ async function startBookingFlow(page: Page): Promise<Locator> {
   await expect(dialog.getByRole("heading", { name: /Choose an Appointment Time/i })).toBeVisible();
 
   await dialog.getByRole("button", { name: /Tomorrow/i }).click();
-  await dialog.getByRole("button", { name: "10:00 AM - 12:00 PM" }).click();
+  await dialog.getByRole("button", { name: "9:00 AM - 12:00 PM" }).click();
   await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
   await dialog.getByRole("button", { name: "Continue" }).click();
 
@@ -141,7 +141,7 @@ test("booking wizard sends captured contact data when abandoned before submit", 
   expect(payload.booking.serviceDetail).toBe("Fixture");
   expect(payload.booking.serviceDisplay).toBe("Installations Replacements > Fixture");
   expect(payload.booking.preferredDate).not.toBe("NA");
-  expect(payload.booking.preferredWindow).toBe("10:00 AM - 12:00 PM");
+  expect(payload.booking.preferredWindow).toBe("9:00 AM - 12:00 PM");
   // Confirm-details fields were never shown to this customer (abandoned at
   // contact_info / step 3). They should report Not Presented, not NA.
   expect(payload.booking.notes).toBe("Not Presented");
