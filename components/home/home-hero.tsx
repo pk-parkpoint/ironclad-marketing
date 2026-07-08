@@ -41,6 +41,21 @@ function ChevronRightIcon() {
   );
 }
 
+function ReviewStar() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-[14px] w-[14px] sm:h-[16px] sm:w-[16px]"
+      fill="#FBBC04"
+      stroke="#FBBC04"
+      strokeWidth="1"
+      viewBox="0 0 24 24"
+    >
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}
+
 export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
   return (
     <section className="relative isolate min-h-[480px] overflow-hidden md:min-h-[580px]">
@@ -64,13 +79,20 @@ export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
       <div className="relative mx-auto flex min-h-[480px] w-full max-w-[1280px] items-center px-6 py-4 md:min-h-[580px] md:py-8">
         <div className="w-full text-center [font-family:var(--font-inter)] md:max-w-[760px] md:text-left lg:max-w-[78%] xl:max-w-[72%]">
           <Link
-            className="focus-ring inline-flex max-w-full items-center justify-center gap-2.5 rounded-full bg-[rgba(0,0,0,0.3)] px-4 py-2 text-center text-[#FFFFFF] transition-colors duration-200 hover:bg-[rgba(0,0,0,0.45)] hover:no-underline sm:px-5"
-            aria-label={`4.9/5 ${reviewCount} reviews on Google, Yelp, and Nextdoor`}
+            className="focus-ring inline-flex max-w-full flex-wrap items-center justify-center gap-x-2.5 gap-y-1 rounded-full bg-[rgba(0,0,0,0.3)] px-4 py-2 text-center text-[#FFFFFF] transition-colors duration-200 hover:bg-[rgba(0,0,0,0.45)] hover:no-underline sm:px-5"
+            aria-label={`Five stars. 4.9/5. ${reviewCount} reviews on Google, Yelp, and Nextdoor`}
             href={reviewHref}
             style={{ color: "#FFFFFF" }}
           >
-            <span className="text-[13px] font-semibold leading-tight text-[#FFFFFF] sm:text-[14px]">
-              4.9/5 {reviewCount} reviews on Google, Yelp, &amp; Nextdoor
+            <span className="flex shrink-0 items-center gap-[2px]">
+              <ReviewStar />
+              <ReviewStar />
+              <ReviewStar />
+              <ReviewStar />
+              <ReviewStar />
+            </span>
+            <span className="min-w-0 text-[13px] font-semibold leading-tight text-[#FFFFFF] sm:text-[14px]">
+              4.9/5 &middot; {reviewCount} reviews on Google, Yelp, &amp; Nextdoor
             </span>
             <ChevronRightIcon />
           </Link>
