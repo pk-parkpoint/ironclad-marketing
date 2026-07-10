@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { DRAIN_CLEANING_TEMPLATE as defaultContent } from "./drain-cleaning-data";
+import { HeroMetaBadge } from "./hero-meta-badge";
 import { ReferenceChrome } from "./reference-chrome";
 import { ServiceTemplateEffects } from "./service-template-effects";
 import type { DrainCleaningTemplateContent } from "./service-template-types";
@@ -38,7 +39,6 @@ export function DrainCleaningPage({
   phoneDisplay,
   phoneHref,
 }: DrainCleaningPageProps) {
-  const hasHeroCopyOverride = Boolean(content.hero.eyebrow || content.hero.ratingLabel || content.hero.chipLabel);
   const hasHeroCtaOverride = Boolean(content.hero.primaryCtaLabel || content.hero.secondaryCtaLabel);
 
   return (
@@ -59,7 +59,11 @@ export function DrainCleaningPage({
         <div className="dc-hero-scrim" />
         <div className="dc-hero-glow" />
         <div className="dc-hero-inner">
-          {content.hero.eyebrow ? <div className="dc-hero-eyebrow">{content.hero.eyebrow}</div> : <GoogleRatingBadge />}
+          {content.hero.eyebrow ? (
+            <HeroMetaBadge eyebrow={content.hero.eyebrow} ratingLabel={content.hero.ratingLabel} />
+          ) : (
+            <GoogleRatingBadge label={content.hero.ratingLabel} />
+          )}
           <h1 data-slot="hero-title">{content.hero.title}</h1>
           <HeroSubtitle
             pun={content.hero.pun}
@@ -67,14 +71,12 @@ export function DrainCleaningPage({
             supportLine={content.hero.supportLine}
             valueLine={content.hero.subhead}
           />
-          {hasHeroCopyOverride ? (
+          <TrustRow />
+          {content.hero.chipLabel ? (
             <div className="dc-hero-proof-row">
-              <GoogleRatingBadge label={content.hero.ratingLabel} simple={Boolean(content.hero.ratingLabel)} />
-              {content.hero.chipLabel ? <span className="dc-hero-chip">{content.hero.chipLabel}</span> : null}
+              <span className="dc-hero-chip">{content.hero.chipLabel}</span>
             </div>
-          ) : (
-            <TrustRow />
-          )}
+          ) : null}
           <div className="dc-hero-ctas">
             {hasHeroCtaOverride ? (
               <>

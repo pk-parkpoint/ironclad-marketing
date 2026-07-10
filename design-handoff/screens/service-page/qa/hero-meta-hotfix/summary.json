@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-07-10T20:33:03.202Z",
+  "results": [
+    {
+      "slug": "water-heaters",
+      "viewport": "desktop",
+      "screenshotPath": "design-handoff/screens/service-page/qa/hero-meta-hotfix/water-heaters-desktop.png",
+      "metaText": "WATER HEATERS · AUSTIN4.9/5 · 142 reviews on Google, Yelp, & Nextdoor",
+      "trustText": "Locally Owned & OperatedLicensed & Insured"
+    },
+    {
+      "slug": "leak-repair",
+      "viewport": "desktop",
+      "screenshotPath": "design-handoff/screens/service-page/qa/hero-meta-hotfix/leak-repair-desktop.png",
+      "metaText": "LEAK REPAIR · AUSTIN4.9/5 · 142 reviews on Google, Yelp, & Nextdoor",
+      "trustText": "Locally Owned & OperatedLicensed & Insured"
+    },
+    {
+      "slug": "water-heaters",
+      "viewport": "mobile",
+      "screenshotPath": "design-handoff/screens/service-page/qa/hero-meta-hotfix/water-heaters-mobile.png",
+      "metaText": "WATER HEATERS · AUSTIN4.9/5 · 142 reviews on Google, Yelp, & Nextdoor",
+      "trustText": "Locally Owned & OperatedLicensed & Insured"
+    },
+    {
+      "slug": "leak-repair",
+      "viewport": "mobile",
+      "screenshotPath": "design-handoff/screens/service-page/qa/hero-meta-hotfix/leak-repair-mobile.png",
+      "metaText": "LEAK REPAIR · AUSTIN4.9/5 · 142 reviews on Google, Yelp, & Nextdoor",
+      "trustText": "Locally Owned & OperatedLicensed & Insured"
+    }
+  ]
+}
