@@ -3,6 +3,7 @@ import { StructuredData } from "@/components/seo/structured-data";
 import { getServiceHeroImage } from "@/components/service/service-hero-images";
 import { ServiceStandardPage } from "@/components/service/service-standard-page";
 import { DrainCleaningPage } from "@/components/service-template/drain-cleaning-page";
+import type { DrainCleaningTemplateContent } from "@/components/service-template/service-template-types";
 import { getPpcServiceVariant, getPpcServiceVariantSlugs } from "@/content/ppc-service-variants";
 import { SERVICES, type ServiceEntry } from "@/content/services";
 import { getServiceDetail, type ServiceDetail } from "@/content/service-details";
@@ -42,25 +43,34 @@ function buildServicePageSchemas({
   heroImage,
   pagePath,
   service,
+  templateContent,
 }: {
   detail: ServiceDetail;
   heroImage: string;
   pagePath: string;
   service: ServiceEntry;
+  templateContent?: DrainCleaningTemplateContent;
 }) {
+  const faqItems = templateContent
+    ? templateContent.faqs.map(([question, answer]) => ({ question, answer }))
+    : detail.faqs;
+  const processSteps = templateContent
+    ? templateContent.process.map(([title, description]) => ({ description, title }))
+    : detail.processSteps.map((step) => ({
+        title: step.title,
+        description: step.description,
+      }));
+
   return buildSchemaStack(
     buildBreadcrumbListSchema(buildBreadcrumbItems(pagePath, service.title)),
     buildLocalBusinessSchema(pagePath),
     buildServiceSchema(service),
-    buildServiceFaqSchema(service.slug, detail.faqs),
+    buildServiceFaqSchema(service.slug, faqItems),
     buildHowToSchema({
       name: `How ${service.title} Works`,
       description: detail.heroDescription,
       path: pagePath,
-      steps: detail.processSteps.map((step) => ({
-        title: step.title,
-        description: step.description,
-      })),
+      steps: processSteps,
     }),
     buildImageObjectSchema({
       alt: `${service.title} service in Austin, Texas`,
@@ -103,7 +113,7 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
   const detail = getServiceDetail(service);
   const pagePath = `/plumbing/${service.slug}`;
   const heroImage = variant?.content.hero.image ?? getServiceHeroImage(service.slug);
-  const schemas = buildServicePageSchemas({ detail, heroImage, pagePath, service });
+  const schemas = buildServicePageSchemas({ detail, heroImage, pagePath, service, templateContent: variant?.content });
 
   if (variant) {
     return (

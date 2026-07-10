@@ -467,6 +467,11 @@
   text-shadow: var(--text-shadow-hero-sub);
 }
 
+.dc-hero-pun {
+  color: var(--color-accent-primary);
+  font-weight: var(--weight-bold);
+}
+
 .dc-hero-trust {
   color: var(--color-text-on-dark);
   display: flex;

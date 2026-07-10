@@ -8,6 +8,7 @@ import {
 } from "../content/aeo-top-questions";
 import { GUIDE_ENTRIES } from "../content/guides";
 import { LOCATIONS } from "../content/locations";
+import { getPpcServiceRouteEntries } from "../content/ppc-service-variants";
 import { SERVICES } from "../content/services";
 import { STATIC_PAGE_BY_PATH } from "../content/static-pages";
 import { getPublicContactInfo } from "../lib/contact";
@@ -76,6 +77,19 @@ function guideLine(slug: string): string {
   return line(entry.routeLabel, `/guides/${slug}`, PRIORITY_GUIDE_SUMMARIES[slug] ?? entry.title);
 }
 
+function serviceLines(): string[] {
+  const entries = new Map<string, string>();
+
+  for (const service of SERVICES) {
+    entries.set(`/plumbing/${service.slug}`, line(service.title, `/plumbing/${service.slug}`, service.metaDescription));
+  }
+  for (const { path, service } of getPpcServiceRouteEntries()) {
+    entries.set(path, line(service.title, path, service.metaDescription));
+  }
+
+  return [...entries.values()];
+}
+
 function buildLlmsTxt(): string {
   const contact = getPublicContactInfo();
   return [
@@ -117,7 +131,7 @@ function buildLlmsTxt(): string {
     "",
     "## Service Pages",
     "",
-    ...SERVICES.map((service) => line(service.title, `/plumbing/${service.slug}`, service.metaDescription)),
+    ...serviceLines(),
     "",
     "## High-Value Service Areas",
     "",

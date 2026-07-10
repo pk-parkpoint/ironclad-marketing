@@ -2,6 +2,7 @@ import { BLOG_POSTS } from "../content/blog-posts";
 import { GUIDE_ROUTE_PATHS } from "../content/guides";
 import { TOP_QUESTIONS_GUIDE_PATH } from "../content/aeo-top-questions";
 import { LOCATIONS } from "../content/locations";
+import { getPpcServiceRouteEntries } from "../content/ppc-service-variants";
 import { SERVICES } from "../content/services";
 import robots from "../app/robots";
 import { STATIC_ROUTE_PATHS } from "../lib/routes";
@@ -65,6 +66,7 @@ function main() {
     "/",
     ...STATIC_ROUTE_PATHS.map((path) => normalizePath(path)),
     ...SERVICES.map((service) => `/plumbing/${service.slug}`),
+    ...getPpcServiceRouteEntries().map((entry) => entry.path),
     ...LOCATIONS.map((location) => `/service-area/${location.slug}`),
     ...BLOG_POSTS.map((post) => `/blog/${post.slug}`),
     "/guides",

@@ -1,13 +1,15 @@
 import Image from "next/image";
-import { DRAIN_CLEANING_TEMPLATE as defaultContent, type DrainCleaningTemplateContent } from "./drain-cleaning-data";
+import { DRAIN_CLEANING_TEMPLATE as defaultContent } from "./drain-cleaning-data";
 import { ReferenceChrome } from "./reference-chrome";
 import { ServiceTemplateEffects } from "./service-template-effects";
+import type { DrainCleaningTemplateContent } from "./service-template-types";
 import {
   AreaChip,
   Eyebrow,
   FAQItem,
   GoogleRatingBadge,
   GuaranteeItem,
+  HeroSubtitle,
   InlineLink,
   ProcessStep,
   RadarGraphic,
@@ -59,16 +61,12 @@ export function DrainCleaningPage({
         <div className="dc-hero-inner">
           {content.hero.eyebrow ? <div className="dc-hero-eyebrow">{content.hero.eyebrow}</div> : <GoogleRatingBadge />}
           <h1 data-slot="hero-title">{content.hero.title}</h1>
-          <p className="dc-hero-subtitle" data-slot="hero-subtitle">
-            {content.hero.subhead}
-            {content.hero.supportLine ? (
-              <>
-                {" "}
-                <br />
-                {content.hero.supportLine}
-              </>
-            ) : null}
-          </p>
+          <HeroSubtitle
+            pun={content.hero.pun}
+            punFirst={content.hero.punFirst}
+            supportLine={content.hero.supportLine}
+            valueLine={content.hero.subhead}
+          />
           {hasHeroCopyOverride ? (
             <div className="dc-hero-proof-row">
               <GoogleRatingBadge label={content.hero.ratingLabel} simple={Boolean(content.hero.ratingLabel)} />
@@ -125,7 +123,12 @@ export function DrainCleaningPage({
               <SignRow body={body} index={index} key={title} title={title} />
             ))}
           </div>
-          <SignsCallout phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
+          <SignsCallout
+            body={content.callout.body}
+            phoneDisplay={phoneDisplay}
+            phoneHref={phoneHref}
+            title={content.callout.title}
+          />
         </div>
           </section>
 
@@ -144,7 +147,7 @@ export function DrainCleaningPage({
           </div>
           <div className="dc-ink-button-row">
             <TemplateButton href={bookingHref} icon="arrow" variant="ink">
-              Schedule drain cleaning
+              Schedule online
             </TemplateButton>
           </div>
         </div>
@@ -171,7 +174,7 @@ export function DrainCleaningPage({
             <div className="dc-why-left">
               <Eyebrow variant="ink">The Ironclad Difference</Eyebrow>
               <h2 className="dc-display-title">Why Austin Calls Ironclad</h2>
-              <p>Anyone can clear a clog. We&apos;re built so you never have to make this call twice.</p>
+              <p>{content.whyLine}</p>
             </div>
             <div className="dc-why-list">
               {content.why.map(([title, body], index) => (
@@ -206,16 +209,16 @@ export function DrainCleaningPage({
           <RadarGraphic />
           <div className="dc-area-copy">
             <h2 className="dc-section-title-md" data-slot="areas-title">
-              Drain Cleaning in Austin and Nearby Areas
+              {content.serviceArea.title}
             </h2>
-            <p>Same-day drain cleaning across Austin and the surrounding metro.</p>
+            <p>{content.serviceArea.body}</p>
             <div className="dc-area-chips" data-reveal-group>
               {content.areas.map((area) => (
                 <AreaChip key={area}>{area}</AreaChip>
               ))}
             </div>
             <TemplateButton href={bookingHref} variant="schedule">
-              Schedule Drain Cleaning Near You
+              {content.serviceArea.ctaLabel}
             </TemplateButton>
           </div>
         </div>
@@ -223,7 +226,7 @@ export function DrainCleaningPage({
 
           <section className="dc-faq-section">
         <div className="dc-container dc-container--faq">
-          <h2 className="dc-section-title-md">Drain Cleaning FAQ</h2>
+          <h2 className="dc-section-title-md">{content.faqTitle}</h2>
           <div className="dc-faq-list">
             {content.faqs.map(([question, answer], index) => (
               <FAQItem answer={answer} key={question} open={index === 0} question={question} />
@@ -236,16 +239,24 @@ export function DrainCleaningPage({
         <div className="dc-container dc-container--cta">
           <span className="dc-cta-badge">10% off your first service</span>
           <h2 className="dc-section-title-md" data-slot="cta-title">
-            Ready to Clear Your Drain?
+            {content.finalCta.title}
           </h2>
-          <p>Book online in 60 seconds or call for fast drain cleaning in Austin.</p>
+          <p>{content.finalCta.body}</p>
           <div className="dc-cta-buttons">
-            <TemplateButton href={bookingHref} variant="schedule">
-              Schedule Drain Cleaning
-            </TemplateButton>
-            <TemplateButton href={phoneHref} icon="phone" variant="white">
-              Call {phoneDisplay}
-            </TemplateButton>
+            {content.finalCta.callFirst ? (
+              <TemplateButton href={phoneHref} icon="phone" variant="call">
+                {content.finalCta.primaryLabel}
+              </TemplateButton>
+            ) : (
+              <>
+                <TemplateButton href={bookingHref} variant="schedule">
+                  {content.finalCta.primaryLabel}
+                </TemplateButton>
+                <TemplateButton href={phoneHref} icon="phone" variant="white">
+                  Call {phoneDisplay}
+                </TemplateButton>
+              </>
+            )}
           </div>
         </div>
           </section>

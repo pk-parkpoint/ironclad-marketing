@@ -1,10 +1,60 @@
-import fs from "node:fs";
-import path from "node:path";
-import {
-  DRAIN_CLEANING_TEMPLATE,
-  type DrainCleaningTemplateContent,
-} from "@/components/service-template/drain-cleaning-data";
+import { DRAIN_CLEANING_TEMPLATE } from "@/components/service-template/drain-cleaning-data";
+import type { DrainCleaningTemplateContent } from "@/components/service-template/service-template-types";
 import type { ServiceEntry } from "@/content/services";
+import variantRecords from "@/content/ppc-service-variants.json";
+
+type VariantText = {
+  title: string;
+  body: string;
+};
+
+type VariantService = VariantText & {
+  image: string;
+};
+
+type VariantFaq = {
+  q: string;
+  a: string;
+};
+
+type VariantImage = {
+  label: string;
+  path: string;
+};
+
+type VariantRecord = {
+  index: number;
+  key: string;
+  slug: string;
+  bookUrl: string;
+  seoTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  h1: string;
+  valueLine: string;
+  pun: string;
+  punFirst?: boolean;
+  callFirst?: boolean;
+  signsHeading: string;
+  signsIntro: string;
+  signs: VariantText[];
+  servicesHeading: string;
+  servicesIntro: string;
+  services: VariantService[];
+  calloutHeadline: string;
+  calloutSub: string;
+  whyLine: string;
+  process: VariantText[];
+  serviceAreaHeader: string;
+  serviceAreaSub: string;
+  serviceAreaCta: string;
+  faqHeading: string;
+  faqs: VariantFaq[];
+  finalHeading: string;
+  finalBody: string;
+  finalCta: string;
+  images: VariantImage[];
+};
 
 export type PpcServiceVariant = {
   content: DrainCleaningTemplateContent;
@@ -12,138 +62,95 @@ export type PpcServiceVariant = {
   slug: string;
 };
 
-const VARIANT_FILES = [
-  "01-drain-cleaning.md",
-  "02-clogged-drain.md",
-  "03-toilet-repair.md",
-  "04-emergency-plumber.md",
-  "05-burst-pipe-repair.md",
-  "06-leak-repair.md",
-  "07-water-heater-repair.md",
-  "08-garbage-disposal-repair.md",
-  "09-sump-pump-repair.md",
-  "10-faucet-repair.md",
-  "11-water-heater-installation.md",
-  "12-tankless-installation.md",
-  "13-repiping.md",
-  "14-leak-detection.md",
-  "15-slab-leak-repair.md",
-  "16-sewer-line-repair.md",
-  "17-hydro-jetting.md",
-  "18-gas-line-service.md",
-  "19-bathroom-plumbing.md",
-  "20-water-treatment.md",
-  "21-plumbing-repairs.md",
-  "22-water-heaters.md",
-  "23-fixtures.md",
-  "24-sewer-camera-inspection.md",
-  "25-trenchless-sewer-repair.md",
-] as const;
+export type PpcServiceRouteEntry = {
+  path: string;
+  service: ServiceEntry;
+  variant: PpcServiceVariant;
+};
 
-const VARIANT_DIR = path.join(process.cwd(), "design-handoff/ppc-variants/pages");
-const SERVICE_CARD_MEDIA = DRAIN_CLEANING_TEMPLATE.services.cards.map((card) => ({
-  caption: card[2],
-  imageSrc: card[3],
-}));
+const ROOT_PLUMBING_SLUG = "plumbing";
+const ASSET_SERVICE_PREFIX = "assets/services/";
+const VARIANTS = variantRecords as VariantRecord[];
 let cache: PpcServiceVariant[] | undefined;
 
-function escapeRegExp(value: string): string {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-function requiredMatch(markdown: string, pattern: RegExp, label: string, fileName: string): string {
-  const match = markdown.match(pattern);
-  if (!match) {
-    throw new Error(`PPC variant ${fileName} is missing ${label}`);
+function serviceImagePath(assetPath: string): string {
+  if (!assetPath.startsWith(ASSET_SERVICE_PREFIX)) {
+    return assetPath;
   }
-  return match[1].trim();
+  return `/media/services/${assetPath.slice(ASSET_SERVICE_PREFIX.length)}`;
 }
 
-function requiredField(markdown: string, label: string, fileName: string): string {
-  const pattern = new RegExp(`- \\*\\*${escapeRegExp(label)}:\\*\\*[ \\t]*(.+)`);
-  return requiredMatch(markdown, pattern, label, fileName);
+function textPairs(items: VariantText[]): Array<readonly [string, string]> {
+  return items.map((item) => [item.title, item.body] as const);
 }
 
-function optionalField(markdown: string, label: string): string | undefined {
-  const pattern = new RegExp(`- \\*\\*${escapeRegExp(label)}:\\*\\*[ \\t]*([^\\n]*)`);
-  const value = markdown.match(pattern)?.[1]?.trim();
-  return value || undefined;
-}
-
-function markdownBlock(markdown: string, headingPrefix: string, fileName: string): string {
-  const start = markdown.search(new RegExp(`^## ${escapeRegExp(headingPrefix)}`, "m"));
-  if (start < 0) {
-    throw new Error(`PPC variant ${fileName} is missing ${headingPrefix}`);
-  }
-  const rest = markdown.slice(start);
-  const next = rest.slice(1).search(/^## /m);
-  return next < 0 ? rest : rest.slice(0, next + 1);
-}
-
-function numberedPairs(block: string, count: number, label: string, fileName: string): Array<readonly [string, string]> {
-  const pairs = [...block.matchAll(/^\s*\d+\. \*\*(.+?)\*\*\s+\u2014\s+(.+)$/gm)].map(
-    (match) => [match[1].trim(), match[2].trim()] as const,
-  );
-  if (pairs.length !== count) {
-    throw new Error(`PPC variant ${fileName} expected ${count} ${label}, found ${pairs.length}`);
-  }
-  return pairs;
-}
-
-function parseVariant(fileName: string): PpcServiceVariant {
-  const markdown = fs.readFileSync(path.join(VARIANT_DIR, fileName), "utf8");
-  const slug = requiredMatch(markdown, /\*\*Suggested page slug:\*\*\s+`\/plumbing\/([^`]+)`/, "slug", fileName);
-  const titleTag = requiredField(markdown, "Title tag", fileName);
-  const metaDescription = requiredField(markdown, "Meta description", fileName);
-  const heroTitle = requiredField(markdown, "H1 (keyword)", fileName);
-  const serviceTitle = requiredMatch(markdown, /^#\s+\d+\.\s+(.+?)\s+\u2014/m, "service title", fileName);
-  const signsBlock = markdownBlock(markdown, "Section 2", fileName);
-  const servicesBlock = markdownBlock(markdown, "Section 3", fileName);
-  const servicePairs = numberedPairs(servicesBlock, 6, "service cards", fileName);
-
+function buildVariant(record: VariantRecord): PpcServiceVariant {
+  const imageLabels = new Map(record.images.map((image) => [image.path, image.label]));
   const content: DrainCleaningTemplateContent = {
     ...DRAIN_CLEANING_TEMPLATE,
+    callout: {
+      body: record.calloutSub,
+      title: record.calloutHeadline,
+    },
+    faqTitle: record.faqHeading,
+    faqs: record.faqs.map((faq) => [faq.q, faq.a] as const),
+    finalCta: {
+      body: record.finalBody,
+      callFirst: record.callFirst,
+      primaryLabel: record.finalCta,
+      title: record.finalHeading,
+    },
     hero: {
       ...DRAIN_CLEANING_TEMPLATE.hero,
-      chipLabel: optionalField(markdown, "Chip"),
-      eyebrow: optionalField(markdown, "Eyebrow"),
-      primaryCtaLabel: optionalField(markdown, "Primary CTA"),
-      ratingLabel: optionalField(markdown, "Trust badge"),
-      secondaryCtaLabel: optionalField(markdown, "Secondary CTA"),
-      subhead: requiredField(markdown, "Subhead (pun)", fileName),
-      supportLine: optionalField(markdown, "Support line") ?? "",
-      title: heroTitle,
+      eyebrow: record.eyebrow,
+      pun: record.pun,
+      punFirst: record.punFirst,
+      subhead: record.valueLine,
+      supportLine: "",
+      title: record.h1,
+    },
+    process: textPairs(record.process),
+    serviceArea: {
+      body: record.serviceAreaSub,
+      ctaLabel: record.serviceAreaCta,
+      title: record.serviceAreaHeader,
     },
     services: {
-      cards: servicePairs.map(
-        ([title, body], index) =>
-          [title, body, SERVICE_CARD_MEDIA[index]?.caption ?? "Photo pending", SERVICE_CARD_MEDIA[index]?.imageSrc] as const,
+      cards: record.services.map(
+        (service) =>
+          [
+            service.title,
+            service.body,
+            imageLabels.get(service.image) ?? `Photo: ${service.title}`,
+            serviceImagePath(service.image),
+          ] as const,
       ),
-      intro: requiredField(servicesBlock, "Intro", fileName),
-      title: requiredField(servicesBlock, "Heading", fileName),
+      intro: record.servicesIntro,
+      title: record.servicesHeading,
     },
     signs: {
-      intro: requiredField(signsBlock, "Intro", fileName),
-      items: numberedPairs(signsBlock, 4, "sign rows", fileName),
-      title: requiredField(signsBlock, "Heading", fileName),
+      intro: record.signsIntro,
+      items: textPairs(record.signs),
+      title: record.signsHeading,
     },
+    whyLine: record.whyLine,
   };
 
   return {
     content,
     service: {
-      h1: heroTitle,
-      metaDescription,
-      slug,
-      title: serviceTitle,
-      titleTag,
+      h1: record.h1,
+      metaDescription: record.metaDescription,
+      slug: record.slug,
+      title: record.key,
+      titleTag: record.seoTitle,
     },
-    slug,
+    slug: record.slug,
   };
 }
 
 export function getPpcServiceVariants(): PpcServiceVariant[] {
-  cache ??= VARIANT_FILES.map(parseVariant);
+  cache ??= VARIANTS.map(buildVariant);
   return cache;
 }
 
@@ -152,5 +159,19 @@ export function getPpcServiceVariant(slug: string): PpcServiceVariant | undefine
 }
 
 export function getPpcServiceVariantSlugs(): string[] {
-  return getPpcServiceVariants().map((variant) => variant.slug);
+  return getPpcServiceVariants()
+    .map((variant) => variant.slug)
+    .filter((slug) => slug !== ROOT_PLUMBING_SLUG);
+}
+
+export function getPpcServiceRoutePath(slug: string): string {
+  return slug === ROOT_PLUMBING_SLUG ? "/plumbing" : `/plumbing/${slug}`;
+}
+
+export function getPpcServiceRouteEntries(): PpcServiceRouteEntry[] {
+  return getPpcServiceVariants().map((variant) => ({
+    path: getPpcServiceRoutePath(variant.slug),
+    service: variant.service,
+    variant,
+  }));
 }

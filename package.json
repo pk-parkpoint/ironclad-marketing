@@ -24,6 +24,7 @@
     "sitemap-robots:audit": "tsx scripts/validate-sitemap-robots.ts",
     "llms:generate": "tsx scripts/generate-llms.ts",
     "llms:audit": "tsx scripts/validate-llms.ts",
+    "ppc:verify": "node scripts/verify-ppc-service-pages.mjs",
     "search-visibility:audit": "tsx scripts/validate-search-visibility.ts",
     "internal-links:audit": "tsx scripts/validate-internal-links.ts",
     "analytics:audit": "tsx scripts/validate-analytics.ts",

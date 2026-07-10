@@ -11,7 +11,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
     path: "plumbing",
     titleTag: "Plumber in Austin, TX | Ironclad Plumbing",
     metaDescription:
-      "Ironclad Plumbing serves Greater Austin with repairs, drain cleaning, water heaters, leak detection, sewer, and 24/7 emergency plumbing. Upfront pricing.",
+      "Full-service plumbing in Austin from Ironclad. Drains, water heaters, leaks, sewers, and emergencies, with upfront pricing and a written warranty. Call today.",
     h1: "Complete Plumbing Services Across Greater Austin",
     section: "Plumbing Hub",
   },

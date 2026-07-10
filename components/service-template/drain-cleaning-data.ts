@@ -1,37 +1,4 @@
-type TextPair = readonly [string, string];
-type ServiceCard = readonly [string, string, string, string?];
-
-export type DrainCleaningTemplateContent = {
-  hero: {
-    chipLabel?: string;
-    eyebrow?: string;
-    primaryCtaLabel?: string;
-    ratingLabel?: string;
-    secondaryCtaLabel?: string;
-    title: string;
-    subhead: string;
-    supportLine: string;
-    image: string;
-    imageAlt: string;
-  };
-  guarantees: readonly TextPair[];
-  signs: {
-    title: string;
-    intro: string;
-    items: readonly TextPair[];
-  };
-  services: {
-    title: string;
-    intro: string;
-    cards: readonly ServiceCard[];
-  };
-  reviews: readonly (readonly [string, string, string, string])[];
-  why: readonly TextPair[];
-  stats: readonly TextPair[];
-  process: readonly TextPair[];
-  areas: readonly string[];
-  faqs: readonly TextPair[];
-};
+import type { DrainCleaningTemplateContent } from "./service-template-types";
 
 export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
   hero: {
@@ -69,6 +36,10 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
         "When several fixtures act up together, the problem isn't the fixture; it's the main line. This one deserves a call today.",
       ],
     ],
+  },
+  callout: {
+    title: "Seeing these signs, or backing up right now?",
+    body: "We answer 24/7 and offer same-day drain cleaning across Austin.",
   },
   services: {
     title: "Our Drain Cleaning Services",
@@ -133,6 +104,7 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
       "Our water heater died on a Sunday night. They answered the phone and had someone out Monday first thing. These guys are the real deal.",
     ],
   ],
+  whyLine: "Anyone can clear a clog. We're built so you never have to make this call twice.",
   why: [
     ["4.9 Stars on Google", "142 reviews from real Austin homeowners."],
     ["Licensed & Insured", "Verify our Master Plumber license with the State Board."],
@@ -150,6 +122,11 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
     ["We clear the blockage", "The right method for the drain, the access, and the clog."],
     ["We test and tell you straight", "We confirm it flows and flag anything that could bring it back."],
   ],
+  serviceArea: {
+    title: "Drain Cleaning in Austin and Nearby Areas",
+    body: "Same-day drain cleaning across Austin and the surrounding metro.",
+    ctaLabel: "Schedule Drain Cleaning Near You",
+  },
   areas: [
     "Austin",
     "Round Rock",
@@ -164,6 +141,7 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
     "Hutto",
     "Dripping Springs",
   ],
+  faqTitle: "Drain Cleaning FAQ",
   faqs: [
     [
       "How much does drain cleaning cost in Austin?",
@@ -190,4 +168,9 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
       "For one minor clog, try a plunger or clear visible debris near the opening. Skip the harsh chemical drain cleaners, they can damage pipes. If it keeps returning, hits multiple drains, or causes a backup, call a plumber.",
     ],
   ],
+  finalCta: {
+    title: "Ready to Clear Your Drain?",
+    body: "Book online in 60 seconds or call for fast drain cleaning in Austin.",
+    primaryLabel: "Schedule Drain Cleaning",
+  },
 };

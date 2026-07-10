@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { BLOG_POSTS } from "../content/blog-posts";
 import { LOCATIONS } from "../content/locations";
+import { getPpcServiceRouteEntries } from "../content/ppc-service-variants";
 import { SERVICES } from "../content/services";
 import { STATIC_PAGES } from "../content/static-pages";
 import {
@@ -44,6 +45,35 @@ function getOgTemplateForStaticPath(pathname: string): OgTemplate {
   return "default";
 }
 
+function buildServiceEntries(): MetadataEntry[] {
+  const entries = new Map<string, MetadataEntry>();
+
+  for (const service of SERVICES) {
+    entries.set(`/plumbing/${service.slug}`, {
+      route: `/plumbing/${service.slug}`,
+      title: service.titleTag,
+      description: service.metaDescription,
+      ogTemplate: "service",
+      ogType: "website",
+    });
+  }
+
+  for (const { path: route, service } of getPpcServiceRouteEntries()) {
+    if (route === "/plumbing") {
+      continue;
+    }
+    entries.set(route, {
+      route,
+      title: service.titleTag,
+      description: service.metaDescription,
+      ogTemplate: "service",
+      ogType: "website",
+    });
+  }
+
+  return [...entries.values()];
+}
+
 function buildEntries(): MetadataEntry[] {
   return [
     {
@@ -61,13 +91,7 @@ function buildEntries(): MetadataEntry[] {
       ogTemplate: getOgTemplateForStaticPath(page.path),
       ogType: "website" as const,
     })),
-    ...SERVICES.map((service) => ({
-      route: `/plumbing/${service.slug}`,
-      title: service.titleTag,
-      description: service.metaDescription,
-      ogTemplate: "service" as const,
-      ogType: "website" as const,
-    })),
+    ...buildServiceEntries(),
     ...LOCATIONS.map((location) => ({
       route: `/service-area/${location.slug}`,
       title: location.titleTag,

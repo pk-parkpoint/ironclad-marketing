@@ -4,6 +4,7 @@ import {
   TOP_QUESTIONS_GUIDE_TITLE,
 } from "../content/aeo-top-questions";
 import { LOCATIONS } from "../content/locations";
+import { getPpcServiceRouteEntries } from "../content/ppc-service-variants";
 import { SERVICES } from "../content/services";
 
 const BASE_URL = "https://ironcladtexas.com";
@@ -34,6 +35,7 @@ const REQUIRED_PATHS = [
   "/guides/questions-to-ask-your-plumber",
   "/guides/plumbing-emergency-first-10-minutes",
   ...SERVICES.map((service) => `/plumbing/${service.slug}`),
+  ...getPpcServiceRouteEntries().map((entry) => entry.path),
   ...LOCATIONS.slice(0, 10).map((location) => `/service-area/${location.slug}`),
 ];
 

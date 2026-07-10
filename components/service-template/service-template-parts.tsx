@@ -91,6 +91,42 @@ export function TrustRow() {
   );
 }
 
+export function HeroSubtitle({
+  pun,
+  punFirst,
+  supportLine,
+  valueLine,
+}: {
+  pun?: string;
+  punFirst?: boolean;
+  supportLine?: string;
+  valueLine: string;
+}) {
+  const punNode = pun ? <span className="dc-hero-pun">{pun}</span> : null;
+
+  return (
+    <p className="dc-hero-subtitle" data-slot="hero-subtitle">
+      {punNode && punFirst ? (
+        <>
+          {punNode} {valueLine}
+        </>
+      ) : (
+        <>
+          {valueLine}
+          {punNode ? <> {punNode}</> : null}
+        </>
+      )}
+      {supportLine ? (
+        <>
+          {" "}
+          <br />
+          {supportLine}
+        </>
+      ) : null}
+    </p>
+  );
+}
+
 export function GuaranteeItem({ label, proof }: { label: string; proof: string }) {
   return (
     <div className="dc-guarantee-item" data-reveal>
@@ -115,7 +151,17 @@ export function SignRow({ index, title, body }: { index: number; title: string; 
   );
 }
 
-export function SignsCallout({ phoneDisplay, phoneHref }: { phoneDisplay: string; phoneHref: string }) {
+export function SignsCallout({
+  body,
+  phoneDisplay,
+  phoneHref,
+  title,
+}: {
+  body: string;
+  phoneDisplay: string;
+  phoneHref: string;
+  title: string;
+}) {
   return (
     <div className="dc-signs-callout">
       <div className="dc-signs-callout-copy">
@@ -123,8 +169,8 @@ export function SignsCallout({ phoneDisplay, phoneHref }: { phoneDisplay: string
           <AlertTriangle aria-hidden="true" />
         </span>
         <div>
-          <p className="dc-callout-title">Seeing these signs, or backing up right now?</p>
-          <p className="dc-callout-sub">We answer 24/7 and offer same-day drain cleaning across Austin.</p>
+          <p className="dc-callout-title">{title}</p>
+          <p className="dc-callout-sub">{body}</p>
         </div>
       </div>
       <TemplateButton href={phoneHref} icon="phone" variant="call">

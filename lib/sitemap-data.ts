@@ -2,6 +2,7 @@ import { GUIDE_ROUTE_PATHS } from "@/content/guides";
 import { TOP_QUESTIONS_GUIDE_PATH } from "@/content/aeo-top-questions";
 import { BLOG_POSTS } from "@/content/blog-posts";
 import { LOCATIONS } from "@/content/locations";
+import { getPpcServiceRouteEntries } from "@/content/ppc-service-variants";
 import { STATIC_ROUTE_PATHS } from "@/lib/routes";
 import { SERVICES } from "@/content/services";
 import { CANONICAL_ORIGIN } from "@/lib/site-url";
@@ -42,6 +43,18 @@ function getRouteLastModified(path: string, fallback: string): string {
   return ROUTE_LASTMOD_OVERRIDES[normalizePath(path)] ?? fallback;
 }
 
+function getServiceRoutePaths(): string[] {
+  const paths = new Set(SERVICES.map((service) => `/plumbing/${service.slug}`));
+
+  for (const entry of getPpcServiceRouteEntries()) {
+    if (entry.path !== "/plumbing") {
+      paths.add(entry.path);
+    }
+  }
+
+  return [...paths];
+}
+
 export function buildCoreSitemapEntries(): SitemapEntry[] {
   const routes = [
     "/",
@@ -58,10 +71,10 @@ export function buildCoreSitemapEntries(): SitemapEntry[] {
 }
 
 export function buildServiceSitemapEntries(): SitemapEntry[] {
-  return SERVICES.map((service) => ({
+  return getServiceRoutePaths().map((path) => ({
     changeFrequency: "weekly",
-    lastModified: getRouteLastModified(`/plumbing/${service.slug}`, LASTMOD.services),
-    path: `/plumbing/${service.slug}`,
+    lastModified: getRouteLastModified(path, LASTMOD.services),
+    path,
     priority: 0.82,
   }));
 }

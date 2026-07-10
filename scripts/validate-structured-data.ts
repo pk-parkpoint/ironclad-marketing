@@ -1,6 +1,7 @@
 import { BLOG_POSTS } from "../content/blog-posts";
 import { FAQ_ENTRIES } from "../content/faqs";
 import { LOCATIONS } from "../content/locations";
+import { getPpcServiceRouteEntries } from "../content/ppc-service-variants";
 import { REVIEWS } from "../content/reviews";
 import { getServiceDetail } from "../content/service-details";
 import { SERVICES } from "../content/services";
@@ -68,6 +69,20 @@ function main() {
     );
   }
 
+  for (const { path, service } of getPpcServiceRouteEntries()) {
+    const serviceSchema = asRecord(
+      buildServiceSchema({
+        description: service.metaDescription,
+        name: service.title,
+        path,
+        serviceType: service.title,
+      }),
+      `PPC service schema missing for ${path}`,
+    );
+    assert(serviceSchema["@type"] === "Service", `PPC service schema @type mismatch for ${path}`);
+    assert(serviceSchema.url === toAbsoluteUrl(path), `PPC service schema URL mismatch for ${path}`);
+  }
+
   const faqHubSchema = asRecord(buildFaqPageSchema(FAQ_ENTRIES), "faq hub schema missing");
   assert(faqHubSchema["@type"] === "FAQPage", "FAQ hub must emit FAQPage schema");
   const faqHubMainEntity = faqHubSchema.mainEntity;
@@ -84,6 +99,7 @@ function main() {
     "/plumbing-guides",
     "/404",
     ...SERVICES.map((service) => `/plumbing/${service.slug}`),
+    ...getPpcServiceRouteEntries().map((entry) => entry.path),
     ...LOCATIONS.map((location) => `/service-area/${location.slug}`),
     ...BLOG_POSTS.map((post) => `/blog/${post.slug}`),
   ]);

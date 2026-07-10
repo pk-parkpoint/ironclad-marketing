@@ -95,6 +95,67 @@ Variant browser QA: PASS. Checked all 20 URLs at desktop `1440x900` and mobile `
 
 Build proof: `npm run lint` PASS, `npm run build` PASS.
 
+## PPC Content Update - 2026-07-10
+
+Implemented routes: `/plumbing` and 30 `/plumbing/{slug}` service routes
+Content source: `/Users/15237/Downloads/Drain cleaning page redesign (9).zip`
+Package SHA-256: `d52bada9fa6a407ac942ffbe0dd8e087c5f1eb9b73dcd09520310ad717bfa072`
+Verification run: `BASE_URL=http://127.0.0.1:3030 npm run ppc:verify`
+
+- Imported 31 PPC service variants into `content/ppc-service-variants.json`.
+- Imported the package preview into `design-handoff/ppc-content-update/variants.md`.
+- Imported 186 WebP service-card images into `public/media/services/{slug}/`.
+- Kept the shared main-site header/nav untouched per task scope.
+- Updated metadata, structured data, sitemap, llms, search visibility, and booking-entrypoint audits for the PPC route set.
+- QA artifacts: `design-handoff/screens/service-page/qa/ppc-content/`.
+
+| Screen | Format | Element | Property | Package value | Implemented value | Result | Notes |
+|---|---|---|---|---|---|---|---|
+| ppc-service-pages | desktop | Route set | routes | 31 records | `/plumbing` plus 30 `/plumbing/{slug}` routes | PASS | Root slug `plumbing` renders at `/plumbing`, not `/plumbing/plumbing`. |
+| ppc-service-pages | mobile | Route set | routes | 31 records | `/plumbing` plus 30 `/plumbing/{slug}` routes | PASS | Same responsive build as desktop. |
+| ppc-service-pages | desktop | SEO metadata | title/description | JSON `seoTitle`, `metaDescription` | `generateMetadata` and static `/plumbing` metadata | PASS | Verified title on all 31 routes. |
+| ppc-service-pages | mobile | SEO metadata | title/description | JSON `seoTitle`, `metaDescription` | `generateMetadata` and static `/plumbing` metadata | PASS | Verified title on all 31 routes. |
+| ppc-service-pages | desktop | Hero | H1/subtitle/pun | JSON `hero` fields | shared service template content | PASS | Uses existing service-page typography and color tokens. |
+| ppc-service-pages | mobile | Hero | H1/subtitle/pun | JSON `hero` fields | shared service template content | PASS | Uses existing service-page responsive rules. |
+| ppc-service-pages | desktop | Service cards | images/content | six package cards per route | `/media/services/{slug}/*.webp`, six cards | PASS | 186 images loaded across 31 routes. |
+| ppc-service-pages | mobile | Service cards | images/content | six package cards per route | `/media/services/{slug}/*.webp`, six cards | PASS | Image decode verified through Next optimized URLs. |
+| ppc-service-pages | desktop | Signs/callout/process/FAQ/CTA | copy fields | JSON variant sections | shared service template content | PASS | Verifier checks section headings, FAQ heading, final CTA, and booking link. |
+| ppc-service-pages | mobile | Signs/callout/process/FAQ/CTA | copy fields | JSON variant sections | shared service template content | PASS | Same content source as desktop. |
+| ppc-service-pages | desktop | Booking CTA | href | `/book?service={slug}` | `/book?service={slug}` | PASS | Verified on all routes. |
+| ppc-service-pages | mobile | Booking CTA | href | `/book?service={slug}` | `/book?service={slug}` | PASS | Verified on all routes. |
+| ppc-service-pages | desktop | Structured data | Service/FAQ | variant title, route URL, FAQs | route-specific JSON-LD | PASS | Covered by `structured-data:audit`. |
+| ppc-service-pages | mobile | Structured data | Service/FAQ | variant title, route URL, FAQs | route-specific JSON-LD | PASS | Same server output as desktop. |
+| ppc-service-pages | desktop | Search surfaces | sitemap/llms/search audit | 31 PPC routes | route helpers plus audit scripts | PASS | Covered by sitemap, llms, and search audits. |
+| ppc-service-pages | mobile | Search surfaces | sitemap/llms/search audit | 31 PPC routes | route helpers plus audit scripts | PASS | Same route helpers as desktop. |
+| ppc-service-pages | desktop | Header/nav | scope | no nav work requested | shared main-site `SiteHeader` unchanged | PASS | User explicitly excluded nav bar work. |
+| ppc-service-pages | mobile | Header/nav | scope | no nav work requested | shared main-site `SiteHeader` unchanged | PASS | User explicitly excluded nav bar work. |
+
+### PPC Content Update Conflicts
+
+| Area | Conflict | Handling |
+|---|---|---|
+| Header/nav | Responsive sweep records document-level overflow from shared header/nav chrome at widths `1024`, `1079`, `1080`, and `1081` (`scrollWidth 1188px`). | Logged as out-of-scope because the task explicitly said not to do the nav bar. The service-page root `#dc-root` had zero overflow in all 434 sweep checks. |
+| References | The package is a content-and-asset update, not a new pixel-reference redesign package with desktop/mobile reference PNGs for every route. | Verified rendered content, images, metadata, structured data, responsive service body, and interaction states instead of pixel diffs. |
+
+### PPC Content Update Package Defects
+
+| Defect | Impact | Handling |
+|---|---|---|
+| No per-route desktop/mobile reference PNGs supplied for the 31 updated pages. | Strict pixelmatch parity cannot be computed for every PPC route. | Captured passing desktop and mobile screenshots for every route and saved them under `qa/ppc-content/`. |
+| Some package copy appears assumption-based for offers/pricing. | Content was treated as authoritative package copy, not rewritten. | Imported unchanged and preserved in `content/ppc-service-variants.json`. |
+
+### PPC Content Update Diff Results
+
+| Check | Result | Evidence |
+|---|---|---|
+| Base desktop/mobile screenshots | PASS | 62 screenshots saved, one desktop and one mobile capture for each of 31 routes. |
+| Responsive sweep | PASS for service body | 434 service-body checks passed with no `#dc-root` clipping, overlap, or horizontal overflow. Document chrome overflow logged above. |
+| Interaction states | PASS | 10 interaction states changed as expected; screenshots saved under `design-handoff/screens/service-page/states/`. |
+| PPC verifier summary | PASS | `design-handoff/screens/service-page/qa/ppc-content/verification-summary.json`. |
+| Pixel diff % | N/A | No route-specific reference PNGs were supplied in this content package. |
+
+Build proof: `npm run lint`, `metadata:audit`, `structured-data:audit`, `sitemap-robots:audit`, `llms:generate`, `search-visibility:audit`, `llms:audit`, `npm run build`, `ssr:audit`, Playwright booking entrypoints, and `ppc:verify` passed.
+
 Note: the strict original PNG references predate this PPC copy update. The previous source-vs-reference residual remains a package/reference issue unless new reference PNGs are supplied for the updated copy.
 
 ## PPC Service-Card Images - 2026-07-06
