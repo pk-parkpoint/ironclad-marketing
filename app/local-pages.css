@@ -1224,6 +1224,11 @@
     grid-template-columns: var(--local-grid-one-col);
   }
 
+  .local-guarantee-strip .local-grid-4 {
+    grid-template-columns: var(--local-grid-two-cols);
+    gap: var(--local-space-26) var(--local-space-18);
+  }
+
   .local-band-process .local-grid-4 {
     gap: var(--local-space-40);
   }
@@ -1287,6 +1292,11 @@
   .local-grid-4,
   .local-grid-3 {
     grid-template-columns: var(--local-grid-one-col);
+  }
+
+  .local-guarantee-strip .local-grid-4 {
+    grid-template-columns: var(--local-grid-two-cols);
+    gap: var(--local-space-24) var(--local-space-14);
   }
 
   .local-hero-badge {

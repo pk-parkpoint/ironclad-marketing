@@ -124,6 +124,7 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | mobile | Process responsive gaps | process rows `2 cols ≤1080 gap 44px 36px` and `1 col ≤820 gap 40px` | `.local-band-process .local-grid-4` responsive tokenized gaps | PASS | Matches `responsive.md` process row gap rules and improved mobile diffs. |
 | local-pages | tablet | Knowledge/Why responsive stack | `why-split` and `local-split` stack at `≤1080`, gap `36px` | section-scoped `.local-band-knowledge .local-split`, `.local-band-proof .local-split` | PASS | Leaves Coverage/AreaSplit governed by existing `≤820` stacking rule. |
 | local-pages | desktop | GuaranteeStrip heading | reference shows centered `Our Ironclad Guarantee` heading above 4-item grid | `local-guarantee-heading` above guarantee grid | PASS partial | Adds visible reference anatomy while retaining component grid. |
+| local-pages | mobile | GuaranteeStrip grid | 2 columns, gap `24px 14px` at `≤640` | `.local-guarantee-strip .local-grid-4` remains 2 columns at 390px with computed gap `24px 14px` | PASS | Corrects prior mobile one-column collapse from generic `.local-grid-4` rule. |
 | local-pages | desktop | Numbered issue callout visual | reference shows dark navy diagnostic panel with CTA | `local-signs-callout` uses `--local-color-navy`, inverse text, call gradient CTA | PASS partial | More closely matches reference panel; copy remains production/local data. |
 | local-pages | desktop | Numbered issue callout compact CTA | reference shows compact help panel with phone action | `local-signs-callout` now uses icon + short diagnostic prompt + call CTA | PASS partial | Improves service-area desktop diff from `29.903191196157174%` to `23.847624798711756%`. |
 | local-pages | desktop | Services footer CTA | reference shows dark `View all plumbing services` CTA below service cards | `local-services-more` link to `/plumbing` | PASS partial | Adds missing internal link and visual anchor. |
@@ -143,9 +144,9 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | desktop | AreaSplit pulse | `pulse-ring` animation | `.local-area-ring-outer` animation `local-pulse-ring` | PASS | Playwright artifact `qa/states/area-pulse-ring.png`; animation disabled only for base diff captures. |
 | local-pages | mobile | Mobile menu/sticky bar | menu panel, sticky fixed bottom bar at `bottom:0` | native `details` mobile menu and fixed `.local-sticky-bar` | PASS | Playwright artifact `qa/states/mobile-menu-open.png`; sticky `position:fixed`, bottom offset `0`. |
 | service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `23.847624798711756%` diff | FAIL | Compact callout and hero trust restoration improved desktop from `29.903191196157174%`; still above gate. |
-| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `22.76045688756255%` diff | FAIL | Compact callout improves from ETA-regressed `22.99425953631561%` but remains above gate and worse than earlier baseline. |
+| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `22.783336867589107%` diff | FAIL | Mobile guarantee grid now matches spec, but page-height shifts keep pixelmatch above gate. |
 | neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `31.001922207146087%` diff | FAIL | Compact callout plus single facts panel improved from `38.848461441569604%`; still above gate. |
-| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `23.454536753246483%` diff | FAIL | Single facts panel improves from `23.68505785609034%` but remains above gate and worse than earlier baseline. |
+| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `24.666552959235887%` diff | FAIL | Mobile guarantee grid now matches spec; downstream vertical shift worsens pixelmatch and still requires further parity work. |
 
 ### Local Service Area Conflicts
 
@@ -170,9 +171,9 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | Screen | Format | Result | Pixels differing | Notes |
 |---|---|---:|---:|---|
 | service-area-page | desktop | FAIL | `23.847624798711756%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png` |
-| service-area-page | mobile | FAIL | `22.76045688756255%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
+| service-area-page | mobile | FAIL | `22.783336867589107%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
 | neighborhood-page | desktop | FAIL | `31.001922207146087%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png` |
-| neighborhood-page | mobile | FAIL | `23.454536753246483%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
+| neighborhood-page | mobile | FAIL | `24.666552959235887%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
 
 Functional QA: PASS. `qa/summary.json` covers 10 desktop/mobile route captures, route status, H1, title, canonical, zero horizontal overflow, all local hub links, all 16 Austin-page neighborhood links, all local URLs in `/sitemaps/service-areas.xml`, breakpoint sweep overflow `0`, and Schibsted Grotesk font weights 400/500/600/700 loaded.
 
