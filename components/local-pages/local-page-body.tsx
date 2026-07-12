@@ -1,6 +1,6 @@
 import type { LocalCityPageData, LocalNeighborhoodPageData } from "@/content/local-pages";
 import { getAustinNeighborhoodLinks, getNearbyCities, getNearbyNeighborhoods } from "@/content/local-pages";
-import { GuaranteeStrip, LocalHero, LocalStickyBar } from "./local-page-shared";
+import { GuaranteeStrip, LocalHero } from "./local-page-shared";
 import {
   CoverageSection,
   FaqSection,
@@ -83,7 +83,6 @@ export function LocalPageBody({ bookingHref, page, phoneDisplay, phoneHref }: Lo
         phoneHref={phoneHref}
         title={`Need a Plumber in ${page.name}? Call Ironclad.`}
       />
-      <LocalStickyBar bookingHref={bookingHref} phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
     </main>
   );
 }

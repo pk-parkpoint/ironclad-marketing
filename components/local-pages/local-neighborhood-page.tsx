@@ -38,7 +38,7 @@ export function LocalNeighborhoodPage({ page }: { page: LocalNeighborhoodPageDat
   );
 
   return (
-    <LocalPageChrome>
+    <LocalPageChrome bookingHref={bookingHref}>
       <StructuredData data={schemas} id={`ld-local-neighborhood-${page.slug}`} />
       <LocalPageBody
         bookingHref={bookingHref}

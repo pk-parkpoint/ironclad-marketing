@@ -30,7 +30,7 @@ export function LocalCityPage({ page }: { page: LocalCityPageData }) {
   );
 
   return (
-    <LocalPageChrome>
+    <LocalPageChrome bookingHref={bookingHref}>
       <StructuredData data={schemas} id={`ld-local-city-${page.slug}`} />
       <LocalPageBody
         bookingHref={bookingHref}

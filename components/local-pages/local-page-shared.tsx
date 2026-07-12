@@ -86,7 +86,7 @@ export function LocalStars() {
   );
 }
 
-export function LocalPageChrome({ children }: { children: ReactNode }) {
+export function LocalPageChrome({ bookingHref, children }: { bookingHref: string; children: ReactNode }) {
   const { phoneDisplay, phoneHref } = getPublicContactInfo();
   const year = new Date().getFullYear();
 
@@ -158,6 +158,7 @@ export function LocalPageChrome({ children }: { children: ReactNode }) {
           <span>TX Master Plumber License #M-12345</span>
         </div>
       </footer>
+      <LocalStickyBar bookingHref={bookingHref} phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
     </div>
   );
 }
