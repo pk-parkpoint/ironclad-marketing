@@ -43,6 +43,7 @@
   --local-font-display: var(--font-local-display), "Schibsted Grotesk", var(--font-inter), sans-serif;
   --local-shadow-card: 0 1px 2px rgba(24, 34, 48, 0.04);
   --local-shadow-card-hover: 0 16px 44px rgba(24, 34, 48, 0.1);
+  --local-shadow-callout: 0 20px 40px rgba(24, 34, 48, 0.08);
   --local-shadow-button: 0 14px 32px rgba(47, 143, 224, 0.3);
   --local-shadow-call-button: 0 14px 32px rgba(47, 140, 77, 0.24);
   --local-shadow-hero-title: 0 2px 26px rgba(10, 16, 22, 0.6);
@@ -86,6 +87,10 @@
   --local-color-footer-text: #9daab6;
   --local-color-footer-muted: #6e7c88;
   --local-color-footer-rule: rgba(255, 255, 255, 0.12);
+  --local-color-callout-bg: #f5f0e7;
+  --local-color-ring-bg: #f7f3ec;
+  --local-color-ring-border: rgba(47, 143, 224, 0.18);
+  --local-color-ring-fill: rgba(47, 143, 224, 0.08);
   --local-type-promo-size: 13.5px;
   --local-type-nav-size: 16px;
   --local-type-header-button-size: 15px;
@@ -122,6 +127,7 @@
   --local-space-68: 68px;
   --local-space-96: 96px;
   --local-space-100: 100px;
+  --local-space-120: 120px;
   --local-size-icon-star: 15px;
   --local-size-icon-trust: 17px;
   --local-size-icon-button: 18px;
@@ -132,6 +138,10 @@
   --local-size-icon-coverage: 34px;
   --local-size-button-min-height: 48px;
   --local-size-card-min-height: 138px;
+  --local-size-area-visual: 280px;
+  --local-size-area-visual-mobile: 220px;
+  --local-size-ring-mid: 70%;
+  --local-size-ring-inner: 42%;
   --local-width-row-number: 56px;
   --local-width-hero-title: 660px;
   --local-width-hero-subtitle: 580px;
@@ -142,6 +152,7 @@
   --local-grid-split-cols: minmax(0, 0.9fr) minmax(0, 1.1fr);
   --local-grid-footer-cols: 1.25fr repeat(3, 1fr);
   --local-grid-mobile-header-cols: var(--local-size-menu-button) 1fr var(--local-size-menu-button);
+  --local-grid-callout-cols: minmax(var(--local-space-0), 1fr) auto;
   --local-font-size-12: 12px;
   --local-font-size-13: 13px;
   --local-font-size-14: 14px;
@@ -191,6 +202,8 @@
   --local-space-chip: var(--local-space-9) var(--local-space-14);
   --local-space-faq-summary: var(--local-space-18) var(--local-space-20);
   --local-space-faq-body: var(--local-space-0) var(--local-space-20) var(--local-space-20);
+  --local-space-callout: var(--local-space-28);
+  --local-space-callout-mobile: var(--local-space-22);
   --local-space-footer-legal: var(--local-space-22) var(--local-space-0);
   --local-space-sticky-bar: var(--local-space-10) var(--local-space-14) calc(var(--local-space-10) + env(safe-area-inset-bottom));
   --local-space-sticky-button: var(--local-space-14) var(--local-space-8);

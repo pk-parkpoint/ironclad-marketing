@@ -116,10 +116,12 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | mobile | Chrome | local handoff header/footer, mobile header, sticky bottom bar | route-scoped `LocalPageChrome`, mobile header, local footer, static full-page capture override | PASS partial | Chrome is now local-page scoped; exact source anatomy still differs. |
 | local-pages | desktop | Token purity | all screen UI values reference token layer | all non-media `app/local-pages.css` raw color/type/spacing/radius/shadow values replaced with `var(--local-*)` tokens | PASS partial | Remaining raw values are media-query breakpoints, which CSS cannot read from custom properties without an additional transform. |
 | local-pages | mobile | Token purity | all screen UI values reference token layer | all non-media `app/local-pages.css` raw color/type/spacing/radius/shadow values replaced with `var(--local-*)` tokens | PASS partial | Same limitation: raw `640/820/1080px` media conditions remain. |
-| service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `29.137615243724124%` diff | FAIL | Route-scoped local chrome reduced one source of drift, but section heights/content still differ. |
-| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `42.251472709051356%` diff | FAIL | Actual page is substantially shorter than the reference after static sticky capture. |
-| neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `25.864651947189%` diff | FAIL | See generated diff artifact. |
-| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `44.16930867574644%` diff | FAIL | Actual page is substantially shorter than the reference after static sticky capture. |
+| local-pages | desktop | Numbered issue callout | NumberedIssueRows end with `signs-callout` panel | `local-signs-callout` panel with diagnostic copy and booking CTA | PASS partial | Added per shared component spec; exact source copy may differ. |
+| local-pages | mobile | AreaSplit graphic | left radius/rings graphic with pulse-ring concept | tokenized static ring graphic in AreaSplit | PASS partial | Adds required visual anatomy; pulse animation state still not separately captured. |
+| service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `25.304664773514336%` diff | FAIL | Height closer after callout/area graphic, but section visuals/content still differ. |
+| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `35.93694003681537%` diff | FAIL | Improved from prior `42.251472709051356%`, still above gate. |
+| neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `31.736833362223376%` diff | FAIL | Height closer, but added visual anatomy increased pixel mismatch against current composition. |
+| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `36.712449845497055%` diff | FAIL | Improved from prior `44.16930867574644%`, still above gate. |
 
 ### Local Service Area Conflicts
 
@@ -143,10 +145,10 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 
 | Screen | Format | Result | Pixels differing | Notes |
 |---|---|---:|---:|---|
-| service-area-page | desktop | FAIL | `29.137615243724124%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png` |
-| service-area-page | mobile | FAIL | `42.251472709051356%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
-| neighborhood-page | desktop | FAIL | `25.864651947189%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png` |
-| neighborhood-page | mobile | FAIL | `44.16930867574644%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
+| service-area-page | desktop | FAIL | `25.304664773514336%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png` |
+| service-area-page | mobile | FAIL | `35.93694003681537%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
+| neighborhood-page | desktop | FAIL | `31.736833362223376%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png` |
+| neighborhood-page | mobile | FAIL | `36.712449845497055%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
 
 Functional QA: PASS. `qa/summary.json` covers 10 desktop/mobile route captures, route status, H1, title, canonical, zero horizontal overflow, all 16 Austin neighborhood hub links, all 16 Austin-page links, all 16 sitemap URLs, breakpoint sweep overflow `0`, and Schibsted Grotesk font weights 400/500/600/700 loaded.
 

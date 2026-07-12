@@ -7,14 +7,14 @@
     },
     "actual": {
       "width": 1440,
-      "height": 6313
+      "height": 6792
     },
     "canvas": {
       "width": 1440,
       "height": 7219
     },
-    "pixels": 3028960,
-    "pct": 29.137615243724124,
+    "pixels": 2630511,
+    "pct": 25.304664773514336,
     "diff": "design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png"
   },
   {
@@ -25,14 +25,14 @@
     },
     "actual": {
       "width": 390,
-      "height": 10926
+      "height": 11482
     },
     "canvas": {
       "width": 390,
       "height": 13637
     },
-    "pixels": 2247115,
-    "pct": 42.251472709051356,
+    "pixels": 1911281,
+    "pct": 35.93694003681537,
     "diff": "design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png"
   },
   {
@@ -43,14 +43,14 @@
     },
     "actual": {
       "width": 1440,
-      "height": 6860
+      "height": 7339
     },
     "canvas": {
       "width": 1440,
       "height": 7692
     },
-    "pixels": 2864893,
-    "pct": 25.864651947189,
+    "pixels": 3515324,
+    "pct": 31.736833362223376,
     "diff": "design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png"
   },
   {
@@ -61,14 +61,14 @@
     },
     "actual": {
       "width": 390,
-      "height": 11598
+      "height": 12154
     },
     "canvas": {
       "width": 390,
       "height": 14679
     },
-    "pixels": 2528609,
-    "pct": 44.16930867574644,
+    "pixels": 2101718,
+    "pct": 36.712449845497055,
     "diff": "design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png"
   }
 ]

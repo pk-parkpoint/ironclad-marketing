@@ -76,6 +76,18 @@ export function NumberedRowsSection({
             </div>
           ))}
         </div>
+        <div className="local-signs-callout">
+          <div>
+            <p className="local-callout-kicker">Local diagnosis</p>
+            <h3 className="local-callout-title">We check the whole system before we quote the fix.</h3>
+            <p className="local-callout-body">
+              A licensed Ironclad plumber verifies the line, fixture, and shutoff conditions first, then gives you a flat price before work starts.
+            </p>
+          </div>
+          <Link className="local-button local-button-primary local-callout-button" data-track-intent="book" href="/book">
+            Schedule Service <ArrowRight className="local-icon-sticky" />
+          </Link>
+        </div>
       </div>
     </section>
   );
@@ -211,8 +223,13 @@ export function CoverageSection({
   return (
     <section className="local-band">
       <div className="local-inner local-split">
-        <div>
-          <MapPin className="local-icon-coverage" />
+        <div className="local-area-visual-wrap">
+          <div className="local-area-visual" aria-hidden="true">
+            <span className="local-area-ring local-area-ring-outer" />
+            <span className="local-area-ring local-area-ring-mid" />
+            <span className="local-area-ring local-area-ring-inner" />
+            <MapPin className="local-icon-coverage" />
+          </div>
           <SectionHeader kicker="Coverage" title={title} lead={body} />
         </div>
         <ul className="local-chip-list">
