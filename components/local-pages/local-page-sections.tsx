@@ -10,5 +10,6 @@ export {
   FinalCta,
   NearbySection,
   ReviewsSection,
+  StatsStrip,
   WhySection,
 } from "./local-page-sections-trust";

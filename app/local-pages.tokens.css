@@ -5,13 +5,13 @@
   --local-color-blue-dark: #1767b1;
   --local-color-green: #2f8c4d;
   --local-color-green-top: #46a862;
-  --local-color-navy: #111827;
-  --local-color-navy-soft: #182332;
+  --local-color-navy: #16202b;
+  --local-color-navy-soft: #1e2a38;
   --local-color-sand: #f4efe6;
-  --local-color-bone: #f7f2ea;
+  --local-color-bone: #f5f0e7;
   --local-color-brass: #b08d57;
   --local-color-border: #e4ddd0;
-  --local-color-page: #fffaf2;
+  --local-color-page: #ffffff;
   --local-color-white: #ffffff;
   --local-color-hero-sub: #d2dce5;
   --local-color-star: #fbbc04;
@@ -50,7 +50,7 @@
   --local-gradient-process-radial: radial-gradient(circle at 90% 12%, var(--local-color-process-radial), transparent 34%);
   --local-font-display: var(--font-local-display), "Schibsted Grotesk", var(--font-inter), sans-serif;
   --local-shadow-card: 0 1px 2px rgba(24, 34, 48, 0.04);
-  --local-shadow-card-hover: 0 16px 44px rgba(24, 34, 48, 0.1);
+  --local-shadow-card-hover: 0 28px 52px -30px rgba(22, 28, 34, 0.55);
   --local-shadow-near-card-hover: 0 12px 34px rgba(24, 34, 48, 0.09);
   --local-shadow-mobile-menu: 0 18px 40px rgba(24, 34, 48, 0.12);
   --local-shadow-callout: 0 20px 40px rgba(24, 34, 48, 0.08);
@@ -58,7 +58,7 @@
   --local-shadow-call-button: 0 14px 32px rgba(47, 140, 77, 0.24);
   --local-shadow-hero-title: 0 2px 26px rgba(10, 16, 22, 0.6);
   --local-shadow-hero-sub: 0 1px 14px rgba(10, 16, 22, 0.5);
-  --local-radius-card: 8px;
+  --local-radius-card: 18px;
   --local-radius-button: 12px;
   --local-radius-pill: 999px;
   --local-radius-badge-mobile: 16px;
@@ -81,6 +81,10 @@
   --local-hero-inner-width: min(100% - 56px, 1240px);
   --local-hero-inner-mobile-width: min(100% - 40px, 1240px);
   --local-width-lg: min(100%, 1180px);
+  --local-width-guarantee: min(100%, 1240px);
+  --local-width-issues: min(100%, 1140px);
+  --local-width-reviews: min(100%, 1200px);
+  --local-width-coverage: min(100%, 1160px);
   --local-width-narrow: min(100%, 840px);
   --local-width-chrome: 1280px;
   --local-width-footer: 1180px;
@@ -158,6 +162,7 @@
   --local-size-icon-coverage: 34px;
   --local-size-button-min-height: 48px;
   --local-size-card-min-height: 138px;
+  --local-size-stat-min-height: 132px;
   --local-size-area-visual: 280px;
   --local-size-area-visual-mobile: 220px;
   --local-size-ring-mid: 70%;
@@ -188,6 +193,7 @@
   --local-font-size-30: 30px;
   --local-font-size-37: 37px;
   --local-font-size-52: 52px;
+  --local-font-size-stat: 44px;
   --local-font-size-section-fluid: clamp(28px, 4vw, 42px);
   --local-font-weight-500: 500;
   --local-font-weight-600: 600;
@@ -223,6 +229,7 @@
   --local-space-card: var(--local-space-22);
   --local-space-trait-card: var(--local-space-20);
   --local-space-review-card: var(--local-space-24);
+  --local-space-guarantee-title-margin: var(--local-space-0) var(--local-space-0) var(--local-space-34);
   --local-space-chip: var(--local-space-9) var(--local-space-14);
   --local-space-faq-summary: var(--local-space-18) var(--local-space-20);
   --local-space-faq-body: var(--local-space-0) var(--local-space-20) var(--local-space-20);

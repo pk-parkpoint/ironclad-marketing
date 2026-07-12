@@ -62,6 +62,27 @@ export function ReviewsSection({ cityName, reviews }: { cityName: string; review
   );
 }
 
+export function StatsStrip() {
+  const stats = [
+    ["4.9", "Google Rating"],
+    ["142", "Reviews"],
+    ["24/7", "Emergency Service"],
+  ];
+
+  return (
+    <section className="local-stats-strip" aria-label="Ironclad local service proof">
+      <div className="local-stats-grid">
+        {stats.map(([value, label]) => (
+          <div className="local-stat-item" key={label}>
+            <strong>{value}</strong>
+            <span>{label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function CoverageSection({
   body,
   items,
@@ -78,21 +99,23 @@ export function CoverageSection({
   return (
     <section className="local-band local-band-coverage">
       <div className="local-inner local-split">
-        <div className="local-area-visual-wrap">
+        <div className="local-area-visual-wrap" aria-hidden="true">
           <div className="local-area-visual" aria-hidden="true">
             <span className="local-area-ring local-area-ring-outer" />
             <span className="local-area-ring local-area-ring-mid" />
             <span className="local-area-ring local-area-ring-inner" />
             <MapPin className="local-icon-coverage" />
           </div>
-          <SectionHeader kicker="Coverage" title={title} lead={body} />
         </div>
-        <ul className="local-chip-list">
-          {items.map((item) => {
-            const href = linkByLabel.get(item);
-            return <li key={item}>{href ? <Link href={href}>{item}</Link> : <span>{item}</span>}</li>;
-          })}
-        </ul>
+        <div className="local-area-copy">
+          <SectionHeader kicker="Coverage" title={title} lead={body} />
+          <ul className="local-chip-list">
+            {items.map((item) => {
+              const href = linkByLabel.get(item);
+              return <li key={item}>{href ? <Link href={href}>{item}</Link> : <span>{item}</span>}</li>;
+            })}
+          </ul>
+        </div>
       </div>
     </section>
   );

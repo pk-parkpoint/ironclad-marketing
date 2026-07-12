@@ -236,8 +236,9 @@ export function LocalHero({
 
 export function GuaranteeStrip() {
   return (
-    <section className="local-band local-band-navy" aria-label="Ironclad guarantees">
+    <section className="local-band local-band-navy local-guarantee-strip" aria-label="Ironclad guarantees">
       <div className="local-inner">
+        <h2 className="local-guarantee-heading">Our Ironclad Guarantee</h2>
         <div className="local-grid local-grid-4">
           {guarantees.map(({ body, icon: Icon, title }) => (
             <div key={title}>

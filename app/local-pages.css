@@ -308,6 +308,14 @@
   font-weight: var(--local-font-weight-700);
 }
 
+.local-guarantee-heading {
+  margin: var(--local-space-guarantee-title-margin);
+  color: var(--local-color-white);
+  font-size: var(--local-font-size-20);
+  font-weight: var(--local-font-weight-700);
+  text-align: center;
+}
+
 .local-guarantee-body,
 .local-proof-body,
 .local-process-body {
@@ -385,7 +393,7 @@
 
 .local-callout-title {
   margin: var(--local-space-0);
-  color: var(--local-color-ink);
+  color: var(--local-color-white);
   font-size: var(--local-font-size-21);
   font-weight: var(--local-font-weight-700);
   line-height: var(--local-line-snug);
@@ -393,14 +401,35 @@
 
 .local-callout-body {
   margin: var(--local-space-10) var(--local-space-0) var(--local-space-0);
-  color: var(--local-color-muted);
+  color: var(--local-color-slate-300);
   font-size: var(--local-font-size-16);
   line-height: var(--local-line-footer-copy);
 }
 
 .local-callout-button {
   align-self: center;
+  background: var(--local-gradient-call);
+  box-shadow: var(--local-shadow-call-button);
   white-space: nowrap;
+}
+
+.local-services-more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--local-space-8);
+  margin-top: var(--local-space-24);
+  padding: var(--local-space-13) var(--local-space-22);
+  border-radius: var(--local-radius-button);
+  background: var(--local-color-navy);
+  color: var(--local-color-white);
+  font-size: var(--local-font-size-14);
+  font-weight: var(--local-font-weight-700);
+  text-decoration: none;
+}
+
+.local-services-more:hover {
+  color: var(--local-color-white);
+  text-decoration: none;
 }
 
 .local-process-number {
@@ -604,6 +633,22 @@
   color: var(--local-color-white);
 }
 
+.local-guarantee-strip .local-inner {
+  width: var(--local-width-guarantee);
+}
+
+.local-band-issues .local-inner {
+  width: var(--local-width-issues);
+}
+
+.local-band-reviews .local-inner {
+  width: var(--local-width-reviews);
+}
+
+.local-band-coverage .local-inner {
+  width: var(--local-width-coverage);
+}
+
 .local-inner {
   width: var(--local-width-lg);
   margin-inline: var(--local-size-auto);
@@ -727,7 +772,7 @@
   padding: var(--local-space-callout);
   border: var(--local-border-width) solid var(--local-color-border);
   border-radius: var(--local-radius-card);
-  background: var(--local-color-callout-bg);
+  background: var(--local-color-navy);
   box-shadow: var(--local-shadow-callout);
 }
 
@@ -748,6 +793,7 @@
 .local-area-visual-wrap {
   display: grid;
   align-content: center;
+  justify-items: center;
 }
 
 .local-area-visual {
@@ -756,10 +802,14 @@
   width: var(--local-size-area-visual);
   height: var(--local-size-area-visual);
   place-items: center;
-  margin: var(--local-space-0) var(--local-space-0) var(--local-space-30);
+  margin: var(--local-space-0);
   border: var(--local-border-width) solid var(--local-color-ring-border);
   border-radius: var(--local-radius-pill);
   background: var(--local-color-ring-bg);
+}
+
+.local-area-copy {
+  align-self: center;
 }
 
 .local-area-visual .local-icon-coverage {
@@ -797,6 +847,44 @@
   margin: var(--local-space-24) var(--local-space-0) var(--local-space-0);
   padding: var(--local-space-0);
   list-style: none;
+}
+
+.local-stats-strip {
+  background: var(--local-color-blue);
+  color: var(--local-color-white);
+}
+
+.local-stats-grid {
+  display: grid;
+  max-width: var(--local-width-reviews);
+  min-height: var(--local-size-stat-min-height);
+  grid-template-columns: var(--local-grid-three-cols);
+  margin: var(--local-space-auto);
+}
+
+.local-stat-item {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  border-left: var(--local-border-width) solid var(--local-color-badge-div);
+  text-align: center;
+}
+
+.local-stat-item:first-child {
+  border-left: var(--local-space-0);
+}
+
+.local-stat-item strong {
+  font-size: var(--local-font-size-stat);
+  line-height: var(--local-line-tight);
+}
+
+.local-stat-item span {
+  margin-top: var(--local-space-8);
+  font-size: var(--local-font-size-12);
+  font-weight: var(--local-font-weight-800);
+  letter-spacing: var(--local-letter-kicker);
+  text-transform: uppercase;
 }
 
 .local-chip-list a,

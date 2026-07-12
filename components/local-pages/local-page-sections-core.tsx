@@ -100,6 +100,9 @@ export function ServicesSection({
             </Link>
           ))}
         </div>
+        <Link className="local-services-more" href="/plumbing">
+          View all plumbing services <ArrowRight className="local-icon-sticky" />
+        </Link>
       </div>
     </section>
   );

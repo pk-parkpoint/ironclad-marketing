@@ -11,6 +11,7 @@ import {
   ProcessSection,
   ReviewsSection,
   ServicesSection,
+  StatsStrip,
   WhySection,
 } from "./local-page-sections";
 
@@ -68,6 +69,7 @@ export function LocalPageBody({ bookingHref, page, phoneDisplay, phoneHref }: Lo
       <ServicesSection cityName={page.name} services={page.services} />
       <ProcessSection cityName={page.name} />
       <WhySection cityName={page.name} />
+      <StatsStrip />
       <ReviewsSection cityName={page.name} reviews={page.reviews} />
       <CoverageSection body={areaBody} items={areaItems} links={areaLinks} title={areaTitle} />
       <NearbySection
