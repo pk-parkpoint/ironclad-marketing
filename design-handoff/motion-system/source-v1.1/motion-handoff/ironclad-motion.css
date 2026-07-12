@@ -1,0 +1,146 @@
+/* ============================================================
+   Ironclad Motion System — ironclad-motion.css  (v1.0)
+   Drop-in stylesheet. Pair with ironclad-motion.js.
+   Everything is gated behind (a) prefers-reduced-motion and
+   (b) a .anim class the JS adds to <body> — no JS, no motion,
+   and content is NEVER hidden for no-JS users.
+   ============================================================ */
+
+:root {
+  --ic-ease: cubic-bezier(.22,.61,.36,1);   /* signature ease-out */
+  --ic-reveal-dur: .6s;
+  --ic-entrance-dur: .65s;
+  --ic-accent: var(--accent, #2F8FE0);
+}
+
+/* ---------- 1. Scroll reveals ----------
+   Add data-reveal to any section header, card, or band.
+   JS adds .rev when it enters the viewport (15% threshold)
+   and staggers siblings by 90ms per column position. */
+@media (prefers-reduced-motion: no-preference) {
+  .anim [data-reveal] {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity var(--ic-reveal-dur) var(--ic-ease),
+                transform var(--ic-reveal-dur) var(--ic-ease);
+  }
+  .anim [data-reveal].rev { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- 2. Hero entrance cascade ----------
+   Add data-entrance to the hero's inner container; its direct
+   children rise in, 100ms apart (first five children). */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes ic-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .anim [data-entrance] > * { animation: ic-rise var(--ic-entrance-dur) var(--ic-ease) both; }
+  .anim [data-entrance] > *:nth-child(2) { animation-delay: .10s; }
+  .anim [data-entrance] > *:nth-child(3) { animation-delay: .20s; }
+  .anim [data-entrance] > *:nth-child(4) { animation-delay: .30s; }
+  .anim [data-entrance] > *:nth-child(5) { animation-delay: .40s; }
+  .anim [data-entrance] > *:nth-child(n+6) { animation-delay: .48s; }
+}
+
+/* ---------- 3. Count-up numbers ----------
+   <span data-count="200">200</span> — JS animates 0 → value
+   (1.1s, cubic ease-out) when it enters the viewport.
+   No CSS needed; keep the real value in markup for no-JS/SEO. */
+
+/* ---------- 4. Rotating word ----------
+   <span class="ic-rot"><span data-rotate='["leaks","clogs","water heaters"]'>leaks</span></span>
+   JS swaps every 2.6s with a vertical flip; wrapper width eases. */
+.ic-rot {
+  display: inline-block; overflow: hidden; vertical-align: bottom;
+  white-space: nowrap; transition: width .3s ease;
+}
+.ic-rot > span {
+  display: inline-block;
+  transition: transform .35s var(--ic-ease), opacity .35s ease;
+}
+
+/* ---------- 5. Underline draw (the pun underline) ----------
+   Wrap the key phrase: <span class="ic-underline">hold water.</span>
+   Draws left→right 0.8s after the hero settles. */
+.ic-underline { position: relative; }
+.ic-underline::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 5px; border-radius: 3px; background: var(--ic-accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .8s var(--ic-ease) .8s;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .anim .ic-underline::after { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ic-underline::after { transform: scaleX(1); } /* underline still shows, no draw */
+}
+
+/* ---------- 6. Primary CTA: sheen sweep + press ----------
+   Add .ic-cta to the primary button and place <span class="ic-sheen"></span>
+   inside it as the first child. Sheen sweeps every 6s; press scales 0.98. */
+.ic-cta { position: relative; overflow: hidden; transition: transform .15s ease; }
+.ic-cta:active { transform: scale(.98); }
+.ic-sheen {
+  position: absolute; top: 0; bottom: 0; left: 0; width: 45%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.35), transparent);
+  transform: translateX(-140%) skewX(-18deg); pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes ic-sheen-sweep {
+    0%, 82% { transform: translateX(-140%) skewX(-18deg); }
+    97%, 100% { transform: translateX(340%) skewX(-18deg); }
+  }
+  .anim .ic-sheen { animation: ic-sheen-sweep 6s ease-in-out 3s infinite; }
+}
+
+/* ---------- 7. Smooth accordions (details/summary) ----------
+   Progressive enhancement; Chromium 131+/modern browsers animate,
+   others snap (fine). Apply globally. */
+:root { interpolate-size: allow-keywords; }
+@media (prefers-reduced-motion: no-preference) {
+  details::details-content {
+    block-size: 0; overflow-y: clip;
+    transition: content-visibility .35s allow-discrete, block-size .35s ease;
+  }
+  details[open]::details-content { block-size: auto; }
+}
+
+/* ---------- 8. Icon pulse (quick-answer bolt etc.) ----------
+   Add .ic-pulse-icon to an inline svg; pulses twice after load. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes ic-bolt-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.4); } }
+  .anim .ic-pulse-icon { animation: ic-bolt-pulse .8s ease-in-out 1.2s 2; transform-origin: center; }
+}
+
+/* ---------- 9. Live pulse dot (24/7 availability) ----------
+   <span class="ic-pulse-dot"></span> before "Schedule Now | 24/7". */
+.ic-pulse-dot {
+  position: relative; display: inline-block; width: 7px; height: 7px;
+  border-radius: 50%; background: #34A853; margin-right: 8px; vertical-align: 1px;
+}
+.ic-pulse-dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: #34A853; }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes ic-ring { 0% { transform: scale(.7); opacity: .65; } 100% { transform: scale(2.6); opacity: 0; } }
+  .anim .ic-pulse-dot::after { animation: ic-ring 2.6s ease-out infinite; }
+}
+
+/* ---------- 10. Glass shimmer (cursor-follow) ----------
+   Add .ic-glass to translucent/glass cards; JS injects the shine
+   layer and tracks the cursor. Desktop hover only. */
+.ic-glass { position: relative; overflow: hidden; }
+.ic-glass .ic-shine {
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%),
+              rgba(255,255,255,.16), transparent 60%);
+  opacity: 0; transition: opacity .25s ease; pointer-events: none;
+}
+.ic-glass:hover .ic-shine { opacity: 1; }
+
+/* ---------- 11. Promo-bar arrow nudge ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes ic-nudge {
+    0%, 78%, 100% { transform: translateX(0); }
+    86% { transform: translateX(4px); }
+    93% { transform: translateX(1px); }
+  }
+  .anim .ic-nudge { display: inline-block; animation: ic-nudge 4s ease-in-out 2s infinite; }
+}

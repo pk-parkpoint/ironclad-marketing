@@ -8,6 +8,10 @@ Canonical reference: `IP - FAQ Hub (Canonical)` in the design workspace.
 
 This directory records the reusable animation template supplied by design and the production adaptation proven first on the FAQ cluster. The implementation intentionally loads only on FAQ routes until the motion and performance checks are accepted for sitewide rollout.
 
+## Pending service and service-area rollout
+
+The v1.1 source handoff for all 31 service pages and the service-area/neighborhood templates is archived under [`source-v1.1`](source-v1.1/README.md). It includes the original ZIP, all seven extracted source files, and the exact element-level hook map. Production implementation remains pending explicit approval.
+
 ## Production template
 
 - Runtime: `components/motion/ironclad-motion.tsx`
