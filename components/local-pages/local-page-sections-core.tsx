@@ -48,7 +48,7 @@ export function NumberedRowsSection({
   return (
     <section className="local-band local-band-issues">
       <div className="local-inner">
-        <SectionHeader kicker="Common Issues" title={title} lead={lead} />
+        <SectionHeader kicker="Common Issues" title={title} lead={lead} revealTitle />
         <div className="mt-8">
           {items.map(([itemTitle, body], index) => (
             <div className="local-row" key={itemTitle}>
@@ -91,10 +91,11 @@ export function ServicesSection({
           kicker="Popular Services"
           title={`Most-Requested Services in ${cityName}`}
           lead={`The repairs and upgrades ${cityName} homeowners call us for most, all backed by upfront pricing and a written warranty.`}
+          revealTitle
         />
         <div className="local-grid local-grid-3">
           {services.map((service) => (
-            <Link className="local-card local-link-card" href={getServiceHref(service)} key={service[0]}>
+            <Link className="local-card local-link-card" data-reveal href={getServiceHref(service)} key={service[0]}>
               <span className="local-card-kicker">Service</span>
               <strong className="local-service-title">{service[0]}</strong>
               <span className="local-card-body">{service[1]}</span>
@@ -123,10 +124,12 @@ export function ProcessSection({ cityName }: { cityName: string }) {
   return (
     <section className="local-band local-band-process">
       <div className="local-inner">
-        <SectionHeader kicker="Process" title={`Your ${cityName} Service, Step by Step`} />
+        <div data-reveal>
+          <SectionHeader kicker="Process" title={`Your ${cityName} Service, Step by Step`} />
+        </div>
         <div className="local-grid local-grid-4">
           {steps.map(([title, body], index) => (
-            <div key={title}>
+            <div data-reveal key={title}>
               <p className="local-process-number">{String(index + 1).padStart(2, "0")}</p>
               <h3 className="local-process-title">{title}</h3>
               <p className="local-process-body">{body}</p>

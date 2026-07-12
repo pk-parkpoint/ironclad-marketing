@@ -1537,11 +1537,6 @@
   display: none;
 }
 
-.dc-root [data-reveal] {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 @keyframes dc-pulsering {
   0% {
     opacity: var(--motion-pulse-opacity-start);
@@ -1556,18 +1551,6 @@
 @media (prefers-reduced-motion: no-preference) {
   .dc-radar-pulse {
     animation: dc-pulsering 3s ease-out infinite;
-  }
-
-  .dc-root [data-reveal] {
-    opacity: 0;
-    transform: translateY(var(--motion-reveal-offset-y));
-    transition: opacity var(--motion-reveal-duration) ease-out, transform var(--motion-reveal-duration) ease-out;
-    transition-delay: calc(var(--reveal-index, 0) * var(--motion-reveal-stagger));
-  }
-
-  .dc-root [data-reveal].is-visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 

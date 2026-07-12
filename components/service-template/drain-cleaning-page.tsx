@@ -2,7 +2,6 @@ import Image from "next/image";
 import { DRAIN_CLEANING_TEMPLATE as defaultContent } from "./drain-cleaning-data";
 import { HeroMetaBadge } from "./hero-meta-badge";
 import { ReferenceChrome } from "./reference-chrome";
-import { ServiceTemplateEffects } from "./service-template-effects";
 import type { DrainCleaningTemplateContent } from "./service-template-types";
 import {
   AreaChip,
@@ -43,7 +42,6 @@ export function DrainCleaningPage({
 
   return (
     <ReferenceChrome phoneDisplay={phoneDisplay} phoneHref={phoneHref}>
-        <ServiceTemplateEffects />
         <main>
           <section className="dc-hero" id="hero-section">
         <Image
@@ -58,7 +56,7 @@ export function DrainCleaningPage({
         />
         <div className="dc-hero-scrim" />
         <div className="dc-hero-glow" />
-        <div className="dc-hero-inner">
+        <div className="dc-hero-inner" data-entrance>
           {content.hero.eyebrow ? (
             <HeroMetaBadge eyebrow={content.hero.eyebrow} ratingLabel={content.hero.ratingLabel} />
           ) : (
@@ -83,13 +81,13 @@ export function DrainCleaningPage({
                 <TemplateButton href={bookingHref} variant="outline">
                   {content.hero.primaryCtaLabel ?? "Schedule Now"}
                 </TemplateButton>
-                <TemplateButton href={phoneHref} icon="phone" variant="call">
+                <TemplateButton href={phoneHref} icon="phone" motion variant="call">
                   {content.hero.secondaryCtaLabel ?? phoneDisplay}
                 </TemplateButton>
               </>
             ) : (
               <>
-                <TemplateButton href={phoneHref} icon="phone" variant="call">
+                <TemplateButton href={phoneHref} icon="phone" motion variant="call">
                   {phoneDisplay}
                 </TemplateButton>
                 <TemplateButton href={bookingHref} variant="outline">
@@ -103,8 +101,8 @@ export function DrainCleaningPage({
 
           <section className="dc-guarantee" id="guarantees">
         <div className="dc-container dc-container--guarantee">
-          <h2 className="dc-section-title-md">Our Ironclad Guarantee</h2>
-          <div className="dc-guarantee-grid" data-reveal-group>
+          <h2 className="dc-section-title-md" data-reveal>Our Ironclad Guarantee</h2>
+          <div className="dc-guarantee-grid">
             {content.guarantees.map(([label, proof]) => (
               <GuaranteeItem key={label} label={label} proof={proof} />
             ))}
@@ -114,7 +112,7 @@ export function DrainCleaningPage({
 
           <section className="dc-signs">
         <div className="dc-container dc-container--signs">
-          <h2 className="dc-section-title-lg" data-slot="signs-title">
+          <h2 className="dc-section-title-lg" data-reveal data-slot="signs-title">
             {content.signs.title}
           </h2>
           <p className="dc-section-intro" data-slot="signs-intro">
@@ -136,7 +134,7 @@ export function DrainCleaningPage({
 
           <section className="dc-services">
         <div className="dc-container dc-container--services">
-          <h2 className="dc-section-title-lg" data-slot="services-title">
+          <h2 className="dc-section-title-lg" data-reveal data-slot="services-title">
             {content.services.title}
           </h2>
           <p className="dc-section-intro" data-slot="services-intro">
@@ -156,14 +154,14 @@ export function DrainCleaningPage({
           </section>
 
           <section className="dc-container dc-container--reviews" id="reviews">
-        <div className="dc-reviews-header">
+        <div className="dc-reviews-header" data-reveal>
           <div>
             <h2 className="dc-section-title-md">Austin Homeowners Trust Ironclad</h2>
             <div className="dc-review-meta">4.9 / 5 · 142 Google reviews</div>
           </div>
           <InlineLink href="/reviews">Read all reviews →</InlineLink>
         </div>
-        <div className="dc-reviews-grid" data-reveal-group>
+        <div className="dc-reviews-grid">
           {content.reviews.map(([name, initial, time, quote]) => (
             <ReviewCard initial={initial} key={name} name={name} quote={quote} time={time} />
           ))}
@@ -194,7 +192,7 @@ export function DrainCleaningPage({
 
           <section className="dc-process">
         <div className="dc-container dc-container--process">
-          <div className="dc-process-header">
+          <div className="dc-process-header" data-reveal>
             <Eyebrow variant="navy">Our Process</Eyebrow>
             <h2 className="dc-process-title">What to Expect</h2>
           </div>
@@ -214,7 +212,7 @@ export function DrainCleaningPage({
               {content.serviceArea.title}
             </h2>
             <p>{content.serviceArea.body}</p>
-            <div className="dc-area-chips" data-reveal-group>
+            <div className="dc-area-chips">
               {content.areas.map((area) => (
                 <AreaChip key={area}>{area}</AreaChip>
               ))}
@@ -228,7 +226,7 @@ export function DrainCleaningPage({
 
           <section className="dc-faq-section">
         <div className="dc-container dc-container--faq">
-          <h2 className="dc-section-title-md">{content.faqTitle}</h2>
+          <h2 className="dc-section-title-md" data-reveal>{content.faqTitle}</h2>
           <div className="dc-faq-list">
             {content.faqs.map(([question, answer], index) => (
               <FAQItem answer={answer} key={question} open={index === 0} question={question} />
@@ -238,7 +236,7 @@ export function DrainCleaningPage({
           </section>
 
           <section className="dc-final-cta">
-        <div className="dc-container dc-container--cta">
+        <div className="dc-container dc-container--cta" data-reveal>
           <span className="dc-cta-badge">10% off your first service</span>
           <h2 className="dc-section-title-md" data-slot="cta-title">
             {content.finalCta.title}
@@ -246,12 +244,12 @@ export function DrainCleaningPage({
           <p>{content.finalCta.body}</p>
           <div className="dc-cta-buttons">
             {content.finalCta.callFirst ? (
-              <TemplateButton href={phoneHref} icon="phone" variant="call">
+              <TemplateButton href={phoneHref} icon="phone" motion variant="call">
                 {content.finalCta.primaryLabel}
               </TemplateButton>
             ) : (
               <>
-                <TemplateButton href={bookingHref} variant="schedule">
+                <TemplateButton href={bookingHref} motion variant="schedule">
                   {content.finalCta.primaryLabel}
                 </TemplateButton>
                 <TemplateButton href={phoneHref} icon="phone" variant="white">

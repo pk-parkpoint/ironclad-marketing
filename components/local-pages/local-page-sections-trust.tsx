@@ -26,7 +26,7 @@ export function WhySection({ cityName }: { cityName: string }) {
         </div>
         <div className="local-grid">
           {items.map(([title, body]) => (
-            <div className="local-proof-item local-why-item" key={title}>
+            <div className="local-proof-item local-why-item" data-reveal key={title}>
               <BadgeCheck className="local-icon-proof" />
               <div>
                 <h3 className="local-proof-title">{title}</h3>
@@ -44,7 +44,7 @@ export function ReviewsSection({ cityName, reviews }: { cityName: string; review
   return (
     <section className="local-band local-band-reviews">
       <div className="local-inner">
-        <div className="local-review-head">
+        <div className="local-review-head" data-reveal>
           <div>
             <SectionHeader kicker="Reviews" title={`${cityName} Homeowners Trust Ironclad`} />
             <p className="local-review-meta">4.9/5 · 142 Google reviews</p>
@@ -55,7 +55,7 @@ export function ReviewsSection({ cityName, reviews }: { cityName: string; review
         </div>
         <div className="local-grid local-grid-3">
           {reviews.map((review) => (
-            <figure className="local-card local-review-card" key={`${review.name}-${review.loc}`}>
+            <figure className="local-card local-review-card" data-reveal key={`${review.name}-${review.loc}`}>
               <LocalStars />
               <blockquote className="local-review-quote">&ldquo;{review.text}&rdquo;</blockquote>
               <figcaption className="local-review-caption">
@@ -87,7 +87,7 @@ export function StatsStrip() {
       <div className="local-stats-grid">
         {stats.map(([value, label]) => (
           <div className="local-stat-item" key={label}>
-            <strong>{value}</strong>
+            <strong>{value === "24/7" ? value : <span data-count={value}>{value}</span>}</strong>
             <span>{label}</span>
           </div>
         ))}
@@ -125,7 +125,7 @@ export function CoverageSection({
           <ul className="local-chip-list">
             {items.map((item) => {
               const href = linkByLabel.get(item);
-              return <li key={item}>{href ? <Link href={href}>{item}</Link> : <span>{item}</span>}</li>;
+              return <li data-reveal key={item}>{href ? <Link href={href}>{item}</Link> : <span>{item}</span>}</li>;
             })}
           </ul>
         </div>
@@ -138,10 +138,10 @@ export function NearbySection({ label, pages }: { label: string; pages: NearbyLi
   return (
     <section className="local-band local-band-nearby">
       <div className="local-inner">
-        <SectionHeader kicker="Nearby" title={label} />
+        <SectionHeader kicker="Nearby" revealTitle title={label} />
         <div className="local-grid local-grid-4">
           {pages.map((page) => (
-            <Link className="local-card local-link-card local-near-card" href={page.path} key={page.path}>
+            <Link className="local-card local-link-card local-near-card" data-reveal href={page.path} key={page.path}>
               <strong className="local-near-title">{page.name}</strong>
               <span className="local-card-action">
                 View page <ArrowRight className="local-icon-sticky" />
@@ -158,7 +158,7 @@ export function FaqSection({ faqs, title }: { title: string; faqs: Pair[] }) {
   return (
     <section className="local-band local-band-faq">
       <div className="local-inner local-inner-narrow">
-        <SectionHeader kicker="FAQ" title={title} />
+        <SectionHeader kicker="FAQ" revealTitle title={title} />
         <div className="local-faq">
           {faqs.map(([question, answer], index) => (
             <details key={question} open={index === 0}>
@@ -188,11 +188,12 @@ export function FinalCta({
 }) {
   return (
     <section className="local-band local-band-navy local-final">
-      <div className="local-inner local-inner-narrow">
+      <div className="local-inner local-inner-narrow" data-reveal>
         <p className="local-final-badge">15% off your first service</p>
         <SectionHeader kicker="Book Service" title={title} lead={body} />
         <div className="local-hero-actions justify-center">
-          <Link className="local-button local-button-primary" data-track-intent="book" href={bookingHref}>
+          <Link className="local-button local-button-primary ic-cta" data-track-intent="book" href={bookingHref}>
+            <span className="ic-sheen" aria-hidden="true" />
             Schedule Online
           </Link>
           <a className="local-button local-button-secondary" data-track-intent="phone" href={phoneHref}>

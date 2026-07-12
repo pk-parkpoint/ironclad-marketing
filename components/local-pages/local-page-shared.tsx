@@ -94,7 +94,7 @@ export function LocalPageChrome({ bookingHref, children }: { bookingHref: string
     <div className={`local-page-shell ${schibstedGrotesk.variable}`}>
       <div className="local-chrome-sticky">
         <Link className="local-promo-bar" data-track-intent="book" href="/book">
-          Book Today and Get 10% Off Your First Service &gt;
+          Book Today and Get 10% Off Your First Service <span className="ic-nudge" aria-hidden="true">→</span>
         </Link>
         <header className="local-site-header">
           <div className="local-site-header-inner">
@@ -125,6 +125,7 @@ export function LocalPageChrome({ bookingHref, children }: { bookingHref: string
             </nav>
             <div className="local-header-actions">
               <Link className="local-header-outline" data-track-intent="book" href="/book">
+                <span className="ic-pulse-dot" aria-hidden="true" />
                 Schedule Now | 24/7
               </Link>
               <a className="local-header-phone" data-track-intent="phone" href={phoneHref}>
@@ -198,37 +199,40 @@ export function LocalHero({
           </nav>
         ) : null}
 
-        <div className="local-hero-badge">
-          <span className={parentLink ? "local-hero-eyebrow" : "local-hero-eyebrow local-hero-eyebrow-service"}>{eyebrow}</span>
-          <span className="local-badge-div" aria-hidden="true" />
-          <LocalStars />
-          <span>4.9/5 · 142 reviews</span>
-        </div>
+        <div data-entrance>
+          <div className="local-hero-badge">
+            <span className={parentLink ? "local-hero-eyebrow" : "local-hero-eyebrow local-hero-eyebrow-service"}>{eyebrow}</span>
+            <span className="local-badge-div" aria-hidden="true" />
+            <LocalStars />
+            <span>4.9/5 · <span data-count="142">142</span> reviews</span>
+          </div>
 
-        <h1>{title}</h1>
-        <p className="local-hero-subtitle" data-speakable="hero">
-          {intro}
-        </p>
+          <h1>{title}</h1>
+          <p className="local-hero-subtitle" data-speakable="hero">
+            {intro}
+          </p>
 
-        <div className="local-trust-row" aria-label="Trust signals">
-          <span>
-            <Home className="local-icon-trust" /> Locally Owned & Operated
-          </span>
-          <span>
-            <ShieldCheck className="local-icon-trust" /> Licensed & Insured
-          </span>
-          <span>
-            <Clock3 className="local-icon-trust" /> Same-Day Service
-          </span>
-        </div>
+          <div className="local-trust-row" aria-label="Trust signals">
+            <span>
+              <Home className="local-icon-trust" /> Locally Owned & Operated
+            </span>
+            <span>
+              <ShieldCheck className="local-icon-trust" /> Licensed & Insured
+            </span>
+            <span>
+              <Clock3 className="local-icon-trust" /> Same-Day Service
+            </span>
+          </div>
 
-        <div className="local-hero-actions">
-          <a className="local-button local-button-call" data-track-intent="phone" href={phoneHref}>
-            <Phone className="local-icon-button" /> Call {phoneDisplay}
-          </a>
-          <Link className="local-button local-button-light" data-track-intent="book" href={bookingHref}>
-            <CalendarDays className="local-icon-button" /> Schedule Online
-          </Link>
+          <div className="local-hero-actions">
+            <a className="local-button local-button-call ic-cta" data-track-intent="phone" href={phoneHref}>
+              <span className="ic-sheen" aria-hidden="true" />
+              <Phone className="local-icon-button" /> Call {phoneDisplay}
+            </a>
+            <Link className="local-button local-button-light" data-track-intent="book" href={bookingHref}>
+              <CalendarDays className="local-icon-button" /> Schedule Online
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -239,10 +243,10 @@ export function GuaranteeStrip() {
   return (
     <section className="local-band local-band-navy local-guarantee-strip" aria-label="Ironclad guarantees">
       <div className="local-inner">
-        <h2 className="local-guarantee-heading">Our Ironclad Guarantee</h2>
+        <h2 className="local-guarantee-heading" data-reveal>Our Ironclad Guarantee</h2>
         <div className="local-grid local-grid-4">
           {guarantees.map(({ body, icon: Icon, title }) => (
-            <div key={title}>
+            <div data-reveal key={title}>
               <Icon className="local-icon-guarantee" />
               <h2 className="local-guarantee-title">{title}</h2>
               <p className="local-guarantee-body">{body}</p>
