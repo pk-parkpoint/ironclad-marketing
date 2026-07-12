@@ -6,10 +6,10 @@
     "percent": 29.221075556786875
   },
   "service-area-page-mobile": {
-    "actual": "390x11874",
+    "actual": "390x11910",
     "reference": "390x13637",
-    "pixels": 1078341,
-    "percent": 20.275551243506072
+    "pixels": 1059142,
+    "percent": 19.914561252098835
   },
   "neighborhood-page-desktop": {
     "actual": "1440x7469",
@@ -18,9 +18,9 @@
     "percent": 36.493100696250075
   },
   "neighborhood-page-mobile": {
-    "actual": "390x12416",
+    "actual": "390x12434",
     "reference": "390x14679",
-    "pixels": 1266985,
-    "percent": 22.131476852506896
+    "pixels": 1249702,
+    "percent": 21.829580370352904
   }
 }

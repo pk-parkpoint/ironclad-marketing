@@ -1168,6 +1168,16 @@
   .local-grid-3 {
     grid-template-columns: var(--local-grid-two-cols);
   }
+
+  .local-band-process .local-grid-4 {
+    gap: var(--local-space-44) var(--local-space-36);
+  }
+
+  .local-band-knowledge .local-split,
+  .local-band-proof .local-split {
+    grid-template-columns: var(--local-grid-one-col);
+    gap: var(--local-space-36);
+  }
 }
 
 @media (max-width: 820px) {
@@ -1207,6 +1217,10 @@
   .local-grid-3,
   .local-split {
     grid-template-columns: var(--local-grid-one-col);
+  }
+
+  .local-band-process .local-grid-4 {
+    gap: var(--local-space-40);
   }
 
   .local-signs-callout {
