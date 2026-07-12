@@ -31,7 +31,11 @@ export default function FaqHub({ posts }: { posts: FaqPost[] }) {
       <section className={styles.hero}>
         <div className={styles.heroInner} data-entrance>
           <div className={styles.badge}>Homeowner FAQ <span className={styles.dot} /> <span><span className="ic-count" data-count="200">200</span> questions · 11 topics</span></div>
-          <h1>Plumbing answers that actually <span className="ic-underline">hold water.</span></h1>
+          <h1>
+            Plumbing answers that
+            <br />
+            actually <span className="ic-underline">hold water.</span>
+          </h1>
           <p className={styles.heroSub}>
             Straight answers to the questions homeowners actually ask about{" "}
             <span className="ic-rot ic-rot-light">

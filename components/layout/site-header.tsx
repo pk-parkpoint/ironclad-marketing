@@ -154,7 +154,7 @@ export function SiteHeader() {
           href="/book"
         >
           <span className="block max-w-full truncate">
-            Book Today and Get 10% Off Your First Service →
+            Book Today and Get 10% Off Your First Service <span className="ic-nudge" aria-hidden="true">→</span>
           </span>
         </Link>
 
@@ -273,6 +273,7 @@ export function SiteHeader() {
                 data-track-intent="book"
                 href="/book"
               >
+                <span className="ic-pulse-dot" aria-hidden="true" />
                 Schedule Now
               </Link>
 

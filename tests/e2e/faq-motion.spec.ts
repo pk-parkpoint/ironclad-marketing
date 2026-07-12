@@ -19,6 +19,16 @@ test("canonical FAQ hub motion initializes without layout shift or runtime error
 
   const root = page.locator("[data-motion-root]");
   await expect(root).toHaveClass(/ic-anim/);
+  const sharedHeader = page.locator("header");
+  await expect(sharedHeader).toHaveCount(1);
+  await expect(sharedHeader.getByRole("link", { name: "Schedule Now" })).toBeVisible();
+  await expect(page.getByText("Schedule Now | 24/7")).toHaveCount(0);
+  const headingParts = await page.getByRole("heading", { level: 1 }).evaluate((heading) =>
+    Array.from(heading.childNodes)
+      .map((node) => (node.nodeName === "BR" ? "<br>" : node.textContent?.trim()))
+      .filter(Boolean),
+  );
+  expect(headingParts).toEqual(["Plumbing answers that", "<br>", "actually", "hold water."]);
   await expect(page.locator("[data-count]")).toHaveText("200");
   const rotatingWord = page.locator("[data-rotate]");
   const rotatingWrapper = rotatingWord.locator("..");

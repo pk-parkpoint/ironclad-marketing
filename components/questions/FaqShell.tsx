@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronDown, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import type { ReactNode } from "react";
+import { SiteHeader } from "@/components/layout/site-header";
 import { IroncladMotionRoot } from "@/components/motion/ironclad-motion";
 
 import styles from "./FaqCluster.module.css";
@@ -11,47 +12,12 @@ const topicLinks = allTopics();
 
 export default function FaqShell({ children }: { children: ReactNode }) {
   return (
-    <IroncladMotionRoot as="div" className={styles.root}>
-      <div className={styles.promo}>First-time customer? Get 10% off your first service <span className="ic-nudge">→</span></div>
-      <header className={styles.header}>
-        <div className={styles.headerInner}>
-          <Link href="/plumbing" aria-label="Ironclad Plumbing">
-            <Image className={styles.logo} src="/media/logo/ironclad-logo-clear-dark.svg" alt="Ironclad Plumbing" width={180} height={48} />
-          </Link>
-          <nav className={styles.nav} aria-label="Primary">
-            <Link href="/plumbing">Plumbing <ChevronDown className={styles.navChevron} aria-hidden="true" /></Link>
-            <Link href="/service-area">Service Areas <ChevronDown className={styles.navChevron} aria-hidden="true" /></Link>
-            <Link href="/questions">Guides <ChevronDown className={styles.navChevron} aria-hidden="true" /></Link>
-            <Link href="/about">About Us <ChevronDown className={styles.navChevron} aria-hidden="true" /></Link>
-          </nav>
-          <div className={styles.headerActions}>
-            <Link className={styles.schedulePill} href="/book?open=1"><span className="ic-pulse-dot" />Schedule Now | 24/7</Link>
-            <a className={styles.phonePill} href={PHONE_TEL}><Phone className={styles.headerPhoneIcon} aria-hidden="true" />{PHONE_DISPLAY}</a>
-          </div>
-        </div>
-        <div className={styles.mobileHeader}>
-          <details>
-            <summary className={styles.hamburger} aria-label="Open navigation"><span /></summary>
-            <nav className={styles.mobileMenu} aria-label="Mobile">
-              <Link href="/plumbing">Plumbing</Link>
-              <Link href="/service-area">Service Areas</Link>
-              <Link href="/questions">Guides</Link>
-              <Link href="/about">About Us</Link>
-              <Link href="/book?open=1">Schedule Now · 24/7</Link>
-            </nav>
-          </details>
-          <Link href="/plumbing" aria-label="Ironclad Plumbing">
-            <Image className={styles.logo} src="/media/logo/ironclad-logo-clear-dark.svg" alt="Ironclad Plumbing" width={180} height={48} />
-          </Link>
-          <span className={styles.mobileHeaderSpacer} aria-hidden="true" />
-        </div>
-      </header>
-      {children}
-      <div className={styles.stickyBar}>
-        <a href={PHONE_TEL}><Phone className={styles.stickyPhoneIcon} aria-hidden="true" />{PHONE_DISPLAY}</a>
-        <Link href="/book?open=1">Schedule Online</Link>
+    <IroncladMotionRoot as="div">
+      <SiteHeader />
+      <div className={styles.root}>
+        {children}
+        <FaqFooter />
       </div>
-      <FaqFooter />
     </IroncladMotionRoot>
   );
 }
