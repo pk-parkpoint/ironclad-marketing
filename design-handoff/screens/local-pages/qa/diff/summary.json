@@ -1,26 +1,26 @@
 {
   "service-area-page-desktop": {
-    "actual": "1440x7006",
+    "actual": "1440x7055",
     "reference": "1440x7219",
-    "pixels": 2922310,
-    "percent": 28.11167674808761
+    "pixels": 3035643,
+    "percent": 29.201903541580087
   },
   "service-area-page-mobile": {
-    "actual": "390x11778",
+    "actual": "390x11874",
     "reference": "390x13637",
-    "pixels": 1065484,
-    "percent": 20.033806969349975
+    "pixels": 1108267,
+    "percent": 20.838236095990734
   },
   "neighborhood-page-desktop": {
-    "actual": "1440x7420",
+    "actual": "1440x7469",
     "reference": "1440x7692",
-    "pixels": 3927996,
-    "percent": 35.46249349973999
+    "pixels": 4040150,
+    "percent": 36.4750353903045
   },
   "neighborhood-page-mobile": {
-    "actual": "390x12320",
+    "actual": "390x12416",
     "reference": "390x14679",
-    "pixels": 1273503,
-    "percent": 22.24533215949525
+    "pixels": 1276109,
+    "percent": 22.29085332089624
   }
 }

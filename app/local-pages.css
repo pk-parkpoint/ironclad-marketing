@@ -473,6 +473,36 @@
   padding: var(--local-space-review-card);
 }
 
+.local-review-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--local-space-24);
+}
+
+.local-review-meta {
+  margin: var(--local-space-8) var(--local-space-0) var(--local-space-0);
+  color: var(--local-color-muted);
+  font-size: var(--local-font-size-14);
+  font-weight: var(--local-font-weight-600);
+}
+
+.local-review-all {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--local-space-8);
+  color: var(--local-color-blue);
+  font-size: var(--local-font-size-14);
+  font-weight: var(--local-font-weight-700);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.local-review-all:hover {
+  color: var(--local-color-blue);
+  text-decoration: none;
+}
+
 .local-review-quote {
   margin-top: var(--local-space-16);
 }
@@ -566,6 +596,17 @@
   border: var(--local-border-width) solid var(--local-color-outline-border);
   background: var(--local-color-outline-bg);
   color: var(--local-color-white);
+}
+
+.local-button-call {
+  background: var(--local-gradient-call);
+  box-shadow: var(--local-shadow-call-button);
+  color: var(--local-color-white);
+}
+
+.local-button-light {
+  background: var(--local-color-white);
+  color: var(--local-color-light-button-text);
 }
 
 .local-band {
@@ -955,6 +996,19 @@
   text-align: center;
 }
 
+.local-final-badge {
+  display: inline-flex;
+  margin: var(--local-space-0) var(--local-space-0) var(--local-space-16);
+  padding: var(--local-space-final-badge);
+  border-radius: var(--local-radius-pill);
+  background: var(--local-color-final-badge-bg);
+  color: var(--local-color-blue);
+  font-size: var(--local-font-size-12);
+  font-weight: var(--local-font-weight-800);
+  letter-spacing: var(--local-letter-kicker);
+  text-transform: uppercase;
+}
+
 .local-final .local-section-title,
 .local-final .local-section-lead {
   margin-inline: var(--local-size-auto);
@@ -1189,6 +1243,10 @@
 
   .local-hero-actions .local-button {
     width: var(--local-size-full);
+  }
+
+  .local-review-head {
+    display: grid;
   }
 
   .local-grid-4,

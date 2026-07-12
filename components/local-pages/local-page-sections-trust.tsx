@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, ChevronDown, MapPin, Wrench } from "lucide-react";
+import { ArrowRight, BadgeCheck, ChevronDown, MapPin } from "lucide-react";
 import type { LocalReview, Pair } from "@/content/local-pages";
 import { LocalStars } from "./local-page-shared";
 import { SectionHeader } from "./local-section-header";
@@ -44,7 +44,15 @@ export function ReviewsSection({ cityName, reviews }: { cityName: string; review
   return (
     <section className="local-band local-band-reviews">
       <div className="local-inner">
-        <SectionHeader kicker="Reviews" title={`${cityName} Homeowners Trust Ironclad`} />
+        <div className="local-review-head">
+          <div>
+            <SectionHeader kicker="Reviews" title={`${cityName} Homeowners Trust Ironclad`} />
+            <p className="local-review-meta">4.9/5 · 142 Google reviews</p>
+          </div>
+          <Link className="local-review-all" href="/reviews">
+            Read all reviews <ArrowRight className="local-icon-sticky" />
+          </Link>
+        </div>
         <div className="local-grid local-grid-3">
           {reviews.map((review) => (
             <figure className="local-card local-review-card" key={`${review.name}-${review.loc}`}>
@@ -176,7 +184,7 @@ export function FinalCta({
   return (
     <section className="local-band local-band-navy local-final">
       <div className="local-inner local-inner-narrow">
-        <Wrench className="local-icon-final" />
+        <p className="local-final-badge">15% off your first service</p>
         <SectionHeader kicker="Book Service" title={title} lead={body} />
         <div className="local-hero-actions justify-center">
           <Link className="local-button local-button-primary" data-track-intent="book" href={bookingHref}>

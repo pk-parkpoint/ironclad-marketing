@@ -32,6 +32,8 @@
   --local-color-badge-div: rgba(255, 255, 255, 0.34);
   --local-color-outline-border: rgba(255, 255, 255, 0.42);
   --local-color-outline-bg: rgba(255, 255, 255, 0.08);
+  --local-color-light-button-text: #16202b;
+  --local-color-final-badge-bg: rgba(47, 143, 224, 0.18);
   --local-color-mobile-bar-bg: rgba(255, 255, 255, 0.78);
   --local-color-mobile-bar-border: rgba(30, 42, 56, 0.14);
   --local-color-mobile-menu-bg: rgba(255, 255, 255, 0.98);
@@ -220,6 +222,7 @@
   --local-space-hero-desktop: var(--local-space-96) var(--local-space-0) var(--local-space-100);
   --local-space-hero-mobile: var(--local-space-52) var(--local-space-0) var(--local-space-60);
   --local-space-hero-badge: var(--local-space-9) var(--local-space-18);
+  --local-space-final-badge: var(--local-space-8) var(--local-space-18);
   --local-space-button: var(--local-space-13) var(--local-space-22);
   --local-space-band: var(--local-space-68) var(--local-space-28);
   --local-space-band-mobile: var(--local-space-52) var(--local-space-20);

@@ -201,7 +201,7 @@ export function LocalHero({
           <span className={parentLink ? "local-hero-eyebrow" : "local-hero-eyebrow local-hero-eyebrow-service"}>{eyebrow}</span>
           <span className="local-badge-div" aria-hidden="true" />
           <LocalStars />
-          <span>4.9/5 - 142 reviews</span>
+          <span>4.9/5 · 142 reviews</span>
         </div>
 
         <h1>{title}</h1>
@@ -222,12 +222,12 @@ export function LocalHero({
         </div>
 
         <div className="local-hero-actions">
-          <Link className="local-button local-button-primary" data-track-intent="book" href={bookingHref}>
-            <CalendarDays className="local-icon-button" /> Schedule Online
-          </Link>
-          <a className="local-button local-button-secondary" data-track-intent="phone" href={phoneHref}>
+          <a className="local-button local-button-call" data-track-intent="phone" href={phoneHref}>
             <Phone className="local-icon-button" /> Call {phoneDisplay}
           </a>
+          <Link className="local-button local-button-light" data-track-intent="book" href={bookingHref}>
+            <CalendarDays className="local-icon-button" /> Schedule Online
+          </Link>
         </div>
       </div>
     </section>
