@@ -33,12 +33,11 @@ export default function FaqHub({ posts }: { posts: FaqPost[] }) {
           <div className={styles.badge}>Homeowner FAQ <span className={styles.dot} /> <span><span className="ic-count" data-count="200">200</span> questions · 11 topics</span></div>
           <h1>Plumbing answers that actually <span className="ic-underline">hold water.</span></h1>
           <p className={styles.heroSub}>
-            Straight answers to the 200 questions homeowners actually ask: what it usually is, what to do next,
-            and when it&apos;s time to call—across{" "}
-            <span aria-hidden="true" className="ic-rot">
-              <span data-rotate='["leaks.","clogs.","water heaters.","low pressure.","repair costs."]'>leaks.</span>
+            Straight answers to the questions homeowners actually ask about{" "}
+            <span className="ic-rot ic-rot-light">
+              <span data-rotate='["weak pressure","leaks","clogs","water heaters","high bills"]'>weak pressure</span>
             </span>
-            <span className="sr-only">leaks, clogs, water heaters, low pressure, and repair costs.</span>
+            {": what it usually is, what to do next, and when it's time to call."}
           </p>
           <div className={styles.mostAskedLabel}>Most-asked questions</div>
           <div className={styles.glassGrid}>

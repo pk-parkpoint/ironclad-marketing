@@ -21,7 +21,7 @@ Wrap page content with `IroncladMotionRoot`, then use attribute/class hooks. The
 | Scroll reveal | `data-reveal` | 600ms, 14px rise, 90ms three-column stagger |
 | Hero cascade | `data-entrance` | 650ms, 100ms child stagger |
 | Count-up | `data-count="200"` | 1100ms cubic ease-out |
-| Rotating word | `.ic-rot > [data-rotate]` | 350ms flip every 2600ms; wrapper reserves the widest word |
+| Rotating word | `.ic-rot > [data-rotate]` | 350ms flip every 2600ms; wrapper width follows each word over 300ms |
 | Underline draw | `.ic-underline` | 800ms after an 800ms delay |
 | CTA sheen/press | `.ic-cta > .ic-sheen` | 6s ambient cycle; 150ms press |
 | Accordion | native `details` | 350ms progressive enhancement |
@@ -49,7 +49,7 @@ Signature easing: `cubic-bezier(0.22, 0.61, 0.36, 1)`. Motion must not bounce or
 - A passive, animation-frame-throttled scroll check resolves any reveal targets passed by a fast scrollbar jump.
 - Glass shimmer is not initialized for coarse/touch pointers.
 - Real count values and the first rotating word are server rendered for SEO and no-JS behavior.
-- The rotating-word wrapper reserves the widest supplied word at initialization instead of animating width, preventing text reflow and layout shift.
+- The rotating-word wrapper animates to each word's rendered width, matching the canonical FAQ Hub behavior.
 
 ## FAQ rollout
 

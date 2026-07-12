@@ -20,7 +20,16 @@ test("canonical FAQ hub motion initializes without layout shift or runtime error
   const root = page.locator("[data-motion-root]");
   await expect(root).toHaveClass(/ic-anim/);
   await expect(page.locator("[data-count]")).toHaveText("200");
-  await expect(page.locator("[data-rotate]")).toBeAttached();
+  const rotatingWord = page.locator("[data-rotate]");
+  const rotatingWrapper = rotatingWord.locator("..");
+  await expect(rotatingWord).toHaveText("weak pressure");
+  await expect(rotatingWord).toHaveCSS("color", "rgb(255, 255, 255)");
+  await expect(rotatingWrapper.locator("..")).toContainText(
+    "weak pressure: what it usually is, what to do next, and when it's time to call.",
+  );
+  const initialRotatingWidth = (await rotatingWrapper.boundingBox())?.width ?? 0;
+  await expect(rotatingWord).toHaveText("leaks", { timeout: 4_000 });
+  await expect.poll(async () => (await rotatingWrapper.boundingBox())?.width ?? 0).toBeLessThan(initialRotatingWidth);
   await expect(page.locator(".ic-shine").first()).toBeAttached();
   await expect(page.locator(".ic-sheen")).toHaveCount(1);
   await expect(page.locator(".ic-pulse-dot")).toHaveCount(1);

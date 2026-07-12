@@ -12,11 +12,16 @@
   overflow: hidden;
   vertical-align: bottom;
   white-space: nowrap;
+  transition: width 300ms ease;
 }
 
 .ic-rot > span {
   display: inline-block;
   transition: transform 350ms var(--ic-ease), opacity 350ms ease;
+}
+
+.ic-rot-light > span {
+  color: #fff;
 }
 
 .ic-count {

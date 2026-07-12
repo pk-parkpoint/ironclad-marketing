@@ -127,17 +127,10 @@ export function IroncladMotionRoot({ as: Element = "main", children, className }
       if (!wrapper) return;
       const rotateWords = words as string[];
       let wordIndex = Math.max(0, rotateWords.indexOf(node.textContent?.trim() ?? ""));
-      const measuringNode = node.cloneNode(true) as HTMLElement;
-      measuringNode.style.cssText = "position:absolute;visibility:hidden;width:max-content;transition:none";
-      wrapper.appendChild(measuringNode);
-      const maxWordWidth = Math.max(
-        ...rotateWords.map((word) => {
-          measuringNode.textContent = word;
-          return measuringNode.getBoundingClientRect().width;
-        }),
-      );
-      measuringNode.remove();
-      wrapper.style.width = `${Math.ceil(maxWordWidth)}px`;
+      const settleTimeoutId = window.setTimeout(() => {
+        wrapper.style.width = `${node.offsetWidth}px`;
+      }, 600);
+      timeoutIds.add(settleTimeoutId);
 
       const intervalId = window.setInterval(() => {
         wordIndex = (wordIndex + 1) % rotateWords.length;
@@ -148,6 +141,8 @@ export function IroncladMotionRoot({ as: Element = "main", children, className }
           node.textContent = rotateWords[wordIndex];
           node.style.transition = "none";
           node.style.transform = "translateY(115%)";
+          void node.offsetHeight;
+          wrapper.style.width = `${node.offsetWidth}px`;
 
           const frameId = window.requestAnimationFrame(() => {
             node.style.removeProperty("transition");
