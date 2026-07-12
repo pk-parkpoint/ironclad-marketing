@@ -44,9 +44,10 @@ export default function FaqHubPage() {
 
   return (
     <>
-      <SiteHeader />
       <StructuredData data={schemas} id="ld-faq-hub" />
-      <IroncladMotionRoot>
+      <IroncladMotionRoot as="div">
+        <SiteHeader />
+        <main>
         <section className="section-block bg-soft-background">
           <div className="container-shell" data-entrance>
             <p className="text-sm font-semibold uppercase tracking-[0.12em] text-muted">Education</p>
@@ -55,8 +56,10 @@ export default function FaqHubPage() {
             </h1>
             <p className="body-large mt-4 max-w-[var(--max-readable-width)] text-muted">
               Find straight answers about plumbing service and what to expect when you work with Ironclad—covering{" "}
-              <span aria-hidden="true" className="ic-rot">
-                <span data-rotate='["pricing.","scheduling.","drains.","leaks.","water heaters."]'>pricing.</span>
+              <span aria-hidden="true" className="ic-rot-slot">
+                <span className="ic-rot">
+                  <span data-rotate='["pricing.","scheduling.","drains.","leaks.","water heaters."]'>pricing.</span>
+                </span>
               </span>
               <span className="sr-only">pricing, scheduling, drains, leaks, and water heaters.</span>
             </p>
@@ -149,8 +152,9 @@ export default function FaqHubPage() {
             </div>
           </div>
         </section>
+        </main>
+        <SiteFooter />
       </IroncladMotionRoot>
-      <SiteFooter />
     </>
   );
 }

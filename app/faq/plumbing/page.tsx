@@ -43,9 +43,10 @@ export default function PlumbingFaqPage() {
 
   return (
     <>
-      <SiteHeader />
       <StructuredData data={schemas} id="ld-faq-plumbing" />
-      <IroncladMotionRoot>
+      <IroncladMotionRoot as="div">
+        <SiteHeader />
+        <main>
         <section className="section-block bg-soft-background">
           <div className="container-shell" data-entrance>
             <p className="text-sm font-semibold uppercase tracking-[0.12em] text-muted">Education</p>
@@ -143,8 +144,9 @@ export default function PlumbingFaqPage() {
             </div>
           </div>
         </section>
+        </main>
+        <SiteFooter />
       </IroncladMotionRoot>
-      <SiteFooter />
     </>
   );
 }

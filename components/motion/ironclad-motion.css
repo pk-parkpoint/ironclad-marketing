@@ -20,6 +20,14 @@
   transition: transform 350ms var(--ic-ease), opacity 350ms ease;
 }
 
+@media (max-width: 640px) {
+  .ic-rot-slot {
+    display: inline-block;
+    min-width: 7em;
+    text-align: left;
+  }
+}
+
 .ic-rot-light > span {
   color: #fff;
 }

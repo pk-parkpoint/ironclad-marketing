@@ -38,8 +38,10 @@ export default function FaqHub({ posts }: { posts: FaqPost[] }) {
           </h1>
           <p className={styles.heroSub}>
             Straight answers to the questions homeowners actually ask about{" "}
-            <span className="ic-rot ic-rot-light">
-              <span data-rotate='["weak pressure","leaks","clogs","water heaters","high bills"]'>weak pressure</span>
+            <span className="ic-rot-slot">
+              <span className="ic-rot ic-rot-light">
+                <span data-rotate='["weak pressure","leaks","clogs","water heaters","high bills"]'>weak pressure</span>
+              </span>
             </span>
             {": what it usually is, what to do next, and when it's time to call."}
           </p>
