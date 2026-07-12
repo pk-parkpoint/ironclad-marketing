@@ -165,6 +165,7 @@
   --local-size-icon-final: 32px;
   --local-size-icon-coverage: 34px;
   --local-size-review-avatar: 32px;
+  --local-size-callout-mark: 32px;
   --local-size-button-min-height: 48px;
   --local-size-card-min-height: 138px;
   --local-size-stat-min-height: 132px;
@@ -183,6 +184,7 @@
   --local-grid-footer-cols: 1.25fr repeat(3, 1fr);
   --local-grid-mobile-header-cols: var(--local-size-menu-button) 1fr var(--local-size-menu-button);
   --local-grid-callout-cols: minmax(var(--local-space-0), 1fr) auto;
+  --local-grid-callout-compact-cols: auto minmax(var(--local-space-0), 1fr) auto;
   --local-font-size-12: 12px;
   --local-font-size-13: 13px;
   --local-font-size-14: 14px;

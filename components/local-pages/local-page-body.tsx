@@ -53,7 +53,6 @@ export function LocalPageBody({ bookingHref, page, phoneDisplay, phoneHref }: Lo
       <LocalHero
         bookingHref={bookingHref}
         eyebrow={isNeighborhood ? `Neighborhood Guide - ${page.name}` : `Service Area - ${page.name}, TX`}
-        eta={page.eta.short}
         intro={page.intro}
         parentLink={isNeighborhood ? { href: page.parentHref, label: page.parent } : undefined}
         phoneDisplay={phoneDisplay}
@@ -65,6 +64,8 @@ export function LocalPageBody({ bookingHref, page, phoneDisplay, phoneHref }: Lo
       <NumberedRowsSection
         items={page.challenges}
         lead={page.challengesLead}
+        phoneDisplay={phoneDisplay}
+        phoneHref={phoneHref}
         title={isNeighborhood ? `Common on ${page.name} Streets` : `Plumbing Built for ${page.name} Homes`}
       />
       <ServicesSection cityName={page.name} services={page.services} />

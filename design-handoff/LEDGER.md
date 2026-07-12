@@ -112,7 +112,7 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | mobile | SEO metadata | title/canonical | route-specific title and canonical | route-specific title and canonical | PASS | Same server metadata as desktop. |
 | local-pages | desktop | Internal linking | hub/Austin/sitemap | all 16 neighborhood URLs linked | all 16 linked, none missing | PASS | `hubLinks`, `austinLinks`, and `sitemap` are clean. |
 | local-pages | desktop | City URL coverage | all generated service-area city URLs render local pages | 19 `/service-area/{slug}` URLs use redesigned `LocalPageChrome` shell | PASS | Verified by focused Playwright route/link/sitemap check on local prod server. |
-| local-pages | desktop | ETA data | route-specific arrival-window/ETA data visible and linked | all 19 city pages and 16 Austin neighborhood pages expose ETA text; hub cards show ETA next to each link | PASS | Missing legacy-only city routes now adapt existing `location-details` content into local-page data. |
+| local-pages | desktop | ETA data | route-specific arrival-window/ETA data visible and linked | all 19 city pages and 16 Austin neighborhood pages have ETA data; `/service-area` hub cards show ETA next to each link | PASS | Missing legacy-only city routes now adapt existing `location-details` content into local-page data; assigned screen hero keeps spec trust text. |
 | local-pages | mobile | Responsive layout | horizontal overflow | no overflow | overflow count `0` across sampled routes | PASS | Checked at `390x844`. |
 | local-pages | desktop | Fonts | Schibsted Grotesk weights 400/500/600/700 | Next font loader, weights 400/500/600/700, h1 rendered with Schibsted | PASS | Confirmed in Chromium with `document.fonts.check`. |
 | local-pages | mobile | Chrome | local handoff header/footer, mobile header, sticky bottom bar | route-scoped `LocalPageChrome`, mobile header, local footer, static full-page capture override | PASS partial | Chrome is now local-page scoped; exact source anatomy still differs. |
@@ -125,6 +125,7 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | tablet | Knowledge/Why responsive stack | `why-split` and `local-split` stack at `≤1080`, gap `36px` | section-scoped `.local-band-knowledge .local-split`, `.local-band-proof .local-split` | PASS | Leaves Coverage/AreaSplit governed by existing `≤820` stacking rule. |
 | local-pages | desktop | GuaranteeStrip heading | reference shows centered `Our Ironclad Guarantee` heading above 4-item grid | `local-guarantee-heading` above guarantee grid | PASS partial | Adds visible reference anatomy while retaining component grid. |
 | local-pages | desktop | Numbered issue callout visual | reference shows dark navy diagnostic panel with CTA | `local-signs-callout` uses `--local-color-navy`, inverse text, call gradient CTA | PASS partial | More closely matches reference panel; copy remains production/local data. |
+| local-pages | desktop | Numbered issue callout compact CTA | reference shows compact help panel with phone action | `local-signs-callout` now uses icon + short diagnostic prompt + call CTA | PASS partial | Improves service-area desktop diff from `29.903191196157174%` to `23.847624798711756%`. |
 | local-pages | desktop | Services footer CTA | reference shows dark `View all plumbing services` CTA below service cards | `local-services-more` link to `/plumbing` | PASS partial | Adds missing internal link and visual anchor. |
 | local-pages | desktop | Stats strip | reference shows blue `4.9 / 142 / 24/7` strip between Why and Reviews | `StatsStrip` after WhySection | PASS partial | Added from reference anatomy; not separately named in markdown component spec. |
 | local-pages | desktop | AreaSplit layout | left graphic, right heading/list | `CoverageSection` now renders graphic column and copy/list column | PASS partial | Corrects prior layout that placed heading under the graphic. |
@@ -133,6 +134,7 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | desktop | Reviews header row | Reviews header row plus rating meta and read-all link | `local-review-head`, `local-review-meta`, `local-review-all` | PASS partial | Adds reference-visible `4.9/5 · 142 Google reviews` and `/reviews` link. |
 | local-pages | desktop | ReviewCard identity row | reference cards show reviewer initial badge plus name/location | `local-review-avatar` renders existing `LocalReview.initial` next to name/location | PASS partial | Adds reference-visible reviewer identity anatomy on desktop and mobile cards. |
 | local-pages | desktop | FinalCTA badge | FinalCTA badge + h2 + sub + CTAs | `local-final-badge` before SectionHeader | PASS partial | Replaces icon-only treatment with the component-spec badge slot. |
+| local-pages | desktop | Local Knowledge facts panel | reference shows one white facts panel with 3 rows | neighborhood traits now render inside one `local-trait-card` with tokenized row dividers | PASS partial | Improves neighborhood desktop diff from `34.28314445044073%` to `31.001922207146087%`. |
 | local-pages | mobile | StickyMobileBar static capture order | reference full-page capture shows sticky bar at the page end after footer | `LocalStickyBar` moved from page body to `LocalPageChrome` after footer while retaining fixed production behavior | PASS partial | Improves static full-page mobile diff and keeps booking URL attribution from city/neighborhood wrappers. |
 | local-pages | desktop | ServiceCard hover/focus | translate `-4px`, border `#D8CDB8`, title accent, arrow `translateX(4px)`, focus outline | tokenized `.local-link-card` hover/focus states | PASS | Playwright state artifact `qa/states/service-card-hover.png` and `service-card-focus.png`. |
 | local-pages | desktop | NearCard hover/focus | translate `-3px`, brass border, near shadow, arrow `translateX(4px)`, focus outline | tokenized `.local-near-card` hover/focus states | PASS | Playwright state artifact `qa/states/near-card-hover.png`. |
@@ -140,10 +142,10 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | desktop | FAQAccordion states | hover accent, focus outline, open chevron rotation | native `details/summary` with `.local-faq-chev` | PASS | Playwright artifacts `qa/states/faq-summary-hover.png` and `faq-open.png`. |
 | local-pages | desktop | AreaSplit pulse | `pulse-ring` animation | `.local-area-ring-outer` animation `local-pulse-ring` | PASS | Playwright artifact `qa/states/area-pulse-ring.png`; animation disabled only for base diff captures. |
 | local-pages | mobile | Mobile menu/sticky bar | menu panel, sticky fixed bottom bar at `bottom:0` | native `details` mobile menu and fixed `.local-sticky-bar` | PASS | Playwright artifact `qa/states/mobile-menu-open.png`; sticky `position:fixed`, bottom offset `0`. |
-| service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `29.221075556786875%` diff | FAIL | ReviewCard identity anatomy is closer, but current pixelmatch worsened from prior `29.201903541580087%`; still above gate. |
-| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `19.914561252098835%` diff | FAIL | Improved from prior `20.275551243506072%` after process responsive gap fix; still above gate. |
-| neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `36.493100696250075%` diff | FAIL | ReviewCard identity anatomy is closer, but current pixelmatch worsened from prior `36.4750353903045%`; still above gate. |
-| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `21.829580370352904%` diff | FAIL | Improved from prior `22.131476852506896%` after process responsive gap fix; still above gate. |
+| service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `23.847624798711756%` diff | FAIL | Compact callout and hero trust restoration improved desktop from `29.903191196157174%`; still above gate. |
+| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `22.76045688756255%` diff | FAIL | Compact callout improves from ETA-regressed `22.99425953631561%` but remains above gate and worse than earlier baseline. |
+| neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `31.001922207146087%` diff | FAIL | Compact callout plus single facts panel improved from `38.848461441569604%`; still above gate. |
+| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `23.454536753246483%` diff | FAIL | Single facts panel improves from `23.68505785609034%` but remains above gate and worse than earlier baseline. |
 
 ### Local Service Area Conflicts
 
@@ -167,14 +169,14 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 
 | Screen | Format | Result | Pixels differing | Notes |
 |---|---|---:|---:|---|
-| service-area-page | desktop | FAIL | `29.221075556786875%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png` |
-| service-area-page | mobile | FAIL | `19.914561252098835%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
-| neighborhood-page | desktop | FAIL | `36.493100696250075%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png` |
-| neighborhood-page | mobile | FAIL | `21.829580370352904%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
+| service-area-page | desktop | FAIL | `23.847624798711756%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png` |
+| service-area-page | mobile | FAIL | `22.76045688756255%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
+| neighborhood-page | desktop | FAIL | `31.001922207146087%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png` |
+| neighborhood-page | mobile | FAIL | `23.454536753246483%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
 
 Functional QA: PASS. `qa/summary.json` covers 10 desktop/mobile route captures, route status, H1, title, canonical, zero horizontal overflow, all local hub links, all 16 Austin-page neighborhood links, all local URLs in `/sitemaps/service-areas.xml`, breakpoint sweep overflow `0`, and Schibsted Grotesk font weights 400/500/600/700 loaded.
 
-Route/ETA QA: PASS. Focused local prod Playwright check covered 19 city URLs plus 16 Austin neighborhood URLs: status `200`, redesigned local shell present, visible `ETA:` text present, no hub link misses, no hub ETA misses, and no `/sitemaps/service-areas.xml` misses.
+Route/ETA QA: PASS. Focused local prod Playwright check covered 19 city URLs plus 16 Austin neighborhood URLs: status `200`, redesigned local shell present, no hub link misses, hub ETA text present, no `/sitemaps/service-areas.xml` misses, breakpoint sweep overflow `0`, and Schibsted Grotesk font weights 400/500/600/700 loaded. ETA remains visible on the `/service-area` hub cards instead of the assigned screen hero trust row to preserve HeroLocal parity.
 
 Interaction states: PASS by artifact. `qa/states/summary.json` confirms changed hover/focus/open/animation states for ServiceCard, NearCard, WhyItem, FAQ summary/open, AreaSplit pulse ring, mobile menu open, and mobile sticky bar fixed bottom offset `0`.
 

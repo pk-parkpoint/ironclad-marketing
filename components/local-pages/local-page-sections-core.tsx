@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import type { LocalService, Pair } from "@/content/local-pages";
 import { getServiceHref } from "@/content/local-pages";
 import { SectionHeader } from "./local-section-header";
@@ -19,9 +19,9 @@ export function LocalKnowledgeSection({
         <div>
           <SectionHeader kicker="Local Knowledge" title={`What We Know About ${name} Homes`} lead={body} />
         </div>
-        <div className="local-grid">
+        <div className="local-card local-trait-card">
           {traits.map(([label, value]) => (
-            <div className="local-card local-trait-card" key={label}>
+            <div className="local-trait-row" key={label}>
               <p className="local-trait-kicker">{label}</p>
               <p className="local-trait-value">{value}</p>
             </div>
@@ -35,11 +35,15 @@ export function LocalKnowledgeSection({
 export function NumberedRowsSection({
   items,
   lead,
+  phoneDisplay,
+  phoneHref,
   title,
 }: {
   title: string;
   lead: string;
   items: Pair[];
+  phoneDisplay: string;
+  phoneHref: string;
 }) {
   return (
     <section className="local-band local-band-issues">
@@ -57,16 +61,16 @@ export function NumberedRowsSection({
           ))}
         </div>
         <div className="local-signs-callout">
-          <div>
-            <p className="local-callout-kicker">Local diagnosis</p>
-            <h3 className="local-callout-title">We check the whole system before we quote the fix.</h3>
-            <p className="local-callout-body">
-              A licensed Ironclad plumber verifies the line, fixture, and shutoff conditions first, then gives you a flat price before work starts.
-            </p>
+          <span className="local-callout-mark" aria-hidden="true">
+            <Phone className="local-icon-sticky" />
+          </span>
+          <div className="local-callout-copy">
+            <h3 className="local-callout-title">Not sure what is going on?</h3>
+            <p className="local-callout-body">Describe it and we will tell you what it takes to fix, free.</p>
           </div>
-          <Link className="local-button local-button-primary local-callout-button" data-track-intent="book" href="/book">
-            Schedule Service <ArrowRight className="local-icon-sticky" />
-          </Link>
+          <a className="local-button local-button-call local-callout-button" data-track-intent="phone" href={phoneHref}>
+            Call {phoneDisplay}
+          </a>
         </div>
       </div>
     </section>

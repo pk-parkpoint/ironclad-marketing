@@ -382,34 +382,23 @@
   font-weight: var(--local-font-weight-700);
 }
 
-.local-callout-kicker {
-  margin: var(--local-space-0) var(--local-space-0) var(--local-space-8);
-  color: var(--local-color-blue);
-  font-size: var(--local-font-size-12);
-  font-weight: var(--local-font-weight-800);
-  letter-spacing: var(--local-letter-kicker);
-  text-transform: uppercase;
-}
-
 .local-callout-title {
   margin: var(--local-space-0);
   color: var(--local-color-white);
-  font-size: var(--local-font-size-21);
+  font-size: var(--local-font-size-16);
   font-weight: var(--local-font-weight-700);
   line-height: var(--local-line-snug);
 }
 
 .local-callout-body {
-  margin: var(--local-space-10) var(--local-space-0) var(--local-space-0);
+  margin: var(--local-space-6) var(--local-space-0) var(--local-space-0);
   color: var(--local-color-slate-300);
-  font-size: var(--local-font-size-16);
-  line-height: var(--local-line-footer-copy);
+  font-size: var(--local-font-size-13);
+  line-height: var(--local-line-body);
 }
 
 .local-callout-button {
   align-self: center;
-  background: var(--local-gradient-call);
-  box-shadow: var(--local-shadow-call-button);
   white-space: nowrap;
 }
 
@@ -772,6 +761,12 @@
   padding: var(--local-space-trait-card);
 }
 
+.local-trait-row + .local-trait-row {
+  margin-top: var(--local-space-18);
+  padding-top: var(--local-space-18);
+  border-top: var(--local-border-width) solid var(--local-color-border);
+}
+
 .local-link-card {
   display: flex;
   min-height: var(--local-size-card-min-height);
@@ -822,15 +817,25 @@
 
 .local-signs-callout {
   display: grid;
-  grid-template-columns: var(--local-grid-callout-cols);
-  gap: var(--local-space-24);
+  grid-template-columns: var(--local-grid-callout-compact-cols);
+  gap: var(--local-space-16);
   align-items: center;
   margin-top: var(--local-space-30);
-  padding: var(--local-space-callout);
+  padding: var(--local-space-18);
   border: var(--local-border-width) solid var(--local-color-border);
-  border-radius: var(--local-radius-card);
+  border-radius: var(--local-radius-button);
   background: var(--local-color-navy);
   box-shadow: var(--local-shadow-callout);
+}
+
+.local-callout-mark {
+  display: inline-grid;
+  place-items: center;
+  width: var(--local-size-callout-mark);
+  height: var(--local-size-callout-mark);
+  border-radius: var(--local-radius-button);
+  background: var(--local-color-navy-soft);
+  color: var(--local-color-blue);
 }
 
 .local-row-number {
