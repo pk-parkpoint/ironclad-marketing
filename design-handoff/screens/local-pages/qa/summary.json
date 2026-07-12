@@ -1,118 +1,122 @@
 {
+  "baseURL": "http://127.0.0.1:3028",
   "routes": [
     {
-      "path": "/service-area/austin-tx",
-      "viewport": "desktop",
+      "format": "desktop",
+      "route": "/service-area",
       "status": 200,
-      "h1": "Austin's Most Trusted Plumber, in Every Neighborhood",
+      "statusH1": "Local Plumbing Service Across Greater Austin",
+      "title": "Areas We Serve | Ironclad Plumbing - Greater Austin, TX",
+      "canonical": "https://ironcladtexas.com/service-area",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "overflow": false
+    },
+    {
+      "format": "desktop",
+      "route": "/service-area/austin-tx",
+      "status": 200,
+      "statusH1": "Austin's Most Trusted Plumber, in Every Neighborhood",
       "title": "Plumber in Austin, TX - Licensed & Insured | Ironclad Plumbing",
       "canonical": "https://ironcladtexas.com/service-area/austin-tx",
-      "overflow": 0,
-      "screenshot": "design-handoff/screens/local-pages/qa/service-area-austin-tx-desktop.png"
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "overflow": false
     },
     {
-      "path": "/service-area/austin-tx/tarrytown",
-      "viewport": "desktop",
+      "format": "desktop",
+      "route": "/service-area/round-rock-tx",
       "status": 200,
-      "h1": "Tarrytown's Plumber for Homes Built to Last",
+      "statusH1": "Round Rock's Reliable Plumber, From Teravista to Forest Creek",
+      "title": "Plumber in Round Rock, TX - Licensed & Insured | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/round-rock-tx",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "overflow": false
+    },
+    {
+      "format": "desktop",
+      "route": "/service-area/austin-tx/tarrytown",
+      "status": 200,
+      "statusH1": "Tarrytown's Plumber for Homes Built to Last",
       "title": "Tarrytown Plumber - Austin, TX | Ironclad Plumbing",
       "canonical": "https://ironcladtexas.com/service-area/austin-tx/tarrytown",
-      "overflow": 0,
-      "screenshot": "design-handoff/screens/local-pages/qa/service-area-austin-tx-tarrytown-desktop.png"
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "overflow": false
     },
     {
-      "path": "/service-area/austin-tx/west-lake-hills",
-      "viewport": "desktop",
+      "format": "desktop",
+      "route": "/service-area/austin-tx/barton-creek",
       "status": 200,
-      "h1": "West Lake Hills' Plumber for Hillside Estates",
-      "title": "West Lake Hills Plumber - Austin, TX | Ironclad Plumbing",
-      "canonical": "https://ironcladtexas.com/service-area/austin-tx/west-lake-hills",
-      "overflow": 0,
-      "screenshot": "design-handoff/screens/local-pages/qa/service-area-austin-tx-west-lake-hills-desktop.png"
+      "statusH1": "Barton Creek's Plumber for Estate Homes and Hillside Systems",
+      "title": "Barton Creek Plumber - Austin, TX | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/austin-tx/barton-creek",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "overflow": false
     },
     {
-      "path": "/service-area/leander-tx",
-      "viewport": "desktop",
+      "format": "mobile",
+      "route": "/service-area",
       "status": 200,
-      "h1": "Leander's Reliable Plumber, From Crystal Falls to Travisso",
-      "title": "Plumber in Leander, TX - Licensed & Insured | Ironclad Plumbing",
-      "canonical": "https://ironcladtexas.com/service-area/leander-tx",
-      "overflow": 0,
-      "screenshot": "design-handoff/screens/local-pages/qa/service-area-leander-tx-desktop.png"
+      "statusH1": "Local Plumbing Service Across Greater Austin",
+      "title": "Areas We Serve | Ironclad Plumbing - Greater Austin, TX",
+      "canonical": "https://ironcladtexas.com/service-area",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "overflow": false
     },
     {
-      "path": "/service-area/buda-tx",
-      "viewport": "desktop",
+      "format": "mobile",
+      "route": "/service-area/austin-tx",
       "status": 200,
-      "h1": "Buda Plumbing - Fast Service, Fair Pricing",
-      "title": "Plumber in Buda, TX | Ironclad Plumbing",
-      "canonical": "https://ironcladtexas.com/service-area/buda-tx",
-      "overflow": 0,
-      "screenshot": "design-handoff/screens/local-pages/qa/service-area-buda-tx-desktop.png"
-    },
-    {
-      "path": "/service-area/austin-tx",
-      "viewport": "mobile",
-      "status": 200,
-      "h1": "Austin's Most Trusted Plumber, in Every Neighborhood",
+      "statusH1": "Austin's Most Trusted Plumber, in Every Neighborhood",
       "title": "Plumber in Austin, TX - Licensed & Insured | Ironclad Plumbing",
       "canonical": "https://ironcladtexas.com/service-area/austin-tx",
-      "overflow": 0,
-      "screenshot": "design-handoff/screens/local-pages/qa/service-area-austin-tx-mobile.png"
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "overflow": false
     },
     {
-      "path": "/service-area/austin-tx/tarrytown",
-      "viewport": "mobile",
+      "format": "mobile",
+      "route": "/service-area/round-rock-tx",
       "status": 200,
-      "h1": "Tarrytown's Plumber for Homes Built to Last",
+      "statusH1": "Round Rock's Reliable Plumber, From Teravista to Forest Creek",
+      "title": "Plumber in Round Rock, TX - Licensed & Insured | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/round-rock-tx",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "overflow": false
+    },
+    {
+      "format": "mobile",
+      "route": "/service-area/austin-tx/tarrytown",
+      "status": 200,
+      "statusH1": "Tarrytown's Plumber for Homes Built to Last",
       "title": "Tarrytown Plumber - Austin, TX | Ironclad Plumbing",
       "canonical": "https://ironcladtexas.com/service-area/austin-tx/tarrytown",
-      "overflow": 0,
-      "screenshot": "design-handoff/screens/local-pages/qa/service-area-austin-tx-tarrytown-mobile.png"
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "overflow": false
     },
     {
-      "path": "/service-area/austin-tx/west-lake-hills",
-      "viewport": "mobile",
+      "format": "mobile",
+      "route": "/service-area/austin-tx/barton-creek",
       "status": 200,
-      "h1": "West Lake Hills' Plumber for Hillside Estates",
-      "title": "West Lake Hills Plumber - Austin, TX | Ironclad Plumbing",
-      "canonical": "https://ironcladtexas.com/service-area/austin-tx/west-lake-hills",
-      "overflow": 0,
-      "screenshot": "design-handoff/screens/local-pages/qa/service-area-austin-tx-west-lake-hills-mobile.png"
-    },
-    {
-      "path": "/service-area/leander-tx",
-      "viewport": "mobile",
-      "status": 200,
-      "h1": "Leander's Reliable Plumber, From Crystal Falls to Travisso",
-      "title": "Plumber in Leander, TX - Licensed & Insured | Ironclad Plumbing",
-      "canonical": "https://ironcladtexas.com/service-area/leander-tx",
-      "overflow": 0,
-      "screenshot": "design-handoff/screens/local-pages/qa/service-area-leander-tx-mobile.png"
-    },
-    {
-      "path": "/service-area/buda-tx",
-      "viewport": "mobile",
-      "status": 200,
-      "h1": "Buda Plumbing - Fast Service, Fair Pricing",
-      "title": "Plumber in Buda, TX | Ironclad Plumbing",
-      "canonical": "https://ironcladtexas.com/service-area/buda-tx",
-      "overflow": 0,
-      "screenshot": "design-handoff/screens/local-pages/qa/service-area-buda-tx-mobile.png"
+      "statusH1": "Barton Creek's Plumber for Estate Homes and Hillside Systems",
+      "title": "Barton Creek Plumber - Austin, TX | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/austin-tx/barton-creek",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "overflow": false
     }
   ],
-  "sitemap": {
-    "status": 200,
-    "checked": 16,
-    "missing": []
-  },
-  "hubLinks": {
-    "checked": 16,
-    "missing": []
-  },
-  "austinLinks": {
-    "checked": 16,
-    "missing": []
+  "links": {
+    "hubMissing": [],
+    "austinMissing": [],
+    "sitemapMissing": [],
+    "sitemapSource": "/sitemaps/service-areas.xml"
   },
   "fonts": {
     "checks": [
@@ -135,76 +139,149 @@
     ],
     "h1Family": "\"Schibsted Grotesk\", \"Schibsted Grotesk Fallback\", \"Schibsted Grotesk\", Inter, \"Inter Fallback\", sans-serif"
   },
-  "sweep": [
+  "sweepOverflow": [
     {
       "width": 639,
-      "overflow": 0,
-      "stickyVisible": true
+      "scrollWidth": 639,
+      "clientWidth": 639,
+      "overflowing": false
     },
     {
       "width": 640,
-      "overflow": 0,
-      "stickyVisible": true
+      "scrollWidth": 640,
+      "clientWidth": 640,
+      "overflowing": false
     },
     {
       "width": 641,
-      "overflow": 0,
-      "stickyVisible": true
+      "scrollWidth": 641,
+      "clientWidth": 641,
+      "overflowing": false
     },
     {
       "width": 768,
-      "overflow": 0,
-      "stickyVisible": true
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "overflowing": false
     },
     {
       "width": 819,
-      "overflow": 0,
-      "stickyVisible": true
+      "scrollWidth": 819,
+      "clientWidth": 819,
+      "overflowing": false
     },
     {
       "width": 820,
-      "overflow": 0,
-      "stickyVisible": true
+      "scrollWidth": 820,
+      "clientWidth": 820,
+      "overflowing": false
     },
     {
       "width": 821,
-      "overflow": 0,
-      "stickyVisible": false
+      "scrollWidth": 821,
+      "clientWidth": 821,
+      "overflowing": false
     },
     {
       "width": 1024,
-      "overflow": 0,
-      "stickyVisible": false
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "overflowing": false
     },
     {
       "width": 1079,
-      "overflow": 0,
-      "stickyVisible": false
+      "scrollWidth": 1079,
+      "clientWidth": 1079,
+      "overflowing": false
     },
     {
       "width": 1080,
-      "overflow": 0,
-      "stickyVisible": false
+      "scrollWidth": 1080,
+      "clientWidth": 1080,
+      "overflowing": false
     },
     {
       "width": 1081,
-      "overflow": 0,
-      "stickyVisible": false
+      "scrollWidth": 1081,
+      "clientWidth": 1081,
+      "overflowing": false
     },
     {
       "width": 1239,
-      "overflow": 0,
-      "stickyVisible": false
+      "scrollWidth": 1239,
+      "clientWidth": 1239,
+      "overflowing": false
     },
     {
       "width": 1240,
-      "overflow": 0,
-      "stickyVisible": false
+      "scrollWidth": 1240,
+      "clientWidth": 1240,
+      "overflowing": false
     },
     {
       "width": 1241,
-      "overflow": 0,
-      "stickyVisible": false
+      "scrollWidth": 1241,
+      "clientWidth": 1241,
+      "overflowing": false
+    }
+  ],
+  "stateChecks": [
+    {
+      "name": "service-card",
+      "type": "hover",
+      "before": "rgb(24, 34, 48)",
+      "after": "rgb(47, 143, 224)",
+      "changed": true
+    },
+    {
+      "name": "near-card",
+      "type": "hover",
+      "before": "rgb(24, 34, 48)",
+      "after": "rgb(47, 143, 224)",
+      "changed": true
+    },
+    {
+      "name": "why-item",
+      "type": "hover",
+      "before": "rgb(255, 255, 255)",
+      "after": "rgb(247, 251, 255)",
+      "changed": true
+    },
+    {
+      "name": "faq-summary",
+      "type": "hover",
+      "before": "rgb(24, 34, 48)",
+      "after": "rgb(32, 70, 106)",
+      "changed": true
+    },
+    {
+      "name": "service-card-focus",
+      "type": "focus-visible",
+      "outlineStyle": "solid",
+      "changed": true
+    },
+    {
+      "name": "faq-open",
+      "type": "open",
+      "before": false,
+      "after": true,
+      "chevronTransform": "matrix(0.7609, 0.648869, -0.648869, 0.7609, 0, 0)",
+      "changed": true
+    },
+    {
+      "name": "area-pulse-ring",
+      "type": "animation",
+      "animationName": "local-pulse-ring",
+      "changed": true
+    },
+    {
+      "name": "mobile-menu-open",
+      "type": "open",
+      "changed": true,
+      "panelVisible": true,
+      "stickyPosition": "fixed",
+      "stickyBottom": 0,
+      "badgeDividerDisplay": "none"
     }
   ]
 }

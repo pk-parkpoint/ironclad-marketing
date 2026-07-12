@@ -1,74 +1,26 @@
-[
-  {
-    "name": "service-area-page-desktop",
-    "ref": {
-      "width": 1440,
-      "height": 7219
-    },
-    "actual": {
-      "width": 1440,
-      "height": 6824
-    },
-    "canvas": {
-      "width": 1440,
-      "height": 7219
-    },
-    "pixels": 2663163,
-    "pct": 25.618766449646767,
-    "diff": "design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png"
+{
+  "service-area-page-desktop": {
+    "actual": "1440x6824",
+    "reference": "1440x7219",
+    "pixels": 2093848,
+    "percent": 20.142140339536102
   },
-  {
-    "name": "service-area-page-mobile",
-    "ref": {
-      "width": 390,
-      "height": 13637
-    },
-    "actual": {
-      "width": 390,
-      "height": 11568
-    },
-    "canvas": {
-      "width": 390,
-      "height": 13637
-    },
-    "pixels": 1856864,
-    "pct": 34.9137621440914,
-    "diff": "design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png"
+  "service-area-page-mobile": {
+    "actual": "390x11568",
+    "reference": "390x13637",
+    "pixels": 1107192,
+    "percent": 20.81802336403788
   },
-  {
-    "name": "neighborhood-page-desktop",
-    "ref": {
-      "width": 1440,
-      "height": 7692
-    },
-    "actual": {
-      "width": 1440,
-      "height": 7400
-    },
-    "canvas": {
-      "width": 1440,
-      "height": 7692
-    },
-    "pixels": 3741322,
-    "pct": 33.77717469809903,
-    "diff": "design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png"
+  "neighborhood-page-desktop": {
+    "actual": "1440x7371",
+    "reference": "1440x7692",
+    "pixels": 3209647,
+    "percent": 28.97713894666898
   },
-  {
-    "name": "neighborhood-page-mobile",
-    "ref": {
-      "width": 390,
-      "height": 14679
-    },
-    "actual": {
-      "width": 390,
-      "height": 12238
-    },
-    "canvas": {
-      "width": 390,
-      "height": 14679
-    },
-    "pixels": 2046027,
-    "pct": 35.73964900145158,
-    "diff": "design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png"
+  "neighborhood-page-mobile": {
+    "actual": "390x12109",
+    "reference": "390x14679",
+    "pixels": 1361133,
+    "percent": 23.776037982046567
   }
-]
+}

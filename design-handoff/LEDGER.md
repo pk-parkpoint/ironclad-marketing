@@ -119,10 +119,17 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | desktop | Numbered issue callout | NumberedIssueRows end with `signs-callout` panel | `local-signs-callout` panel with diagnostic copy and booking CTA | PASS partial | Added per shared component spec; exact source copy may differ. |
 | local-pages | mobile | AreaSplit graphic | left radius/rings graphic with pulse-ring concept | tokenized static ring graphic in AreaSplit | PASS partial | Adds required visual anatomy; pulse animation state still not separately captured. |
 | local-pages | desktop | Section treatments | Local Knowledge/Issues/Services/Process/Proof have distinct backgrounds and paddings | section-specific classes and tokenized backgrounds/paddings | PASS partial | Matches documented section roles; exact source composition still differs. |
-| service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `25.618766449646767%` diff | FAIL | Section treatments moved height closer but slightly increased pixel mismatch from prior `25.304664773514336%`. |
-| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `34.9137621440914%` diff | FAIL | Improved from prior `35.93694003681537%`, still above gate. |
-| neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `33.77717469809903%` diff | FAIL | Section treatments moved height closer but increased pixel mismatch from prior `31.736833362223376%`. |
-| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `35.73964900145158%` diff | FAIL | Improved from prior `36.712449845497055%`, still above gate. |
+| local-pages | desktop | Hero badge | `hero-badge` divider + service-area white eyebrow / neighborhood gold eyebrow | `.local-badge-div`, `.local-hero-eyebrow-service`, `.local-hero-eyebrow` | PASS partial | Divider visible on desktop, hidden on mobile per shared component spec. |
+| local-pages | desktop | ServiceCard hover/focus | translate `-4px`, border `#D8CDB8`, title accent, arrow `translateX(4px)`, focus outline | tokenized `.local-link-card` hover/focus states | PASS | Playwright state artifact `qa/states/service-card-hover.png` and `service-card-focus.png`. |
+| local-pages | desktop | NearCard hover/focus | translate `-3px`, brass border, near shadow, arrow `translateX(4px)`, focus outline | tokenized `.local-near-card` hover/focus states | PASS | Playwright state artifact `qa/states/near-card-hover.png`. |
+| local-pages | desktop | WhyItem hover | padding-left `14px`, title accent-tinted white | tokenized `.local-why-item` hover state | PASS | Playwright state artifact `qa/states/why-item-hover.png`. |
+| local-pages | desktop | FAQAccordion states | hover accent, focus outline, open chevron rotation | native `details/summary` with `.local-faq-chev` | PASS | Playwright artifacts `qa/states/faq-summary-hover.png` and `faq-open.png`. |
+| local-pages | desktop | AreaSplit pulse | `pulse-ring` animation | `.local-area-ring-outer` animation `local-pulse-ring` | PASS | Playwright artifact `qa/states/area-pulse-ring.png`; animation disabled only for base diff captures. |
+| local-pages | mobile | Mobile menu/sticky bar | menu panel, sticky fixed bottom bar at `bottom:0` | native `details` mobile menu and fixed `.local-sticky-bar` | PASS | Playwright artifact `qa/states/mobile-menu-open.png`; sticky `position:fixed`, bottom offset `0`. |
+| service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `20.142140339536102%` diff | FAIL | Improved from prior `25.618766449646767%`; still above gate. |
+| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `20.81802336403788%` diff | FAIL | Improved from prior `34.9137621440914%`; still above gate. |
+| neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `28.97713894666898%` diff | FAIL | Improved from prior `33.77717469809903%`; still above gate. |
+| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `23.776037982046567%` diff | FAIL | Improved from prior `35.73964900145158%`; still above gate. |
 
 ### Local Service Area Conflicts
 
@@ -146,12 +153,14 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 
 | Screen | Format | Result | Pixels differing | Notes |
 |---|---|---:|---:|---|
-| service-area-page | desktop | FAIL | `25.618766449646767%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png` |
-| service-area-page | mobile | FAIL | `34.9137621440914%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
-| neighborhood-page | desktop | FAIL | `33.77717469809903%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png` |
-| neighborhood-page | mobile | FAIL | `35.73964900145158%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
+| service-area-page | desktop | FAIL | `20.142140339536102%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png` |
+| service-area-page | mobile | FAIL | `20.81802336403788%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
+| neighborhood-page | desktop | FAIL | `28.97713894666898%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png` |
+| neighborhood-page | mobile | FAIL | `23.776037982046567%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
 
-Functional QA: PASS. `qa/summary.json` covers 10 desktop/mobile route captures, route status, H1, title, canonical, zero horizontal overflow, all 16 Austin neighborhood hub links, all 16 Austin-page links, all 16 sitemap URLs, breakpoint sweep overflow `0`, and Schibsted Grotesk font weights 400/500/600/700 loaded.
+Functional QA: PASS. `qa/summary.json` covers 10 desktop/mobile route captures, route status, H1, title, canonical, zero horizontal overflow, all local hub links, all 16 Austin-page neighborhood links, all local URLs in `/sitemaps/service-areas.xml`, breakpoint sweep overflow `0`, and Schibsted Grotesk font weights 400/500/600/700 loaded.
+
+Interaction states: PASS by artifact. `qa/states/summary.json` confirms changed hover/focus/open/animation states for ServiceCard, NearCard, WhyItem, FAQ summary/open, AreaSplit pulse ring, mobile menu open, and mobile sticky bar fixed bottom offset `0`.
 
 ## PPC Content Update - 2026-07-10
 

@@ -98,9 +98,21 @@ export function LocalPageChrome({ children }: { children: ReactNode }) {
         </Link>
         <header className="local-site-header">
           <div className="local-site-header-inner">
-            <button className="local-menu-button" aria-label="Open navigation" type="button">
-              <Menu className="local-menu-icon" />
-            </button>
+            <details className="local-mobile-menu">
+              <summary className="local-menu-button" aria-label="Open navigation">
+                <Menu className="local-menu-icon" />
+              </summary>
+              <nav aria-label="Mobile local navigation" className="local-mobile-menu-panel">
+                {chromeNavLinks.map((link) => (
+                  <Link className={link.href === "/service-area" ? "local-nav-active" : undefined} href={link.href} key={link.href}>
+                    {link.label}
+                  </Link>
+                ))}
+                <Link data-track-intent="book" href="/book">
+                  Schedule Now | 24/7
+                </Link>
+              </nav>
+            </details>
             <Link className="local-logo-link" href="/" aria-label="Ironclad Plumbing home">
               <Image alt="Ironclad Plumbing" height={44} priority src="/media/logo/ironclad-logo-clear-dark.svg" width={151} />
             </Link>
@@ -186,7 +198,8 @@ export function LocalHero({
         ) : null}
 
         <div className="local-hero-badge">
-          <span className="local-hero-eyebrow">{eyebrow}</span>
+          <span className={parentLink ? "local-hero-eyebrow" : "local-hero-eyebrow local-hero-eyebrow-service"}>{eyebrow}</span>
+          <span className="local-badge-div" aria-hidden="true" />
           <LocalStars />
           <span>4.9/5 - 142 reviews</span>
         </div>

@@ -1,0 +1,59 @@
+[
+  {
+    "name": "service-card",
+    "type": "hover",
+    "before": "rgb(24, 34, 48)",
+    "after": "rgb(47, 143, 224)",
+    "changed": true
+  },
+  {
+    "name": "near-card",
+    "type": "hover",
+    "before": "rgb(24, 34, 48)",
+    "after": "rgb(47, 143, 224)",
+    "changed": true
+  },
+  {
+    "name": "why-item",
+    "type": "hover",
+    "before": "rgb(255, 255, 255)",
+    "after": "rgb(247, 251, 255)",
+    "changed": true
+  },
+  {
+    "name": "faq-summary",
+    "type": "hover",
+    "before": "rgb(24, 34, 48)",
+    "after": "rgb(32, 70, 106)",
+    "changed": true
+  },
+  {
+    "name": "service-card-focus",
+    "type": "focus-visible",
+    "outlineStyle": "solid",
+    "changed": true
+  },
+  {
+    "name": "faq-open",
+    "type": "open",
+    "before": false,
+    "after": true,
+    "chevronTransform": "matrix(0.7609, 0.648869, -0.648869, 0.7609, 0, 0)",
+    "changed": true
+  },
+  {
+    "name": "area-pulse-ring",
+    "type": "animation",
+    "animationName": "local-pulse-ring",
+    "changed": true
+  },
+  {
+    "name": "mobile-menu-open",
+    "type": "open",
+    "changed": true,
+    "panelVisible": true,
+    "stickyPosition": "fixed",
+    "stickyBottom": 0,
+    "badgeDividerDisplay": "none"
+  }
+]
