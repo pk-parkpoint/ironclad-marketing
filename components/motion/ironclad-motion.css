@@ -139,6 +139,11 @@
     transform: translateY(0);
   }
 
+  .ic-motion-root.ic-anim [data-reveal][data-icr] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   .ic-motion-root.ic-anim [data-entrance] > * {
     animation: ic-rise var(--ic-entrance-duration) var(--ic-ease) both;
   }

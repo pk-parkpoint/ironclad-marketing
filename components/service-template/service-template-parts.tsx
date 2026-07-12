@@ -18,16 +18,19 @@ export function TemplateButton({
   href,
   variant,
   icon,
+  motion = false,
 }: {
   children: React.ReactNode;
   href: string;
   variant: ButtonVariant;
   icon?: "phone" | "arrow";
+  motion?: boolean;
 }) {
-  const className = `dc-btn dc-btn--${variant}`;
+  const className = `dc-btn dc-btn--${variant}${motion ? " ic-cta" : ""}`;
   const trackIntent = icon === "phone" ? "phone" : href.startsWith("/book") ? "book" : undefined;
   const content = (
     <>
+      {motion ? <span aria-hidden="true" className="ic-sheen" /> : null}
       {icon === "phone" ? <Phone aria-hidden="true" className="dc-btn-icon" /> : null}
       <span>{children}</span>
       {icon === "arrow" ? <ArrowRight aria-hidden="true" className="dc-btn-arrow" /> : null}
@@ -217,7 +220,7 @@ export function ServiceCard({
   title: string;
 }) {
   return (
-    <article className="dc-service-card">
+    <article className="dc-service-card" data-reveal>
       <ImageSlot caption={caption} imageSrc={imageSrc} title={title} />
       <div className="dc-service-card-copy">
         <h3 className="dc-service-card-title">{title}</h3>
@@ -264,7 +267,7 @@ export function Eyebrow({ children, variant }: { children: React.ReactNode; vari
 
 export function WhyItem({ index, title, body }: { index: number; title: string; body: string }) {
   return (
-    <div className="dc-why-item">
+    <div className="dc-why-item" data-reveal>
       <span>{String(index + 1).padStart(2, "0")}</span>
       <div>
         <h3>{title}</h3>
@@ -275,10 +278,13 @@ export function WhyItem({ index, title, body }: { index: number; title: string; 
 }
 
 export function StatCell({ value, label }: { value: string; label: string }) {
+  const match = value.match(/^(\d+(?:\.\d+)?)(.*)$/);
+
   return (
     <div className="dc-stat-cell">
-      <div className="dc-stat-number" data-count-to={value}>
-        {value}
+      <div className="dc-stat-number">
+        {match ? <span data-count={match[1]}>{match[1]}</span> : value}
+        {match?.[2]}
       </div>
       <div className="dc-stat-label">{label}</div>
     </div>
@@ -287,7 +293,7 @@ export function StatCell({ value, label }: { value: string; label: string }) {
 
 export function ProcessStep({ index, title, body }: { index: number; title: string; body: string }) {
   return (
-    <div className="dc-process-step">
+    <div className="dc-process-step" data-reveal>
       <span className="dc-process-dot" />
       <div className="dc-process-number">{String(index + 1).padStart(2, "0")}</div>
       <h3>{title}</h3>
@@ -327,7 +333,7 @@ export function RadarGraphic() {
 
 export function FAQItem({ answer, open, question }: { answer: string; open?: boolean; question: string }) {
   return (
-    <details className="dc-faq-item" open={open}>
+    <details className="dc-faq-item" name="dc-service-faq" open={open}>
       <summary>
         {question}
         <ChevronDownIcon className="dc-faq-chevron" />
