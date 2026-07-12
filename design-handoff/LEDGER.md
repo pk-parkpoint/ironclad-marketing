@@ -114,6 +114,8 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | mobile | Responsive layout | horizontal overflow | no overflow | overflow count `0` across sampled routes | PASS | Checked at `390x844`. |
 | local-pages | desktop | Fonts | Schibsted Grotesk weights 400/500/600/700 | Next font loader, weights 400/500/600/700, h1 rendered with Schibsted | PASS | Confirmed in Chromium with `document.fonts.check`. |
 | local-pages | mobile | Chrome | local handoff header/footer, mobile header, sticky bottom bar | route-scoped `LocalPageChrome`, mobile header, local footer, static full-page capture override | PASS partial | Chrome is now local-page scoped; exact source anatomy still differs. |
+| local-pages | desktop | Token purity | all screen UI values reference token layer | all non-media `app/local-pages.css` raw color/type/spacing/radius/shadow values replaced with `var(--local-*)` tokens | PASS partial | Remaining raw values are media-query breakpoints, which CSS cannot read from custom properties without an additional transform. |
+| local-pages | mobile | Token purity | all screen UI values reference token layer | all non-media `app/local-pages.css` raw color/type/spacing/radius/shadow values replaced with `var(--local-*)` tokens | PASS partial | Same limitation: raw `640/820/1080px` media conditions remain. |
 | service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `29.137615243724124%` diff | FAIL | Route-scoped local chrome reduced one source of drift, but section heights/content still differ. |
 | service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `42.251472709051356%` diff | FAIL | Actual page is substantially shorter than the reference after static sticky capture. |
 | neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `25.864651947189%` diff | FAIL | See generated diff artifact. |
@@ -134,7 +136,7 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 |---|---|---|
 | Local-pages handoff is external to the repo package tree. | Strict package-root discovery cannot resolve it from `design-handoff/` alone. | Logged source ZIP and extracted root path. |
 | No fixed-state or interaction reference PNGs were supplied for local pages. | Interaction/state parity cannot be pixel-diffed against references. | Verified URL, metadata, link, sitemap, and overflow behavior instead. |
-| Strict token purity remains incomplete for local page CSS. | Raw layout/type values still exist outside the token file. | Added `app/local-pages.tokens.css`, moved component-side arbitrary Tailwind styling into semantic classes, and added route-scoped chrome tokens; further CSS tokenization is still needed. |
+| Strict token purity remains incomplete only at media-query conditions. | CSS custom properties cannot be used directly inside `@media (max-width: ...)` without a custom-media/PostCSS transform. | Non-media local page values now reference `var(--local-*)`; logged the remaining raw breakpoint literals as a package/build-system limitation. |
 | Strict `0.5%` pixel parity is not reached. | Cannot report handoff parity complete. | Generated residual diff artifacts under `qa/diff/` and recorded the failures above. |
 
 ### Local Service Area Diff Results
