@@ -17,6 +17,10 @@
   --local-color-star: #fbbc04;
   --local-color-slate-300: #cbd5e1;
   --local-color-faq-bg: #faf7f1;
+  --local-color-knowledge-bg: #f7f3ec;
+  --local-color-bone-alt: #f6f1e9;
+  --local-color-sand-alt: #f3ede3;
+  --local-color-dark-proof: #12181f;
   --local-color-hero-scrim-1: rgba(12, 20, 30, 0.96);
   --local-color-hero-scrim-2: rgba(12, 20, 30, 0.82);
   --local-color-hero-scrim-3: rgba(12, 20, 30, 0.2);
@@ -40,6 +44,7 @@
     url("/media/services/ironclad-team-hero.png") 72% center / cover no-repeat;
   --local-gradient-primary: linear-gradient(180deg, #48a0ef, var(--local-color-blue));
   --local-gradient-call: linear-gradient(180deg, var(--local-color-green-top), var(--local-color-green));
+  --local-gradient-process-radial: radial-gradient(circle at 90% 12%, var(--local-color-process-radial), transparent 34%);
   --local-font-display: var(--font-local-display), "Schibsted Grotesk", var(--font-inter), sans-serif;
   --local-shadow-card: 0 1px 2px rgba(24, 34, 48, 0.04);
   --local-shadow-card-hover: 0 16px 44px rgba(24, 34, 48, 0.1);
@@ -91,6 +96,7 @@
   --local-color-ring-bg: #f7f3ec;
   --local-color-ring-border: rgba(47, 143, 224, 0.18);
   --local-color-ring-fill: rgba(47, 143, 224, 0.08);
+  --local-color-process-radial: rgba(47, 143, 224, 0.12);
   --local-type-promo-size: 13.5px;
   --local-type-nav-size: 16px;
   --local-type-header-button-size: 15px;
@@ -121,10 +127,13 @@
   --local-space-34: 34px;
   --local-space-36: 36px;
   --local-space-42: 42px;
+  --local-space-48: 48px;
   --local-space-52: 52px;
   --local-space-54: 54px;
   --local-space-60: 60px;
   --local-space-68: 68px;
+  --local-space-76: 76px;
+  --local-space-82: 82px;
   --local-space-96: 96px;
   --local-space-100: 100px;
   --local-space-120: 120px;
@@ -197,7 +206,11 @@
   --local-space-button: var(--local-space-13) var(--local-space-22);
   --local-space-band: var(--local-space-68) var(--local-space-28);
   --local-space-band-mobile: var(--local-space-52) var(--local-space-20);
+  --local-space-band-lg: var(--local-space-76) var(--local-space-28);
+  --local-space-band-knowledge: var(--local-space-82) var(--local-space-28);
+  --local-space-band-compact-mobile: var(--local-space-48) var(--local-space-28);
   --local-space-card: var(--local-space-22);
+  --local-space-trait-card: var(--local-space-20);
   --local-space-review-card: var(--local-space-24);
   --local-space-chip: var(--local-space-9) var(--local-space-14);
   --local-space-faq-summary: var(--local-space-18) var(--local-space-20);

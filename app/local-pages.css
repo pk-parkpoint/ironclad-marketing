@@ -482,6 +482,48 @@
   background: var(--local-color-bone);
 }
 
+.local-band-knowledge {
+  padding: var(--local-space-band-knowledge);
+  border-bottom: var(--local-border-width) solid var(--local-color-border);
+  background: var(--local-color-knowledge-bg);
+}
+
+.local-band-issues,
+.local-band-services {
+  padding: var(--local-space-band-lg);
+}
+
+.local-band-services {
+  background: var(--local-color-bone-alt);
+}
+
+.local-band-process {
+  position: relative;
+  overflow: hidden;
+  background: var(--local-color-navy-soft);
+  color: var(--local-color-white);
+}
+
+.local-band-process::before {
+  position: absolute;
+  inset: var(--local-space-0);
+  content: "";
+  background: var(--local-gradient-process-radial);
+}
+
+.local-band-process > .local-inner {
+  position: relative;
+}
+
+.local-band-proof {
+  background: var(--local-color-dark-proof);
+  color: var(--local-color-white);
+}
+
+.local-band-nearby {
+  background: var(--local-color-sand-alt);
+}
+
 .local-band-navy {
   background: var(--local-color-navy);
   color: var(--local-color-white);
@@ -552,6 +594,10 @@
   border-radius: var(--local-radius-card);
   background: var(--local-color-white);
   box-shadow: var(--local-shadow-card);
+}
+
+.local-trait-card {
+  padding: var(--local-space-trait-card);
 }
 
 .local-link-card {
@@ -852,6 +898,12 @@
 
   .local-band {
     padding: var(--local-space-band-mobile);
+  }
+
+  .local-band-knowledge,
+  .local-band-issues,
+  .local-band-services {
+    padding: var(--local-space-band-compact-mobile);
   }
 
   .local-grid-4,

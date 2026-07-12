@@ -34,14 +34,14 @@ export function LocalKnowledgeSection({
   traits: Pair[];
 }) {
   return (
-    <section className="local-band local-band-sand">
+    <section className="local-band local-band-knowledge">
       <div className="local-inner local-split">
         <div>
           <SectionHeader kicker="Local Knowledge" title={`What We Know About ${name} Homes`} lead={body} />
         </div>
         <div className="local-grid">
           {traits.map(([label, value]) => (
-            <div className="local-card p-5" key={label}>
+            <div className="local-card local-trait-card" key={label}>
               <p className="local-trait-kicker">{label}</p>
               <p className="local-trait-value">{value}</p>
             </div>
@@ -62,7 +62,7 @@ export function NumberedRowsSection({
   items: Pair[];
 }) {
   return (
-    <section className="local-band">
+    <section className="local-band local-band-issues">
       <div className="local-inner">
         <SectionHeader kicker="Common Issues" title={title} lead={lead} />
         <div className="mt-8">
@@ -101,7 +101,7 @@ export function ServicesSection({
   services: LocalService[];
 }) {
   return (
-    <section className="local-band local-band-bone">
+    <section className="local-band local-band-services">
       <div className="local-inner">
         <SectionHeader
           kicker="Popular Services"
@@ -134,7 +134,7 @@ export function ProcessSection({ cityName }: { cityName: string }) {
   ];
 
   return (
-    <section className="local-band local-band-navy-soft">
+    <section className="local-band local-band-process">
       <div className="local-inner">
         <SectionHeader kicker="Process" title={`Your ${cityName} Service, Step by Step`} />
         <div className="local-grid local-grid-4">
@@ -160,7 +160,7 @@ export function WhySection({ cityName }: { cityName: string }) {
   ];
 
   return (
-    <section className="local-band local-band-navy">
+    <section className="local-band local-band-proof">
       <div className="local-inner local-split">
         <div>
           <SectionHeader
@@ -187,7 +187,7 @@ export function WhySection({ cityName }: { cityName: string }) {
 
 export function ReviewsSection({ cityName, reviews }: { cityName: string; reviews: LocalReview[] }) {
   return (
-    <section className="local-band">
+    <section className="local-band local-band-reviews">
       <div className="local-inner">
         <SectionHeader kicker="Reviews" title={`${cityName} Homeowners Trust Ironclad`} />
         <div className="local-grid local-grid-3">
@@ -221,7 +221,7 @@ export function CoverageSection({
   const linkByLabel = new Map(links?.map((link) => [link.label, link.href]));
 
   return (
-    <section className="local-band">
+    <section className="local-band local-band-coverage">
       <div className="local-inner local-split">
         <div className="local-area-visual-wrap">
           <div className="local-area-visual" aria-hidden="true">
@@ -245,7 +245,7 @@ export function CoverageSection({
 
 export function NearbySection({ label, pages }: { label: string; pages: NearbyLink[] }) {
   return (
-    <section className="local-band local-band-sand">
+    <section className="local-band local-band-nearby">
       <div className="local-inner">
         <SectionHeader kicker="Nearby" title={label} />
         <div className="local-grid local-grid-4">
@@ -265,7 +265,7 @@ export function NearbySection({ label, pages }: { label: string; pages: NearbyLi
 
 export function FaqSection({ faqs, title }: { title: string; faqs: Pair[] }) {
   return (
-    <section className="local-band">
+    <section className="local-band local-band-faq">
       <div className="local-inner local-inner-narrow">
         <SectionHeader kicker="FAQ" title={title} />
         <div className="local-faq">
