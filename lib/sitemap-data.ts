@@ -1,5 +1,6 @@
 import { GUIDE_ROUTE_PATHS } from "@/content/guides";
 import { TOP_QUESTIONS_GUIDE_PATH } from "@/content/aeo-top-questions";
+import { QUESTION_ROUTE_PATHS } from "@/components/questions/question-data";
 import { BLOG_POSTS } from "@/content/blog-posts";
 import { LOCAL_NEIGHBORHOOD_PAGES } from "@/content/local-pages";
 import { LOCATIONS } from "@/content/locations";
@@ -107,7 +108,7 @@ export function buildArticleSitemapEntries(): SitemapEntry[] {
 }
 
 export function buildGuideSitemapEntries(): SitemapEntry[] {
-  const routes = ["/guides", TOP_QUESTIONS_GUIDE_PATH, ...GUIDE_ROUTE_PATHS];
+  const routes = ["/guides", TOP_QUESTIONS_GUIDE_PATH, ...GUIDE_ROUTE_PATHS, ...QUESTION_ROUTE_PATHS];
 
   return routes.map((path) => ({
     changeFrequency: "weekly",
