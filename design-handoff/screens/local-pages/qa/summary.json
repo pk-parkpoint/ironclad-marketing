@@ -113,5 +113,98 @@
   "austinLinks": {
     "checked": 16,
     "missing": []
-  }
+  },
+  "fonts": {
+    "checks": [
+      {
+        "weight": 400,
+        "loaded": true
+      },
+      {
+        "weight": 500,
+        "loaded": true
+      },
+      {
+        "weight": 600,
+        "loaded": true
+      },
+      {
+        "weight": 700,
+        "loaded": true
+      }
+    ],
+    "h1Family": "\"Schibsted Grotesk\", \"Schibsted Grotesk Fallback\", \"Schibsted Grotesk\", Inter, \"Inter Fallback\", sans-serif"
+  },
+  "sweep": [
+    {
+      "width": 639,
+      "overflow": 0,
+      "stickyVisible": true
+    },
+    {
+      "width": 640,
+      "overflow": 0,
+      "stickyVisible": true
+    },
+    {
+      "width": 641,
+      "overflow": 0,
+      "stickyVisible": true
+    },
+    {
+      "width": 768,
+      "overflow": 0,
+      "stickyVisible": true
+    },
+    {
+      "width": 819,
+      "overflow": 0,
+      "stickyVisible": true
+    },
+    {
+      "width": 820,
+      "overflow": 0,
+      "stickyVisible": true
+    },
+    {
+      "width": 821,
+      "overflow": 0,
+      "stickyVisible": false
+    },
+    {
+      "width": 1024,
+      "overflow": 0,
+      "stickyVisible": false
+    },
+    {
+      "width": 1079,
+      "overflow": 0,
+      "stickyVisible": false
+    },
+    {
+      "width": 1080,
+      "overflow": 0,
+      "stickyVisible": false
+    },
+    {
+      "width": 1081,
+      "overflow": 0,
+      "stickyVisible": false
+    },
+    {
+      "width": 1239,
+      "overflow": 0,
+      "stickyVisible": false
+    },
+    {
+      "width": 1240,
+      "overflow": 0,
+      "stickyVisible": false
+    },
+    {
+      "width": 1241,
+      "overflow": 0,
+      "stickyVisible": false
+    }
+  ]
 }

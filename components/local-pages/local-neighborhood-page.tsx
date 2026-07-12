@@ -1,5 +1,3 @@
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
 import { StructuredData } from "@/components/seo/structured-data";
 import type { LocalNeighborhoodPageData } from "@/content/local-pages";
 import { getFaqItems } from "@/content/local-pages";
@@ -12,6 +10,7 @@ import {
   buildServiceSchema,
 } from "@/lib/structured-data";
 import { LocalPageBody } from "./local-page-body";
+import { LocalPageChrome } from "./local-page-shared";
 
 function getBreadcrumbs(page: LocalNeighborhoodPageData) {
   return [
@@ -39,8 +38,7 @@ export function LocalNeighborhoodPage({ page }: { page: LocalNeighborhoodPageDat
   );
 
   return (
-    <>
-      <SiteHeader />
+    <LocalPageChrome>
       <StructuredData data={schemas} id={`ld-local-neighborhood-${page.slug}`} />
       <LocalPageBody
         bookingHref={bookingHref}
@@ -48,7 +46,6 @@ export function LocalNeighborhoodPage({ page }: { page: LocalNeighborhoodPageDat
         phoneDisplay={contactInfo.phoneDisplay}
         phoneHref={contactInfo.phoneHref}
       />
-      <SiteFooter />
-    </>
+    </LocalPageChrome>
   );
 }

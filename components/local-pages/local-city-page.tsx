@@ -1,5 +1,3 @@
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
 import { StructuredData } from "@/components/seo/structured-data";
 import type { LocalCityPageData } from "@/content/local-pages";
 import { getFaqItems } from "@/content/local-pages";
@@ -13,6 +11,7 @@ import {
   buildServiceSchema,
 } from "@/lib/structured-data";
 import { LocalPageBody } from "./local-page-body";
+import { LocalPageChrome } from "./local-page-shared";
 
 export function LocalCityPage({ page }: { page: LocalCityPageData }) {
   const contactInfo = getPublicContactInfo();
@@ -31,8 +30,7 @@ export function LocalCityPage({ page }: { page: LocalCityPageData }) {
   );
 
   return (
-    <>
-      <SiteHeader />
+    <LocalPageChrome>
       <StructuredData data={schemas} id={`ld-local-city-${page.slug}`} />
       <LocalPageBody
         bookingHref={bookingHref}
@@ -40,7 +38,6 @@ export function LocalCityPage({ page }: { page: LocalCityPageData }) {
         phoneDisplay={contactInfo.phoneDisplay}
         phoneHref={contactInfo.phoneHref}
       />
-      <SiteFooter />
-    </>
+    </LocalPageChrome>
   );
 }

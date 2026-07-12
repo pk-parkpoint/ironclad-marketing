@@ -40,7 +40,7 @@
     url("/media/services/ironclad-team-hero.png") 72% center / cover no-repeat;
   --local-gradient-primary: linear-gradient(180deg, #48a0ef, var(--local-color-blue));
   --local-gradient-call: linear-gradient(180deg, var(--local-color-green-top), var(--local-color-green));
-  --local-font-display: "Schibsted Grotesk", var(--font-inter), sans-serif;
+  --local-font-display: var(--font-local-display), "Schibsted Grotesk", var(--font-inter), sans-serif;
   --local-shadow-card: 0 1px 2px rgba(24, 34, 48, 0.04);
   --local-shadow-card-hover: 0 16px 44px rgba(24, 34, 48, 0.1);
   --local-shadow-button: 0 14px 32px rgba(47, 143, 224, 0.3);
@@ -48,22 +48,48 @@
   --local-shadow-hero-title: 0 2px 26px rgba(10, 16, 22, 0.6);
   --local-shadow-hero-sub: 0 1px 14px rgba(10, 16, 22, 0.5);
   --local-radius-card: 8px;
+  --local-radius-button: 12px;
   --local-radius-pill: 999px;
   --local-radius-badge-mobile: 16px;
   --local-radius-sticky-button: 12px;
   --local-blur-hero-pill: blur(8px);
   --local-blur-sticky-bar: blur(18px) saturate(1.6);
   --local-motion-card: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  --local-motion-fast: 150ms ease;
   --local-motion-button:
     transform 180ms ease,
     box-shadow 180ms ease,
     background-color 180ms ease,
     color 180ms ease;
   --local-z-hero-content: 1;
+  --local-z-nav: 40;
   --local-z-sticky-bar: 998;
   --local-hero-min-height: 560px;
   --local-hero-inner-width: min(100% - 56px, 1240px);
   --local-hero-inner-mobile-width: min(100% - 40px, 1240px);
   --local-width-lg: min(100%, 1180px);
   --local-width-narrow: min(100%, 840px);
+  --local-width-chrome: 1280px;
+  --local-width-footer: 1180px;
+  --local-size-promo-min-height: 36px;
+  --local-size-header-min-height: 60px;
+  --local-size-logo-desktop-height: 44px;
+  --local-size-logo-mobile-height: 48px;
+  --local-size-footer-logo-height: 40px;
+  --local-size-menu-button: 44px;
+  --local-space-chrome-inline: 32px;
+  --local-space-chrome-inline-mobile: 20px;
+  --local-space-footer-y: 58px;
+  --local-color-header-border: #edf1f4;
+  --local-color-header-action-border: #d7dee5;
+  --local-color-footer: #0f1822;
+  --local-color-footer-text: #9daab6;
+  --local-color-footer-muted: #6e7c88;
+  --local-color-footer-rule: rgba(255, 255, 255, 0.12);
+  --local-type-promo-size: 13.5px;
+  --local-type-nav-size: 16px;
+  --local-type-header-button-size: 15px;
+  --local-type-footer-title-size: 14px;
+  --local-type-footer-link-size: 14px;
+  --local-radius-header-button: var(--local-radius-pill);
 }

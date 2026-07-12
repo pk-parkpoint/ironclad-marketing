@@ -112,10 +112,12 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | mobile | SEO metadata | title/canonical | route-specific title and canonical | route-specific title and canonical | PASS | Same server metadata as desktop. |
 | local-pages | desktop | Internal linking | hub/Austin/sitemap | all 16 neighborhood URLs linked | all 16 linked, none missing | PASS | `hubLinks`, `austinLinks`, and `sitemap` are clean. |
 | local-pages | mobile | Responsive layout | horizontal overflow | no overflow | overflow count `0` across sampled routes | PASS | Checked at `390x844`. |
-| service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `29.98068538280277%` diff | FAIL | Current production chrome/content structure does not match package source closely enough for strict parity. |
-| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `32.769783563946504%` diff | FAIL | Height and layout differ from package reference. |
-| neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `28.703242134158234%` diff | FAIL | See generated diff artifact. |
-| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `26.805204015504447%` diff | FAIL | See generated diff artifact. |
+| local-pages | desktop | Fonts | Schibsted Grotesk weights 400/500/600/700 | Next font loader, weights 400/500/600/700, h1 rendered with Schibsted | PASS | Confirmed in Chromium with `document.fonts.check`. |
+| local-pages | mobile | Chrome | local handoff header/footer, mobile header, sticky bottom bar | route-scoped `LocalPageChrome`, mobile header, local footer, static full-page capture override | PASS partial | Chrome is now local-page scoped; exact source anatomy still differs. |
+| service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `29.137615243724124%` diff | FAIL | Route-scoped local chrome reduced one source of drift, but section heights/content still differ. |
+| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `42.251472709051356%` diff | FAIL | Actual page is substantially shorter than the reference after static sticky capture. |
+| neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `25.864651947189%` diff | FAIL | See generated diff artifact. |
+| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `44.16930867574644%` diff | FAIL | Actual page is substantially shorter than the reference after static sticky capture. |
 
 ### Local Service Area Conflicts
 
@@ -123,7 +125,7 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 |---|---|---|
 | Package location | The handoff was not present as an in-repo package root; it was only available from the downloaded ZIP. | Resolved the package under `/tmp/ironclad-local-pages-handoff-10/local-pages-handoff` and recorded that path here. |
 | URL source | `urls.md` includes West Lake Hills and Rollingwood nested under Austin, while source markup also referenced Seaholm. | Treated `urls.md` as authoritative: included West Lake Hills and Rollingwood, excluded Seaholm. |
-| Chrome | The handoff source has local reference chrome, while the production site has shared header/footer behavior. | Preserved production chrome and integrated local page body beneath it. |
+| Chrome | The handoff source has local reference chrome, while the production site has shared header/footer behavior. | Added route-scoped local chrome/footer for local pages without changing shared site chrome. |
 | Pixel diff dimensions | Reference and actual captures have different page heights. | Diff artifacts use a padded max canvas so the mismatch is visible and measurable. |
 
 ### Local Service Area Package Defects
@@ -132,19 +134,19 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 |---|---|---|
 | Local-pages handoff is external to the repo package tree. | Strict package-root discovery cannot resolve it from `design-handoff/` alone. | Logged source ZIP and extracted root path. |
 | No fixed-state or interaction reference PNGs were supplied for local pages. | Interaction/state parity cannot be pixel-diffed against references. | Verified URL, metadata, link, sitemap, and overflow behavior instead. |
-| Strict token purity remains incomplete for local page CSS. | Raw layout/type values still exist outside the token file. | Added `app/local-pages.tokens.css` and moved component-side arbitrary Tailwind styling into semantic classes; further CSS tokenization is still needed. |
+| Strict token purity remains incomplete for local page CSS. | Raw layout/type values still exist outside the token file. | Added `app/local-pages.tokens.css`, moved component-side arbitrary Tailwind styling into semantic classes, and added route-scoped chrome tokens; further CSS tokenization is still needed. |
 | Strict `0.5%` pixel parity is not reached. | Cannot report handoff parity complete. | Generated residual diff artifacts under `qa/diff/` and recorded the failures above. |
 
 ### Local Service Area Diff Results
 
 | Screen | Format | Result | Pixels differing | Notes |
 |---|---|---:|---:|---|
-| service-area-page | desktop | FAIL | `29.98068538280277%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png` |
-| service-area-page | mobile | FAIL | `32.769783563946504%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
-| neighborhood-page | desktop | FAIL | `28.703242134158234%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png` |
-| neighborhood-page | mobile | FAIL | `26.805204015504447%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
+| service-area-page | desktop | FAIL | `29.137615243724124%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png` |
+| service-area-page | mobile | FAIL | `42.251472709051356%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
+| neighborhood-page | desktop | FAIL | `25.864651947189%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png` |
+| neighborhood-page | mobile | FAIL | `44.16930867574644%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
 
-Functional QA: PASS. `qa/summary.json` covers 10 desktop/mobile route captures, route status, H1, title, canonical, zero horizontal overflow, all 16 Austin neighborhood hub links, all 16 Austin-page links, and all 16 sitemap URLs.
+Functional QA: PASS. `qa/summary.json` covers 10 desktop/mobile route captures, route status, H1, title, canonical, zero horizontal overflow, all 16 Austin neighborhood hub links, all 16 Austin-page links, all 16 sitemap URLs, breakpoint sweep overflow `0`, and Schibsted Grotesk font weights 400/500/600/700 loaded.
 
 ## PPC Content Update - 2026-07-10
 
