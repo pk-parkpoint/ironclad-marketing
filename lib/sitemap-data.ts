@@ -1,6 +1,7 @@
 import { GUIDE_ROUTE_PATHS } from "@/content/guides";
 import { TOP_QUESTIONS_GUIDE_PATH } from "@/content/aeo-top-questions";
 import { BLOG_POSTS } from "@/content/blog-posts";
+import { LOCAL_NEIGHBORHOOD_PAGES } from "@/content/local-pages";
 import { LOCATIONS } from "@/content/locations";
 import { getPpcServiceRouteEntries } from "@/content/ppc-service-variants";
 import { STATIC_ROUTE_PATHS } from "@/lib/routes";
@@ -18,7 +19,7 @@ const LASTMOD = {
   articles: "2026-03-16T00:00:00.000Z",
   core: "2026-05-26T00:00:00.000Z",
   guides: "2026-05-26T00:00:00.000Z",
-  serviceAreas: "2026-04-23T00:00:00.000Z",
+  serviceAreas: "2026-07-12T00:00:00.000Z",
   services: "2026-04-23T00:00:00.000Z",
 } as const;
 
@@ -80,12 +81,20 @@ export function buildServiceSitemapEntries(): SitemapEntry[] {
 }
 
 export function buildServiceAreaSitemapEntries(): SitemapEntry[] {
-  return LOCATIONS.map((location) => ({
+  const cityEntries: SitemapEntry[] = LOCATIONS.map((location) => ({
     changeFrequency: "weekly",
     lastModified: getRouteLastModified(`/service-area/${location.slug}`, LASTMOD.serviceAreas),
     path: `/service-area/${location.slug}`,
     priority: 0.8,
   }));
+  const neighborhoodEntries: SitemapEntry[] = LOCAL_NEIGHBORHOOD_PAGES.map((page) => ({
+    changeFrequency: "weekly",
+    lastModified: getRouteLastModified(page.path, LASTMOD.serviceAreas),
+    path: page.path,
+    priority: 0.6,
+  }));
+
+  return [...cityEntries, ...neighborhoodEntries];
 }
 
 export function buildArticleSitemapEntries(): SitemapEntry[] {

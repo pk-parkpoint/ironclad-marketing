@@ -1,0 +1,117 @@
+{
+  "routes": [
+    {
+      "path": "/service-area/austin-tx",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": "Austin's Most Trusted Plumber, in Every Neighborhood",
+      "title": "Plumber in Austin, TX - Licensed & Insured | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/austin-tx",
+      "overflow": 0,
+      "screenshot": "design-handoff/screens/local-pages/qa/service-area-austin-tx-desktop.png"
+    },
+    {
+      "path": "/service-area/austin-tx/tarrytown",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": "Tarrytown's Plumber for Homes Built to Last",
+      "title": "Tarrytown Plumber - Austin, TX | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/austin-tx/tarrytown",
+      "overflow": 0,
+      "screenshot": "design-handoff/screens/local-pages/qa/service-area-austin-tx-tarrytown-desktop.png"
+    },
+    {
+      "path": "/service-area/austin-tx/west-lake-hills",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": "West Lake Hills' Plumber for Hillside Estates",
+      "title": "West Lake Hills Plumber - Austin, TX | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/austin-tx/west-lake-hills",
+      "overflow": 0,
+      "screenshot": "design-handoff/screens/local-pages/qa/service-area-austin-tx-west-lake-hills-desktop.png"
+    },
+    {
+      "path": "/service-area/leander-tx",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": "Leander's Reliable Plumber, From Crystal Falls to Travisso",
+      "title": "Plumber in Leander, TX - Licensed & Insured | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/leander-tx",
+      "overflow": 0,
+      "screenshot": "design-handoff/screens/local-pages/qa/service-area-leander-tx-desktop.png"
+    },
+    {
+      "path": "/service-area/buda-tx",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": "Buda Plumbing - Fast Service, Fair Pricing",
+      "title": "Plumber in Buda, TX | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/buda-tx",
+      "overflow": 0,
+      "screenshot": "design-handoff/screens/local-pages/qa/service-area-buda-tx-desktop.png"
+    },
+    {
+      "path": "/service-area/austin-tx",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": "Austin's Most Trusted Plumber, in Every Neighborhood",
+      "title": "Plumber in Austin, TX - Licensed & Insured | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/austin-tx",
+      "overflow": 0,
+      "screenshot": "design-handoff/screens/local-pages/qa/service-area-austin-tx-mobile.png"
+    },
+    {
+      "path": "/service-area/austin-tx/tarrytown",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": "Tarrytown's Plumber for Homes Built to Last",
+      "title": "Tarrytown Plumber - Austin, TX | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/austin-tx/tarrytown",
+      "overflow": 0,
+      "screenshot": "design-handoff/screens/local-pages/qa/service-area-austin-tx-tarrytown-mobile.png"
+    },
+    {
+      "path": "/service-area/austin-tx/west-lake-hills",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": "West Lake Hills' Plumber for Hillside Estates",
+      "title": "West Lake Hills Plumber - Austin, TX | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/austin-tx/west-lake-hills",
+      "overflow": 0,
+      "screenshot": "design-handoff/screens/local-pages/qa/service-area-austin-tx-west-lake-hills-mobile.png"
+    },
+    {
+      "path": "/service-area/leander-tx",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": "Leander's Reliable Plumber, From Crystal Falls to Travisso",
+      "title": "Plumber in Leander, TX - Licensed & Insured | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/leander-tx",
+      "overflow": 0,
+      "screenshot": "design-handoff/screens/local-pages/qa/service-area-leander-tx-mobile.png"
+    },
+    {
+      "path": "/service-area/buda-tx",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": "Buda Plumbing - Fast Service, Fair Pricing",
+      "title": "Plumber in Buda, TX | Ironclad Plumbing",
+      "canonical": "https://ironcladtexas.com/service-area/buda-tx",
+      "overflow": 0,
+      "screenshot": "design-handoff/screens/local-pages/qa/service-area-buda-tx-mobile.png"
+    }
+  ],
+  "sitemap": {
+    "status": 200,
+    "checked": 16,
+    "missing": []
+  },
+  "hubLinks": {
+    "checked": 16,
+    "missing": []
+  },
+  "austinLinks": {
+    "checked": 16,
+    "missing": []
+  }
+}

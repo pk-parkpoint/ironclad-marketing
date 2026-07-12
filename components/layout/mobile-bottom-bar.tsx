@@ -4,11 +4,29 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { getPublicContactInfo } from "@/lib/contact";
 
+const LOCAL_CITY_PATHS = new Set([
+  "/service-area/austin-tx",
+  "/service-area/round-rock-tx",
+  "/service-area/georgetown-tx",
+  "/service-area/pflugerville-tx",
+  "/service-area/cedar-park-tx",
+  "/service-area/leander-tx",
+  "/service-area/lakeway-tx",
+  "/service-area/bee-cave-tx",
+  "/service-area/west-lake-hills-tx",
+  "/service-area/rollingwood-tx",
+]);
+
 export function MobileBottomBar() {
   const pathname = usePathname();
   const { smsHref } = getPublicContactInfo();
 
-  if (pathname === "/plumbing/drain-cleaning" || pathname === "/reviews") {
+  if (
+    pathname === "/plumbing/drain-cleaning" ||
+    pathname === "/reviews" ||
+    LOCAL_CITY_PATHS.has(pathname || "") ||
+    pathname?.startsWith("/service-area/austin-tx/")
+  ) {
     return null;
   }
 

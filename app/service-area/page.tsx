@@ -8,6 +8,7 @@ import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { FaqAccordion } from "@/components/service/faq-accordion";
 import { ServiceGridTile } from "@/components/service/service-grid-tile";
+import { getAustinNeighborhoodLinks } from "@/content/local-pages";
 import { LOCATIONS } from "@/content/locations";
 import { SERVICES } from "@/content/services";
 import { getPublicContactInfo } from "@/lib/contact";
@@ -52,6 +53,7 @@ const SERVICE_AREA_FAQS = [
 
 export default function ServiceAreaHubPage() {
   const contactInfo = getPublicContactInfo();
+  const austinNeighborhoodLinks = getAustinNeighborhoodLinks();
   const schemas = buildSchemaStack(
     buildBreadcrumbListSchema(buildBreadcrumbItems("/service-area", "Service Areas")),
     buildFaqPageSchema(SERVICE_AREA_FAQS),
@@ -132,6 +134,28 @@ export default function ServiceAreaHubPage() {
                 >
                   <p className="text-base font-semibold text-ink">{location.cityName}</p>
                   <p className="mt-1 text-sm text-muted">{location.metaDescription}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-block">
+          <div className="container-shell">
+            <h2 className="h2-display">Austin Neighborhood Plumbing Pages</h2>
+            <p className="mt-3 max-w-[720px] text-sm text-body md:text-base">
+              Central Austin homeowners can use neighborhood-specific pages for local plumbing issues, nearby streets,
+              frequently requested services, and booking links.
+            </p>
+            <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+              {austinNeighborhoodLinks.map((neighborhood) => (
+                <Link
+                  className="focus-ring card-shell block p-5 transition-colors hover:border-cta-blue hover:no-underline"
+                  href={neighborhood.href}
+                  key={neighborhood.href}
+                >
+                  <p className="text-base font-semibold text-ink">{neighborhood.label}</p>
+                  <p className="mt-1 text-sm text-muted">Austin neighborhood plumbing guide.</p>
                 </Link>
               ))}
             </div>
