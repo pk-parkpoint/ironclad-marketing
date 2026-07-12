@@ -111,6 +111,8 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | desktop | SEO metadata | title/canonical | route-specific title and canonical | route-specific title and canonical | PASS | Checked in `qa/summary.json`. |
 | local-pages | mobile | SEO metadata | title/canonical | route-specific title and canonical | route-specific title and canonical | PASS | Same server metadata as desktop. |
 | local-pages | desktop | Internal linking | hub/Austin/sitemap | all 16 neighborhood URLs linked | all 16 linked, none missing | PASS | `hubLinks`, `austinLinks`, and `sitemap` are clean. |
+| local-pages | desktop | City URL coverage | all generated service-area city URLs render local pages | 19 `/service-area/{slug}` URLs use redesigned `LocalPageChrome` shell | PASS | Verified by focused Playwright route/link/sitemap check on local prod server. |
+| local-pages | desktop | ETA data | route-specific arrival-window/ETA data visible and linked | all 19 city pages and 16 Austin neighborhood pages expose ETA text; hub cards show ETA next to each link | PASS | Missing legacy-only city routes now adapt existing `location-details` content into local-page data. |
 | local-pages | mobile | Responsive layout | horizontal overflow | no overflow | overflow count `0` across sampled routes | PASS | Checked at `390x844`. |
 | local-pages | desktop | Fonts | Schibsted Grotesk weights 400/500/600/700 | Next font loader, weights 400/500/600/700, h1 rendered with Schibsted | PASS | Confirmed in Chromium with `document.fonts.check`. |
 | local-pages | mobile | Chrome | local handoff header/footer, mobile header, sticky bottom bar | route-scoped `LocalPageChrome`, mobile header, local footer, static full-page capture override | PASS partial | Chrome is now local-page scoped; exact source anatomy still differs. |
@@ -171,6 +173,8 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | neighborhood-page | mobile | FAIL | `21.829580370352904%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
 
 Functional QA: PASS. `qa/summary.json` covers 10 desktop/mobile route captures, route status, H1, title, canonical, zero horizontal overflow, all local hub links, all 16 Austin-page neighborhood links, all local URLs in `/sitemaps/service-areas.xml`, breakpoint sweep overflow `0`, and Schibsted Grotesk font weights 400/500/600/700 loaded.
+
+Route/ETA QA: PASS. Focused local prod Playwright check covered 19 city URLs plus 16 Austin neighborhood URLs: status `200`, redesigned local shell present, visible `ETA:` text present, no hub link misses, no hub ETA misses, and no `/sitemaps/service-areas.xml` misses.
 
 Interaction states: PASS by artifact. `qa/states/summary.json` confirms changed hover/focus/open/animation states for ServiceCard, NearCard, WhyItem, FAQ summary/open, AreaSplit pulse ring, mobile menu open, and mobile sticky bar fixed bottom offset `0`.
 

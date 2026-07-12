@@ -8,8 +8,7 @@ import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { FaqAccordion } from "@/components/service/faq-accordion";
 import { ServiceGridTile } from "@/components/service/service-grid-tile";
-import { getAustinNeighborhoodLinks } from "@/content/local-pages";
-import { LOCATIONS } from "@/content/locations";
+import { getAustinNeighborhoodLinks, LOCAL_CITY_PAGES } from "@/content/local-pages";
 import { SERVICES } from "@/content/services";
 import { getPublicContactInfo } from "@/lib/contact";
 import { buildPageMetadata } from "@/lib/seo";
@@ -75,7 +74,7 @@ export default function ServiceAreaHubPage() {
           eyebrow="Service Areas"
           heading="Local Plumbing Service Across Greater Austin"
           subtitle="Ironclad supports homeowners across Travis, Williamson, and Hays county corridors with fast dispatch, clear communication, and warranty-backed work."
-          trustChips={["19+ Service Area Pages", "Emergency Availability", "Licensed and Insured"]}
+          trustChips={["19 City Pages", "16 Austin Neighborhoods", "Licensed and Insured"]}
         />
 
         <section className="bg-soft-background pt-6">
@@ -126,14 +125,17 @@ export default function ServiceAreaHubPage() {
           <div className="container-shell">
             <h2 className="h2-display">City-by-City Service Area Pages</h2>
             <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-              {LOCATIONS.map((location) => (
+              {LOCAL_CITY_PAGES.map((location) => (
                 <Link
                   className="focus-ring card-shell block p-5 transition-colors hover:border-cta-blue hover:no-underline"
-                  href={`/service-area/${location.slug}`}
+                  href={location.path}
                   key={location.slug}
                 >
-                  <p className="text-base font-semibold text-ink">{location.cityName}</p>
-                  <p className="mt-1 text-sm text-muted">{location.metaDescription}</p>
+                  <p className="text-base font-semibold text-ink">{location.name}</p>
+                  <p className="mt-1 text-sm text-muted">{location.intro}</p>
+                  <p className="mt-3 text-xs font-semibold uppercase text-cta-blue">
+                    {location.eta.short}
+                  </p>
                 </Link>
               ))}
             </div>
@@ -156,6 +158,9 @@ export default function ServiceAreaHubPage() {
                 >
                   <p className="text-base font-semibold text-ink">{neighborhood.label}</p>
                   <p className="mt-1 text-sm text-muted">Austin neighborhood plumbing guide.</p>
+                  <p className="mt-3 text-xs font-semibold uppercase text-cta-blue">
+                    {neighborhood.eta}
+                  </p>
                 </Link>
               ))}
             </div>

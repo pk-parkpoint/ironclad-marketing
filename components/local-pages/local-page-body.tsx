@@ -53,6 +53,7 @@ export function LocalPageBody({ bookingHref, page, phoneDisplay, phoneHref }: Lo
       <LocalHero
         bookingHref={bookingHref}
         eyebrow={isNeighborhood ? `Neighborhood Guide - ${page.name}` : `Service Area - ${page.name}, TX`}
+        eta={page.eta.short}
         intro={page.intro}
         parentLink={isNeighborhood ? { href: page.parentHref, label: page.parent } : undefined}
         phoneDisplay={phoneDisplay}

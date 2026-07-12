@@ -7,6 +7,7 @@ import { getPublicContactInfo } from "@/lib/contact";
 
 type LocalHeroProps = {
   eyebrow: string;
+  eta: string;
   title: string;
   intro: string;
   bookingHref: string;
@@ -181,6 +182,7 @@ function LocalFooterColumn({ links, title }: { links: { href: string; label: str
 export function LocalHero({
   bookingHref,
   eyebrow,
+  eta,
   intro,
   parentLink,
   phoneDisplay,
@@ -218,7 +220,7 @@ export function LocalHero({
             <ShieldCheck className="local-icon-trust" /> Licensed & Insured
           </span>
           <span>
-            <Clock3 className="local-icon-trust" /> Same-Day Service
+            <Clock3 className="local-icon-trust" /> {eta}
           </span>
         </div>
 
