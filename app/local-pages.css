@@ -508,8 +508,24 @@
 }
 
 .local-review-caption {
+  display: flex;
+  align-items: center;
+  gap: var(--local-space-10);
   margin-top: var(--local-space-20);
   font-weight: var(--local-font-weight-700);
+}
+
+.local-review-avatar {
+  display: inline-grid;
+  width: var(--local-size-review-avatar);
+  height: var(--local-size-review-avatar);
+  flex: none;
+  place-items: center;
+  border-radius: var(--local-radius-pill);
+  background: var(--local-color-review-avatar-bg);
+  color: var(--local-color-white);
+  font-size: var(--local-font-size-13);
+  font-weight: var(--local-font-weight-800);
 }
 
 .local-review-location {

@@ -127,6 +127,7 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | desktop | Hero badge | `hero-badge` divider + service-area white eyebrow / neighborhood gold eyebrow | `.local-badge-div`, `.local-hero-eyebrow-service`, `.local-hero-eyebrow` | PASS partial | Divider visible on desktop, hidden on mobile per shared component spec. |
 | local-pages | desktop | Hero CTAs | reference shows green call action and light schedule action | phone CTA first with `local-button-call`, schedule CTA second with `local-button-light` | PASS partial | Aligns visible desktop hero CTA treatment; mobile remains stacked by existing responsive rule. |
 | local-pages | desktop | Reviews header row | Reviews header row plus rating meta and read-all link | `local-review-head`, `local-review-meta`, `local-review-all` | PASS partial | Adds reference-visible `4.9/5 · 142 Google reviews` and `/reviews` link. |
+| local-pages | desktop | ReviewCard identity row | reference cards show reviewer initial badge plus name/location | `local-review-avatar` renders existing `LocalReview.initial` next to name/location | PASS partial | Adds reference-visible reviewer identity anatomy on desktop and mobile cards. |
 | local-pages | desktop | FinalCTA badge | FinalCTA badge + h2 + sub + CTAs | `local-final-badge` before SectionHeader | PASS partial | Replaces icon-only treatment with the component-spec badge slot. |
 | local-pages | mobile | StickyMobileBar static capture order | reference full-page capture shows sticky bar at the page end after footer | `LocalStickyBar` moved from page body to `LocalPageChrome` after footer while retaining fixed production behavior | PASS partial | Improves static full-page mobile diff and keeps booking URL attribution from city/neighborhood wrappers. |
 | local-pages | desktop | ServiceCard hover/focus | translate `-4px`, border `#D8CDB8`, title accent, arrow `translateX(4px)`, focus outline | tokenized `.local-link-card` hover/focus states | PASS | Playwright state artifact `qa/states/service-card-hover.png` and `service-card-focus.png`. |
@@ -135,10 +136,10 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 | local-pages | desktop | FAQAccordion states | hover accent, focus outline, open chevron rotation | native `details/summary` with `.local-faq-chev` | PASS | Playwright artifacts `qa/states/faq-summary-hover.png` and `faq-open.png`. |
 | local-pages | desktop | AreaSplit pulse | `pulse-ring` animation | `.local-area-ring-outer` animation `local-pulse-ring` | PASS | Playwright artifact `qa/states/area-pulse-ring.png`; animation disabled only for base diff captures. |
 | local-pages | mobile | Mobile menu/sticky bar | menu panel, sticky fixed bottom bar at `bottom:0` | native `details` mobile menu and fixed `.local-sticky-bar` | PASS | Playwright artifact `qa/states/mobile-menu-open.png`; sticky `position:fixed`, bottom offset `0`. |
-| service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `29.201903541580087%` diff | FAIL | Hero/review/final CTA anatomy is closer, but current pixelmatch worsened from prior `28.11167674808761%`; still above gate. |
-| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `20.251860041403198%` diff | FAIL | Improved from prior `20.838236095990734%` after moving StickyMobileBar after footer in static capture order; still above gate. |
-| neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `36.4750353903045%` diff | FAIL | Hero/review/final CTA anatomy is closer, but current pixelmatch worsened from prior `35.46249349973999%`; still above gate. |
-| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `22.109519791923226%` diff | FAIL | Improved from prior `22.29085332089624%` after moving StickyMobileBar after footer in static capture order; still above gate. |
+| service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `29.221075556786875%` diff | FAIL | ReviewCard identity anatomy is closer, but current pixelmatch worsened from prior `29.201903541580087%`; still above gate. |
+| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `20.275551243506072%` diff | FAIL | ReviewCard identity anatomy is closer, but current pixelmatch worsened from prior `20.251860041403198%`; still above gate. |
+| neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `36.493100696250075%` diff | FAIL | ReviewCard identity anatomy is closer, but current pixelmatch worsened from prior `36.4750353903045%`; still above gate. |
+| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `22.131476852506896%` diff | FAIL | ReviewCard identity anatomy is closer, but current pixelmatch worsened from prior `22.109519791923226%`; still above gate. |
 
 ### Local Service Area Conflicts
 
@@ -162,10 +163,10 @@ Verification artifacts: `design-handoff/screens/local-pages/qa/`
 
 | Screen | Format | Result | Pixels differing | Notes |
 |---|---|---:|---:|---|
-| service-area-page | desktop | FAIL | `29.201903541580087%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png` |
-| service-area-page | mobile | FAIL | `20.251860041403198%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
-| neighborhood-page | desktop | FAIL | `36.4750353903045%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png` |
-| neighborhood-page | mobile | FAIL | `22.109519791923226%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
+| service-area-page | desktop | FAIL | `29.221075556786875%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png` |
+| service-area-page | mobile | FAIL | `20.275551243506072%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
+| neighborhood-page | desktop | FAIL | `36.493100696250075%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png` |
+| neighborhood-page | mobile | FAIL | `22.131476852506896%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
 
 Functional QA: PASS. `qa/summary.json` covers 10 desktop/mobile route captures, route status, H1, title, canonical, zero horizontal overflow, all local hub links, all 16 Austin-page neighborhood links, all local URLs in `/sitemaps/service-areas.xml`, breakpoint sweep overflow `0`, and Schibsted Grotesk font weights 400/500/600/700 loaded.
 

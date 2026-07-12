@@ -34,6 +34,7 @@
   --local-color-outline-bg: rgba(255, 255, 255, 0.08);
   --local-color-light-button-text: #16202b;
   --local-color-final-badge-bg: rgba(47, 143, 224, 0.18);
+  --local-color-review-avatar-bg: #16202b;
   --local-color-mobile-bar-bg: rgba(255, 255, 255, 0.78);
   --local-color-mobile-bar-border: rgba(30, 42, 56, 0.14);
   --local-color-mobile-menu-bg: rgba(255, 255, 255, 0.98);
@@ -162,6 +163,7 @@
   --local-size-icon-guarantee: 28px;
   --local-size-icon-final: 32px;
   --local-size-icon-coverage: 34px;
+  --local-size-review-avatar: 32px;
   --local-size-button-min-height: 48px;
   --local-size-card-min-height: 138px;
   --local-size-stat-min-height: 132px;

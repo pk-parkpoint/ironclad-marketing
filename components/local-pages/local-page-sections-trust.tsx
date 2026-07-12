@@ -59,8 +59,13 @@ export function ReviewsSection({ cityName, reviews }: { cityName: string; review
               <LocalStars />
               <blockquote className="local-review-quote">&ldquo;{review.text}&rdquo;</blockquote>
               <figcaption className="local-review-caption">
-                {review.name}
-                <span className="local-review-location">{review.loc}</span>
+                <span className="local-review-avatar" aria-hidden="true">
+                  {review.initial}
+                </span>
+                <span>
+                  {review.name}
+                  <span className="local-review-location">{review.loc}</span>
+                </span>
               </figcaption>
             </figure>
           ))}

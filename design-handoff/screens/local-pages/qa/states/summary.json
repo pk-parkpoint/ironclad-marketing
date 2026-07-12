@@ -24,7 +24,7 @@
     "name": "faq-summary",
     "type": "hover",
     "before": "rgb(24, 34, 48)",
-    "after": "rgb(35, 85, 130)",
+    "after": "rgb(32, 72, 109)",
     "changed": true
   },
   {
@@ -38,7 +38,7 @@
     "type": "open",
     "before": false,
     "after": true,
-    "chevronTransform": "matrix(0.477831, 0.878452, -0.878452, 0.477831, 0, 0)",
+    "chevronTransform": "matrix(0.80247, 0.596693, -0.596693, 0.80247, 0, 0)",
     "changed": true
   },
   {
