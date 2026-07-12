@@ -42,10 +42,8 @@ export function LocalKnowledgeSection({
         <div className="local-grid">
           {traits.map(([label, value]) => (
             <div className="local-card p-5" key={label}>
-              <p className="text-[12px] font-extrabold uppercase tracking-[0.14em] text-[var(--local-blue)]">
-                {label}
-              </p>
-              <p className="mt-2 text-[18px] font-bold leading-snug">{value}</p>
+              <p className="local-trait-kicker">{label}</p>
+              <p className="local-trait-value">{value}</p>
             </div>
           ))}
         </div>
@@ -72,8 +70,8 @@ export function NumberedRowsSection({
             <div className="local-row" key={itemTitle}>
               <div className="local-row-number">{String(index + 1).padStart(2, "0")}</div>
               <div>
-                <h3 className="m-0 text-[20px] font-bold">{itemTitle}</h3>
-                <p className="mt-2 text-[16px] leading-7 text-[var(--local-muted)]">{body}</p>
+                <h3 className="local-row-title">{itemTitle}</h3>
+                <p className="local-row-body">{body}</p>
               </div>
             </div>
           ))}
@@ -101,13 +99,11 @@ export function ServicesSection({
         <div className="local-grid local-grid-3">
           {services.map((service) => (
             <Link className="local-card local-link-card" href={getServiceHref(service)} key={service[0]}>
-              <span className="text-[12px] font-extrabold uppercase tracking-[0.14em] text-[var(--local-blue)]">
-                Service
-              </span>
-              <strong className="mt-3 text-[21px] leading-tight">{service[0]}</strong>
-              <span className="mt-3 text-[15px] leading-6 text-[var(--local-muted)]">{service[1]}</span>
-              <span className="mt-5 inline-flex items-center gap-2 text-[14px] font-bold text-[var(--local-blue)]">
-                View service <ArrowRight size={16} />
+              <span className="local-card-kicker">Service</span>
+              <strong className="local-service-title">{service[0]}</strong>
+              <span className="local-card-body">{service[1]}</span>
+              <span className="local-card-action">
+                View service <ArrowRight className="local-icon-sticky" />
               </span>
             </Link>
           ))}
@@ -132,9 +128,9 @@ export function ProcessSection({ cityName }: { cityName: string }) {
         <div className="local-grid local-grid-4">
           {steps.map(([title, body], index) => (
             <div key={title}>
-              <p className="text-[28px] font-black text-[#69aef0]">{String(index + 1).padStart(2, "0")}</p>
-              <h3 className="mt-3 text-[20px] font-bold text-white">{title}</h3>
-              <p className="mt-2 text-[15px] leading-7 text-slate-300">{body}</p>
+              <p className="local-process-number">{String(index + 1).padStart(2, "0")}</p>
+              <h3 className="local-process-title">{title}</h3>
+              <p className="local-process-body">{body}</p>
             </div>
           ))}
         </div>
@@ -163,11 +159,11 @@ export function WhySection({ cityName }: { cityName: string }) {
         </div>
         <div className="local-grid">
           {items.map(([title, body]) => (
-            <div className="grid grid-cols-[28px_1fr] gap-4" key={title}>
-              <BadgeCheck color="#69aef0" size={24} />
+            <div className="local-proof-item" key={title}>
+              <BadgeCheck className="local-icon-proof" />
               <div>
-                <h3 className="m-0 text-[19px] font-bold text-white">{title}</h3>
-                <p className="mt-1 text-[15px] leading-6 text-slate-300">{body}</p>
+                <h3 className="local-proof-title">{title}</h3>
+                <p className="local-proof-body">{body}</p>
               </div>
             </div>
           ))}
@@ -184,12 +180,12 @@ export function ReviewsSection({ cityName, reviews }: { cityName: string; review
         <SectionHeader kicker="Reviews" title={`${cityName} Homeowners Trust Ironclad`} />
         <div className="local-grid local-grid-3">
           {reviews.map((review) => (
-            <figure className="local-card m-0 p-6" key={`${review.name}-${review.loc}`}>
+            <figure className="local-card local-review-card" key={`${review.name}-${review.loc}`}>
               <LocalStars />
-              <blockquote className="mt-4 text-[16px] leading-7 text-[var(--local-muted)]">&ldquo;{review.text}&rdquo;</blockquote>
-              <figcaption className="mt-5 font-bold">
+              <blockquote className="local-review-quote">&ldquo;{review.text}&rdquo;</blockquote>
+              <figcaption className="local-review-caption">
                 {review.name}
-                <span className="block text-[14px] font-semibold text-[var(--local-muted)]">{review.loc}</span>
+                <span className="local-review-location">{review.loc}</span>
               </figcaption>
             </figure>
           ))}
@@ -216,7 +212,7 @@ export function CoverageSection({
     <section className="local-band">
       <div className="local-inner local-split">
         <div>
-          <MapPin color="#2f8fe0" size={34} />
+          <MapPin className="local-icon-coverage" />
           <SectionHeader kicker="Coverage" title={title} lead={body} />
         </div>
         <ul className="local-chip-list">
@@ -238,9 +234,9 @@ export function NearbySection({ label, pages }: { label: string; pages: NearbyLi
         <div className="local-grid local-grid-4">
           {pages.map((page) => (
             <Link className="local-card local-link-card" href={page.path} key={page.path}>
-              <strong className="text-[18px]">{page.name}</strong>
-              <span className="mt-6 inline-flex items-center gap-2 text-[14px] font-bold text-[var(--local-blue)]">
-                View page <ArrowRight size={16} />
+              <strong className="local-near-title">{page.name}</strong>
+              <span className="local-card-action">
+                View page <ArrowRight className="local-icon-sticky" />
               </span>
             </Link>
           ))}
@@ -282,7 +278,7 @@ export function FinalCta({
   return (
     <section className="local-band local-band-navy local-final">
       <div className="local-inner local-inner-narrow">
-        <Wrench color="#69aef0" size={32} />
+        <Wrench className="local-icon-final" />
         <SectionHeader kicker="Book Service" title={title} lead={body} />
         <div className="local-hero-actions justify-center">
           <Link className="local-button local-button-primary" data-track-intent="book" href={bookingHref}>

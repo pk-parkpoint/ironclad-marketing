@@ -1,0 +1,74 @@
+[
+  {
+    "name": "service-area-page-desktop",
+    "ref": {
+      "width": 1440,
+      "height": 7219
+    },
+    "actual": {
+      "width": 1440,
+      "height": 7403
+    },
+    "canvas": {
+      "width": 1440,
+      "height": 7403
+    },
+    "pixels": 3196037,
+    "pct": 29.98068538280277,
+    "diff": "design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png"
+  },
+  {
+    "name": "service-area-page-mobile",
+    "ref": {
+      "width": 390,
+      "height": 13637
+    },
+    "actual": {
+      "width": 390,
+      "height": 12766
+    },
+    "canvas": {
+      "width": 390,
+      "height": 13637
+    },
+    "pixels": 1742838,
+    "pct": 32.769783563946504,
+    "diff": "design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png"
+  },
+  {
+    "name": "neighborhood-page-desktop",
+    "ref": {
+      "width": 1440,
+      "height": 7692
+    },
+    "actual": {
+      "width": 1440,
+      "height": 7974
+    },
+    "canvas": {
+      "width": 1440,
+      "height": 7974
+    },
+    "pixels": 3295867,
+    "pct": 28.703242134158234,
+    "diff": "design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png"
+  },
+  {
+    "name": "neighborhood-page-mobile",
+    "ref": {
+      "width": 390,
+      "height": 14679
+    },
+    "actual": {
+      "width": 390,
+      "height": 13442
+    },
+    "canvas": {
+      "width": 390,
+      "height": 14679
+    },
+    "pixels": 1534547,
+    "pct": 26.805204015504447,
+    "diff": "design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png"
+  }
+]

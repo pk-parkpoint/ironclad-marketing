@@ -9,6 +9,7 @@ import { BOOKING_PREBOOT_SCRIPT } from "@/lib/booking-preboot-script";
 import { CANONICAL_ORIGIN } from "@/lib/site-url";
 import { Suspense } from "react";
 import "./globals.css";
+import "./local-pages.tokens.css";
 import "./local-pages.css";
 import "./service-page-template.css";
 import "./service-page-template.tokens.css";

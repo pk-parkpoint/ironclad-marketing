@@ -38,7 +38,7 @@ export function LocalStars() {
   return (
     <span className="local-stars" aria-label="5 star rating">
       {[0, 1, 2, 3, 4].map((index) => (
-        <Star fill="currentColor" key={index} size={15} strokeWidth={0} />
+        <Star className="local-star-icon" fill="currentColor" key={index} strokeWidth={0} />
       ))}
     </span>
   );
@@ -77,22 +77,22 @@ export function LocalHero({
 
         <div className="local-trust-row" aria-label="Trust signals">
           <span>
-            <Home size={17} /> Locally Owned & Operated
+            <Home className="local-icon-trust" /> Locally Owned & Operated
           </span>
           <span>
-            <ShieldCheck size={17} /> Licensed & Insured
+            <ShieldCheck className="local-icon-trust" /> Licensed & Insured
           </span>
           <span>
-            <Clock3 size={17} /> Same-Day Service
+            <Clock3 className="local-icon-trust" /> Same-Day Service
           </span>
         </div>
 
         <div className="local-hero-actions">
           <Link className="local-button local-button-primary" data-track-intent="book" href={bookingHref}>
-            <CalendarDays size={18} /> Schedule Online
+            <CalendarDays className="local-icon-button" /> Schedule Online
           </Link>
           <a className="local-button local-button-secondary" data-track-intent="phone" href={phoneHref}>
-            <Phone size={18} /> Call {phoneDisplay}
+            <Phone className="local-icon-button" /> Call {phoneDisplay}
           </a>
         </div>
       </div>
@@ -107,9 +107,9 @@ export function GuaranteeStrip() {
         <div className="local-grid local-grid-4">
           {guarantees.map(({ body, icon: Icon, title }) => (
             <div key={title}>
-              <Icon color="#69aef0" size={28} />
-              <h2 className="mt-4 text-[18px] font-bold text-white">{title}</h2>
-              <p className="mt-2 text-[14px] leading-6 text-slate-300">{body}</p>
+              <Icon className="local-icon-guarantee" />
+              <h2 className="local-guarantee-title">{title}</h2>
+              <p className="local-guarantee-body">{body}</p>
             </div>
           ))}
         </div>
@@ -130,7 +130,7 @@ export function LocalStickyBar({
   return (
     <div className="local-sticky-bar" aria-label="Mobile booking actions">
       <a className="local-button local-button-primary" data-track-intent="phone" href={phoneHref}>
-        <Phone size={17} /> {phoneDisplay}
+        <Phone className="local-icon-sticky" /> {phoneDisplay}
       </a>
       <Link className="local-button local-button-primary" data-track-intent="book" href={bookingHref}>
         Schedule Online

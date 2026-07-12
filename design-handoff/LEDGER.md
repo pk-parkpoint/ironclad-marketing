@@ -95,6 +95,57 @@ Variant browser QA: PASS. Checked all 20 URLs at desktop `1440x900` and mobile `
 
 Build proof: `npm run lint` PASS, `npm run build` PASS.
 
+## Local Service Area Pages - 2026-07-12
+
+Content source: `/Users/15237/Downloads/Drain cleaning page redesign (10).zip`  
+Resolved package root: `/tmp/ironclad-local-pages-handoff-10/local-pages-handoff`  
+Implemented routes: `/service-area/austin-tx`, `/service-area/{city}`, and `/service-area/austin-tx/{neighborhood}`  
+Verification artifacts: `design-handoff/screens/local-pages/qa/`
+
+| Screen | Format | Element | Property | Package value | Implemented value | Result | Notes |
+|---|---|---|---|---|---|---|---|
+| service-area-page | desktop | Route | URL/status | `/service-area/austin-tx` | `/service-area/austin-tx`, status 200 | PASS | Verified by Playwright QA summary. |
+| service-area-page | mobile | Route | URL/status | `/service-area/austin-tx` | `/service-area/austin-tx`, status 200 | PASS | Verified by Playwright QA summary. |
+| neighborhood-page | desktop | Route | URL/status | nested Austin neighborhood pages | 16 `/service-area/austin-tx/{neighborhood}` pages, status 200 | PASS | Verified hub, Austin page, and sitemap links. |
+| neighborhood-page | mobile | Route | URL/status | nested Austin neighborhood pages | 16 `/service-area/austin-tx/{neighborhood}` pages, status 200 | PASS | Verified hub, Austin page, and sitemap links. |
+| local-pages | desktop | SEO metadata | title/canonical | route-specific title and canonical | route-specific title and canonical | PASS | Checked in `qa/summary.json`. |
+| local-pages | mobile | SEO metadata | title/canonical | route-specific title and canonical | route-specific title and canonical | PASS | Same server metadata as desktop. |
+| local-pages | desktop | Internal linking | hub/Austin/sitemap | all 16 neighborhood URLs linked | all 16 linked, none missing | PASS | `hubLinks`, `austinLinks`, and `sitemap` are clean. |
+| local-pages | mobile | Responsive layout | horizontal overflow | no overflow | overflow count `0` across sampled routes | PASS | Checked at `390x844`. |
+| service-area-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `29.98068538280277%` diff | FAIL | Current production chrome/content structure does not match package source closely enough for strict parity. |
+| service-area-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `32.769783563946504%` diff | FAIL | Height and layout differ from package reference. |
+| neighborhood-page | desktop | Pixel parity | <= `0.5%` diff | `reference-desktop.png` | `28.703242134158234%` diff | FAIL | See generated diff artifact. |
+| neighborhood-page | mobile | Pixel parity | <= `0.5%` diff | `reference-mobile.png` | `26.805204015504447%` diff | FAIL | See generated diff artifact. |
+
+### Local Service Area Conflicts
+
+| Area | Conflict | Handling |
+|---|---|---|
+| Package location | The handoff was not present as an in-repo package root; it was only available from the downloaded ZIP. | Resolved the package under `/tmp/ironclad-local-pages-handoff-10/local-pages-handoff` and recorded that path here. |
+| URL source | `urls.md` includes West Lake Hills and Rollingwood nested under Austin, while source markup also referenced Seaholm. | Treated `urls.md` as authoritative: included West Lake Hills and Rollingwood, excluded Seaholm. |
+| Chrome | The handoff source has local reference chrome, while the production site has shared header/footer behavior. | Preserved production chrome and integrated local page body beneath it. |
+| Pixel diff dimensions | Reference and actual captures have different page heights. | Diff artifacts use a padded max canvas so the mismatch is visible and measurable. |
+
+### Local Service Area Package Defects
+
+| Defect | Impact | Handling |
+|---|---|---|
+| Local-pages handoff is external to the repo package tree. | Strict package-root discovery cannot resolve it from `design-handoff/` alone. | Logged source ZIP and extracted root path. |
+| No fixed-state or interaction reference PNGs were supplied for local pages. | Interaction/state parity cannot be pixel-diffed against references. | Verified URL, metadata, link, sitemap, and overflow behavior instead. |
+| Strict token purity remains incomplete for local page CSS. | Raw layout/type values still exist outside the token file. | Added `app/local-pages.tokens.css` and moved component-side arbitrary Tailwind styling into semantic classes; further CSS tokenization is still needed. |
+| Strict `0.5%` pixel parity is not reached. | Cannot report handoff parity complete. | Generated residual diff artifacts under `qa/diff/` and recorded the failures above. |
+
+### Local Service Area Diff Results
+
+| Screen | Format | Result | Pixels differing | Notes |
+|---|---|---:|---:|---|
+| service-area-page | desktop | FAIL | `29.98068538280277%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-desktop.png` |
+| service-area-page | mobile | FAIL | `32.769783563946504%` | `design-handoff/screens/local-pages/qa/diff/service-area-page-mobile.png` |
+| neighborhood-page | desktop | FAIL | `28.703242134158234%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-desktop.png` |
+| neighborhood-page | mobile | FAIL | `26.805204015504447%` | `design-handoff/screens/local-pages/qa/diff/neighborhood-page-mobile.png` |
+
+Functional QA: PASS. `qa/summary.json` covers 10 desktop/mobile route captures, route status, H1, title, canonical, zero horizontal overflow, all 16 Austin neighborhood hub links, all 16 Austin-page links, and all 16 sitemap URLs.
+
 ## PPC Content Update - 2026-07-10
 
 Implemented routes: `/plumbing` and 30 `/plumbing/{slug}` service routes

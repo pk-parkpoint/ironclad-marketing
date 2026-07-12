@@ -1,0 +1,69 @@
+:root {
+  --local-color-ink: #182230;
+  --local-color-muted: #5d6876;
+  --local-color-blue: #2f8fe0;
+  --local-color-blue-dark: #1767b1;
+  --local-color-green: #2f8c4d;
+  --local-color-green-top: #46a862;
+  --local-color-navy: #111827;
+  --local-color-navy-soft: #182332;
+  --local-color-sand: #f4efe6;
+  --local-color-bone: #f7f2ea;
+  --local-color-brass: #b08d57;
+  --local-color-border: #e4ddd0;
+  --local-color-page: #fffaf2;
+  --local-color-white: #ffffff;
+  --local-color-hero-sub: #d2dce5;
+  --local-color-star: #fbbc04;
+  --local-color-slate-300: #cbd5e1;
+  --local-color-faq-bg: #faf7f1;
+  --local-color-hero-scrim-1: rgba(12, 20, 30, 0.96);
+  --local-color-hero-scrim-2: rgba(12, 20, 30, 0.82);
+  --local-color-hero-scrim-3: rgba(12, 20, 30, 0.2);
+  --local-color-hero-radial: rgba(47, 143, 224, 0.32);
+  --local-color-hero-link: rgba(255, 255, 255, 0.8);
+  --local-color-hero-trust: rgba(255, 255, 255, 0.88);
+  --local-color-hero-pill-bg: rgba(255, 255, 255, 0.16);
+  --local-color-hero-pill-border: rgba(255, 255, 255, 0.24);
+  --local-color-outline-border: rgba(255, 255, 255, 0.42);
+  --local-color-outline-bg: rgba(255, 255, 255, 0.08);
+  --local-color-mobile-bar-bg: rgba(255, 255, 255, 0.78);
+  --local-color-mobile-bar-border: rgba(30, 42, 56, 0.14);
+  --local-gradient-hero:
+    linear-gradient(
+      90deg,
+      var(--local-color-hero-scrim-1) 0%,
+      var(--local-color-hero-scrim-2) 42%,
+      var(--local-color-hero-scrim-3) 100%
+    ),
+    radial-gradient(circle at 22% 20%, var(--local-color-hero-radial), transparent 30%),
+    url("/media/services/ironclad-team-hero.png") 72% center / cover no-repeat;
+  --local-gradient-primary: linear-gradient(180deg, #48a0ef, var(--local-color-blue));
+  --local-gradient-call: linear-gradient(180deg, var(--local-color-green-top), var(--local-color-green));
+  --local-font-display: "Schibsted Grotesk", var(--font-inter), sans-serif;
+  --local-shadow-card: 0 1px 2px rgba(24, 34, 48, 0.04);
+  --local-shadow-card-hover: 0 16px 44px rgba(24, 34, 48, 0.1);
+  --local-shadow-button: 0 14px 32px rgba(47, 143, 224, 0.3);
+  --local-shadow-call-button: 0 14px 32px rgba(47, 140, 77, 0.24);
+  --local-shadow-hero-title: 0 2px 26px rgba(10, 16, 22, 0.6);
+  --local-shadow-hero-sub: 0 1px 14px rgba(10, 16, 22, 0.5);
+  --local-radius-card: 8px;
+  --local-radius-pill: 999px;
+  --local-radius-badge-mobile: 16px;
+  --local-radius-sticky-button: 12px;
+  --local-blur-hero-pill: blur(8px);
+  --local-blur-sticky-bar: blur(18px) saturate(1.6);
+  --local-motion-card: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  --local-motion-button:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+  --local-z-hero-content: 1;
+  --local-z-sticky-bar: 998;
+  --local-hero-min-height: 560px;
+  --local-hero-inner-width: min(100% - 56px, 1240px);
+  --local-hero-inner-mobile-width: min(100% - 40px, 1240px);
+  --local-width-lg: min(100%, 1180px);
+  --local-width-narrow: min(100%, 840px);
+}
