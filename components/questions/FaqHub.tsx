@@ -29,14 +29,21 @@ export default function FaqHub({ posts }: { posts: FaqPost[] }) {
   return (
     <FaqShell>
       <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <div className={styles.badge}>Homeowner FAQ <span className={styles.dot} /> <span>200 questions · 11 topics</span></div>
-          <h1>Plumbing answers that actually hold water.</h1>
-          <p className={styles.heroSub}>Straight answers to the 200 questions homeowners actually ask: what it usually is, what to do next, and when it&apos;s time to call.</p>
+        <div className={styles.heroInner} data-entrance>
+          <div className={styles.badge}>Homeowner FAQ <span className={styles.dot} /> <span><span className="ic-count" data-count="200">200</span> questions · 11 topics</span></div>
+          <h1>Plumbing answers that actually <span className="ic-underline">hold water.</span></h1>
+          <p className={styles.heroSub}>
+            Straight answers to the 200 questions homeowners actually ask: what it usually is, what to do next,
+            and when it&apos;s time to call—across{" "}
+            <span aria-hidden="true" className="ic-rot">
+              <span data-rotate='["leaks.","clogs.","water heaters.","low pressure.","repair costs."]'>leaks.</span>
+            </span>
+            <span className="sr-only">leaks, clogs, water heaters, low pressure, and repair costs.</span>
+          </p>
           <div className={styles.mostAskedLabel}>Most-asked questions</div>
           <div className={styles.glassGrid}>
             {mostAsked.map(([kicker, question, key]) => (
-              <Link className={styles.glassCard} key={key} href={postPath(postMap[key])}>
+              <Link className={`${styles.glassCard} ic-glass`} key={key} href={postPath(postMap[key])}>
                 <span><span className={styles.glassKicker}>{kicker}</span><span className={styles.glassQuestion}>{question}</span></span>
                 <span aria-hidden="true">→</span>
               </Link>
@@ -52,7 +59,7 @@ export default function FaqHub({ posts }: { posts: FaqPost[] }) {
           </div>
           <div className={styles.topicGrid}>
             {allTopics().map((topic) => (
-              <Link className={styles.topicCard} key={topic.key} href={topicPath(topic.key)}>
+              <Link className={styles.topicCard} data-reveal key={topic.key} href={topicPath(topic.key)}>
                 <div className={styles.topicImage}>
                   <Image fill sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw" src={assetPath(topic.hero)} alt="" />
                   <span className={styles.countBadge}>{topic.questions.length} questions</span>
@@ -81,12 +88,12 @@ export function CtaBand({ cta }: { cta?: FaqCta }) {
   };
   return (
     <section className={styles.cta}>
-      <div className={styles.ctaInner}>
+      <div className={styles.ctaInner} data-reveal>
         <span className={styles.ctaBadge}>10% off your first service</span>
         <h2>{copy.h}</h2>
         <p>{copy.p}</p>
         <div className={styles.pills}>
-          <Link className={styles.primaryButton} href={copy.href.replace("https://ironcladtexas.com", "")}>{copy.btn} →</Link>
+          <Link className={`${styles.primaryButton} ic-cta`} href={copy.href.replace("https://ironcladtexas.com", "")}><span className="ic-sheen" aria-hidden="true" />{copy.btn} →</Link>
           <a className={styles.lightButton} href={PHONE_TEL}><Phone className={styles.ctaPhoneIcon} aria-hidden="true" />Call {PHONE_DISPLAY}</a>
         </div>
       </div>

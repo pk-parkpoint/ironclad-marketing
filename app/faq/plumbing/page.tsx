@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { IroncladMotionRoot } from "@/components/motion/ironclad-motion";
 import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { FAQ_CATEGORIES, FAQ_ENTRIES, type FaqCategoryId } from "@/content/faqs";
@@ -44,9 +45,9 @@ export default function PlumbingFaqPage() {
     <>
       <SiteHeader />
       <StructuredData data={schemas} id="ld-faq-plumbing" />
-      <main>
+      <IroncladMotionRoot>
         <section className="section-block bg-soft-background">
-          <div className="container-shell">
+          <div className="container-shell" data-entrance>
             <p className="text-sm font-semibold uppercase tracking-[0.12em] text-muted">Education</p>
             <h1 className="h1-display mt-4 max-w-[var(--max-readable-width)]">
               Plumbing FAQs - Honest Answers from Licensed Pros
@@ -61,7 +62,7 @@ export default function PlumbingFaqPage() {
               to help you compare options clearly.
             </QuickAnswer>
 
-            <div className="mt-8 flex flex-wrap gap-2">
+            <div className="ic-glass mt-8 flex flex-wrap gap-2 rounded-[var(--radius-card)] border border-white/70 bg-white/60 p-3" data-reveal>
               {FAQ_CATEGORIES.map((category) => (
                 <a
                   key={category.id}
@@ -74,7 +75,8 @@ export default function PlumbingFaqPage() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link className="focus-ring primary-button" href="/book">
+              <Link className="ic-cta focus-ring primary-button" href="/book">
+                <span className="ic-sheen" aria-hidden="true" />
                 Book Service
               </Link>
               <Link className="focus-ring secondary-button" href="/contact">
@@ -121,7 +123,7 @@ export default function PlumbingFaqPage() {
         </section>
 
         <section className="section-block bg-ink">
-          <div className="container-shell text-white">
+          <div className="container-shell text-white" data-reveal>
             <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
               Ready to get it fixed?
             </h2>
@@ -141,7 +143,7 @@ export default function PlumbingFaqPage() {
             </div>
           </div>
         </section>
-      </main>
+      </IroncladMotionRoot>
       <SiteFooter />
     </>
   );

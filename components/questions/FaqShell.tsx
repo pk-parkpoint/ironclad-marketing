@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, Phone } from "lucide-react";
 import type { ReactNode } from "react";
+import { IroncladMotionRoot } from "@/components/motion/ironclad-motion";
 
 import styles from "./FaqCluster.module.css";
 import { PHONE_DISPLAY, PHONE_TEL, allTopics, localHref, topicPath } from "./question-data";
@@ -10,8 +11,8 @@ const topicLinks = allTopics();
 
 export default function FaqShell({ children }: { children: ReactNode }) {
   return (
-    <div className={styles.root}>
-      <div className={styles.promo}>First-time customer? Get 10% off your first service <span>→</span></div>
+    <IroncladMotionRoot as="div" className={styles.root}>
+      <div className={styles.promo}>First-time customer? Get 10% off your first service <span className="ic-nudge">→</span></div>
       <header className={styles.header}>
         <div className={styles.headerInner}>
           <Link href="/plumbing" aria-label="Ironclad Plumbing">
@@ -24,7 +25,7 @@ export default function FaqShell({ children }: { children: ReactNode }) {
             <Link href="/about">About Us <ChevronDown className={styles.navChevron} aria-hidden="true" /></Link>
           </nav>
           <div className={styles.headerActions}>
-            <Link className={styles.schedulePill} href="/book?open=1">Schedule Now | 24/7</Link>
+            <Link className={styles.schedulePill} href="/book?open=1"><span className="ic-pulse-dot" />Schedule Now | 24/7</Link>
             <a className={styles.phonePill} href={PHONE_TEL}><Phone className={styles.headerPhoneIcon} aria-hidden="true" />{PHONE_DISPLAY}</a>
           </div>
         </div>
@@ -51,7 +52,7 @@ export default function FaqShell({ children }: { children: ReactNode }) {
         <Link href="/book?open=1">Schedule Online</Link>
       </div>
       <FaqFooter />
-    </div>
+    </IroncladMotionRoot>
   );
 }
 

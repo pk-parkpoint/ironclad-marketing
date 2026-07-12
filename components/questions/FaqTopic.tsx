@@ -19,7 +19,7 @@ export default function FaqTopic({ topic }: { topic: FaqTopicData }) {
     <FaqShell>
       <section className={styles.imageHero}>
         <Image fill priority sizes="100vw" src={assetPath(topic.hero)} alt="" />
-        <div className={styles.topicHeroInner}>
+        <div className={styles.topicHeroInner} data-entrance>
           <nav className={styles.breadcrumb} aria-label="Breadcrumb">
             <Link href="/questions/">Plumbing FAQ</Link><span>/</span><span>{topic.name}</span>
           </nav>
@@ -32,7 +32,7 @@ export default function FaqTopic({ topic }: { topic: FaqTopicData }) {
         </div>
       </section>
       <section className={styles.index}>
-        <div className={styles.indexInner}>
+        <div className={styles.indexInner} data-reveal>
           <div className={styles.sectionKicker}>
             <List className={styles.sectionKickerIcon} aria-hidden="true" />
             On this page

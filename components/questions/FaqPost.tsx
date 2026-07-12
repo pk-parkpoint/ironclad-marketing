@@ -21,7 +21,7 @@ export default function FaqPost({ topic, post }: { topic: FaqTopic; post: FaqPos
     <FaqShell>
       <section className={`${styles.imageHero} ${styles.postImageHero}`}>
         <Image fill priority sizes="100vw" src={assetPath(post.hero)} alt="" />
-        <div className={styles.postHeroInner}>
+        <div className={styles.postHeroInner} data-entrance>
           <div className={styles.crumbBadge}>
             <Link href="/questions/">Plumbing FAQ</Link><span className={styles.dot} /><Link href={topicPath(topic.key)}>{topic.name}</Link>
           </div>
@@ -36,7 +36,7 @@ export default function FaqPost({ topic, post }: { topic: FaqTopic; post: FaqPos
       <div className={styles.quickCardWrap}>
         <div className={styles.quickCard}>
           <div className={styles.quickCardLabel}>
-            <Zap className={styles.quickCardIcon} aria-hidden="true" />
+            <Zap className={`${styles.quickCardIcon} ic-pulse-icon`} aria-hidden="true" />
             <strong>Quick answer</strong>
           </div>
           <p>{post.quick}</p>
@@ -66,7 +66,7 @@ export default function FaqPost({ topic, post }: { topic: FaqTopic; post: FaqPos
 
 function StepsBlock({ steps }: { steps: FaqContentBlock }) {
   return (
-    <section className={styles.stepsBlock}>
+    <section className={styles.stepsBlock} data-reveal>
       <h2>{steps.h}</h2>
       <p>{steps.intro}</p>
       <div className={styles.stepGrid}>
@@ -83,7 +83,7 @@ function StepsBlock({ steps }: { steps: FaqContentBlock }) {
 
 function ListBlock({ list }: { list: FaqContentBlock }) {
   return (
-    <section className={styles.listBlock}>
+    <section className={styles.listBlock} data-reveal>
       <h2>{list.h}</h2>
       <p>{list.intro}</p>
       <div className={styles.listItems}>
@@ -101,7 +101,7 @@ function ListBlock({ list }: { list: FaqContentBlock }) {
 function MoreQuestions({ topic, post }: { topic: FaqTopic; post: FaqPostData }) {
   return (
     <section className={styles.postRelated}>
-      <div className={styles.postRelatedInner}>
+      <div className={styles.postRelatedInner} data-reveal>
         <h2>More {topic.name} questions</h2>
         {nearestQuestions(topic, post.n).map((question) => (
           <Link className={styles.relatedRow} key={question.n} href={`${topicPath(topic.key)}#q-${question.n}`}>

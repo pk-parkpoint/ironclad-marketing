@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { IroncladMotionRoot } from "@/components/motion/ironclad-motion";
 import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { FAQ_CATEGORIES, FAQ_ENTRIES, type FaqCategoryId } from "@/content/faqs";
@@ -45,28 +46,39 @@ export default function FaqHubPage() {
     <>
       <SiteHeader />
       <StructuredData data={schemas} id="ld-faq-hub" />
-      <main>
+      <IroncladMotionRoot>
         <section className="section-block bg-soft-background">
-          <div className="container-shell">
+          <div className="container-shell" data-entrance>
             <p className="text-sm font-semibold uppercase tracking-[0.12em] text-muted">Education</p>
             <h1 className="h1-display mt-4 max-w-[var(--max-readable-width)]">
-              Frequently Asked Questions
+              Frequently Asked <span className="ic-underline">Questions</span>
             </h1>
             <p className="body-large mt-4 max-w-[var(--max-readable-width)] text-muted">
-              Find answers to common questions about plumbing service, pricing, scheduling, and what to
-              expect when you work with Ironclad.
+              Find straight answers about plumbing service and what to expect when you work with Ironclad—covering{" "}
+              <span aria-hidden="true" className="ic-rot">
+                <span data-rotate='["pricing.","scheduling.","drains.","leaks.","water heaters."]'>pricing.</span>
+              </span>
+              <span className="sr-only">pricing, scheduling, drains, leaks, and water heaters.</span>
             </p>
-            <QuickAnswer className="mt-6">
+            <QuickAnswer className="ic-glass mt-6">
               Ironclad Plumbing answers common Austin plumbing questions with direct guidance on pricing, scheduling,
               repairs, drains, leaks, water heaters, and what happens during a service visit. Use this page to compare
               options before you book or call.
             </QuickAnswer>
 
+            <div className="ic-glass mt-6 inline-flex items-center gap-3 rounded-full border border-white/70 bg-white/70 px-5 py-3 shadow-sm">
+              <strong className="ic-count text-2xl leading-none text-cta-blue" data-count={FAQ_ENTRIES.length}>
+                {FAQ_ENTRIES.length}
+              </strong>
+              <span className="text-sm font-semibold text-ink">straight answers across {FAQ_CATEGORIES.length} topics</span>
+            </div>
+
             <div className="mt-8 flex flex-wrap gap-2">
               {FAQ_CATEGORIES.map((category) => (
                 <a
                   key={category.id}
-                  className="focus-ring rounded-full border border-border bg-background px-4 py-2 text-sm font-semibold text-ink hover:bg-white"
+                  className="ic-glass focus-ring rounded-full border border-border bg-background px-4 py-2 text-sm font-semibold text-ink hover:bg-white"
+                  data-reveal
                   href={`#category-${category.id}`}
                 >
                   {category.label}
@@ -75,7 +87,8 @@ export default function FaqHubPage() {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link className="focus-ring primary-button" href="/book">
+              <Link className="ic-cta focus-ring primary-button" href="/book">
+                <span className="ic-sheen" aria-hidden="true" />
                 Book Service
               </Link>
               <Link className="focus-ring secondary-button" href="/contact">
@@ -96,7 +109,7 @@ export default function FaqHubPage() {
               return (
                 <section key={category.id} id={`category-${category.id}`} className="scroll-mt-28">
                   <h2 className="h2-display">{category.label}</h2>
-                  <div className="mt-6 overflow-hidden rounded-[var(--radius-card)] border border-border bg-background">
+                  <div className="ic-glass mt-6 overflow-hidden rounded-[var(--radius-card)] border border-border bg-background">
                     {entries.map((faq) => (
                       <details
                         key={faq.question}
@@ -119,7 +132,7 @@ export default function FaqHubPage() {
         </section>
 
         <section className="section-block bg-ink">
-          <div className="container-shell text-white">
+          <div className="container-shell text-white" data-reveal>
             <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
               Still have questions?
             </h2>
@@ -136,7 +149,7 @@ export default function FaqHubPage() {
             </div>
           </div>
         </section>
-      </main>
+      </IroncladMotionRoot>
       <SiteFooter />
     </>
   );

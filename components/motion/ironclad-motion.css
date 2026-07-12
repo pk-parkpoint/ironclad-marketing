@@ -1,0 +1,196 @@
+/* Route-scoped Ironclad motion template. Import from each participating layout. */
+:root {
+  --ic-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ic-reveal-duration: 600ms;
+  --ic-entrance-duration: 650ms;
+  --ic-accent: var(--color-cta-blue, #2563eb);
+  interpolate-size: allow-keywords;
+}
+
+.ic-rot {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+.ic-rot > span {
+  display: inline-block;
+  transition: transform 350ms var(--ic-ease), opacity 350ms ease;
+}
+
+.ic-count {
+  display: inline-block;
+  min-width: 3ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ic-underline {
+  position: relative;
+  white-space: nowrap;
+}
+
+.ic-underline::after {
+  position: absolute;
+  right: 0;
+  bottom: -0.08em;
+  left: 0;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--ic-accent);
+  content: "";
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.ic-glass {
+  position: relative;
+  overflow: hidden;
+  contain: paint;
+}
+
+.ic-glass .ic-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    220px circle at var(--ic-pointer-x, 50%) var(--ic-pointer-y, 50%),
+    rgb(255 255 255 / 16%),
+    transparent 60%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ic-glass:hover .ic-shine {
+    opacity: 1;
+  }
+}
+
+.ic-pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #34a853;
+  vertical-align: 1px;
+}
+
+.ic-pulse-dot::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  content: "";
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes ic-rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes ic-underline-draw {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  @keyframes ic-sheen-sweep {
+    0%, 82% { transform: translateX(-140%) skewX(-18deg); }
+    97%, 100% { transform: translateX(340%) skewX(-18deg); }
+  }
+
+  @keyframes ic-icon-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+  }
+
+  @keyframes ic-ring {
+    from { opacity: 0.65; transform: scale(0.7); }
+    to { opacity: 0; transform: scale(2.6); }
+  }
+
+  @keyframes ic-nudge {
+    0%, 78%, 100% { transform: translateX(0); }
+    86% { transform: translateX(4px); }
+    93% { transform: translateX(1px); }
+  }
+
+  .ic-motion-root.ic-anim [data-reveal] {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity var(--ic-reveal-duration) var(--ic-ease) var(--ic-reveal-delay, 0ms),
+      transform var(--ic-reveal-duration) var(--ic-ease) var(--ic-reveal-delay, 0ms);
+  }
+
+  .ic-motion-root.ic-anim [data-reveal].ic-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ic-motion-root.ic-anim [data-entrance] > * {
+    animation: ic-rise var(--ic-entrance-duration) var(--ic-ease) both;
+  }
+
+  .ic-motion-root.ic-anim [data-entrance] > *:nth-child(2) { animation-delay: 100ms; }
+  .ic-motion-root.ic-anim [data-entrance] > *:nth-child(3) { animation-delay: 200ms; }
+  .ic-motion-root.ic-anim [data-entrance] > *:nth-child(4) { animation-delay: 300ms; }
+  .ic-motion-root.ic-anim [data-entrance] > *:nth-child(5) { animation-delay: 400ms; }
+  .ic-motion-root.ic-anim [data-entrance] > *:nth-child(n + 6) { animation-delay: 480ms; }
+
+  .ic-motion-root.ic-anim .ic-underline::after {
+    animation: ic-underline-draw 800ms var(--ic-ease) 800ms both;
+  }
+
+  .ic-motion-root.ic-anim .ic-cta {
+    position: relative;
+    overflow: hidden;
+    transition: transform 150ms ease;
+  }
+
+  .ic-motion-root.ic-anim .ic-cta:active {
+    transform: scale(0.98);
+  }
+
+  .ic-motion-root.ic-anim .ic-sheen {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 45%;
+    background: linear-gradient(105deg, transparent, rgb(255 255 255 / 35%), transparent);
+    pointer-events: none;
+    transform: translateX(-140%) skewX(-18deg);
+    animation: ic-sheen-sweep 6s ease-in-out 3s infinite;
+  }
+
+  .ic-motion-root.ic-anim details::details-content {
+    block-size: 0;
+    overflow-y: clip;
+    transition: content-visibility 350ms allow-discrete, block-size 350ms ease;
+  }
+
+  .ic-motion-root.ic-anim details[open]::details-content {
+    block-size: auto;
+  }
+
+  .ic-motion-root.ic-anim .ic-pulse-icon {
+    animation: ic-icon-pulse 800ms ease-in-out 1.2s 2;
+    transform-origin: center;
+  }
+
+  .ic-motion-root.ic-anim .ic-pulse-dot::after {
+    animation: ic-ring 2.6s ease-out infinite;
+  }
+
+  .ic-motion-root.ic-anim .ic-nudge {
+    display: inline-block;
+    animation: ic-nudge 4s ease-in-out 2s infinite;
+  }
+}
