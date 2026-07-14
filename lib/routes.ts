@@ -18,6 +18,7 @@ export type TopNavLink = {
 const PLUMBING_DROPDOWN_LINKS: NavChildLink[] = [
   { href: "/plumbing", label: "All Plumbing Services" },
   { href: "/plumbing/emergency", label: "Emergency Plumbing" },
+  { href: "/plumbing/plumbing-inspection", label: "Plumbing Inspection" },
   {
     href: "/plumbing/repairs",
     label: "Repairs",
@@ -44,17 +45,30 @@ const PLUMBING_DROPDOWN_LINKS: NavChildLink[] = [
       { href: "/plumbing/water-heaters", label: "Water Heaters" },
       { href: "/plumbing/water-heater-repair", label: "Water Heater Repair" },
       { href: "/plumbing/water-heater-installation", label: "Water Heater Installation" },
+      { href: "/plumbing/water-heater-tune-up", label: "Water Heater Tune-Up" },
       { href: "/plumbing/tankless-water-heaters", label: "Tankless Water Heaters" },
     ],
   },
+  { href: "/plumbing/sump-pump-services", label: "Sump Pump Services" },
   {
     href: "/plumbing/fixtures",
-    label: "Fixtures & Rooms",
+    label: "Fixtures",
     children: [
       { href: "/plumbing/fixtures", label: "Fixtures" },
       { href: "/plumbing/faucet-sink-services", label: "Faucet & Sink Services" },
       { href: "/plumbing/toilet-repair-installation", label: "Toilet Repair & Installation" },
       { href: "/plumbing/garbage-disposal-services", label: "Garbage Disposal Services" },
+    ],
+  },
+  {
+    href: "/plumbing/kitchen-bathroom-plumbing-repair",
+    label: "Kitchen & Bathroom Plumbing",
+    children: [
+      { href: "/plumbing/kitchen-bathroom-plumbing-repair", label: "Kitchen & Bathroom Plumbing Repair" },
+      {
+        href: "/plumbing/kitchen-bathroom-plumbing-installation",
+        label: "Kitchen & Bathroom Plumbing Installation",
+      },
       { href: "/plumbing/bathroom-plumbing", label: "Bathroom Plumbing" },
     ],
   },
@@ -71,6 +85,7 @@ const PLUMBING_DROPDOWN_LINKS: NavChildLink[] = [
     label: "Water Quality & Supply",
     children: [
       { href: "/plumbing/water-treatment", label: "Water Treatment" },
+      { href: "/plumbing/water-filtration", label: "Water Filtration" },
       { href: "/plumbing/well-pump-services", label: "Well Pump & Pressure Tank" },
       { href: "/plumbing/backflow-prevention", label: "Backflow Prevention & Testing" },
     ],
