@@ -81,9 +81,7 @@ export function maybeOpenBookingLink(event: MouseEvent, anchor: HTMLAnchorElemen
   const detail = getBookingLinkDetail(anchor);
   if (!detail) return null;
 
-  if (isCurrentWindowClick(event, anchor) && dispatchOpenBookingModal(detail, { queueIfUnhandled: true })) {
-    event.preventDefault();
-  }
+  if (isCurrentWindowClick(event, anchor)) return detail;
 
   return detail;
 }

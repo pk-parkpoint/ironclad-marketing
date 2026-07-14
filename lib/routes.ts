@@ -57,6 +57,7 @@ const SERVICE_AREA_DROPDOWN_LINKS: NavChildLink[] = [
 const ABOUT_DROPDOWN_LINKS: NavChildLink[] = [
   { href: "/reviews", label: "Our Reviews" },
   { href: "/guarantees", label: "Our Guarantees" },
+  { href: "/site-map", label: "Site Map" },
   { href: "/careers", label: "Careers" },
   { href: "/about", label: "About Us" },
 ];
@@ -69,6 +70,7 @@ export const TOP_NAV_LINKS: TopNavLink[] = [
 ];
 
 export const DEDICATED_MARKETING_PATHS = new Set([
+  "book",
   "blog",
   "faq",
   "faq/plumbing",

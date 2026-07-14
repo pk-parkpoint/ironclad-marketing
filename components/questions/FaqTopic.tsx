@@ -21,7 +21,7 @@ export default function FaqTopic({ topic }: { topic: FaqTopicData }) {
         <Image fill priority sizes="100vw" src={assetPath(topic.hero)} alt="" />
         <div className={styles.topicHeroInner} data-entrance>
           <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-            <Link href="/questions/">Plumbing FAQ</Link><span>/</span><span>{topic.name}</span>
+            <Link href="/questions">Plumbing FAQ</Link><span>/</span><span>{topic.name}</span>
           </nav>
           <h1>{topic.name}: every question, answered</h1>
           <p className={styles.topicSub}>{topic.blurb}</p>

@@ -5,6 +5,8 @@ import { BLOG_POSTS } from "../content/blog-posts";
 const APP_BUILD_DIR = path.join(process.cwd(), ".next", "server", "app");
 const ALLOWED_NON_PAGE_PATHS = new Set(["/favicon.ico", "/robots.txt", "/sitemap.xml"]);
 const REDIRECT_ONLY_ROUTES = new Set([
+  "/book",
+  "/faq",
   "/plumbing-guides",
   ...BLOG_POSTS.map((post) => `/guides/${post.slug}`),
 ]);

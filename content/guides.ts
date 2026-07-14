@@ -290,6 +290,7 @@ export const GUIDE_ENTRY_BY_SLUG = new Map(GUIDE_ENTRIES.map((entry) => [entry.s
 export const GUIDE_ROUTE_PATHS = GUIDE_ENTRIES.map((entry) => `/guides/${entry.slug}`);
 
 export const GUIDES_DROPDOWN_LINKS = [
+  { href: "/questions", label: "Plumbing FAQ Hub" },
   { href: "/guides/what-plumbing-costs-austin", label: "What Plumbing Should Cost" },
   { href: "/guides/questions-to-ask-your-plumber", label: "Questions to Ask Before You Hire" },
   { href: "/guides/plumber-red-flags", label: "Red Flags to Watch For" },
