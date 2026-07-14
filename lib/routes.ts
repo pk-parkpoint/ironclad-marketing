@@ -17,20 +17,26 @@ export type TopNavLink = {
 
 const PLUMBING_DROPDOWN_LINKS: NavChildLink[] = [
   { href: "/plumbing", label: "All Plumbing Services" },
+  { href: "/plumbing/emergency", label: "Emergency Plumbing" },
   {
     href: "/plumbing/repairs",
-    label: "Repairs & Leaks",
+    label: "Repairs",
     children: [
       { href: "/plumbing/repairs", label: "Plumbing Repairs" },
-      { href: "/plumbing/leak-repair", label: "Leak Repair" },
-      { href: "/plumbing/leak-detection", label: "Leak Detection" },
-      { href: "/plumbing/slab-leak-repair", label: "Slab Leak Repair" },
       { href: "/plumbing/water-line-repair", label: "Water Line / Main Line Repair" },
       { href: "/plumbing/water-pressure", label: "Water Pressure / Pressure Regulator" },
       { href: "/plumbing/repiping", label: "Repiping" },
       { href: "/plumbing/burst-pipe-repair", label: "Burst Pipe Repair" },
       { href: "/plumbing/frozen-pipe-repair", label: "Frozen Pipe Repair" },
-      { href: "/plumbing/emergency", label: "Emergency Plumbing" },
+    ],
+  },
+  {
+    href: "/plumbing/leak-repair",
+    label: "Leaks",
+    children: [
+      { href: "/plumbing/leak-repair", label: "Leak Repair" },
+      { href: "/plumbing/leak-detection", label: "Leak Detection" },
+      { href: "/plumbing/slab-leak-repair", label: "Slab Leak Repair" },
     ],
   },
   {
@@ -56,10 +62,16 @@ const PLUMBING_DROPDOWN_LINKS: NavChildLink[] = [
   },
   {
     href: "/plumbing/gas-line-services",
-    label: "Gas, Water Quality & Safety",
+    label: "Gas Lines",
     children: [
       { href: "/plumbing/gas-line-services", label: "Gas Line Services" },
       { href: "/plumbing/gas-leak-repair", label: "Gas Leak Detection & Repair" },
+    ],
+  },
+  {
+    href: "/plumbing/water-treatment",
+    label: "Water Quality & Supply",
+    children: [
       { href: "/plumbing/water-treatment", label: "Water Treatment" },
       { href: "/plumbing/well-pump-services", label: "Well Pump & Pressure Tank" },
       { href: "/plumbing/backflow-prevention", label: "Backflow Prevention & Testing" },
