@@ -33,19 +33,19 @@ function FaqFooter() {
           <p className={styles.footerAvailability}>Available 24/7 · call or text</p>
         </div>
         <FooterColumn title="FAQ Topics" links={[
-          ["All Topics", "/questions/"],
-          ["Leaks", "/questions/leaks/"],
-          ["Clogs & Drains", "/questions/clogs-and-drains/"],
-          ["Water Heaters", "/questions/water-heaters/"],
+          ["All Topics", "/questions"],
+          ["Leaks", "/questions/leaks"],
+          ["Clogs & Drains", "/questions/clogs-and-drains"],
+          ["Water Heaters", "/questions/water-heaters"],
         ]} />
         <FooterColumn title="Services" links={[
           ["Leak Detection", "/plumbing/leak-detection"],
           ["Drain Cleaning", "/plumbing/drain-cleaning"],
           ["Water Heaters", "/plumbing/water-heaters"],
-          ["Emergency Plumbing", "/plumbing/emergency-plumbing"],
+          ["Emergency Plumbing", "/plumbing/emergency"],
         ]} />
         <FooterColumn title="Service Areas" links={[
-          ["Austin, TX", "/service-area/austin"],
+          ["Austin, TX", "/service-area/austin-tx"],
           ["Round Rock, TX", "/service-area/round-rock-tx"],
           ["Cedar Park, TX", "/service-area/cedar-park-tx"],
           ["View all areas →", "/service-area"],
@@ -81,7 +81,7 @@ export function RelatedTopics({ currentKey }: { currentKey: string }) {
               {topic.name} <span>{topic.questions.length}</span>
             </Link>
           ))}
-          <Link className={`${styles.chip} ${styles.chipInverse}`} href="/questions/">All 200 questions →</Link>
+          <Link className={`${styles.chip} ${styles.chipInverse}`} href="/questions">All 200 questions →</Link>
         </div>
       </div>
     </section>

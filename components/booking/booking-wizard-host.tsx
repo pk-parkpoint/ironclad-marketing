@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { BookingWizardProps } from "./booking-wizard";
 import {
   OPEN_BOOKING_MODAL_EVENT,
@@ -29,8 +29,6 @@ const LazyBookingWizard = dynamic<BookingWizardProps>(
 export function BookingWizardHost() {
   const pathname = usePathname();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const search = searchParams.toString();
   const [open, setOpen] = useState(false);
   const [initialServiceSlug, setInitialServiceSlug] = useState<string | undefined>();
   const clickOpenedBookingPathRef = useRef<string | null>(null);
@@ -71,19 +69,6 @@ export function BookingWizardHost() {
   }, [open]);
 
   useEffect(() => {
-    if (pathname !== "/book") return;
-    void preloadBookingWizard();
-    const query = new URLSearchParams(search);
-    setInitialServiceSlug(query.get("service") || undefined);
-    const currentBookingPath = `${pathname}${search ? `?${search}` : ""}`;
-    if (clickOpenedBookingPathRef.current === currentBookingPath) {
-      clickOpenedBookingPathRef.current = null;
-      return;
-    }
-    setOpen(true);
-  }, [pathname, search]);
-
-  useEffect(() => {
     if (pathname !== "/book") {
       clickOpenedBookingPathRef.current = null;
       setOpen(false);
@@ -122,7 +107,7 @@ export function BookingWizardHost() {
     };
   }, []);
 
-  if (!open && pathname !== "/book") {
+  if (!open || pathname === "/book") {
     return null;
   }
 

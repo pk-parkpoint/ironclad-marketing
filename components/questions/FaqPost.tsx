@@ -23,7 +23,7 @@ export default function FaqPost({ topic, post }: { topic: FaqTopic; post: FaqPos
         <Image fill priority sizes="100vw" src={assetPath(post.hero)} alt="" />
         <div className={styles.postHeroInner} data-entrance>
           <div className={styles.crumbBadge}>
-            <Link href="/questions/">Plumbing FAQ</Link><span className={styles.dot} /><Link href={topicPath(topic.key)}>{topic.name}</Link>
+            <Link href="/questions">Plumbing FAQ</Link><span className={styles.dot} /><Link href={topicPath(topic.key)}>{topic.name}</Link>
           </div>
           <h1>{post.title}</h1>
           <p className={styles.postSub}>{post.sub}</p>

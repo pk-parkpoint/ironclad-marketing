@@ -76,11 +76,11 @@ export const POST_SLUGS: Record<string, string> = {
 };
 
 export function topicPath(topicKey: string): string {
-  return `/questions/${TOPIC_SLUGS[topicKey]}/`;
+  return `/questions/${TOPIC_SLUGS[topicKey]}`;
 }
 
 export function postPath(post: FaqPost): string {
-  return `${topicPath(post.topic)}${POST_SLUGS[post.key]}/`;
+  return `${topicPath(post.topic)}/${POST_SLUGS[post.key]}`;
 }
 
 export function assetPath(source: string): string {

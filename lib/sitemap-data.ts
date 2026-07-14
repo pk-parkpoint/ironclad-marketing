@@ -62,6 +62,7 @@ export function buildCoreSitemapEntries(): SitemapEntry[] {
     "/",
     "/commercial-plumbing/austin-tx",
     "/resources",
+    "/site-map",
     ...STATIC_ROUTE_PATHS.map((path) => normalizePath(path)),
   ];
   return routes.map((path) => ({
