@@ -5,6 +5,7 @@ import { allPosts, allTopics, postPath, topicPath } from "@/components/questions
 import { BLOG_POSTS } from "@/content/blog-posts";
 import { GUIDE_ENTRIES } from "@/content/guides";
 import { LOCAL_CITY_PAGES, LOCAL_NEIGHBORHOOD_PAGES } from "@/content/local-pages";
+import { getPpcServiceRouteEntries } from "@/content/ppc-service-variants";
 import { SERVICES } from "@/content/services";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -50,10 +51,17 @@ function SiteMapSection({ links, title }: { links: SiteMapLink[]; title: string 
 }
 
 export default function SiteMapPage() {
-  const serviceLinks = SERVICES.map((service) => ({
-    href: `/plumbing/${service.slug}`,
-    label: service.title,
-  }));
+  const serviceLinks = [
+    ...new Map([
+      ...SERVICES.map((service) => [
+        `/plumbing/${service.slug}`,
+        { href: `/plumbing/${service.slug}`, label: service.title },
+      ] as const),
+      ...getPpcServiceRouteEntries()
+        .filter((entry) => entry.path !== "/plumbing")
+        .map((entry) => [entry.path, { href: entry.path, label: entry.service.title }] as const),
+    ]).values(),
+  ];
   const cityLinks = LOCAL_CITY_PAGES.map((page) => ({ href: page.path, label: `${page.name} Plumber` }));
   const neighborhoodLinks = LOCAL_NEIGHBORHOOD_PAGES.map((page) => ({
     href: page.path,

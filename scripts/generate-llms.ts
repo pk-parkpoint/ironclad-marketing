@@ -14,7 +14,7 @@ import { STATIC_PAGE_BY_PATH } from "../content/static-pages";
 import { getPublicContactInfo } from "../lib/contact";
 
 const BASE_URL = "https://ironcladtexas.com";
-const LAST_UPDATED = "2026-05-26";
+const LAST_UPDATED = "2026-07-14";
 const PRIORITY_GUIDE_SLUGS = [
   "what-plumbing-costs-austin",
   "questions-to-ask-your-plumber",

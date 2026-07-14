@@ -159,6 +159,54 @@ export const SERVICES: ServiceEntry[] = [
       "Commercial-grade hydro jetting in Austin to blast grease, roots, and mineral buildup from sewer and drain lines.",
     h1: "Hydro Jetting - When a Snake Isn't Enough",
   },
+  {
+    slug: "plumbing-inspection",
+    title: "Plumbing Inspection",
+    titleTag: "Plumbing Inspection Austin, TX | Ironclad Plumbing",
+    metaDescription:
+      "Get a detailed plumbing inspection in Austin for an older home, purchase, remodel, or recurring issue. Clear findings and upfront next steps.",
+    h1: "Whole-Home Plumbing Inspections in Austin",
+  },
+  {
+    slug: "water-heater-tune-up",
+    title: "Water Heater Tune-Up",
+    titleTag: "Water Heater Tune-Up Austin, TX | Ironclad Plumbing",
+    metaDescription:
+      "Schedule a water heater tune-up in Austin. Ironclad flushes sediment, tests safety controls, and checks performance with upfront pricing.",
+    h1: "Water Heater Tune-Ups for Reliable Hot Water",
+  },
+  {
+    slug: "sump-pump-services",
+    title: "Sump Pump Services",
+    titleTag: "Sump Pump Services Austin, TX | Ironclad Plumbing",
+    metaDescription:
+      "Sump pump testing, repair, replacement, and battery backup service in Austin. Protect low areas from water with clear, upfront recommendations.",
+    h1: "Sump Pump Repair, Replacement & Testing",
+  },
+  {
+    slug: "water-filtration",
+    title: "Water Filtration",
+    titleTag: "Water Filtration Austin, TX | Ironclad Plumbing",
+    metaDescription:
+      "Improve Austin tap water with properly sized whole-home or drinking-water filtration. Ironclad tests, installs, and maintains filtration systems.",
+    h1: "Water Filtration Designed for Your Home",
+  },
+  {
+    slug: "kitchen-bathroom-plumbing-repair",
+    title: "Kitchen & Bathroom Plumbing Repair",
+    titleTag: "Kitchen & Bathroom Plumbing Repair Austin | Ironclad",
+    metaDescription:
+      "Kitchen and bathroom plumbing repair in Austin for faucets, sinks, toilets, showers, disposals, drains, and hidden leaks. Upfront pricing.",
+    h1: "Kitchen & Bathroom Plumbing Repair",
+  },
+  {
+    slug: "kitchen-bathroom-plumbing-installation",
+    title: "Kitchen & Bathroom Plumbing Installation",
+    titleTag: "Kitchen & Bathroom Plumbing Install Austin | Ironclad",
+    metaDescription:
+      "Kitchen and bathroom plumbing installation in Austin for fixtures, sinks, toilets, disposals, valves, supply lines, and remodel rough-ins.",
+    h1: "Kitchen & Bathroom Plumbing Installation",
+  },
 ];
 
 export const SERVICE_SLUG_SET = new Set(SERVICES.map((service) => service.slug));

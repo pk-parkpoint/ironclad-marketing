@@ -4896,5 +4896,953 @@
         "path": "assets/services/backflow-prevention/06-device-replacement.webp"
       }
     ]
+  },
+  {
+    "index": 32,
+    "key": "Plumbing Inspection",
+    "slug": "plumbing-inspection",
+    "bookUrl": "https://ironcladtexas.com/book?service=plumbing-inspection",
+    "seoTitle": "Plumbing Inspection Austin, TX | Ironclad Plumbing",
+    "metaDescription": "Get a detailed plumbing inspection in Austin for an older home, purchase, remodel, or recurring issue. Clear findings and upfront next steps.",
+    "eyebrow": "PLUMBING INSPECTION · AUSTIN",
+    "h1": "Whole-Home Plumbing Inspections in Austin",
+    "valueLine": "A practical review of the systems you depend on, with clear next steps.",
+    "pun": "Know your pipes before they surprise you.",
+    "punFirst": false,
+    "callFirst": false,
+    "signsHeading": "When a Plumbing Inspection Makes Sense",
+    "signsIntro": "An inspection gives you a clearer picture before a purchase, project, or small warning becomes a larger repair.",
+    "signs": [
+      {
+        "title": "You are buying an older home",
+        "body": "A focused plumbing review can flag aging supply lines, weak shutoffs, pressure issues, and water heater concerns."
+      },
+      {
+        "title": "Problems keep returning",
+        "body": "Repeated leaks, clogs, or pressure changes may point to a broader system issue instead of separate one-off repairs."
+      },
+      {
+        "title": "You are planning a remodel",
+        "body": "Checking pipe condition, capacity, valves, and fixture connections early helps prevent expensive changes after work begins."
+      },
+      {
+        "title": "The system has not been checked in years",
+        "body": "A preventive inspection can identify worn parts and maintenance needs while there is still time to plan."
+      }
+    ],
+    "servicesHeading": "What We Check During a Plumbing Inspection",
+    "servicesIntro": "We review the accessible plumbing system, test key operating points, and explain which findings need action now and which can be monitored.",
+    "services": [
+      {
+        "title": "Pipes, fixtures & connections",
+        "body": "Accessible supply lines, drains, faucets, toilets, and exposed connections checked for wear, corrosion, and active leaks.",
+        "image": "assets/services/repairs/06-fixture-repairs.webp"
+      },
+      {
+        "title": "Leak & moisture review",
+        "body": "Visible warning signs and likely leak areas checked before water damage has more time to spread.",
+        "image": "assets/services/leak-detection/03-under-slab-and-in-wall.webp"
+      },
+      {
+        "title": "Water pressure testing",
+        "body": "House pressure measured and reviewed for low flow, excessive pressure, or regulator trouble.",
+        "image": "assets/services/water-pressure/01-pressure-testing.webp"
+      },
+      {
+        "title": "Shutoff & valve checks",
+        "body": "Accessible fixture stops and the main shutoff reviewed for condition and reliable operation.",
+        "image": "assets/services/repairs/03-valve-and-shut-off-replacement.webp"
+      },
+      {
+        "title": "Water heater review",
+        "body": "The heater, visible connections, safety components, venting, and signs of corrosion or leakage checked.",
+        "image": "assets/services/water-heater-repair/05-gas-and-electric-water-heaters.webp"
+      },
+      {
+        "title": "Clear findings & priorities",
+        "body": "You get a straightforward explanation of immediate concerns, maintenance items, and future planning priorities.",
+        "image": "assets/services/leak-detection/06-clear-diagnosis-and-quote.webp"
+      }
+    ],
+    "calloutHeadline": "Buying, remodeling, or tired of recurring plumbing surprises?",
+    "calloutSub": "A whole-home inspection gives you a clearer plan before you commit to the next step.",
+    "whyLine": "A useful inspection should replace guesswork with priorities you can understand and act on.",
+    "process": [
+      {
+        "step": "01",
+        "title": "Tell us why you need the inspection",
+        "body": "Share the home's age, known symptoms, purchase timeline, or remodeling plans."
+      },
+      {
+        "step": "02",
+        "title": "We inspect accessible systems",
+        "body": "A licensed plumber reviews fixtures, visible piping, pressure, valves, drains, and water-heating equipment."
+      },
+      {
+        "step": "03",
+        "title": "We test and document findings",
+        "body": "We verify key operating conditions and organize concerns by urgency."
+      },
+      {
+        "step": "04",
+        "title": "You get clear next steps",
+        "body": "We explain what needs attention, what can wait, and where a more specialized diagnostic may help."
+      }
+    ],
+    "serviceAreaHeader": "Plumbing Inspections in Austin and Nearby Areas",
+    "serviceAreaSub": "Whole-home plumbing inspections for homeowners, buyers, and remodel planning across Greater Austin.",
+    "serviceAreaCta": "Schedule an Inspection Near You",
+    "faqHeading": "Plumbing Inspection FAQ",
+    "faqs": [
+      {
+        "q": "What is included in a whole-home plumbing inspection?",
+        "a": "We review accessible pipes, fixtures, drains, shutoffs, water pressure, visible leak signs, and water-heating equipment. The exact scope is confirmed before the visit."
+      },
+      {
+        "q": "How long does a plumbing inspection take?",
+        "a": "Most homes take about one to two hours, depending on the home's size, age, access, and the number of systems or symptoms to review."
+      },
+      {
+        "q": "Is this different from a general home inspection?",
+        "a": "Yes. A plumbing inspection is performed by a plumbing professional and goes deeper into water pressure, fixture operation, shutoffs, piping condition, leaks, and water-heating concerns."
+      },
+      {
+        "q": "Does a plumbing inspection include a sewer camera?",
+        "a": "Not automatically. A camera inspection is a separate diagnostic that may be recommended when recurring backups, older sewer piping, or purchase concerns justify it."
+      },
+      {
+        "q": "Should I get a plumbing inspection before buying a home?",
+        "a": "It can be especially useful for older homes, homes with prior leaks, additions, low pressure, slow drains, or an aging water heater."
+      },
+      {
+        "q": "Will I receive repair recommendations?",
+        "a": "Yes. We explain the findings, identify urgent items, and separate recommended maintenance from repairs that can be planned later."
+      }
+    ],
+    "finalHeading": "Get a Clearer Picture of Your Plumbing",
+    "finalBody": "Book a whole-home plumbing inspection in Austin and get practical findings before the next decision.",
+    "finalCta": "Schedule an Inspection",
+    "images": [
+      {
+        "file": "06-fixture-repairs.webp",
+        "label": "Pipes, fixtures & connections",
+        "path": "assets/services/repairs/06-fixture-repairs.webp"
+      },
+      {
+        "file": "03-under-slab-and-in-wall.webp",
+        "label": "Leak & moisture review",
+        "path": "assets/services/leak-detection/03-under-slab-and-in-wall.webp"
+      },
+      {
+        "file": "01-pressure-testing.webp",
+        "label": "Water pressure testing",
+        "path": "assets/services/water-pressure/01-pressure-testing.webp"
+      },
+      {
+        "file": "03-valve-and-shut-off-replacement.webp",
+        "label": "Shutoff & valve checks",
+        "path": "assets/services/repairs/03-valve-and-shut-off-replacement.webp"
+      },
+      {
+        "file": "05-gas-and-electric-water-heaters.webp",
+        "label": "Water heater review",
+        "path": "assets/services/water-heater-repair/05-gas-and-electric-water-heaters.webp"
+      },
+      {
+        "file": "06-clear-diagnosis-and-quote.webp",
+        "label": "Clear findings & priorities",
+        "path": "assets/services/leak-detection/06-clear-diagnosis-and-quote.webp"
+      }
+    ]
+  },
+  {
+    "index": 33,
+    "key": "Water Heater Tune-Up",
+    "slug": "water-heater-tune-up",
+    "bookUrl": "https://ironcladtexas.com/book?service=water-heater-tune-up",
+    "seoTitle": "Water Heater Tune-Up Austin, TX | Ironclad Plumbing",
+    "metaDescription": "Schedule a water heater tune-up in Austin. Ironclad flushes sediment, tests safety controls, and checks performance with upfront pricing.",
+    "eyebrow": "WATER HEATER TUNE-UP · AUSTIN",
+    "h1": "Water Heater Tune-Ups for Reliable Hot Water",
+    "valueLine": "Flush buildup, check safety, and catch wear before the next cold shower.",
+    "pun": "Give your water heater a little warm-up.",
+    "punFirst": false,
+    "callFirst": false,
+    "signsHeading": "Signs Your Water Heater Is Due for Service",
+    "signsIntro": "Routine maintenance is useful before performance drops, but these warning signs make a tune-up more urgent.",
+    "signs": [
+      {
+        "title": "Popping or rumbling sounds",
+        "body": "Sediment can harden at the bottom of a tank, causing noise and making the heater work harder."
+      },
+      {
+        "title": "Hot water runs out sooner",
+        "body": "Reduced capacity or slower recovery can point to buildup, control issues, or a worn heating component."
+      },
+      {
+        "title": "Temperature changes unexpectedly",
+        "body": "Water that swings hot and cold may need thermostat, element, burner, or mixing-valve attention."
+      },
+      {
+        "title": "It has been a year or more",
+        "body": "Annual service is a practical baseline in Austin, especially where hard water accelerates mineral buildup."
+      }
+    ],
+    "servicesHeading": "What a Water Heater Tune-Up Covers",
+    "servicesIntro": "We tailor service to the heater type, age, condition, and manufacturer guidance instead of treating every unit the same.",
+    "services": [
+      {
+        "title": "Tank flush & sediment removal",
+        "body": "We drain and flush eligible tank systems to reduce mineral buildup and restore cleaner heat transfer.",
+        "image": "assets/services/water-heater-repair/04-sediment-flush-and-maintenance.webp"
+      },
+      {
+        "title": "Tank & corrosion check",
+        "body": "The tank exterior, visible connections, and corrosion warning signs are reviewed for developing leaks.",
+        "image": "assets/services/water-heater-repair/03-leaking-tank-assessment.webp"
+      },
+      {
+        "title": "Safety control testing",
+        "body": "Accessible safety components are checked for proper operation and visible installation concerns.",
+        "image": "assets/services/water-heater-installation/05-code-and-permit-handling.webp"
+      },
+      {
+        "title": "Thermostat & heating check",
+        "body": "Temperature controls, electric elements, or gas burner operation are checked for steady performance.",
+        "image": "assets/services/water-heater-repair/02-thermostat-and-element-replacement.webp"
+      },
+      {
+        "title": "Leak, venting & connection review",
+        "body": "Visible water, gas, electrical, drain-pan, and venting connections are reviewed as applicable.",
+        "image": "assets/services/water-heater-repair/05-gas-and-electric-water-heaters.webp"
+      },
+      {
+        "title": "Tankless descaling",
+        "body": "Tankless units can be flushed and descaled on the schedule recommended for the unit and local water conditions.",
+        "image": "assets/services/tankless-water-heaters/05-descaling-and-maintenance.webp"
+      }
+    ],
+    "calloutHeadline": "Hearing noise, losing capacity, or overdue for maintenance?",
+    "calloutSub": "A tune-up can restore performance and reveal wear before it becomes an interruption.",
+    "whyLine": "Maintenance should protect the equipment you have and give you an honest view of what it still needs.",
+    "process": [
+      {
+        "step": "01",
+        "title": "Book the right service",
+        "body": "Tell us whether the unit is tank or tankless, gas or electric, and how old it is."
+      },
+      {
+        "step": "02",
+        "title": "We inspect before servicing",
+        "body": "We confirm the condition and explain any reason a flush or repair would not be appropriate."
+      },
+      {
+        "step": "03",
+        "title": "We tune and test",
+        "body": "The eligible maintenance tasks are completed and the heater is tested for operation and safety."
+      },
+      {
+        "step": "04",
+        "title": "We explain what we found",
+        "body": "You get maintenance guidance and clear options if a worn part or installation concern needs attention."
+      }
+    ],
+    "serviceAreaHeader": "Water Heater Tune-Ups in Austin and Nearby Areas",
+    "serviceAreaSub": "Tank and tankless water heater maintenance across Austin and the surrounding metro.",
+    "serviceAreaCta": "Schedule a Tune-Up Near You",
+    "faqHeading": "Water Heater Tune-Up FAQ",
+    "faqs": [
+      {
+        "q": "How often should a water heater be serviced?",
+        "a": "Annual service is a useful baseline for many tank and tankless units. The best interval depends on the manufacturer, water hardness, usage, and system age."
+      },
+      {
+        "q": "What does a water heater tune-up include?",
+        "a": "The visit can include inspection, eligible flushing or descaling, temperature and heating checks, safety-control testing, and a review of visible connections and leaks."
+      },
+      {
+        "q": "Do tankless water heaters need tune-ups?",
+        "a": "Yes. Tankless systems commonly need periodic flushing or descaling, filter cleaning, and operating checks, especially in hard-water areas."
+      },
+      {
+        "q": "Does Austin hard water affect water heaters?",
+        "a": "Yes. Minerals can collect in tank bottoms and tankless heat exchangers, reducing efficiency and contributing to noise or slower performance."
+      },
+      {
+        "q": "Can a tune-up fix a water heater that has no hot water?",
+        "a": "A no-hot-water call is usually a repair diagnosis, not routine maintenance. We can identify the failed component and explain the repair options."
+      },
+      {
+        "q": "Will maintenance prevent every water heater failure?",
+        "a": "No, but it can reduce sediment-related problems, catch visible wear earlier, and help you plan before an aging unit fails unexpectedly."
+      }
+    ],
+    "finalHeading": "Keep the Hot Water Dependable",
+    "finalBody": "Schedule a water heater tune-up in Austin for a cleaner, safer, better-informed maintenance plan.",
+    "finalCta": "Schedule a Tune-Up",
+    "images": [
+      {
+        "file": "04-sediment-flush-and-maintenance.webp",
+        "label": "Tank flush & sediment removal",
+        "path": "assets/services/water-heater-repair/04-sediment-flush-and-maintenance.webp"
+      },
+      {
+        "file": "03-leaking-tank-assessment.webp",
+        "label": "Tank & corrosion check",
+        "path": "assets/services/water-heater-repair/03-leaking-tank-assessment.webp"
+      },
+      {
+        "file": "05-code-and-permit-handling.webp",
+        "label": "Safety control testing",
+        "path": "assets/services/water-heater-installation/05-code-and-permit-handling.webp"
+      },
+      {
+        "file": "02-thermostat-and-element-replacement.webp",
+        "label": "Thermostat & heating check",
+        "path": "assets/services/water-heater-repair/02-thermostat-and-element-replacement.webp"
+      },
+      {
+        "file": "05-gas-and-electric-water-heaters.webp",
+        "label": "Leak, venting & connection review",
+        "path": "assets/services/water-heater-repair/05-gas-and-electric-water-heaters.webp"
+      },
+      {
+        "file": "05-descaling-and-maintenance.webp",
+        "label": "Tankless descaling",
+        "path": "assets/services/tankless-water-heaters/05-descaling-and-maintenance.webp"
+      }
+    ]
+  },
+  {
+    "index": 34,
+    "key": "Sump Pump Services",
+    "slug": "sump-pump-services",
+    "bookUrl": "https://ironcladtexas.com/book?service=sump-pump-services",
+    "seoTitle": "Sump Pump Services Austin, TX | Ironclad Plumbing",
+    "metaDescription": "Sump pump testing, repair, replacement, and battery backup service in Austin. Protect low areas from water with clear, upfront recommendations.",
+    "eyebrow": "SUMP PUMP SERVICES · AUSTIN",
+    "h1": "Sump Pump Repair, Replacement & Testing",
+    "valueLine": "Test the system before the next storm puts it to work.",
+    "pun": "Keep water in its place.",
+    "punFirst": false,
+    "callFirst": false,
+    "signsHeading": "Signs Your Sump Pump Needs Attention",
+    "signsIntro": "A sump pump can sit unnoticed for months. These signs mean it may not be ready when water reaches the pit.",
+    "signs": [
+      {
+        "title": "The pit fills but the pump stays off",
+        "body": "A failed float, switch, power supply, or pump motor can leave rising water with nowhere to go."
+      },
+      {
+        "title": "The pump runs constantly",
+        "body": "Continuous cycling may point to a stuck switch, undersized pump, check-valve problem, or incoming water issue."
+      },
+      {
+        "title": "You hear grinding or rattling",
+        "body": "New mechanical noise can indicate debris, worn bearings, a damaged impeller, or a pump nearing failure."
+      },
+      {
+        "title": "There is no backup plan",
+        "body": "A primary pump cannot protect the space during a power outage unless a reliable backup system is in place."
+      }
+    ],
+    "servicesHeading": "Our Sump Pump Services",
+    "servicesIntro": "We test the complete pumping path, explain why the system is failing, and recommend repair, replacement, or backup based on the actual condition.",
+    "services": [
+      {
+        "title": "System inspection & testing",
+        "body": "The pit, pump response, float, check valve, power, and visible discharge path are tested together.",
+        "image": "assets/services/leak-detection/05-pressure-testing.webp"
+      },
+      {
+        "title": "Sump pump repair",
+        "body": "Repairable switch, float, valve, connection, and operating issues are addressed where practical.",
+        "image": "assets/services/repairs/05-pipe-and-fitting-repair.webp"
+      },
+      {
+        "title": "Pump replacement",
+        "body": "Failed or undersized pumps are replaced with equipment matched to the pit and expected water volume.",
+        "image": "assets/services/water-line-repair/02-water-line-repair.webp"
+      },
+      {
+        "title": "Battery backup options",
+        "body": "Backup configurations are reviewed for continued protection during outages or primary-pump failure.",
+        "image": "assets/services/emergency/02-major-leaks-and-flooding.webp"
+      },
+      {
+        "title": "Float & switch service",
+        "body": "Sticking or unreliable controls are diagnosed so the pump starts and stops at the correct water level.",
+        "image": "assets/services/repairs/03-valve-and-shut-off-replacement.webp"
+      },
+      {
+        "title": "Discharge & check-valve review",
+        "body": "Visible discharge piping and backflow controls are checked for restriction, leakage, or water returning to the pit.",
+        "image": "assets/services/repiping/05-minimal-disruption-access.webp"
+      }
+    ],
+    "calloutHeadline": "Not sure the sump pump will start when the water rises?",
+    "calloutSub": "Testing it now is simpler than discovering a failure during heavy rain.",
+    "whyLine": "A sump system is only useful when the pump, controls, power, and discharge path all work together.",
+    "process": [
+      {
+        "step": "01",
+        "title": "Describe the system and symptoms",
+        "body": "Tell us where the pit is, when the pump last ran, and whether water is rising now."
+      },
+      {
+        "step": "02",
+        "title": "We test the complete setup",
+        "body": "The pump, float, check valve, power, and accessible discharge route are evaluated."
+      },
+      {
+        "step": "03",
+        "title": "We repair or replace the failed part",
+        "body": "You receive an upfront recommendation based on condition, capacity, and reliability."
+      },
+      {
+        "step": "04",
+        "title": "We confirm operation",
+        "body": "The system is cycle-tested and you get practical guidance for future testing and backup planning."
+      }
+    ],
+    "serviceAreaHeader": "Sump Pump Services in Austin and Nearby Areas",
+    "serviceAreaSub": "Sump pump inspection, repair, replacement, and backup planning across Greater Austin.",
+    "serviceAreaCta": "Schedule Sump Pump Service",
+    "faqHeading": "Sump Pump FAQ",
+    "faqs": [
+      {
+        "q": "Does every Austin home need a sump pump?",
+        "a": "No. Sump pumps are used where a pit collects groundwater or drainage in a low area, basement, or crawlspace. The home's layout and water history determine the need."
+      },
+      {
+        "q": "How do I test a sump pump?",
+        "a": "For many systems, adding water to the pit should raise the float and start the pump. Stop and call if the pump does not start, makes unusual noise, or cannot move the water."
+      },
+      {
+        "q": "How long does a sump pump last?",
+        "a": "Many pumps last roughly seven to ten years, but cycling frequency, debris, installation, and maintenance can shorten or extend that range."
+      },
+      {
+        "q": "Should I install a battery backup?",
+        "a": "A backup is worth considering when the space is vulnerable to water damage or outages commonly happen during the same storms that fill the pit."
+      },
+      {
+        "q": "Can a sump pump be repaired?",
+        "a": "Some float, switch, check-valve, and connection problems are repairable. A failed motor, severe corrosion, or an undersized older pump may justify replacement."
+      },
+      {
+        "q": "Why does my sump pump run all the time?",
+        "a": "Common causes include a stuck switch, failed check valve, undersized pump, discharge problem, or a water source that is continuously filling the pit."
+      }
+    ],
+    "finalHeading": "Make Sure the Pump Is Ready",
+    "finalBody": "Book sump pump testing or repair in Austin before the next heavy rain exposes a weak system.",
+    "finalCta": "Schedule Sump Pump Service",
+    "images": [
+      {
+        "file": "05-pressure-testing.webp",
+        "label": "System inspection & testing",
+        "path": "assets/services/leak-detection/05-pressure-testing.webp"
+      },
+      {
+        "file": "05-pipe-and-fitting-repair.webp",
+        "label": "Sump pump repair",
+        "path": "assets/services/repairs/05-pipe-and-fitting-repair.webp"
+      },
+      {
+        "file": "02-water-line-repair.webp",
+        "label": "Pump replacement",
+        "path": "assets/services/water-line-repair/02-water-line-repair.webp"
+      },
+      {
+        "file": "02-major-leaks-and-flooding.webp",
+        "label": "Battery backup options",
+        "path": "assets/services/emergency/02-major-leaks-and-flooding.webp"
+      },
+      {
+        "file": "03-valve-and-shut-off-replacement.webp",
+        "label": "Float & switch service",
+        "path": "assets/services/repairs/03-valve-and-shut-off-replacement.webp"
+      },
+      {
+        "file": "05-minimal-disruption-access.webp",
+        "label": "Discharge & check-valve review",
+        "path": "assets/services/repiping/05-minimal-disruption-access.webp"
+      }
+    ]
+  },
+  {
+    "index": 35,
+    "key": "Water Filtration",
+    "slug": "water-filtration",
+    "bookUrl": "https://ironcladtexas.com/book?service=water-filtration",
+    "seoTitle": "Water Filtration Austin, TX | Ironclad Plumbing",
+    "metaDescription": "Improve Austin tap water with properly sized whole-home or drinking-water filtration. Ironclad tests, installs, and maintains filtration systems.",
+    "eyebrow": "WATER FILTRATION · AUSTIN",
+    "h1": "Water Filtration Designed for Your Home",
+    "valueLine": "Test first, choose the right treatment, and avoid paying for a system you do not need.",
+    "pun": "Clear answers for clearer water.",
+    "punFirst": false,
+    "callFirst": false,
+    "signsHeading": "When to Consider Water Filtration",
+    "signsIntro": "Taste, odor, visible particles, and appliance residue can point to different water-quality needs. The right solution starts with the actual problem.",
+    "signs": [
+      {
+        "title": "Chlorine taste or odor",
+        "body": "Activated-carbon filtration may improve the taste and smell of treated municipal water."
+      },
+      {
+        "title": "Sediment or visible particles",
+        "body": "Rust, grit, or suspended material may call for targeted sediment filtration and a source check."
+      },
+      {
+        "title": "Staining or scale keeps returning",
+        "body": "Mineral hardness is different from ordinary filtration and may require conditioning or softening instead."
+      },
+      {
+        "title": "You rely on bottled drinking water",
+        "body": "A point-of-use drinking-water system can provide filtered water at the tap with less storage and waste."
+      }
+    ],
+    "servicesHeading": "Our Water Filtration Services",
+    "servicesIntro": "We match filtration to the water source, household demand, available space, and the contaminants or qualities you actually want to address.",
+    "services": [
+      {
+        "title": "Water-quality assessment",
+        "body": "Your concerns, source water, visible symptoms, and available test information are reviewed before equipment is recommended.",
+        "image": "assets/services/water-treatment/01-water-testing.webp"
+      },
+      {
+        "title": "Whole-home filtration",
+        "body": "Properly sized central filtration treats water before it reaches fixtures throughout the home.",
+        "image": "assets/services/water-treatment/03-whole-house-filtration.webp"
+      },
+      {
+        "title": "Drinking-water systems",
+        "body": "Under-sink and point-of-use options provide filtered water where you drink and cook.",
+        "image": "assets/services/water-treatment/04-drinking-water-systems.webp"
+      },
+      {
+        "title": "Sediment filtration",
+        "body": "Staged sediment filters can reduce grit and suspended particles while protecting downstream equipment.",
+        "image": "assets/services/water-treatment/06-maintenance-and-media-swaps.webp"
+      },
+      {
+        "title": "Softener & conditioner guidance",
+        "body": "We separate hardness problems from filtration needs and explain when a softener or conditioner is the better tool.",
+        "image": "assets/services/water-treatment/02-water-softener-install.webp"
+      },
+      {
+        "title": "Filter & media maintenance",
+        "body": "Cartridges, media, housings, and system condition are serviced on the schedule the equipment requires.",
+        "image": "assets/services/water-treatment/05-salt-free-conditioners.webp"
+      }
+    ],
+    "calloutHeadline": "Not sure whether you need a filter, softener, or both?",
+    "calloutSub": "Start with the water problem and choose equipment only after the goal is clear.",
+    "whyLine": "Good water treatment is sized around evidence and household use, not the largest system that can be sold.",
+    "process": [
+      {
+        "step": "01",
+        "title": "Tell us what you notice",
+        "body": "Share taste, odor, residue, staining, sediment, source-water, and drinking-water concerns."
+      },
+      {
+        "step": "02",
+        "title": "We assess the water and plumbing",
+        "body": "We review available test results, flow needs, installation space, and the existing piping."
+      },
+      {
+        "step": "03",
+        "title": "You choose a right-sized option",
+        "body": "We explain what each system can and cannot address before you approve the price."
+      },
+      {
+        "step": "04",
+        "title": "We install and verify",
+        "body": "The system is installed, flushed, tested, and paired with a practical maintenance schedule."
+      }
+    ],
+    "serviceAreaHeader": "Water Filtration in Austin and Nearby Areas",
+    "serviceAreaSub": "Whole-home and drinking-water filtration assessment, installation, and maintenance across Greater Austin.",
+    "serviceAreaCta": "Schedule Water Filtration Service",
+    "faqHeading": "Water Filtration FAQ",
+    "faqs": [
+      {
+        "q": "What is the difference between a water filter and a water softener?",
+        "a": "Filtration targets specific particles, tastes, odors, or contaminants. A softener primarily exchanges hardness minerals that cause scale. Some homes benefit from one; others need both."
+      },
+      {
+        "q": "What does a whole-home water filter remove?",
+        "a": "It depends on the filter media and system design. Carbon, sediment, and specialty media address different issues, so testing and a defined goal matter."
+      },
+      {
+        "q": "Do I need a water test before choosing a filter?",
+        "a": "A test or reliable utility water information helps avoid guesswork, especially for wells, visible staining, unusual odors, or specific health-related concerns."
+      },
+      {
+        "q": "Is whole-home filtration better than reverse osmosis?",
+        "a": "They serve different jobs. Whole-home systems treat water throughout the house; reverse osmosis is commonly used at a drinking-water tap for more targeted treatment."
+      },
+      {
+        "q": "How often do water filters need maintenance?",
+        "a": "Intervals vary by media, cartridge size, water quality, and household use. We provide a schedule based on the installed system rather than a generic date."
+      },
+      {
+        "q": "Will a water filter reduce water pressure?",
+        "a": "A correctly sized, maintained system should preserve useful flow. Undersized or clogged filters can restrict pressure and need correction or service."
+      }
+    ],
+    "finalHeading": "Choose Filtration Based on Your Water",
+    "finalBody": "Schedule a water-filtration assessment in Austin and get a system matched to the problem you want to solve.",
+    "finalCta": "Schedule Filtration Service",
+    "images": [
+      {
+        "file": "01-water-testing.webp",
+        "label": "Water-quality assessment",
+        "path": "assets/services/water-treatment/01-water-testing.webp"
+      },
+      {
+        "file": "03-whole-house-filtration.webp",
+        "label": "Whole-home filtration",
+        "path": "assets/services/water-treatment/03-whole-house-filtration.webp"
+      },
+      {
+        "file": "04-drinking-water-systems.webp",
+        "label": "Drinking-water systems",
+        "path": "assets/services/water-treatment/04-drinking-water-systems.webp"
+      },
+      {
+        "file": "06-maintenance-and-media-swaps.webp",
+        "label": "Sediment filtration",
+        "path": "assets/services/water-treatment/06-maintenance-and-media-swaps.webp"
+      },
+      {
+        "file": "02-water-softener-install.webp",
+        "label": "Softener & conditioner guidance",
+        "path": "assets/services/water-treatment/02-water-softener-install.webp"
+      },
+      {
+        "file": "05-salt-free-conditioners.webp",
+        "label": "Filter & media maintenance",
+        "path": "assets/services/water-treatment/05-salt-free-conditioners.webp"
+      }
+    ]
+  },
+  {
+    "index": 36,
+    "key": "Kitchen & Bathroom Plumbing Repair",
+    "slug": "kitchen-bathroom-plumbing-repair",
+    "bookUrl": "https://ironcladtexas.com/book?service=kitchen-bathroom-plumbing-repair",
+    "seoTitle": "Kitchen & Bathroom Plumbing Repair Austin | Ironclad",
+    "metaDescription": "Kitchen and bathroom plumbing repair in Austin for faucets, sinks, toilets, showers, disposals, drains, and hidden leaks. Upfront pricing.",
+    "eyebrow": "KITCHEN & BATHROOM REPAIR · AUSTIN",
+    "h1": "Kitchen & Bathroom Plumbing Repair",
+    "valueLine": "One licensed team for the fixtures, drains, valves, and leaks used every day.",
+    "pun": "Fix the drip before it becomes the project.",
+    "punFirst": false,
+    "callFirst": false,
+    "signsHeading": "Signs the Room Needs a Plumber",
+    "signsIntro": "Small kitchen and bathroom problems often share a connection, valve, drain, or pressure issue that is easier to fix before damage spreads.",
+    "signs": [
+      {
+        "title": "Water appears under a sink or cabinet",
+        "body": "A trap, supply line, shutoff, faucet, disposal, or hidden connection may be leaking into finished surfaces."
+      },
+      {
+        "title": "A faucet drips or loses pressure",
+        "body": "Worn cartridges, aerators, valves, or supply issues can waste water and make everyday fixtures unreliable."
+      },
+      {
+        "title": "The toilet runs, rocks, or leaks",
+        "body": "Internal parts, seals, mounting, or the connection below the fixture may need repair."
+      },
+      {
+        "title": "A shower, tub, or sink drains slowly",
+        "body": "Localized buildup can become a complete clog, while multiple slow fixtures may point to a larger drain problem."
+      }
+    ],
+    "servicesHeading": "Kitchen & Bathroom Plumbing Repairs",
+    "servicesIntro": "We diagnose the source, protect the surrounding finishes, and give you an exact repair option before work begins.",
+    "services": [
+      {
+        "title": "Faucet & sink repair",
+        "body": "Drips, loose fixtures, failed cartridges, leaking drains, and damaged sink connections repaired cleanly.",
+        "image": "assets/services/faucet-sink-services/01-drip-and-leak-repair.webp"
+      },
+      {
+        "title": "Toilet repair",
+        "body": "Running, rocking, leaking, weak-flushing, and overflowing toilets diagnosed and repaired.",
+        "image": "assets/services/toilet-repair-installation/02-running-toilet-repair.webp"
+      },
+      {
+        "title": "Shower & tub valve repair",
+        "body": "Temperature, pressure, dripping, and valve-control problems corrected without unnecessary replacement.",
+        "image": "assets/services/bathroom-plumbing/02-shower-and-tub-valves.webp"
+      },
+      {
+        "title": "Under-sink & fixture leaks",
+        "body": "Supply lines, shutoffs, traps, drains, and concealed connection points traced and repaired.",
+        "image": "assets/services/leak-repair/01-under-sink-and-fixture-leaks.webp"
+      },
+      {
+        "title": "Garbage disposal repair",
+        "body": "Jammed, leaking, humming, or non-working disposals checked along with the drain and mounting connections.",
+        "image": "assets/services/garbage-disposal-services/01-jam-and-reset-repair.webp"
+      },
+      {
+        "title": "Kitchen & bathroom drain repair",
+        "body": "Room-specific slow drains and clogs cleared, with escalation when symptoms point to the branch or main line.",
+        "image": "assets/services/clogged-drain/01-kitchen-sink-clogs.webp"
+      }
+    ],
+    "calloutHeadline": "Leak, drip, clog, or fixture problem interrupting the room?",
+    "calloutSub": "We repair the working parts and connections behind the kitchen and bathroom fixtures you use most.",
+    "whyLine": "A room repair should solve the source without leaving damage, mess, or unanswered questions behind.",
+    "process": [
+      {
+        "step": "01",
+        "title": "Tell us the room and symptom",
+        "body": "Share the fixture, when the problem started, and whether water is actively leaking."
+      },
+      {
+        "step": "02",
+        "title": "We diagnose the source",
+        "body": "The fixture, valves, connections, drain, and surrounding area are checked before a repair is recommended."
+      },
+      {
+        "step": "03",
+        "title": "You approve the repair",
+        "body": "We explain the option and price before replacing parts or opening the work area."
+      },
+      {
+        "step": "04",
+        "title": "We test and clean up",
+        "body": "Water flow, drainage, seals, and fixture operation are verified before the room is returned to use."
+      }
+    ],
+    "serviceAreaHeader": "Kitchen & Bathroom Plumbing Repair in Austin",
+    "serviceAreaSub": "Fixture, valve, drain, disposal, toilet, sink, shower, and leak repair across Greater Austin.",
+    "serviceAreaCta": "Schedule Room Plumbing Repair",
+    "faqHeading": "Kitchen & Bathroom Plumbing Repair FAQ",
+    "faqs": [
+      {
+        "q": "What kitchen plumbing problems do you repair?",
+        "a": "We repair faucets, sinks, supply lines, shutoffs, traps, disposals, fixture drains, dishwasher connections, and many under-sink leaks."
+      },
+      {
+        "q": "What bathroom plumbing problems do you repair?",
+        "a": "We handle toilets, faucets, sinks, shower and tub valves, fixture drains, supply lines, shutoffs, and visible or hidden connection leaks."
+      },
+      {
+        "q": "Should I repair or replace a leaking faucet or toilet?",
+        "a": "Repair often makes sense when the fixture is in good condition and parts are available. Replacement may be better for cracked, heavily corroded, inefficient, or repeatedly failing fixtures."
+      },
+      {
+        "q": "Can you repair a leak without damaging the cabinet or wall?",
+        "a": "Many fixture and connection leaks are accessible. When a line is concealed, we explain the least disruptive access and repair approach before work starts."
+      },
+      {
+        "q": "Do you clear kitchen and bathroom drains?",
+        "a": "Yes. We handle localized fixture clogs and can diagnose branch or main-line problems when several drains are affected."
+      },
+      {
+        "q": "Can you repair the plumbing during a kitchen or bathroom remodel?",
+        "a": "Yes. Repair work can be coordinated with a remodel, while new fixtures, relocated lines, and rough-ins are handled as installation work."
+      }
+    ],
+    "finalHeading": "Get the Room Working Properly Again",
+    "finalBody": "Book kitchen or bathroom plumbing repair in Austin for a clear diagnosis and an upfront repair plan.",
+    "finalCta": "Schedule Plumbing Repair",
+    "images": [
+      {
+        "file": "01-drip-and-leak-repair.webp",
+        "label": "Faucet & sink repair",
+        "path": "assets/services/faucet-sink-services/01-drip-and-leak-repair.webp"
+      },
+      {
+        "file": "02-running-toilet-repair.webp",
+        "label": "Toilet repair",
+        "path": "assets/services/toilet-repair-installation/02-running-toilet-repair.webp"
+      },
+      {
+        "file": "02-shower-and-tub-valves.webp",
+        "label": "Shower & tub valve repair",
+        "path": "assets/services/bathroom-plumbing/02-shower-and-tub-valves.webp"
+      },
+      {
+        "file": "01-under-sink-and-fixture-leaks.webp",
+        "label": "Under-sink & fixture leaks",
+        "path": "assets/services/leak-repair/01-under-sink-and-fixture-leaks.webp"
+      },
+      {
+        "file": "01-jam-and-reset-repair.webp",
+        "label": "Garbage disposal repair",
+        "path": "assets/services/garbage-disposal-services/01-jam-and-reset-repair.webp"
+      },
+      {
+        "file": "01-kitchen-sink-clogs.webp",
+        "label": "Kitchen & bathroom drain repair",
+        "path": "assets/services/clogged-drain/01-kitchen-sink-clogs.webp"
+      }
+    ]
+  },
+  {
+    "index": 37,
+    "key": "Kitchen & Bathroom Plumbing Installation",
+    "slug": "kitchen-bathroom-plumbing-installation",
+    "bookUrl": "https://ironcladtexas.com/book?service=kitchen-bathroom-plumbing-installation",
+    "seoTitle": "Kitchen & Bathroom Plumbing Install Austin | Ironclad",
+    "metaDescription": "Kitchen and bathroom plumbing installation in Austin for fixtures, sinks, toilets, disposals, valves, supply lines, and remodel rough-ins.",
+    "eyebrow": "KITCHEN & BATHROOM INSTALLATION · AUSTIN",
+    "h1": "Kitchen & Bathroom Plumbing Installation",
+    "valueLine": "Fixtures, connections, and remodel plumbing installed cleanly and tested before use.",
+    "pun": "Start the room with plumbing that fits.",
+    "punFirst": false,
+    "callFirst": false,
+    "signsHeading": "When You Need Installation Work",
+    "signsIntro": "New fixtures are only one part of a reliable room. The supplies, drains, valves, venting, clearances, and rough-in all need to match.",
+    "signs": [
+      {
+        "title": "You are replacing multiple fixtures",
+        "body": "A coordinated installation keeps shutoffs, drains, supply lines, and fixture connections consistent across the room."
+      },
+      {
+        "title": "The layout is changing",
+        "body": "Moving a sink, toilet, shower, tub, appliance, or island may require new supply, drain, or vent routing."
+      },
+      {
+        "title": "Old connections are exposed",
+        "body": "A remodel is the best time to address corroded valves, undersized lines, or aging materials hidden behind finishes."
+      },
+      {
+        "title": "A new fixture does not match the rough-in",
+        "body": "Dimensions, mounting, drains, and water connections should be confirmed before finishes or cabinets make corrections harder."
+      }
+    ],
+    "servicesHeading": "Kitchen & Bathroom Plumbing Installation",
+    "servicesIntro": "We install the fixture and the plumbing behind it, coordinate the required access, and test the complete connection before the project moves on.",
+    "services": [
+      {
+        "title": "Kitchen sinks & faucets",
+        "body": "New sinks, faucets, shutoffs, supplies, traps, and drain connections installed and leak-tested.",
+        "image": "assets/services/faucet-sink-services/04-kitchen-faucet-install.webp"
+      },
+      {
+        "title": "Bathroom sinks & vanities",
+        "body": "Vanity plumbing aligned to the fixture, cabinet, drain, shutoffs, and faucet configuration.",
+        "image": "assets/services/bathroom-plumbing/05-vanity-and-sink-plumbing.webp"
+      },
+      {
+        "title": "Toilet installation",
+        "body": "Toilets set, sealed, connected, secured, and tested for stable operation and a reliable flush.",
+        "image": "assets/services/toilet-repair-installation/04-toilet-installation.webp"
+      },
+      {
+        "title": "Shower & tub plumbing",
+        "body": "Valves, supplies, drains, and fixture connections installed for replacement or remodeling work.",
+        "image": "assets/services/bathroom-plumbing/01-fixture-installation.webp"
+      },
+      {
+        "title": "Disposals & appliance connections",
+        "body": "Garbage disposals and accessible dishwasher water and drain connections installed to the room's setup.",
+        "image": "assets/services/garbage-disposal-services/05-new-disposal-installation.webp"
+      },
+      {
+        "title": "Remodel rough-in plumbing",
+        "body": "Supply, drain, vent, and fixture locations prepared and tested before walls, cabinets, and finishes close the work.",
+        "image": "assets/services/bathroom-plumbing/06-remodel-rough-in.webp"
+      }
+    ],
+    "calloutHeadline": "Planning new fixtures, a new layout, or a full room remodel?",
+    "calloutSub": "Get the plumbing locations and connections right before cabinets, tile, and walls make changes expensive.",
+    "whyLine": "A polished room depends on plumbing that is correctly placed, supported, sealed, and tested behind the finish.",
+    "process": [
+      {
+        "step": "01",
+        "title": "Review the fixtures and plan",
+        "body": "We confirm product specifications, layout, access, existing piping, and the project schedule."
+      },
+      {
+        "step": "02",
+        "title": "We define the plumbing scope",
+        "body": "You receive an upfront plan for rough-in, fixture connections, required corrections, and testing."
+      },
+      {
+        "step": "03",
+        "title": "We install and coordinate",
+        "body": "The plumbing work is completed at the right stage for cabinets, tile, counters, and other trades."
+      },
+      {
+        "step": "04",
+        "title": "We test before turnover",
+        "body": "Connections, drainage, seals, flow, and fixture operation are checked before the room goes into service."
+      }
+    ],
+    "serviceAreaHeader": "Kitchen & Bathroom Plumbing Installation in Austin",
+    "serviceAreaSub": "Fixture installation and remodel plumbing for kitchens and bathrooms across Greater Austin.",
+    "serviceAreaCta": "Schedule an Installation Consultation",
+    "faqHeading": "Kitchen & Bathroom Plumbing Installation FAQ",
+    "faqs": [
+      {
+        "q": "What kitchen fixtures can a plumber install?",
+        "a": "Common installations include sinks, faucets, disposals, shutoffs, supply lines, drains, and accessible dishwasher water and drain connections."
+      },
+      {
+        "q": "What bathroom fixtures can a plumber install?",
+        "a": "We install toilets, sinks, faucets, shower and tub valves, fixture drains, supplies, shutoffs, and plumbing for compatible vanities and remodel layouts."
+      },
+      {
+        "q": "Can you install fixtures I already purchased?",
+        "a": "Often yes, provided the fixture is complete, code-compliant, compatible with the rough-in, and suitable for the available space and connections."
+      },
+      {
+        "q": "Do kitchen or bathroom remodels require plumbing permits?",
+        "a": "Some replacements do not, while relocated piping, new fixtures, or larger remodel scopes may. Requirements depend on the municipality and project."
+      },
+      {
+        "q": "Can you move a sink, toilet, shower, or tub?",
+        "a": "Yes, when the structure, drainage, venting, slope, access, and local code support the new location. We assess feasibility before finishes are removed or installed."
+      },
+      {
+        "q": "Do you coordinate with remodel contractors?",
+        "a": "Yes. Plumbing rough-in and finish work can be scheduled around cabinets, counters, waterproofing, tile, and inspections when responsibilities are clear."
+      }
+    ],
+    "finalHeading": "Build the Room on Reliable Plumbing",
+    "finalBody": "Schedule kitchen or bathroom plumbing installation in Austin before the next phase of the project begins.",
+    "finalCta": "Schedule Installation",
+    "images": [
+      {
+        "file": "04-kitchen-faucet-install.webp",
+        "label": "Kitchen sinks & faucets",
+        "path": "assets/services/faucet-sink-services/04-kitchen-faucet-install.webp"
+      },
+      {
+        "file": "05-vanity-and-sink-plumbing.webp",
+        "label": "Bathroom sinks & vanities",
+        "path": "assets/services/bathroom-plumbing/05-vanity-and-sink-plumbing.webp"
+      },
+      {
+        "file": "04-toilet-installation.webp",
+        "label": "Toilet installation",
+        "path": "assets/services/toilet-repair-installation/04-toilet-installation.webp"
+      },
+      {
+        "file": "01-fixture-installation.webp",
+        "label": "Shower & tub plumbing",
+        "path": "assets/services/bathroom-plumbing/01-fixture-installation.webp"
+      },
+      {
+        "file": "05-new-disposal-installation.webp",
+        "label": "Disposals & appliance connections",
+        "path": "assets/services/garbage-disposal-services/05-new-disposal-installation.webp"
+      },
+      {
+        "file": "06-remodel-rough-in.webp",
+        "label": "Remodel rough-in plumbing",
+        "path": "assets/services/bathroom-plumbing/06-remodel-rough-in.webp"
+      }
+    ]
   }
 ]

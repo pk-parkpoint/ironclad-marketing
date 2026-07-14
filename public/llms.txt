@@ -2,7 +2,7 @@
 
 > Ironclad Plumbing is a residential plumbing company serving Austin and the Greater Austin metro. The site publishes service pages, city pages, written guarantees, FAQs, cost guides, and homeowner education for comparing plumbing work before booking.
 
-Last updated: 2026-05-26.
+Last updated: 2026-07-14.
 
 ## Canonical Site
 
@@ -70,6 +70,12 @@ Last updated: 2026-05-26.
 - [Faucet & Sink Services](https://ironcladtexas.com/plumbing/faucet-sink-repair-installation): Dripping faucets, leaking sinks, and new installations repaired or replaced with precision in Austin homes.
 - [Garbage Disposal Services](https://ironcladtexas.com/plumbing/garbage-disposal-repair-installation): Garbage disposal repair, replacement, and new installation in Austin. Jammed, leaking, or dead units fixed same-day.
 - [Hydro Jetting](https://ironcladtexas.com/plumbing/hydro-jetting): Recurring clogs in Austin? Ironclad's hydro jetting clears grease, roots, and buildup a snake can't reach. Upfront pricing. Call today.
+- [Plumbing Inspection](https://ironcladtexas.com/plumbing/plumbing-inspection): Get a detailed plumbing inspection in Austin for an older home, purchase, remodel, or recurring issue. Clear findings and upfront next steps.
+- [Water Heater Tune-Up](https://ironcladtexas.com/plumbing/water-heater-tune-up): Schedule a water heater tune-up in Austin. Ironclad flushes sediment, tests safety controls, and checks performance with upfront pricing.
+- [Sump Pump Services](https://ironcladtexas.com/plumbing/sump-pump-services): Sump pump testing, repair, replacement, and battery backup service in Austin. Protect low areas from water with clear, upfront recommendations.
+- [Water Filtration](https://ironcladtexas.com/plumbing/water-filtration): Improve Austin tap water with properly sized whole-home or drinking-water filtration. Ironclad tests, installs, and maintains filtration systems.
+- [Kitchen & Bathroom Plumbing Repair](https://ironcladtexas.com/plumbing/kitchen-bathroom-plumbing-repair): Kitchen and bathroom plumbing repair in Austin for faucets, sinks, toilets, showers, disposals, drains, and hidden leaks. Upfront pricing.
+- [Kitchen & Bathroom Plumbing Installation](https://ironcladtexas.com/plumbing/kitchen-bathroom-plumbing-installation): Kitchen and bathroom plumbing installation in Austin for fixtures, sinks, toilets, disposals, valves, supply lines, and remodel rough-ins.
 - [Plumbing](https://ironcladtexas.com/plumbing): Full-service plumbing in Austin from Ironclad. Drains, water heaters, leaks, sewers, and emergencies, with upfront pricing and a written warranty. Call today.
 - [Water Line / Main Line Repair](https://ironcladtexas.com/plumbing/water-line-repair): Main water line repair and replacement in Austin. Ironclad finds the break and fixes it fast with minimal digging and upfront pricing. Call now.
 - [Water Pressure / Pressure Regulator (PRV)](https://ironcladtexas.com/plumbing/water-pressure): Low or high water pressure in Austin? Ironclad tests and repairs pressure regulators (PRV) and supply issues, with upfront pricing. Call today.
