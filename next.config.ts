@@ -10,6 +10,15 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_FIREBASE_PROJECT_ID: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "",
     NEXT_PUBLIC_FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "",
   },
+  async redirects() {
+    return [
+      { source: "/book-online", destination: "/book", permanent: true },
+      { source: "/emergency-plumbing", destination: "/plumbing/emergency", permanent: true },
+      { source: "/water-heaters", destination: "/plumbing/water-heaters", permanent: true },
+      { source: "/drain-cleaning", destination: "/plumbing/drain-cleaning", permanent: true },
+      { source: "/leak-detection", destination: "/plumbing/leak-detection", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {
