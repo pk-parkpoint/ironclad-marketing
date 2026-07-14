@@ -27,12 +27,16 @@ function main() {
   assertContains(".env.example", envExample, "NEXT_PUBLIC_GA4_MEASUREMENT_ID");
   assertContains(".env.example", envExample, "NEXT_PUBLIC_GTM_ID");
   assertContains(".env.example", envExample, "NEXT_PUBLIC_GOOGLE_ADS_ID");
+  assertContains(".env.example", envExample, "NEXT_PUBLIC_GOOGLE_ADS_PHONE_CONVERSION_LABEL");
 
   assertContains("app/layout.tsx", layout, "AnalyticsBootstrap");
   assertContains("app/layout.tsx", layout, "NEXT_PUBLIC_GTM_ID");
   assertContains("app/layout.tsx", layout, "NEXT_PUBLIC_GA4_MEASUREMENT_ID");
   assertContains("app/layout.tsx", layout, "NEXT_PUBLIC_GOOGLE_ADS_ID");
   assertContains("app/layout.tsx", layout, "AW-18207846861");
+  assertContains("analytics events", analyticsEvents, "2WRhCLCe388cEM3jlupD");
+  assertContains("analytics events", analyticsEvents, 'window.gtag("event", "conversion"');
+  assertContains("analytics runtime", analyticsRuntime, "trackGoogleAdsPhoneConversion");
 
   for (const eventName of [
     "page_view",
