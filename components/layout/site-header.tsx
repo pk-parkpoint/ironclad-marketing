@@ -4,13 +4,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { FocusEvent, MouseEvent } from "react";
+import { ChevronRight } from "lucide-react";
 import { getPublicContactInfo } from "@/lib/contact";
 import { TOP_NAV_LINKS } from "@/lib/routes";
+import type { NavChildLink, TopNavLink } from "@/lib/routes";
 import { SiteLogo } from "./site-logo";
 
 function isNavLinkActive(currentPath: string, href: string): boolean {
   if (href === "/") return currentPath === "/";
   return currentPath === href || currentPath.startsWith(`${href}/`);
+}
+
+function isNavTreeActive(currentPath: string, link: NavChildLink): boolean {
+  return isNavLinkActive(currentPath, link.href) || Boolean(link.children?.some((child) => isNavTreeActive(currentPath, child)));
+}
+
+function isTopNavLinkActive(currentPath: string, link: TopNavLink): boolean {
+  return currentPath === link.href || Boolean(link.children?.some((child) => isNavTreeActive(currentPath, child)));
 }
 
 function ChevronDownIcon({ className }: { className?: string }) {
@@ -51,6 +61,111 @@ function PhoneIcon({ className }: { className?: string }) {
   );
 }
 
+function DesktopDropdownItem({
+  childLink,
+  flyoutDirection,
+  pathname,
+}: {
+  childLink: NavChildLink;
+  flyoutDirection: "left" | "right";
+  pathname: string;
+}) {
+  const childActive = isNavTreeActive(pathname, childLink);
+  const childIsCurrentPage = isNavLinkActive(pathname, childLink.href);
+  const hasNestedLinks = Boolean(childLink.children?.length);
+  const useCompactFlyout = (childLink.children?.length || 0) > 10;
+
+  return (
+    <li className="group/item relative" key={childLink.href}>
+      <Link
+        aria-current={childIsCurrentPage ? "page" : undefined}
+        aria-haspopup={hasNestedLinks ? "menu" : undefined}
+        className={`focus-ring flex min-h-11 items-center justify-between gap-4 rounded px-4 py-2.5 text-sm font-medium transition-colors hover:no-underline ${
+          childActive ? "bg-[#F3F4F6] text-[#111827]" : "text-[#374151] hover:bg-[#F3F4F6] hover:text-[#111827]"
+        }`}
+        href={childLink.href}
+      >
+        <span>{childLink.label}</span>
+        {hasNestedLinks ? <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0 text-[#6B7280]" /> : null}
+      </Link>
+
+      {hasNestedLinks ? (
+        <div
+          className={`pointer-events-none invisible absolute z-40 opacity-0 delay-150 transition-[opacity,transform] duration-150 ease-out group-focus-within/item:pointer-events-auto group-focus-within/item:visible group-focus-within/item:translate-x-0 group-focus-within/item:opacity-100 group-focus-within/item:delay-0 group-hover/item:pointer-events-auto group-hover/item:visible group-hover/item:translate-x-0 group-hover/item:opacity-100 group-hover/item:delay-0 ${
+            useCompactFlyout ? "bottom-0" : "top-0"
+          } ${
+            flyoutDirection === "left" ? "right-full translate-x-1 pr-2" : "left-full -translate-x-1 pl-2"
+          }`}
+        >
+          <ul
+            aria-label={`${childLink.label} subpages`}
+            className={`m-0 list-none rounded-lg border border-[#E5E7EB] bg-white p-2 shadow-[0_4px_12px_rgba(0,0,0,0.1)] ${
+              useCompactFlyout ? "grid w-[min(30rem,36vw)] grid-cols-2 gap-1" : "w-[min(21rem,34vw)]"
+            }`}
+          >
+            {childLink.children?.map((nestedLink) => (
+              <DesktopDropdownItem
+                childLink={nestedLink}
+                flyoutDirection={flyoutDirection}
+                key={nestedLink.href}
+                pathname={pathname}
+              />
+            ))}
+          </ul>
+        </div>
+      ) : null}
+    </li>
+  );
+}
+
+function MobileNavChildList({
+  links,
+  onNavigate,
+  pathname,
+}: {
+  links: NavChildLink[];
+  onNavigate: () => void;
+  pathname: string;
+}) {
+  return (
+    <ul className="mt-1 m-0 list-none space-y-1 pl-4">
+      {links.map((childLink) => {
+        const childActive = isNavTreeActive(pathname, childLink);
+        const hasNestedLinks = Boolean(childLink.children?.length);
+
+        return (
+          <li key={childLink.href}>
+            {hasNestedLinks ? (
+              <details className="group/mobile-child">
+                <summary
+                  className={`focus-ring flex min-h-10 cursor-pointer list-none items-center justify-between gap-3 rounded px-3 py-2 text-sm [&::-webkit-details-marker]:hidden ${
+                    childActive ? "font-semibold text-[#111827]" : "text-[#374151] hover:bg-[#F3F4F6]"
+                  }`}
+                >
+                  <span>{childLink.label}</span>
+                  <ChevronDownIcon className="h-4 w-4 shrink-0 text-[#9CA3AF] transition-transform group-open/mobile-child:rotate-180" />
+                </summary>
+                <MobileNavChildList links={childLink.children || []} onNavigate={onNavigate} pathname={pathname} />
+              </details>
+            ) : (
+              <Link
+                aria-current={isNavLinkActive(pathname, childLink.href) ? "page" : undefined}
+                className={`focus-ring flex min-h-10 items-center rounded px-3 py-2 text-sm ${
+                  childActive ? "font-semibold text-[#111827]" : "text-[#374151] hover:bg-[#F3F4F6]"
+                }`}
+                href={childLink.href}
+                onClick={onNavigate}
+              >
+                {childLink.label}
+              </Link>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
 export function SiteHeader() {
   const pathname = usePathname() || "/";
   const [isElevated, setIsElevated] = useState(false);
@@ -60,9 +175,9 @@ export function SiteHeader() {
   const navRef = useRef<HTMLElement | null>(null);
   const { phoneDisplay, phoneHref } = getPublicContactInfo();
   const navPhoneLabel = phoneDisplay;
-  const desktopNavDisplay = "lg:flex";
-  const desktopActionDisplay = "lg:inline-flex";
-  const mobileNavDisplay = "lg:hidden";
+  const desktopNavDisplay = "min-[1360px]:flex";
+  const desktopActionDisplay = "min-[1360px]:inline-flex";
+  const mobileNavDisplay = "min-[1360px]:hidden";
 
   function handleNavItemEnter(event: MouseEvent<HTMLElement> | FocusEvent<HTMLElement>) {
     const nav = navRef.current;
@@ -195,15 +310,16 @@ export function SiteHeader() {
               />
 
               {TOP_NAV_LINKS.map((link) => {
-                const active = isNavLinkActive(pathname, link.href);
+                const active = isTopNavLinkActive(pathname, link);
                 const hasChildren = Boolean(link.children && link.children.length > 0);
-                const isPlumbingDropdown = link.href === "/plumbing";
+                const hasGroupedChildren = Boolean(link.children?.some((child) => child.children?.length));
                 const isAboutDropdown = link.href === "/about";
+                const flyoutDirection = link.href === "/plumbing" ? "right" : "left";
 
                 return (
                   <div className="group/nav relative" key={link.href}>
                     <Link
-                      aria-current={active ? "page" : undefined}
+                      aria-current={pathname === link.href ? "page" : undefined}
                       aria-haspopup={hasChildren ? "menu" : undefined}
                       className={`focus-ring relative z-10 inline-flex items-center gap-1 rounded-lg px-3 py-2 text-[15px] transition-colors hover:no-underline ${
                         active ? "font-semibold text-[#111827]" : "text-[#374151] hover:text-[#111827]"
@@ -222,8 +338,8 @@ export function SiteHeader() {
                       <div className="pointer-events-none invisible absolute left-0 top-full z-30 pt-2 opacity-0 delay-150 transition-[opacity,transform] duration-150 ease-out -translate-y-1 group-focus-within/nav:pointer-events-auto group-focus-within/nav:visible group-focus-within/nav:opacity-100 group-focus-within/nav:translate-y-0 group-focus-within/nav:delay-0 group-hover/nav:pointer-events-auto group-hover/nav:visible group-hover/nav:opacity-100 group-hover/nav:translate-y-0 group-hover/nav:delay-0">
                         <div
                           className={`rounded-lg border border-[#E5E7EB] bg-white p-2 shadow-[0_4px_12px_rgba(0,0,0,0.1)] ${
-                            isPlumbingDropdown
-                              ? "w-[min(40rem,72vw)]"
+                            hasGroupedChildren
+                              ? "w-[min(23rem,38vw)]"
                               : isAboutDropdown
                                 ? "w-[min(18rem,32vw)]"
                                 : "w-[min(28rem,64vw)]"
@@ -232,30 +348,21 @@ export function SiteHeader() {
                           <ul
                             aria-label={`${link.label} subpages`}
                             className={`m-0 list-none gap-1 p-0 ${
-                              isPlumbingDropdown
-                                ? "grid grid-cols-2"
+                              hasGroupedChildren
+                                ? "grid grid-cols-1"
                                 : isAboutDropdown
                                   ? "grid grid-cols-1"
                                   : "grid grid-cols-1 sm:grid-cols-2"
                             }`}
                           >
                             {link.children?.map((childLink) => {
-                              const childActive = isNavLinkActive(pathname, childLink.href);
-
                               return (
-                                <li key={childLink.href}>
-                                  <Link
-                                    aria-current={childActive ? "page" : undefined}
-                                    className={`focus-ring block rounded px-4 py-2.5 text-sm font-medium transition-colors hover:no-underline ${
-                                      childActive
-                                        ? "bg-[#F3F4F6] text-[#111827]"
-                                        : "text-[#374151] hover:bg-[#F3F4F6] hover:text-[#111827]"
-                                    }`}
-                                    href={childLink.href}
-                                  >
-                                    {childLink.label}
-                                  </Link>
-                                </li>
+                                <DesktopDropdownItem
+                                  childLink={childLink}
+                                  flyoutDirection={flyoutDirection}
+                                  key={childLink.href}
+                                  pathname={pathname}
+                                />
                               );
                             })}
                           </ul>
@@ -312,7 +419,7 @@ export function SiteHeader() {
 
       <div
         aria-hidden={!mobileNavOpen}
-        className={`fixed inset-0 z-50 overflow-hidden transition-opacity duration-200 motion-reduce:transition-none ${mobileNavDisplay} ${
+        className={`fixed inset-0 z-[1000] overflow-hidden transition-opacity duration-200 motion-reduce:transition-none ${mobileNavDisplay} ${
           mobileNavOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         inert={!mobileNavOpen}
@@ -363,42 +470,39 @@ export function SiteHeader() {
           <nav aria-label="Mobile primary" className="flex-1 overflow-y-auto px-4 py-4">
             <ul className="m-0 list-none space-y-1 p-0">
               {TOP_NAV_LINKS.map((link) => {
-                const active = isNavLinkActive(pathname, link.href);
+                const active = isTopNavLinkActive(pathname, link);
+                const hasChildren = Boolean(link.children?.length);
 
                 return (
                   <li key={link.href}>
-                    <Link
-                      aria-current={active ? "page" : undefined}
-                      className={`focus-ring block rounded-lg px-4 py-3 text-base font-medium ${
-                        active ? "font-semibold text-[#111827]" : "text-[#374151] hover:bg-[#F3F4F6]"
-                      }`}
-                      href={link.href}
-                      onClick={() => setMobileNavOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                    {link.children?.length ? (
-                      <ul className="mt-1 m-0 list-none space-y-1 pl-4">
-                        {link.children.map((childLink) => {
-                          const childActive = isNavLinkActive(pathname, childLink.href);
-
-                          return (
-                            <li key={childLink.href}>
-                              <Link
-                                aria-current={childActive ? "page" : undefined}
-                                className={`focus-ring block rounded px-3 py-2 text-sm ${
-                                  childActive ? "font-semibold text-[#111827]" : "text-[#374151] hover:bg-[#F3F4F6]"
-                                }`}
-                                href={childLink.href}
-                                onClick={() => setMobileNavOpen(false)}
-                              >
-                                {childLink.label}
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    ) : null}
+                    {hasChildren ? (
+                      <details className="group/mobile-nav">
+                        <summary
+                          className={`focus-ring flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-lg px-4 py-3 text-base font-medium [&::-webkit-details-marker]:hidden ${
+                            active ? "font-semibold text-[#111827]" : "text-[#374151] hover:bg-[#F3F4F6]"
+                          }`}
+                        >
+                          <span>{link.label}</span>
+                          <ChevronDownIcon className="h-4 w-4 shrink-0 text-[#6B7280] transition-transform group-open/mobile-nav:rotate-180" />
+                        </summary>
+                        <MobileNavChildList
+                          links={link.children || []}
+                          onNavigate={() => setMobileNavOpen(false)}
+                          pathname={pathname}
+                        />
+                      </details>
+                    ) : (
+                      <Link
+                        aria-current={pathname === link.href ? "page" : undefined}
+                        className={`focus-ring block rounded-lg px-4 py-3 text-base font-medium ${
+                          active ? "font-semibold text-[#111827]" : "text-[#374151] hover:bg-[#F3F4F6]"
+                        }`}
+                        href={link.href}
+                        onClick={() => setMobileNavOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 );
               })}

@@ -189,7 +189,7 @@ export function LocalHero({
   title,
 }: LocalHeroProps) {
   return (
-    <section className="local-hero">
+    <section className={`local-hero ${schibstedGrotesk.variable}`}>
       <div className="local-hero-inner">
         {parentLink ? (
           <nav aria-label="Breadcrumb" className="local-breadcrumb">
