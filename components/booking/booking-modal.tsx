@@ -632,7 +632,7 @@ export function BookingModal({ open, initialServiceSlug, onOpenChange }: Booking
                   className="focus-ring mt-1 min-h-11 w-full rounded-xl border border-border px-3 py-2 text-sm"
                   inputMode="tel"
                   onChange={(event) => updateContactForm("phone", event.target.value)}
-                  placeholder="(833) 597-1932"
+                  placeholder="(512) 516-2470"
                   type="tel"
                   value={contactForm.phone}
                 />

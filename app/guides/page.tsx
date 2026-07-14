@@ -174,8 +174,8 @@ export default function GuidesHubPage() {
                 <h2 className="guide-hub-section__title">Browse the full guide index</h2>
                 <p>Every guide stays visible here in grouped lists so homeowners can scan the entire library quickly.</p>
               </div>
-              <a className="guide-hub-call-pill" href="tel:+18335971932">
-                (833) 597-1932
+              <a className="guide-hub-call-pill" href="tel:+15125162470">
+                (512) 516-2470
               </a>
             </div>
             <div className="guide-index-grid">

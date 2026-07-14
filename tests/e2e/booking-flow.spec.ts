@@ -153,6 +153,18 @@ test("booking flow uses public scheduling facade and confirms from facade identi
   await expect(confirmStep.getByRole("radio", { name: "Text" })).not.toBeChecked();
   await expect(confirmStep.getByRole("radio", { name: "Either" })).not.toBeChecked();
 
+  await expect.poll(async () => page.evaluate(() => {
+    const entries = window.dataLayer ?? [];
+    return entries.filter((entry) => {
+      const args = Array.from(entry as unknown as ArrayLike<unknown>);
+      const params = args[2] as Record<string, unknown> | undefined;
+      return args[0] === "event"
+        && args[1] === "conversion"
+        && params?.send_to === "AW-18207846861/booking-test-label"
+        && params?.transaction_id === "booking-1";
+    }).length;
+  })).toBe(1);
+
   expect(facadeCalls).toEqual(expect.arrayContaining(["search", "hold", "book"]));
   expect(retiredBookingCalls).toEqual([]);
 

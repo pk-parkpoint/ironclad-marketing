@@ -16,6 +16,8 @@ function main() {
   const layout = read("app/layout.tsx");
   const analyticsRuntime = read("components/analytics/analytics-bootstrap.tsx");
   const analyticsEvents = read("components/analytics/analytics-events.ts");
+  const googleAdsConversions = read("lib/google-ads-conversions.ts");
+  const bookingConfirmation = read("components/booking/booking-step-confirm.tsx");
   const analyticsLib = read("lib/analytics.ts");
   const aiReferrers = read("lib/ai-referrers.ts");
   const siteHeader = read("components/layout/site-header.tsx");
@@ -28,14 +30,18 @@ function main() {
   assertContains(".env.example", envExample, "NEXT_PUBLIC_GTM_ID");
   assertContains(".env.example", envExample, "NEXT_PUBLIC_GOOGLE_ADS_ID");
   assertContains(".env.example", envExample, "NEXT_PUBLIC_GOOGLE_ADS_PHONE_CONVERSION_LABEL");
+  assertContains(".env.example", envExample, "NEXT_PUBLIC_GOOGLE_ADS_BOOKING_CONVERSION_LABEL");
+  assertContains(".env.example", envExample, "NEXT_PUBLIC_GOOGLE_ADS_WEBSITE_CALL_CONVERSION_LABEL");
 
   assertContains("app/layout.tsx", layout, "AnalyticsBootstrap");
   assertContains("app/layout.tsx", layout, "NEXT_PUBLIC_GTM_ID");
   assertContains("app/layout.tsx", layout, "NEXT_PUBLIC_GA4_MEASUREMENT_ID");
   assertContains("app/layout.tsx", layout, "NEXT_PUBLIC_GOOGLE_ADS_ID");
   assertContains("app/layout.tsx", layout, "AW-18207846861");
-  assertContains("analytics events", analyticsEvents, "2WRhCLCe388cEM3jlupD");
-  assertContains("analytics events", analyticsEvents, 'window.gtag("event", "conversion"');
+  assertContains("Google Ads conversions", googleAdsConversions, 'window.gtag("event", "conversion"');
+  assertContains("Google Ads conversions", googleAdsConversions, "transaction_id: bookingId");
+  assertContains("booking confirmation", bookingConfirmation, "trackGoogleAdsBookingConversion(displayBookingId)");
+  assertContains("app/layout.tsx", layout, "phone_conversion_number");
   assertContains("analytics runtime", analyticsRuntime, "trackGoogleAdsPhoneConversion");
 
   for (const eventName of [
@@ -73,7 +79,8 @@ function main() {
 
   assertContains("site-header.tsx", siteHeader, 'data-track-intent="phone"');
   assertContains("site-header.tsx", siteHeader, 'data-track-intent="book"');
-  assertContains("mobile-bottom-bar.tsx", mobileBottomBar, 'data-track-intent="text"');
+  assertContains("mobile-bottom-bar.tsx", mobileBottomBar, 'data-track-intent="phone"');
+  assertContains("mobile-bottom-bar.tsx", mobileBottomBar, 'data-track-intent="book"');
   assertContains(
     "service phone CTAs",
     `${servicePage}\n${serviceStandardPage}\n${serviceTemplateParts}`,

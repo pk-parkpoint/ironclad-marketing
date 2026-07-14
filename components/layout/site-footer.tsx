@@ -227,7 +227,7 @@ export function SiteFooter() {
             {/* Right — Copyright + social */}
             <div className="flex items-center gap-4">
               <p className="text-[13px] text-[#6B7280]">
-                &copy; {year} Ironclad Plumbing. All rights reserved.
+                &copy; {year} Ironclad Plumbing. All rights reserved. RMP #39871.
               </p>
               <div className="flex items-center gap-3">
                 {facebookUrl ? (

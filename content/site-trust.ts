@@ -1,7 +1,7 @@
 import { LOCATIONS } from "@/content/locations";
 
 export const TRUST_FIELDS = {
-  masterPlumberLicense: "Texas Responsible Master Plumber license verification available through TSBPE",
+  masterPlumberLicense: "Texas Responsible Master Plumber RMP #39871",
   insuredStatus: "Fully licensed and insured",
   writtenWarranty: "Written workmanship warranty on every completed job",
   serviceArea: "Greater Austin and surrounding Central Texas cities",

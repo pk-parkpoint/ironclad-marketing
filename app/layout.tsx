@@ -23,10 +23,16 @@ const inter = Inter({
 const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID?.trim();
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID?.trim();
 const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID?.trim() || "AW-18207846861";
+const GOOGLE_ADS_WEBSITE_CALL_LABEL =
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_WEBSITE_CALL_CONVERSION_LABEL?.trim();
+const PHONE_CONVERSION_NUMBER = process.env.NEXT_PUBLIC_PHONE?.trim() || "(512) 516-2470";
 
 function GoogleTagHead() {
   const configCalls = [
     `gtag('config',${JSON.stringify(GOOGLE_ADS_ID)});`,
+    GOOGLE_ADS_WEBSITE_CALL_LABEL && !GOOGLE_ADS_WEBSITE_CALL_LABEL.startsWith("replace-with-")
+      ? `gtag('config',${JSON.stringify(`${GOOGLE_ADS_ID}/${GOOGLE_ADS_WEBSITE_CALL_LABEL}`)},{phone_conversion_number:${JSON.stringify(PHONE_CONVERSION_NUMBER)}});`
+      : "",
     GA4_MEASUREMENT_ID
       ? `gtag('config',${JSON.stringify(GA4_MEASUREMENT_ID)},{send_page_view:false});`
       : "",

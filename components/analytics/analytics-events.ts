@@ -1,5 +1,7 @@
 "use client";
 
+import { trackGoogleAdsPhoneClickConversion } from "@/lib/google-ads-conversions";
+
 type GtagFunction = (
   command: "event" | "config" | "js",
   idOrEvent: string | Date,
@@ -14,10 +16,6 @@ declare global {
 }
 
 const HAS_GTM = Boolean(process.env.NEXT_PUBLIC_GTM_ID);
-const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID?.trim() || "AW-18207846861";
-const GOOGLE_ADS_PHONE_CONVERSION_LABEL =
-  process.env.NEXT_PUBLIC_GOOGLE_ADS_PHONE_CONVERSION_LABEL?.trim() || "2WRhCLCe388cEM3jlupD";
-
 export function getCtaPosition(element: Element): string {
   if (element.closest("header")) return "header";
   if (element.closest("footer")) return "footer";
@@ -34,8 +32,5 @@ export function trackEvent(event: string, payload: Record<string, unknown>) {
 }
 
 export function trackGoogleAdsPhoneConversion() {
-  if (typeof window.gtag !== "function") return;
-  window.gtag("event", "conversion", {
-    send_to: `${GOOGLE_ADS_ID}/${GOOGLE_ADS_PHONE_CONVERSION_LABEL}`,
-  });
+  trackGoogleAdsPhoneClickConversion();
 }

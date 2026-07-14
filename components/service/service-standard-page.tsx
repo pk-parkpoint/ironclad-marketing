@@ -105,13 +105,15 @@ export function ServiceStandardPage({ detail, phoneDisplay, phoneHref, service }
                 >
                   Call {phoneDisplay}
                 </a>
-                <Link
-                  className="focus-ring inline-flex items-center justify-center rounded-full border-2 border-white bg-transparent px-7 py-[14px] text-[16px] font-semibold text-white transition-colors hover:bg-white hover:text-[#1E2A38] hover:no-underline"
-                  data-track-intent="book"
-                  href="/book"
-                >
-                  Schedule Now
-                </Link>
+                {service.slug !== "emergency" ? (
+                  <Link
+                    className="focus-ring inline-flex items-center justify-center rounded-full border-2 border-white bg-transparent px-7 py-[14px] text-[16px] font-semibold text-white transition-colors hover:bg-white hover:text-[#1E2A38] hover:no-underline"
+                    data-track-intent="book"
+                    href="/book"
+                  >
+                    Schedule Now
+                  </Link>
+                ) : null}
               </div>
             </div>
           </div>

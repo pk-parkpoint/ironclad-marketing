@@ -1,5 +1,5 @@
-const DEFAULT_PHONE_DISPLAY = "(833) 597-1932";
-const DEFAULT_PHONE_E164 = "+18335971932";
+const DEFAULT_PHONE_DISPLAY = "(512) 516-2470";
+const DEFAULT_PHONE_E164 = "+15125162470";
 const DEFAULT_CONTACT_EMAIL = "info@ironcladtexas.com";
 
 function normalizeEmail(value: string | undefined): string | null {
@@ -30,12 +30,16 @@ export type PublicContactInfo = {
 export function getPublicContactInfo(): PublicContactInfo {
   const contactEmail =
     normalizeEmail(process.env.NEXT_PUBLIC_CONTACT_EMAIL) ?? DEFAULT_CONTACT_EMAIL;
+  const phoneDisplay = process.env.NEXT_PUBLIC_PHONE?.trim() || DEFAULT_PHONE_DISPLAY;
+  const textDisplay = process.env.NEXT_PUBLIC_TEXT_NUMBER?.trim() || phoneDisplay;
+  const phoneDigits = phoneDisplay.replace(/\D/g, "").slice(-10);
+  const textDigits = textDisplay.replace(/\D/g, "").slice(-10);
 
   return {
-    phoneDisplay: DEFAULT_PHONE_DISPLAY,
-    textDisplay: DEFAULT_PHONE_DISPLAY,
-    phoneHref: `tel:${DEFAULT_PHONE_E164}`,
-    smsHref: `sms:${DEFAULT_PHONE_E164}`,
+    phoneDisplay,
+    textDisplay,
+    phoneHref: `tel:${phoneDigits.length === 10 ? `+1${phoneDigits}` : DEFAULT_PHONE_E164}`,
+    smsHref: `sms:${textDigits.length === 10 ? `+1${textDigits}` : DEFAULT_PHONE_E164}`,
     contactEmail,
   };
 }

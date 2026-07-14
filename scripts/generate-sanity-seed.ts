@@ -484,8 +484,8 @@ function main() {
     _id: "companyInfo",
     _type: "companyInfo",
     name: "Ironclad Plumbing",
-    phone: "(512) XXX-XXXX",
-    textNumber: "(512) XXX-XXXX",
+    phone: "(512) 516-2470",
+    textNumber: "(512) 516-2470",
     email: "info@ironcladtexas.com",
     address: {
       street: "1234 Congress Ave",
@@ -502,7 +502,7 @@ function main() {
       emergency: "24/7",
     },
     license: {
-      number: "M-45678",
+      number: "RMP #39871",
       board: "Texas State Board of Plumbing Examiners",
     },
     insurance: {

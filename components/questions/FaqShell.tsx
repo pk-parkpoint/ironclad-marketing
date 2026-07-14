@@ -53,7 +53,7 @@ function FaqFooter() {
       </div>
       <div className={styles.legal}>
         <span>© {new Date().getFullYear()} Ironclad Plumbing. All rights reserved.</span>
-        <span>TX Master Plumber License #M-12345</span>
+        <span>Texas Responsible Master Plumber RMP #39871</span>
       </div>
     </footer>
   );
