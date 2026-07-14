@@ -15,7 +15,11 @@ import { derivePageContext, getDeviceType } from "@/lib/analytics-page-context";
 import { getAiReferralContext } from "@/lib/ai-referrers";
 import { maybeOpenBookingLink } from "@/lib/booking-events";
 import { recordBookingSiteVisit } from "@/lib/booking-session";
-import { getCtaPosition, trackEvent } from "@/components/analytics/analytics-events";
+import {
+  getCtaPosition,
+  trackEvent,
+  trackGoogleAdsPhoneConversion,
+} from "@/components/analytics/analytics-events";
 import { useScrollDepthTracking } from "@/components/analytics/use-scroll-depth-tracking";
 
 const FAQ_KEY_PREFIX = "ironclad_faq_engaged:";
@@ -195,7 +199,10 @@ export function AnalyticsBootstrap() {
       );
 
       trackEvent("cta_click", payload);
-      if (href.startsWith("tel:")) trackEvent("phone_click", payload);
+      if (href.startsWith("tel:")) {
+        trackEvent("phone_click", payload);
+        trackGoogleAdsPhoneConversion();
+      }
       if (href.startsWith("sms:")) trackEvent("text_click", payload);
       if (bookingLinkDetail) {
         trackEvent("book_click", payload);
