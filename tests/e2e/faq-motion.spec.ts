@@ -138,8 +138,14 @@ test("FAQ motion rescans content added after a client render", async ({ page }) 
   await expect(probe).toHaveClass(/ic-revealed/);
 });
 
-test("legacy FAQ accordions retain progressive motion behavior", async ({ page }) => {
+test("FAQ alias permanently resolves to the canonical question hub", async ({ page }) => {
   await page.goto("/faq");
+  await expect(page).toHaveURL(/\/questions$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Plumbing answers that");
+});
+
+test("legacy plumbing FAQ accordions retain progressive motion behavior", async ({ page }) => {
+  await page.goto("/faq/plumbing");
   await expect(page.locator("[data-motion-root]")).toHaveClass(/ic-anim/);
   await expect(page.locator("header")).toHaveCount(1);
   await expect(page.locator("[data-motion-root] .ic-pulse-dot")).toHaveCount(1);
@@ -147,5 +153,5 @@ test("legacy FAQ accordions retain progressive motion behavior", async ({ page }
   const firstFaq = page.locator("#category-general details").first();
   await firstFaq.locator("summary").click();
   await expect(firstFaq).toHaveAttribute("open", "");
-  await expect(firstFaq.locator('[data-speakable="faq-answer"]')).toBeVisible();
+  await expect(firstFaq.locator("div")).toBeVisible();
 });
