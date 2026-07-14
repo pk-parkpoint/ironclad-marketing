@@ -30,7 +30,7 @@ type DrainCleaningPageProps = {
   phoneHref: string;
 };
 
-const DEFAULT_BOOKING_HREF = "/book?service=drain-cleaning";
+const DEFAULT_BOOKING_HREF = "/book?service=drain-clearing";
 
 export function DrainCleaningPage({
   bookingHref = DEFAULT_BOOKING_HREF,

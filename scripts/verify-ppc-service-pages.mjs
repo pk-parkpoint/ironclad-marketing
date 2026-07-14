@@ -236,7 +236,7 @@ function styleChanged(before, after) {
 }
 
 async function verifyInteractionStates(browser) {
-  const route = "/plumbing/drain-cleaning";
+  const route = "/plumbing/drain-clearing";
   const { context, page } = await loadPage(browser, route, desktopViewport);
   const results = [];
 

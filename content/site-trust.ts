@@ -12,7 +12,7 @@ export const TRUST_FIELDS = {
 
 export const BUSINESS_SERVICE_TYPES = [
   "Residential plumbing",
-  "Drain cleaning",
+  "Drain clearing",
   "Water heater service",
   "Tankless water heater service",
   "Sewer line diagnostics and repair",

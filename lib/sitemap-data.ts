@@ -135,7 +135,7 @@ export function buildImageSitemapEntries(): ImageSitemapEntry[] {
   // Service page hero images
   const heroImages: Record<string, { file: string; alt: string }> = {
     repairs: { file: "plumbing-repairs.jpg", alt: "Plumbing repair technician working in Austin home" },
-    "drain-cleaning": { file: "drain-cleaning.jpg", alt: "Professional drain cleaning service in Austin" },
+    "drain-clearing": { file: "drain-cleaning.jpg", alt: "Professional drain clearing service in Austin" },
     "sewer-services": { file: "sewer-line-services.jpg", alt: "Sewer camera and diagnostic equipment in Austin" },
     "water-heaters": { file: "water-heaters.jpg", alt: "Water heater installation and service in Austin" },
     fixtures: { file: "fixture-installation.jpg", alt: "Plumbing fixture installation in Austin bathroom" },

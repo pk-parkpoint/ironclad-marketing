@@ -29,7 +29,7 @@ export function ServiceStandardPage({ detail, phoneDisplay, phoneHref, service }
   const relatedServices = SERVICES.filter((entry) => entry.slug !== service.slug).slice(0, 4);
   const relatedCities = LOCATIONS.slice(0, 5);
   const relatedGuides = BLOG_POSTS.slice(0, 3);
-  const showCommercialCrossover = ["drain-cleaning", "gas-line-services", "repairs", "sewer-services"].includes(
+  const showCommercialCrossover = ["drain-clearing", "gas-line-services", "repairs", "sewer-services"].includes(
     service.slug,
   );
   const signCards = detail.symptoms.slice(0, 4).map((symptom) => ({

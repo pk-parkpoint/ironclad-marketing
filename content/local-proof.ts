@@ -24,7 +24,7 @@ const LOCAL_PROOF_BY_CITY: Partial<Record<string, LocalProofData>> = {
       },
       {
         title: "Hyde Park Drain Recovery",
-        service: "Drain Cleaning",
+        service: "Drain Clearing",
         summary: "Camera verified root intrusion and restored flow with clearing plus prevention plan.",
       },
     ],
@@ -60,7 +60,7 @@ const LOCAL_PROOF_BY_CITY: Partial<Record<string, LocalProofData>> = {
       },
       {
         title: "Brushy Creek Mainline Cleanout",
-        service: "Drain Cleaning",
+        service: "Drain Clearing",
         summary: "Resolved recurring backups and provided preventative maintenance recommendations.",
       },
     ],

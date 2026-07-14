@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("phone links fire the Google Ads phone conversion exactly once", async ({ page }) => {
-  await page.goto("/plumbing/drain-cleaning");
+  await page.goto("/plumbing/drain-clearing");
 
   await expect.poll(async () => page.evaluate(() =>
     (window.dataLayer ?? []).filter((entry) => entry.event === "page_view").length,

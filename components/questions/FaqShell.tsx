@@ -40,7 +40,7 @@ function FaqFooter() {
         ]} />
         <FooterColumn title="Services" links={[
           ["Leak Detection", "/plumbing/leak-detection"],
-          ["Drain Cleaning", "/plumbing/drain-cleaning"],
+          ["Drain Clearing", "/plumbing/drain-clearing"],
           ["Water Heaters", "/plumbing/water-heaters"],
           ["Emergency Plumbing", "/plumbing/emergency"],
         ]} />

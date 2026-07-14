@@ -114,7 +114,7 @@ export const TOP_PLUMBING_QUESTIONS: TopPlumbingQuestion[] = [
     answer:
       "A recurring clog usually means the first cleaning cleared the symptom but not the cause. Common causes include grease buildup, scale, root intrusion, pipe bellies, broken pipe sections, poor slope, or items lodged deeper in the line. If the same drain keeps backing up, ask for camera evidence or a clearer diagnosis before approving repeated snaking.",
     urgentNote: "Multiple fixtures backing up at once can indicate a mainline or sewer issue and should be treated as urgent.",
-    service: { label: "Drain cleaning", path: "/plumbing/drain-cleaning" },
+    service: { label: "Drain clearing", path: "/plumbing/drain-clearing" },
     guide: { label: "Drain cleaning vs hydro jetting", path: "/guides/drain-cleaning-vs-hydro-jetting" },
     sources: [source("EPA WaterSense leak guidance")],
   },

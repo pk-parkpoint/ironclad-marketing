@@ -90,7 +90,7 @@ const SERVICE_AREA_LINKS: FooterLink[] = [
 
 const SERVICE_LINKS: FooterLink[] = [
   { href: "/plumbing/repairs", label: "Plumbing Repairs" },
-  { href: "/plumbing/drain-cleaning", label: "Drain Cleaning" },
+  { href: "/plumbing/drain-clearing", label: "Drain Clearing" },
   { href: "/plumbing/sewer-services", label: "Sewer Line Services" },
   { href: "/plumbing/water-heaters", label: "Water Heaters" },
   { href: "/plumbing/leak-detection", label: "Leak Detection" },

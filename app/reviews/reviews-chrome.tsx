@@ -19,7 +19,7 @@ const quickLinks = [
 ];
 
 const serviceLinks = [
-  { href: "/plumbing/drain-cleaning", label: "Drain Cleaning" },
+  { href: "/plumbing/drain-clearing", label: "Drain Clearing" },
   { href: "/plumbing/sewer-services", label: "Sewer Line Services" },
   { href: "/plumbing/hydro-jetting", label: "Hydro-Jetting" },
   { href: "/plumbing/water-heaters", label: "Water Heaters" },

@@ -38,7 +38,7 @@ function buildTopQuestionsArticleSchema() {
       "Plumbing permits",
       "Emergency plumbing",
       "Water heater repair",
-      "Drain cleaning",
+      "Drain clearing",
       "Leak detection",
     ],
     mentions: TOP_PLUMBING_QUESTIONS.flatMap((entry) => [

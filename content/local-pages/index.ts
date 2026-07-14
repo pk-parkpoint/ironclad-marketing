@@ -58,11 +58,11 @@ const data = rawData as {
 };
 
 const serviceSlugOverrides: Record<string, string> = {
-  "Drain Replacement": "drain-cleaning",
+  "Drain Replacement": "drain-clearing",
   "Fixture Installation": "fixtures",
   "Fixture Upgrades": "fixtures",
   "Remodel Rough-In": "repiping",
-  "Sewer & Drain Cleaning": "drain-cleaning",
+  "Sewer & Drain Clearing": "drain-clearing",
   "Whole-Home Repiping": "repiping",
 };
 

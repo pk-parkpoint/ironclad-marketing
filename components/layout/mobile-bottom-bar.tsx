@@ -22,7 +22,7 @@ export function MobileBottomBar() {
   const { smsHref } = getPublicContactInfo();
 
   if (
-    pathname === "/plumbing/drain-cleaning" ||
+    pathname === "/plumbing/drain-clearing" ||
     pathname === "/reviews" ||
     LOCAL_CITY_PATHS.has(pathname || "") ||
     pathname?.startsWith("/service-area/austin-tx/")

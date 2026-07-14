@@ -105,7 +105,8 @@ const TIME_WINDOW_OPTIONS: TimeWindowOption[] = [
 
 function resolveInitialServiceSlug(value?: string): string | undefined {
   if (!value) return undefined;
-  return SERVICE_OPTIONS.some((option) => option.slug === value) ? value : undefined;
+  const normalizedValue = value === "drain-cleaning" ? "drain-clearing" : value;
+  return SERVICE_OPTIONS.some((option) => option.slug === normalizedValue) ? normalizedValue : undefined;
 }
 
 function buildDayOptions(): Array<{ id: string; label: string }> {

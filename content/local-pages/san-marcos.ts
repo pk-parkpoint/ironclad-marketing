@@ -29,9 +29,9 @@ export const SAN_MARCOS_CITY_PAGE: Omit<LocalCityPageData, "eta"> = {
   ],
   services: [
     [
-      "Drain Cleaning",
+      "Drain Clearing",
       "Professional clearing for sinks, tubs, toilets, branch lines, and recurring main-line stoppages.",
-      "drain-cleaning",
+      "drain-clearing",
     ],
     [
       "Water Heaters",

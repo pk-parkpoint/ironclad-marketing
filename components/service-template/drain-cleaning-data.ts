@@ -2,7 +2,7 @@ import type { DrainCleaningTemplateContent } from "./service-template-types";
 
 export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
   hero: {
-    title: "Fast, Reliable Drain Cleaning",
+    title: "Fast, Reliable Drain Clearing",
     subhead: "Water you waiting for?",
     supportLine: "Slow drains, clogs, and backups cleared fast, with a full cleanup before we leave.",
     image: "/media/services/ironclad-team-hero.png",
@@ -15,7 +15,7 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
     ["Written Warranty on Every Job", "In writing, not just a handshake."],
   ],
   signs: {
-    title: "Signs You Need Drain Cleaning",
+    title: "Signs You Need Drain Clearing",
     intro:
       "Drains almost never fail without warning; they slow down, gurgle, and smell before they ever back up. Catching those warnings early is the difference between a quick clear and water on the floor. Here are the four that matter most.",
     items: [
@@ -39,10 +39,10 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
   },
   callout: {
     title: "Seeing these signs, or backing up right now?",
-    body: "We answer 24/7 and offer same-day drain cleaning across Austin.",
+    body: "We answer 24/7 and offer same-day drain clearing across Austin.",
   },
   services: {
-    title: "Our Drain Cleaning Services",
+    title: "Our Drain Clearing Services",
     intro:
       "Whether it's one slow sink or the whole house backing up, we clear the blockage, then find out why it happened so it stays clear. Every job starts with a diagnosis and an exact price you approve before work begins.",
     cards: [
@@ -123,9 +123,9 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
     ["We test and tell you straight", "We confirm it flows and flag anything that could bring it back."],
   ],
   serviceArea: {
-    title: "Drain Cleaning in Austin and Nearby Areas",
-    body: "Same-day drain cleaning across Austin and the surrounding metro.",
-    ctaLabel: "Schedule Drain Cleaning Near You",
+    title: "Drain Clearing in Austin and Nearby Areas",
+    body: "Same-day drain clearing across Austin and the surrounding metro.",
+    ctaLabel: "Schedule Drain Clearing Near You",
   },
   areas: [
     "Austin",
@@ -141,14 +141,14 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
     "Hutto",
     "Dripping Springs",
   ],
-  faqTitle: "Drain Cleaning FAQ",
+  faqTitle: "Drain Clearing FAQ",
   faqs: [
     [
-      "How much does drain cleaning cost in Austin?",
-      "Most drain cleaning runs between $175 and $350, depending on the drain, the access point, and how stubborn the clog is. You get the exact price before any work starts, and you approve it first.",
+      "How much does drain clearing cost in Austin?",
+      "Most drain clearing runs between $175 and $350, depending on the drain, the access point, and how stubborn the clog is. You get the exact price before any work starts, and you approve it first.",
     ],
     [
-      "Do you offer same-day drain cleaning?",
+      "Do you offer same-day drain clearing?",
       "In most cases, yes. Same-day availability depends on demand, but we prioritize getting to you fast. For an active backup, call and we will find the soonest window.",
     ],
     [
@@ -170,7 +170,7 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
   ],
   finalCta: {
     title: "Ready to Clear Your Drain?",
-    body: "Book online in 60 seconds or call for fast drain cleaning in Austin.",
-    primaryLabel: "Schedule Drain Cleaning",
+    body: "Book online in 60 seconds or call for fast drain clearing in Austin.",
+    primaryLabel: "Schedule Drain Clearing",
   },
 };

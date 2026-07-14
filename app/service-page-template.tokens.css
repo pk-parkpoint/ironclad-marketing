@@ -2,7 +2,7 @@
 /* =============================================================================
    IRONCLAD — SERVICE PAGE TEMPLATE · DESIGN TOKENS
    Single source of truth. A value not in this file does not exist.
-   Reference instance: Drain Cleaning. This page is the template for EVERY service.
+   Reference instance: Drain Clearing. This page is the template for EVERY service.
 
    SCOPE: The promo bar, header/nav, and footer are EXISTING SITE CHROME and are
    OUT OF SCOPE (engineering keeps production components). Their tokens are still
@@ -21,7 +21,7 @@
 
   /* ---------------------------------------------------------------------------
      1. BRAND ACCENT  (themeable per service — this is the ONE knob that recolors
-        the template. Drain Cleaning = #2F8FE0. Swap this + the two button
+        the template. Drain Clearing = #2F8FE0. Swap this + the two button
         gradients below to re-skin for another service.)
      --------------------------------------------------------------------------- */
   --color-accent-primary: #2F8FE0;
@@ -126,7 +126,7 @@
   --radius-faq: 14px;                    /* faq item */
   --radius-icon-box: 13px;               /* signs callout warning-icon square */
   --radius-btn: 12px;                    /* call/schedule buttons (callout, area, CTA, sticky) */
-  --radius-btn-ink: 10px;                /* "Schedule drain cleaning" ink button */
+  --radius-btn-ink: 10px;                /* "Schedule drain clearing" ink button */
   --radius-circle: 50%;                  /* avatars, area pin, process node */
 
   /* ---------------------------------------------------------------------------
@@ -323,7 +323,7 @@
 
   /* ---- Buttons (all weights/sizes) ---- */
   --type-btn-hero-size: 16px;   --type-btn-hero-weight: 700;     /* hero call + schedule */
-  --type-btn-ink-size: 15.5px;  --type-btn-ink-weight: 600;      /* "Schedule drain cleaning" */
+  --type-btn-ink-size: 15.5px;  --type-btn-ink-weight: 600;      /* "Schedule drain clearing" */
   --type-btn-area-size: 15.5px; --type-btn-area-weight: 700;
   --type-btn-cta-size: 17px;    --type-btn-cta-weight: 700;      /* final CTA buttons */
   --type-btn-callout-size: 16px;--type-btn-callout-weight: 700;  /* signs callout call btn */

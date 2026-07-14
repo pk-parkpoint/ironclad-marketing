@@ -32,8 +32,8 @@ const SERVICE_LONGFORM_BY_SLUG: Partial<Record<string, ServiceLongform>> = {
       "Set leak alerts on your water meter app if your utility supports it.",
     ],
   },
-  "drain-cleaning": {
-    overviewHeading: "Drain Cleaning Built Around Long-Term Flow",
+  "drain-clearing": {
+    overviewHeading: "Drain Clearing Built Around Long-Term Flow",
     overviewParagraphs: [
       "Quick snaking can restore flow for a day and hide larger problems. We choose the clearing method based on blockage type, line material, and line condition so the fix lasts longer and causes less pipe wear.",
       "For repeat clogs, we pair cleaning with inspection so you can see whether grease, roots, scale, or pipe damage is driving the issue. That evidence keeps next-step recommendations practical and cost-effective.",

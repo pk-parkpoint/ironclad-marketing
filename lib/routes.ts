@@ -23,7 +23,6 @@ const PLUMBING_DROPDOWN_LINKS: NavChildLink[] = [
     label: "Repairs",
     children: [
       { href: "/plumbing/repairs", label: "Plumbing Repairs" },
-      { href: "/plumbing/water-line-repair", label: "Water Line / Main Line Repair" },
       { href: "/plumbing/water-pressure", label: "Water Pressure / Pressure Regulator" },
       { href: "/plumbing/repiping", label: "Repiping" },
       { href: "/plumbing/burst-pipe-repair", label: "Burst Pipe Repair" },
@@ -36,7 +35,6 @@ const PLUMBING_DROPDOWN_LINKS: NavChildLink[] = [
     children: [
       { href: "/plumbing/leak-repair", label: "Leak Repair" },
       { href: "/plumbing/leak-detection", label: "Leak Detection" },
-      { href: "/plumbing/slab-leak-repair", label: "Slab Leak Repair" },
     ],
   },
   {
@@ -80,7 +78,7 @@ const PLUMBING_DROPDOWN_LINKS: NavChildLink[] = [
 ];
 
 const DRAINS_DROPDOWN_LINKS: NavChildLink[] = [
-  { href: "/plumbing/drain-cleaning", label: "Drain Cleaning" },
+  { href: "/plumbing/drain-clearing", label: "Drain Clearing" },
   { href: "/plumbing/clogged-drain", label: "Clogged Drain" },
   { href: "/plumbing/hydro-jetting", label: "Hydro Jetting" },
   {
@@ -92,6 +90,8 @@ const DRAINS_DROPDOWN_LINKS: NavChildLink[] = [
       { href: "/plumbing/trenchless-sewer-repair", label: "Trenchless Sewer Repair" },
     ],
   },
+  { href: "/plumbing/water-line-repair", label: "Water Lines" },
+  { href: "/plumbing/slab-leak-repair", label: "Slab Leak Detection & Repair" },
 ];
 
 const SERVICE_AREA_DROPDOWN_LINKS: NavChildLink[] = [
@@ -117,7 +117,7 @@ const ABOUT_DROPDOWN_LINKS: NavChildLink[] = [
 
 export const TOP_NAV_LINKS: TopNavLink[] = [
   { href: "/plumbing", label: "Plumbing", children: PLUMBING_DROPDOWN_LINKS },
-  { href: "/plumbing/drain-cleaning", label: "Drains", children: DRAINS_DROPDOWN_LINKS },
+  { href: "/plumbing/drain-clearing", label: "Drains", children: DRAINS_DROPDOWN_LINKS },
   { href: "/service-area", label: "Service Areas", children: SERVICE_AREA_DROPDOWN_LINKS },
   { href: "/guides", label: "Guides", children: GUIDES_DROPDOWN_LINKS },
   { href: "/about", label: "About Us", children: ABOUT_DROPDOWN_LINKS },

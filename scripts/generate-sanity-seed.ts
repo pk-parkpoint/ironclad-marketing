@@ -32,13 +32,13 @@ const legacyServiceSlugMap: Record<string, string> = {
   "sewer-lines": "sewer-services",
   "fixture-installation": "fixtures",
   "water-filtration": "water-treatment",
-  "garbage-disposals": "drain-cleaning",
+  "garbage-disposals": "drain-clearing",
 };
 
 const serviceTypeMap: Record<string, string> = {
   "Leak Detection": "leak-detection",
   "Water Heater": "water-heaters",
-  "Drain Cleaning": "drain-cleaning",
+  "Drain Clearing": "drain-clearing",
   "Plumbing Repairs": "repairs",
   "Fixture Installation": "fixtures",
   "Sewer Lines": "sewer-services",
@@ -428,7 +428,7 @@ function main() {
       validFrom: "2026-01-01T00:00:00.000Z",
       validUntil: "2026-12-31T23:59:59.000Z",
       active: true,
-      applicableServices: [toRef(serviceId("repairs")), toRef(serviceId("drain-cleaning"))],
+      applicableServices: [toRef(serviceId("repairs")), toRef(serviceId("drain-clearing"))],
       newCustomersOnly: true,
       sortOrder: 0,
     },

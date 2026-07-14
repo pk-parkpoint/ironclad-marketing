@@ -5,7 +5,7 @@ import pixelmatch from "pixelmatch";
 import { PNG } from "pngjs";
 
 const baseUrl = process.env.BASE_URL || "http://127.0.0.1:3027";
-const pagePath = "/plumbing/drain-cleaning";
+const pagePath = "/plumbing/drain-clearing";
 const screenDir = path.join(process.cwd(), "design-handoff/screens/service-page");
 const qaDir = path.join(screenDir, "qa");
 const stateDir = path.join(screenDir, "states");

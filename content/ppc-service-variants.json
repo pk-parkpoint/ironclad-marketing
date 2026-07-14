@@ -791,18 +791,18 @@
   },
   {
     "index": 6,
-    "key": "Drain Cleaning",
-    "slug": "drain-cleaning",
-    "bookUrl": "https://ironcladtexas.com/book?service=drain-cleaning",
-    "seoTitle": "Drain Cleaning in Austin, TX | Ironclad Plumbing",
-    "metaDescription": "Fast, reliable drain cleaning in Austin. We clear clogs and backups the same day, with upfront pricing and a written warranty. Call Ironclad today.",
-    "eyebrow": "DRAIN CLEANING · AUSTIN",
-    "h1": "Fast, Reliable Drain Cleaning",
+    "key": "Drain Clearing",
+    "slug": "drain-clearing",
+    "bookUrl": "https://ironcladtexas.com/book?service=drain-clearing",
+    "seoTitle": "Drain Clearing in Austin, TX | Ironclad Plumbing",
+    "metaDescription": "Fast, reliable drain clearing in Austin. We clear clogs and backups the same day, with upfront pricing and a written warranty. Call Ironclad today.",
+    "eyebrow": "DRAIN CLEARING · AUSTIN",
+    "h1": "Fast, Reliable Drain Clearing",
     "valueLine": "Same-day availability, upfront pricing, no surprises.",
     "pun": "Water you waiting for?",
     "punFirst": false,
     "callFirst": false,
-    "signsHeading": "Signs You Need Drain Cleaning",
+    "signsHeading": "Signs You Need Drain Clearing",
     "signsIntro": "Drains almost never fail without warning; they slow down, gurgle, and smell before they ever back up. Catching those warnings early is the difference between a quick clear and water on the floor. Here are the four that matter most.",
     "signs": [
       {
@@ -822,7 +822,7 @@
         "body": "When several fixtures act up together, the problem isn't the fixture; it's the main line. This one deserves a call today."
       }
     ],
-    "servicesHeading": "Our Drain Cleaning Services",
+    "servicesHeading": "Our Drain Clearing Services",
     "servicesIntro": "Whether it's one slow sink or the whole house backing up, we clear the blockage, then find out why it happened so it stays clear. Every job starts with a diagnosis and an exact price you approve before work begins.",
     "services": [
       {
@@ -857,7 +857,7 @@
       }
     ],
     "calloutHeadline": "Seeing these signs, or backing up right now?",
-    "calloutSub": "We answer 24/7 and offer same-day drain cleaning across Austin.",
+    "calloutSub": "We answer 24/7 and offer same-day drain clearing across Austin.",
     "whyLine": "Anyone can clear a clog. We're built so you never have to make this call twice.",
     "process": [
       {
@@ -881,17 +881,17 @@
         "body": "We confirm it flows and flag anything that could bring it back."
       }
     ],
-    "serviceAreaHeader": "Drain Cleaning in Austin and Nearby Areas",
-    "serviceAreaSub": "Same-day drain cleaning across Austin and the surrounding metro.",
-    "serviceAreaCta": "Schedule Drain Cleaning Near You",
-    "faqHeading": "Drain Cleaning FAQ",
+    "serviceAreaHeader": "Drain Clearing in Austin and Nearby Areas",
+    "serviceAreaSub": "Same-day drain clearing across Austin and the surrounding metro.",
+    "serviceAreaCta": "Schedule Drain Clearing Near You",
+    "faqHeading": "Drain Clearing FAQ",
     "faqs": [
       {
-        "q": "How much does drain cleaning cost in Austin?",
-        "a": "Most drain cleaning runs between $175 and $350, depending on the drain, the access point, and how stubborn the clog is. You get the exact price before any work starts, and you approve it first."
+        "q": "How much does drain clearing cost in Austin?",
+        "a": "Most drain clearing runs between $175 and $350, depending on the drain, the access point, and how stubborn the clog is. You get the exact price before any work starts, and you approve it first."
       },
       {
-        "q": "Do you offer same-day drain cleaning?",
+        "q": "Do you offer same-day drain clearing?",
         "a": "In most cases, yes. Same-day availability depends on demand, but we prioritize getting to you fast. For an active backup, call and we will find the soonest window."
       },
       {
@@ -912,8 +912,8 @@
       }
     ],
     "finalHeading": "Ready to Clear Your Drain?",
-    "finalBody": "Book online in 60 seconds or call for fast drain cleaning in Austin.",
-    "finalCta": "Schedule Drain Cleaning",
+    "finalBody": "Book online in 60 seconds or call for fast drain clearing in Austin.",
+    "finalCta": "Schedule Drain Clearing",
     "images": [
       {
         "file": "01-kitchen-and-bathroom-sink-drains.webp",

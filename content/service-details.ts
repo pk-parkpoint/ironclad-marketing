@@ -96,10 +96,10 @@ const REPAIRS_DETAIL: ServiceDetail = {
 };
 
 const DRAIN_CLEANING_DETAIL: ServiceDetail = {
-  slug: "drain-cleaning",
+  slug: "drain-clearing",
   heroDescription:
-    "A plunger might clear the symptom. We find the cause. Ironclad drain cleaning includes camera inspection when warranted, so you know exactly what's happening inside your pipes — not just that something was blocking them.",
-  symptomsHeading: "Signs You Need Drain Cleaning",
+    "A plunger might clear the symptom. We find the cause. Ironclad drain clearing includes camera inspection when warranted, so you know exactly what's happening inside your pipes — not just that something was blocking them.",
+  symptomsHeading: "Signs You Need Drain Clearing",
   symptoms: [
     "Water drains slowly in sinks, tubs, or showers",
     "Gurgling sounds from drains",
@@ -110,7 +110,7 @@ const DRAIN_CLEANING_DETAIL: ServiceDetail = {
   ],
   solutionsHeading: "What We Do",
   solutions: [
-    "Cable (snake) drain cleaning for routine blockages",
+    "Cable (snake) drain clearing for routine blockages",
     "Hydro jetting for heavy buildup and grease lines",
     "Camera inspection to identify root intrusion, pipe damage, or buildup patterns",
     "Kitchen drain and grease line clearing",
@@ -156,9 +156,9 @@ const DRAIN_CLEANING_DETAIL: ServiceDetail = {
   ],
   faqs: [
     {
-      question: "How much does drain cleaning cost in Austin?",
+      question: "How much does drain clearing cost in Austin?",
       answer:
-        "Straightforward cable clearing typically runs $175–$350 depending on access and severity. Hydro jetting and camera inspection are additional. You'll see a price before we start.",
+        "Straightforward drain clearing typically runs $175–$350 depending on access and severity. Hydro jetting and camera inspection are additional. You'll see a price before we start.",
     },
     {
       question: "How often should I have my drains cleaned?",
@@ -1327,7 +1327,7 @@ const HYDRO_JETTING_DETAIL: ServiceDetail = {
 
 const SERVICE_DETAILS_BY_SLUG: Partial<Record<string, ServiceDetail>> = {
   repairs: REPAIRS_DETAIL,
-  "drain-cleaning": DRAIN_CLEANING_DETAIL,
+  "drain-clearing": DRAIN_CLEANING_DETAIL,
   "sewer-services": SEWER_SERVICES_DETAIL,
   "water-heaters": WATER_HEATERS_DETAIL,
   "tankless-water-heaters": TANKLESS_WATER_HEATERS_DETAIL,

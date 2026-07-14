@@ -15,7 +15,7 @@ export type TestimonialEntry = {
 export const TESTIMONIALS: TestimonialEntry[] = REVIEWS.map((review, index) => ({
   reviewerDisplayName: review.reviewerName,
   city: review.location,
-  serviceType: index % 3 === 0 ? "Repairs" : index % 3 === 1 ? "Drain Cleaning" : "Water Heaters",
+  serviceType: index % 3 === 0 ? "Repairs" : index % 3 === 1 ? "Drain Clearing" : "Water Heaters",
   reviewSource: "google",
   reviewDate: review.date,
   excerpt: review.text,

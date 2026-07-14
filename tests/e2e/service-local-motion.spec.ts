@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import variantRecords from "../../content/ppc-service-variants.json";
 
-const serviceRoute = "/plumbing/drain-cleaning";
+const serviceRoute = "/plumbing/drain-clearing";
 const localRoutes = ["/service-area/austin-tx", "/service-area/austin-tx/barton-creek"];
 
 async function expectExcludedEffects(page: Page) {

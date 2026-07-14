@@ -16,12 +16,12 @@ export const SERVICES: ServiceEntry[] = [
     h1: "Fast, Reliable Plumbing Repairs",
   },
   {
-    slug: "drain-cleaning",
-    title: "Drain Cleaning",
-    titleTag: "Drain Cleaning in Austin, TX | Ironclad Plumbing",
+    slug: "drain-clearing",
+    title: "Drain Clearing",
+    titleTag: "Drain Clearing in Austin, TX | Ironclad Plumbing",
     metaDescription:
-      "Slow drains and recurring clogs cleared fast with professional drain cleaning and camera inspection.",
-    h1: "Professional Drain Cleaning - Find the Cause, Not Just the Clog",
+      "Slow drains and recurring clogs cleared fast with professional drain clearing and camera inspection.",
+    h1: "Professional Drain Clearing - Find the Cause, Not Just the Clog",
   },
   {
     slug: "sewer-services",

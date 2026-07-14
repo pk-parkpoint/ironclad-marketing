@@ -106,7 +106,7 @@ export const FAQ_ENTRIES: FaqEntry[] = [
     category: "drains-sewers",
     question: "Why does my drain keep clogging?",
     answer:
-      "Recurring clogs usually indicate a deeper issue: root intrusion, pipe damage, or buildup inside the line. A camera inspection can identify the cause. More at /plumbing/drain-cleaning.",
+      "Recurring clogs usually indicate a deeper issue: root intrusion, pipe damage, or buildup inside the line. A camera inspection can identify the cause. More at /plumbing/drain-clearing.",
   },
   {
     category: "drains-sewers",
