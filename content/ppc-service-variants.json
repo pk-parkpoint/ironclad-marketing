@@ -5252,17 +5252,17 @@
       {
         "title": "System inspection & testing",
         "body": "The pit, pump response, float, check valve, power, and visible discharge path are tested together.",
-        "image": "assets/services/well-pump-services/06-system-inspection.webp"
+        "image": "assets/services/leak-detection/05-pressure-testing.webp"
       },
       {
         "title": "Sump pump repair",
         "body": "Repairable switch, float, valve, connection, and operating issues are addressed where practical.",
-        "image": "assets/services/well-pump-services/01-well-pump-repair.webp"
+        "image": "assets/services/repairs/05-pipe-and-fitting-repair.webp"
       },
       {
         "title": "Pump replacement",
         "body": "Failed or undersized pumps are replaced with equipment matched to the pit and expected water volume.",
-        "image": "assets/services/well-pump-services/02-pump-replacement.webp"
+        "image": "assets/services/water-line-repair/02-water-line-repair.webp"
       },
       {
         "title": "Battery backup options",
@@ -5272,12 +5272,12 @@
       {
         "title": "Float & switch service",
         "body": "Sticking or unreliable controls are diagnosed so the pump starts and stops at the correct water level.",
-        "image": "assets/services/well-pump-services/04-pressure-switch-repair.webp"
+        "image": "assets/services/repairs/03-valve-and-shut-off-replacement.webp"
       },
       {
         "title": "Discharge & check-valve review",
         "body": "Visible discharge piping and backflow controls are checked for restriction, leakage, or water returning to the pit.",
-        "image": "assets/services/well-pump-services/05-water-flow-diagnosis.webp"
+        "image": "assets/services/repiping/05-minimal-disruption-access.webp"
       }
     ],
     "calloutHeadline": "Not sure the sump pump will start when the water rises?",
@@ -5340,19 +5340,19 @@
     "finalCta": "Schedule Sump Pump Service",
     "images": [
       {
-        "file": "06-system-inspection.webp",
+        "file": "05-pressure-testing.webp",
         "label": "System inspection & testing",
-        "path": "assets/services/well-pump-services/06-system-inspection.webp"
+        "path": "assets/services/leak-detection/05-pressure-testing.webp"
       },
       {
-        "file": "01-well-pump-repair.webp",
+        "file": "05-pipe-and-fitting-repair.webp",
         "label": "Sump pump repair",
-        "path": "assets/services/well-pump-services/01-well-pump-repair.webp"
+        "path": "assets/services/repairs/05-pipe-and-fitting-repair.webp"
       },
       {
-        "file": "02-pump-replacement.webp",
+        "file": "02-water-line-repair.webp",
         "label": "Pump replacement",
-        "path": "assets/services/well-pump-services/02-pump-replacement.webp"
+        "path": "assets/services/water-line-repair/02-water-line-repair.webp"
       },
       {
         "file": "02-major-leaks-and-flooding.webp",
@@ -5360,14 +5360,14 @@
         "path": "assets/services/emergency/02-major-leaks-and-flooding.webp"
       },
       {
-        "file": "04-pressure-switch-repair.webp",
+        "file": "03-valve-and-shut-off-replacement.webp",
         "label": "Float & switch service",
-        "path": "assets/services/well-pump-services/04-pressure-switch-repair.webp"
+        "path": "assets/services/repairs/03-valve-and-shut-off-replacement.webp"
       },
       {
-        "file": "05-water-flow-diagnosis.webp",
+        "file": "05-minimal-disruption-access.webp",
         "label": "Discharge & check-valve review",
-        "path": "assets/services/well-pump-services/05-water-flow-diagnosis.webp"
+        "path": "assets/services/repiping/05-minimal-disruption-access.webp"
       }
     ]
   },
