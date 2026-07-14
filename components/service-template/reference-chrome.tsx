@@ -72,7 +72,7 @@ function ChromeFooter({ phoneDisplay, phoneHref }: Pick<ReferenceChromeProps, "p
       <div className="dc-chrome-legal-wrap">
         <div className="dc-chrome-legal">
           <span>© 2026 Ironclad Plumbing. All rights reserved.</span>
-          <span>TX Master Plumber License #M-12345</span>
+          <span>Texas Responsible Master Plumber RMP #39871</span>
         </div>
       </div>
     </footer>

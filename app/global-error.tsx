@@ -60,7 +60,7 @@ export default function GlobalError({
               Go Home
             </a>
             <a
-              href="tel:+18335971932"
+              href="tel:+15125162470"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -74,7 +74,7 @@ export default function GlobalError({
                 border: "2px solid transparent",
               }}
             >
-              Call (833) 597-1932
+              Call (512) 516-2470
             </a>
           </div>
         </div>

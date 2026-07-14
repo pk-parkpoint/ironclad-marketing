@@ -116,10 +116,10 @@ export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center md:justify-start">
             <a
               className="focus-ring ic-primary-blue-button inline-flex w-full items-center justify-center gap-2 hover:no-underline sm:w-auto"
-              href="tel:+18335971932"
+              href="tel:+15125162470"
             >
               <PhoneIcon />
-              (833) 597-1932
+              (512) 516-2470
             </a>
             <Link
               className="focus-ring inline-flex w-full items-center justify-center rounded-full border-2 border-white bg-transparent px-7 py-[14px] text-[16px] font-semibold text-white transition-colors hover:bg-white hover:text-[#1E2A38] hover:no-underline sm:w-auto"

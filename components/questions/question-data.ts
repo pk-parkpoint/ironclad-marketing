@@ -42,8 +42,8 @@ const FAQ_META = FAQ_META_SOURCE as FaqMeta;
 const FAQ_POSTS = FAQ_POSTS_SOURCE as Record<string, FaqPost>;
 
 export const SITE_ORIGIN = "https://ironcladtexas.com";
-export const PHONE_DISPLAY = "(833) 597-1932";
-export const PHONE_TEL = "tel:+18335971932";
+export const PHONE_DISPLAY = "(512) 516-2470";
+export const PHONE_TEL = "tel:+15125162470";
 export const TOPIC_SLUGS: Record<string, string> = {
   leaks: "leaks",
   clogs: "clogs-and-drains",

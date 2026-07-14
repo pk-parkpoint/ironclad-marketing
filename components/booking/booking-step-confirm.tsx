@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { trackLeadSubmitSuccess } from "@/lib/analytics";
 import { derivePageContext } from "@/lib/analytics-page-context";
+import { trackGoogleAdsBookingConversion } from "@/lib/google-ads-conversions";
 import type { BookingConfirmation, WizardFormData } from "./booking-wizard";
 import { getServiceIssueLabel } from "./booking-step-select-issue";
 import styles from "./booking-wizard.module.css";
@@ -85,6 +86,7 @@ export function BookingStepConfirm({
 
     const pageContext = derivePageContext(window.location.pathname);
     hasTrackedSuccessRef.current = true;
+    trackGoogleAdsBookingConversion(displayBookingId);
     trackLeadSubmitSuccess({
       city: pageContext.city,
       formType: "booking_wizard",
