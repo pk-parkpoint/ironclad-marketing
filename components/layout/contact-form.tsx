@@ -5,7 +5,7 @@ import { trackLeadSubmitSuccess } from "@/lib/analytics";
 
 const SERVICE_OPTIONS = [
   "Plumbing Repairs",
-  "Drain Cleaning",
+  "Drain Clearing",
   "Sewer Line Services",
   "Water Heaters",
   "Leak Detection",

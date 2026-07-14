@@ -4,7 +4,8 @@ const aliases = [
   ["/book-online", "/book"],
   ["/emergency-plumbing", "/plumbing/emergency"],
   ["/water-heaters", "/plumbing/water-heaters"],
-  ["/drain-cleaning", "/plumbing/drain-cleaning"],
+  ["/drain-cleaning", "/plumbing/drain-clearing"],
+  ["/plumbing/drain-cleaning", "/plumbing/drain-clearing"],
   ["/leak-detection", "/plumbing/leak-detection"],
 ] as const;
 

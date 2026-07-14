@@ -91,12 +91,12 @@ test("standard service page booking links open the wizard on the book route", as
 });
 
 test("service template booking links preserve service query on the book route", async ({ page }) => {
-  await page.goto("/plumbing/drain-cleaning");
+  await page.goto("/plumbing/drain-clearing");
 
   await page.getByRole("link", { name: "Schedule online" }).first().click();
 
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
   const url = new URL(page.url());
   expect(url.pathname).toBe("/book");
-  expect(url.searchParams.get("service")).toBe("drain-cleaning");
+  expect(url.searchParams.get("service")).toBe("drain-clearing");
 });

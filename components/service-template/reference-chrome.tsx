@@ -17,7 +17,7 @@ const QUICK_LINKS = [
   ["Terms", "/terms"],
 ] as const;
 const SERVICES = [
-  ["Drain Cleaning", "/plumbing/drain-cleaning"],
+  ["Drain Clearing", "/plumbing/drain-clearing"],
   ["Sewer Line Services", "/plumbing/sewer-services"],
   ["Hydro Jetting", "/plumbing/hydro-jetting"],
   ["Water Heaters", "/plumbing/water-heaters"],

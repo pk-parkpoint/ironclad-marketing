@@ -40,11 +40,11 @@ const HOME_SERVICES_GRID = [
     href: "/plumbing/repairs",
   },
   {
-    title: "Drain Cleaning",
+    title: "Drain Clearing",
     description: "Slow drains and recurring clogs cleared fast with professional-grade equipment.",
     imageSrc: "/media/services/drain-cleaning.jpg",
     alt: "Plumber clearing a clogged drain under a commercial kitchen sink",
-    href: "/plumbing/drain-cleaning",
+    href: "/plumbing/drain-clearing",
   },
   {
     title: "Sewer Line Services",

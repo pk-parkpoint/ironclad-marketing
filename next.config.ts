@@ -15,7 +15,8 @@ const nextConfig: NextConfig = {
       { source: "/book-online", destination: "/book", permanent: true },
       { source: "/emergency-plumbing", destination: "/plumbing/emergency", permanent: true },
       { source: "/water-heaters", destination: "/plumbing/water-heaters", permanent: true },
-      { source: "/drain-cleaning", destination: "/plumbing/drain-cleaning", permanent: true },
+      { source: "/drain-cleaning", destination: "/plumbing/drain-clearing", permanent: true },
+      { source: "/plumbing/drain-cleaning", destination: "/plumbing/drain-clearing", permanent: true },
       { source: "/leak-detection", destination: "/plumbing/leak-detection", permanent: true },
     ];
   },

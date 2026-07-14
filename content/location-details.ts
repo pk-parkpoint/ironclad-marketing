@@ -49,7 +49,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
       "Recurring sewer backups in mature-tree neighborhoods",
       "Pressure and balancing issues in multi-story remodels",
     ],
-    featuredServiceSlugs: ["leak-detection", "water-treatment", "drain-cleaning"],
+    featuredServiceSlugs: ["leak-detection", "water-treatment", "drain-clearing"],
     homeownerTips: [
       "Schedule annual water heater maintenance to offset hard-water sediment.",
       "Track water use monthly and investigate unexplained spikes fast.",
@@ -69,7 +69,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
       "Toilet and fixture wear in older subdivisions",
       "Water pressure inconsistencies across larger floor plans",
     ],
-    featuredServiceSlugs: ["water-heaters", "drain-cleaning", "fixtures"],
+    featuredServiceSlugs: ["water-heaters", "drain-clearing", "fixtures"],
     homeownerTips: [
       "Flush tank heaters every year to maintain recovery and efficiency.",
       "Use drain strainers in bathrooms with heavy daily use.",
@@ -109,7 +109,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
       "Faucet and toilet component failures",
       "Occasional slab leak symptoms in older sections",
     ],
-    featuredServiceSlugs: ["drain-cleaning", "water-treatment", "leak-detection"],
+    featuredServiceSlugs: ["drain-clearing", "water-treatment", "leak-detection"],
     homeownerTips: [
       "Avoid grease disposal down drains to reduce repeat kitchen clogs.",
       "Inspect toilet fill valves yearly in high-use bathrooms.",
@@ -129,7 +129,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
       "Fixture and valve wear in high-traffic households",
       "Scale buildup affecting shower and kitchen performance",
     ],
-    featuredServiceSlugs: ["drain-cleaning", "water-heaters", "water-treatment"],
+    featuredServiceSlugs: ["drain-clearing", "water-heaters", "water-treatment"],
     homeownerTips: [
       "Book camera inspections when drain problems recur more than twice a year.",
       "Maintain water heaters annually to reduce sediment-related failures.",
@@ -269,7 +269,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
       "Fixture and valve failures in builder-grade installs",
       "Hard-water scaling on appliances and shower components",
     ],
-    featuredServiceSlugs: ["drain-cleaning", "water-heaters", "fixtures"],
+    featuredServiceSlugs: ["drain-clearing", "water-heaters", "fixtures"],
     homeownerTips: [
       "Treat slow drains early before full backups occur.",
       "Flush water heaters yearly to improve lifespan.",
@@ -289,7 +289,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
       "Fixture fatigue in heavily used bathrooms",
       "Scale accumulation affecting flow and appliance reliability",
     ],
-    featuredServiceSlugs: ["drain-cleaning", "water-heaters", "repairs"],
+    featuredServiceSlugs: ["drain-clearing", "water-heaters", "repairs"],
     homeownerTips: [
       "Review plumbing capacity before major home additions.",
       "Use preventive drain maintenance for high-demand kitchens.",
@@ -309,7 +309,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
       "Drain slowdown in high-use kitchens and baths",
       "Water heater maintenance gaps in newer homes",
     ],
-    featuredServiceSlugs: ["water-treatment", "repairs", "drain-cleaning"],
+    featuredServiceSlugs: ["water-treatment", "repairs", "drain-clearing"],
     homeownerTips: [
       "Adopt annual maintenance even on newer plumbing systems.",
       "Install treatment early to reduce long-term fixture wear.",
@@ -349,7 +349,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
       "Fixture and shutoff valve aging",
       "Water quality concerns tied to mineral content",
     ],
-    featuredServiceSlugs: ["sewer-services", "water-heaters", "drain-cleaning"],
+    featuredServiceSlugs: ["sewer-services", "water-heaters", "drain-clearing"],
     homeownerTips: [
       "Use camera diagnostics when drain issues return repeatedly.",
       "Plan heater replacement before end-of-life failure periods.",
@@ -805,7 +805,7 @@ function buildFallbackProfile(location: LocationEntry): LocationProfile {
       "Water heater efficiency decline",
       "Hard-water scale impacts",
     ],
-    featuredServiceSlugs: ["repairs", "drain-cleaning", "water-heaters"],
+    featuredServiceSlugs: ["repairs", "drain-clearing", "water-heaters"],
     homeownerTips: [
       "Address small leaks early to avoid larger repair scopes.",
       "Flush and maintain water heaters annually.",

@@ -40,11 +40,11 @@ test("core marketing routes render with visible h1", async ({ page }) => {
 });
 
 test("dynamic route smoke: plumbing detail page renders", async ({ page }) => {
-  const response = await safeGoto(page, "/plumbing/drain-cleaning");
+  const response = await safeGoto(page, "/plumbing/drain-clearing");
   expect(response).not.toBeNull();
   expect(response!.ok()).toBeTruthy();
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-  await expect(page.getByText("Professional Drain Cleaning")).toBeVisible();
+  await expect(page.getByText("Professional Drain Clearing")).toBeVisible();
 });
 
 test("mobile-safe layout smoke: no horizontal overflow on core pages", async ({ page }) => {
