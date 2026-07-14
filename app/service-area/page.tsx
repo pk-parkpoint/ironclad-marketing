@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { CtaBanner } from "@/components/layout/cta-banner";
-import { Hero } from "@/components/layout/hero";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { LocalHero } from "@/components/local-pages/local-page-shared";
 import { QuickAnswer } from "@/components/seo/quick-answer";
 import { StructuredData } from "@/components/seo/structured-data";
 import { FaqAccordion } from "@/components/service/faq-accordion";
@@ -63,18 +63,13 @@ export default function ServiceAreaHubPage() {
       <SiteHeader />
       <StructuredData data={schemas} id="ld-service-area-hub" />
       <main>
-        <Hero
-          actions={[
-            { href: "/book", label: "Book Service", variant: "primary" },
-            { href: contactInfo.phoneHref, label: `Call ${contactInfo.phoneDisplay}`, variant: "secondary" },
-            { href: contactInfo.smsHref, label: "Text Us", variant: "text" },
-          ]}
-          alignment="left"
-          backgroundType="gradient"
-          eyebrow="Service Areas"
-          heading="Local Plumbing Service Across Greater Austin"
-          subtitle="Ironclad supports homeowners across Travis, Williamson, and Hays county corridors with fast dispatch, clear communication, and warranty-backed work."
-          trustChips={[`${LOCAL_CITY_PAGES.length} City Pages`, "16 Austin Neighborhoods", "Licensed and Insured"]}
+        <LocalHero
+          bookingHref="/book"
+          eyebrow="Service Areas - Greater Austin"
+          intro="Ironclad supports homeowners across Travis, Williamson, and Hays county corridors with fast dispatch, clear communication, and warranty-backed work."
+          phoneDisplay={contactInfo.phoneDisplay}
+          phoneHref={contactInfo.phoneHref}
+          title="Local Plumbing Service Across Greater Austin"
         />
 
         <section className="bg-soft-background pt-6">

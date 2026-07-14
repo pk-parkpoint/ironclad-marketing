@@ -1,6 +1,7 @@
 import rawData from "./data.json";
 import { cityEta, neighborhoodEta, type LocalEta } from "./local-page-eta";
 import { SAN_MARCOS_CITY_PAGE } from "./san-marcos";
+import { AUSTIN_NEIGHBORHOOD_LINKS } from "@/content/austin-neighborhoods";
 import { getLocationDetail } from "@/content/location-details";
 import { LOCATIONS, type LocationEntry } from "@/content/locations";
 import { SERVICES } from "@/content/services";
@@ -131,11 +132,18 @@ export function getServiceHref(service: LocalService): string {
 }
 
 export function getAustinNeighborhoodLinks() {
-  return LOCAL_NEIGHBORHOOD_PAGES.map((page) => ({
-    href: page.path,
-    label: page.name,
-    eta: page.eta.short,
-  }));
+  if (AUSTIN_NEIGHBORHOOD_LINKS.length !== LOCAL_NEIGHBORHOOD_PAGES.length) {
+    throw new Error("Austin neighborhood navigation is out of sync with local page content.");
+  }
+
+  return AUSTIN_NEIGHBORHOOD_LINKS.map((link) => {
+    const page = LOCAL_NEIGHBORHOOD_PAGES.find((entry) => entry.path === link.href);
+    if (!page || page.name !== link.label) {
+      throw new Error(`Austin neighborhood navigation entry does not match local page content: ${link.href}`);
+    }
+
+    return { ...link, eta: page.eta.short };
+  });
 }
 
 export function getNearbyCities(currentSlug: string, count = 6) {
