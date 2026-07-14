@@ -112,6 +112,14 @@ export const LOCATIONS: LocationEntry[] = [
     h1: "Kyle Plumbing - Ready When You Are",
   },
   {
+    slug: "san-marcos-tx",
+    cityName: "San Marcos",
+    titleTag: "Plumber in San Marcos, TX | Ironclad Plumbing",
+    metaDescription:
+      "San Marcos plumbing repairs, drain cleaning, water heaters, leak detection, and urgent service with clear upfront pricing.",
+    h1: "San Marcos Plumbing - Clear Answers, Professional Service",
+  },
+  {
     slug: "manor-tx",
     cityName: "Manor",
     titleTag: "Plumber in Manor, TX | Ironclad Plumbing",

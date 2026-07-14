@@ -74,7 +74,7 @@ export default function ServiceAreaHubPage() {
           eyebrow="Service Areas"
           heading="Local Plumbing Service Across Greater Austin"
           subtitle="Ironclad supports homeowners across Travis, Williamson, and Hays county corridors with fast dispatch, clear communication, and warranty-backed work."
-          trustChips={["19 City Pages", "16 Austin Neighborhoods", "Licensed and Insured"]}
+          trustChips={[`${LOCAL_CITY_PAGES.length} City Pages`, "16 Austin Neighborhoods", "Licensed and Insured"]}
         />
 
         <section className="bg-soft-background pt-6">

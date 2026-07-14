@@ -72,7 +72,7 @@ export function LocalPageBody({ bookingHref, page, phoneDisplay, phoneHref }: Lo
       <ProcessSection cityName={page.name} />
       <WhySection cityName={page.name} />
       <StatsStrip />
-      <ReviewsSection cityName={page.name} reviews={page.reviews} />
+      <ReviewsSection cityName={page.reviews.length > 0 ? page.name : "Central Texas"} reviews={page.reviews} />
       <CoverageSection body={areaBody} items={areaItems} links={areaLinks} title={areaTitle} />
       <NearbySection
         label={isNeighborhood ? "Nearby Austin Neighborhoods" : "Nearby Service Areas"}
