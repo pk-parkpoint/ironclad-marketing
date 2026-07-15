@@ -77,7 +77,7 @@ async function main() {
     {
       label: "FAQ hub",
       path: "/faq",
-      requiredPatterns: [/Frequently Asked Questions/i, /application\/ld\+json/i],
+      requiredPatterns: [/Plumbing Questions, Answered/i, /application\/ld\+json/i],
     },
   ];
 
