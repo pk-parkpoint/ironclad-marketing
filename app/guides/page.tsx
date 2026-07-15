@@ -86,6 +86,15 @@ export default function GuidesHubPage() {
         <section className="guide-hub-section">
           <div className="guide-hub-container">
             <h2 className="guide-hub-section__title">Plumbing tools, guides and calculators</h2>
+            <Link className="guide-cost-card mb-6 block" href="/data">
+              <span className="guide-hub-tool-card__eyebrow">NEW: AUSTIN HOME DATA DESK</span>
+              <h3>Explore 25 planned Austin home-data products</h3>
+              <p>
+                Preview the permanent URLs and product plans for local costs, risks, permits, water conditions and
+                homeowner decisions.
+              </p>
+              <span>Open the Data Desk</span>
+            </Link>
             <Link className="guide-cost-card mb-6 block" href={TOP_QUESTIONS_GUIDE_PATH}>
               <h3>{TOP_QUESTIONS_GUIDE_TITLE}</h3>
               <p>{TOP_QUESTIONS_GUIDE_DESCRIPTION}</p>

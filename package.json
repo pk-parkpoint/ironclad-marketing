@@ -22,6 +22,7 @@
     "ssr:audit": "tsx scripts/validate-ssr-rendering.ts",
     "phase0:live:audit": "tsx scripts/validate-phase0-live.ts",
     "sitemap-robots:audit": "tsx scripts/validate-sitemap-robots.ts",
+    "data-desk:audit": "tsx scripts/validate-data-desk.ts",
     "llms:generate": "tsx scripts/generate-llms.ts",
     "llms:audit": "tsx scripts/validate-llms.ts",
     "ppc:verify": "node scripts/verify-ppc-service-pages.mjs",
