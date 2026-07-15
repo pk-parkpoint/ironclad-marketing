@@ -25,9 +25,9 @@ export default function Error({ reset }: { error: Error & { digest?: string }; r
         </Link>
         <a
           className="focus-ring inline-flex items-center justify-center rounded-full bg-[#D03E04] px-7 py-[14px] text-[16px] font-semibold text-white transition-colors hover:bg-[#B03503] hover:no-underline"
-          href="tel:+15125162470"
+          href="tel:+15125062470"
         >
-          Call (512) 516-2470
+          Call (512) 506-2470
         </a>
       </div>
     </main>

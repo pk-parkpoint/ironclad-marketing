@@ -21,7 +21,7 @@ function GuideRailVideo() {
         <source src="/hero/ironclad-hero-bg.webm" type="video/webm" />
         <source src="/media/hero-video.mp4" type="video/mp4" />
       </video>
-      <p className="guide-rail-note">Need a straight answer? Call or text <a href="tel:+15125162470">(512) 516-2470</a>.</p>
+      <p className="guide-rail-note">Need a straight answer? Call or text <a href="tel:+15125062470">(512) 506-2470</a>.</p>
     </div>
   );
 }
@@ -103,7 +103,7 @@ export function GuidePageTemplate({ page }: { page: GuidePageData }) {
                 <div className="guide-support-card">
                   <h2>Questions this guide did not answer?</h2>
                   <p>
-                    Call or text <a href="tel:+15125162470">(512) 516-2470</a>. We will give you a direct answer
+                    Call or text <a href="tel:+15125062470">(512) 506-2470</a>. We will give you a direct answer
                     whether you hire us or not.
                   </p>
                   <p>No service visit fees. No pressure to book.</p>

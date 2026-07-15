@@ -1,6 +1,6 @@
 import type { AttributionData } from "@/lib/analytics";
 
-const PUBLIC_PHONE = process.env.NEXT_PUBLIC_PHONE?.trim() || "(512) 516-2470";
+const PUBLIC_PHONE = process.env.NEXT_PUBLIC_PHONE?.trim() || "(512) 506-2470";
 const TRACKING_PHONE = process.env.NEXT_PUBLIC_GOOGLE_ADS_TRACKING_PHONE?.trim() || "";
 const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID?.trim() || "AW-18207846861";
 const WEBSITE_CALL_LABEL =

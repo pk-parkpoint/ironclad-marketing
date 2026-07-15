@@ -44,7 +44,7 @@ test("website-call replacement is configured for the Google Ads tracking number"
 
 test("paid Google sessions route calls to Conduit while direct sessions keep the public number", async ({ page }) => {
   await page.goto("/plumbing/water-heater-repair");
-  await expect(page.locator('a[href^="tel:"]:visible').first()).toHaveAttribute("href", "tel:+15125162470");
+  await expect(page.locator('a[href^="tel:"]:visible').first()).toHaveAttribute("href", "tel:+15125062470");
 
   await page.goto("/plumbing/water-heater-repair?gclid=test-google-click");
   await expect(page.locator('a[href^="tel:"]:visible').first()).toHaveAttribute("href", "tel:+17372049967");
@@ -60,14 +60,14 @@ test("mobile paid-search CTAs keep emergency traffic call-only", async ({ page }
   const standardBar = page.locator("div.fixed").filter({
     has: page.locator('a[data-track-intent="phone"]'),
   }).last();
-  await expect(standardBar.getByRole("link", { name: "Call Now" })).toHaveAttribute("href", "tel:+15125162470");
+  await expect(standardBar.getByRole("link", { name: "Call Now" })).toHaveAttribute("href", "tel:+15125062470");
   await expect(standardBar.getByRole("link", { name: "Book Online" })).toHaveAttribute("href", "/book");
 
   await page.goto("/emergency-plumbing");
   const emergencyBar = page.locator("div.fixed").filter({
     has: page.locator('a[data-track-intent="phone"]'),
   }).last();
-  await expect(emergencyBar.getByRole("link", { name: "Call Now" })).toHaveAttribute("href", "tel:+15125162470");
+  await expect(emergencyBar.getByRole("link", { name: "Call Now" })).toHaveAttribute("href", "tel:+15125062470");
   await expect(emergencyBar.getByRole("link", { name: "Book Online" })).toHaveCount(0);
   await expect(page.getByRole("contentinfo")).toContainText("RMP #39871");
 });

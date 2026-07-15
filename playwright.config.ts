@@ -67,7 +67,7 @@ export default defineConfig({
         NEXT_PUBLIC_GOOGLE_ADS_BOOKING_CONVERSION_LABEL: "booking-test-label",
         NEXT_PUBLIC_GOOGLE_ADS_WEBSITE_CALL_CONVERSION_LABEL: "website-call-test-label",
         NEXT_PUBLIC_GOOGLE_ADS_TRACKING_PHONE: "(737) 204-9967",
-        NEXT_PUBLIC_PHONE: "(512) 516-2470",
+        NEXT_PUBLIC_PHONE: "(512) 506-2470",
       },
       port: APP_PORT,
       reuseExistingServer: !process.env.CI,
