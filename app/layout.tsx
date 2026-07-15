@@ -25,7 +25,10 @@ const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID?.trim();
 const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID?.trim() || "AW-18207846861";
 const GOOGLE_ADS_WEBSITE_CALL_LABEL =
   process.env.NEXT_PUBLIC_GOOGLE_ADS_WEBSITE_CALL_CONVERSION_LABEL?.trim();
-const PHONE_CONVERSION_NUMBER = process.env.NEXT_PUBLIC_PHONE?.trim() || "(512) 516-2470";
+const PHONE_CONVERSION_NUMBER =
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_TRACKING_PHONE?.trim()
+  || process.env.NEXT_PUBLIC_PHONE?.trim()
+  || "(512) 516-2470";
 
 function GoogleTagHead() {
   const configCalls = [

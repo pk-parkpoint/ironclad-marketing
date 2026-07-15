@@ -27,7 +27,7 @@ test("phone links fire the Google Ads phone conversion exactly once", async ({ p
   )).toBe(1);
 });
 
-test("website-call replacement is configured for the public Ironclad number", async ({ page }) => {
+test("website-call replacement is configured for the Google Ads tracking number", async ({ page }) => {
   await page.goto("/plumbing/water-heater-repair");
 
   await expect.poll(async () => page.evaluate(() => {
@@ -37,9 +37,20 @@ test("website-call replacement is configured for the public Ironclad number", as
       const params = args[2] as Record<string, unknown> | undefined;
       return args[0] === "config"
         && args[1] === "AW-18207846861/website-call-test-label"
-        && params?.phone_conversion_number === "(512) 516-2470";
+        && params?.phone_conversion_number === "(737) 204-9967";
     });
   })).toBe(true);
+});
+
+test("paid Google sessions route calls to Conduit while direct sessions keep the public number", async ({ page }) => {
+  await page.goto("/plumbing/water-heater-repair");
+  await expect(page.locator('a[href^="tel:"]:visible').first()).toHaveAttribute("href", "tel:+15125162470");
+
+  await page.goto("/plumbing/water-heater-repair?gclid=test-google-click");
+  await expect(page.locator('a[href^="tel:"]:visible').first()).toHaveAttribute("href", "tel:+17372049967");
+
+  await page.goto("/plumbing/drain-clearing");
+  await expect(page.locator('a[href^="tel:"]:visible').first()).toHaveAttribute("href", "tel:+17372049967");
 });
 
 test("mobile paid-search CTAs keep emergency traffic call-only", async ({ page }) => {
