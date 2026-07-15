@@ -42,7 +42,7 @@ export function derivePageContext(pathname: string): PageContext {
     return { pageTemplate: "article_detail", pageFamily: "article", service: "", city: "" };
   }
 
-  if (pathname.startsWith("/commercial-plumbing/")) {
+  if (pathname === "/commercial-plumbing" || pathname.startsWith("/commercial-plumbing/")) {
     return { pageTemplate: "commercial", pageFamily: "commercial", service: "Commercial Plumbing", city: "Austin" };
   }
 

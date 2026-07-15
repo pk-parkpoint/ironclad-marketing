@@ -4,6 +4,7 @@ import type { LocationEntry } from "@/content/locations";
 import type { ServiceEntry } from "@/content/services";
 
 type ServiceRelatedLinksProps = {
+  description?: string;
   relatedServices: ServiceEntry[];
   relatedCities: LocationEntry[];
   relatedGuides: BlogEntry[];
@@ -11,6 +12,7 @@ type ServiceRelatedLinksProps = {
 };
 
 export function ServiceRelatedLinks({
+  description,
   relatedServices,
   relatedCities,
   relatedGuides,
@@ -22,7 +24,7 @@ export function ServiceRelatedLinks({
         <div>
           <h2 className="text-[30px] font-bold leading-[1.2] text-[#111827]">Related Services and Resources</h2>
           <p className="mt-3 text-[16px] leading-[1.7] text-[#374151]">
-            Explore related service pages, service-area coverage, and practical homeowner guides.
+            {description ?? "Explore related service pages, service-area coverage, and practical homeowner guides."}
           </p>
         </div>
 
@@ -67,7 +69,7 @@ export function ServiceRelatedLinks({
           <div className="rounded-lg border border-[#BFDBFE] bg-[#EFF6FF] p-5">
             <p className="text-[14px] text-[#1E3A8A]">
               Need similar support for a business property?{" "}
-              <Link className="font-semibold underline" href="/commercial-plumbing/austin-tx">
+              <Link className="font-semibold underline" href="/commercial-plumbing">
                 Visit our commercial plumbing page.
               </Link>
             </p>

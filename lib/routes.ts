@@ -88,6 +88,7 @@ const PLUMBING_DROPDOWN_LINKS: NavChildLink[] = [
       { href: "/plumbing/backflow-prevention", label: "Backflow Prevention & Testing" },
     ],
   },
+  { href: "/commercial-plumbing", label: "Commercial Plumbing" },
   { href: "/plumbing/plumbing-inspection", label: "Plumbing Inspection" },
   { href: "/plumbing", label: "All Plumbing Services" },
 ];
@@ -141,6 +142,7 @@ export const TOP_NAV_LINKS: TopNavLink[] = [
 export const DEDICATED_MARKETING_PATHS = new Set([
   "book",
   "blog",
+  "commercial-plumbing",
   "faq",
   "faq/plumbing",
   "guarantees",

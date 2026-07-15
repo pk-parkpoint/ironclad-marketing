@@ -3,6 +3,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { allPosts, allTopics, postPath, topicPath } from "@/components/questions/question-data";
 import { BLOG_POSTS } from "@/content/blog-posts";
+import { COMMERCIAL_PLUMBING_PATH, COMMERCIAL_PLUMBING_SERVICE } from "@/content/commercial-plumbing";
 import { GUIDE_ENTRIES } from "@/content/guides";
 import { LOCAL_CITY_PAGES, LOCAL_NEIGHBORHOOD_PAGES } from "@/content/local-pages";
 import { getPpcServiceRouteEntries } from "@/content/ppc-service-variants";
@@ -53,6 +54,10 @@ function SiteMapSection({ links, title }: { links: SiteMapLink[]; title: string 
 export default function SiteMapPage() {
   const serviceLinks = [
     ...new Map([
+      [
+        COMMERCIAL_PLUMBING_PATH,
+        { href: COMMERCIAL_PLUMBING_PATH, label: COMMERCIAL_PLUMBING_SERVICE.title },
+      ] as const,
       ...SERVICES.map((service) => [
         `/plumbing/${service.slug}`,
         { href: `/plumbing/${service.slug}`, label: service.title },

@@ -1,10 +1,5 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import path from "node:path";
-import { BLOG_POSTS } from "../content/blog-posts";
-import { LOCATIONS } from "../content/locations";
-import { getPpcServiceRouteEntries } from "../content/ppc-service-variants";
-import { SERVICES } from "../content/services";
-import { STATIC_PAGES } from "../content/static-pages";
 import {
   buildPageMetadata,
   OG_IMAGE_BY_TEMPLATE,
@@ -12,154 +7,20 @@ import {
   OG_IMAGE_WIDTH,
   normalizeCanonicalPath,
   type OgTemplate,
-  type OgType,
 } from "../lib/seo";
-
-type MetadataEntry = {
-  route: string;
-  title: string;
-  description: string;
-  ogTemplate: OgTemplate;
-  ogType: OgType;
-};
+import { buildMetadataAuditEntries } from "./metadata-audit-entries";
+import { readImageDimensions } from "./image-dimensions";
 
 const REQUIRED_OG_DIMENSIONS = { width: 1200, height: 630 };
 const REQUIRED_TWITTER_CARD = "summary_large_image";
-
-function getOgTemplateForStaticPath(pathname: string): OgTemplate {
-  if (pathname === "plumbing" || pathname.startsWith("plumbing/")) {
-    return "service";
-  }
-  if (pathname === "service-area" || pathname.startsWith("service-area/")) {
-    return "location";
-  }
-  if (
-    pathname === "blog" ||
-    pathname.startsWith("blog/") ||
-    pathname === "faq" ||
-    pathname.startsWith("faq/") ||
-    pathname === "plumbing-guides"
-  ) {
-    return "blog";
-  }
-  return "default";
-}
-
-function buildServiceEntries(): MetadataEntry[] {
-  const entries = new Map<string, MetadataEntry>();
-
-  for (const service of SERVICES) {
-    entries.set(`/plumbing/${service.slug}`, {
-      route: `/plumbing/${service.slug}`,
-      title: service.titleTag,
-      description: service.metaDescription,
-      ogTemplate: "service",
-      ogType: "website",
-    });
-  }
-
-  for (const { path: route, service } of getPpcServiceRouteEntries()) {
-    if (route === "/plumbing") {
-      continue;
-    }
-    entries.set(route, {
-      route,
-      title: service.titleTag,
-      description: service.metaDescription,
-      ogTemplate: "service",
-      ogType: "website",
-    });
-  }
-
-  return [...entries.values()];
-}
-
-function buildEntries(): MetadataEntry[] {
-  return [
-    {
-      route: "/",
-      title: "Ironclad Plumbing | Austin's Modern Plumbing Company",
-      description:
-        "Licensed Austin plumber with on-time arrival windows, upfront pricing, and a written workmanship warranty.",
-      ogTemplate: "default",
-      ogType: "website",
-    },
-    ...STATIC_PAGES.map((page) => ({
-      route: `/${page.path}`,
-      title: page.titleTag,
-      description: page.metaDescription,
-      ogTemplate: getOgTemplateForStaticPath(page.path),
-      ogType: "website" as const,
-    })),
-    ...buildServiceEntries(),
-    ...LOCATIONS.map((location) => ({
-      route: `/service-area/${location.slug}`,
-      title: location.titleTag,
-      description: location.metaDescription,
-      ogTemplate: "location" as const,
-      ogType: "website" as const,
-    })),
-    ...BLOG_POSTS.map((post) => ({
-      route: `/blog/${post.slug}`,
-      title: post.titleTag,
-      description: post.metaDescription,
-      ogTemplate: "blog" as const,
-      ogType: "article" as const,
-    })),
-    {
-      route: "/404",
-      title: "Page Not Found | Ironclad Plumbing",
-      description:
-        "The page you requested could not be found. Explore services, locations, or contact Ironclad Plumbing.",
-      ogTemplate: "default",
-      ogType: "website",
-    },
-  ];
-}
 
 function fail(message: string): never {
   console.error(`metadata audit failed: ${message}`);
   process.exit(1);
 }
 
-function readPngDimensions(diskPath: string): { width: number; height: number } {
-  const buffer = readFileSync(diskPath);
-  // PNG signature: 89 50 4E 47 0D 0A 1A 0A
-  if (
-    buffer.length < 24 ||
-    buffer[0] !== 0x89 ||
-    buffer[1] !== 0x50 ||
-    buffer[2] !== 0x4e ||
-    buffer[3] !== 0x47 ||
-    buffer[4] !== 0x0d ||
-    buffer[5] !== 0x0a ||
-    buffer[6] !== 0x1a ||
-    buffer[7] !== 0x0a
-  ) {
-    fail(`invalid PNG signature for ${diskPath}`);
-  }
-
-  const chunkType = buffer.toString("ascii", 12, 16);
-  if (chunkType !== "IHDR") {
-    fail(`PNG missing IHDR chunk for ${diskPath}`);
-  }
-
-  return {
-    width: buffer.readUInt32BE(16),
-    height: buffer.readUInt32BE(20),
-  };
-}
-
-function readSvgDimensions(diskPath: string): { width: number; height: number } {
-  const source = readFileSync(diskPath, "utf8");
-  return {
-    width: Number(source.match(/\bwidth="(\d+)"/)?.[1] ?? 0),
-    height: Number(source.match(/\bheight="(\d+)"/)?.[1] ?? 0),
-  };
-}
-
 function main() {
-  const entries = buildEntries();
+  const entries = buildMetadataAuditEntries();
 
   if (entries.length === 0) {
     fail("no metadata entries found");
@@ -322,12 +183,7 @@ function main() {
       fail(`missing og:image asset at ${diskPath}`);
     }
 
-    const ext = path.extname(diskPath).toLowerCase();
-    const { width, height } = ext === ".png"
-      ? readPngDimensions(diskPath)
-      : ext === ".svg"
-        ? readSvgDimensions(diskPath)
-        : (() => fail(`unsupported og:image format for ${imagePath} (${ext || "no extension"})`))();
+    const { width, height } = readImageDimensions(diskPath);
     if (width !== REQUIRED_OG_DIMENSIONS.width || height !== REQUIRED_OG_DIMENSIONS.height) {
       fail(
         `invalid og:image dimensions for ${imagePath}; expected ${REQUIRED_OG_DIMENSIONS.width}x${REQUIRED_OG_DIMENSIONS.height}, got ${width}x${height}`,

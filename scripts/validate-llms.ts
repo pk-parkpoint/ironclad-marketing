@@ -27,6 +27,7 @@ const REQUIRED_PATHS = [
   "/",
   "/llms-full.txt",
   "/plumbing",
+  "/commercial-plumbing",
   "/service-area",
   "/faq/plumbing",
   "/guides",
