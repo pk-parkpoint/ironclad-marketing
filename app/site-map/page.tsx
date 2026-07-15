@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { allPosts, allTopics, postPath, topicPath } from "@/components/questions/question-data";
 import { BLOG_POSTS } from "@/content/blog-posts";
 import { COMMERCIAL_PLUMBING_PATH, COMMERCIAL_PLUMBING_SERVICE } from "@/content/commercial-plumbing";
+import { DATA_DESK_PRODUCTS } from "@/content/data-desk";
 import { GUIDE_ENTRIES } from "@/content/guides";
 import { LOCAL_CITY_PAGES, LOCAL_NEIGHBORHOOD_PAGES } from "@/content/local-pages";
 import { getPpcServiceRouteEntries } from "@/content/ppc-service-variants";
@@ -73,6 +74,10 @@ export default function SiteMapPage() {
     label: `${page.name} Plumbing`,
   }));
   const guideLinks = GUIDE_ENTRIES.map((guide) => ({ href: `/guides/${guide.slug}`, label: guide.routeLabel }));
+  const dataDeskLinks = [
+    { href: "/data", label: "Austin Home Data Desk" },
+    ...DATA_DESK_PRODUCTS.map((product) => ({ href: `/data/${product.slug}`, label: product.title })),
+  ];
   const questionLinks = [
     ...allTopics().map((topic) => ({ href: topicPath(topic.key), label: topic.name })),
     ...allPosts().map((post) => ({ href: postPath(post), label: post.title })),
@@ -95,6 +100,7 @@ export default function SiteMapPage() {
             <SiteMapSection links={cityLinks} title="City Service Areas" />
             <SiteMapSection links={neighborhoodLinks} title="Austin Neighborhood Pages" />
             <SiteMapSection links={guideLinks} title="Homeowner Guides" />
+            <SiteMapSection links={dataDeskLinks} title="Austin Home Data Desk" />
             <SiteMapSection links={questionLinks} title="Questions and Answers" />
             <SiteMapSection links={articleLinks} title="Articles" />
           </div>

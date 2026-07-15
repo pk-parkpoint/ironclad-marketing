@@ -131,11 +131,16 @@ const ABOUT_DROPDOWN_LINKS: NavChildLink[] = [
   { href: "/about", label: "About Us" },
 ];
 
+const GUIDES_NAV_LINKS: NavChildLink[] = [
+  { href: "/data", label: "Austin Home Data Desk" },
+  ...GUIDES_DROPDOWN_LINKS,
+];
+
 export const TOP_NAV_LINKS: TopNavLink[] = [
   { href: "/plumbing", label: "Plumbing", children: PLUMBING_DROPDOWN_LINKS },
   { href: "/plumbing/drain-clearing", label: "Drains", children: DRAINS_DROPDOWN_LINKS },
   { href: "/service-area", label: "Service Areas", children: SERVICE_AREA_DROPDOWN_LINKS },
-  { href: "/guides", label: "Guides", children: GUIDES_DROPDOWN_LINKS },
+  { href: "/guides", label: "Guides", children: GUIDES_NAV_LINKS },
   { href: "/about", label: "About Us", children: ABOUT_DROPDOWN_LINKS },
 ];
 
@@ -143,6 +148,7 @@ export const DEDICATED_MARKETING_PATHS = new Set([
   "book",
   "blog",
   "commercial-plumbing",
+  "data",
   "faq",
   "faq/plumbing",
   "guarantees",
