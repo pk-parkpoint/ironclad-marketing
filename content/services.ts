@@ -100,7 +100,7 @@ export const SERVICES: ServiceEntry[] = [
     title: "Water Heater Repair",
     titleTag: "Water Heater Repair in Austin, TX | Ironclad Plumbing",
     metaDescription:
-      "Same-day water heater repair in Austin. Thermostats, elements, pilot lights, and valves diagnosed and fixed with upfront pricing.",
+      "Same-day water heater-repair availability in Austin. Thermostats, elements, pilot lights, and valves diagnosed and fixed with upfront pricing.",
     h1: "Water Heater Repair - Restore Hot Water Fast",
   },
   {
@@ -132,7 +132,7 @@ export const SERVICES: ServiceEntry[] = [
     title: "Toilet Repair & Installation",
     titleTag: "Toilet Repair & Installation in Austin | Ironclad Plumbing",
     metaDescription:
-      "Running toilets, weak flushes, and new toilet installation handled same-day with upfront pricing in Austin.",
+      "Same-day availability for running toilets, weak flushes, and new toilet installation, with upfront pricing in Austin.",
     h1: "Toilet Repair & Installation - Stop the Run, Fix the Flush",
   },
   {
@@ -148,7 +148,7 @@ export const SERVICES: ServiceEntry[] = [
     title: "Garbage Disposal Services",
     titleTag: "Garbage Disposal Services in Austin | Ironclad Plumbing",
     metaDescription:
-      "Garbage disposal repair, replacement, and new installation in Austin. Jammed, leaking, or dead units fixed same-day.",
+      "Garbage disposal repair, replacement, and new installation in Austin, with same-day availability for jammed, leaking, or dead units.",
     h1: "Garbage Disposal Repair & Installation - Quick Fix, Clean Sink",
   },
   {

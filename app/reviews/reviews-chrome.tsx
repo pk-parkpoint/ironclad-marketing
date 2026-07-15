@@ -51,9 +51,9 @@ export function ReviewsFooter() {
           <Link className={styles.footerLogo} href="/">
             <Image alt="Ironclad Plumbing" height={40} src="/media/logo/ironclad-logo-clear-light.svg" width={138} />
           </Link>
-          <p>Austin&apos;s most trusted plumber. Fast response, fair price, fixed right, so you never call twice.</p>
+          <p>Austin plumbing backed by clear pricing and written warranties.</p>
           <a href={phoneHref}><PhoneIcon />{phoneDisplay}</a>
-          <small>Available 24/7 · call or text</small>
+          <small>24/7 emergency line · call or text</small>
         </div>
         <FooterColumn links={quickLinks} title="Quick Links" />
         <FooterColumn links={serviceLinks} title="Services" />

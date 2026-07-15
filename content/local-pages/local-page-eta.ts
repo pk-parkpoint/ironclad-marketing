@@ -10,7 +10,7 @@ const CITY_ETA_BY_SLUG: Record<string, LocalEta> = {
   },
   "round-rock-tx": {
     short: "Round Rock ETA: 75-150 min",
-    detail: "Round Rock is handled on a regular Williamson County same-day corridor.",
+    detail: "Round Rock is handled on a regular Williamson County dispatch corridor, with urgent calls prioritized.",
   },
   "georgetown-tx": {
     short: "Georgetown ETA: 90-180 min",
@@ -18,7 +18,7 @@ const CITY_ETA_BY_SLUG: Record<string, LocalEta> = {
   },
   "pflugerville-tx": {
     short: "Pflugerville ETA: 75-150 min",
-    detail: "Pflugerville remains one of the closest same-day northeast dispatch zones.",
+    detail: "Pflugerville is one of our closest northeast dispatch zones, with same-day availability based on demand.",
   },
   "cedar-park-tx": {
     short: "Cedar Park ETA: 75-150 min",
@@ -50,7 +50,7 @@ const CITY_ETA_BY_SLUG: Record<string, LocalEta> = {
   },
   "buda-tx": {
     short: "Buda ETA: 90-180 min",
-    detail: "Buda remains on a daily south corridor with strong same-day coverage.",
+    detail: "Buda remains on a daily south corridor, with same-day availability based on demand.",
   },
   "kyle-tx": {
     short: "Kyle ETA: 2-4 hr",
@@ -96,6 +96,6 @@ export function cityEta(slug: string): LocalEta {
 export function neighborhoodEta(name: string): LocalEta {
   return {
     short: "Austin ETA: 60-120 min",
-    detail: `${name} calls are routed through the Austin same-day dispatch lane.`,
+    detail: `${name} calls are routed through the Austin dispatch lane, with urgent calls prioritized.`,
   };
 }

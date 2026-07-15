@@ -108,7 +108,7 @@ export function ServiceStandardPage({
                 </span>
                 <span className="flex items-center gap-2">
                   <TrustIcon />
-                  5-Star Google Reviews
+                  4.9 Average Rating
                 </span>
               </div>
               <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">

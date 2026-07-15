@@ -57,7 +57,7 @@ async function main() {
     {
       label: "homepage",
       path: "/",
-      requiredPatterns: [/The Plumber Austin Trusts\./i, /application\/ld\+json/i, /View All \d+ Services/i],
+      requiredPatterns: [/Austin Plumbing, Done Right\./i, /application\/ld\+json/i, /View All \d+ Services/i],
     },
     {
       label: "service page (core)",
@@ -72,7 +72,7 @@ async function main() {
     {
       label: "city page",
       path: "/service-area/austin-tx",
-      requiredPatterns: [/FAQ for\s*Austin/i, /application\/ld\+json/i, /Request Service in Austin/i],
+      requiredPatterns: [/Austin Plumbing Questions, Answered/i, /application\/ld\+json/i, /Need a Plumber in Austin\? Call Ironclad\./i],
     },
     {
       label: "FAQ hub",

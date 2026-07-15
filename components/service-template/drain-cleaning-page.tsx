@@ -157,7 +157,7 @@ export function DrainCleaningPage({
         <div className="dc-reviews-header" data-reveal>
           <div>
             <h2 className="dc-section-title-md">Austin Homeowners Trust Ironclad</h2>
-            <div className="dc-review-meta">4.9 / 5 · 142 Google reviews</div>
+            <div className="dc-review-meta">4.9 / 5 · 142 reviews across Google, Yelp, and Nextdoor</div>
           </div>
           <InlineLink href="/reviews">Read all reviews →</InlineLink>
         </div>

@@ -1,6 +1,6 @@
 # Content Records — All 31 PPC Service-Page Variants
 
-**One responsive template, 31 content records.** Every variant renders through the same desktop+mobile template (see `screens/service-page/`). Only the values below change per keyword. The global brand accent is `#2F8FE0` (tweakable) on every variant. Phone is `(833) 597-1932` sitewide.
+**One responsive template, 31 content records.** Every variant renders through the same desktop+mobile template (see `screens/service-page/`). Only the values below change per keyword. The global brand accent is `#2F8FE0` (tweakable) on every variant. Phone is `(512) 506-2470` sitewide.
 
 Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (4), stat band (3), reviews (3), 12-area service map, footer, 10% offer chip, "Why Austin Calls Ironclad" 4 cards.
 
@@ -35,7 +35,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Not sure who to call, or dealing with something right now?
-- Sub: We answer 24/7 and cover the whole home across Austin.
+- Sub: We cover whole-home plumbing across Austin, with a 24/7 emergency line for urgent calls.
 
 **Why-Austin intro line:** Anyone can send a plumber. We're built so you never have to make the same call twice.
 
@@ -75,15 +75,15 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   1. **Q:** How much does a plumber cost in Austin?
      **A:** Most repairs run $125 to $500 depending on the job. You get the exact price before any work starts, and you approve it first.
   2. **Q:** Do you offer same-day service?
-     **A:** Often yes, and we answer 24/7. Availability depends on the day, so call and we will tell you the soonest window.
+     **A:** Often, depending on demand. Call for the soonest window; our 24/7 emergency line handles urgent calls.
   3. **Q:** Are you licensed and insured?
      **A:** Yes. We are a licensed Texas plumbing company, fully insured, and every job carries a written warranty.
   4. **Q:** Do you charge for estimates?
-     **A:** You get upfront pricing before work begins. Diagnostic fees, when they apply, are explained before we start.
+     **A:** You get upfront pricing before work begins. We charge a diagnostic fee for the visit, evaluation, and written estimate. It is explained before dispatch and typically applied to approved work.
   5. **Q:** What plumbing services do you cover?
      **A:** Drains, water heaters, leaks, sewer lines, fixtures, gas, water treatment, and emergencies. If it involves your home's water or gas, we handle it.
   6. **Q:** What should I do in a plumbing emergency?
-     **A:** Shut off the water at the fixture or the main, then call us. We answer 24/7 and will talk you through it.
+     **A:** Shut off the water at the fixture or the main, then call us. Our 24/7 emergency line is available, and we will talk you through it.
 
 **Final CTA band**
 
@@ -120,7 +120,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: No hot water, or a tank you do not trust?
-- Sub: We answer 24/7 and offer same-day water heater help across Austin.
+- Sub: Same-day availability for water heater help depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can swap a water heater. We're built so you never have to make this call twice.
 
@@ -139,7 +139,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
      - image: `assets/services/water-heaters/04-sediment-flush-and-maintenance.webp`
   5. **Gas & electric service** — Both types installed and repaired safely.
      - image: `assets/services/water-heaters/05-gas-and-electric-service.webp`
-  6. **Same-day replacement** — When a tank is done, we can install a new one fast.
+  6. **Fast replacement options** — When a tank is done, we can install a new one fast.
      - image: `assets/services/water-heaters/06-same-day-replacement.webp`
 
 **Process (What to Expect) — 4 steps**
@@ -162,7 +162,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   2. **Q:** Repair or replace?
      **A:** Under about 8 years, repair usually wins. Past 10, or with a leaking tank, replacement is the safer call. We tell you straight which one fits.
   3. **Q:** Do you offer same-day water heater service?
-     **A:** Often yes for repairs, and we answer 24/7. Same-day installs depend on unit availability.
+     **A:** Repairs are often available the same day, depending on demand. Our 24/7 emergency line handles urgent calls, and installations depend on unit availability.
   4. **Q:** Tank or tankless?
      **A:** Tankless costs more up front but gives endless hot water and lower bills. We size both to your home so you can choose.
   5. **Q:** How long does a water heater last?
@@ -205,7 +205,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Something leaking, running, or not working right now?
-- Sub: We answer 24/7 and offer same-day repairs across Austin.
+- Sub: Same-day availability for repairs depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can patch a leak. We're built so you never have to make this call twice.
 
@@ -237,7 +237,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Plumbing Repairs in Austin and Nearby Areas
-- Sub: Same-day repairs across Austin and the surrounding metro.
+- Sub: Same-day availability for repairs across Austin and the surrounding metro.
 - CTA label: Schedule a Repair Near You
 
 **FAQ — Plumbing Repair FAQ**
@@ -245,7 +245,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   1. **Q:** How much does a plumbing repair cost in Austin?
      **A:** Most repairs run $125 to $500 depending on the job. You get the exact price first and approve it.
   2. **Q:** Do you offer same-day repairs?
-     **A:** Often yes, and we answer 24/7. Call and we will give you the soonest window.
+     **A:** Often, depending on demand. Call for the soonest window; our 24/7 emergency line handles urgent calls.
   3. **Q:** What kinds of repairs do you handle?
      **A:** Leaks, running toilets, bad valves, low pressure, dripping faucets, and more. If it is failing, we can fix it.
   4. **Q:** Can you fix it in one visit?
@@ -290,7 +290,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Wet spots in the yard, a spike in your bill, or dropping pressure?
-- Sub: We answer 24/7 and offer same-day water line help across Austin.
+- Sub: Same-day availability for water line help depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can dig up a water line. We're built so you never have to make this call twice.
 
@@ -322,7 +322,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Water Line Repair in Austin and Nearby Areas
-- Sub: Same-day water line repair across Austin and the surrounding metro.
+- Sub: Same-day availability for water line repair across Austin and the surrounding metro.
 - CTA label: Schedule Water Line Service Near You
 
 **FAQ — Water Line Repair FAQ**
@@ -332,7 +332,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   2. **Q:** How do I know my main water line is leaking?
      **A:** Signs include a jump in your water bill, soggy spots in the yard, low pressure, or the meter running with everything off.
   3. **Q:** Do you offer same-day service?
-     **A:** Often yes, and we answer 24/7 for active leaks that are causing damage.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles active leaks that are causing damage.
   4. **Q:** Can you repair the line without tearing up my yard?
      **A:** In many cases yes. We use the least invasive method the situation allows and restore the area.
   5. **Q:** Repair or full replacement?
@@ -375,7 +375,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Weak flow, banging pipes, or pressure that is too high?
-- Sub: We answer 24/7 and offer same-day pressure help across Austin.
+- Sub: Same-day availability for pressure help depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can swap a valve. We're built so you never have to make this call twice.
 
@@ -407,7 +407,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Water Pressure Repair in Austin and Nearby Areas
-- Sub: Same-day pressure and regulator service across Austin and the surrounding metro.
+- Sub: Same-day availability for pressure and regulator service across Austin and the surrounding metro.
 - CTA label: Schedule Pressure Service Near You
 
 **FAQ — Water Pressure FAQ**
@@ -419,7 +419,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   3. **Q:** Can water pressure be too high?
      **A:** Yes, and high pressure damages fixtures and appliances over time. A regulator brings it into a safe range.
   4. **Q:** Do you offer same-day service?
-     **A:** Often yes, and we answer 24/7.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent calls.
   5. **Q:** Is low pressure an emergency?
      **A:** Not usually, but a sudden change can signal a leak, which is worth checking soon.
   6. **Q:** What can I check before calling?
@@ -460,7 +460,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Seeing these signs, or backing up right now?
-- Sub: We answer 24/7 and offer same-day drain cleaning across Austin.
+- Sub: Same-day drain-cleaning availability depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can clear a clog. We're built so you never have to make this call twice.
 
@@ -545,7 +545,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Standing water, or a clog that keeps coming back?
-- Sub: We answer 24/7 and offer same-day drain help across Austin.
+- Sub: Same-day availability for drain help depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can plunge a drain. We're built so you never have to make this call twice.
 
@@ -577,7 +577,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Clogged Drain Repair in Austin and Nearby Areas
-- Sub: Same-day clog clearing across Austin and the surrounding metro.
+- Sub: Same-day availability for clog clearing across Austin and the surrounding metro.
 - CTA label: Schedule Drain Service Near You
 
 **FAQ — Clogged Drain FAQ**
@@ -585,7 +585,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   1. **Q:** How much does it cost to clear a clogged drain in Austin?
      **A:** Most jobs run $175 to $350 depending on the drain and how stubborn the clog is. You approve the price first.
   2. **Q:** Do you offer same-day clog clearing?
-     **A:** Often yes, and we answer 24/7.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent calls.
   3. **Q:** Why does my drain keep clogging?
      **A:** A returning clog usually means buildup deeper in the line than a plunger reaches. We clear it at the source.
   4. **Q:** Is it a clog or a main line problem?
@@ -630,7 +630,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Repeat clogs, or a line full of grease and roots?
-- Sub: We answer 24/7 and offer same-day jetting across Austin.
+- Sub: Same-day availability for jetting depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can run a snake. We're built so you never have to make this call twice.
 
@@ -662,7 +662,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Hydro Jetting in Austin and Nearby Areas
-- Sub: Same-day hydro jetting across Austin and the surrounding metro.
+- Sub: Same-day availability for hydro jetting across Austin and the surrounding metro.
 - CTA label: Schedule Jetting Near You
 
 **FAQ — Hydro Jetting FAQ**
@@ -672,7 +672,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   2. **Q:** How is jetting different from snaking?
      **A:** A snake punches a hole through a clog. Jetting scours the whole pipe wall clean, so it stays clear longer.
   3. **Q:** Do you offer same-day jetting?
-     **A:** Often yes, and we answer 24/7.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent calls.
   4. **Q:** Is hydro jetting safe for my pipes?
      **A:** For pipes in sound condition, yes. That is why we camera the line first to confirm it is a good fit.
   5. **Q:** Will jetting clear tree roots?
@@ -715,7 +715,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Multiple drains backing up, or sewage smell in the yard?
-- Sub: We answer 24/7 for sewer emergencies across Austin.
+- Sub: Our 24/7 emergency line handles sewer emergencies across Austin.
 
 **Why-Austin intro line:** Anyone can dig up a sewer line. We're built so you never have to make this call twice.
 
@@ -757,7 +757,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   2. **Q:** How do I know my sewer line is the problem?
      **A:** Several drains backing up at once, gurgling toilets, or a sewage smell in the yard all point to the main line.
   3. **Q:** Do you offer emergency sewer service?
-     **A:** Yes, we answer 24/7 for active backups.
+     **A:** Yes. Our 24/7 emergency line handles active backups.
   4. **Q:** Can you fix a sewer line without digging up my yard?
      **A:** Often yes, with trenchless methods. We show you what the camera finds and lay out the options.
   5. **Q:** What causes sewer line failure?
@@ -800,7 +800,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Recurring backups, or buying a home and want to know what is underground?
-- Sub: We answer 24/7 and offer same-day inspections across Austin.
+- Sub: Same-day availability for inspections depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can guess at the problem. We're built so you never have to make this call twice.
 
@@ -832,7 +832,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Sewer Camera Inspection in Austin and Nearby Areas
-- Sub: Same-day camera inspection across Austin and the surrounding metro.
+- Sub: Same-day availability for camera inspection across Austin and the surrounding metro.
 - CTA label: Schedule an Inspection Near You
 
 **FAQ — Sewer Camera Inspection FAQ**
@@ -842,7 +842,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   2. **Q:** Why would I need a camera inspection?
      **A:** For recurring clogs, before buying a home, or to locate a problem before digging. It removes the guesswork.
   3. **Q:** Do you offer same-day inspection?
-     **A:** Often yes, and we answer 24/7.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent calls.
   4. **Q:** What can the camera find?
      **A:** Roots, cracks, bellies, blockages, and collapsed sections, with the exact location and depth.
   5. **Q:** Do I get to see the footage?
@@ -885,7 +885,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Need a sewer line fixed without tearing up the yard?
-- Sub: We answer 24/7 and serve the whole Austin metro.
+- Sub: We serve the whole Austin metro, with a 24/7 emergency line for urgent calls.
 
 **Why-Austin intro line:** Anyone can dig a trench. We're built so you never have to make this call twice.
 
@@ -970,7 +970,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: No hot water, or a tank that is leaking or making noise?
-- Sub: We answer 24/7 and offer same-day repair across Austin.
+- Sub: Same-day availability for repair depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can look at a water heater. We're built so you never have to make this call twice.
 
@@ -989,7 +989,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
      - image: `assets/services/water-heater-repair/04-sediment-flush-and-maintenance.webp`
   5. **Gas & electric water heaters** — Both types serviced by licensed pros.
      - image: `assets/services/water-heater-repair/05-gas-and-electric-water-heaters.webp`
-  6. **Same-day replacement** — When a tank is done, we can install a new one fast.
+  6. **Fast replacement options** — When a tank is done, we can install a new one fast.
      - image: `assets/services/water-heater-repair/06-same-day-replacement.webp`
 
 **Process (What to Expect) — 4 steps**
@@ -1002,7 +1002,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Water Heater Repair in Austin and Nearby Areas
-- Sub: Same-day water heater repair across Austin and the surrounding metro.
+- Sub: Same-day availability for water heater repair across Austin and the surrounding metro.
 - CTA label: Schedule Repair Near You
 
 **FAQ — Water Heater Repair FAQ**
@@ -1010,7 +1010,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   1. **Q:** How much does water heater repair cost in Austin?
      **A:** Most repairs run $150 to $600 depending on the part. You approve the price first.
   2. **Q:** Do you offer same-day water heater repair?
-     **A:** Often yes, and we answer 24/7.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent calls.
   3. **Q:** Should I repair or replace?
      **A:** Under 8 years, repair usually wins. A leaking tank means replacement. We tell you straight.
   4. **Q:** Why is my water not getting hot?
@@ -1225,7 +1225,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: A spike in your bill, a musty smell, or the meter running with everything off?
-- Sub: We answer 24/7 and offer same-day leak detection across Austin.
+- Sub: Same-day availability for leak detection depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can cut a hole and look. We're built so you never have to make this call twice.
 
@@ -1257,7 +1257,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Leak Detection in Austin and Nearby Areas
-- Sub: Same-day leak detection across Austin and the surrounding metro.
+- Sub: Same-day availability for leak detection across Austin and the surrounding metro.
 - CTA label: Schedule Detection Near You
 
 **FAQ — Leak Detection FAQ**
@@ -1267,7 +1267,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   2. **Q:** How do you find a hidden leak without damage?
      **A:** We use electronic and acoustic tools to pinpoint the source before any wall or slab is opened.
   3. **Q:** Do you offer same-day leak detection?
-     **A:** Often yes, and we answer 24/7.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent calls.
   4. **Q:** How do I know I even have a leak?
      **A:** A jump in your bill, a musty smell, warm spots on the floor, or the meter moving with all water off.
   5. **Q:** Can you fix the leak too?
@@ -1310,7 +1310,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Warm spots on the floor, a spike in your bill, or the sound of water under the slab?
-- Sub: We answer 24/7 and offer same-day help across Austin.
+- Sub: Same-day availability for help depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can jackhammer a floor. We're built so you never have to make this call twice.
 
@@ -1342,7 +1342,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Slab Leak Repair in Austin and Nearby Areas
-- Sub: Same-day slab leak help across Austin and the surrounding metro.
+- Sub: Same-day availability for slab leak help across Austin and the surrounding metro.
 - CTA label: Schedule Slab Leak Service Near You
 
 **FAQ — Slab Leak Repair FAQ**
@@ -1352,7 +1352,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   2. **Q:** How do I know I have a slab leak?
      **A:** Warm spots on the floor, unexplained high bills, low pressure, or the sound of running water under the floor.
   3. **Q:** Do you offer same-day service?
-     **A:** Often yes, and we answer 24/7 for active leaks.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles active leaks.
   4. **Q:** Do you have to break up my whole floor?
      **A:** No. We pinpoint the leak first and use the least invasive fix, which may be a spot repair or a reroute.
   5. **Q:** What causes slab leaks?
@@ -1395,7 +1395,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: A drip, a stain, or water where it should not be?
-- Sub: We answer 24/7 and offer same-day leak repair across Austin.
+- Sub: Same-day availability for leak repair depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can wrap a pipe. We're built so you never have to make this call twice.
 
@@ -1427,7 +1427,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Leak Repair in Austin and Nearby Areas
-- Sub: Same-day leak repair across Austin and the surrounding metro.
+- Sub: Same-day availability for leak repair across Austin and the surrounding metro.
 - CTA label: Schedule Leak Repair Near You
 
 **FAQ — Leak Repair FAQ**
@@ -1435,7 +1435,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   1. **Q:** How much does leak repair cost in Austin?
      **A:** Most repairs run $150 to $600 depending on location and access. You approve the price first.
   2. **Q:** Do you offer same-day leak repair?
-     **A:** Often yes, and we answer 24/7.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent calls.
   3. **Q:** The leak is behind a wall. Can you find it?
      **A:** Yes. We locate hidden leaks before opening anything, so we open only what is needed.
   4. **Q:** Is a small drip worth fixing now?
@@ -1480,7 +1480,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: A dripping faucet, a wobbly toilet, or a new fixture to install?
-- Sub: We answer 24/7 and serve the whole Austin metro.
+- Sub: We serve the whole Austin metro, with a 24/7 emergency line for urgent calls.
 
 **Why-Austin intro line:** Anyone can tighten a fixture. We're built so you never have to make this call twice.
 
@@ -1524,7 +1524,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   3. **Q:** Do you handle repairs too?
      **A:** Yes. Drips, running toilets, low flow, and loose fixtures are all common fixes.
   4. **Q:** Do you offer same-day service?
-     **A:** Often yes, and we answer 24/7.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent calls.
   5. **Q:** My faucet drips even when off. Is that a problem?
      **A:** Yes, a constant drip wastes water and signals worn parts that will only get worse.
   6. **Q:** Do you clean up after?
@@ -1565,7 +1565,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: A dripping faucet, a slow sink, or a new one to install?
-- Sub: We answer 24/7 and offer same-day service across Austin.
+- Sub: Same-day availability for service depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can swap a faucet. We're built so you never have to make this call twice.
 
@@ -1597,7 +1597,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Faucet & Sink Service in Austin and Nearby Areas
-- Sub: Same-day faucet and sink service across Austin and the surrounding metro.
+- Sub: Same-day availability for faucet and sink service across Austin and the surrounding metro.
 - CTA label: Schedule Faucet Service Near You
 
 **FAQ — Faucet & Sink FAQ**
@@ -1605,7 +1605,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   1. **Q:** How much does faucet or sink work cost in Austin?
      **A:** Most jobs run $150 to $450 depending on the fixture. You approve the price first.
   2. **Q:** Do you offer same-day service?
-     **A:** Often yes, and we answer 24/7.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent calls.
   3. **Q:** Can you install a faucet I already bought?
      **A:** Yes, and we tell you up front if any parts are missing.
   4. **Q:** Why is my sink draining slowly?
@@ -1650,7 +1650,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: A toilet that runs, rocks, won't flush, or is overflowing?
-- Sub: We answer 24/7 and offer same-day service across Austin.
+- Sub: Same-day availability for service depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can jiggle the handle. We're built so you never have to make this call twice.
 
@@ -1682,7 +1682,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Toilet Repair & Installation in Austin and Nearby Areas
-- Sub: Same-day toilet service across Austin and the surrounding metro.
+- Sub: Same-day availability for toilet service across Austin and the surrounding metro.
 - CTA label: Schedule Toilet Service Near You
 
 **FAQ — Toilet FAQ**
@@ -1690,7 +1690,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   1. **Q:** How much does toilet repair or installation cost in Austin?
      **A:** Repairs run $125 to $350; a new toilet runs $200 to $500 installed. You approve the price first.
   2. **Q:** Do you offer same-day toilet service?
-     **A:** Often yes, and we answer 24/7.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent calls.
   3. **Q:** My toilet keeps running. Is that a real problem?
      **A:** Yes, a running toilet can waste hundreds of gallons a day and drive up your bill.
   4. **Q:** My toilet is overflowing right now. What do I do?
@@ -1735,7 +1735,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: A disposal that hums, jams, leaks, or won't turn on?
-- Sub: We answer 24/7 and offer same-day service across Austin.
+- Sub: Same-day availability for service depends on demand; our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can hit the reset button. We're built so you never have to make this call twice.
 
@@ -1767,7 +1767,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Garbage Disposal Service in Austin and Nearby Areas
-- Sub: Same-day disposal service across Austin and the surrounding metro.
+- Sub: Same-day availability for disposal service across Austin and the surrounding metro.
 - CTA label: Schedule Disposal Service Near You
 
 **FAQ — Garbage Disposal FAQ**
@@ -1775,7 +1775,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   1. **Q:** How much does garbage disposal service cost in Austin?
      **A:** Most repairs and replacements run $150 to $450. You approve the price first.
   2. **Q:** Do you offer same-day service?
-     **A:** Often yes, and we answer 24/7.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent calls.
   3. **Q:** My disposal just hums. Can it be fixed?
      **A:** Often yes, a hum usually means a jam or a stuck motor, which we can free or replace.
   4. **Q:** Repair or replace?
@@ -1820,7 +1820,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Remodeling, or dealing with a bathroom plumbing issue?
-- Sub: We answer 24/7 and serve the whole Austin metro.
+- Sub: We serve the whole Austin metro, with a 24/7 emergency line for urgent calls.
 
 **Why-Austin intro line:** Anyone can rough in a bathroom. We're built so you never have to make this call twice.
 
@@ -1866,7 +1866,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   4. **Q:** Do you install customer-supplied fixtures?
      **A:** Yes, and we flag anything missing before we start.
   5. **Q:** Do you offer same-day service for repairs?
-     **A:** Often yes, and we answer 24/7.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent calls.
   6. **Q:** Is the work guaranteed?
      **A:** Yes, every job carries our written warranty.
 
@@ -1883,7 +1883,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 - **URL slug:** `/gas-line-services`  (booking link: `https://ironcladtexas.com/book?service=gas-line-services`)
 - **CTA style:** Standard (booking + call buttons)
 - **SEO title:** Gas Line Repair & Install Austin | Ironclad Plumbing
-- **Meta description:** Gas line repair or install in Austin by licensed pros. Code-compliant, safety-tested, upfront pricing. Ironclad answers 24/7. Call now.
+- **Meta description:** Gas line repair or install in Austin by licensed pros. Code-compliant, safety-tested, upfront pricing. Ironclad offers a 24/7 emergency line. Call now.
 - **Eyebrow:** GAS LINE SERVICES · AUSTIN
 
 **Hero**
@@ -1905,7 +1905,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Adding a gas appliance, or worried about a gas line?
-- Sub: If you smell gas, leave and call us and your gas utility right away. We answer 24/7 across Austin.
+- Sub: If you smell gas, leave and call us and your gas utility right away. Our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can run a gas line. We're built so you never have to make this call twice.
 
@@ -1990,7 +1990,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Smell gas, hear hissing, or have a pilot that won't stay lit?
-- Sub: Leave the home and call us and your gas utility from outside. We answer 24/7 across Austin.
+- Sub: Leave the home and call us and your gas utility from outside. Our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can chase a smell. We're built so you never have to make this call twice.
 
@@ -2014,7 +2014,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 
 **Process (What to Expect) — 4 steps**
 
-  01. **Call us right away** — If you smell gas, get out and call from outside. We answer 24/7.
+  01. **Call us right away** — If you smell gas, get out and call from outside. Our 24/7 emergency line is available.
   02. **We locate the leak** — Licensed detection to find the exact source.
   03. **We make the repair** — Safe, code-compliant repair of the line or connection.
   04. **We test for safety** — We pressure-test and confirm the system is safe before we leave.
@@ -2032,7 +2032,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   2. **Q:** How much does gas leak repair cost in Austin?
      **A:** Detection and repair typically run $150 to $750 depending on the source. You approve the price first when it is safe to do so.
   3. **Q:** Do you offer emergency service?
-     **A:** Yes, we answer 24/7 for suspected gas leaks.
+     **A:** Yes. Our 24/7 emergency line handles suspected gas leaks; leave the property and call your gas utility first.
   4. **Q:** How do you find a gas leak?
      **A:** Licensed detection equipment pinpoints the source at the line or connection.
   5. **Q:** What causes gas leaks?
@@ -2044,7 +2044,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 
 - Heading: Smell Gas? Don't Wait.
 - Body: Call now for licensed gas leak service in Austin, 24/7.
-- Button: Call (833) 597-1932
+- Button: Call (512) 506-2470
 
 ---
 
@@ -2160,7 +2160,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: No water, sputtering taps, or a pump that keeps cycling?
-- Sub: We answer 24/7 and offer same-day well service across Austin and the Hill Country.
+- Sub: Same-day availability for well service depends on demand; our 24/7 emergency line serves Austin and the Hill Country.
 
 **Why-Austin intro line:** Anyone can pull a pump. We're built so you never have to make this call twice.
 
@@ -2192,7 +2192,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Service Area block**
 
 - Header: Well Pump & Pressure Tank Service in Austin and Nearby Areas
-- Sub: Same-day well service across Austin, the Hill Country, and the surrounding metro.
+- Sub: Same-day availability for well service across Austin, the Hill Country, and the surrounding metro.
 - CTA label: Schedule Well Service Near You
 
 **FAQ — Well Pump FAQ**
@@ -2200,7 +2200,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   1. **Q:** How much does well pump service cost in Austin?
      **A:** Repairs and replacements typically run $800 to $2,500 depending on the pump and depth. You approve the price first.
   2. **Q:** Do you offer same-day well service?
-     **A:** Often yes, and we answer 24/7 when you are out of water.
+     **A:** Often, depending on demand. Our 24/7 emergency line handles urgent no-water calls.
   3. **Q:** Why do I have no water from my well?
      **A:** Common causes are a failed pump, a waterlogged pressure tank, or a bad switch. We test to find which.
   4. **Q:** Why does my pump keep cycling on and off?
@@ -2308,7 +2308,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 - **URL slug:** `/emergency`  (booking link: `https://ironcladtexas.com/book?service=emergency`)
 - **CTA style:** CALL-FIRST (no booking button in final CTA — phone button only)
 - **SEO title:** 24/7 Emergency Plumber in Austin | Ironclad Plumbing
-- **Meta description:** Need an emergency plumber in Austin? Ironclad answers 24/7 for burst pipes, floods, and no-water calls. Fast response, upfront pricing. Call now.
+- **Meta description:** Need an emergency plumber in Austin? Ironclad's 24/7 emergency line handles burst pipes, floods, and no-water calls. Fast response, upfront pricing. Call now.
 - **Eyebrow:** EMERGENCY PLUMBING · AUSTIN
 
 **Hero**
@@ -2330,7 +2330,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Burst pipe, flooding, no water, or sewage backing up?
-- Sub: We answer 24/7 and get a plumber to you fast across Austin.
+- Sub: Our 24/7 emergency line prioritizes urgent calls across Austin.
 
 **Why-Austin intro line:** Anyone can promise 24/7. We're built so you never have to make this call twice.
 
@@ -2354,7 +2354,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 
 **Process (What to Expect) — 4 steps**
 
-  01. **Call us now** — We answer 24/7 and get a plumber moving.
+  01. **Call us now** — Our 24/7 emergency line gets an available plumber moving for urgent calls.
   02. **We diagnose fast** — Your plumber finds the cause and stops the damage.
   03. **We fix it right** — The right emergency fix, done to last, not just to patch.
   04. **We test and tell you straight** — We confirm it is handled and flag any follow-up.
@@ -2369,7 +2369,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 
   1. **Q:** How much does an emergency plumber cost in Austin?
      **A:** It depends on the job; after-hours calls may include a service fee, and you approve the price before work starts.
-  2. **Q:** Are you really available 24/7?
+  2. **Q:** Do you offer emergency help 24/7?
      **A:** Yes, we answer day, night, weekends, and holidays.
   3. **Q:** What counts as a plumbing emergency?
      **A:** Burst pipes, major leaks, flooding, no water, sewage backups, and gas concerns.
@@ -2383,8 +2383,8 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Final CTA band**
 
 - Heading: Plumbing Emergency? Call Now.
-- Body: We answer 24/7 for emergency plumbing across Austin.
-- Button: Call (833) 597-1932
+- Body: Our 24/7 emergency line handles emergency plumbing across Austin.
+- Button: Call (512) 506-2470
 
 ---
 
@@ -2393,7 +2393,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 - **URL slug:** `/burst-pipe-repair`  (booking link: `https://ironcladtexas.com/book?service=burst-pipe-repair`)
 - **CTA style:** CALL-FIRST (no booking button in final CTA — phone button only)
 - **SEO title:** Burst Pipe Repair in Austin, TX | Ironclad Plumbing
-- **Meta description:** Burst pipe in Austin? We stop the water fast and repair it right, with upfront pricing and a written warranty. Ironclad answers 24/7. Call now.
+- **Meta description:** Burst pipe in Austin? We stop the water fast and repair it right, with upfront pricing and a written warranty. Ironclad offers a 24/7 emergency line. Call now.
 - **Eyebrow:** BURST PIPE REPAIR · AUSTIN
 
 **Hero**
@@ -2415,7 +2415,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: Water pouring, a soaked wall, or no water at all?
-- Sub: Shut off your main and call us. We answer 24/7 across Austin.
+- Sub: Shut off your main and call us. Our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can clamp a pipe. We're built so you never have to make this call twice.
 
@@ -2439,7 +2439,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 
 **Process (What to Expect) — 4 steps**
 
-  01. **Call us now** — We answer 24/7. Shut off the main while we head your way.
+  01. **Call us now** — Our 24/7 emergency line is available. Shut off the main while help is dispatched.
   02. **We stop the water fast** — Your plumber isolates the burst and stops the flooding.
   03. **We repair it right** — A lasting repair of the pipe, not a temporary patch.
   04. **We test and tell you straight** — We restore pressure and check for hidden damage.
@@ -2455,7 +2455,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   1. **Q:** How much does burst pipe repair cost in Austin?
      **A:** Most repairs run $400 to $1,500 depending on location and damage. You approve the price when it is safe to do so.
   2. **Q:** What do I do the moment a pipe bursts?
-     **A:** Shut off the water at the main, then call us. We answer 24/7.
+     **A:** Shut off the water at the main, then call us. Our 24/7 emergency line is available.
   3. **Q:** Do you offer emergency service?
      **A:** Yes, around the clock.
   4. **Q:** Why do pipes burst?
@@ -2468,8 +2468,8 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Final CTA band**
 
 - Heading: Pipe Burst? Call Now.
-- Body: We answer 24/7 for burst pipe repair across Austin.
-- Button: Call (833) 597-1932
+- Body: Our 24/7 emergency line handles burst pipe repair across Austin.
+- Button: Call (512) 506-2470
 
 ---
 
@@ -2500,7 +2500,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Signs callout bar**
 
 - Headline: No water in a freeze, or a pipe that already burst?
-- Sub: Shut off your main and call us. We answer 24/7 across Austin.
+- Sub: Shut off your main and call us. Our 24/7 emergency line serves Austin.
 
 **Why-Austin intro line:** Anyone can thaw a pipe. We're built so you never have to make this call twice.
 
@@ -2524,7 +2524,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 
 **Process (What to Expect) — 4 steps**
 
-  01. **Call us now** — We answer 24/7. Shut off the main if a pipe has burst.
+  01. **Call us now** — Our 24/7 emergency line is available. Shut off the main if a pipe has burst.
   02. **We locate the problem** — We find the frozen or burst section fast.
   03. **We thaw or repair** — We safely thaw the line or repair a burst, done to last.
   04. **We test and tell you straight** — We restore flow and flag pipes at risk of freezing again.
@@ -2542,7 +2542,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   2. **Q:** My pipes are frozen but not burst. What do I do?
      **A:** Shut off the main to be safe, open a faucet, and call us before you try to thaw with heat.
   3. **Q:** Do you offer emergency service in a freeze?
-     **A:** Yes, we answer 24/7 during hard freezes.
+     **A:** Yes. Our 24/7 emergency line handles urgent frozen-pipe calls during hard freezes.
   4. **Q:** How do I prevent frozen pipes?
      **A:** Insulate exposed pipes, drip faucets in a freeze, and disconnect hoses. We can insulate at-risk lines.
   5. **Q:** Which pipes freeze first?
@@ -2553,8 +2553,8 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 **Final CTA band**
 
 - Heading: Frozen Pipes? Call Now.
-- Body: We answer 24/7 for frozen pipe help across Austin.
-- Button: Call (833) 597-1932
+- Body: Our 24/7 emergency line handles frozen pipe help across Austin.
+- Button: Call (512) 506-2470
 
 ---
 
@@ -2642,4 +2642,3 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
 - Button: Schedule Backflow Service
 
 ---
-

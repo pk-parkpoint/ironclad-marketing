@@ -11,12 +11,12 @@ export const DRAIN_SEWER: CampaignSpec = {
   residentialFilter: true,
   headlines: [
     "Clogged Drain? Call Us Today",
-    "Same-Day Drain Clearing",
+    "Fast Drain Appointments",
     "We Clear Clogs Fast",
     "Camera Inspection Available",
     "Kitchen, Bath & Main Lines",
     "Licensed & Insured Plumbers",
-    "5-Star Rated Austin Plumbers",
+    "Highly Rated Austin Plumbers",
     "Locally Owned & Operated",
     "Price Approved Before Work",
     "We Find It and Fix It",
@@ -27,9 +27,9 @@ export const DRAIN_SEWER: CampaignSpec = {
   ],
   descriptions: [
     LICENSE_DESCRIPTION,
-    "Clogged drain, slow drain, or sewer backup? Same-day drain clearing across Austin.",
+    "Clogged drain, slow drain, or sewer backup? Ask about current Austin availability.",
     "Camera inspection available. We find the problem, show you the price, then fix it.",
-    "5-star rated and locally owned. Call now or book your appointment online in 60 seconds.",
+    "Highly rated and locally owned. Call now or book your appointment online in 60 seconds.",
   ],
   adGroups: [
     {

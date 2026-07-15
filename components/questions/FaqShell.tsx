@@ -28,9 +28,9 @@ function FaqFooter() {
       <div className={styles.footerGrid}>
         <div className={styles.footerBrand}>
           <Image className={styles.footerLogo} src="/media/logo/ironclad-logo-white-dark.svg" alt="Ironclad Plumbing" width={180} height={48} />
-          <p>Austin&apos;s most trusted plumber. Fast response, fair price, fixed right, so you never call twice.</p>
+          <p>Austin plumbing backed by clear pricing and written warranties.</p>
           <a className={styles.footerPhone} href={PHONE_TEL}><Phone className={styles.footerPhoneIcon} aria-hidden="true" />{PHONE_DISPLAY}</a>
-          <p className={styles.footerAvailability}>Available 24/7 · call or text</p>
+          <p className={styles.footerAvailability}>24/7 emergency line · call or text</p>
         </div>
         <FooterColumn title="FAQ Topics" links={[
           ["All Topics", "/questions"],

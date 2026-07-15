@@ -52,9 +52,9 @@ export function TemplateButton({
   );
 }
 
-export function StarRating({ variant }: { variant: "google" | "review" }) {
+export function StarRating({ variant, label = "5 out of 5 stars" }: { variant: "google" | "review"; label?: string }) {
   return (
-    <span aria-label="5 out of 5 stars" className={`dc-stars dc-stars--${variant}`} role="img">
+    <span aria-label={label} className={`dc-stars dc-stars--${variant}`} role="img">
       {Array.from({ length: 5 }).map((_, index) => (
         <StarIcon className="dc-star" key={index} />
       ))}
@@ -70,7 +70,7 @@ export function GoogleRatingBadge({ label = "4.9 out of 5 · 142 reviews", simpl
       ) : (
         <>
           <GoogleGIcon />
-          <StarRating variant="google" />
+          <StarRating label="4.9 out of 5 stars" variant="google" />
         </>
       )}
       {simple ? null : <span>{label}</span>}

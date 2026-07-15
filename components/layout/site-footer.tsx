@@ -182,7 +182,7 @@ export function SiteFooter() {
                 <SiteLogo className="h-auto w-[220px]" theme="light" />
               </Link>
               <p className="mt-4 text-[13px] text-[#9CA3AF]">
-                Austin&apos;s Most Trusted Plumber
+                Austin Plumbing, Backed in Writing
               </p>
             </div>
 

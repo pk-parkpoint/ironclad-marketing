@@ -1,6 +1,6 @@
 import type { LocationEntry } from "@/content/locations";
 import { LOCATIONS } from "@/content/locations";
-import type { ReviewEntry } from "@/content/reviews";
+import { PUBLISHED_REVIEW_SUMMARY, type ReviewEntry } from "@/content/reviews";
 import type { ServiceEntry } from "@/content/services";
 import { BUSINESS_SERVICE_TYPES, TRUST_FIELDS, buildAreaServedList } from "@/content/site-trust";
 import { getPublicContactInfo } from "@/lib/contact";
@@ -390,9 +390,6 @@ export function buildAggregateRatingSchema(reviews: ReviewEntry[]): JsonLd {
     throw new Error("reviews are required for AggregateRating schema");
   }
 
-  const ratingTotal = reviews.reduce((sum, entry) => sum + entry.rating, 0);
-  const ratingValue = Number((ratingTotal / reviews.length).toFixed(1));
-
   return {
     "@context": SCHEMA_CONTEXT,
     "@type": "Plumber",
@@ -401,8 +398,8 @@ export function buildAggregateRatingSchema(reviews: ReviewEntry[]): JsonLd {
     url: toAbsoluteUrl("/reviews"),
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue,
-      reviewCount: reviews.length,
+      ratingValue: PUBLISHED_REVIEW_SUMMARY.ratingValue,
+      reviewCount: PUBLISHED_REVIEW_SUMMARY.reviewCount,
       bestRating: 5,
       worstRating: 1,
     },

@@ -66,7 +66,7 @@ export default function ServiceAreaHubPage() {
         <LocalHero
           bookingHref="/book"
           eyebrow="Service Areas - Greater Austin"
-          intro="Ironclad supports homeowners across Travis, Williamson, and Hays county corridors with fast dispatch, clear communication, and warranty-backed work."
+          intro="Ironclad supports homeowners across Travis, Williamson, Hays, and Burnet county corridors with fast dispatch, clear communication, and warranty-backed work."
           phoneDisplay={contactInfo.phoneDisplay}
           phoneHref={contactInfo.phoneHref}
           title="Local Plumbing Service Across Greater Austin"
@@ -82,8 +82,8 @@ export default function ServiceAreaHubPage() {
               ]}
             />
             <QuickAnswer className="mt-6">
-              Ironclad Plumbing serves Austin and surrounding communities across Travis, Williamson, and Hays county
-              corridors. Homeowners get the same licensed technicians, written pricing, warranty-backed work, and clear
+              Ironclad Plumbing serves Austin and surrounding communities across Travis, Williamson, Hays, and Burnet
+              county corridors. Homeowners get the same licensed technicians, written pricing, warranty-backed work, and clear
               dispatch communication whether the job is in Austin, Round Rock, Georgetown, Cedar Park, or nearby cities.
             </QuickAnswer>
           </div>

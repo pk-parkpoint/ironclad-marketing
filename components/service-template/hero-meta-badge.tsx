@@ -11,11 +11,11 @@ export function HeroMetaBadge({
   ratingLabel?: string;
 }) {
   return (
-    <Link aria-label={`${eyebrow}. Five stars. ${ratingLabel}`} className="dc-hero-meta-badge" href="/reviews">
+    <Link aria-label={`${eyebrow}. ${ratingLabel}`} className="dc-hero-meta-badge" href="/reviews">
       <span className="dc-hero-meta-keyword">{eyebrow}</span>
       <span aria-hidden="true" className="dc-hero-meta-divider" />
       <span className="dc-hero-meta-rating">
-        <StarRating variant="google" />
+        <StarRating label="4.9 out of 5 stars" variant="google" />
         <span>{ratingLabel}</span>
       </span>
     </Link>

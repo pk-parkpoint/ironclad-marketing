@@ -3,7 +3,7 @@ import { COMMERCIAL_PLUMBING_PATH, COMMERCIAL_PLUMBING_SERVICE } from "../conten
 import { FAQ_ENTRIES } from "../content/faqs";
 import { LOCATIONS } from "../content/locations";
 import { getPpcServiceRouteEntries } from "../content/ppc-service-variants";
-import { REVIEWS } from "../content/reviews";
+import { PUBLISHED_REVIEW_SUMMARY, REVIEWS } from "../content/reviews";
 import { getServiceDetail } from "../content/service-details";
 import { SERVICES } from "../content/services";
 import { STATIC_PAGES } from "../content/static-pages";
@@ -165,12 +165,12 @@ function main() {
     "aggregateRating @type must be AggregateRating",
   );
   assert(
-    aggregateRating.reviewCount === REVIEWS.length,
-    "aggregateRating reviewCount must match real review dataset",
+    aggregateRating.reviewCount === PUBLISHED_REVIEW_SUMMARY.reviewCount,
+    "aggregateRating reviewCount must match published review summary",
   );
   assert(
-    typeof aggregateRating.ratingValue === "number" && Number.isFinite(aggregateRating.ratingValue),
-    "aggregateRating ratingValue must be numeric",
+    aggregateRating.ratingValue === PUBLISHED_REVIEW_SUMMARY.ratingValue,
+    "aggregateRating ratingValue must match published review summary",
   );
 
   console.log(

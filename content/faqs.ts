@@ -30,7 +30,7 @@ export const FAQ_ENTRIES: FaqEntry[] = [
     category: "general",
     question: "What areas do you serve?",
     answer:
-      "We serve Austin and 19+ surrounding communities across Travis, Williamson, and Hays counties. See our full service area list at /service-area.",
+      "We serve Austin and 19+ surrounding communities across Travis, Williamson, Hays, and Burnet counties. See our full service area list at /service-area.",
   },
   {
     category: "general",

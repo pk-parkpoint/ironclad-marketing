@@ -10,13 +10,13 @@ export const EMERGENCY: CampaignSpec = {
   crossNegatives: ["water heater", "tankless", "drain cleaning", "drain clearing", "leak detection", "repipe"],
   residentialFilter: true,
   headlines: [
-    "Same-Day Emergency Plumbing",
+    "24/7 Emergency Line",
     "Burst Pipe? Call Us Now",
     "Sewer Backup? Call Us Now",
-    "We Can Be There Today",
+    "Call for Current Arrival Time",
     "After-Hours Service Available",
     "Licensed & Insured Plumbers",
-    "5-Star Rated Austin Plumbers",
+    "Highly Rated Austin Plumbers",
     "Locally Owned & Operated",
     "Price Approved Before Work",
     "Call Now for Fast Service",
@@ -27,9 +27,9 @@ export const EMERGENCY: CampaignSpec = {
   ],
   descriptions: [
     LICENSE_DESCRIPTION,
-    "Burst pipe, sewer backup, or major leak? Call now and we'll get a plumber out today.",
-    "Same-day service across Austin, Round Rock, Cedar Park, Buda, Kyle and San Marcos.",
-    "5-star rated on Google. Locally owned. Call now or book online in 60 seconds.",
+    "Burst pipe, sewer backup, or major leak? Call our 24/7 emergency line now.",
+    "Call for current availability across Austin, Round Rock, Cedar Park, Buda and Kyle.",
+    "Highly rated and locally owned. Call now or book online in 60 seconds.",
   ],
   adGroups: [
     {
@@ -84,12 +84,12 @@ export const WATER_HEATER: CampaignSpec = {
   residentialFilter: true,
   headlines: [
     "No Hot Water? We Can Help",
-    "Same-Day Water Heater Repair",
+    "Fast Water Heater Service",
     "Repair or Replace? We'll Say",
     "Gas, Electric & Tankless",
     "Old Unit Hauled Away",
     "Licensed & Insured Plumbers",
-    "5-Star Rated Austin Plumbers",
+    "Highly Rated Austin Plumbers",
     "Locally Owned & Operated",
     "Price Approved Before Work",
     "Serving All of Greater Austin",
@@ -99,9 +99,9 @@ export const WATER_HEATER: CampaignSpec = {
   ],
   descriptions: [
     LICENSE_DESCRIPTION,
-    "No hot water? We repair and replace water heaters same-day across the Austin metro.",
+    "No hot water? Ask about current repair and replacement availability across Austin.",
     "Gas, electric and tankless. We'll tell you if it can be repaired instead of replaced.",
-    "5-star rated and locally owned. Call now or book your appointment online in 60 seconds.",
+    "Highly rated and locally owned. Call now or book your appointment online in 60 seconds.",
   ],
   adGroups: [
     {

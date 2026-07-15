@@ -72,7 +72,7 @@ const schibstedGrotesk = Schibsted_Grotesk({
 
 export function LocalStars() {
   return (
-    <span className="local-stars" aria-label="5 star rating">
+    <span className="local-stars" aria-label="4.9 out of 5 stars">
       {[0, 1, 2, 3, 4].map((index) => (
         <Star className="local-star-icon" fill="currentColor" key={index} strokeWidth={0} />
       ))}
@@ -95,12 +95,12 @@ export function LocalPageChrome({ bookingHref, children }: { bookingHref: string
               <Link className="local-footer-logo" href="/" aria-label="Ironclad Plumbing home">
                 <Image alt="Ironclad Plumbing" height={40} src="/media/logo/ironclad-logo-clear-light.svg" width={138} />
               </Link>
-              <p>Austin&apos;s most trusted plumber. Fast response, fair price, fixed right, so you never call twice.</p>
+              <p>Austin plumbing backed by clear pricing and written warranties.</p>
               <a href={phoneHref}>
                 <Phone className="local-icon-sticky" />
                 {phoneDisplay}
               </a>
-              <small>Available 24/7 - call or text</small>
+              <small>24/7 emergency line - call or text</small>
             </div>
             <LocalFooterColumn links={quickLinks} title="Quick Links" />
             <LocalFooterColumn links={serviceLinks} title="Services" />
@@ -173,7 +173,7 @@ export function LocalHero({
               <ShieldCheck className="local-icon-trust" /> Licensed & Insured
             </span>
             <span>
-              <Clock3 className="local-icon-trust" /> Same-Day Service
+              <Clock3 className="local-icon-trust" /> Same-Day Availability
             </span>
           </div>
 

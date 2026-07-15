@@ -19,7 +19,7 @@ Use exactly this data when creating or correcting citations.
 | Business name | Ironclad Plumbing |
 | Website | https://ironcladtexas.com |
 | Booking URL | https://ironcladtexas.com/book |
-| Phone | (833) 597-1932 |
+| Phone | (512) 506-2470 |
 | Email | info@ironcladtexas.com |
 | Primary market | Austin, TX |
 | Service area | Greater Austin, including Travis, Williamson, Hays, and nearby Hill Country communities |
@@ -66,7 +66,7 @@ I’m updating Ironclad Plumbing’s Austin-area business profile so customers h
 Canonical details:
 - Website: https://ironcladtexas.com
 - Booking: https://ironcladtexas.com/book
-- Phone: (833) 597-1932
+- Phone: (512) 506-2470
 - Email: info@ironcladtexas.com
 - Category: Plumber
 - Service area: Greater Austin, TX

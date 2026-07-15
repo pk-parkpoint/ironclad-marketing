@@ -11,22 +11,22 @@ export const GUARANTEES_PAGE_INTRO =
 
 export const GUARANTEES_PAGE_SECTIONS: GuaranteeSection[] = [
   {
-    title: "No Service Visit Fees. Ever.",
+    title: "Diagnostic Fee Explained Up Front.",
     items: [
       {
         label: "What it means",
         body:
-          "We do not charge a trip charge, dispatch fee, diagnostic fee, or service call fee. When our technician arrives, evaluates the problem, and presents a written estimate, that process costs you nothing. If you decide not to proceed, you owe us zero.",
+          "We charge a diagnostic fee for the service visit, evaluation, and written estimate. We explain the fee before dispatch. If you approve the work, the fee is typically applied to the job cost.",
       },
       {
-        label: "Why we do this",
+        label: "What the fee covers",
         body:
-          "Service visit fees exist to recoup the cost of sending a truck to a home that does not convert into a paying job. We absorb that cost because the diagnostic should demonstrate competence, not create a sunk-cost pressure to say yes.",
+          "The diagnostic fee covers the plumber's travel, time on site, professional evaluation, and a written scope and price. You can review the estimate before deciding whether to proceed.",
       },
       {
         label: "The fine print",
         body:
-          "This applies to standard residential service calls within our service area during normal business hours. After-hours emergency dispatch may carry a separate emergency response fee, which is disclosed before we dispatch.",
+          "After-hours emergency dispatch may carry a separate emergency response fee. We disclose applicable fees before dispatch, and the written estimate shows how the diagnostic fee is applied when work is approved.",
       },
     ],
   },
@@ -126,7 +126,7 @@ export const GUARANTEES_PAGE_SECTIONS: GuaranteeSection[] = [
       {
         label: "What this does not cover",
         body:
-          "It does not include free on-site service visits, work performed by other companies, or unrelated new diagnostic visits. Those are still new service calls, though still without a service visit fee.",
+          "It does not include on-site service visits, work performed by other companies, or unrelated new diagnostic visits. New on-site visits are handled under the diagnostic-fee policy above.",
       },
     ],
   },
