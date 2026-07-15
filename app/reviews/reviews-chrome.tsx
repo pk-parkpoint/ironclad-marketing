@@ -1,14 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SiteHeader } from "@/components/layout/site-header";
 import { getPublicContactInfo } from "@/lib/contact";
 import styles from "./reviews-page.module.css";
-
-const navLinks = [
-  { href: "/plumbing", label: "Plumbing" },
-  { href: "/service-area", label: "Service Areas" },
-  { href: "/guides", label: "Guides" },
-  { href: "/about", label: "About Us" },
-];
 
 const quickLinks = [
   { href: "/reviews", label: "Reviews" },
@@ -43,33 +37,7 @@ function PhoneIcon() {
 }
 
 export function ReviewsHeader() {
-  const { phoneDisplay, phoneHref } = getPublicContactInfo();
-
-  return (
-    <div className={styles.chromeHeader}>
-      <Link className={styles.promoBar} href="/book">
-        Book Today and Get 10% Off Your First Service →
-      </Link>
-      <header className={styles.siteHeader}>
-        <div className={styles.siteHeaderInner}>
-          <Link className={styles.logoLink} href="/">
-            <Image alt="Ironclad Plumbing" height={44} src="/media/logo/ironclad-logo-clear-dark.svg" width={151} />
-          </Link>
-          <nav aria-label="Primary reviews navigation" className={styles.reviewNav}>
-            {navLinks.map((link) => (
-              <Link href={link.href} key={link.href}>
-                {link.label} <span>⌄</span>
-              </Link>
-            ))}
-          </nav>
-          <div className={styles.headerActions}>
-            <Link className={styles.headerOutlineButton} href="/book">Schedule Now | 24/7</Link>
-            <a className={styles.headerPhoneButton} href={phoneHref}><PhoneIcon />{phoneDisplay}</a>
-          </div>
-        </div>
-      </header>
-    </div>
-  );
+  return <SiteHeader />;
 }
 
 export function ReviewsFooter() {

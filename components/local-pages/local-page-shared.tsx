@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Schibsted_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
-import { CalendarDays, CheckCircle2, Clock3, Home, Menu, Phone, ShieldCheck, Star } from "lucide-react";
+import { CalendarDays, CheckCircle2, Clock3, Home, Phone, ShieldCheck, Star } from "lucide-react";
+import { SiteHeader } from "@/components/layout/site-header";
 import { getPublicContactInfo } from "@/lib/contact";
 
 type LocalHeroProps = {
@@ -36,13 +37,6 @@ const guarantees = [
     title: "Written Warranty on Every Job",
     body: "In writing, not just a handshake.",
   },
-];
-
-const chromeNavLinks = [
-  { href: "/plumbing", label: "Plumbing" },
-  { href: "/service-area", label: "Service Areas" },
-  { href: "/guides", label: "Guides" },
-  { href: "/about", label: "About Us" },
 ];
 
 const quickLinks = [
@@ -91,76 +85,35 @@ export function LocalPageChrome({ bookingHref, children }: { bookingHref: string
   const year = new Date().getFullYear();
 
   return (
-    <div className={`local-page-shell ${schibstedGrotesk.variable}`}>
-      <div className="local-chrome-sticky">
-        <Link className="local-promo-bar" data-track-intent="book" href="/book">
-          Book Today and Get 10% Off Your First Service <span className="ic-nudge" aria-hidden="true">→</span>
-        </Link>
-        <header className="local-site-header">
-          <div className="local-site-header-inner">
-            <details className="local-mobile-menu">
-              <summary className="local-menu-button" aria-label="Open navigation">
-                <Menu className="local-menu-icon" />
-              </summary>
-              <nav aria-label="Mobile local navigation" className="local-mobile-menu-panel">
-                {chromeNavLinks.map((link) => (
-                  <Link className={link.href === "/service-area" ? "local-nav-active" : undefined} href={link.href} key={link.href}>
-                    {link.label}
-                  </Link>
-                ))}
-                <Link data-track-intent="book" href="/book">
-                  Schedule Now | 24/7
-                </Link>
-              </nav>
-            </details>
-            <Link className="local-logo-link" href="/" aria-label="Ironclad Plumbing home">
-              <Image alt="Ironclad Plumbing" height={44} priority src="/media/logo/ironclad-logo-clear-dark.svg" width={151} />
-            </Link>
-            <nav aria-label="Primary local navigation" className="local-chrome-nav">
-              {chromeNavLinks.map((link) => (
-                <Link className={link.href === "/service-area" ? "local-nav-active" : undefined} href={link.href} key={link.href}>
-                  {link.label} <span>⌄</span>
-                </Link>
-              ))}
-            </nav>
-            <div className="local-header-actions">
-              <Link className="local-header-outline" data-track-intent="book" href="/book">
-                <span className="ic-pulse-dot" aria-hidden="true" />
-                Schedule Now | 24/7
+    <>
+      <SiteHeader />
+      <div className={`local-page-shell ${schibstedGrotesk.variable}`}>
+        {children}
+        <footer className="local-footer">
+          <div className="local-footer-grid">
+            <div className="local-footer-brand">
+              <Link className="local-footer-logo" href="/" aria-label="Ironclad Plumbing home">
+                <Image alt="Ironclad Plumbing" height={40} src="/media/logo/ironclad-logo-clear-light.svg" width={138} />
               </Link>
-              <a className="local-header-phone" data-track-intent="phone" href={phoneHref}>
+              <p>Austin&apos;s most trusted plumber. Fast response, fair price, fixed right, so you never call twice.</p>
+              <a href={phoneHref}>
                 <Phone className="local-icon-sticky" />
                 {phoneDisplay}
               </a>
+              <small>Available 24/7 - call or text</small>
             </div>
+            <LocalFooterColumn links={quickLinks} title="Quick Links" />
+            <LocalFooterColumn links={serviceLinks} title="Services" />
+            <LocalFooterColumn links={areaLinks} title="Service Areas" />
           </div>
-        </header>
+          <div className="local-footer-legal">
+            <span>© {year} Ironclad Plumbing. All rights reserved.</span>
+            <span>Texas Responsible Master Plumber RMP #39871</span>
+          </div>
+        </footer>
+        <LocalStickyBar bookingHref={bookingHref} phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
       </div>
-      {children}
-      <footer className="local-footer">
-        <div className="local-footer-grid">
-          <div className="local-footer-brand">
-            <Link className="local-footer-logo" href="/" aria-label="Ironclad Plumbing home">
-              <Image alt="Ironclad Plumbing" height={40} src="/media/logo/ironclad-logo-clear-light.svg" width={138} />
-            </Link>
-            <p>Austin&apos;s most trusted plumber. Fast response, fair price, fixed right, so you never call twice.</p>
-            <a href={phoneHref}>
-              <Phone className="local-icon-sticky" />
-              {phoneDisplay}
-            </a>
-            <small>Available 24/7 - call or text</small>
-          </div>
-          <LocalFooterColumn links={quickLinks} title="Quick Links" />
-          <LocalFooterColumn links={serviceLinks} title="Services" />
-          <LocalFooterColumn links={areaLinks} title="Service Areas" />
-        </div>
-        <div className="local-footer-legal">
-          <span>© {year} Ironclad Plumbing. All rights reserved.</span>
-          <span>Texas Responsible Master Plumber RMP #39871</span>
-        </div>
-      </footer>
-      <LocalStickyBar bookingHref={bookingHref} phoneDisplay={phoneDisplay} phoneHref={phoneHref} />
-    </div>
+    </>
   );
 }
 
