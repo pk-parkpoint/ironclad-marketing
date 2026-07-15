@@ -30,12 +30,12 @@ function imageData(relativePath: string): string {
 
 export async function ensureAssets(callsFromAds: string): Promise<Map<string, { fieldType: string; resourceName: string }>> {
   const assets = new Map<string, { fieldType: string; resourceName: string }>();
-  const call = await ensureAsset("IRONCLAD | Call | 512-516-2470", {
+  const call = await ensureAsset("IRONCLAD | Call | 737-204-9967", {
     callAsset: {
       callConversionAction: callsFromAds,
       callConversionReportingState: "USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION",
       countryCode: "US",
-      phoneNumber: "5125162470",
+      phoneNumber: "7372049967",
     },
   });
   assets.set("call", { fieldType: "CALL", resourceName: call });

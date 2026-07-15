@@ -5,6 +5,8 @@ export const ATTRIBUTION_KEYS = [
   "utm_term",
   "utm_content",
   "gclid",
+  "gbraid",
+  "wbraid",
   "fbclid",
   "msclkid",
 ] as const;

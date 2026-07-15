@@ -15,6 +15,7 @@ import { derivePageContext, getDeviceType } from "@/lib/analytics-page-context";
 import { getAiReferralContext } from "@/lib/ai-referrers";
 import { maybeOpenBookingLink } from "@/lib/booking-events";
 import { recordBookingSiteVisit } from "@/lib/booking-session";
+import { applyGoogleAdsTrackingPhone, routeGoogleAdsPhoneAnchor } from "@/lib/google-ads-tracking-phone";
 import {
   getCtaPosition,
   trackEvent,
@@ -136,6 +137,7 @@ export function AnalyticsBootstrap() {
     if (hasAttribution(merged)) {
       writeStoredAttribution(merged);
       applyAttributionToInternalAnchors(merged);
+      applyGoogleAdsTrackingPhone(merged);
     }
 
     recordBookingSiteVisit({
@@ -181,6 +183,8 @@ export function AnalyticsBootstrap() {
       const bookingLinkDetail = maybeOpenBookingLink(event, anchor);
       const context = derivePageContext(pathname);
       const attribution = readStoredAttribution();
+      routeGoogleAdsPhoneAnchor(anchor, attribution);
+      const routedHref = anchor.getAttribute("href") ?? href;
       const payload = withAttribution(
         {
           page_url: `${pathname}${search ? `?${search}` : ""}`,
@@ -192,14 +196,14 @@ export function AnalyticsBootstrap() {
           device_type: getDeviceType(),
           cta_label: label,
           cta_position: getCtaPosition(anchor),
-          href,
+          href: routedHref,
           faq_precedes_conversion: faqPrecedesConversion(pathname),
         },
         attribution,
       );
 
       trackEvent("cta_click", payload);
-      if (href.startsWith("tel:")) {
+      if (routedHref.startsWith("tel:")) {
         trackEvent("phone_click", payload);
         trackGoogleAdsPhoneConversion();
       }

@@ -124,6 +124,7 @@ export type BookingLeadPayload = {
     entryPage: string;
     fbclid: string;
     firstReferrerUrl: string;
+    gbraid: string;
     gclid: string;
     lastPageBeforeExit: string;
     msclkid: string;
@@ -140,6 +141,7 @@ export type BookingLeadPayload = {
     utmMedium: string;
     utmSource: string;
     utmTerm: string;
+    wbraid: string;
   };
 };
 
@@ -380,6 +382,7 @@ export function buildBookingLeadPayload({
       entryPage: normalizeValue(siteSession.entryPage),
       fbclid: normalizeValue(siteSession.attribution.fbclid),
       firstReferrerUrl: normalizeValue(siteSession.referrerUrl),
+      gbraid: normalizeValue(siteSession.attribution.gbraid),
       gclid: normalizeValue(siteSession.attribution.gclid),
       lastPageBeforeExit: normalizeValue(siteSession.lastPage),
       msclkid: normalizeValue(siteSession.attribution.msclkid),
@@ -396,6 +399,7 @@ export function buildBookingLeadPayload({
       utmMedium: normalizeValue(siteSession.attribution.utm_medium),
       utmSource: normalizeValue(siteSession.attribution.utm_source),
       utmTerm: normalizeValue(siteSession.attribution.utm_term),
+      wbraid: normalizeValue(siteSession.attribution.wbraid),
     },
   };
 }

@@ -92,6 +92,9 @@ export function BookingStepConfirm({
       formType: "booking_wizard",
       service: formData.serviceDetail || formData.serviceCategory || "",
     });
+    onClose();
+    // onClose is guarded by hasTrackedSuccessRef and intentionally fires with conversion tracking.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayBookingId, formData.serviceCategory, formData.serviceDetail]);
 
   useEffect(() => {
@@ -104,8 +107,6 @@ export function BookingStepConfirm({
 
   function handleDone() {
     setShowFarewell(true); // show farewell, then auto-dismiss after 5s
-    // notification is sent after farewell shows
-    try { onClose(); } catch { /* ignore */ }
   }
 
   if (showFarewell) {
