@@ -217,7 +217,7 @@ export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSub
             inputMode="tel"
             value={formData.phone}
             onChange={(e) => { onUpdate({ phone: formatPhone(e.target.value) }); clearError("phone"); }}
-            placeholder="(512) 516-2470"
+            placeholder="(512) 506-2470"
           />
           {errors.phone && <span className={styles.errorMessage}>{errors.phone}</span>}
         </div>

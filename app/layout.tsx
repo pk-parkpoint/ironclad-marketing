@@ -28,7 +28,7 @@ const GOOGLE_ADS_WEBSITE_CALL_LABEL =
 const PHONE_CONVERSION_NUMBER =
   process.env.NEXT_PUBLIC_GOOGLE_ADS_TRACKING_PHONE?.trim()
   || process.env.NEXT_PUBLIC_PHONE?.trim()
-  || "(512) 516-2470";
+  || "(512) 506-2470";
 
 function GoogleTagHead() {
   const configCalls = [
