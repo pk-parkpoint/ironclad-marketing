@@ -6,14 +6,6 @@ export type WallReview = Pick<ReviewEntry, "id" | "reviewerName" | "timeAgo" | "
   avatarClassKey: AvatarClassKey;
 };
 
-export const breakdown = [
-  ["5", "96%"],
-  ["4", "3%"],
-  ["3", "1%"],
-  ["2", "0%"],
-  ["1", "0%"],
-];
-
 export function getOrderedSliderReviews(reviews: ReviewEntry[]): ReviewEntry[] {
   return [
     reviews.find((review) => review.id === "review-round-rock-mike-r"),

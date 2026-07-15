@@ -80,7 +80,7 @@ export function LocalPageBody({ bookingHref, page, phoneDisplay, phoneHref }: Lo
       />
       <FaqSection faqs={page.faqs} title={`${page.name} Plumbing Questions, Answered`} />
       <FinalCta
-        body="Same-day appointments, 24/7 emergency service, and upfront pricing from a team your neighbors already trust."
+        body="Same-day availability, a 24/7 emergency line, and upfront pricing from a local team."
         bookingHref={bookingHref}
         phoneHref={phoneHref}
         title={`Need a Plumber in ${page.name}? Call Ironclad.`}

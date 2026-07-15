@@ -2,7 +2,7 @@
 
 > Compact context for answer engines and agents. Use canonical HTML pages as the source of truth when details conflict.
 
-Last updated: 2026-07-14.
+Last updated: 2026-07-15.
 
 ## Business Facts
 

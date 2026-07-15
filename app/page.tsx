@@ -9,7 +9,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { StructuredData } from "@/components/seo/structured-data";
 import { HOME_FAQ_ITEMS } from "@/content/home-faqs";
 import { LOCATIONS } from "@/content/locations";
-import { REVIEWS } from "@/content/reviews";
+import { PUBLISHED_REVIEW_SUMMARY, REVIEWS } from "@/content/reviews";
 import { SERVICES } from "@/content/services";
 import { buildPageMetadata } from "@/lib/seo";
 import {
@@ -22,15 +22,13 @@ import {
 } from "@/lib/structured-data";
 
 export const metadata = buildPageMetadata({
-  title: "Austin Plumber | Same-Day Plumbing, Drain, Water Heater & Leak Service",
+  title: "Austin Plumber | Plumbing, Drain, Water Heater & Leak Service",
   description:
-    "Same-day Austin plumbing for repairs, drains, water heaters, leaks, and emergencies. Clear pricing, expert service, and easy online booking.",
+    "Austin plumbing for repairs, drains, water heaters, leaks, and emergencies, with same-day availability, clear pricing, and easy online booking.",
   path: "/",
 });
 
-const GOOGLE_REVIEW_LINK = "/reviews";
-const REVIEW_COUNT = 142;
-
+const REVIEW_LINK = "/reviews";
 const HOME_SERVICES_GRID = [
   {
     title: "Plumbing Repairs",
@@ -94,7 +92,7 @@ export default function Home() {
       <SiteHeader />
       <StructuredData data={schemas} id="ld-home-business" />
       <main id="main-content">
-        <HomeHero reviewCount={REVIEW_COUNT} reviewHref={GOOGLE_REVIEW_LINK} />
+        <HomeHero reviewCount={PUBLISHED_REVIEW_SUMMARY.reviewCount} reviewHref={REVIEW_LINK} />
         <GuaranteeBar />
         <section className="bg-[#F9FAFB] pt-16 pb-20 home-deferred-section">
           <div className="mx-auto w-full max-w-[1280px] px-6">

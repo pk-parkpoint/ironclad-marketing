@@ -5,8 +5,8 @@ import path from "node:path";
 const baseUrl = process.env.BASE_URL || "http://127.0.0.1:3030";
 const repoRoot = process.cwd();
 const variantsPath = path.join(repoRoot, "content/ppc-service-variants.json");
-const outputDir = path.join(repoRoot, "design-handoff/screens/service-page/qa/ppc-content");
-const stateDir = path.join(repoRoot, "design-handoff/screens/service-page/states");
+const outputDir = process.env.PPC_OUTPUT_DIR || path.join(repoRoot, "design-handoff/screens/service-page/qa/ppc-content");
+const stateDir = process.env.PPC_STATE_DIR || path.join(repoRoot, "design-handoff/screens/service-page/states");
 const serviceAssetPrefix = "assets/services/";
 const desktopViewport = { width: 1440, height: 900 };
 const mobileViewport = { width: 390, height: 844 };
@@ -246,6 +246,7 @@ async function verifyInteractionStates(browser) {
         if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
         window.scrollTo(0, 0);
       });
+      await page.mouse.move(0, 0);
       const locator = page.locator(selector).first();
       await locator.scrollIntoViewIfNeeded();
       const before = await styleSnapshot(locator);
@@ -278,18 +279,22 @@ await fs.mkdir(outputDir, { recursive: true });
 await fs.mkdir(stateDir, { recursive: true });
 
 const variants = await readVariants();
-assert(Array.isArray(variants) && variants.length === 31, `expected 31 variants, found ${variants.length}`);
+assert(Array.isArray(variants) && variants.length === 37, `expected 37 variants, found ${variants.length}`);
+const interactionsOnly = process.env.PPC_INTERACTIONS_ONLY === "1";
 
 const browser = await chromium.launch();
 try {
   const base = [];
-  for (const variant of variants) {
-    console.log(`checking base ${variant.slug}`);
-    base.push(await verifyVariantAtViewport(browser, variant, "desktop", desktopViewport));
-    base.push(await verifyVariantAtViewport(browser, variant, "mobile", mobileViewport));
+  let sweep = [];
+  if (!interactionsOnly) {
+    for (const variant of variants) {
+      console.log(`checking base ${variant.slug}`);
+      base.push(await verifyVariantAtViewport(browser, variant, "desktop", desktopViewport));
+      base.push(await verifyVariantAtViewport(browser, variant, "mobile", mobileViewport));
+    }
+    console.log("checking responsive sweep");
+    sweep = await verifySweep(browser, variants);
   }
-  console.log("checking responsive sweep");
-  const sweep = await verifySweep(browser, variants);
   console.log("checking interaction states");
   const states = await verifyInteractionStates(browser);
   const failedStates = states.filter((state) => !state.changed);

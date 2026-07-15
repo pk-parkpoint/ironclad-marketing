@@ -47,7 +47,7 @@ const LOCAL_PROOF_BY_CITY: Partial<Record<string, LocalProofData>> = {
       },
     ],
     neighborhoodBadges: ["Brushy Creek", "Teravista", "Forest Creek"],
-    emergencyResponseNote: "Round Rock requests are handled on a dedicated same-day dispatch corridor.",
+    emergencyResponseNote: "Round Rock requests are handled on a dedicated dispatch corridor, with urgent calls prioritized.",
   },
   "cedar-park-tx": {
     citySlug: "cedar-park-tx",

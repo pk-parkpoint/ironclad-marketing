@@ -13,9 +13,9 @@ export const LEAKS_LINES: CampaignSpec = {
     "Hidden Leak? We'll Find It",
     "High Water Bill? Call Us",
     "We Find It Before We Cut",
-    "Same-Day Leak Service",
+    "Fast Leak Appointments",
     "Licensed & Insured Plumbers",
-    "5-Star Rated Austin Plumbers",
+    "Highly Rated Austin Plumbers",
     "Locally Owned & Operated",
     "Price Approved Before Work",
     "Financing Available",
@@ -27,9 +27,9 @@ export const LEAKS_LINES: CampaignSpec = {
   ],
   descriptions: [
     LICENSE_DESCRIPTION,
-    "Slab leaks, water lines, gas lines and repiping. Same-day service across Austin.",
+    "Slab leaks, water lines, gas lines and repiping. Ask about current availability.",
     "We find the leak before anyone cuts into your floor. Electronic leak detection.",
-    "Licensed, insured and locally owned. 5-star rated on Google. Call or book online.",
+    "Licensed, insured and locally owned. Highly rated. Call or book online.",
   ],
   adGroups: [
     {
@@ -97,12 +97,12 @@ const cityKeyword = (text: string, path: string): KeywordSpec => ({
 
 export const GENERAL_CITY_HEADLINES = [
   "Licensed & Insured Plumbers",
-  "Same-Day Plumbing Service",
-  "We Can Be There Today",
+  "Fast Plumbing Appointments",
+  "Call for Current Availability",
   "Leaks, Clogs & Water Heaters",
   "Locally Owned & Operated",
   "Price Approved Before Work",
-  "5-Star Rated on Google",
+  "Highly Rated Austin Plumbers",
   "Honest Local Plumbers",
   "Financing Available",
   "Serving All of Greater Austin",
@@ -113,9 +113,9 @@ export const GENERAL_CITY_HEADLINES = [
 
 export const GENERAL_CITY_DESCRIPTIONS = [
   LICENSE_DESCRIPTION,
-  "Leaks, clogs, water heaters, sewer lines and more. Same-day service across Austin.",
+  "Leaks, clogs, water heaters, sewer lines and more. Ask about current availability.",
   "Licensed, insured and locally owned. We show you the price before we do the work.",
-  "5-star rated on Google. Call now or book your appointment online in 60 seconds.",
+  "Highly rated and locally owned. Call now or book your appointment online in 60 seconds.",
 ];
 
 export const GENERAL_CITY: CampaignSpec = {
@@ -150,7 +150,7 @@ export const GENERAL_CITY: CampaignSpec = {
     {
       name: "Austin Plumber",
       finalUrl: `${SITE_ORIGIN}/service-area/austin-tx`,
-      pinnedHeadline: "Austin Plumber, 5-Star Rated",
+      pinnedHeadline: "Highly Rated Austin Plumber",
       keywords: [
         ...exact("austin plumber", "plumber austin tx"),
         ...phrase("licensed plumber austin", "best plumber austin", "plumbing company austin", "plumber in austin texas"),
@@ -188,10 +188,10 @@ export const FREEZE: CampaignSpec = {
   headlines: [
     "Burst Pipe? Call Us Now",
     "Emergency Freeze Response",
-    "Same-Day Pipe Repair",
-    "We Can Be There Today",
+    "Fast Pipe Repair",
+    "Call for Current Availability",
     "Licensed & Insured Plumbers",
-    "5-Star Rated Austin Plumbers",
+    "Highly Rated Austin Plumbers",
     "Locally Owned & Operated",
     "Price Approved Before Work",
     "Call Now for Fast Service",
@@ -199,9 +199,9 @@ export const FREEZE: CampaignSpec = {
   ],
   descriptions: [
     LICENSE_DESCRIPTION,
-    "Frozen or burst pipe? Call now. Emergency plumbers dispatching across Austin today.",
-    "We find the break, show you the price, and get your water back on. Same day.",
-    "Licensed & insured. 5-star rated on Google. Serving all of the greater Austin area.",
+    "Frozen or burst pipe? Call our 24/7 emergency line for a current arrival window.",
+    "We find the break, show you the price, and explain the available repair timing.",
+    "Licensed, insured and highly rated. Serving all of the greater Austin area.",
   ],
   adGroups: [
     {

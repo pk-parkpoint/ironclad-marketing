@@ -3,19 +3,19 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { ReviewEntry } from "@/content/reviews";
-import { REVIEWS } from "@/content/reviews";
+import { PUBLISHED_REVIEW_SUMMARY, REVIEWS } from "@/content/reviews";
 
 /* ------------------------------------------------------------------ */
 /*  Stats Counter Row                                                  */
 /* ------------------------------------------------------------------ */
 
 const STATS = [
-  { target: 26, suffix: "", label: "5-STAR REVIEWS" },
-  { target: 131, suffix: "", label: "COMPLETED JOBS" },
-  { target: 97, suffix: "", label: "HAPPY CUSTOMERS" },
+  { target: PUBLISHED_REVIEW_SUMMARY.ratingValue, decimals: 1, suffix: "", label: "AVERAGE RATING" },
+  { target: PUBLISHED_REVIEW_SUMMARY.reviewCount, decimals: 0, suffix: "", label: "PUBLISHED REVIEWS" },
+  { target: PUBLISHED_REVIEW_SUMMARY.sources.length, decimals: 0, suffix: "", label: "REVIEW PLATFORMS" },
 ] as const;
 
-function useCountUp(target: number, duration = 2000) {
+function useCountUp(target: number, duration = 2000, decimals = 0) {
   const [count, setCount] = useState(0);
   const [done, setDone] = useState(false);
   const hasAnimated = useRef(false);
@@ -35,10 +35,11 @@ function useCountUp(target: number, duration = 2000) {
             const elapsed = now - start;
             const progress = Math.min(elapsed / duration, 1);
             const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.floor(eased * target));
+            setCount(Number((eased * target).toFixed(decimals)));
             if (progress < 1) {
               requestAnimationFrame(animate);
             } else {
+              setCount(target);
               setDone(true);
             }
           }
@@ -51,17 +52,17 @@ function useCountUp(target: number, duration = 2000) {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [target, duration]);
+  }, [target, duration, decimals]);
 
   return { count, done, ref };
 }
 
-function StatItem({ target, suffix, label }: (typeof STATS)[number]) {
-  const { count, done, ref } = useCountUp(target);
+function StatItem({ target, decimals, suffix, label }: (typeof STATS)[number]) {
+  const { count, done, ref } = useCountUp(target, 2000, decimals);
   return (
     <div ref={ref} className="flex flex-col items-center px-4 py-6 md:py-0">
       <span className="text-4xl font-bold text-[#2563EB] md:text-[48px]">
-        {count.toLocaleString()}
+        {count.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}
         {done ? suffix : ""}
       </span>
       <span className="mt-2 text-[13px] font-semibold uppercase tracking-[0.1em] text-[#6B7280]">
@@ -139,12 +140,12 @@ function GoogleGIcon({ size = 24 }: { size?: number }) {
 /*  Star Rating Row                                                    */
 /* ------------------------------------------------------------------ */
 
-function StarRow({ count = 5, size = 16 }: { count?: number; size?: number }) {
+function StarRow({ count = 5, size = 16, label }: { count?: number; size?: number; label?: string }) {
   return (
     <div
       className="flex items-center gap-0.5"
       role="img"
-      aria-label={`${count} out of 5 stars`}
+      aria-label={label ?? `${count} out of 5 stars`}
     >
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
@@ -362,7 +363,7 @@ function BottomCTA() {
       </Link>
       <div className="mt-4 mb-12 inline-flex items-center gap-1.5">
         <GoogleGIcon size={20} />
-        <StarRow count={5} size={14} />
+        <StarRow count={5} label={`${PUBLISHED_REVIEW_SUMMARY.ratingValue} out of 5 stars`} size={14} />
         <span className="text-xs font-semibold uppercase tracking-[0.05em] text-[#6B7280]">
           4.9/5 RATING
         </span>

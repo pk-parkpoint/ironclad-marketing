@@ -233,9 +233,9 @@ The ONLY CTA on the entire page. No mid-content CTAs. No sidebar CTAs. One. At t
 
 ```
 Questions this guide didn't answer?
-Call or text Ironclad at (833) 597-1932.
+Call or text Ironclad at (512) 506-2470.
 We'll give you a straight answer whether you hire us or not.
-No service visit fees.
+Diagnostic fees are explained before dispatch and typically applied to approved work.
 ```
 
 - Centered text. No background color.
@@ -293,7 +293,7 @@ Total content area: ~988px. Centered in 1100px max-width container. 48px gap bet
 
 ## Print Stylesheet
 
-Hide: nav, footer, TOC, prev/next, CTA, sticky bar, progress bar, "Keep Reading." Show: breadcrumb (text only), byline, TLDR, body, tables. Tables fit page width at 12px. Page footer: "ironcladtexas.com/guides/[slug] | (833) 597-1932"
+Hide: nav, footer, TOC, prev/next, CTA, sticky bar, progress bar, "Keep Reading." Show: breadcrumb (text only), byline, TLDR, body, tables. Tables fit page width at 12px. Page footer: "ironcladtexas.com/guides/[slug] | (512) 506-2470"
 
 ---
 

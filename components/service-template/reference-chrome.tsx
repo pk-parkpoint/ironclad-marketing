@@ -37,12 +37,12 @@ function ChromeFooter({ phoneDisplay, phoneHref }: Pick<ReferenceChromeProps, "p
       <div className="dc-chrome-footer-grid">
         <div>
           <SiteLogo theme="light" />
-          <p>Austin&apos;s most trusted plumber. Fast response, fair price, fixed right, so you never call twice.</p>
+          <p>Austin plumbing backed by clear pricing and written warranties.</p>
           <a className="dc-chrome-footer-phone" href={phoneHref}>
             <Phone aria-hidden="true" />
             {phoneDisplay}
           </a>
-          <div className="dc-chrome-footer-note">Available 24/7 · call or text</div>
+          <div className="dc-chrome-footer-note">24/7 emergency line · call or text</div>
         </div>
         <nav aria-label="Footer quick links">
           <h3>Quick Links</h3>

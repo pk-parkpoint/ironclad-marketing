@@ -80,7 +80,7 @@ export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
         <div className="w-full text-center [font-family:var(--font-inter)] md:max-w-[760px] md:text-left lg:max-w-[78%] xl:max-w-[72%]">
           <Link
             className="focus-ring inline-flex max-w-full flex-wrap items-center justify-center gap-x-2.5 gap-y-1 rounded-full bg-[rgba(0,0,0,0.3)] px-4 py-2 text-center text-[#FFFFFF] transition-colors duration-200 hover:bg-[rgba(0,0,0,0.45)] hover:no-underline sm:px-5"
-            aria-label={`Five stars. 4.9/5. ${reviewCount} reviews on Google, Yelp, and Nextdoor`}
+            aria-label={`4.9 out of 5. ${reviewCount} reviews on Google, Yelp, and Nextdoor`}
             href={reviewHref}
             style={{ color: "#FFFFFF" }}
           >
@@ -103,7 +103,7 @@ export function HomeHero({ reviewCount, reviewHref }: HomeHeroProps) {
           >
             Leak No Further.
             <br />
-            <span className="md:whitespace-nowrap">The Plumber Austin Trusts.</span>
+            <span className="md:whitespace-nowrap">Austin Plumbing, Done Right.</span>
           </h1>
           <p
             className="mt-2.5 text-[18px] font-normal leading-[1.6] text-[rgba(255,255,255,0.9)] md:text-[20px]"

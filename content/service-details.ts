@@ -68,7 +68,7 @@ const REPAIRS_DETAIL: ServiceDetail = {
   trustPoints: [
     { title: "Diagnose before we quote", description: "No guessing, no inflating." },
     { title: "Written repair warranty", description: "Repairs are warrantied in writing." },
-    { title: "Same-day parts on trucks", description: "We stock common parts for same-day fixes." },
+    { title: "Common parts stocked", description: "Stocked parts help us complete many repairs in one visit." },
   ],
   faqs: [
     {
@@ -84,7 +84,7 @@ const REPAIRS_DETAIL: ServiceDetail = {
     {
       question: "Can you fix my plumbing today?",
       answer:
-        "In most cases, yes. We carry common parts and can complete straightforward repairs same-day. If parts need to be ordered, we'll let you know the timeline upfront.",
+        "Often, depending on demand and the parts required. We carry common parts and explain the timeline before approved work begins.",
     },
     {
       question: "Should I repair or replace my fixture?",
@@ -299,7 +299,7 @@ const WATER_HEATERS_DETAIL: ServiceDetail = {
   ],
   trustPoints: [
     { title: "Right-fit guidance", description: "We help you choose the right size and type." },
-    { title: "Same-day replacement", description: "Available for standard tank units." },
+    { title: "Fast replacement options", description: "Same-day availability depends on the unit and schedule." },
     { title: "Permits handled", description: "We handle permits when required." },
   ],
   faqs: [
@@ -316,7 +316,7 @@ const WATER_HEATERS_DETAIL: ServiceDetail = {
     {
       question: "How long does water heater replacement take?",
       answer:
-        "Standard tank swaps take 2–4 hours. Same-day service is available for most installations.",
+        "Standard tank swaps take 2–4 hours once work begins. Same-day availability depends on the unit, permitting needs, and current schedule.",
     },
     {
       question: "Do you offer financing for water heater replacement?",
@@ -708,7 +708,7 @@ const EMERGENCY_DETAIL: ServiceDetail = {
     "Austin's rare but severe cold snaps — like the ones in 2021 and 2023 — expose homes that aren't winterized. If you have exposed pipes in your attic, garage, or exterior walls, consider pipe insulation before the next freeze. We can help.",
   processHeading: "What to Expect",
   processSteps: [
-    { number: "1", title: "Contact", description: "Call or text us — we answer 24/7." },
+    { number: "1", title: "Contact", description: "Call or text our 24/7 emergency line." },
     { number: "2", title: "Dispatch", description: "We dispatch a technician as fast as possible." },
     {
       number: "3",
@@ -822,7 +822,7 @@ const SLAB_LEAK_REPAIR_DETAIL: ServiceDetail = {
 const WATER_HEATER_REPAIR_DETAIL: ServiceDetail = {
   slug: "water-heater-repair",
   heroDescription:
-    "No hot water usually means a fixable problem — a failed thermostat, a burned-out heating element, a tripped reset button, or a faulty gas valve. Before you assume you need a full replacement, let us diagnose it. Many water heater issues are same-day repairs that cost a fraction of a new unit.",
+    "No hot water usually means a fixable problem — a failed thermostat, a burned-out heating element, a tripped reset button, or a faulty gas valve. Before you assume you need a full replacement, let us diagnose it. Many water heater issues can be repaired without replacing the unit.",
   symptomsHeading: "Signs Your Water Heater Needs Repair",
   symptoms: [
     "No hot water at all",
@@ -851,12 +851,12 @@ const WATER_HEATER_REPAIR_DETAIL: ServiceDetail = {
   processSteps: [
     { number: "1", title: "Diagnose", description: "We test thermostats, elements, gas valves, and connections." },
     { number: "2", title: "Recommend", description: "Repair vs. replace recommendation with honest reasoning." },
-    { number: "3", title: "Repair", description: "Same-day repair with parts we carry on our trucks." },
+    { number: "3", title: "Repair", description: "We complete the approved repair with stocked parts when available." },
     { number: "4", title: "Test", description: "We verify hot water output and check for leaks." },
   ],
   trustPoints: [
     { title: "Repair-first approach", description: "We fix what's fixable instead of pushing a replacement." },
-    { title: "Same-day parts", description: "Common parts on every truck for same-day turnaround." },
+    { title: "Common parts stocked", description: "Our trucks carry many frequently needed repair parts." },
     { title: "Honest replace guidance", description: "If replacement makes more sense, we'll tell you why." },
   ],
   faqs: [
@@ -920,7 +920,7 @@ const WATER_HEATER_INSTALLATION_DETAIL: ServiceDetail = {
   ],
   trustPoints: [
     { title: "Code-compliant every time", description: "Expansion tank, drain pan, proper venting — all included." },
-    { title: "Same-day available", description: "Standard tank swaps often completed the same day." },
+    { title: "Fast installation options", description: "Same-day availability depends on the unit and current schedule." },
     { title: "Permits handled", description: "We pull permits when required and schedule inspections." },
   ],
   faqs: [
@@ -1108,7 +1108,7 @@ const TOILET_REPAIR_INSTALLATION_DETAIL: ServiceDetail = {
     { number: "4", title: "Test", description: "Multiple flush tests and leak check before we leave." },
   ],
   trustPoints: [
-    { title: "Same-day repair", description: "Common toilet repairs completed in under an hour." },
+    { title: "Efficient repair", description: "Many common toilet repairs can be completed in a single visit." },
     { title: "Water-saving options", description: "Low-flow models that actually flush well." },
     { title: "Clean installation", description: "Old wax, caulk, and bolts removed — not left behind." },
   ],
@@ -1131,7 +1131,7 @@ const TOILET_REPAIR_INSTALLATION_DETAIL: ServiceDetail = {
     {
       question: "Why does my toilet keep running?",
       answer:
-        "Usually a worn flapper, a faulty fill valve, or an incorrect water level. These are inexpensive, same-day repairs.",
+        "Usually a worn flapper, a faulty fill valve, or an incorrect water level. These are commonly straightforward repairs once the cause is confirmed.",
     },
   ],
   bookingCtaText: "Book Toilet Service",

@@ -75,7 +75,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
       "Use drain strainers in bathrooms with heavy daily use.",
       "Replace old shut-off valves before emergency failures occur.",
     ],
-    dispatchNote: "Round Rock is in our regular same-day service corridor.",
+    dispatchNote: "Round Rock is in a regular dispatch corridor, with same-day availability based on demand.",
   },
   "georgetown-tx": {
     localOverview:
@@ -155,7 +155,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
       "Install quality shutoff hardware during fixture upgrades.",
       "Use treatment systems to protect tankless and tank heaters alike.",
     ],
-    dispatchNote: "Leander dispatch times are typically same-day for core service calls.",
+    dispatchNote: "Leander often has same-day windows for core service calls, based on route demand.",
   },
   "lakeway-tx": {
     localOverview:
@@ -259,7 +259,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
   },
   "buda-tx": {
     localOverview:
-      "Buda households need quick, dependable plumbing support as neighborhoods continue to expand. We focus on same-day-capable repairs and practical upgrade planning.",
+      "Buda households need quick, dependable plumbing support as neighborhoods continue to expand. We focus on prompt repairs and practical upgrade planning.",
     infrastructureContext:
       "Common calls include drain clearing, heater replacement, and fixture work driven by daily family usage.",
     neighborhoods: ["Sunfield", "Whispering Hollow", "Garlic Creek", "Cullen Country", "Elm Grove"],
@@ -275,7 +275,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
       "Flush water heaters yearly to improve lifespan.",
       "Replace aging fixture supply lines before leaks emerge.",
     ],
-    dispatchNote: "Buda remains on a daily dispatch route with strong same-day coverage.",
+    dispatchNote: "Buda remains on a daily dispatch route, with same-day availability based on demand.",
   },
   "kyle-tx": {
     localOverview:
@@ -315,7 +315,7 @@ const LOCATION_PROFILE_BY_SLUG: Partial<Record<string, LocationProfile>> = {
       "Install treatment early to reduce long-term fixture wear.",
       "Track drainage performance and address recurring slow flow promptly.",
     ],
-    dispatchNote: "Manor is on our East-side dispatch schedule with routine same-day availability.",
+    dispatchNote: "Manor is on our East-side dispatch schedule, with same-day availability based on route demand.",
   },
   "hutto-tx": {
     localOverview:

@@ -8,7 +8,7 @@ type NearbyLink = { name: string; path: string };
 
 export function WhySection({ cityName }: { cityName: string }) {
   const items = [
-    ["4.9 Stars on Google", `142 reviews from real ${cityName}-area homeowners.`],
+    ["4.9 Average Rating", "142 published reviews across Google, Yelp, and Nextdoor."],
     ["Licensed & Insured", "Verify our Texas Master Plumber license with the State Board anytime."],
     ["Locally Owned", `${cityName} neighbors, not a national call center or franchise.`],
     ["24/7 Emergency Service", "A backup at 2 AM still reaches a real person, not voicemail."],
@@ -47,7 +47,7 @@ export function ReviewsSection({ cityName, reviews }: { cityName: string; review
         <div className="local-review-head" data-reveal>
           <div>
             <SectionHeader kicker="Reviews" title={`${cityName} Homeowners Trust Ironclad`} />
-            <p className="local-review-meta">4.9/5 · 142 Google reviews</p>
+            <p className="local-review-meta">4.9/5 · 142 reviews across Google, Yelp, and Nextdoor</p>
           </div>
           <Link className="local-review-all" href="/reviews">
             Read all reviews <ArrowRight className="local-icon-sticky" />
@@ -77,7 +77,7 @@ export function ReviewsSection({ cityName, reviews }: { cityName: string; review
 
 export function StatsStrip() {
   const stats = [
-    ["4.9", "Google Rating"],
+    ["4.9", "Average Rating"],
     ["142", "Reviews"],
     ["24/7", "Emergency Service"],
   ];

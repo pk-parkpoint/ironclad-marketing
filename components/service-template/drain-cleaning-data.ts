@@ -39,7 +39,7 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
   },
   callout: {
     title: "Seeing these signs, or backing up right now?",
-    body: "We answer 24/7 and offer same-day drain clearing across Austin.",
+    body: "Our 24/7 emergency line handles active backups, and same-day appointments are often available across Austin.",
   },
   services: {
     title: "Our Drain Clearing Services",
@@ -106,7 +106,7 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
   ],
   whyLine: "Anyone can clear a clog. We're built so you never have to make this call twice.",
   why: [
-    ["4.9 Stars on Google", "142 reviews from real Austin homeowners."],
+    ["4.9 Average Rating", "142 published reviews across Google, Yelp, and Nextdoor."],
     ["Licensed & Insured", "Verify our Master Plumber license with the State Board."],
     ["Locally Owned", "Austin neighbors, not a national call center."],
     ["24/7 Emergency Service", "A backup at 2 AM still gets a real person."],
@@ -124,7 +124,7 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
   ],
   serviceArea: {
     title: "Drain Clearing in Austin and Nearby Areas",
-    body: "Same-day drain clearing across Austin and the surrounding metro.",
+    body: "Same-day drain-clearing availability across Austin and the surrounding metro.",
     ctaLabel: "Schedule Drain Clearing Near You",
   },
   areas: [

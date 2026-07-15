@@ -6,7 +6,7 @@ export const TRUST_FIELDS = {
   writtenWarranty: "Written workmanship warranty on every completed job",
   serviceArea: "Greater Austin and surrounding Central Texas cities",
   financing: "Financing options available for qualified projects",
-  sameDayEmergency: "Same-day and emergency service available",
+  sameDayEmergency: "Same-day availability based on demand, with a 24/7 emergency line",
   backgroundCheckedTeam: "Background-checked technicians",
 } as const;
 

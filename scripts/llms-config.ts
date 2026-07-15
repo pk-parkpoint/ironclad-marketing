@@ -1,4 +1,4 @@
-export const LLMS_LAST_UPDATED = "2026-07-14";
+export const LLMS_LAST_UPDATED = "2026-07-15";
 
 export const PRIORITY_GUIDE_SLUGS = [
   "what-plumbing-costs-austin",

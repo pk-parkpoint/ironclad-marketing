@@ -116,7 +116,7 @@ export function ServicesSection({
 export function ProcessSection({ cityName }: { cityName: string }) {
   const steps = [
     ["Book in Minutes", `Call, text, or schedule online. Tell us what is happening at your ${cityName} home.`],
-    ["Same-Day Dispatch", `A licensed Ironclad plumber heads to your ${cityName} address and calls ahead if timing changes.`],
+    ["Dispatch & Call Ahead", `We confirm the soonest available arrival window for your ${cityName} address and call ahead if timing changes.`],
     ["Upfront Diagnosis", "We inspect, explain the fix in plain language, and give a flat price before work begins."],
     ["Fixed & Guaranteed", "We complete the repair, clean up, and back the job in writing."],
   ];

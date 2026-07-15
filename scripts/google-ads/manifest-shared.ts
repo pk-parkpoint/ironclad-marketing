@@ -52,13 +52,13 @@ export const SITELINKS: SitelinkSpec[] = [
   {
     text: "Emergency Plumbing",
     description1: "Burst pipes, backups, major leaks.",
-    description2: "Call now for same-day dispatch.",
+    description2: "Call for a live arrival window.",
     finalUrl: `${SITE_ORIGIN}/emergency-plumbing`,
   },
   {
     text: "Water Heaters",
     description1: "Repair, replacement, tankless.",
-    description2: "Gas and electric. Same-day.",
+    description2: "Gas and electric options.",
     finalUrl: `${SITE_ORIGIN}/water-heaters`,
   },
   {
@@ -82,10 +82,10 @@ export const SITELINKS: SitelinkSpec[] = [
 ];
 
 export const CALLOUTS = [
-  "Same-Day Service",
+  "Fast Appointments",
   "Licensed & Insured",
   "Locally Owned",
-  "5-Star Rated on Google",
+  "Highly Rated",
   "Price Approved First",
   "Free Online Booking",
   "Camera Inspection",

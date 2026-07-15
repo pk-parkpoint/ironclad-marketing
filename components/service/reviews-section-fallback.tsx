@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { REVIEWS } from "@/content/reviews";
+import { PUBLISHED_REVIEW_SUMMARY, REVIEWS } from "@/content/reviews";
 
 const STATS = [
-  { value: "26", label: "5-STAR REVIEWS" },
-  { value: "131", label: "COMPLETED JOBS" },
-  { value: "97", label: "HAPPY CUSTOMERS" },
+  { value: PUBLISHED_REVIEW_SUMMARY.ratingValue.toFixed(1), label: "AVERAGE RATING" },
+  { value: String(PUBLISHED_REVIEW_SUMMARY.reviewCount), label: "PUBLISHED REVIEWS" },
+  { value: String(PUBLISHED_REVIEW_SUMMARY.sources.length), label: "REVIEW PLATFORMS" },
 ] as const;
 
 function GoogleGIcon({ size = 24 }: { size?: number }) {
@@ -30,9 +30,9 @@ function GoogleGIcon({ size = 24 }: { size?: number }) {
   );
 }
 
-function StarRow() {
+function StarRow({ label = "5 out of 5 stars" }: { label?: string }) {
   return (
-    <div aria-label="5 out of 5 stars" className="flex items-center gap-0.5" role="img">
+    <div aria-label={label} className="flex items-center gap-0.5" role="img">
       {Array.from({ length: 5 }).map((_, index) => (
         <svg
           aria-hidden="true"
@@ -115,7 +115,7 @@ export function ReviewsSectionFallback() {
           </Link>
           <div className="mt-4 mb-12 inline-flex items-center gap-1.5">
             <GoogleGIcon size={20} />
-            <StarRow />
+            <StarRow label={`${PUBLISHED_REVIEW_SUMMARY.ratingValue} out of 5 stars`} />
             <span className="text-xs font-semibold uppercase tracking-[0.05em] text-[#6B7280]">4.9/5 RATING</span>
           </div>
         </div>

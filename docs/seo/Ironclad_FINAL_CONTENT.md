@@ -38,7 +38,7 @@ The home services industry runs on three things: confusion, exhaustion, and opac
 
 These are not buried in fine print. These live on the homepage, the about page, every service page footer, and as a standalone `/guarantees` page.
 
-1. **No service visit fees. Ever.** We don't charge you money to show up and tell you what's wrong. The diagnostic is part of the job.
+1. **Diagnostic fee explained up front.** We disclose the fee before dispatch, and it is typically applied to approved work.
 2. **We call you back within one hour or your project is free.** Not a voicemail. Not a bot. A human, within 60 minutes of your first contact during business hours.
 3. **We give you the same advice we'd give a family member.** If it doesn't need replacing, we'll say so. If you can wait, we'll tell you. If there's a cheaper option that makes sense, we'll present it.
 4. **The final bill matches the quote. No surprise charges.** The number on the estimate is the number on the invoice. If something changes mid-job, we stop and talk to you before the price moves.
@@ -93,8 +93,8 @@ Use all of it on us or on anyone else. We'd rather compete on a level playing fi
 
 **H2:** Six Guarantees We Put in Writing
 
-**No service visit fees. Ever.**
-We show up, we diagnose the problem, we give you a written estimate. If you decide not to proceed, you owe us nothing. The diagnostic is not a sales tool. It's the first step of doing the job right.
+**Diagnostic fee explained up front.**
+We disclose the fee before dispatch. It covers the service visit, evaluation, and written estimate and is typically applied to approved work.
 
 **One-hour callback or your project is free.**
 Contact us during business hours and a real person calls you back within 60 minutes. Not an auto-reply. Not a chatbot. A human who can answer your question or schedule your appointment. If we miss the window, the work is on us. [Terms apply — link to /guarantees for full details.]
@@ -177,11 +177,11 @@ Call or text (512) 506-2470. Read our pricing guide first if you want. Bring our
 
 Replace the duplicate guarantee block and zero-value counters with:
 
-- No Service Visit Fees
+- Diagnostic Fee Explained Up Front
 - 1-Hour Callback or It's Free
 - Quote-Locked Pricing
 - Written Warranty on Every Job
-- 142+ Google Reviews ★★★★★
+- 4.9 Average Rating · 142 Reviews Across Google, Yelp, and Nextdoor
 
 ### "Why Ironclad Is Different" Section
 
@@ -207,7 +207,7 @@ Keep existing service card grid. No changes to structure. Update card descriptio
 
 ### Homepage FAQ Replacement
 
-1. **Do you charge a fee just to come out and look?** No. Ironclad never charges a service visit fee or diagnostic fee. We show up, evaluate the problem, and give you a written estimate. If you decide not to proceed, you owe nothing.
+1. **Do you charge a fee just to come out and look?** We charge a diagnostic fee for the visit, evaluation, and written estimate. We explain it before dispatch, and it is typically applied to approved work.
 
 2. **What happens if you don't call me back within an hour?** Your project is free. During business hours, we guarantee a human callback within 60 minutes of your first contact. If we miss that window, the work we do for you is on us.
 
@@ -221,7 +221,7 @@ Keep existing service card grid. No changes to structure. Update card descriptio
 
 7. **Do you handle emergency plumbing?** Yes. Burst pipes, active leaks, sewer backups, gas concerns, and no-water situations. Call or text and we prioritize getting someone to you as fast as possible.
 
-8. **What areas do you serve?** Austin and 19 surrounding cities across Travis, Williamson, and Hays counties. We run daily routes through the entire greater Austin metro.
+8. **What areas do you serve?** Austin and 19+ surrounding communities across Travis, Williamson, Hays, and Burnet counties. See the current list at `/service-area`.
 
 ### Final CTA
 
@@ -247,13 +247,13 @@ Each guarantee gets its own block with: the guarantee statement, what it means i
 
 ---
 
-#### 1. No Service Visit Fees. Ever.
+#### 1. Diagnostic Fee Explained Up Front.
 
-**What it means:** We do not charge a trip charge, dispatch fee, diagnostic fee, or service call fee. When our technician arrives at your home, evaluates the problem, and presents a written estimate, that process costs you nothing. If you decide not to proceed with the work, you owe us zero.
+**What it means:** We charge a diagnostic fee for the service visit, evaluation, and written estimate. We explain the fee before dispatch. If you approve the work, the fee is typically applied to the job cost.
 
-**Why we do this:** Service visit fees exist to recoup the cost of sending a truck to a home that doesn't convert into a paying job. We absorb that cost because we believe the diagnostic should demonstrate our competence, not create a sunk-cost pressure to say yes.
+**What the fee covers:** The plumber's travel, time on site, professional evaluation, and a written scope and price. You can review the estimate before deciding whether to proceed.
 
-**The fine print:** This applies to standard residential service calls within our service area during normal business hours. After-hours emergency dispatch may carry a separate emergency response fee, which is disclosed before we dispatch.
+**The fine print:** After-hours emergency dispatch may carry a separate emergency response fee. We disclose applicable fees before dispatch, and the written estimate shows how the diagnostic fee is applied when work is approved.
 
 ---
 
@@ -308,7 +308,7 @@ Each guarantee gets its own block with: the guarantee statement, what it means i
 
 **What this covers:** Phone, text, or email advice about work Ironclad previously performed at your address. Diagnosis of symptoms related to our prior work. Guidance on whether a new issue is related to prior work or a separate problem.
 
-**What this does not cover:** Free on-site service visits (those are a new service call, though still with no service visit fee). Work performed by other companies. General plumbing questions unrelated to work we did (though honestly, we'll probably answer those too).
+**What this does not cover:** On-site service visits, work performed by other companies, or unrelated new diagnostic visits. New on-site visits follow the diagnostic-fee policy above.
 
 ---
 
@@ -355,7 +355,7 @@ These replace and expand the P1 article plan from the original backlog. Organize
 
 | ID | Priority | Page | Content Summary |
 |---|---|---|---|
-| CNT-001-v2 | P0 | `/` | Hero update per spec above. New trust strip (no service visit fees, 1-hour callback, quote-locked, warranty, reviews). New "Why Ironclad Is Different" section with 4 cards. Updated FAQ with guarantee-forward questions. Updated final CTA that references pricing guide. |
+| CNT-001-v2 | P0 | `/` | Hero update per spec above. New trust strip (diagnostic fee explained up front, 1-hour callback, quote-locked, warranty, reviews). New "Why Ironclad Is Different" section with 4 cards. Updated FAQ with guarantee-forward questions. Updated final CTA that references pricing guide. |
 
 ---
 
@@ -491,7 +491,7 @@ Find your problem. See what Ironclad charges. See what Austin companies charge. 
 
 ## How to Read This Table
 
-**The Ironclad Price column** is what we charge for a standard, no-complications version of that job. It includes materials, labor, cleanup, and warranty. No service call fee. No hidden add-ons.
+**The Ironclad Price column** is what we charge for a standard, no-complications version of that job. It includes materials, labor, cleanup, and warranty. The diagnostic fee is disclosed before dispatch and typically applied to approved work. No hidden add-ons.
 
 **The Austin Range column** is what you'll see from other licensed, insured plumbing companies across the Austin metro. The low end is typically a smaller operation with less overhead. The high end is typically a larger company with more infrastructure, marketing spend, and/or commission-based techs. Both ends can do good work. Both ends can also cut corners (low end) or overcharge (high end).
 
@@ -836,7 +836,7 @@ The dispatch fee gets a truck to your house after hours. The repair itself is pr
 
 Ironclad publishes these numbers because we think you should know what you're paying for. Compare us against anyone. Compare anyone against us.
 
-Questions? Call (512) 506-2470. No service visit fees. We'll give you a specific number for your situation.
+Questions? Call (512) 506-2470. Diagnostic fees are explained before dispatch and typically applied to approved work. We'll give you a specific number for your situation.
 
 
 ---
@@ -3580,7 +3580,7 @@ Home warranties are not scams. They serve a legitimate purpose for specific situ
 
 Ironclad does not currently work as a contracted provider for home warranty companies. Here is why: warranty contractors agree to work at reduced rates that make it difficult to maintain the quality standards, response times, and warranty coverage we promise our direct customers. We'd rather charge you a fair market rate and deliver the service level we've committed to than discount the work and cut corners to hit a warranty company's margin targets.
 
-If you have a home warranty and want to use it, that's your right and we respect it. Call your warranty company for covered claims. But if the warranty denies the claim, if you want to choose your own equipment, if you need service faster than the warranty contractor can provide, or if the job isn't covered, call Ironclad at (512) 506-2470. No service visit fees. We'll give you a straight diagnosis and a fair price.
+If you have a home warranty and want to use it, that's your right and we respect it. Call your warranty company for covered claims. But if the warranty denies the claim, if you want to choose your own equipment, if you need service faster than the warranty contractor can provide, or if the job isn't covered, call Ironclad at (512) 506-2470. Diagnostic fees are explained before dispatch and typically applied to approved work. We'll give you a straight diagnosis and a fair price.
 
 ---
 ---
@@ -3689,7 +3689,7 @@ Keep records of every call, including the representative's name and any case num
 
 **3. Fix leaks before December.** Because of the winter average calculation, a leak that persists through winter costs you 12 months of inflated sewer charges on top of the leak itself.
 
-If your bill spiked and you don't know why, call Ironclad at (512) 506-2470. We'll do a leak detection visit and find out where the water is going. No service visit fees.
+If your bill spiked and you don't know why, call Ironclad at (512) 506-2470. We'll do a leak detection visit and find out where the water is going. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 ---
@@ -3899,7 +3899,7 @@ Buyers and their agents inflate repair credits because they don't know the actua
 
 [If applicable, describe a bundled pre-listing service: Ironclad sends a tech to do a full plumbing walkthrough, fix small items on the spot, flag larger items with estimates, provide a report documenting the condition of the system. Position as: "Get your plumbing inspection-ready in a single visit." Price as appropriate.]
 
-Call Ironclad at (512) 506-2470 to schedule a pre-listing plumbing assessment. We'll tell you what to fix, what to disclose, and what's fine as-is. No service visit fees.
+Call Ironclad at (512) 506-2470 to schedule a pre-listing plumbing assessment. We'll tell you what to fix, what to disclose, and what's fine as-is. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 ---
@@ -4044,7 +4044,7 @@ If the camera shows debris, offsets, or improper connections, you have documenta
 
 **Loose connections.** In a house with 50+ plumbing connections, the probability that every single one was torqued perfectly is low. The most common: slip nuts on drain traps, compression fittings on supply lines, and hose connections on washing machine and dishwasher supply.
 
-Ironclad offers independent new-construction plumbing inspections for Austin-area homeowners. We check everything on this list and provide a written report you can use for warranty claims. Call (512) 506-2470 to schedule. No service visit fees.
+Ironclad offers independent new-construction plumbing inspections for Austin-area homeowners. We check everything on this list and provide a written report you can use for warranty claims. Call (512) 506-2470 to schedule. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 
 ---
@@ -4209,7 +4209,7 @@ A company that won't let you compare. "This price is only available today." Wate
 4. Get 2-3 quotes. Compare scope, equipment brand, and warranty.
 5. Compare against Ironclad's published prices: whole-house softener ($2,500), carbon filter ($1,800), RO ($550), combo ($3,500-$5,000).
 
-Call Ironclad at (512) 506-2470 for a water quality assessment. We'll test your water, tell you your hardness number, and recommend only what your home actually needs. No service visit fees.
+Call Ironclad at (512) 506-2470 for a water quality assessment. We'll test your water, tell you your hardness number, and recommend only what your home actually needs. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 ---
@@ -4460,7 +4460,7 @@ Slab leaks don't fix themselves and they get worse over time. Here's what happen
 
 **The winter average impact:** If the slab leak runs through December-February, your Austin Water winter average gets inflated, raising your sewer charges for the entire following year (see our [Austin Water Bill Guide](/guides/how-to-read-austin-water-bill)).
 
-Ironclad Plumbing: (512) 506-2470. No service visit fees. We'll find the leak and show you exactly what's happening before recommending anything.
+Ironclad Plumbing: (512) 506-2470. Diagnostic fees are explained before dispatch and typically applied to approved work. We'll find the leak and show you exactly what's happening before recommending anything.
 
 ---
 ---
@@ -4574,7 +4574,7 @@ Ironclad charges **$175** for a single-fixture drain cleaning. The Austin market
 
 For the full cost breakdown of every plumbing service, see [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin).
 
-Call Ironclad: (512) 506-2470. No service visit fees.
+Call Ironclad: (512) 506-2470. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 
@@ -4606,7 +4606,7 @@ Ironclad charges **$2,200** for a standard 50-gallon gas water heater replacemen
 
 Full breakdown: [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin). Repair vs replace decision guide: [Water Heater Repair vs Replacement](/guides/water-heater-repair-vs-replace).
 
-Call Ironclad: (512) 506-2470. No service visit fees.
+Call Ironclad: (512) 506-2470. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 
@@ -4635,7 +4635,7 @@ Ironclad Plumbing publishes this cost guide so Austin homeowners know what sewer
 
 Full breakdown: [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin).
 
-Call Ironclad: (512) 506-2470. No service visit fees.
+Call Ironclad: (512) 506-2470. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 
@@ -4660,7 +4660,7 @@ Detection is the diagnostic. It tells you where the leak is and what's leaking. 
 
 Full breakdown: [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin). Slab leak warning signs: [How to Tell If You Have a Slab Leak](/guides/slab-leak-signs-austin).
 
-Call Ironclad: (512) 506-2470. No service visit fees.
+Call Ironclad: (512) 506-2470. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 
@@ -4694,7 +4694,7 @@ Materials are only 14% of the bill. You're mostly paying for skilled labor and t
 
 Full breakdown: [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin).
 
-Call Ironclad: (512) 506-2470. No service visit fees.
+Call Ironclad: (512) 506-2470. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 ---
@@ -4732,7 +4732,7 @@ Ironclad Plumbing explains the signs your water heater needs replacing because t
 
 Full pricing: [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin). Water heater repair ($250) vs replacement ($2,200).
 
-Call Ironclad: (512) 506-2470. We diagnose before we recommend. No service visit fees.
+Call Ironclad: (512) 506-2470. We diagnose before we recommend. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 
@@ -4772,7 +4772,7 @@ Ironclad Plumbing explains the signs your sewer line may need replacing because 
 
 Full pricing: spot repair (~$2,000), trenchless lining (~$5,500), full replacement (~$8,000-$12,000). [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin).
 
-Call Ironclad: (512) 506-2470. We always start with a camera. No service visit fees.
+Call Ironclad: (512) 506-2470. We always start with a camera. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 
@@ -4816,7 +4816,7 @@ Ironclad Plumbing explains the signs your water softener needs attention because
 
 Full pricing: water softener installed ($2,500), combo softener + carbon filter ($3,500-$5,000). [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin). Austin hard water details: [Austin Hard Water Guide](/guides/austin-hard-water).
 
-Call Ironclad: (512) 506-2470. We'll test your water and diagnose the softener. No service visit fees.
+Call Ironclad: (512) 506-2470. We'll test your water and diagnose the softener. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 
 ---
@@ -5031,7 +5031,7 @@ Multiple drains slow throughout house
 
 Full pricing: [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin).
 
-Call Ironclad at (512) 506-2470. We start with the simplest fix and escalate only when the evidence supports it. No service visit fees.
+Call Ironclad at (512) 506-2470. We start with the simplest fix and escalate only when the evidence supports it. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 ---
@@ -5112,7 +5112,7 @@ Ironclad Plumbing put this comparison together because the tank-vs-tankless deci
 
 Full pricing: [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin).
 
-Call Ironclad at (512) 506-2470. We install both. We'll tell you which one makes sense for your house, your household, and your budget. No service visit fees.
+Call Ironclad at (512) 506-2470. We install both. We'll tell you which one makes sense for your house, your household, and your budget. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 ---
@@ -5221,7 +5221,7 @@ If the pipe is cracked but not collapsed, trenchless lining may solve it for $5,
 
 Full pricing: [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin).
 
-Call Ironclad at (512) 506-2470. We always start with a camera. No service visit fees.
+Call Ironclad at (512) 506-2470. We always start with a camera. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 ---
@@ -5329,7 +5329,7 @@ Austin water is hard. That's true for every home in the city. It's not an emerge
 
 Full pricing: [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin). Austin hard water details: [Austin Hard Water Guide](/guides/austin-hard-water).
 
-Call Ironclad at (512) 506-2470. We test your water and recommend only what your home needs. No service visit fees.
+Call Ironclad at (512) 506-2470. We test your water and recommend only what your home needs. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 ---
 ---
@@ -5451,7 +5451,7 @@ A good plumber answers all five without hesitation and shows you the evidence. A
 
 Full pricing: spot repair (~$2,000), reroute (~$3,500), repipe (~$8,500). [Ironclad's Open Price Guide](/guides/what-plumbing-costs-austin). Slab leak signs: [How to Tell If You Have a Slab Leak](/guides/slab-leak-signs-austin).
 
-Call Ironclad at (512) 506-2470. We diagnose before we recommend. We show you the evidence. You decide. No service visit fees.
+Call Ironclad at (512) 506-2470. We diagnose before we recommend. We show you the evidence. You decide. Diagnostic fees are explained before dispatch and typically applied to approved work.
 
 
 ---

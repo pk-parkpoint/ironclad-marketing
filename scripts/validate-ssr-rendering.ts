@@ -36,7 +36,7 @@ function main() {
     {
       label: "homepage",
       relativeFile: "index.html",
-      requiredPatterns: [/The Plumber Austin Trusts\./i, /application\/ld\+json/i],
+      requiredPatterns: [/Austin Plumbing, Done Right\./i, /application\/ld\+json/i],
     },
     {
       label: "service page",
@@ -46,7 +46,7 @@ function main() {
     {
       label: "city page",
       relativeFile: "service-area/austin-tx.html",
-      requiredPatterns: [/FAQ for\s*Austin/i, /application\/ld\+json/i, /Request Service in Austin/i],
+      requiredPatterns: [/Austin Plumbing Questions, Answered/i, /application\/ld\+json/i, /Need a Plumber in Austin\? Call Ironclad\./i],
     },
   ];
 

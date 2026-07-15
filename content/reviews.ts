@@ -13,6 +13,12 @@ export type ReviewEntry = {
   avatarColor: string;
 };
 
+export const PUBLISHED_REVIEW_SUMMARY = {
+  ratingValue: 4.9,
+  reviewCount: 142,
+  sources: ["Google", "Yelp", "Nextdoor"],
+} as const;
+
 export const REVIEWS: ReviewEntry[] = [
   {
     id: "review-austin-john-d",
