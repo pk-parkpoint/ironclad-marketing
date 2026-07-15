@@ -16,9 +16,7 @@ export type TopNavLink = {
 };
 
 const PLUMBING_DROPDOWN_LINKS: NavChildLink[] = [
-  { href: "/plumbing", label: "All Plumbing Services" },
   { href: "/plumbing/emergency", label: "Emergency Plumbing" },
-  { href: "/plumbing/plumbing-inspection", label: "Plumbing Inspection" },
   {
     href: "/plumbing/repairs",
     label: "Repairs",
@@ -90,6 +88,8 @@ const PLUMBING_DROPDOWN_LINKS: NavChildLink[] = [
       { href: "/plumbing/backflow-prevention", label: "Backflow Prevention & Testing" },
     ],
   },
+  { href: "/plumbing/plumbing-inspection", label: "Plumbing Inspection" },
+  { href: "/plumbing", label: "All Plumbing Services" },
 ];
 
 const DRAINS_DROPDOWN_LINKS: NavChildLink[] = [
