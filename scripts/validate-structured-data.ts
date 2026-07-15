@@ -1,4 +1,5 @@
 import { BLOG_POSTS } from "../content/blog-posts";
+import { COMMERCIAL_PLUMBING_PATH, COMMERCIAL_PLUMBING_SERVICE } from "../content/commercial-plumbing";
 import { FAQ_ENTRIES } from "../content/faqs";
 import { LOCATIONS } from "../content/locations";
 import { getPpcServiceRouteEntries } from "../content/ppc-service-variants";
@@ -44,6 +45,21 @@ function main() {
   assert(homeBusiness["@type"] === "Plumber", "homepage schema must be Plumber");
   assert(contactBusiness["@type"] === "Plumber", "contact schema must be Plumber");
   assert(contactBusiness.url === toAbsoluteUrl("/contact"), "contact LocalBusiness URL mismatch");
+
+  const commercialServiceSchema = asRecord(
+    buildServiceSchema({
+      description: COMMERCIAL_PLUMBING_SERVICE.metaDescription,
+      name: COMMERCIAL_PLUMBING_SERVICE.title,
+      path: COMMERCIAL_PLUMBING_PATH,
+      serviceType: "Commercial plumbing",
+    }),
+    "commercial service schema missing",
+  );
+  assert(commercialServiceSchema["@type"] === "Service", "commercial schema must be Service");
+  assert(
+    commercialServiceSchema.url === toAbsoluteUrl(COMMERCIAL_PLUMBING_PATH),
+    "commercial service schema URL mismatch",
+  );
 
   for (const service of SERVICES) {
     const serviceSchema = asRecord(

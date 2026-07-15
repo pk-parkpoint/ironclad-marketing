@@ -1,3 +1,5 @@
+import { COMMERCIAL_PLUMBING_PATH, COMMERCIAL_PLUMBING_SERVICE } from "./commercial-plumbing";
+
 export type StaticPageEntry = {
   path: string;
   titleTag: string;
@@ -7,6 +9,13 @@ export type StaticPageEntry = {
 };
 
 export const STATIC_PAGES: StaticPageEntry[] = [
+  {
+    path: COMMERCIAL_PLUMBING_PATH.slice(1),
+    titleTag: COMMERCIAL_PLUMBING_SERVICE.titleTag,
+    metaDescription: COMMERCIAL_PLUMBING_SERVICE.metaDescription,
+    h1: COMMERCIAL_PLUMBING_SERVICE.h1,
+    section: "Plumbing Service",
+  },
   {
     path: "plumbing",
     titleTag: "Plumber in Austin, TX | Ironclad Plumbing",

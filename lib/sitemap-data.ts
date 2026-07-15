@@ -2,6 +2,7 @@ import { GUIDE_ROUTE_PATHS } from "@/content/guides";
 import { TOP_QUESTIONS_GUIDE_PATH } from "@/content/aeo-top-questions";
 import { QUESTION_ROUTE_PATHS } from "@/components/questions/question-data";
 import { BLOG_POSTS } from "@/content/blog-posts";
+import { COMMERCIAL_PLUMBING_PATH } from "@/content/commercial-plumbing";
 import { LOCAL_NEIGHBORHOOD_PAGES } from "@/content/local-pages";
 import { LOCATIONS } from "@/content/locations";
 import { getPpcServiceRouteEntries } from "@/content/ppc-service-variants";
@@ -25,6 +26,7 @@ const LASTMOD = {
 } as const;
 
 const ROUTE_LASTMOD_OVERRIDES: Record<string, string> = {
+  [COMMERCIAL_PLUMBING_PATH]: "2026-07-14T00:00:00.000Z",
   [TOP_QUESTIONS_GUIDE_PATH]: "2026-05-26T00:00:00.000Z",
   "/faq/plumbing": "2026-05-26T00:00:00.000Z",
   "/guides": "2026-05-26T00:00:00.000Z",
@@ -60,7 +62,6 @@ function getServiceRoutePaths(): string[] {
 export function buildCoreSitemapEntries(): SitemapEntry[] {
   const routes = [
     "/",
-    "/commercial-plumbing/austin-tx",
     "/resources",
     "/site-map",
     ...STATIC_ROUTE_PATHS.map((path) => normalizePath(path)),
@@ -151,6 +152,16 @@ export function buildImageSitemapEntries(): ImageSitemapEntry[] {
       });
     }
   }
+
+  entries.push({
+    pagePath: COMMERCIAL_PLUMBING_PATH,
+    images: [
+      {
+        path: "/media/services/ironclad-team-hero.png",
+        caption: "Ironclad Plumbing commercial plumbing team in Austin",
+      },
+    ],
+  });
 
   // Homepage OG image
   entries.push({

@@ -11,6 +11,7 @@ const SERVICE_OPTIONS = [
   "Leak Detection",
   "Gas Line Services",
   "Fixture Installation",
+  "Commercial Plumbing",
   "Emergency Plumbing",
   "Other",
 ];

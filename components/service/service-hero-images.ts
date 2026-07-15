@@ -5,6 +5,7 @@ const HERO_IMAGES: Record<string, string> = {
   "water-heaters": "/media/services/water-heaters.jpg",
   fixtures: "/media/services/fixture-installation.jpg",
   emergency: "/media/services/emergency-plumbing.jpg",
+  "commercial-plumbing": "/media/services/ironclad-team-hero.png",
 };
 
 const HERO_IMAGE_ALTS: Partial<Record<string, string>> = {
@@ -14,6 +15,7 @@ const HERO_IMAGE_ALTS: Partial<Record<string, string>> = {
   "water-heaters": "Technician servicing a residential water heater system",
   fixtures: "Plumber installing updated plumbing fixtures in a bathroom",
   emergency: "Emergency plumbing technician responding to urgent home service call",
+  "commercial-plumbing": "Ironclad Plumbing commercial plumbing team in Austin",
 };
 
 export function getServiceHeroImage(slug: string): string {
