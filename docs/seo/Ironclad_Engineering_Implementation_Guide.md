@@ -235,7 +235,7 @@ The ONLY CTA on the entire page. No mid-content CTAs. No sidebar CTAs. One. At t
 Questions this guide didn't answer?
 Call or text Ironclad at (512) 506-2470.
 We'll give you a straight answer whether you hire us or not.
-Diagnostic fees are explained before dispatch and typically applied to approved work.
+Review the written options before deciding. No pressure to book.
 ```
 
 - Centered text. No background color.

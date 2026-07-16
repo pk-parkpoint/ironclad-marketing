@@ -106,7 +106,7 @@ export function GuidePageTemplate({ page }: { page: GuidePageData }) {
                     Call or text <a href="tel:+15125062470">(512) 506-2470</a>. We will give you a direct answer
                     whether you hire us or not.
                   </p>
-                  <p>On-site diagnostic fees are explained before dispatch. No pressure to book.</p>
+                  <p>Review the written options before deciding. No pressure to book.</p>
                 </div>
               </section>
 
