@@ -79,7 +79,7 @@ Shared blocks identical on all 31 (see components.md): NavBar, guarantee strip (
   3. **Q:** Are you licensed and insured?
      **A:** Yes. We are a licensed Texas plumbing company, fully insured, and every job carries a written warranty.
   4. **Q:** Do you charge for estimates?
-     **A:** You get upfront pricing before work begins. We charge a diagnostic fee for the visit, evaluation, and written estimate. It is explained before dispatch and typically applied to approved work.
+     **A:** You get upfront pricing before work begins. Diagnostic fees, when they apply, are explained before we start.
   5. **Q:** What plumbing services do you cover?
      **A:** Drains, water heaters, leaks, sewer lines, fixtures, gas, water treatment, and emergencies. If it involves your home's water or gas, we handle it.
   6. **Q:** What should I do in a plumbing emergency?

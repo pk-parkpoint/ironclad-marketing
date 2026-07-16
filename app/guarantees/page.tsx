@@ -19,7 +19,7 @@ export function generateMetadata() {
   return buildPageMetadata({
     title: "The Ironclad Guarantees | Ironclad Plumbing - Austin, TX",
     description:
-      "Read the six written guarantees Ironclad Plumbing makes to Austin homeowners before any residential plumbing job begins.",
+      "Read the five written guarantees Ironclad Plumbing makes to Austin homeowners before any residential plumbing job begins.",
     path: "/guarantees",
   });
 }
@@ -72,9 +72,9 @@ export default function GuaranteesPage() {
             </h1>
             <p className="body-large max-w-[var(--max-readable-width)] text-muted">{GUARANTEES_PAGE_INTRO}</p>
             <QuickAnswer>
-              Ironclad Plumbing gives Austin homeowners written service guarantees covering visit fees, callback
-              accountability, advice quality, quote-locked pricing, warranties, and lifetime support. These promises are
-              meant to make the service experience easier to compare before work begins.
+              Ironclad Plumbing gives Austin homeowners written service guarantees covering callback accountability,
+              advice quality, quote-locked pricing, warranties, and lifetime support. These promises are meant to make
+              the service experience easier to compare before work begins.
             </QuickAnswer>
           </div>
         </section>

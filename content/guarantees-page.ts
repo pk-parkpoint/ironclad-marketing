@@ -7,29 +7,9 @@ export type GuaranteeSection = {
 };
 
 export const GUARANTEES_PAGE_INTRO =
-  "Every plumbing company says they're trustworthy. We put ours in writing with consequences. These six guarantees apply to every residential plumbing job we do in the Austin metro area.";
+  "Every plumbing company says they're trustworthy. We put ours in writing with consequences. These five guarantees apply to every residential plumbing job we do in the Austin metro area.";
 
 export const GUARANTEES_PAGE_SECTIONS: GuaranteeSection[] = [
-  {
-    title: "Diagnostic Fee Explained Up Front.",
-    items: [
-      {
-        label: "What it means",
-        body:
-          "We charge a diagnostic fee for the service visit, evaluation, and written estimate. We explain the fee before dispatch. If you approve the work, the fee is typically applied to the job cost.",
-      },
-      {
-        label: "What the fee covers",
-        body:
-          "The diagnostic fee covers the plumber's travel, time on site, professional evaluation, and a written scope and price. You can review the estimate before deciding whether to proceed.",
-      },
-      {
-        label: "The fine print",
-        body:
-          "After-hours emergency dispatch may carry a separate emergency response fee. We disclose applicable fees before dispatch, and the written estimate shows how the diagnostic fee is applied when work is approved.",
-      },
-    ],
-  },
   {
     title: "One-Hour Callback or Your Project Is Free.",
     items: [
@@ -126,7 +106,7 @@ export const GUARANTEES_PAGE_SECTIONS: GuaranteeSection[] = [
       {
         label: "What this does not cover",
         body:
-          "It does not include on-site service visits, work performed by other companies, or unrelated new diagnostic visits. New on-site visits are handled under the diagnostic-fee policy above.",
+          "It does not include on-site service visits, work performed by other companies, or unrelated new service calls.",
       },
     ],
   },

@@ -23,9 +23,9 @@ export const MARKETING_PAGE_CONTENT: Record<string, MarketingPageContent> = {
         ],
       },
       {
-        heading: "Six Guarantees We Put in Writing",
+        heading: "Five Guarantees We Put in Writing",
         paragraphs: [
-          "Diagnostic fees explained before dispatch, one-hour callback accountability, family-member advice, quote-locked pricing, written warranties, and lifetime support are the operating promises behind the brand.",
+          "One-hour callback accountability, family-member advice, quote-locked pricing, written warranties, and lifetime support are the operating promises behind the brand.",
         ],
       },
       {
