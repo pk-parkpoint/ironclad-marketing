@@ -1,11 +1,13 @@
 import Link from "next/link";
-import { DataDeskBreadcrumbs } from "@/components/data-desk/data-desk-breadcrumbs";
-import { DataDeskProductCard } from "@/components/data-desk/data-desk-product-card";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
+import { ArrowRight, Braces, ChartNoAxesCombined, FileText, Radio } from "lucide-react";
+import type { CSSProperties } from "react";
+import { DataDeskHeader } from "@/components/data-desk/data-desk-header";
+import { DataDeskHubCard } from "@/components/data-desk/data-desk-hub-card";
+import { DataDeskPoweredFooter } from "@/components/data-desk/data-desk-powered-footer";
 import { StructuredData } from "@/components/seo/structured-data";
 import {
   DATA_DESK_CATEGORIES,
+  DATA_DESK_EXPERIENCE_BY_SLUG,
   DATA_DESK_HUB_DESCRIPTION,
   DATA_DESK_PRODUCTS,
   getDataDeskProductsByCategory,
@@ -21,96 +23,53 @@ export const metadata = buildPageMetadata({
   robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
 });
 
-const PLANNED_FORMATS = [
-  { title: "Canonical report", text: "Findings, charts, methodology, sources and archived versions on IroncladTexas.com." },
-  { title: "Responsive embed", text: "A clean iframe or component for newsrooms, HOAs, agents and property partners." },
-  { title: "Public data", text: "Documented JSON and CSV downloads for independent analysis and reuse." },
-  { title: "Broadcast graphic", text: "Continuously updated 16:9 and social-ready images for editorial use." },
+const FORMATS = [
+  { title: "Canonical report", text: "Findings, charts, methodology, sources and archived versions.", icon: FileText },
+  { title: "Responsive embed", text: "A clean interactive card for newsrooms, HOAs and property partners.", icon: ChartNoAxesCombined },
+  { title: "Public data", text: "Documented JSON and CSV releases for independent analysis and reuse.", icon: Braces },
+  { title: "Broadcast graphic", text: "Continuously refreshed 16:9 and social-ready images.", icon: Radio },
 ];
 
 export default function DataDeskHubPage() {
+  const style = { "--rc": "#2F8FE0", "--rc2": "#38D6E0" } as CSSProperties;
   return (
-    <>
+    <div className="dd-page" style={style}>
       <StructuredData data={buildDataDeskHubSchema(DATA_DESK_PRODUCTS)} id="data-desk-collection-schema" />
-      <SiteHeader />
-      <main className="bg-soft-background">
-        <section className="border-b border-border bg-white py-12 md:py-16">
-          <div className="container-shell">
-            <DataDeskBreadcrumbs />
-            <div className="mt-8 max-w-[880px]">
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="rounded-full bg-ink px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white">
-                  25 product templates ready
-                </span>
-                <span className="text-sm font-semibold text-body">Prelaunch preview · data products in development</span>
-              </div>
-              <h1 className="mt-6 text-4xl font-bold leading-tight text-ink md:text-6xl">Austin Home Data Desk</h1>
-              <p className="mt-5 max-w-[780px] text-lg leading-8 text-body">
-                A planned public source for Austin home-system costs, risks, emergencies, permits, water conditions and
-                homeowner decisions—built for residents, newsrooms and property professionals.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-12 md:py-16">
-          <div className="container-shell">
-            <div className="max-w-[760px]">
-              <p className="text-sm font-bold uppercase tracking-[0.12em] text-cta-blue">One source, four useful formats</p>
-              <h2 className="mt-3 text-3xl font-bold text-ink">Designed to be cited, embedded and independently checked.</h2>
-              <p className="mt-4 leading-7 text-body">
-                These are honest development previews, not live datasets. Each finished product is planned to publish
-                the same documented information in four reusable forms.
-              </p>
-            </div>
-            <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              {PLANNED_FORMATS.map((format) => (
-                <article className="rounded-2xl border border-border bg-white p-5" key={format.title}>
-                  <h3 className="font-bold text-ink">{format.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-body">{format.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {DATA_DESK_CATEGORIES.map((category, index) => {
-          const products = getDataDeskProductsByCategory(category.id);
-          return (
-            <section className={index % 2 === 0 ? "border-y border-border bg-white py-12 md:py-16" : "py-12 md:py-16"} id={category.id} key={category.id}>
-              <div className="container-shell">
-                <div className="max-w-[760px]">
-                  <p className="text-sm font-bold uppercase tracking-[0.12em] text-cta-blue">{products.length} planned products</p>
-                  <h2 className="mt-3 text-3xl font-bold text-ink">{category.label}</h2>
-                  <p className="mt-3 leading-7 text-body">{category.description}</p>
-                </div>
-                <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                  {products.map((product) => <DataDeskProductCard key={product.slug} product={product} />)}
-                </div>
-              </div>
-            </section>
-          );
-        })}
-
-        <section className="border-t border-border bg-ink py-12 text-white md:py-16">
-          <div className="container-shell grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+      <DataDeskHeader />
+      <main>
+        <section className="dd-hub-hero">
+          <div aria-hidden="true" className="dd-conic-glow" />
+          <div className="dd-container dd-hub-hero-grid" data-entrance>
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.12em] text-blue-200">Built for credibility</p>
-              <h2 className="mt-3 text-3xl font-bold">Sources, limitations and corrections will be public.</h2>
-              <p className="mt-4 max-w-[760px] leading-7 text-slate-200">
-                Live products will use versioned source records, freshness checks and a manual review path for safety,
-                emergency, regulatory and water-quality changes. Stale data will be labeled unavailable rather than current.
-              </p>
+              <span className="dd-badge"><span className="ic-pulse-dot" />25 interactive product previews</span>
+              <h1>Austin Home <span className="dd-accent-text">Data Desk</span></h1>
+              <p>Source-documented tools for home-system costs, risks, permits, water conditions and homeowner decisions—designed for residents, newsrooms and property professionals.</p>
+              <div className="dd-hero-actions"><a className="dd-green-button ic-cta" href="#products">Browse all 25 products<ArrowRight size={17} /><span className="ic-sheen" /></a><Link className="dd-ghost-button" href="/guides">Published homeowner guides</Link></div>
             </div>
-            <div className="rounded-2xl border border-white/20 bg-white/10 p-6">
-              <h3 className="font-bold">Looking for current homeowner guidance?</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-200">The existing guide library is published and available now.</p>
-              <Link className="mt-4 inline-flex font-bold text-white underline underline-offset-4" href="/guides">Browse homeowner guides</Link>
-            </div>
+            <aside className="dd-hub-panel ic-glass">
+              <div><strong className="ic-count" data-count="25">25</strong><span>products</span></div>
+              <div><strong className="ic-count" data-count="5">5</strong><span>categories</span></div>
+              <div><strong className="ic-count" data-count="4">4</strong><span>release formats</span></div>
+              <p>Interactive previews are ready now. Public datasets remain clearly labeled prelaunch until validated sources and freshness monitors go live.</p>
+            </aside>
           </div>
         </section>
+
+        <section className="dd-paper-section">
+          <div className="dd-container"><div className="dd-light-heading" data-reveal><p>One source, four useful formats</p><h2>Designed to be cited, embedded and independently checked.</h2></div><div className="dd-four-grid">{FORMATS.map(({ icon: Icon, text, title }) => <article className="dd-format-card" data-reveal key={title}><span><Icon size={21} /></span><h3>{title}</h3><p>{text}</p></article>)}</div></div>
+        </section>
+
+        <div id="products">
+          {DATA_DESK_CATEGORIES.map((category, index) => (
+            <section className={index % 2 === 0 ? "dd-hub-products" : "dd-hub-products dd-hub-products-paper"} id={category.id} key={category.id}>
+              <div className="dd-container"><div className="dd-light-heading" data-reveal><p>{getDataDeskProductsByCategory(category.id).length} interactive products</p><h2>{category.label}</h2><span>{category.description}</span></div><div className="dd-hub-grid">{getDataDeskProductsByCategory(category.id).map((product) => { const experience = DATA_DESK_EXPERIENCE_BY_SLUG.get(product.slug); return experience ? <DataDeskHubCard experience={experience} key={product.slug} product={product} /> : null; })}</div></div>
+            </section>
+          ))}
+        </div>
+
+        <section className="dd-hub-close"><div className="dd-container" data-reveal><p>Built for credibility</p><h2>Sources, limitations and corrections stay public.</h2><span>Every live product will use versioned source records, freshness checks and a manual review path. Stale or unavailable information will never be presented as current.</span><Link href="/guides">Browse current homeowner guidance <ArrowRight size={17} /></Link></div></section>
       </main>
-      <SiteFooter />
-    </>
+      <DataDeskPoweredFooter />
+    </div>
   );
 }

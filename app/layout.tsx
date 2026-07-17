@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { AnalyticsBootstrap } from "@/components/analytics/analytics-bootstrap";
 import { BookingWizardHost } from "@/components/booking/booking-wizard-host";
-import { Inter, Schibsted_Grotesk } from "next/font/google";
+import { Hanken_Grotesk, Inter, JetBrains_Mono, Schibsted_Grotesk } from "next/font/google";
 import { MobileBottomBar } from "@/components/layout/mobile-bottom-bar";
 import { BOOKING_PREBOOT_SCRIPT } from "@/lib/booking-preboot-script";
 import { CANONICAL_ORIGIN } from "@/lib/site-url";
@@ -23,6 +23,20 @@ const schibstedGrotesk = Schibsted_Grotesk({
   variable: "--font-schibsted",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const hankenGrotesk = Hanken_Grotesk({
+  variable: "--font-hanken",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["400", "600"],
   display: "swap",
 });
 
@@ -185,7 +199,7 @@ export default function RootLayout({
         />
         <AnalyticsHead />
       </head>
-      <body className={`${inter.variable} ${schibstedGrotesk.variable} antialiased pb-24 md:pb-0`}>
+      <body className={`${inter.variable} ${schibstedGrotesk.variable} ${hankenGrotesk.variable} ${jetBrainsMono.variable} antialiased pb-24 md:pb-0`}>
         <Suspense fallback={null}>
           <BookingWizardHost />
         </Suspense>
