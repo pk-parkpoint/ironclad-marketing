@@ -1,4 +1,10 @@
-import { DATA_DESK_CATEGORIES, DATA_DESK_PRODUCTS, getDataDeskRelatedProducts } from "../content/data-desk";
+import {
+  DATA_DESK_CATEGORIES,
+  DATA_DESK_EXPERIENCE_BY_SLUG,
+  DATA_DESK_EXPERIENCES,
+  DATA_DESK_PRODUCTS,
+  getDataDeskRelatedProducts,
+} from "../content/data-desk";
 
 const failures: string[] = [];
 const ranks = new Set<number>();
@@ -10,6 +16,9 @@ function fail(message: string) {
 
 if (DATA_DESK_PRODUCTS.length !== 25) {
   fail(`Expected 25 products, found ${DATA_DESK_PRODUCTS.length}.`);
+}
+if (DATA_DESK_EXPERIENCES.length !== 25) {
+  fail(`Expected 25 interactive experiences, found ${DATA_DESK_EXPERIENCES.length}.`);
 }
 
 for (const product of DATA_DESK_PRODUCTS) {
@@ -31,6 +40,29 @@ for (const product of DATA_DESK_PRODUCTS) {
   if (product.audiences.length < 3) fail(`${label}: needs at least three intended audiences.`);
   if (!product.guardrail.trim()) fail(`${label}: needs a scope or safety guardrail.`);
 
+  const experience = DATA_DESK_EXPERIENCE_BY_SLUG.get(product.slug);
+  if (!experience) {
+    fail(`${label}: missing interactive experience.`);
+  } else {
+    if (!/^#[0-9A-F]{6}$/i.test(experience.accent) || !/^#[0-9A-F]{6}$/i.test(experience.accent2)) {
+      fail(`${label}: invalid accent pair.`);
+    }
+    if (!experience.headline.toLowerCase().includes(experience.highlight.toLowerCase())) {
+      fail(`${label}: headline does not contain its highlighted phrase.`);
+    }
+    if (experience.rowLabels.length < 3) fail(`${label}: needs at least three result rows.`);
+
+    const choiceResults =
+      experience.control.type === "search"
+        ? [...experience.control.samples.map((sample) => sample.result), experience.control.fallback]
+        : experience.control.type === "picker" || experience.control.type === "select" || experience.control.type === "gauge"
+          ? experience.control.options.map((option) => option.result)
+          : [];
+    if (choiceResults.some((result) => result.values.length !== experience.rowLabels.length)) {
+      fail(`${label}: a result does not match the declared row labels.`);
+    }
+  }
+
   const related = getDataDeskRelatedProducts(product);
   if (related.length !== 4) fail(`${label}: expected four related products, found ${related.length}.`);
   if (related.some((candidate) => candidate.slug === product.slug)) fail(`${label}: related products include itself.`);
@@ -46,10 +78,19 @@ for (const category of DATA_DESK_CATEGORIES) {
   }
 }
 
+const controlCounts = DATA_DESK_EXPERIENCES.reduce<Record<string, number>>((counts, experience) => {
+  counts[experience.control.type] = (counts[experience.control.type] ?? 0) + 1;
+  return counts;
+}, {});
+const expectedControlCounts = { gauge: 1, select: 1, search: 3, "leak-calculator": 1, "heater-calculator": 1, picker: 18 };
+for (const [type, expected] of Object.entries(expectedControlCounts)) {
+  if (controlCounts[type] !== expected) fail(`Expected ${expected} ${type} experiences, found ${controlCounts[type] ?? 0}.`);
+}
+
 if (failures.length > 0) {
   console.error("Data Desk audit failed:\n");
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log(`Data Desk audit passed: ${DATA_DESK_PRODUCTS.length} unique products, ranks 1–25, metadata and related links valid.`);
+console.log(`Data Desk audit passed: ${DATA_DESK_PRODUCTS.length} unique products and interactive experiences; ranks, metadata, controls, result rows and related links valid.`);
