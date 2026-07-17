@@ -13,9 +13,9 @@ async function expectFastScrollCompletion(page: Page) {
   await expect.poll(() => page.locator("[data-reveal]:not([data-icr])").count()).toBe(0);
 }
 
-test("motion rollout covers all 31 PPC service variants", () => {
-  expect(variantRecords).toHaveLength(31);
-  expect(new Set(variantRecords.map((variant) => variant.slug)).size).toBe(31);
+test("motion rollout covers all PPC service variants", () => {
+  expect(variantRecords).toHaveLength(38);
+  expect(new Set(variantRecords.map((variant) => variant.slug)).size).toBe(38);
 });
 
 test("service template carries the complete approved motion hook map", async ({ page }) => {

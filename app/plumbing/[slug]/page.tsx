@@ -120,7 +120,7 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
       <>
         <StructuredData data={schemas} id={`ld-service-${service.slug}`} />
         <DrainCleaningPage
-          bookingHref={`/book?service=${variant.slug}`}
+          bookingHref={variant.bookingHref}
           content={variant.content}
           phoneDisplay={phoneDisplay}
           phoneHref={phoneHref}

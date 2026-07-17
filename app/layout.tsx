@@ -1,9 +1,8 @@
-/* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from "next";
 import Script from "next/script";
 import { AnalyticsBootstrap } from "@/components/analytics/analytics-bootstrap";
 import { BookingWizardHost } from "@/components/booking/booking-wizard-host";
-import { Inter } from "next/font/google";
+import { Inter, Schibsted_Grotesk } from "next/font/google";
 import { MobileBottomBar } from "@/components/layout/mobile-bottom-bar";
 import { BOOKING_PREBOOT_SCRIPT } from "@/lib/booking-preboot-script";
 import { CANONICAL_ORIGIN } from "@/lib/site-url";
@@ -17,6 +16,13 @@ import "./service-page-template.tokens.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const schibstedGrotesk = Schibsted_Grotesk({
+  variable: "--font-schibsted",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -46,11 +52,11 @@ function GoogleTagHead() {
       <Script
         id="google-ads-tag"
         src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GOOGLE_ADS_ID)}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
       <Script
         id="gtag-init"
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());${configCalls}`,
         }}
@@ -65,7 +71,7 @@ function AnalyticsHead() {
       <>
         <Script
           id="gtm-init"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`,
           }}
@@ -158,14 +164,6 @@ export const metadata: Metadata = {
     },
   },
   manifest: "/manifest.json",
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
-    shortcut: ["/favicon.ico"],
-  },
 };
 
 export default function RootLayout({
@@ -181,32 +179,13 @@ export default function RootLayout({
         <meta name="geo.placename" content="Austin" />
         <meta name="geo.position" content="30.2672;-97.7431" />
         <meta name="ICBM" content="30.2672, -97.7431" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link
-          rel="preload"
-          as="image"
-          href="/hero/ironclad-hero-poster.jpg"
-        />
-        <link
-          rel="preload"
-          as="video"
-          href="/media/hero-video-desktop.mp4"
-          type="video/mp4"
-          media="(min-width: 768px) and (prefers-reduced-motion: no-preference)"
-        />
         <script
           id="booking-link-preboot"
           dangerouslySetInnerHTML={{ __html: BOOKING_PREBOOT_SCRIPT }}
         />
         <AnalyticsHead />
       </head>
-      <body className={`${inter.variable} antialiased pb-24 md:pb-0`}>
+      <body className={`${inter.variable} ${schibstedGrotesk.variable} antialiased pb-24 md:pb-0`}>
         <Suspense fallback={null}>
           <BookingWizardHost />
         </Suspense>

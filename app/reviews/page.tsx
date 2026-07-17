@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Schibsted_Grotesk } from "next/font/google";
 import { StructuredData } from "@/components/seo/structured-data";
 import { PUBLISHED_REVIEW_SUMMARY, REVIEWS, type ReviewEntry } from "@/content/reviews";
 import { getPublicContactInfo } from "@/lib/contact";
@@ -15,13 +14,6 @@ import {
 import { ReviewsFooter, ReviewsHeader } from "./reviews-chrome";
 import { getOrderedSliderReviews, type WallReview, wallReviews } from "./reviews-page-data";
 import styles from "./reviews-page.module.css";
-
-const schibstedGrotesk = Schibsted_Grotesk({
-  variable: "--font-reviews-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
 
 export const metadata = buildPageMetadata({
   title: "Customer Reviews | Ironclad Plumbing Austin",
@@ -111,12 +103,12 @@ export default function ReviewsPage() {
   const { phoneDisplay, phoneHref } = getPublicContactInfo();
 
   return (
-    <div className={`${styles.root} ${schibstedGrotesk.variable} reviews-page-root dc-root`}>
+    <div className={`${styles.root} reviews-page-root dc-root`}>
       <ReviewsHeader />
       <StructuredData data={schemas} id="ld-reviews-page" />
       <main className={styles.page}>
         <section className={styles.hero}>
-          <Image alt="The Ironclad Plumbing team beside their service truck in Austin" className={styles.heroPhoto} fill priority src="/media/services/ironclad-team-hero.png" sizes="100vw" unoptimized />
+          <Image alt="The Ironclad Plumbing team beside their service truck in Austin" className={styles.heroPhoto} fetchPriority="high" fill priority src="/media/services/ironclad-team-hero.png" sizes="100vw" />
           <div className={styles.heroScrim} />
           <div className={styles.heroGlow} />
           <div className={styles.heroInner}>

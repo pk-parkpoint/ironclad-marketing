@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const APP_PORT = 4010;
-const MOCK_PORT = 4011;
+const APP_PORT = Number(process.env.PLAYWRIGHT_APP_PORT ?? 4010);
+const MOCK_PORT = Number(process.env.PLAYWRIGHT_MOCK_PORT ?? 4011);
 const BASE_URL = `http://127.0.0.1:${APP_PORT}`;
 const MOCK_URL = `http://127.0.0.1:${MOCK_PORT}`;
 const projects = [

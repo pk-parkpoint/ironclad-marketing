@@ -5844,5 +5844,160 @@
         "path": "assets/services/bathroom-plumbing/06-remodel-rough-in.webp"
       }
     ]
+  },
+  {
+    "index": 38,
+    "key": "Toilet Replacement",
+    "slug": "toilet-replacement",
+    "bookUrl": "https://ironcladtexas.com/book?service=toilet-repair-installation",
+    "seoTitle": "Toilet Replacement Austin | Ironclad Plumbing",
+    "metaDescription": "Professional toilet replacement in Austin. We remove the old toilet, inspect the flange, install and test the new fixture, and provide upfront pricing.",
+    "heroImage": "assets/services/toilet-repair-installation/04-toilet-installation.webp",
+    "heroImageAlt": "Professional toilet replacement and installation in an Austin home",
+    "eyebrow": "TOILET REPLACEMENT · AUSTIN",
+    "h1": "Toilet Replacement & Installation in Austin",
+    "valueLine": "Old toilet removed, new fixture installed level and leak-free, with the final price approved before work starts.",
+    "pun": "A better flush starts with the right fit.",
+    "punFirst": true,
+    "callFirst": false,
+    "signsHeading": "When It Is Time to Replace the Toilet",
+    "signsIntro": "A repair is often enough, but recurring failures, damaged porcelain, poor efficiency, or a remodel can make replacement the better long-term choice.",
+    "signs": [
+      {
+        "title": "The bowl or tank is cracked",
+        "body": "Cracked porcelain cannot be repaired reliably. Replacement prevents a small seep from becoming floor or subfloor damage."
+      },
+      {
+        "title": "Clogs and weak flushes keep returning",
+        "body": "If the drain is clear and internal repairs do not restore performance, an older fixture may be the recurring problem."
+      },
+      {
+        "title": "The toilet uses too much water",
+        "body": "Modern WaterSense and high-efficiency models can reduce water use while providing a stronger, more consistent flush."
+      },
+      {
+        "title": "You need a better fit or height",
+        "body": "A remodel, comfort-height upgrade, elongated bowl, or accessibility need is the right time to choose a fixture that fits the room and household."
+      }
+    ],
+    "servicesHeading": "Complete Toilet Replacement Service",
+    "servicesIntro": "We handle the full replacement from shutoff and removal through flange inspection, installation, testing, cleanup, and haul-away.",
+    "services": [
+      {
+        "title": "Old toilet removal & haul-away",
+        "body": "The existing toilet is disconnected and removed carefully, with the old fixture hauled away when requested.",
+        "image": "assets/services/toilet-repair-installation/04-toilet-installation.webp"
+      },
+      {
+        "title": "Flange, floor & drain inspection",
+        "body": "We inspect the flange, mounting surface, drain opening, and visible floor condition before setting the replacement.",
+        "image": "assets/services/toilet-repair-installation/03-leak-and-wax-seal-repair.webp"
+      },
+      {
+        "title": "New toilet installation",
+        "body": "The new fixture is assembled, set level, anchored correctly, sealed, and connected to the existing plumbing.",
+        "image": "assets/services/toilet-repair-installation/04-toilet-installation.webp"
+      },
+      {
+        "title": "Shutoff & supply connection",
+        "body": "The accessible shutoff and supply connection are checked so the new toilet fills reliably without leaks.",
+        "image": "assets/services/toilet-repair-installation/05-fill-and-flush-valve-replacement.webp"
+      },
+      {
+        "title": "Efficiency & comfort upgrades",
+        "body": "We can install compatible standard, comfort-height, elongated, dual-flush, and high-efficiency toilets.",
+        "image": "assets/services/fixtures/02-toilet-repair-and-install.webp"
+      },
+      {
+        "title": "Flush, fill & leak testing",
+        "body": "Before cleanup, we test repeated flushes, tank fill, shutoff operation, stability, and every visible connection.",
+        "image": "assets/services/toilet-repair-installation/01-clogged-toilet-clearing.webp"
+      }
+    ],
+    "calloutHeadline": "Already bought the replacement toilet?",
+    "calloutSub": "Have the model information ready. We will confirm the rough-in, dimensions, parts, and installation conditions before work begins.",
+    "whyLine": "A toilet replacement should finish with a stable fixture, a clean seal, reliable flushing, and no surprises hidden under the base.",
+    "process": [
+      {
+        "step": "01",
+        "title": "Confirm the fixture and fit",
+        "body": "We verify the rough-in, bowl shape, height, supply location, included parts, and access before removal."
+      },
+      {
+        "step": "02",
+        "title": "Remove and inspect",
+        "body": "The old toilet comes out and the flange, drain opening, floor, shutoff, and supply are checked."
+      },
+      {
+        "step": "03",
+        "title": "Install the replacement",
+        "body": "The new toilet is assembled, set, sealed, secured, and connected according to the fixture requirements."
+      },
+      {
+        "step": "04",
+        "title": "Test and clean up",
+        "body": "We verify stability, filling, flushing, drainage, and leak-free operation before the bathroom is returned to you."
+      }
+    ],
+    "serviceAreaHeader": "Toilet Replacement in Austin and Nearby Areas",
+    "serviceAreaSub": "Professional toilet removal and installation throughout Austin, Round Rock, Cedar Park, Pflugerville, Georgetown, and the surrounding metro.",
+    "serviceAreaCta": "Schedule Toilet Replacement Near You",
+    "faqHeading": "Toilet Replacement FAQ",
+    "faqs": [
+      {
+        "q": "How much does toilet replacement cost in Austin?",
+        "a": "A straightforward replacement commonly runs $200 to $500 installed, depending on the fixture, flange condition, shutoff, supply connection, access, and haul-away. You approve the exact price before work starts."
+      },
+      {
+        "q": "Can you install a toilet I already purchased?",
+        "a": "Yes, when the toilet is complete, undamaged, compatible with the rough-in and available space, and approved for the installation. Have the model number available when booking."
+      },
+      {
+        "q": "Do you remove and dispose of the old toilet?",
+        "a": "Yes. We can remove and haul away the old fixture as part of the approved replacement scope."
+      },
+      {
+        "q": "How do I know which toilet will fit?",
+        "a": "The rough-in measurement, bowl shape, overall dimensions, supply location, flange condition, and nearby doors or cabinets all matter. We verify fit before setting the replacement."
+      },
+      {
+        "q": "Should I repair or replace my toilet?",
+        "a": "Repair usually makes sense for a sound fixture with a worn flapper, valve, seal, or handle. Replacement is often better for cracked porcelain, repeated performance problems, poor efficiency, or a fixture that no longer fits your needs."
+      },
+      {
+        "q": "Can a toilet be replaced in one visit?",
+        "a": "Often yes when the replacement is on site, fits the existing rough-in, and the flange, floor, shutoff, and drain are serviceable. Hidden damage or incompatible parts can add work."
+      }
+    ],
+    "finalHeading": "Ready to Replace Your Toilet?",
+    "finalBody": "Book toilet replacement in Austin for a fit check, upfront installation price, careful removal, and a fully tested new fixture.",
+    "finalCta": "Schedule Toilet Replacement",
+    "images": [
+      {
+        "file": "04-toilet-installation.webp",
+        "label": "Old toilet removal and new toilet installation",
+        "path": "assets/services/toilet-repair-installation/04-toilet-installation.webp"
+      },
+      {
+        "file": "03-leak-and-wax-seal-repair.webp",
+        "label": "Toilet flange and floor inspection",
+        "path": "assets/services/toilet-repair-installation/03-leak-and-wax-seal-repair.webp"
+      },
+      {
+        "file": "05-fill-and-flush-valve-replacement.webp",
+        "label": "Toilet shutoff and supply connection",
+        "path": "assets/services/toilet-repair-installation/05-fill-and-flush-valve-replacement.webp"
+      },
+      {
+        "file": "02-toilet-repair-and-install.webp",
+        "label": "High-efficiency and comfort-height toilet options",
+        "path": "assets/services/fixtures/02-toilet-repair-and-install.webp"
+      },
+      {
+        "file": "01-clogged-toilet-clearing.webp",
+        "label": "Final toilet flush and drain testing",
+        "path": "assets/services/toilet-repair-installation/01-clogged-toilet-clearing.webp"
+      }
+    ]
   }
 ]

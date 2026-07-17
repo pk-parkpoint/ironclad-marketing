@@ -91,7 +91,12 @@ export const DRAIN_SEWER: CampaignSpec = {
       finalUrl: `${SITE_ORIGIN}/plumbing/toilet-repair-installation`,
       pinnedHeadline: "Toilet Repair & Install",
       keywords: [
-        ...exact("toilet repair", "toilet installation", "toilet replacement"),
+        ...exact("toilet repair", "toilet installation"),
+        {
+          finalUrl: `${SITE_ORIGIN}/plumbing/toilet-replacement`,
+          matchType: "EXACT",
+          text: "toilet replacement",
+        },
         ...phrase("clogged toilet plumber", "toilet leaking at base", "toilet repair near me", "toilet installation cost", "install new toilet", "toilet wont flush plumber"),
       ],
     },

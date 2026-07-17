@@ -55,6 +55,7 @@ const PLUMBING_DROPDOWN_LINKS: NavChildLink[] = [
       { href: "/plumbing/fixtures", label: "Fixtures" },
       { href: "/plumbing/faucet-sink-services", label: "Faucet & Sink Services" },
       { href: "/plumbing/toilet-repair-installation", label: "Toilet Repair & Installation" },
+      { href: "/plumbing/toilet-replacement", label: "Toilet Replacement" },
       { href: "/plumbing/garbage-disposal-services", label: "Garbage Disposal Services" },
     ],
   },
