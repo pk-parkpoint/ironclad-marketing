@@ -5,8 +5,8 @@ export const DRAIN_CLEANING_TEMPLATE: DrainCleaningTemplateContent = {
     title: "Fast, Reliable Drain Clearing",
     subhead: "Water you waiting for?",
     supportLine: "Slow drains, clogs, and backups cleared fast, with a full cleanup before we leave.",
-    image: "/media/services/ironclad-team-hero.png",
-    imageAlt: "The Ironclad Plumbing team beside their service truck in Austin",
+    image: "/media/services/drain-cleaning/01-kitchen-and-bathroom-sink-drains.webp",
+    imageAlt: "Professional drain clearing at a kitchen sink in Austin",
   },
   guarantees: [
     ["Fixed Right the First Time", "If it comes back, so do we."],

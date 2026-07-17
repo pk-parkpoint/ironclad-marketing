@@ -5,7 +5,7 @@
 }
 
 .local-page-shell {
-  --local-font-display: var(--font-local-display), "Schibsted Grotesk", var(--font-inter), sans-serif;
+  --local-font-display: var(--font-schibsted), "Schibsted Grotesk", var(--font-inter), sans-serif;
   min-height: var(--local-size-screen);
   background: var(--local-color-white);
   color: var(--local-color-ink);
@@ -192,6 +192,7 @@
 }
 
 .local-hero {
+  isolation: isolate;
   position: relative;
   overflow: hidden;
   min-height: var(--local-hero-min-height);
@@ -199,11 +200,18 @@
   background: var(--local-color-navy);
 }
 
+.local-hero-image {
+  object-fit: cover;
+  object-position: 72% center;
+  z-index: 0;
+}
+
 .local-hero::before {
   position: absolute;
   inset: var(--local-space-0);
   content: "";
   background: var(--local-gradient-hero);
+  z-index: 1;
 }
 
 .local-hero-inner {

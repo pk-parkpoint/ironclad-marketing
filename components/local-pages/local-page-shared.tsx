@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Schibsted_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
 import { CalendarDays, CheckCircle2, Clock3, Home, Phone, ShieldCheck, Star } from "lucide-react";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -63,13 +62,6 @@ const areaLinks = [
   { href: "/service-area", label: "View all areas ->" },
 ];
 
-const schibstedGrotesk = Schibsted_Grotesk({
-  variable: "--font-local-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
 export function LocalStars() {
   return (
     <span className="local-stars" aria-label="4.9 out of 5 stars">
@@ -87,7 +79,7 @@ export function LocalPageChrome({ bookingHref, children }: { bookingHref: string
   return (
     <>
       <SiteHeader />
-      <div className={`local-page-shell ${schibstedGrotesk.variable}`}>
+      <div className="local-page-shell">
         {children}
         <footer className="local-footer">
           <div className="local-footer-grid">
@@ -142,7 +134,16 @@ export function LocalHero({
   title,
 }: LocalHeroProps) {
   return (
-    <section className={`local-hero ${schibstedGrotesk.variable}`}>
+    <section className="local-hero">
+      <Image
+        alt="The Ironclad Plumbing team beside their service truck in Austin"
+        className="local-hero-image"
+        fetchPriority="high"
+        fill
+        priority
+        sizes="100vw"
+        src="/media/services/ironclad-team-hero.png"
+      />
       <div className="local-hero-inner">
         {parentLink ? (
           <nav aria-label="Breadcrumb" className="local-breadcrumb">

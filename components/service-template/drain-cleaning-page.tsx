@@ -48,11 +48,11 @@ export function DrainCleaningPage({
           alt={content.hero.imageAlt}
           className="dc-hero-img"
           data-slot="hero-image"
+          fetchPriority="high"
           fill
           priority
           sizes="100vw"
           src={content.hero.image}
-          unoptimized
         />
         <div className="dc-hero-scrim" />
         <div className="dc-hero-glow" />

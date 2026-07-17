@@ -35,6 +35,11 @@ function imagePath(assetPath) {
   return `/media/services/${assetPath.slice(serviceAssetPrefix.length)}`;
 }
 
+function bookingPath(bookUrl) {
+  const url = new URL(bookUrl, "https://ironcladtexas.com");
+  return `${url.pathname}${url.search}`;
+}
+
 function normalizeText(value) {
   return value.replace(/\s+/g, " ").trim();
 }
@@ -103,7 +108,8 @@ async function verifyVariantAtViewport(browser, variant, viewportName, viewport)
     const servicesTitle = await textContent(page, "[data-slot='services-title']");
     const faqTitle = await textContent(page, ".dc-container--faq h2");
     const finalTitle = await textContent(page, "[data-slot='cta-title']");
-    const bookingHref = await page.locator(`a[href*="/book?service=${variant.slug}"]`).first().getAttribute("href");
+    const expectedBookingHref = bookingPath(variant.bookUrl);
+    const bookingHref = await page.locator(`a[href="${expectedBookingHref}"]`).first().getAttribute("href");
     const serviceCards = await page.locator(".dc-service-card").count();
     const imageInfo = await page.locator(".dc-service-card-img").evaluateAll((images) =>
       images.map((image) => ({
@@ -137,7 +143,7 @@ async function verifyVariantAtViewport(browser, variant, viewportName, viewport)
     assert(servicesTitle === variant.servicesHeading, `${route} ${viewportName}: services heading mismatch`);
     assert(faqTitle === variant.faqHeading, `${route} ${viewportName}: FAQ heading mismatch`);
     assert(finalTitle === variant.finalHeading, `${route} ${viewportName}: final CTA heading mismatch`);
-    assert(Boolean(bookingHref), `${route} ${viewportName}: missing booking href for service=${variant.slug}`);
+    assert(Boolean(bookingHref), `${route} ${viewportName}: missing booking href ${expectedBookingHref}`);
     assert(serviceCards === 6, `${route} ${viewportName}: expected 6 service cards, found ${serviceCards}`);
     assert(imageInfo.length === 6, `${route} ${viewportName}: expected 6 service images, found ${imageInfo.length}`);
 

@@ -170,10 +170,9 @@
      11. TYPOGRAPHY
      Family: headings + all Schibsted-Grotesk numerals use the display family.
      Body uses the OS system stack (San Francisco / Segoe / system-ui).
-     NOTE: Hanken Grotesk is loaded by the page but is NOT referenced anywhere;
-     confirm intent or drop the load (see fonts.md).
+     Schibsted Grotesk is self-hosted through next/font in the root layout.
      --------------------------------------------------------------------------- */
-  --font-family-display: 'Schibsted Grotesk', system-ui, sans-serif;
+  --font-family-display: var(--font-schibsted), 'Schibsted Grotesk', system-ui, sans-serif;
   --font-family-body: -apple-system, 'SF Pro Display', 'SF Pro Text', BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 
   --weight-regular: 400;

@@ -46,12 +46,11 @@
       var(--local-color-hero-scrim-2) 42%,
       var(--local-color-hero-scrim-3) 100%
     ),
-    radial-gradient(circle at 22% 20%, var(--local-color-hero-radial), transparent 30%),
-    url("/media/services/ironclad-team-hero.png") 72% center / cover no-repeat;
+    radial-gradient(circle at 22% 20%, var(--local-color-hero-radial), transparent 30%);
   --local-gradient-primary: linear-gradient(180deg, #48a0ef, var(--local-color-blue));
   --local-gradient-call: linear-gradient(180deg, var(--local-color-green-top), var(--local-color-green));
   --local-gradient-process-radial: radial-gradient(circle at 90% 12%, var(--local-color-process-radial), transparent 34%);
-  --local-font-display: var(--font-local-display), "Schibsted Grotesk", var(--font-inter), sans-serif;
+  --local-font-display: var(--font-schibsted), "Schibsted Grotesk", var(--font-inter), sans-serif;
   --local-shadow-card: 0 1px 2px rgba(24, 34, 48, 0.04);
   --local-shadow-card-hover: 0 28px 52px -30px rgba(22, 28, 34, 0.55);
   --local-shadow-near-card-hover: 0 12px 34px rgba(24, 34, 48, 0.09);
@@ -77,7 +76,7 @@
     box-shadow 180ms ease,
     background-color 180ms ease,
     color 180ms ease;
-  --local-z-hero-content: 1;
+  --local-z-hero-content: 2;
   --local-z-nav: 40;
   --local-z-sticky-bar: 998;
   --local-hero-min-height: 560px;
