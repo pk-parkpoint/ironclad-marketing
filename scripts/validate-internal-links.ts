@@ -150,7 +150,7 @@ function main() {
     { prefix: "/plumbing/", hub: "/plumbing" },
     { prefix: "/service-area/", hub: "/service-area" },
     { prefix: "/blog/", hub: "/blog" },
-    { prefix: "/faq/", hub: "/faq" },
+    { prefix: "/faq/", hub: "/questions" },
   ];
 
   for (const audit of audits) {

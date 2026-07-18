@@ -5,7 +5,6 @@ import { PUBLISHED_REVIEW_SUMMARY, REVIEWS, type ReviewEntry } from "@/content/r
 import { getPublicContactInfo } from "@/lib/contact";
 import { buildPageMetadata } from "@/lib/seo";
 import {
-  buildAggregateRatingSchema,
   buildLocalBusinessSchema,
   buildOrganizationSchema,
   buildSchemaStack,
@@ -98,7 +97,6 @@ export default function ReviewsPage() {
     buildWebSiteSchema(),
     buildOrganizationSchema(),
     buildLocalBusinessSchema("/reviews"),
-    buildAggregateRatingSchema(REVIEWS),
   );
   const { phoneDisplay, phoneHref } = getPublicContactInfo();
 

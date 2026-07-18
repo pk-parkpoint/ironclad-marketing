@@ -83,6 +83,11 @@ function buildLlmsTxt(): string {
       if (!page) throw new Error(`Missing static page metadata for ${path}`);
       return line(page.h1, `/${path}`, page.metaDescription);
     }),
+    line(
+      "Plumbing Questions, Answered",
+      "/questions",
+      "Straight answers to 200 homeowner plumbing questions from Ironclad Plumbing in Austin, Texas.",
+    ),
     line("Guides hub", "/guides", "homeowner guide and cost-guide library."),
     "",
     "## Top Answer Pages",

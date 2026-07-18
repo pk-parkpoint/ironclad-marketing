@@ -5,13 +5,11 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { MARKETING_PAGE_CONTENT } from "@/content/marketing-page-content";
 import { StructuredData } from "@/components/seo/structured-data";
-import { REVIEWS } from "@/content/reviews";
 import { STATIC_PAGE_BY_PATH } from "@/content/static-pages";
 import { buildAboutPageSchema, buildResponsibleMasterPlumberSchema } from "@/lib/about-schema";
 import { DEDICATED_MARKETING_PATHS, STATIC_ROUTE_PATHS } from "@/lib/routes";
 import { buildPageMetadata, type OgTemplate } from "@/lib/seo";
 import {
-  buildAggregateRatingSchema,
   buildBreadcrumbItems,
   buildBreadcrumbListSchema,
   buildLocalBusinessSchema,
@@ -112,10 +110,6 @@ export default async function MarketingRoutePage({ params }: RouteProps) {
     if (masterPlumberSchema) {
       schemas.push(masterPlumberSchema);
     }
-  }
-
-  if (path === "reviews") {
-    schemas.push(buildAggregateRatingSchema(REVIEWS));
   }
 
   return (

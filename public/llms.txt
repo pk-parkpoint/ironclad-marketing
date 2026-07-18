@@ -2,7 +2,7 @@
 
 > Ironclad Plumbing is a residential plumbing company serving Austin and the Greater Austin metro. The site publishes service pages, city pages, written guarantees, FAQs, cost guides, and homeowner education for comparing plumbing work before booking.
 
-Last updated: 2026-07-15.
+Last updated: 2026-07-18.
 
 ## Canonical Site
 
@@ -29,8 +29,8 @@ Last updated: 2026-07-15.
 - [Complete Plumbing Services Across Greater Austin](https://ironcladtexas.com/plumbing): Full-service plumbing in Austin from Ironclad. Drains, water heaters, leaks, sewers, and emergencies, with upfront pricing and a written warranty. Call today.
 - [Commercial Plumbing for Austin Businesses](https://ironcladtexas.com/commercial-plumbing): Commercial plumbing in Austin for restaurants, retail spaces, offices, and tenant improvements. Clear scopes, practical scheduling, and upfront pricing.
 - [Plumbing Service Across Greater Austin](https://ironcladtexas.com/service-area): Ironclad Plumbing serves Austin and surrounding communities including Round Rock, Georgetown, and Cedar Park.
-- [Frequently Asked Questions](https://ironcladtexas.com/faq): Answers to common Austin plumbing questions, from slab leaks to hard-water maintenance.
 - [Plumbing FAQs - Honest Answers from Licensed Pros](https://ironcladtexas.com/faq/plumbing): Straight answers from licensed plumbers about pricing, scheduling, leaks, and water heaters.
+- [Plumbing Questions, Answered](https://ironcladtexas.com/questions): Straight answers to 200 homeowner plumbing questions from Ironclad Plumbing in Austin, Texas.
 - [Guides hub](https://ironcladtexas.com/guides): homeowner guide and cost-guide library.
 
 ## Top Answer Pages
@@ -91,6 +91,7 @@ Last updated: 2026-07-15.
 - [Burst Pipe Repair](https://ironcladtexas.com/plumbing/burst-pipe-repair): Burst pipe in Austin? We stop the water fast and repair it right, with upfront pricing and a written warranty. Ironclad offers a 24/7 emergency line. Call now.
 - [Frozen Pipe Repair](https://ironcladtexas.com/plumbing/frozen-pipe-repair): Frozen or burst pipe in Austin? Ironclad thaws lines and repairs bursts fast, 24/7 during hard freezes. Upfront pricing. Call now.
 - [Backflow Prevention & Testing](https://ironcladtexas.com/plumbing/backflow-prevention): Certified backflow prevention testing, repair, and installation in Austin. Ironclad keeps your water safe and meets city requirements. Call today.
+- [Toilet Replacement](https://ironcladtexas.com/plumbing/toilet-replacement): Professional toilet replacement in Austin. We remove the old toilet, inspect the flange, install and test the new fixture, and provide upfront pricing.
 
 ## High-Value Service Areas
 

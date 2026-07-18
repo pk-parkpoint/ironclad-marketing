@@ -9,11 +9,10 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { StructuredData } from "@/components/seo/structured-data";
 import { HOME_FAQ_ITEMS } from "@/content/home-faqs";
 import { LOCATIONS } from "@/content/locations";
-import { PUBLISHED_REVIEW_SUMMARY, REVIEWS } from "@/content/reviews";
+import { PUBLISHED_REVIEW_SUMMARY } from "@/content/reviews";
 import { SERVICES } from "@/content/services";
 import { buildPageMetadata } from "@/lib/seo";
 import {
-  buildAggregateRatingSchema,
   buildFaqPageSchema,
   buildLocalBusinessSchema,
   buildOrganizationSchema,
@@ -80,7 +79,6 @@ export default function Home() {
     buildLocalBusinessSchema("/"),
     buildWebSiteSchema(),
     buildOrganizationSchema(),
-    buildAggregateRatingSchema(REVIEWS),
     buildFaqPageSchema(HOME_FAQ_ITEMS),
   );
 

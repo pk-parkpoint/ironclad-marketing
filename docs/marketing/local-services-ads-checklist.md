@@ -8,7 +8,7 @@ This is an owner-assisted setup. Search campaigns are API-managed; Local Service
 
 - [ ] Sign in with the owner/manager account authorized for Ironclad's Google Business Profile.
 - [ ] Use the exact public business name shown on the Business Profile and insurance documents.
-- [ ] Set phone to `(512) 516-2470` and confirm a person answers 24/7 before enabling a 24/7 schedule.
+- [ ] Set phone to `(512) 506-2470` and confirm a person answers 24/7 before enabling a 24/7 schedule.
 - [ ] Enter `RMP #39871` exactly and upload the current license document if requested.
 - [ ] Confirm the service category is Plumbing and select only services Ironclad actually performs.
 - [ ] Use the same Greater Austin service area as the Search build; do not add distant counties to chase volume.
@@ -26,7 +26,7 @@ Google says requirements vary by category and location and can include business 
 
 ## Profile quality and lead controls
 
-- [ ] Confirm the Business Profile and LSA profile both show `(512) 516-2470`, correct hours, correct license, and current service areas.
+- [ ] Confirm the Business Profile and LSA profile both show `(512) 506-2470`, correct hours, correct license, and current service areas.
 - [ ] Add real truck, team, and job photos without promotional text overlays.
 - [ ] Enable phone leads. Enable messages only if someone can respond immediately.
 - [ ] Route notifications to at least two accountable people and test every notification channel.

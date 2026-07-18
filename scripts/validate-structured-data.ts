@@ -3,12 +3,11 @@ import { COMMERCIAL_PLUMBING_PATH, COMMERCIAL_PLUMBING_SERVICE } from "../conten
 import { FAQ_ENTRIES } from "../content/faqs";
 import { LOCATIONS } from "../content/locations";
 import { getPpcServiceRouteEntries } from "../content/ppc-service-variants";
-import { PUBLISHED_REVIEW_SUMMARY, REVIEWS } from "../content/reviews";
+import { REVIEWS } from "../content/reviews";
 import { getServiceDetail } from "../content/service-details";
 import { SERVICES } from "../content/services";
 import { STATIC_PAGES } from "../content/static-pages";
 import {
-  buildAggregateRatingSchema,
   buildBreadcrumbItems,
   buildBreadcrumbListSchema,
   buildFaqPageSchema,
@@ -45,6 +44,10 @@ function main() {
   assert(homeBusiness["@type"] === "Plumber", "homepage schema must be Plumber");
   assert(contactBusiness["@type"] === "Plumber", "contact schema must be Plumber");
   assert(contactBusiness.url === toAbsoluteUrl("/contact"), "contact LocalBusiness URL mismatch");
+  assert(
+    !("aggregateRating" in homeBusiness) && !("review" in homeBusiness),
+    "first-party Plumber schema must not aggregate self-controlled reviews",
+  );
 
   const commercialServiceSchema = asRecord(
     buildServiceSchema({
@@ -147,31 +150,6 @@ function main() {
     assert(review.text.trim().length > 0, `missing review text for ${review.id}`);
     assert(review.rating >= 1 && review.rating <= 5, `rating out of range for ${review.id}`);
   }
-
-  const aggregateRatingSchema = asRecord(
-    buildAggregateRatingSchema(REVIEWS),
-    "aggregate rating schema missing",
-  );
-  assert(
-    aggregateRatingSchema["@type"] === "Plumber",
-    "aggregate rating root schema must be Plumber",
-  );
-  const aggregateRating = asRecord(
-    aggregateRatingSchema.aggregateRating,
-    "aggregateRating payload missing",
-  );
-  assert(
-    aggregateRating["@type"] === "AggregateRating",
-    "aggregateRating @type must be AggregateRating",
-  );
-  assert(
-    aggregateRating.reviewCount === PUBLISHED_REVIEW_SUMMARY.reviewCount,
-    "aggregateRating reviewCount must match published review summary",
-  );
-  assert(
-    aggregateRating.ratingValue === PUBLISHED_REVIEW_SUMMARY.ratingValue,
-    "aggregateRating ratingValue must match published review summary",
-  );
 
   console.log(
     `structured data audit passed: ${routeSet.size} routes, ${SERVICES.length} services, ${REVIEWS.length} reviews`,
