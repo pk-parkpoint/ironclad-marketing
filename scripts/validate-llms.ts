@@ -29,6 +29,7 @@ const REQUIRED_PATHS = [
   "/plumbing",
   "/commercial-plumbing",
   "/service-area",
+  "/questions",
   "/faq/plumbing",
   "/guides",
   TOP_QUESTIONS_GUIDE_PATH,
@@ -107,6 +108,7 @@ function main() {
 
   const llmsUrls = validateCanonicalLinks(llms, "public/llms.txt");
   validateCanonicalLinks(full, "public/llms-full.txt");
+  assert(!llmsUrls.has(`${BASE_URL}/faq`), "llms.txt must not link to the /faq redirect alias");
 
   for (const path of REQUIRED_PATHS) {
     const expected = canonicalUrl(path).replace(/\/$/, "");

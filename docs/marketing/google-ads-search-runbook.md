@@ -6,7 +6,7 @@ Last updated: 2026-07-14
 
 - Manager account: `457-337-5000`
 - Ironclad customer: `480-357-2715`
-- Public phone: `(512) 516-2470`
+- Public phone: `(512) 506-2470`
 - License: `RMP #39871`
 - Five core Search campaigns: `$15/day` each, 24/7, `$75/day` total
 - Freeze: built at `$75/day`, paused until the Austin forecast is below 32°F
@@ -44,8 +44,8 @@ The customer confirmation is required for every write or activation command. The
 
 Before activation, confirm all of the following:
 
-- Production HTML contains `(512) 516-2470`, `RMP #39871`, and `AW-18207846861`.
-- The website-call tag config includes the generated website-call conversion label and `phone_conversion_number` set to `(512) 516-2470`.
+- Production HTML contains `(512) 506-2470`, `RMP #39871`, and `AW-18207846861`.
+- The website-call tag config includes the generated website-call conversion label and `phone_conversion_number` set to `(512) 506-2470`.
 - A successful booking emits one booking conversion with the booking ID as `transaction_id`.
 - Mobile landing pages show sticky Call and Book Online actions; the emergency page is call-only above the fold.
 - Every final URL in the manifest returns a successful landing page after redirects.
@@ -62,7 +62,7 @@ The Google Ads API does not expose reliable write controls for every account UI 
 - Every auto-apply recommendation category is off.
 - Automatically created account assets are off.
 - Dynamic business assets and dynamic sitelinks are off.
-- The Google Business Profile location asset is linked and shows `(512) 516-2470`.
+- The Google Business Profile location asset is linked and shows `(512) 506-2470`.
 - Call recording, where available and legally appropriate, is configured in the UI.
 
 Campaign-level AI Max, final URL expansion/text automation, Search Partners, Display, presence-only location targeting, CPC limits, and custom conversion goals are API-managed and audit-enforced.

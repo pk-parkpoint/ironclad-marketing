@@ -790,7 +790,7 @@ interface GuidePage {
 
 **Acceptance criteria:**
 - [ ] Sticky bar visible on mobile (<768px) on all guide pages
-- [ ] Call button triggers `tel:8335971932`
+- [ ] Call button triggers `tel:15125062470`
 - [ ] Schedule button links to `/book`
 - [ ] Bar doesn't overlap content or CTA block
 - [ ] Bar disappears on desktop (768px+)

@@ -64,7 +64,9 @@ function main() {
   ];
   const expectedRoutes = new Set<string>([
     "/",
-    ...STATIC_ROUTE_PATHS.map((path) => normalizePath(path)),
+    ...STATIC_ROUTE_PATHS
+      .map((path) => normalizePath(path))
+      .filter((path) => path !== "/faq"),
     ...SERVICES.map((service) => `/plumbing/${service.slug}`),
     ...getPpcServiceRouteEntries().map((entry) => entry.path),
     ...LOCATIONS.map((location) => `/service-area/${location.slug}`),
@@ -90,6 +92,7 @@ function main() {
     uniqueSitemapUrls.size === sitemapUrls.length,
     "sitemap contains duplicate URL entries",
   );
+  assert(!uniqueSitemapUrls.has(`${baseUrl}/faq`), "redirect aliases must not appear in the sitemap");
 
   for (const url of sitemapUrls) {
     if (url !== baseUrl && url.endsWith("/")) {

@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
       { source: "/drain-cleaning", destination: "/plumbing/drain-clearing", permanent: true },
       { source: "/plumbing/drain-cleaning", destination: "/plumbing/drain-clearing", permanent: true },
       { source: "/leak-detection", destination: "/plumbing/leak-detection", permanent: true },
+      { source: "/service-area/austin", destination: "/service-area/austin-tx", permanent: true },
     ];
   },
   async headers() {

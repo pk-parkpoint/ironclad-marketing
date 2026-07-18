@@ -32,6 +32,8 @@ const ROUTE_LASTMOD_OVERRIDES: Record<string, string> = {
   "/guides": "2026-05-26T00:00:00.000Z",
 };
 
+const SITEMAP_EXCLUDED_PATHS = new Set(["/faq"]);
+
 function normalizePath(path: string): string {
   if (!path) {
     return "/";
@@ -65,7 +67,7 @@ export function buildCoreSitemapEntries(): SitemapEntry[] {
     "/resources",
     "/site-map",
     ...STATIC_ROUTE_PATHS.map((path) => normalizePath(path)),
-  ];
+  ].filter((path) => !SITEMAP_EXCLUDED_PATHS.has(path));
   return routes.map((path) => ({
     changeFrequency: path === "/" ? "daily" : "weekly",
     lastModified: getRouteLastModified(path, LASTMOD.core),

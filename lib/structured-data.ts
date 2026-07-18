@@ -1,6 +1,5 @@
 import type { LocationEntry } from "@/content/locations";
 import { LOCATIONS } from "@/content/locations";
-import { PUBLISHED_REVIEW_SUMMARY, type ReviewEntry } from "@/content/reviews";
 import type { ServiceEntry } from "@/content/services";
 import { BUSINESS_SERVICE_TYPES, TRUST_FIELDS, buildAreaServedList } from "@/content/site-trust";
 import { getPublicContactInfo } from "@/lib/contact";
@@ -380,46 +379,6 @@ export function buildFaqPageSchema(faqs: Array<{ question: string; answer: strin
       acceptedAnswer: {
         "@type": "Answer",
         text: faq.answer,
-      },
-    })),
-  };
-}
-
-export function buildAggregateRatingSchema(reviews: ReviewEntry[]): JsonLd {
-  if (reviews.length === 0) {
-    throw new Error("reviews are required for AggregateRating schema");
-  }
-
-  return {
-    "@context": SCHEMA_CONTEXT,
-    "@type": "Plumber",
-    "@id": schemaId("Plumber", "rating"),
-    name: BUSINESS_NAME,
-    url: toAbsoluteUrl("/reviews"),
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: PUBLISHED_REVIEW_SUMMARY.ratingValue,
-      reviewCount: PUBLISHED_REVIEW_SUMMARY.reviewCount,
-      bestRating: 5,
-      worstRating: 1,
-    },
-    review: reviews.map((entry) => ({
-      "@type": "Review",
-      author: {
-        "@type": "Person",
-        name: entry.reviewerName,
-      },
-      reviewBody: entry.text,
-      datePublished: entry.date,
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: entry.rating,
-        bestRating: 5,
-        worstRating: 1,
-      },
-      publisher: {
-        "@type": "Organization",
-        name: entry.source === "google" ? "Google" : entry.source,
       },
     })),
   };

@@ -83,7 +83,7 @@ export default function PlumbingFaqPage() {
               <Link className="focus-ring secondary-button" href="/contact">
                 Contact Team
               </Link>
-              <Link className="focus-ring secondary-button" href="/faq">
+              <Link className="focus-ring secondary-button" href="/questions">
                 View All FAQs
               </Link>
             </div>
