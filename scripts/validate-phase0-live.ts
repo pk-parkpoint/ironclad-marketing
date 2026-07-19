@@ -45,13 +45,25 @@ function assertMatches(html: string, pattern: RegExp, checkLabel: string) {
 async function main() {
   const baseUrl = (process.env.AUDIT_BASE_URL ?? "https://ironcladtexas.com").replace(/\/$/, "");
 
-  const indexablePaths = ["/about", "/book", "/careers", "/contact", "/reviews"];
+  const indexablePaths = ["/about", "/careers", "/contact", "/reviews"];
   for (const path of indexablePaths) {
     const html = await fetchHtml(baseUrl, path);
     if (/meta name="robots" content="noindex/i.test(html)) {
       throw new Error(`${path} should be indexable but has noindex`);
     }
   }
+
+  const bookingHtml = await fetchHtml(baseUrl, "/book");
+  assertMatches(
+    bookingHtml,
+    /meta name="robots" content="(?=[^"]*\bnoindex\b)(?=[^"]*\bfollow\b)[^"]*"/i,
+    "booking conversion route",
+  );
+  assertMatches(
+    bookingHtml,
+    /meta name="googlebot" content="(?=[^"]*\bnoindex\b)(?=[^"]*\bfollow\b)[^"]*"/i,
+    "booking conversion route",
+  );
 
   const ssrChecks: LiveCheck[] = [
     {
