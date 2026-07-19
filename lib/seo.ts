@@ -2,6 +2,14 @@ import type { Metadata } from "next";
 
 export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;
+export const NOINDEX_FOLLOW_ROBOTS = {
+  follow: true,
+  googleBot: {
+    follow: true,
+    index: false,
+  },
+  index: false,
+} satisfies Metadata["robots"];
 
 export const OG_IMAGE_BY_TEMPLATE = {
   // PNG is more broadly supported by link preview renderers (iMessage, Slack, etc.)

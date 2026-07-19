@@ -63,7 +63,20 @@ function main() {
       path: entry.route,
       ogTemplate: entry.ogTemplate,
       ogType: entry.ogType,
+      robots: entry.robots,
     });
+
+    if (entry.robots) {
+      const robotsMetadata = metadata.robots;
+      if (
+        !robotsMetadata ||
+        typeof robotsMetadata === "string" ||
+        robotsMetadata.index !== false ||
+        robotsMetadata.follow !== true
+      ) {
+        fail(`expected noindex,follow robots metadata for ${entry.route}`);
+      }
+    }
 
     const canonicalRaw = metadata.alternates?.canonical;
     if (!canonicalRaw) {
