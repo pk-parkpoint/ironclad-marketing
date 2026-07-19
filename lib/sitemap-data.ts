@@ -32,7 +32,10 @@ const ROUTE_LASTMOD_OVERRIDES: Record<string, string> = {
   "/guides": "2026-05-26T00:00:00.000Z",
 };
 
-const SITEMAP_EXCLUDED_PATHS = new Set(["/faq"]);
+const SITEMAP_EXCLUDED_PATHS = new Set([
+  "/book",
+  "/faq",
+]);
 
 function normalizePath(path: string): string {
   if (!path) {

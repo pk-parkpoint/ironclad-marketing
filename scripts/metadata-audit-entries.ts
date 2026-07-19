@@ -3,7 +3,12 @@ import { LOCATIONS } from "../content/locations";
 import { getPpcServiceRouteEntries } from "../content/ppc-service-variants";
 import { SERVICES } from "../content/services";
 import { STATIC_PAGES } from "../content/static-pages";
-import type { OgTemplate, OgType } from "../lib/seo";
+import {
+  NOINDEX_FOLLOW_ROBOTS,
+  type OgTemplate,
+  type OgType,
+} from "../lib/seo";
+import type { Metadata } from "next";
 
 export type MetadataEntry = {
   route: string;
@@ -11,6 +16,7 @@ export type MetadataEntry = {
   description: string;
   ogTemplate: OgTemplate;
   ogType: OgType;
+  robots?: Metadata["robots"];
 };
 
 function getOgTemplateForStaticPath(pathname: string): OgTemplate {
@@ -79,6 +85,7 @@ export function buildMetadataAuditEntries(): MetadataEntry[] {
       description: page.metaDescription,
       ogTemplate: getOgTemplateForStaticPath(page.path),
       ogType: "website" as const,
+      robots: page.path === "book" ? NOINDEX_FOLLOW_ROBOTS : undefined,
     })),
     ...buildServiceEntries(),
     ...LOCATIONS.map((location) => ({
