@@ -49,6 +49,7 @@ test("booking links show an immediate loading shell while the wizard chunk loads
     timeout: 1000,
   });
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
+  await expect(page.locator("#ironclad-booking-preboot-shell")).toHaveCount(0);
   expect(new URL(page.url()).pathname).toBe("/book");
 });
 
