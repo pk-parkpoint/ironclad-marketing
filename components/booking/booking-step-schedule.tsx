@@ -73,8 +73,9 @@ export function BookingStepSchedule({
 }: Props) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const [viewYear, setViewYear] = useState(today.getFullYear());
-  const [viewMonth, setViewMonth] = useState(today.getMonth());
+  const defaultDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+  const [viewYear, setViewYear] = useState(defaultDate.getFullYear());
+  const [viewMonth, setViewMonth] = useState(defaultDate.getMonth());
   const [dateError, setDateError] = useState<string | null>(null);
   const autoDateRef = useRef(false);
   const autoWindowRef = useRef<string | null>(null);
@@ -88,13 +89,12 @@ export function BookingStepSchedule({
   const selectedWindows = selectedDate ? windowsByDate[selectedDate] || [] : [];
   const isLoadingSelectedDate = Boolean(selectedDate && loadingDate === selectedDate);
   const firstWindow = selectedWindows[0];
-  const todayId = formatDateId(today.getFullYear(), today.getMonth(), today.getDate());
-
+  const defaultDateId = formatDateId(defaultDate.getFullYear(), defaultDate.getMonth(), defaultDate.getDate());
   useEffect(() => {
     if (selectedDate || autoDateRef.current) return;
     autoDateRef.current = true;
-    onSelectDate(todayId);
-  }, [onSelectDate, selectedDate, todayId]);
+    onSelectDate(defaultDateId);
+  }, [defaultDateId, onSelectDate, selectedDate]);
 
   useEffect(() => {
     if (!firstWindow || isLoadingSelectedDate || formData.selectedOfferId) return;
