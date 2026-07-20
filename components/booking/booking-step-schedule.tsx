@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { PublicBookingWindow } from "@/lib/public-booking-facade";
 import type { WizardFormData } from "./booking-wizard";
 import styles from "./booking-wizard.module.css";
@@ -76,6 +76,9 @@ export function BookingStepSchedule({
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   const [dateError, setDateError] = useState<string | null>(null);
+  const autoDateRef = useRef(false);
+  const autoWindowRef = useRef<string | null>(null);
+  const timesBlockRef = useRef<HTMLDivElement | null>(null);
 
   const firstDay = new Date(viewYear, viewMonth, 1);
   const startDow = firstDay.getDay();
@@ -84,6 +87,29 @@ export function BookingStepSchedule({
   const selectedDate = formData.selectedDate;
   const selectedWindows = selectedDate ? windowsByDate[selectedDate] || [] : [];
   const isLoadingSelectedDate = Boolean(selectedDate && loadingDate === selectedDate);
+  const firstWindow = selectedWindows[0];
+  const todayId = formatDateId(today.getFullYear(), today.getMonth(), today.getDate());
+
+  useEffect(() => {
+    if (selectedDate || autoDateRef.current) return;
+    autoDateRef.current = true;
+    onSelectDate(todayId);
+  }, [onSelectDate, selectedDate, todayId]);
+
+  useEffect(() => {
+    if (!firstWindow || isLoadingSelectedDate || formData.selectedOfferId) return;
+    const selectionKey = `${selectedDate}:${firstWindow.offerId}`;
+    if (autoWindowRef.current === selectionKey) return;
+    autoWindowRef.current = selectionKey;
+    void onSelectWindow(firstWindow).then((reserved) => reserved && setDateError(null));
+  }, [firstWindow, formData.selectedOfferId, isLoadingSelectedDate, onSelectWindow, selectedDate]);
+
+  useEffect(() => {
+    if (!selectedDate) return;
+    const frame = requestAnimationFrame(() => timesBlockRef.current?.scrollIntoView({ block: "nearest" }));
+    return () => cancelAnimationFrame(frame);
+  }, [selectedDate, selectedWindows.length]);
+
   const canGoPrev =
     viewYear > today.getFullYear() || (viewYear === today.getFullYear() && viewMonth > today.getMonth());
 
@@ -159,6 +185,7 @@ export function BookingStepSchedule({
                 key={dateId}
                 type="button"
                 aria-label={dateLabel(dateId)}
+                aria-pressed={selected}
                 disabled={past}
                 className={joinClasses(styles.calendarDay, selected && styles.calendarDaySelected)}
                 onClick={() => {
@@ -173,7 +200,7 @@ export function BookingStepSchedule({
         </div>
       </div>
 
-      <div className={styles.timesBlock}>
+      <div className={styles.timesBlock} ref={timesBlockRef}>
         <div className={styles.timesHeader}>
           <span className={styles.timesTitle}>
             {selectedDate ? `Available times for ${dateLabel(selectedDate)}` : "Select a date to see times"}
@@ -218,6 +245,7 @@ export function BookingStepSchedule({
                 <button
                   key={window.offerId}
                   type="button"
+                  aria-pressed={selected}
                   className={joinClasses(styles.timeSlot, selected && styles.timeSlotSelected)}
                   onClick={async () => {
                     const reserved = await onSelectWindow(window);
