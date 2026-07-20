@@ -10,110 +10,19 @@ import {
   type PublicBookingWindow,
 } from "@/lib/public-booking-facade";
 import type { BookingConfirmation, WizardFormData } from "./booking-wizard";
+import {
+  buildBookPayload,
+  buildIssueSummary,
+  customerArrivalWindows,
+  DURATION_ESTIMATE_MINUTES,
+  friendlyError,
+  schedulerOfferId,
+  schedulerServiceType,
+  SEARCH_MAX_RESULTS,
+  secondsUntil,
+} from "./booking-facade-helpers";
 
 type ActiveHold = PublicBookingHoldResponse & { startTime: string; endTime: string };
-
-const DURATION_ESTIMATE_MINUTES = 90;
-const SEARCH_MAX_RESULTS = 24;
-
-const ARRIVAL_WINDOWS = [
-  { endHour: 12, key: "morning", label: "9:00 AM - 12:00 PM", startHour: 9 },
-  { endHour: 15, key: "midday", label: "12:00 PM - 3:00 PM", startHour: 12 },
-  { endHour: 18, key: "afternoon", label: "3:00 PM - 6:00 PM", startHour: 15 },
-] as const;
-
-const SCHEDULER_SERVICE_TYPE_BY_SELECTION: Record<string, string> = {
-  "clear-a-blockage": "drain_cleaning",
-  "fix-a-leak": "leak_detection_repair",
-  "leaks-blockages-sewer": "drain_cleaning",
-  "other-issue": "leak_detection_repair",
-  "sewer-main-line": "drain_cleaning",
-};
-
-function secondsUntil(expiresAt?: string | null, ttlSeconds?: number): number {
-  if (expiresAt) {
-    return Math.max(0, Math.ceil((new Date(expiresAt).getTime() - Date.now()) / 1000));
-  }
-  return Math.max(0, ttlSeconds || 0);
-}
-
-function friendlyError(fallback: string, error: unknown): string {
-  return error instanceof Error && error.message ? error.message : fallback;
-}
-
-function formatServiceLabel(value: string | null): string {
-  return (value || "plumbing-service")
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (char) => char.toUpperCase());
-}
-
-function buildIssueSummary(formData: WizardFormData): string {
-  const service = [formData.serviceCategory, formData.serviceDetail]
-    .filter(Boolean)
-    .map((entry) => formatServiceLabel(entry))
-    .join(" > ");
-  const notes = formData.additionalNotes.trim();
-  return [service || "Plumbing Service", notes].filter(Boolean).join(". ");
-}
-
-function schedulerServiceType(formData: WizardFormData): string | undefined {
-  const selected = formData.serviceDetail || formData.serviceCategory;
-  return selected ? SCHEDULER_SERVICE_TYPE_BY_SELECTION[selected] || selected : undefined;
-}
-
-function windowHour(value: string): number | null {
-  const match = value.match(/T(\d{2}):/);
-  return match ? Number(match[1]) : null;
-}
-
-function withHour(value: string, hour: number): string {
-  return value.replace(/T\d{2}:\d{2}:\d{2}/, `T${String(hour).padStart(2, "0")}:00:00`);
-}
-
-function customerArrivalWindows(windows: PublicBookingWindow[]): PublicBookingWindow[] {
-  const collapsed: PublicBookingWindow[] = [];
-  for (const slot of ARRIVAL_WINDOWS) {
-    const window = windows.find((candidate) => {
-      const hour = windowHour(candidate.startTime);
-      return hour !== null && hour >= slot.startHour && hour < slot.endHour;
-    });
-    if (!window) continue;
-    collapsed.push({
-      ...window,
-      arrivalWindowLabel: slot.label,
-      displayLabel: slot.label,
-      endTime: withHour(window.endTime, slot.endHour),
-      offerId: `${slot.key}:${window.offerId}`,
-      startTime: withHour(window.startTime, slot.startHour),
-    });
-  }
-  return collapsed;
-}
-
-function schedulerOfferId(offerId: string): string {
-  return offerId.replace(/^(morning|midday|afternoon):/, "");
-}
-
-function buildBookPayload(formData: WizardFormData) {
-  return {
-    name: `${formData.firstName} ${formData.lastName}`.trim(),
-    phone: formData.phone,
-    email: formData.email || undefined,
-    address: {
-      fullAddress: formData.addressFormatted,
-      street: formData.street || formData.addressFormatted,
-      city: formData.city || undefined,
-      state: formData.state || undefined,
-      postalCode: formData.zip || undefined,
-      lat: formData.latitude,
-      lng: formData.longitude,
-      gateCode: formData.gateCode || undefined,
-      hasDogs: formData.petsOnPremise,
-    },
-    issueSummary: buildIssueSummary(formData),
-    notificationPreferences: { sms: true, email: Boolean(formData.email) },
-  };
-}
 
 export function usePublicBookingFacade() {
   const [windowsByDate, setWindowsByDate] = useState<Record<string, PublicBookingWindow[]>>({});
@@ -124,6 +33,8 @@ export function usePublicBookingFacade() {
   const [activeHold, setActiveHold] = useState<ActiveHold | null>(null);
   const [remainingSeconds, setRemainingSeconds] = useState(0);
   const activeHoldRef = useRef<ActiveHold | null>(null);
+  const holdRequestRef = useRef(0);
+  const offerCandidatesRef = useRef<Record<string, PublicBookingWindow[]>>({});
 
   useEffect(() => {
     activeHoldRef.current = activeHold;
@@ -142,6 +53,8 @@ export function usePublicBookingFacade() {
   }, [clearHold]);
 
   const reset = useCallback(() => {
+    holdRequestRef.current += 1;
+    offerCandidatesRef.current = {};
     setWindowsByDate({});
     setLoadingDate(null);
     setSearchError(null);
@@ -183,9 +96,14 @@ export function usePublicBookingFacade() {
         maxResults: SEARCH_MAX_RESULTS,
         serviceType: schedulerServiceType(formData),
       });
+      const grouped = customerArrivalWindows(response.windows);
+      offerCandidatesRef.current = {
+        ...offerCandidatesRef.current,
+        ...grouped.candidatesByOfferId,
+      };
       setWindowsByDate((current) => ({
         ...current,
-        [date]: customerArrivalWindows(response.windows.filter((window) => window.isAvailable)),
+        [date]: grouped.windows,
       }));
     } catch (error) {
       setSearchError(friendlyError("Unable to load available appointment times.", error));
@@ -196,27 +114,39 @@ export function usePublicBookingFacade() {
 
   const holdWindow = useCallback(
     async (window: PublicBookingWindow, formData: WizardFormData) => {
+      const requestId = ++holdRequestRef.current;
       await releaseHold();
       setHoldError(null);
       setBookError(null);
-      try {
-        const offerId = schedulerOfferId(window.offerId);
-        const hold = await holdPublicBookingWindow({
-          durationEstimateMinutes: DURATION_ESTIMATE_MINUTES,
-          idempotencyKey: `${offerId}-${Date.now()}`,
-          issueSummary: buildIssueSummary(formData),
-          offerId,
-          serviceType: schedulerServiceType(formData),
-          windowId: window.windowId,
-        });
-        const active = { ...hold, startTime: window.startTime, endTime: window.endTime };
-        activeHoldRef.current = active;
-        setActiveHold(active);
-        return active;
-      } catch (error) {
-        setHoldError(friendlyError("Unable to reserve that appointment time.", error));
-        return null;
+      const fallback = { ...window, offerId: schedulerOfferId(window.offerId) };
+      const candidates = offerCandidatesRef.current[window.offerId] || [fallback];
+      let lastError: unknown;
+      for (const candidate of candidates) {
+        if (requestId !== holdRequestRef.current) return null;
+        try {
+          const hold = await holdPublicBookingWindow({
+            durationEstimateMinutes: DURATION_ESTIMATE_MINUTES,
+            idempotencyKey: `${candidate.offerId}-${Date.now()}`,
+            issueSummary: buildIssueSummary(formData),
+            offerId: candidate.offerId,
+            serviceType: schedulerServiceType(formData),
+            windowId: candidate.windowId,
+          });
+          if (requestId !== holdRequestRef.current) {
+            await releasePublicBookingHold(hold.holdId).catch(() => undefined);
+            return null;
+          }
+          const active = { ...hold, startTime: window.startTime, endTime: window.endTime };
+          activeHoldRef.current = active;
+          setActiveHold(active);
+          return active;
+        } catch (error) {
+          lastError = error;
+          if (!(error instanceof Error) || !/no longer available/i.test(error.message)) break;
+        }
       }
+      setHoldError(friendlyError("Unable to reserve that appointment time.", lastError));
+      return null;
     },
     [releaseHold],
   );
