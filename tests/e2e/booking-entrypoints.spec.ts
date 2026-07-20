@@ -45,7 +45,7 @@ test("booking links show an immediate loading shell while the wizard chunk loads
 
   await clickBookingTrigger(page);
 
-  await expect(page.locator("#ironclad-booking-preboot-shell, [aria-labelledby='booking-wizard-loading-title']").first()).toBeVisible({
+  await expect(page.locator("#ironclad-booking-preboot-shell")).toBeVisible({
     timeout: 1000,
   });
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();

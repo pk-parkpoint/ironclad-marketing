@@ -1,8 +1,9 @@
 import { expect, test } from "@playwright/test";
 
-function todayId(): string {
+function tomorrowId(): string {
   const date = new Date();
   date.setHours(0, 0, 0, 0);
+  date.setDate(date.getDate() + 1);
   return date.toISOString().slice(0, 10);
 }
 
@@ -20,7 +21,7 @@ function rawWindow(date: string, hour: number, id: string) {
   };
 }
 
-test("today skips started dayparts and selects the first holdable window", async ({ page }) => {
+test("tomorrow is selected and populated without a date click", async ({ page }) => {
   const searchedDates: string[] = [];
   const heldWindowIds: string[] = [];
 
@@ -35,7 +36,6 @@ test("today skips started dayparts and selects the first holdable window", async
           requestId: "search-regression",
           state: "available",
           windows: [
-            rawWindow(payload.date, 10, "morning-started"),
             rawWindow(payload.date, 12, "midday-primary"),
             rawWindow(payload.date, 13, "midday-fallback"),
             rawWindow(payload.date, 15, "afternoon-primary"),
@@ -79,9 +79,9 @@ test("today skips started dayparts and selects the first holdable window", async
   await dialog.getByRole("button", { name: /Leaks, Blockages, or Sewer/i }).click();
   await dialog.getByRole("button", { name: /^Fix a Leak/i }).click();
 
-  const today = dialog.getByRole("button", { name: /^Today,/ });
+  const tomorrow = dialog.getByRole("button", { name: /^Tomorrow,/ });
   const midday = dialog.getByRole("button", { name: "12:00 PM - 3:00 PM" });
-  await expect(today).toHaveAttribute("aria-pressed", "true");
+  await expect(tomorrow).toHaveAttribute("aria-pressed", "true");
   await expect(dialog.getByRole("button", { name: "9:00 AM - 12:00 PM" })).toHaveCount(0);
   await expect(midday).toBeVisible();
   await expect(dialog.getByRole("button", { name: "3:00 PM - 6:00 PM" })).toBeVisible();
@@ -89,6 +89,6 @@ test("today skips started dayparts and selects the first holdable window", async
   await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
   await expect(midday).toBeInViewport();
 
-  expect(searchedDates).toEqual([todayId()]);
+  expect(searchedDates).toEqual([tomorrowId()]);
   expect(heldWindowIds).toEqual(["midday-primary", "midday-fallback"]);
 });
