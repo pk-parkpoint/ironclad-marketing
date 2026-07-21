@@ -17,6 +17,10 @@ import { maybeOpenBookingLink } from "@/lib/booking-events";
 import { recordBookingSiteVisit } from "@/lib/booking-session";
 import { applyGoogleAdsTrackingPhone, routeGoogleAdsPhoneAnchor } from "@/lib/google-ads-tracking-phone";
 import {
+  installPageEngagementLifecycle,
+  startPageEngagement,
+} from "@/lib/page-engagement";
+import {
   getCtaPosition,
   trackEvent,
   trackGoogleAdsPhoneConversion,
@@ -111,6 +115,8 @@ export function AnalyticsBootstrap() {
   const searchParams = useSearchParams();
   const search = useMemo(() => searchParams.toString(), [searchParams]);
 
+  useEffect(() => installPageEngagementLifecycle(), []);
+
   useScrollDepthTracking({
     resetKey: `${pathname}?${search}`,
     onThreshold: (threshold) => {
@@ -140,11 +146,19 @@ export function AnalyticsBootstrap() {
       applyGoogleAdsTrackingPhone(merged);
     }
 
-    recordBookingSiteVisit({
+    const siteSession = recordBookingSiteVisit({
       attribution: merged,
       pathname,
       search,
     });
+
+    if (siteSession) {
+      startPageEngagement({
+        attribution: merged,
+        pagePath: pathname,
+        siteSession,
+      });
+    }
 
     const context = derivePageContext(pathname);
     const aiReferralContext = getAiReferralContext(document.referrer);

@@ -32,6 +32,9 @@
     "search-visibility:audit": "tsx scripts/validate-search-visibility.ts",
     "internal-links:audit": "tsx scripts/validate-internal-links.ts",
     "analytics:audit": "tsx scripts/validate-analytics.ts",
+    "analytics:weekly": "tsx scripts/weekly-analytics-report.ts",
+    "analytics:weekly:audit": "tsx scripts/validate-weekly-analytics.ts",
+    "analytics:weekly:configure": "bash scripts/configure-weekly-analytics.sh",
     "google-ads:validate": "tsx scripts/google-ads/cli.ts validate",
     "google-ads:plan": "tsx scripts/google-ads/cli.ts plan",
     "google-ads:apply": "tsx scripts/google-ads/cli.ts apply",
@@ -44,6 +47,7 @@
     "test:e2e:cross-device": "playwright test tests/e2e/cross-device-smoke.spec.ts --project=chromium --project=mobile-chrome --project=ios-safari --project=ipad-safari --workers=1"
   },
   "dependencies": {
+    "@google-cloud/bigquery": "^8.3.1",
     "@sanity/vision": "^4.22.0",
     "firebase-admin": "^13.7.0",
     "lucide-react": "^0.564.0",

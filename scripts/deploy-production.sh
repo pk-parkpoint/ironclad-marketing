@@ -129,7 +129,7 @@ if source_env.exists():
         env_vars[key] = value
 
 for key, value in os.environ.items():
-    if key.startswith(("BOOKING_", "CONDUIT_", "IRONCLAD_", "LEAD_", "NEXT_PUBLIC_")):
+    if key.startswith(("BIGQUERY_", "BOOKING_", "CONDUIT_", "IRONCLAD_", "LEAD_", "NEXT_PUBLIC_", "WEEKLY_ANALYTICS_")):
         env_vars[key] = value
 
 missing = [key for key in required_keys if not env_vars.get(key)]
