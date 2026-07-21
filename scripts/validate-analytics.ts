@@ -16,6 +16,7 @@ function main() {
   const layout = read("app/layout.tsx");
   const analyticsRuntime = read("components/analytics/analytics-bootstrap.tsx");
   const analyticsEvents = read("components/analytics/analytics-events.ts");
+  const pageEngagement = read("lib/page-engagement.ts");
   const googleAdsConversions = read("lib/google-ads-conversions.ts");
   const bookingConfirmation = read("components/booking/booking-step-confirm.tsx");
   const analyticsLib = read("lib/analytics.ts");
@@ -54,10 +55,29 @@ function main() {
     "scroll_depth",
     "faq_expand",
     "ai_referral_visit",
+    "page_engagement",
   ]) {
-    const source = eventName === "lead_submit_success" ? analyticsLib : `${analyticsRuntime}\n${analyticsEvents}`;
-    const fileLabel = eventName === "lead_submit_success" ? "lib/analytics.ts" : "analytics runtime";
+    const source = eventName === "lead_submit_success"
+      ? analyticsLib
+      : eventName === "page_engagement"
+        ? pageEngagement
+        : `${analyticsRuntime}\n${analyticsEvents}`;
+    const fileLabel = eventName === "lead_submit_success"
+      ? "lib/analytics.ts"
+      : eventName === "page_engagement"
+        ? "lib/page-engagement.ts"
+        : "analytics runtime";
     assertContains(fileLabel, source, eventName);
+  }
+
+  for (const timerField of [
+    "active_time_ms",
+    "elapsed_time_ms",
+    "page_view_id",
+    "site_session_id",
+    'transport_type: "beacon"',
+  ]) {
+    assertContains("lib/page-engagement.ts", pageEngagement, timerField);
   }
 
   for (const aiHost of ["chatgpt.com", "gemini.google.com", "perplexity.ai"]) {
