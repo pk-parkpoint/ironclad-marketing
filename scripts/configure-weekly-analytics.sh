@@ -25,7 +25,7 @@ gcloud run services update "$SERVICE_NAME" \
   --project="$PROJECT_ID" \
   --region="$REGION" \
   --update-env-vars="BIGQUERY_GA4_PROJECT_ID=$PROJECT_ID,BIGQUERY_GA4_DATASET_ID=analytics_534263775,WEEKLY_ANALYTICS_CRON_SECRET=$SECRET" \
-  --quiet
+  --quiet >/dev/null
 
 if gcloud scheduler jobs describe "$JOB_NAME" \
   --project="$PROJECT_ID" \
@@ -39,7 +39,7 @@ if gcloud scheduler jobs describe "$JOB_NAME" \
     --http-method=POST \
     --update-headers="X-Ironclad-Cron-Secret=$SECRET" \
     --attempt-deadline=600s \
-    --quiet
+    --quiet >/dev/null
 else
   gcloud scheduler jobs create http "$JOB_NAME" \
     --project="$PROJECT_ID" \
@@ -50,7 +50,7 @@ else
     --http-method=POST \
     --headers="X-Ironclad-Cron-Secret=$SECRET" \
     --attempt-deadline=600s \
-    --quiet
+    --quiet >/dev/null
 fi
 
 printf 'Weekly analytics scheduled: %s (%s, %s) -> %s\n' "$SCHEDULE" "$TIME_ZONE" "$JOB_NAME" "$REPORT_URL"
