@@ -91,7 +91,7 @@ test("standard service page booking links open the wizard on the book route", as
   const url = new URL(page.url());
   expect(url.pathname).toBe("/book");
   expect(url.searchParams.get("service")).toBe("repairs");
-  await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Enter your information" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Return to Select Issue" })).toBeEnabled();
 });
 
@@ -104,7 +104,7 @@ test("service template booking links preserve service query on the book route", 
   const url = new URL(page.url());
   expect(url.pathname).toBe("/book");
   expect(url.searchParams.get("service")).toBe("drain-clearing");
-  await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Enter your information" })).toBeVisible();
 });
 
 test("bare header booking links inherit water-heater service context", async ({ page }) => {
@@ -116,7 +116,7 @@ test("bare header booking links inherit water-heater service context", async ({ 
   const url = new URL(page.url());
   expect(url.pathname).toBe("/book");
   expect(url.searchParams.get("service")).toBe("water-heater-repair");
-  await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Enter your information" })).toBeVisible();
 
   await page.getByRole("button", { name: "Return to Select Issue" }).click();
   await expect(page.getByRole("heading", { name: "What needs installing or replacing?" })).toBeVisible();
@@ -127,7 +127,7 @@ test("broad service context uses an editable best-fit issue", async ({ page }) =
   await page.goto("/book?service=plumbing");
 
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Enter your information" })).toBeVisible();
 
   await page.getByRole("button", { name: "Return to Select Issue" }).click();
   await expect(page.getByRole("heading", { name: "Can you tell us a bit more?" })).toBeVisible();

@@ -81,8 +81,8 @@ const INITIAL_FORM_DATA: WizardFormData = {
 
 const STEPS = [
   { number: 1, label: "Select Issue" },
-  { number: 2, label: "Schedule Time" },
-  { number: 3, label: "Contact Info" },
+  { number: 2, label: "Contact Info" },
+  { number: 3, label: "Schedule Time" },
   { number: 4, label: "Confirm Details" },
 ];
 
@@ -489,6 +489,14 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
                   <BookingStepSelectIssue formData={formData} onUpdate={updateFormData} onNext={() => moveToStep(2)} />
                 )}
                 {currentStep === 2 && (
+                  <BookingStepContact
+                    formData={formData}
+                    onUpdate={updateFormData}
+                    onBack={() => moveToStep(1)}
+                    onNext={() => moveToStep(3)}
+                  />
+                )}
+                {currentStep === 3 && (
                   <BookingStepSchedule
                     formData={formData}
                     windowsByDate={bookingFacade.windowsByDate}
@@ -496,25 +504,18 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
                     searchError={bookingFacade.searchError}
                     holdError={bookingFacade.holdError}
                     remainingSeconds={bookingFacade.remainingSeconds}
+                    isSubmitting={isSubmitting}
+                    submitError={submitError || bookingFacade.bookError || undefined}
                     onUpdate={updateFormData}
                     onSelectDate={selectDate}
                     onSelectWindow={selectWindow}
                     onRefresh={refreshSelectedDate}
-                    onBack={() => moveToStep(1)}
-                    onNext={() => moveToStep(3)}
-                  />
-                )}
-                {currentStep === 3 && (
-                  <BookingStepContact
-                    formData={formData}
-                    onUpdate={updateFormData}
                     onBack={() => moveToStep(2)}
-                    onSubmit={async () => {
-                      const ok = await handleSubmit();
-                      if (ok) moveToStep(4);
+                    onNext={() => {
+                      void handleSubmit().then((ok) => {
+                        if (ok) moveToStep(4);
+                      });
                     }}
-                    isSubmitting={isSubmitting}
-                    submitError={submitError || bookingFacade.bookError || undefined}
                   />
                 )}
                 {currentStep === 4 && (

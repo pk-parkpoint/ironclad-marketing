@@ -114,13 +114,6 @@ test("booking flow uses public scheduling facade and confirms from facade identi
   await page.getByRole("button", { name: /Leaks, Blockages, or Sewer/i }).click();
   await expect(page.getByRole("heading", { name: "Can you tell us a bit more?" })).toBeVisible();
   await page.getByRole("button", { name: /^Fix a Leak/i }).click();
-  await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
-
-  await page.getByRole("button", { name: /Tomorrow/i }).click();
-  await page.getByRole("button", { name: "9:00 AM - 12:00 PM" }).click();
-  await expect(page.getByText(/This time is reserved for/)).toBeVisible();
-  await page.getByRole("button", { name: "Continue" }).click();
-
   await expect(page.getByRole("heading", { name: "Enter your information" })).toBeVisible();
   const dialog = page.getByRole("dialog");
   await dialog.locator('input[type="text"]').nth(0).fill("E2E");
@@ -128,7 +121,13 @@ test("booking flow uses public scheduling facade and confirms from facade identi
   await dialog.locator('input[type="tel"]').fill(testPhone);
   await dialog.locator('input[type="email"]').fill(testEmail);
   await dialog.locator('input[type="text"]').nth(2).fill("123 Test Street, Austin, TX 78701");
-  await dialog.getByRole("button", { name: "Submit" }).click();
+  await dialog.getByRole("button", { name: "Continue" }).click();
+
+  await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
+  await page.getByRole("button", { name: /Tomorrow/i }).click();
+  await page.getByRole("button", { name: "9:00 AM - 12:00 PM" }).click();
+  await expect(page.getByText(/This time is reserved for/)).toBeVisible();
+  await page.getByRole("button", { name: "Confirm appointment" }).click();
 
   await expect(page.getByRole("heading", { name: "Your appointment is confirmed!" })).toBeVisible();
   const confirmStep = page.getByTestId("booking-step-4");
