@@ -17,6 +17,8 @@ type Props = {
   loadingDate: string | null;
   searchError?: string | null;
   holdError?: string | null;
+  submitError?: string;
+  isSubmitting: boolean;
   remainingSeconds: number;
   onUpdate: (updates: Partial<WizardFormData>) => void;
   onSelectDate: (date: string) => void;
@@ -64,6 +66,8 @@ export function BookingStepSchedule({
   loadingDate,
   searchError,
   holdError,
+  submitError,
+  isSubmitting,
   remainingSeconds,
   onSelectDate,
   onSelectWindow,
@@ -141,7 +145,7 @@ export function BookingStepSchedule({
   for (let day = 1; day <= daysInMonth; day += 1) cells.push(day);
 
   return (
-    <div data-testid="booking-step-2">
+    <div data-testid="booking-step-3">
       <h1 className={`${styles.heading} ${styles.scheduleHeading}`}>Choose an Appointment Time</h1>
 
       <div className={styles.calendarCard}>
@@ -271,6 +275,7 @@ export function BookingStepSchedule({
           {dateError}
         </p>
       )}
+      {submitError && <p className={styles.errorMessage}>{submitError}</p>}
 
       <div className={`${styles.buttonRow} ${styles.buttonRowSplit}`}>
         <button
@@ -283,7 +288,9 @@ export function BookingStepSchedule({
         <button
           type="button"
           className={styles.primaryButton}
+          disabled={isSubmitting}
           onClick={() => {
+            if (isSubmitting) return;
             if (!formData.holdId || !formData.selectedStartTime) {
               setDateError("Please choose an available appointment time.");
               return;
@@ -292,7 +299,7 @@ export function BookingStepSchedule({
             onNext();
           }}
         >
-          Continue
+          {isSubmitting ? "Confirming..." : "Confirm appointment"}
         </button>
       </div>
     </div>

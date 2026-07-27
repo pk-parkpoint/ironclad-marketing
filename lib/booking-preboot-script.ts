@@ -14,6 +14,15 @@ export const BOOKING_PREBOOT_SCRIPT = `
     return url.pathname + url.search + url.hash;
   }
 
+  function serviceSlugFromPathname(pathname) {
+    var normalized = normalizedPathname(pathname);
+    if (normalized === "/plumbing") return "plumbing";
+    if (normalized === "/commercial-plumbing") return "commercial-plumbing";
+
+    var serviceMatch = normalized.match(/^\\/plumbing\\/([^/]+)$/);
+    return serviceMatch && serviceMatch[1] ? decodeURIComponent(serviceMatch[1]) : undefined;
+  }
+
   function bookingDetail(anchor) {
     var href = anchor.getAttribute("href");
     if (!href) return null;
@@ -28,9 +37,14 @@ export const BOOKING_PREBOOT_SCRIPT = `
     if (url.origin !== window.location.origin) return null;
     if (normalizedPathname(url.pathname) !== "/book") return null;
 
+    var serviceSlug = url.searchParams.get("service") || serviceSlugFromPathname(window.location.pathname);
+    if (serviceSlug && !url.searchParams.has("service")) {
+      url.searchParams.set("service", serviceSlug);
+    }
+
     return {
       bookingPath: bookingPath(url),
-      serviceSlug: url.searchParams.get("service") || undefined
+      serviceSlug: serviceSlug || undefined
     };
   }
 

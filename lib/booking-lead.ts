@@ -6,8 +6,8 @@ export const BOOKING_TIME_CAP_MS = 5 * 60 * 1000;
 
 export const BOOKING_SCREEN_IDS = [
   "select_issue",
-  "schedule_time",
   "contact_info",
+  "schedule_time",
   "confirm_details",
 ] as const;
 
@@ -293,7 +293,7 @@ export function buildBookingLeadPayload({
   const resolve = (formatted: string, sourceFields: BookingFieldKey[]) =>
     resolveBookingField({ formatted, sourceFields, ...resolveCtx });
 
-  // Contact-info screen (step 3)
+  // Contact-info screen (step 2)
   const customerName = resolve(normalizeValue(customerNameRaw), ["firstName", "lastName"]);
   const firstName = resolve(normalizeValue(formData.firstName), ["firstName"]);
   const lastName = resolve(normalizeValue(formData.lastName), ["lastName"]);
@@ -313,7 +313,7 @@ export function buildBookingLeadPayload({
   const serviceDetail = resolve(humanizeServiceValue(formData.serviceDetail), ["serviceDetail"]);
   const serviceDisplay = combineServiceDisplay(serviceCategory, serviceDetail);
 
-  // Schedule-time screen (step 2)
+  // Schedule-time screen (step 3)
   const preferredDate = resolve(normalizeValue(formData.selectedDate), ["selectedDate"]);
   // preferredWindow keys on whether the schedule screen was reached at all
   // (the customer may pick a date but skip a window, in which case the visit

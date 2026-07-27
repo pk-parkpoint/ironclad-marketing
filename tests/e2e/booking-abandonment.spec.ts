@@ -88,13 +88,6 @@ async function startBookingFlow(page: Page): Promise<Locator> {
   await expect(dialog).toBeVisible();
   await dialog.getByRole("button", { name: /Installations or Replacements/i }).click();
   await dialog.getByRole("button", { name: /Fixture \(sink, toilet, etc\.\)/i }).click();
-  await expect(dialog.getByRole("heading", { name: /Choose an Appointment Time/i })).toBeVisible();
-
-  await dialog.getByRole("button", { name: /Tomorrow/i }).click();
-  await dialog.getByRole("button", { name: "9:00 AM - 12:00 PM" }).click();
-  await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
-  await dialog.getByRole("button", { name: "Continue" }).click();
-
   await expect(dialog.getByRole("heading", { name: /Enter your information/i })).toBeVisible();
   return dialog;
 }
@@ -140,10 +133,10 @@ test("booking wizard sends captured contact data when abandoned before submit", 
   expect(payload.booking.serviceCategory).toBe("Installations Replacements");
   expect(payload.booking.serviceDetail).toBe("Fixture");
   expect(payload.booking.serviceDisplay).toBe("Installations Replacements > Fixture");
-  expect(payload.booking.preferredDate).not.toBe("NA");
-  expect(payload.booking.preferredWindow).toBe("9:00 AM - 12:00 PM");
+  expect(payload.booking.preferredDate).toBe("Not Presented");
+  expect(payload.booking.preferredWindow).toBe("Not Presented");
   // Confirm-details fields were never shown to this customer (abandoned at
-  // contact_info / step 3). They should report Not Presented, not NA.
+  // contact_info / step 2). They should report Not Presented, not NA.
   expect(payload.booking.notes).toBe("Not Presented");
   expect(payload.booking.gateCode).toBe("Not Presented");
   expect(payload.booking.propertyType).toBe("Not Presented");
@@ -152,7 +145,7 @@ test("booking wizard sends captured contact data when abandoned before submit", 
   expect(payload.booking.contactPreference).toBe("Not Presented");
   expect(payload.tracking.bookingApiSubmitted).toBe("No");
   expect(payload.tracking.abandonmentScreen).toBe("contact_info");
-  expect(payload.tracking.screensVisited).toEqual(["select_issue", "schedule_time", "contact_info"]);
+  expect(payload.tracking.screensVisited).toEqual(["select_issue", "contact_info"]);
 });
 
 test("booking wizard keeps step-four answers when abandoned after submit", async ({ page }) => {
@@ -178,7 +171,13 @@ test("booking wizard keeps step-four answers when abandoned after submit", async
   await dialog.locator('input[type="tel"]').fill(testPhone);
   await dialog.locator('input[type="email"]').fill(testEmail);
   await textInputs.nth(2).fill("456 Test Avenue, Austin, TX 78702");
-  await dialog.getByRole("button", { name: "Submit" }).click();
+  await dialog.getByRole("button", { name: "Continue" }).click();
+
+  await expect(dialog.getByRole("heading", { name: /Choose an Appointment Time/i })).toBeVisible();
+  await dialog.getByRole("button", { name: /Tomorrow/i }).click();
+  await dialog.getByRole("button", { name: "9:00 AM - 12:00 PM" }).click();
+  await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
+  await dialog.getByRole("button", { name: "Confirm appointment" }).click();
 
   await expect(dialog.getByRole("heading", { name: /Your appointment is confirmed!/i })).toBeVisible();
 
@@ -209,8 +208,8 @@ test("booking wizard keeps step-four answers when abandoned after submit", async
   expect(payload.tracking.abandonmentScreen).toBe("confirm_details");
   expect(payload.tracking.screensVisited).toEqual([
     "select_issue",
-    "schedule_time",
     "contact_info",
+    "schedule_time",
     "confirm_details",
   ]);
 });

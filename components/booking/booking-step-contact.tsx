@@ -95,9 +95,7 @@ type Props = {
   formData: WizardFormData;
   onUpdate: (updates: Partial<WizardFormData>) => void;
   onBack: () => void;
-  onSubmit: () => void;
-  isSubmitting: boolean;
-  submitError?: string;
+  onNext: () => void;
 };
 
 const inputClass =
@@ -107,7 +105,7 @@ function fieldGroupClass(hasError?: string) {
   return `${styles.fieldGroup} ${hasError ? styles.fieldError : ""}`;
 }
 
-export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSubmitting, submitError }: Props) {
+export function BookingStepContact({ formData, onUpdate, onBack, onNext }: Props) {
   const [errors, setErrors] = useState<FormErrors>({});
   const addressRef = useRef<HTMLInputElement | null>(null);
   const autocompleteRef = useRef<GoogleAutocompleteInstance | null>(null);
@@ -166,14 +164,14 @@ export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSub
     return Object.keys(errs).length === 0;
   }
 
-  function handleSubmit() {
+  function handleNext() {
     const valid = validate();
     if (!valid) return;
-    onSubmit();
+    onNext();
   }
 
   return (
-    <div data-testid="booking-step-3">
+    <div data-testid="booking-step-2">
       <h1 className={styles.heading}>Enter your information</h1>
       <p className={styles.subcopy}>To confirm your visit</p>
 
@@ -257,8 +255,6 @@ export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSub
         </div>
       </div>
 
-      {submitError && <p className={styles.errorMessage}>{submitError}</p>}
-
       {/* Navigation */}
       <div className={styles.buttonRow}>
         <button
@@ -271,10 +267,9 @@ export function BookingStepContact({ formData, onUpdate, onBack, onSubmit, isSub
         <button
           type="button"
           className={styles.primaryButton}
-          disabled={isSubmitting}
-          onClick={handleSubmit}
+          onClick={handleNext}
         >
-          {isSubmitting ? "Submitting..." : "Submit"}
+          Continue
         </button>
       </div>
     </div>

@@ -53,6 +53,15 @@ function normalizedPathname(pathname: string): string {
   return pathname.replace(/\/+$/, "") || "/";
 }
 
+export function getServiceSlugFromPathname(pathname: string): string | undefined {
+  const normalized = normalizedPathname(pathname);
+  if (normalized === "/plumbing") return "plumbing";
+  if (normalized === "/commercial-plumbing") return "commercial-plumbing";
+
+  const serviceMatch = normalized.match(/^\/plumbing\/([^/]+)$/);
+  return serviceMatch?.[1] ? decodeURIComponent(serviceMatch[1]) : undefined;
+}
+
 function bookingPath(url: URL): string {
   return `${url.pathname}${url.search}${url.hash}`;
 }
@@ -71,9 +80,15 @@ export function getBookingLinkDetail(anchor: HTMLAnchorElement): OpenBookingModa
   if (url.origin !== window.location.origin) return null;
   if (normalizedPathname(url.pathname) !== "/book") return null;
 
+  const serviceSlug =
+    url.searchParams.get("service") || getServiceSlugFromPathname(window.location.pathname);
+  if (serviceSlug && !url.searchParams.has("service")) {
+    url.searchParams.set("service", serviceSlug);
+  }
+
   return {
     bookingPath: bookingPath(url),
-    serviceSlug: url.searchParams.get("service") || undefined,
+    serviceSlug: serviceSlug || undefined,
   };
 }
 
