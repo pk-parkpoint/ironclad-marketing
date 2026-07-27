@@ -21,6 +21,7 @@ import {
   startBookingAttempt,
   updateBookingAttemptDraft,
 } from "@/lib/booking-session";
+import { getBookingServiceIssuePrefill } from "@/lib/booking-service-prefill";
 import { BookingStepSelectIssue } from "./booking-step-select-issue";
 import { BookingStepSchedule } from "./booking-step-schedule";
 import { BookingStepContact } from "./booking-step-contact";
@@ -91,6 +92,15 @@ export type BookingWizardProps = {
   initialServiceSlug?: string;
 };
 
+function getInitialWizardState(serviceSlug: string | null | undefined) {
+  const serviceIssue = getBookingServiceIssuePrefill(serviceSlug);
+  return {
+    currentStep: serviceIssue ? 2 : 1,
+    formData: serviceIssue ? { ...INITIAL_FORM_DATA, ...serviceIssue } : INITIAL_FORM_DATA,
+    serviceIssue,
+  };
+}
+
 function getFocusableElements(container: HTMLElement): HTMLElement[] {
   const selectors =
     'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -104,12 +114,13 @@ function joinClasses(...classes: Array<string | false | null | undefined>): stri
   return classes.filter(Boolean).join(" ");
 }
 
-export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
+export function BookingWizard({ initialServiceSlug, open, onOpenChange }: BookingWizardProps) {
   const pathname = usePathname() ?? "/";
   const searchParams = useSearchParams();
-  const [currentStep, setCurrentStep] = useState(1);
+  const firstWizardState = getInitialWizardState(initialServiceSlug ?? searchParams.get("service"));
+  const [currentStep, setCurrentStep] = useState(firstWizardState.currentStep);
   const [direction, setDirection] = useState<"forward" | "back">("forward");
-  const [formData, setFormData] = useState<WizardFormData>(INITIAL_FORM_DATA);
+  const [formData, setFormData] = useState<WizardFormData>(firstWizardState.formData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | undefined>();
   const [bookingId, setBookingId] = useState<string | undefined>();
@@ -122,8 +133,8 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const finalizedRef = useRef(false);
-  const formDataRef = useRef(INITIAL_FORM_DATA);
-  const currentStepRef = useRef(1);
+  const formDataRef = useRef(firstWizardState.formData);
+  const currentStepRef = useRef(firstWizardState.currentStep);
   const bookingIdRef = useRef<string | undefined>(undefined);
   const pathnameRef = useRef(pathname);
   const searchParamsRef = useRef(searchParams);
@@ -211,13 +222,17 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
 
   useEffect(() => {
     if (!open) return;
+    const currentSearchParams = searchParamsRef.current;
+    const initialState = getInitialWizardState(
+      initialServiceSlug ?? currentSearchParams.get("service"),
+    );
     finalizedRef.current = false;
-    formDataRef.current = INITIAL_FORM_DATA;
-    currentStepRef.current = 1;
+    formDataRef.current = initialState.formData;
+    currentStepRef.current = initialState.currentStep;
     bookingIdRef.current = undefined;
     setDirection("forward");
-    setCurrentStep(1);
-    setFormData(INITIAL_FORM_DATA);
+    setCurrentStep(initialState.currentStep);
+    setFormData(initialState.formData);
     setIsSubmitting(false);
     setSubmitError(undefined);
     setBookingId(undefined);
@@ -225,14 +240,16 @@ export function BookingWizard({ open, onOpenChange }: BookingWizardProps) {
     reset();
     clearBookingAttempt();
     const currentPathname = pathnameRef.current ?? "/";
-    const currentSearchParams = searchParamsRef.current;
     recordBookingSiteVisit({
       attribution: parseAttribution(new URLSearchParams(currentSearchParams.toString())),
       pathname: currentPathname,
       search: currentSearchParams.toString(),
     });
-    startBookingAttempt(INITIAL_FORM_DATA);
-  }, [open, reset]);
+    startBookingAttempt(initialState.formData);
+    if (initialState.serviceIssue) {
+      updateBookingAttemptDraft(initialState.formData, ["serviceCategory", "serviceDetail"]);
+    }
+  }, [initialServiceSlug, open, reset]);
 
   useEffect(() => {
     if (!open) return;
