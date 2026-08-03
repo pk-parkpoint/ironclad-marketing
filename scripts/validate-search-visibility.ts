@@ -18,6 +18,21 @@ const REQUIRED_BRAND = "Ironclad Plumbing";
 const REQUIRED_CITY = "Austin";
 const REQUIRED_REGION = "TX";
 const REQUIRED_COUNTRY = "US";
+const REQUIRED_PHONE_DIGITS = "5125062470";
+const RETIRED_PHONE_PATTERNS = [
+  /(?:\+?1[\s.-]*)?\(?512\)?[\s.-]*516[\s.-]*2470/g,
+  /(?:\+?1[\s.-]*)?\(?833\)?[\s.-]*597[\s.-]*1932/g,
+];
+const PUBLIC_SOURCE_ROOTS = [
+  ".env.example",
+  "app",
+  "components",
+  "content",
+  "lib",
+  "next.config.ts",
+  "public",
+  "scripts",
+];
 
 function fail(message: string): never {
   console.error(`search visibility audit failed: ${message}`);
@@ -60,6 +75,35 @@ function read(relativePath: string): string {
 function assertContains(fileLabel: string, source: string, snippet: string): void {
   if (!source.includes(snippet)) {
     fail(`${fileLabel} is missing required snippet: ${snippet}`);
+  }
+}
+
+function publicSourceFiles(relativePath: string): string[] {
+  const absolutePath = path.resolve(process.cwd(), relativePath);
+  const stat = fs.statSync(absolutePath);
+  if (stat.isFile()) {
+    return [absolutePath];
+  }
+  return fs.readdirSync(absolutePath, { withFileTypes: true }).flatMap((entry) => {
+    if (entry.name === "node_modules" || entry.name === ".next" || entry.name === "out") {
+      return [];
+    }
+    return publicSourceFiles(path.join(relativePath, entry.name));
+  });
+}
+
+function assertNoRetiredPhoneNumbers(): void {
+  for (const sourceRoot of PUBLIC_SOURCE_ROOTS) {
+    for (const filePath of publicSourceFiles(sourceRoot)) {
+      const source = fs.readFileSync(filePath, "utf8");
+      for (const retiredPhonePattern of RETIRED_PHONE_PATTERNS) {
+        assert(
+          !retiredPhonePattern.test(source),
+          `${path.relative(process.cwd(), filePath)} contains a retired public phone number`,
+        );
+        retiredPhonePattern.lastIndex = 0;
+      }
+    }
   }
 }
 
@@ -109,6 +153,15 @@ function main() {
   assert(contactInfo.textDisplay.trim().length > 0, "contact text display is empty");
   assert(contactInfo.phoneHref.startsWith("tel:"), "contact phone href must use tel:");
   assert(contactInfo.smsHref.startsWith("sms:"), "contact sms href must use sms:");
+  assert(
+    digitsOnly(contactInfo.phoneHref).slice(-10) === REQUIRED_PHONE_DIGITS,
+    `contact phone must be ${REQUIRED_PHONE_DIGITS}`,
+  );
+  assert(
+    digitsOnly(contactInfo.smsHref).slice(-10) === REQUIRED_PHONE_DIGITS,
+    `contact text number must be ${REQUIRED_PHONE_DIGITS}`,
+  );
+  assertNoRetiredPhoneNumbers();
 
   const schemaTelephoneRaw = String(localBusiness.telephone ?? "");
   assert(schemaTelephoneRaw.length > 0, "LocalBusiness telephone missing");
