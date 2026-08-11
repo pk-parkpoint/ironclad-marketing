@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Phone } from "lucide-react";
-import { HeadquartersAddress } from "@/components/layout/headquarters-address";
 import { SiteLogo } from "@/components/layout/site-logo";
 import { SiteHeader } from "@/components/layout/site-header";
 
@@ -44,7 +43,6 @@ function ChromeFooter({ phoneDisplay, phoneHref }: Pick<ReferenceChromeProps, "p
             {phoneDisplay}
           </a>
           <div className="dc-chrome-footer-note">24/7 emergency line · call or text</div>
-          <HeadquartersAddress className="mt-3 text-[13px] leading-5 text-[#9CA3AF]" />
         </div>
         <nav aria-label="Footer quick links">
           <h3>Quick Links</h3>

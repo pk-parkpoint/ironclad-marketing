@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone } from "lucide-react";
 import type { ReactNode } from "react";
-import { HeadquartersAddress } from "@/components/layout/headquarters-address";
 import { SiteHeader } from "@/components/layout/site-header";
 import { IroncladMotionRoot } from "@/components/motion/ironclad-motion";
 
@@ -32,7 +31,6 @@ function FaqFooter() {
           <p>Austin plumbing backed by clear pricing and written warranties.</p>
           <a className={styles.footerPhone} href={PHONE_TEL}><Phone className={styles.footerPhoneIcon} aria-hidden="true" />{PHONE_DISPLAY}</a>
           <p className={styles.footerAvailability}>24/7 emergency line · call or text</p>
-          <HeadquartersAddress className="mt-3 text-[13px] leading-5 text-[#9CA3AF]" />
         </div>
         <FooterColumn title="FAQ Topics" links={[
           ["All Topics", "/questions"],

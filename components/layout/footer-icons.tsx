@@ -15,6 +15,15 @@ export function MailIcon() {
   );
 }
 
+export function AddressIcon() {
+  return (
+    <svg fill="none" height="20" stroke="#2563EB" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="20">
+      <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z" />
+      <circle cx="12" cy="10" r="2.5" />
+    </svg>
+  );
+}
+
 export function FacebookIcon() {
   return (
     <svg fill="currentColor" height="20" viewBox="0 0 24 24" width="20">
