@@ -1,8 +1,23 @@
 import Link from "next/link";
-import { getPublicContactInfo } from "@/lib/contact";
+import {
+  HEADQUARTERS_CITY,
+  HEADQUARTERS_MAPS_EMBED_URL,
+  HEADQUARTERS_MAPS_URL,
+  HEADQUARTERS_POSTAL_CODE,
+  HEADQUARTERS_REGION,
+  HEADQUARTERS_STREET,
+  getPublicContactInfo,
+} from "@/lib/contact";
 import { ContactForm } from "./contact-form";
-import { FacebookIcon, GoogleGIcon, InstagramIcon, MailIcon, PhoneIcon, StarIcon } from "./footer-icons";
-import { HeadquartersAddress } from "./headquarters-address";
+import {
+  AddressIcon,
+  FacebookIcon,
+  GoogleGIcon,
+  InstagramIcon,
+  MailIcon,
+  PhoneIcon,
+  StarIcon,
+} from "./footer-icons";
 import { SiteLogo } from "./site-logo";
 
 type FooterLink = {
@@ -44,8 +59,6 @@ const SERVICE_LINKS: FooterLink[] = [
   { href: "/plumbing", label: "View All Services →" },
 ];
 
-const GOOGLE_MAPS_EMBED =
-  "https://www.google.com/maps?q=1510%20Newning%20Ave%2C%20Austin%2C%20TX%2078704&output=embed";
 const FOOTER_WORDMARK = "Ironclad";
 
 /* ------------------------------------------------------------------ */
@@ -88,7 +101,7 @@ export function SiteFooter() {
             </div>
 
             {/* Email */}
-            <div className="flex items-center gap-4">
+            <div className="mb-6 flex items-center gap-4">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#DBEAFE]">
                 <MailIcon />
               </span>
@@ -96,6 +109,27 @@ export function SiteFooter() {
                 <p className="text-[15px] font-semibold text-[#111827]">Email</p>
                 <a className="text-[15px] text-[#2563EB] hover:underline" href={`mailto:${contactEmail}`}>
                   {contactEmail}
+                </a>
+              </div>
+            </div>
+
+            {/* Address */}
+            <div className="flex items-center gap-4">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#DBEAFE]">
+                <AddressIcon />
+              </span>
+              <div>
+                <p className="text-[15px] font-semibold text-[#111827]">Address</p>
+                <a
+                  className="text-[15px] text-[#2563EB] hover:underline"
+                  href={HEADQUARTERS_MAPS_URL}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <span className="block">{HEADQUARTERS_STREET}</span>
+                  <span className="block">
+                    {HEADQUARTERS_CITY}, {HEADQUARTERS_REGION} {HEADQUARTERS_POSTAL_CODE}
+                  </span>
                 </a>
               </div>
             </div>
@@ -128,7 +162,6 @@ export function SiteFooter() {
               <p className="mt-4 text-[13px] text-[#9CA3AF]">
                 Austin Plumbing, Backed in Writing
               </p>
-              <HeadquartersAddress className="mt-4 text-[13px] leading-5 text-[#9CA3AF]" />
             </div>
 
             {/* Column 2 — Quick Links */}
@@ -147,7 +180,7 @@ export function SiteFooter() {
                 className="block h-[240px] w-full"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                src={GOOGLE_MAPS_EMBED}
+                src={HEADQUARTERS_MAPS_EMBED_URL}
                 style={{ border: 0 }}
                 title="Ironclad Plumbing service area"
                 width="100%"
