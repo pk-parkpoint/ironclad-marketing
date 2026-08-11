@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { CalendarDays, CheckCircle2, Clock3, Home, Phone, ShieldCheck, Star } from "lucide-react";
+import { HeadquartersAddress } from "@/components/layout/headquarters-address";
 import { SiteHeader } from "@/components/layout/site-header";
 import { getPublicContactInfo } from "@/lib/contact";
 
@@ -93,6 +94,7 @@ export function LocalPageChrome({ bookingHref, children }: { bookingHref: string
                 {phoneDisplay}
               </a>
               <small>24/7 emergency line - call or text</small>
+              <HeadquartersAddress className="mt-3 text-[13px] leading-5 text-[#9CA3AF]" />
             </div>
             <LocalFooterColumn links={quickLinks} title="Quick Links" />
             <LocalFooterColumn links={serviceLinks} title="Services" />

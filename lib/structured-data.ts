@@ -2,7 +2,13 @@ import type { LocationEntry } from "@/content/locations";
 import { LOCATIONS } from "@/content/locations";
 import type { ServiceEntry } from "@/content/services";
 import { BUSINESS_SERVICE_TYPES, TRUST_FIELDS, buildAreaServedList } from "@/content/site-trust";
-import { getPublicContactInfo } from "@/lib/contact";
+import {
+  HEADQUARTERS_CITY,
+  HEADQUARTERS_POSTAL_CODE,
+  HEADQUARTERS_REGION,
+  HEADQUARTERS_STREET,
+  getPublicContactInfo,
+} from "@/lib/contact";
 
 const SCHEMA_CONTEXT = "https://schema.org";
 const BUSINESS_NAME = "Ironclad Plumbing";
@@ -217,8 +223,10 @@ export function buildLocalBusinessSchema(path: string): JsonLd {
     telephone: contactInfo.phoneHref.replace(/^tel:/, ""),
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Austin",
-      addressRegion: "TX",
+      streetAddress: HEADQUARTERS_STREET,
+      addressLocality: HEADQUARTERS_CITY,
+      addressRegion: HEADQUARTERS_REGION,
+      postalCode: HEADQUARTERS_POSTAL_CODE,
       addressCountry: "US",
     },
     geo: {
