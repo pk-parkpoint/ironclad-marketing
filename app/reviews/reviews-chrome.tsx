@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HeadquartersAddress } from "@/components/layout/headquarters-address";
 import { SiteHeader } from "@/components/layout/site-header";
 import { getPublicContactInfo } from "@/lib/contact";
 import styles from "./reviews-page.module.css";
@@ -54,6 +55,7 @@ export function ReviewsFooter() {
           <p>Austin plumbing backed by clear pricing and written warranties.</p>
           <a href={phoneHref}><PhoneIcon />{phoneDisplay}</a>
           <small>24/7 emergency line · call or text</small>
+          <HeadquartersAddress className="mt-3 text-[13px] leading-5 text-[#9CA3AF]" />
         </div>
         <FooterColumn links={quickLinks} title="Quick Links" />
         <FooterColumn links={serviceLinks} title="Services" />
