@@ -73,7 +73,7 @@ export function customerArrivalWindows(windows: PublicBookingWindow[]): Customer
     const firstCandidate = candidates[0];
     if (!firstCandidate) continue;
     const daypartStart = new Date(withHour(firstCandidate.startTime, slot.startHour));
-    if (daypartStart.getTime() <= Date.now()) continue;
+    if (daypartStart.getTime() < Date.now()) continue;
     const displayOfferId = `${slot.key}:${firstCandidate.offerId}`;
     result.candidatesByOfferId[displayOfferId] = candidates;
     result.windows.push({

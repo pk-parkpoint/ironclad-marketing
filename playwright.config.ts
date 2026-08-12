@@ -4,10 +4,11 @@ const APP_PORT = Number(process.env.PLAYWRIGHT_APP_PORT ?? 4010);
 const MOCK_PORT = Number(process.env.PLAYWRIGHT_MOCK_PORT ?? 4011);
 const BASE_URL = `http://127.0.0.1:${APP_PORT}`;
 const MOCK_URL = `http://127.0.0.1:${MOCK_PORT}`;
+const SYSTEM_CHROME = process.env.PLAYWRIGHT_USE_SYSTEM_CHROME === "1" ? { channel: "chrome" as const } : {};
 const projects = [
   {
     name: "chromium",
-    use: { ...devices["Desktop Chrome"] },
+    use: { ...devices["Desktop Chrome"], ...SYSTEM_CHROME },
   },
   {
     name: "firefox",
@@ -19,7 +20,7 @@ const projects = [
   },
   {
     name: "mobile-chrome",
-    use: { ...devices["Pixel 5"] },
+    use: { ...devices["Pixel 5"], ...SYSTEM_CHROME },
   },
   {
     name: "ios-safari",
