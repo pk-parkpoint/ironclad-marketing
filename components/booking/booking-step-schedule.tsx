@@ -3,6 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import type { PublicBookingWindow } from "@/lib/public-booking-facade";
 import type { WizardFormData } from "./booking-wizard";
+import {
+  dateLabel,
+  firstOfferableDateId,
+  formatDateId,
+  ironcladTodayDateId,
+} from "./booking-date-policy";
 import styles from "./booking-wizard.module.css";
 
 const DAY_LABELS = ["S", "M", "T", "W", "T", "F", "S"];
@@ -27,26 +33,6 @@ type Props = {
   onBack: () => void;
   onNext: () => void;
 };
-
-function formatDateId(year: number, month: number, day: number): string {
-  return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-}
-
-function dateLabel(dateId: string): string {
-  const date = new Date(`${dateId}T00:00:00`);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() + 1);
-  const label = new Intl.DateTimeFormat("en-US", {
-    day: "numeric",
-    month: "short",
-    weekday: "long",
-  }).format(date);
-  if (date.getTime() === today.getTime()) return `Today, ${label}`;
-  if (date.getTime() === tomorrow.getTime()) return `Tomorrow, ${label}`;
-  return label;
-}
 
 function timeLabel(window: PublicBookingWindow): string {
   if (window.arrivalWindowLabel) return window.arrivalWindowLabel;
@@ -75,11 +61,11 @@ export function BookingStepSchedule({
   onBack,
   onNext,
 }: Props) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const defaultDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
-  const [viewYear, setViewYear] = useState(defaultDate.getFullYear());
-  const [viewMonth, setViewMonth] = useState(defaultDate.getMonth());
+  const todayId = ironcladTodayDateId();
+  const defaultDateId = firstOfferableDateId();
+  const [defaultYear, defaultMonth] = defaultDateId.split("-").map(Number);
+  const [viewYear, setViewYear] = useState(defaultYear);
+  const [viewMonth, setViewMonth] = useState(defaultMonth - 1);
   const [dateError, setDateError] = useState<string | null>(null);
   const autoDateRef = useRef(false);
   const autoWindowRef = useRef<string | null>(null);
@@ -93,7 +79,6 @@ export function BookingStepSchedule({
   const selectedWindows = selectedDate ? windowsByDate[selectedDate] || [] : [];
   const isLoadingSelectedDate = Boolean(selectedDate && loadingDate === selectedDate);
   const firstWindow = selectedWindows[0];
-  const defaultDateId = formatDateId(defaultDate.getFullYear(), defaultDate.getMonth(), defaultDate.getDate());
   useEffect(() => {
     if (selectedDate || autoDateRef.current) return;
     autoDateRef.current = true;
@@ -114,8 +99,8 @@ export function BookingStepSchedule({
     return () => cancelAnimationFrame(frame);
   }, [selectedDate, selectedWindows.length]);
 
-  const canGoPrev =
-    viewYear > today.getFullYear() || (viewYear === today.getFullYear() && viewMonth > today.getMonth());
+  const currentMonthId = `${viewYear}-${String(viewMonth + 1).padStart(2, "0")}`;
+  const canGoPrev = currentMonthId > todayId.slice(0, 7);
 
   function prevMonth() {
     if (!canGoPrev) return;
@@ -137,7 +122,7 @@ export function BookingStepSchedule({
   }
 
   function isDayPast(day: number): boolean {
-    return new Date(viewYear, viewMonth, day) < today;
+    return formatDateId(viewYear, viewMonth, day) < todayId;
   }
 
   const cells: (number | null)[] = [];

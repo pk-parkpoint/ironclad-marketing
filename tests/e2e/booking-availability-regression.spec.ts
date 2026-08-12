@@ -1,79 +1,58 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
-function tomorrowId(): string {
-  const date = new Date();
-  date.setHours(0, 0, 0, 0);
-  date.setDate(date.getDate() + 1);
-  return date.toISOString().slice(0, 10);
-}
+type AvailabilityCase = {
+  expectedDate: string;
+  expectedWindowIds: string[];
+  expectedVisible: string[];
+  frozenTime: string;
+  hidden: string[];
+  name: string;
+};
 
-function rawWindow(date: string, hour: number, id: string) {
+const cases: AvailabilityCase[] = [
+  {
+    expectedDate: "2026-08-12",
+    expectedWindowIds: ["window-12", "window-13"],
+    expectedVisible: ["12:00 PM - 3:00 PM", "3:00 PM - 6:00 PM"],
+    frozenTime: "2026-08-12T15:00:00Z",
+    hidden: ["9:00 AM - 12:00 PM"],
+    name: "at 10 AM it opens today at the noon window",
+  },
+  {
+    expectedDate: "2026-08-12",
+    expectedWindowIds: ["window-15"],
+    expectedVisible: ["3:00 PM - 6:00 PM"],
+    frozenTime: "2026-08-12T19:00:00Z",
+    hidden: ["9:00 AM - 12:00 PM", "12:00 PM - 3:00 PM"],
+    name: "at 2 PM it opens today at the 3 PM window",
+  },
+  {
+    expectedDate: "2026-08-13",
+    expectedWindowIds: ["window-9"],
+    expectedVisible: [
+      "9:00 AM - 12:00 PM",
+      "12:00 PM - 3:00 PM",
+      "3:00 PM - 6:00 PM",
+    ],
+    frozenTime: "2026-08-12T20:01:00Z",
+    hidden: [],
+    name: "after 3 PM it opens tomorrow with all three windows",
+  },
+];
+
+function rawWindow(date: string, hour: number) {
   const startHour = String(hour).padStart(2, "0");
   const endHour = String(hour + 2).padStart(2, "0");
   return {
-    arrivalWindowLabel: `${startHour}:00 - ${endHour}:00`,
-    displayLabel: `${startHour}:00 - ${endHour}:00`,
     endTime: `${date}T${endHour}:00:00-05:00`,
     isAvailable: true,
-    offerId: id,
+    offerId: `offer-${hour}`,
     startTime: `${date}T${startHour}:00:00-05:00`,
-    windowId: id,
+    windowId: `window-${hour}`,
   };
 }
 
-test("tomorrow is selected and populated without a date click", async ({ page }) => {
-  const searchedDates: string[] = [];
-  const heldWindowIds: string[] = [];
-
-  await page.route("**/api/scheduling/v3/availability/*", async (route) => {
-    const action = route.request().url().split("/").pop() || "";
-    const payload = route.request().postDataJSON() as Record<string, string>;
-    if (action === "search") {
-      searchedDates.push(payload.date);
-      await route.fulfill({
-        contentType: "application/json",
-        json: {
-          requestId: "search-regression",
-          state: "available",
-          windows: [
-            rawWindow(payload.date, 12, "midday-primary"),
-            rawWindow(payload.date, 13, "midday-fallback"),
-            rawWindow(payload.date, 15, "afternoon-primary"),
-          ],
-        },
-      });
-      return;
-    }
-    if (action === "hold") {
-      heldWindowIds.push(payload.windowId);
-      if (payload.windowId === "midday-primary") {
-        await route.fulfill({
-          contentType: "application/json",
-          json: { error: "Selected window is no longer available." },
-          status: 409,
-        });
-        return;
-      }
-      await route.fulfill({
-        contentType: "application/json",
-        json: {
-          expiresAt: new Date(Date.now() + 5 * 60 * 1000).toISOString(),
-          holdId: "hold-fallback",
-          offerId: payload.offerId,
-          state: "hold_active",
-          ttlSeconds: 300,
-          windowId: payload.windowId,
-        },
-        status: 201,
-      });
-      return;
-    }
-    await route.fulfill({
-      contentType: "application/json",
-      json: { holdId: payload.holdId, released: true, state: "released" },
-    });
-  });
-
+async function reachScheduleStep(page: Page) {
   await page.goto("/book");
   const dialog = page.getByRole("dialog", { name: "Request an Appointment" });
   await dialog.getByRole("button", { name: /Leaks, Blockages, or Sewer/i }).click();
@@ -85,17 +64,87 @@ test("tomorrow is selected and populated without a date click", async ({ page })
   await dialog.locator('input[type="tel"]').fill("5125550100");
   await textInputs.nth(2).fill("123 Test Street, Austin, TX 78701");
   await dialog.getByRole("button", { name: "Continue" }).click();
+  return dialog;
+}
 
-  const tomorrow = dialog.getByRole("button", { name: /^Tomorrow,/ });
-  const midday = dialog.getByRole("button", { name: "12:00 PM - 3:00 PM" });
-  await expect(tomorrow).toHaveAttribute("aria-pressed", "true");
-  await expect(dialog.getByRole("button", { name: "9:00 AM - 12:00 PM" })).toHaveCount(0);
-  await expect(midday).toBeVisible();
-  await expect(dialog.getByRole("button", { name: "3:00 PM - 6:00 PM" })).toBeVisible();
-  await expect(midday).toHaveAttribute("aria-pressed", "true");
-  await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
-  await expect(midday).toBeInViewport();
+for (const scenario of cases) {
+  test(scenario.name, async ({ page }) => {
+    await page.clock.setFixedTime(new Date(scenario.frozenTime));
+    const searchedDates: string[] = [];
+    const heldWindowIds: string[] = [];
 
-  expect(searchedDates).toEqual([tomorrowId()]);
-  expect(heldWindowIds).toEqual(["midday-primary", "midday-fallback"]);
-});
+    await page.route("**/api/scheduling/v3/availability/*", async (route) => {
+      const action = route.request().url().split("/").pop() || "";
+      const payload = route.request().postDataJSON() as Record<string, string>;
+      if (action === "search") {
+        searchedDates.push(payload.date);
+        await route.fulfill({
+          contentType: "application/json",
+          json: {
+            requestId: "search-regression",
+            state: "available",
+            windows: [
+              rawWindow(payload.date, 9),
+              rawWindow(payload.date, 12),
+              ...(scenario.expectedWindowIds.length > 1
+                ? [rawWindow(payload.date, 13)]
+                : []),
+              rawWindow(payload.date, 15),
+            ],
+          },
+        });
+        return;
+      }
+      if (action === "hold") {
+        heldWindowIds.push(payload.windowId);
+        if (scenario.expectedWindowIds.length > 1 && payload.windowId === "window-12") {
+          await route.fulfill({
+            contentType: "application/json",
+            json: { error: "Selected window is no longer available." },
+            status: 409,
+          });
+          return;
+        }
+        await route.fulfill({
+          contentType: "application/json",
+          json: {
+            expiresAt: new Date(
+              new Date(scenario.frozenTime).getTime() + 5 * 60 * 1000,
+            ).toISOString(),
+            holdId: "hold-regression",
+            offerId: payload.offerId,
+            state: "hold_active",
+            ttlSeconds: 300,
+            windowId: payload.windowId,
+          },
+          status: 201,
+        });
+        return;
+      }
+      await route.fulfill({
+        contentType: "application/json",
+        json: { holdId: payload.holdId, released: true, state: "released" },
+      });
+    });
+
+    const dialog = await reachScheduleStep(page);
+    const selectedDate = dialog.getByRole("button", {
+      name: scenario.expectedDate === "2026-08-12" ? /^Today,/ : /^Tomorrow,/,
+    });
+    await expect(selectedDate).toHaveAttribute("aria-pressed", "true");
+
+    for (const label of scenario.expectedVisible) {
+      await expect(dialog.getByRole("button", { name: label })).toBeVisible();
+    }
+    for (const label of scenario.hidden) {
+      await expect(dialog.getByRole("button", { name: label })).toHaveCount(0);
+    }
+
+    const firstVisible = dialog.getByRole("button", { name: scenario.expectedVisible[0] });
+    await expect(firstVisible).toHaveAttribute("aria-pressed", "true");
+    await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
+    await expect(firstVisible).toBeInViewport();
+    expect(searchedDates).toEqual([scenario.expectedDate]);
+    expect(heldWindowIds).toEqual(scenario.expectedWindowIds);
+  });
+}
