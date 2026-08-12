@@ -146,6 +146,7 @@
 .heroPhoto {
   object-fit: cover;
   object-position: 78% center;
+  transform: translateX(10%);
 }
 
 .heroScrim,
@@ -934,6 +935,7 @@
 @media (max-width: 767px) {
   .heroPhoto {
     object-position: 72% center;
+    transform: none;
   }
 
   .promoBar {
