@@ -106,7 +106,7 @@ export default function ReviewsPage() {
       <StructuredData data={schemas} id="ld-reviews-page" />
       <main className={styles.page}>
         <section className={styles.hero}>
-          <Image alt="The Ironclad Plumbing team beside their service truck in Austin" className={styles.heroPhoto} fetchPriority="high" fill priority quality={84} src="/media/reviews/ironclad-team-2026-08-12.webp" sizes="100vw" />
+          <Image alt="The Ironclad Plumbing team beside their service truck in Austin" className={styles.heroPhoto} fetchPriority="high" fill priority quality={96} src="/media/reviews/ironclad-team-2026-08-12-retina-v2.webp" sizes="100vw" />
           <div className={styles.heroScrim} />
           <div className={styles.heroGlow} />
           <div className={styles.heroInner}>

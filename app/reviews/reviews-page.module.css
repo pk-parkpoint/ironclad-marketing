@@ -146,7 +146,8 @@
 .heroPhoto {
   object-fit: cover;
   object-position: 78% center;
-  transform: translateX(10%);
+  transform: scale(1.1);
+  transform-origin: left center;
 }
 
 .heroScrim,
