@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { StructuredData } from "@/components/seo/structured-data";
 import { PUBLISHED_REVIEW_SUMMARY, REVIEWS, type ReviewEntry } from "@/content/reviews";
 import { getPublicContactInfo } from "@/lib/contact";
+import { CriticalHeroPicture } from "@/components/media/critical-hero-picture";
 import { buildPageMetadata } from "@/lib/seo";
 import {
   buildLocalBusinessSchema,
@@ -106,7 +106,15 @@ export default function ReviewsPage() {
       <StructuredData data={schemas} id="ld-reviews-page" />
       <main className={styles.page}>
         <section className={styles.hero}>
-          <Image alt="The Ironclad Plumbing team beside their service truck in Austin" className={styles.heroPhoto} fetchPriority="high" fill priority quality={96} src="/media/reviews/ironclad-team-2026-08-12-retina-v2.webp" sizes="100vw" />
+          <CriticalHeroPicture
+            alt="The Ironclad Plumbing team beside their service truck in Austin"
+            avifSrcSet="/media/reviews/ironclad-team-hero-fast-640.avif 640w, /media/reviews/ironclad-team-hero-fast-1080.avif 1080w, /media/reviews/ironclad-team-hero-fast-1920.avif 1920w"
+            className={styles.heroPhoto}
+            fallbackSrc="/media/reviews/ironclad-team-hero-fallback.jpg"
+            height={1280}
+            sizes="100vw"
+            width={1920}
+          />
           <div className={styles.heroScrim} />
           <div className={styles.heroGlow} />
           <div className={styles.heroInner}>

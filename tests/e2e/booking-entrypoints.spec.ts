@@ -70,7 +70,7 @@ test("booking links reopen the wizard after closing on the book route", async ({
 test("location booking links with query strings open the wizard on the book route", async ({ page }) => {
   await page.goto("/service-area/austin-tx");
 
-  await clickBookingTrigger(page, "Book in Austin");
+  await clickBookingTrigger(page, "Schedule Online");
 
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
   const url = new URL(page.url());

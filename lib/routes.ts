@@ -127,7 +127,6 @@ const SERVICE_AREA_DROPDOWN_LINKS: NavChildLink[] = [
 const ABOUT_DROPDOWN_LINKS: NavChildLink[] = [
   { href: "/reviews", label: "Our Reviews" },
   { href: "/guarantees", label: "Our Guarantees" },
-  { href: "/site-map", label: "Site Map" },
   { href: "/careers", label: "Careers" },
   { href: "/about", label: "About Us" },
 ];

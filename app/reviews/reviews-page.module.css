@@ -144,10 +144,12 @@
 }
 
 .heroPhoto {
+  height: 100%;
   object-fit: cover;
   object-position: 78% center;
   transform: scale(1.1);
   transform-origin: left center;
+  width: 100%;
 }
 
 .heroScrim,

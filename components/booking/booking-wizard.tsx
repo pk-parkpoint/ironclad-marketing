@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { parseAttribution } from "@/lib/analytics";
@@ -220,6 +221,13 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
     onOpenChange(false);
   }
 
+  function handleDialogKeyDown(event: ReactKeyboardEvent<HTMLDivElement>) {
+    if (event.key !== "Escape") return;
+    event.preventDefault();
+    event.stopPropagation();
+    handleDismiss();
+  }
+
   useEffect(() => {
     if (!open) return;
     const currentSearchParams = searchParamsRef.current;
@@ -405,12 +413,14 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
   return (
     <div
       ref={modalRef}
+      autoFocus
       role="dialog"
       aria-modal="true"
       aria-labelledby="booking-wizard-title"
       aria-describedby="booking-modal-description"
       className={styles.page}
       data-theme={theme}
+      onKeyDown={handleDialogKeyDown}
       tabIndex={-1}
     >
       <div className={styles.blobA} aria-hidden="true" />

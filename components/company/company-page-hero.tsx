@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { House, Phone, ShieldCheck, Star } from "lucide-react";
+import { CriticalHeroPicture } from "@/components/media/critical-hero-picture";
 import type { CompanyPageConfig } from "./company-page-types";
 import styles from "./company-page.module.css";
 
@@ -23,14 +23,14 @@ export function CompanyPageHero({ config, phoneDisplay, phoneHref }: CompanyPage
   return (
     <>
       <section className={styles.hero} data-company-section="hero">
-        <Image
+        <CriticalHeroPicture
           alt="The Ironclad Plumbing team beside their service truck"
+          avifSrcSet="/media/company/ironclad-team-hero-fast-640.avif 640w, /media/company/ironclad-team-hero-fast-1080.avif 1080w, /media/company/ironclad-team-hero-fast-1920.avif 1920w"
           className={styles.heroImage}
-          fill
-          priority
-          quality={92}
+          fallbackSrc="/media/company/ironclad-team-hero-fallback.jpg"
+          height={1080}
           sizes="100vw"
-          src="/media/company/ironclad-team-hero-2400x1350.jpg"
+          width={1920}
         />
         <div aria-hidden="true" className={styles.heroOverlay} />
         <div aria-hidden="true" className={styles.heroGlow} />
