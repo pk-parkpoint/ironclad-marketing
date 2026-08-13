@@ -84,7 +84,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
     path: "guarantees",
     titleTag: "The Ironclad Guarantees | Ironclad Plumbing - Austin, TX",
     metaDescription:
-      "Read the six written guarantees Ironclad Plumbing makes to Austin homeowners before any residential plumbing job begins.",
+      "Read Ironclad Plumbing's four clear service guarantees: upfront pricing, arrival updates, tested workmanship, and a written job warranty.",
     h1: "The Ironclad Guarantee - In Writing, Not in Marketing Speak",
     section: "Trust",
   },
