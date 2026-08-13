@@ -146,8 +146,10 @@ export const TOP_NAV_LINKS: TopNavLink[] = [
 ];
 
 export const DEDICATED_MARKETING_PATHS = new Set([
+  "about",
   "book",
   "blog",
+  "careers",
   "commercial-plumbing",
   "data",
   "faq",
