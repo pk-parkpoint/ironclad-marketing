@@ -14,9 +14,9 @@ const PAGES = [
     route: "/guarantees",
     slug: "guarantees",
     heading: "The Ironclad Guarantee",
-    rowsHeading: "The Five Guarantees",
-    processHeading: "How to Use a Guarantee",
-    whyHeading: "Why We Care About This",
+    rowsHeading: "Four Promises We Put in Writing",
+    processHeading: "How the Guarantee Shows Up",
+    whyHeading: "What These Promises Protect",
     faqHeading: "Guarantee Questions, Answered",
   },
   {
@@ -106,10 +106,35 @@ for (const pageConfig of PAGES) {
       finalBackground: "rgb(22, 32, 43)",
       contentOverflow: false,
     });
-    expect(designMetrics.rowCount).toBe(pageConfig.slug === "guarantees" ? 5 : 4);
+    expect(designMetrics.rowCount).toBe(4);
     expect(runtimeErrors.filter((message) => !isProtectedShellWarning(message))).toEqual([]);
   });
 }
+
+test("/guarantees uses Ironclad's established four-promise language", async ({ page }) => {
+  await page.goto("/guarantees");
+  const root = page.locator('[data-company-page="guarantees"]');
+  const pageCopy = await root.innerText();
+
+  for (const promise of [
+    "Fixed Right the First Time",
+    "Upfront Pricing, No Surprises",
+    "On Time or We Call Ahead",
+    "Written Warranty on Every Job",
+  ]) {
+    expect(pageCopy).toContain(promise);
+  }
+
+  for (const unsupportedClaim of [
+    "project is free",
+    "second opinion",
+    "lifetime support",
+    "within the hour",
+    "refund or credit",
+  ]) {
+    expect(pageCopy.toLowerCase()).not.toContain(unsupportedClaim);
+  }
+});
 
 test("company pages keep the approved two-column mobile pillar layout without overflow", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
