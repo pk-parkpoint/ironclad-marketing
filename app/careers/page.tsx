@@ -2,36 +2,34 @@ import { CompanyPage } from "@/components/company/company-page";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { StructuredData } from "@/components/seo/structured-data";
-import { GUARANTEES_COMPANY_PAGE } from "@/content/company-page-guarantees";
+import { CAREERS_COMPANY_PAGE } from "@/content/company-page-careers";
 import { buildPageMetadata } from "@/lib/seo";
 import {
   buildBreadcrumbItems,
   buildBreadcrumbListSchema,
-  buildLocalBusinessSchema,
   buildOrganizationSchema,
   buildSchemaStack,
   buildWebSiteSchema,
 } from "@/lib/structured-data";
 
 export const metadata = buildPageMetadata({
-  title: "The Ironclad Guarantee | Plumbing Guarantees, Austin TX",
-  description: GUARANTEES_COMPANY_PAGE.intro,
-  path: "/guarantees",
+  title: "Careers at Ironclad Plumbing | Austin, TX Plumbing Jobs",
+  description: CAREERS_COMPANY_PAGE.intro,
+  path: "/careers",
 });
 
-export default function GuaranteesPage() {
+export default function CareersPage() {
   const schemas = buildSchemaStack(
-    buildBreadcrumbListSchema(buildBreadcrumbItems("/guarantees", "The Ironclad Guarantee")),
+    buildBreadcrumbListSchema(buildBreadcrumbItems("/careers", "Careers")),
     buildWebSiteSchema(),
     buildOrganizationSchema(),
-    buildLocalBusinessSchema("/guarantees"),
   );
 
   return (
     <>
       <SiteHeader />
-      <StructuredData data={schemas} id="ld-guarantees-page" />
-      <CompanyPage config={GUARANTEES_COMPANY_PAGE} />
+      <StructuredData data={schemas} id="ld-careers-page" />
+      <CompanyPage config={CAREERS_COMPANY_PAGE} />
       <SiteFooter />
     </>
   );
