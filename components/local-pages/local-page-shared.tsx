@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { CalendarDays, CheckCircle2, Clock3, Home, Phone, ShieldCheck, Star } from "lucide-react";
+import { CriticalHeroPicture } from "@/components/media/critical-hero-picture";
 import { SiteHeader } from "@/components/layout/site-header";
 import { getPublicContactInfo } from "@/lib/contact";
 
@@ -135,14 +136,14 @@ export function LocalHero({
 }: LocalHeroProps) {
   return (
     <section className="local-hero">
-      <Image
+      <CriticalHeroPicture
         alt="The Ironclad Plumbing team beside their service truck in Austin"
+        avifSrcSet="/media/services/ironclad-team-hero-fast-640.avif 640w, /media/services/ironclad-team-hero-fast-1080.avif 1080w, /media/services/ironclad-team-hero-fast-1820.avif 1820w"
         className="local-hero-image"
-        fetchPriority="high"
-        fill
-        priority
+        fallbackSrc="/media/services/ironclad-team-hero-fallback.jpg"
+        height={864}
         sizes="100vw"
-        src="/media/services/ironclad-team-hero.png"
+        width={1820}
       />
       <div className="local-hero-inner">
         {parentLink ? (

@@ -38,8 +38,10 @@
 }
 
 .heroImage {
+  height: 100%;
   object-fit: cover;
   object-position: 72% 53%;
+  width: 100%;
 }
 
 .heroOverlay,

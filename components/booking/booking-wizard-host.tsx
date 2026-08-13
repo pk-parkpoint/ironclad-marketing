@@ -86,26 +86,15 @@ export function BookingWizardHost() {
     document.addEventListener("focusin", preloadOnIntent);
     document.addEventListener("touchstart", preloadOnIntent, { passive: true });
 
-    const idleId =
-      "requestIdleCallback" in window
-        ? window.requestIdleCallback(() => {
-            void preloadBookingWizard();
-          }, { timeout: 2500 })
-        : globalThis.setTimeout(() => {
-            void preloadBookingWizard();
-          }, 1800);
+    router.prefetch("/book");
+    void preloadBookingWizard();
 
     return () => {
       document.removeEventListener("pointerover", preloadOnIntent);
       document.removeEventListener("focusin", preloadOnIntent);
       document.removeEventListener("touchstart", preloadOnIntent);
-      if ("cancelIdleCallback" in window && typeof idleId === "number") {
-        window.cancelIdleCallback(idleId);
-      } else {
-        globalThis.clearTimeout(idleId);
-      }
     };
-  }, []);
+  }, [router]);
 
   if (!open || pathname === "/book") {
     return null;
