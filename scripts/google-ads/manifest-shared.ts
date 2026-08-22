@@ -2,7 +2,33 @@ import type { SitelinkSpec } from "./types";
 
 export const SITE_ORIGIN = "https://ironcladtexas.com";
 export const LICENSE_DESCRIPTION =
-  "Licensed & insured Austin plumbers. RMP #39871. You approve the price before we start.";
+  "Licensed & insured Austin plumbers. Locally and family owned. Available 24/7.";
+
+export const FIRST_SERVICE_PROMOTION_HEADLINE = "10% Off Your First Service";
+export const FIRST_SERVICE_PROMOTION_DESCRIPTION =
+  "New customers save 10% on their first service. Book online or call Ironclad today.";
+export const STANDARD_SCHEDULE_DESCRIPTION =
+  "Schedule anytime, day or night. Our 24/7 team is here when you need us.";
+
+export const STANDARD_HEADLINES = [
+  "Austin Plumbing Experts",
+  "Available 24/7",
+  "Schedule Anytime, Day or Night",
+  "Locally & Family Owned",
+  "Options That Fit Your Home",
+  "Fast Appointments Available",
+  "Trusted Local Plumbers",
+  "New Customers Save 10%",
+  "Book Online Anytime",
+  "Call Ironclad Plumbing",
+  "Friendly Local Service",
+  "Help When You Need It",
+  "Service Built Around You",
+];
+
+export function standardDescriptions(expertise: string, promotion = FIRST_SERVICE_PROMOTION_DESCRIPTION): string[] {
+  return [LICENSE_DESCRIPTION, expertise, STANDARD_SCHEDULE_DESCRIPTION, promotion];
+}
 
 export const TARGET_CITIES = [
   "Austin",
@@ -83,13 +109,13 @@ export const SITELINKS: SitelinkSpec[] = [
 
 export const CALLOUTS = [
   "Fast Appointments",
-  "Licensed & Insured",
+  "24/7 Availability",
+  "Schedule Anytime",
   "Locally Owned",
-  "Highly Rated",
-  "Price Approved First",
-  "Free Online Booking",
-  "Camera Inspection",
-  "Financing Available",
+  "Family Owned",
+  "Austin Plumbing Experts",
+  "Options for Your Home",
+  "New Customer Savings",
 ] as const;
 
 export const STRUCTURED_SNIPPET_VALUES = [
