@@ -22,6 +22,15 @@ export function validateManifest() {
     campaignNames.add(campaign.name.toLowerCase());
     requireCondition(campaign.descriptions[0] === LICENSE_DESCRIPTION, `${campaign.name}: description 1 must be the license line`);
     requireCondition(campaign.descriptions.length >= 2 && campaign.descriptions.length <= 4, `${campaign.name}: invalid description count`);
+    requireCondition(campaign.headlines.length + (campaign.pinnedHeadline2 ? 2 : 1) <= 15, `${campaign.name}: responsive search ad exceeds 15 headlines`);
+    if (campaign.pinnedHeadline2) {
+      requireCondition(campaign.pinnedHeadline2.length <= 30, `${campaign.name}: pinned headline 2 exceeds 30 characters`);
+      requireCondition(!PHONE_PATTERN.test(campaign.pinnedHeadline2), `${campaign.name}: phone number found in pinned headline 2`);
+    }
+    for (const headline of campaign.headlines) {
+      requireCondition(headline.length <= 30, `${campaign.name}: headline exceeds 30 characters: ${headline}`);
+      requireCondition(!PHONE_PATTERN.test(headline), `${campaign.name}: phone number found in headline`);
+    }
     for (const description of campaign.descriptions) {
       requireCondition(description.length <= 90, `${campaign.name}: description exceeds 90 characters: ${description}`);
       requireCondition(!PHONE_PATTERN.test(description), `${campaign.name}: phone number found in ad description`);

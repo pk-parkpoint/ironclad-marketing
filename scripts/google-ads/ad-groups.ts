@@ -144,7 +144,7 @@ type AdRow = {
   };
 };
 
-function desiredAd(campaign: CampaignSpec, group: AdGroupSpec) {
+export function desiredAd(campaign: CampaignSpec, group: AdGroupSpec) {
   return {
     finalUrls: [group.finalUrl],
     responsiveSearchAd: {
@@ -154,6 +154,9 @@ function desiredAd(campaign: CampaignSpec, group: AdGroupSpec) {
       })),
       headlines: [
         { pinnedField: "HEADLINE_1", text: group.pinnedHeadline },
+        ...(campaign.pinnedHeadline2
+          ? [{ pinnedField: "HEADLINE_2", text: campaign.pinnedHeadline2 }]
+          : []),
         ...campaign.headlines.map((text) => ({ text })),
       ],
     },
