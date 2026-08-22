@@ -21,6 +21,7 @@ export type CampaignSpec = {
   launchEnabled: boolean;
   crossNegatives: string[];
   residentialFilter: boolean;
+  pinnedHeadline2?: string;
   headlines: string[];
   descriptions: string[];
   adGroups: AdGroupSpec[];
