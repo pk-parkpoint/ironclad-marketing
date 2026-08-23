@@ -53,11 +53,25 @@ export function validateManifest() {
 
     const groupNames = new Set<string>();
     for (const group of campaign.adGroups) {
+      const pinnedHeadline2 = group.pinnedHeadline2 || campaign.pinnedHeadline2;
+      const descriptions = group.promotionDescription
+        ? [...campaign.descriptions.slice(0, -1), group.promotionDescription]
+        : campaign.descriptions;
       requireCondition(!groupNames.has(group.name.toLowerCase()), `${campaign.name}: duplicate ad group ${group.name}`);
       groupNames.add(group.name.toLowerCase());
       requireCondition(group.pinnedHeadline.length <= 30 || group.pinnedHeadline.startsWith("{LOCATION("), `${campaign.name}/${group.name}: pinned headline exceeds 30 characters`);
       requireCondition(!PHONE_PATTERN.test(group.pinnedHeadline), `${campaign.name}/${group.name}: phone number found in headline`);
       requireCondition(!OPERATIONAL_DETAIL_PATTERN.test(group.pinnedHeadline), `${campaign.name}/${group.name}: operational detail found in headline`);
+      requireCondition(Boolean(group.pinnedHeadline2) === Boolean(group.promotionDescription), `${campaign.name}/${group.name}: promotion headline and description overrides must be paired`);
+      requireCondition(Boolean(pinnedHeadline2), `${campaign.name}/${group.name}: promotion must be pinned to headline 2`);
+      requireCondition((pinnedHeadline2 || "").length <= 30, `${campaign.name}/${group.name}: pinned headline 2 exceeds 30 characters`);
+      requireCondition(!PHONE_PATTERN.test(pinnedHeadline2 || ""), `${campaign.name}/${group.name}: phone number found in pinned headline 2`);
+      requireCondition(!OPERATIONAL_DETAIL_PATTERN.test(pinnedHeadline2 || ""), `${campaign.name}/${group.name}: operational detail found in pinned headline 2`);
+      for (const description of descriptions) {
+        requireCondition(description.length <= 90, `${campaign.name}/${group.name}: description exceeds 90 characters: ${description}`);
+        requireCondition(!PHONE_PATTERN.test(description), `${campaign.name}/${group.name}: phone number found in ad description`);
+        requireCondition(!OPERATIONAL_DETAIL_PATTERN.test(description), `${campaign.name}/${group.name}: operational detail found in description: ${description}`);
+      }
       requireCondition(!group.finalUrl.endsWith("/book-online") && !group.finalUrl.endsWith("/book"), `${campaign.name}/${group.name}: booking URL cannot be a search destination`);
       requireCondition(group.keywords.length > 0, `${campaign.name}/${group.name}: no keywords`);
       const keywordKeys = new Set<string>();

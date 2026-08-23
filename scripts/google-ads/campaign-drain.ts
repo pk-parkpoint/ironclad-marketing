@@ -1,7 +1,8 @@
 import {
-  FIRST_SERVICE_PROMOTION_HEADLINE,
   SITE_ORIGIN,
   STANDARD_HEADLINES,
+  STANDARD_PROMOTION_DESCRIPTION,
+  STANDARD_PROMOTION_HEADLINE,
   standardDescriptions,
 } from "./manifest-shared";
 import { exact, phrase, type CampaignSpec } from "./types";
@@ -14,10 +15,11 @@ export const DRAIN_SEWER: CampaignSpec = {
   launchEnabled: true,
   crossNegatives: ["emergency", "24 hour", "open now", "water heater", "tankless", "slab leak", "repipe"],
   residentialFilter: true,
-  pinnedHeadline2: FIRST_SERVICE_PROMOTION_HEADLINE,
+  pinnedHeadline2: "Drain Cleaning for $69",
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
     "Drain and sewer experts who explain the issue and give you the best options for your home.",
+    "Get expert drain cleaning for $69. Schedule anytime or call our 24/7 team.",
   ),
   adGroups: [
     {
@@ -42,6 +44,8 @@ export const DRAIN_SEWER: CampaignSpec = {
       name: "Sewer Line",
       finalUrl: `${SITE_ORIGIN}/plumbing/sewer-services`,
       pinnedHeadline: "Sewer Line Repair Experts",
+      pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
+      promotionDescription: STANDARD_PROMOTION_DESCRIPTION,
       keywords: [
         ...exact("sewer line repair", "sewer line replacement"),
         ...phrase("main line clog", "clogged main line", "main drain clog", "sewer line repair cost", "sewer line replacement cost", "sewer smell in house", "sewer line cleaning"),
@@ -51,6 +55,8 @@ export const DRAIN_SEWER: CampaignSpec = {
       name: "Sewer Camera & Scope",
       finalUrl: `${SITE_ORIGIN}/plumbing/sewer-camera-inspection`,
       pinnedHeadline: "Sewer Camera Experts",
+      pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
+      promotionDescription: STANDARD_PROMOTION_DESCRIPTION,
       keywords: [
         ...exact("sewer camera inspection", "sewer scope inspection"),
         ...phrase("sewer camera inspection cost", "sewer inspection before buying house", "plumbing inspection home purchase", "sewer line camera", "sewer scope near me"),
@@ -60,6 +66,8 @@ export const DRAIN_SEWER: CampaignSpec = {
       name: "Hydro Jetting",
       finalUrl: `${SITE_ORIGIN}/plumbing/hydro-jetting`,
       pinnedHeadline: "Hydro Jetting Experts",
+      pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
+      promotionDescription: STANDARD_PROMOTION_DESCRIPTION,
       keywords: [
         ...exact("hydro jetting"),
         ...phrase("hydro jetting near me", "hydro jetting cost", "hydro jet drain cleaning", "sewer jetting service"),
@@ -69,6 +77,8 @@ export const DRAIN_SEWER: CampaignSpec = {
       name: "Trenchless",
       finalUrl: `${SITE_ORIGIN}/plumbing/trenchless-sewer-repair`,
       pinnedHeadline: "Trenchless Sewer Experts",
+      pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
+      promotionDescription: STANDARD_PROMOTION_DESCRIPTION,
       keywords: [
         ...exact("trenchless sewer repair"),
         ...phrase("trenchless sewer replacement", "trenchless pipe lining", "pipe bursting sewer", "trenchless sewer repair cost"),
@@ -78,6 +88,8 @@ export const DRAIN_SEWER: CampaignSpec = {
       name: "Toilet Repair & Install",
       finalUrl: `${SITE_ORIGIN}/plumbing/toilet-repair-installation`,
       pinnedHeadline: "Toilet Repair Experts",
+      pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
+      promotionDescription: STANDARD_PROMOTION_DESCRIPTION,
       keywords: [
         ...exact("toilet repair", "toilet installation"),
         {

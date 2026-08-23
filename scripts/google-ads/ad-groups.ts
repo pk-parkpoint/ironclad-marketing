@@ -145,17 +145,21 @@ type AdRow = {
 };
 
 export function desiredAd(campaign: CampaignSpec, group: AdGroupSpec) {
+  const pinnedHeadline2 = group.pinnedHeadline2 || campaign.pinnedHeadline2;
+  const descriptions = group.promotionDescription
+    ? [...campaign.descriptions.slice(0, -1), group.promotionDescription]
+    : campaign.descriptions;
   return {
     finalUrls: [group.finalUrl],
     responsiveSearchAd: {
-      descriptions: campaign.descriptions.map((text, index) => ({
+      descriptions: descriptions.map((text, index) => ({
         ...(index === 0 ? { pinnedField: "DESCRIPTION_1" } : {}),
         text,
       })),
       headlines: [
         { pinnedField: "HEADLINE_1", text: group.pinnedHeadline },
-        ...(campaign.pinnedHeadline2
-          ? [{ pinnedField: "HEADLINE_2", text: campaign.pinnedHeadline2 }]
+        ...(pinnedHeadline2
+          ? [{ pinnedField: "HEADLINE_2", text: pinnedHeadline2 }]
           : []),
         ...campaign.headlines.map((text) => ({ text })),
       ],

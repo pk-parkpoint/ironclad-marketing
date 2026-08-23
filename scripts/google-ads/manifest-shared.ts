@@ -4,9 +4,9 @@ export const SITE_ORIGIN = "https://ironcladtexas.com";
 export const LICENSE_DESCRIPTION =
   "Licensed & insured Austin plumbers. Locally and family owned. Available 24/7.";
 
-export const FIRST_SERVICE_PROMOTION_HEADLINE = "10% Off Your First Service";
-export const FIRST_SERVICE_PROMOTION_DESCRIPTION =
-  "New customers save 10% on their first service. Book online or call Ironclad today.";
+export const STANDARD_PROMOTION_HEADLINE = "Up to $100 Off Plumbing";
+export const STANDARD_PROMOTION_DESCRIPTION =
+  "New customers save up to $100 on qualifying plumbing services. Schedule anytime.";
 export const STANDARD_SCHEDULE_DESCRIPTION =
   "Schedule anytime, day or night. Our 24/7 team is here when you need us.";
 
@@ -18,15 +18,11 @@ export const STANDARD_HEADLINES = [
   "Options That Fit Your Home",
   "Fast Appointments Available",
   "Trusted Local Plumbers",
-  "New Customers Save 10%",
   "Book Online Anytime",
   "Call Ironclad Plumbing",
-  "Friendly Local Service",
-  "Help When You Need It",
-  "Service Built Around You",
 ];
 
-export function standardDescriptions(expertise: string, promotion = FIRST_SERVICE_PROMOTION_DESCRIPTION): string[] {
+export function standardDescriptions(expertise: string, promotion = STANDARD_PROMOTION_DESCRIPTION): string[] {
   return [LICENSE_DESCRIPTION, expertise, STANDARD_SCHEDULE_DESCRIPTION, promotion];
 }
 
