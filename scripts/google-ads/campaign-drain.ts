@@ -18,8 +18,8 @@ export const DRAIN_SEWER: CampaignSpec = {
   pinnedHeadline2: "Drain Cleaning for $69",
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
-    "Drain and sewer experts who explain the issue and give you the best options for your home.",
-    "Get expert drain cleaning for $69. Schedule anytime or call our 24/7 team.",
+    "Drain and sewer experts. We'll explain the problem and your options.",
+    "Drain cleaning for $69. Call Ironclad today.",
   ),
   adGroups: [
     {

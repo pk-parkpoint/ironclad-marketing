@@ -17,7 +17,7 @@ export const EMERGENCY: CampaignSpec = {
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
-    "Emergency plumbing experts who act fast and give you the best options for your home.",
+    "Emergency plumbing experts. Call now. We'll explain the problem and your options.",
   ),
   adGroups: [
     {
@@ -73,8 +73,8 @@ export const WATER_HEATER: CampaignSpec = {
   pinnedHeadline2: "Up to $300 Off New Heaters",
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
-    "Water heater experts who explain the issue and give you the best options for your home.",
-    "New customers save up to $300 on qualifying new water heater installation.",
+    "Water heater repair and installation experts. We'll explain the problem and your options.",
+    "New customers save up to $300 on a new water heater. Call Ironclad today.",
   ),
   adGroups: [
     {
