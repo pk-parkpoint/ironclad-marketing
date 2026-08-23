@@ -1,7 +1,7 @@
 import {
-  FIRST_SERVICE_PROMOTION_HEADLINE,
   SITE_ORIGIN,
   STANDARD_HEADLINES,
+  STANDARD_PROMOTION_HEADLINE,
   standardDescriptions,
 } from "./manifest-shared";
 import { exact, phrase, type CampaignSpec } from "./types";
@@ -14,7 +14,7 @@ export const EMERGENCY: CampaignSpec = {
   launchEnabled: true,
   crossNegatives: ["water heater", "tankless", "drain cleaning", "drain clearing", "leak detection", "repipe"],
   residentialFilter: true,
-  pinnedHeadline2: FIRST_SERVICE_PROMOTION_HEADLINE,
+  pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
     "Emergency plumbing experts who act fast and give you the best options for your home.",
@@ -74,7 +74,7 @@ export const WATER_HEATER: CampaignSpec = {
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
     "Water heater experts who explain the issue and give you the best options for your home.",
-    "New customers save 10%, up to $300, on qualifying new water heater installation.",
+    "New customers save up to $300 on qualifying new water heater installation.",
   ),
   adGroups: [
     {

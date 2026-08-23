@@ -1,7 +1,7 @@
 import {
-  FIRST_SERVICE_PROMOTION_HEADLINE,
   SITE_ORIGIN,
   STANDARD_HEADLINES,
+  STANDARD_PROMOTION_HEADLINE,
   standardDescriptions,
 } from "./manifest-shared";
 import { exact, phrase, type CampaignSpec, type KeywordSpec } from "./types";
@@ -14,7 +14,7 @@ export const LEAKS_LINES: CampaignSpec = {
   launchEnabled: true,
   crossNegatives: ["emergency", "24 hour", "open now", "water heater", "tankless", "drain cleaning", "drain clearing"],
   residentialFilter: true,
-  pinnedHeadline2: FIRST_SERVICE_PROMOTION_HEADLINE,
+  pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
     "Leak and line experts who explain the issue and give you the best options for your home.",
@@ -91,7 +91,7 @@ export const GENERAL_CITY: CampaignSpec = {
   launchEnabled: true,
   crossNegatives: ["emergency", "24 hour", "open now", "water heater", "tankless", "drain", "sewer", "leak detection", "slab leak", "repipe", "gas line", "toilet"],
   residentialFilter: true,
-  pinnedHeadline2: FIRST_SERVICE_PROMOTION_HEADLINE,
+  pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
     "Austin plumbing experts who explain the issue and give you the best options for your home.",
@@ -153,7 +153,7 @@ export const FREEZE: CampaignSpec = {
   launchEnabled: false,
   crossNegatives: [],
   residentialFilter: false,
-  pinnedHeadline2: FIRST_SERVICE_PROMOTION_HEADLINE,
+  pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
     "Frozen pipe experts who act fast and give you the best options for your home.",
@@ -179,7 +179,7 @@ export const COMPETITOR: CampaignSpec = {
   launchEnabled: false,
   crossNegatives: [],
   residentialFilter: false,
-  pinnedHeadline2: FIRST_SERVICE_PROMOTION_HEADLINE,
+  pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
     "Austin plumbing experts who explain the issue and give you the best options for your home.",
