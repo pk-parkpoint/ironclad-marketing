@@ -17,7 +17,7 @@ export const LEAKS_LINES: CampaignSpec = {
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
-    "Leak and line experts who explain the issue and give you the best options for your home.",
+    "Leak detection and pipe repair experts. We'll find the problem and explain your options.",
   ),
   adGroups: [
     {
@@ -94,7 +94,7 @@ export const GENERAL_CITY: CampaignSpec = {
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
-    "Austin plumbing experts who explain the issue and give you the best options for your home.",
+    "Local Austin plumbing experts. We'll explain the problem and your options.",
   ),
   adGroups: [
     {
@@ -156,7 +156,7 @@ export const FREEZE: CampaignSpec = {
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
-    "Frozen pipe experts who act fast and give you the best options for your home.",
+    "Frozen pipe repair experts. Call now. We'll explain the problem and your options.",
   ),
   adGroups: [
     {
@@ -182,7 +182,7 @@ export const COMPETITOR: CampaignSpec = {
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
-    "Austin plumbing experts who explain the issue and give you the best options for your home.",
+    "Local Austin plumbing experts. We'll explain the problem and your options.",
   ),
   adGroups: [
     {

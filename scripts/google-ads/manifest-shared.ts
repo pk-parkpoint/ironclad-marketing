@@ -2,28 +2,28 @@ import type { SitelinkSpec } from "./types";
 
 export const SITE_ORIGIN = "https://ironcladtexas.com";
 export const LICENSE_DESCRIPTION =
-  "Licensed & insured Austin plumbers. Locally and family owned. Available 24/7.";
+  "Local, family-owned Austin plumbers. Licensed, insured and available 24/7.";
 
 export const STANDARD_PROMOTION_HEADLINE = "Up to $100 Off Plumbing";
 export const STANDARD_PROMOTION_DESCRIPTION =
-  "New customers save up to $100 on qualifying plumbing services. Schedule anytime.";
-export const STANDARD_SCHEDULE_DESCRIPTION =
-  "Schedule anytime, day or night. Our 24/7 team is here when you need us.";
+  "New customers save up to $100 on plumbing services. Call Ironclad today.";
+export const STANDARD_AVAILABILITY_DESCRIPTION =
+  "Our plumbing team is available 24/7, including nights and weekends.";
 
 export const STANDARD_HEADLINES = [
   "Austin Plumbing Experts",
   "Available 24/7",
-  "Schedule Anytime, Day or Night",
+  "Nights & Weekends",
   "Locally & Family Owned",
-  "Options That Fit Your Home",
-  "Fast Appointments Available",
-  "Trusted Local Plumbers",
-  "Book Online Anytime",
+  "We Explain Your Options",
+  "Fast Appointments",
+  "Licensed & Insured Plumbers",
+  "Book Online",
   "Call Ironclad Plumbing",
 ];
 
 export function standardDescriptions(expertise: string, promotion = STANDARD_PROMOTION_DESCRIPTION): string[] {
-  return [LICENSE_DESCRIPTION, expertise, STANDARD_SCHEDULE_DESCRIPTION, promotion];
+  return [LICENSE_DESCRIPTION, expertise, STANDARD_AVAILABILITY_DESCRIPTION, promotion];
 }
 
 export const TARGET_CITIES = [
@@ -106,7 +106,7 @@ export const SITELINKS: SitelinkSpec[] = [
 export const CALLOUTS = [
   "Fast Appointments",
   "24/7 Availability",
-  "Schedule Anytime",
+  "Nights & Weekends",
   "Locally Owned",
   "Family Owned",
   "Austin Plumbing Experts",
