@@ -144,7 +144,8 @@ for (const scenario of cases) {
     await expect(firstVisible).toHaveAttribute("aria-pressed", "true");
     await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
     await expect(firstVisible).toBeInViewport();
-    expect(searchedDates).toEqual([scenario.expectedDate]);
+    await expect.poll(() => new Set(searchedDates).size).toBe(3);
+    expect(searchedDates[0]).toBe(scenario.expectedDate);
     expect(heldWindowIds).toEqual(scenario.expectedWindowIds);
   });
 }

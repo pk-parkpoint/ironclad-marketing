@@ -23,6 +23,7 @@ type Props = {
   loadingDate: string | null;
   searchError?: string | null;
   holdError?: string | null;
+  holdingOfferId?: string | null;
   submitError?: string;
   isSubmitting: boolean;
   remainingSeconds: number;
@@ -52,6 +53,7 @@ export function BookingStepSchedule({
   loadingDate,
   searchError,
   holdError,
+  holdingOfferId,
   submitError,
   isSubmitting,
   remainingSeconds,
@@ -229,12 +231,15 @@ export function BookingStepSchedule({
         {!isLoadingSelectedDate && selectedWindows.length > 0 && (
           <div className={styles.slotsGrid}>
             {selectedWindows.map((window) => {
-              const selected = formData.selectedOfferId === window.offerId;
+              const selected = holdingOfferId
+                ? holdingOfferId === window.offerId
+                : formData.selectedOfferId === window.offerId;
               return (
                 <button
                   key={window.offerId}
                   type="button"
                   aria-pressed={selected}
+                  aria-busy={holdingOfferId === window.offerId}
                   className={joinClasses(styles.timeSlot, selected && styles.timeSlotSelected)}
                   onClick={async () => {
                     const reserved = await onSelectWindow(window);
@@ -273,7 +278,7 @@ export function BookingStepSchedule({
         <button
           type="button"
           className={styles.primaryButton}
-          disabled={isSubmitting}
+          disabled={isSubmitting || Boolean(holdingOfferId)}
           onClick={() => {
             if (isSubmitting) return;
             if (!formData.holdId || !formData.selectedStartTime) {
@@ -284,7 +289,7 @@ export function BookingStepSchedule({
             onNext();
           }}
         >
-          {isSubmitting ? "Confirming..." : "Confirm appointment"}
+          {holdingOfferId ? "Reserving..." : isSubmitting ? "Confirming..." : "Confirm appointment"}
         </button>
       </div>
     </div>

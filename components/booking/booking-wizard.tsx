@@ -29,6 +29,7 @@ import { BookingStepContact } from "./booking-step-contact";
 import { BookingStepConfirm } from "./booking-step-confirm";
 import { usePublicBookingFacade } from "./use-public-booking-facade";
 import type { PublicBookingWindow } from "@/lib/public-booking-facade";
+import { bookingPrefetchDateIds } from "./booking-date-policy";
 import styles from "./booking-wizard.module.css";
 
 export type WizardFormData = {
@@ -128,7 +129,7 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
   const [confirmation, setConfirmation] = useState<BookingConfirmation | null>(null);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const bookingFacade = usePublicBookingFacade();
-  const { book, bookError, holdWindow, releaseHold, reset, searchDate } = bookingFacade;
+  const { book, bookError, holdWindow, prefetchDates, releaseHold, reset, searchDate } = bookingFacade;
   const modalRef = useRef<HTMLDivElement | null>(null);
   const bodyRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -265,6 +266,11 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
   }, [currentStep, open]);
 
   useEffect(() => {
+    if (!open || currentStep !== 2) return;
+    void prefetchDates(bookingPrefetchDateIds(), formDataRef.current);
+  }, [currentStep, open, prefetchDates]);
+
+  useEffect(() => {
     if (!open) return;
     function onPageHide() {
       sendAbandonmentRef.current({ useBeacon: true });
@@ -382,7 +388,7 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
 
   function refreshSelectedDate() {
     const selectedDate = formDataRef.current.selectedDate;
-    if (selectedDate) void searchDate(selectedDate, formDataRef.current);
+    if (selectedDate) void searchDate(selectedDate, formDataRef.current, { force: true });
   }
 
   async function handleSubmit(): Promise<boolean> {
@@ -513,6 +519,7 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
                     loadingDate={bookingFacade.loadingDate}
                     searchError={bookingFacade.searchError}
                     holdError={bookingFacade.holdError}
+                    holdingOfferId={bookingFacade.holdingOfferId}
                     remainingSeconds={bookingFacade.remainingSeconds}
                     isSubmitting={isSubmitting}
                     submitError={submitError || bookingFacade.bookError || undefined}
