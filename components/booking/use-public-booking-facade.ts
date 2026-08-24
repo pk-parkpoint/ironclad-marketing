@@ -5,7 +5,6 @@ import {
   bookPublicBookingHold,
   holdPublicBookingWindow,
   releasePublicBookingHold,
-  searchPublicBookingAvailability,
   type PublicBookingHoldResponse,
   type PublicBookingWindow,
 } from "@/lib/public-booking-facade";
@@ -13,28 +12,26 @@ import type { BookingConfirmation, WizardFormData } from "./booking-wizard";
 import {
   buildBookPayload,
   buildIssueSummary,
-  customerArrivalWindows,
   DURATION_ESTIMATE_MINUTES,
   friendlyError,
   schedulerOfferId,
   schedulerServiceType,
-  SEARCH_MAX_RESULTS,
   secondsUntil,
 } from "./booking-facade-helpers";
+import { useBookingAvailabilitySearch } from "./use-booking-availability-search";
 
 type ActiveHold = PublicBookingHoldResponse & { startTime: string; endTime: string };
 
 export function usePublicBookingFacade() {
-  const [windowsByDate, setWindowsByDate] = useState<Record<string, PublicBookingWindow[]>>({});
-  const [loadingDate, setLoadingDate] = useState<string | null>(null);
-  const [searchError, setSearchError] = useState<string | null>(null);
   const [holdError, setHoldError] = useState<string | null>(null);
   const [bookError, setBookError] = useState<string | null>(null);
   const [activeHold, setActiveHold] = useState<ActiveHold | null>(null);
+  const [holdingOfferId, setHoldingOfferId] = useState<string | null>(null);
   const [remainingSeconds, setRemainingSeconds] = useState(0);
   const activeHoldRef = useRef<ActiveHold | null>(null);
   const holdRequestRef = useRef(0);
-  const offerCandidatesRef = useRef<Record<string, PublicBookingWindow[]>>({});
+  const availabilitySearch = useBookingAvailabilitySearch();
+  const { candidatesFor, resetSearch } = availabilitySearch;
 
   useEffect(() => {
     activeHoldRef.current = activeHold;
@@ -47,6 +44,8 @@ export function usePublicBookingFacade() {
   }, []);
 
   const releaseHold = useCallback(async () => {
+    holdRequestRef.current += 1;
+    setHoldingOfferId(null);
     const hold = activeHoldRef.current;
     clearHold();
     if (hold?.holdId) await releasePublicBookingHold(hold.holdId).catch(() => undefined);
@@ -54,14 +53,12 @@ export function usePublicBookingFacade() {
 
   const reset = useCallback(() => {
     holdRequestRef.current += 1;
-    offerCandidatesRef.current = {};
-    setWindowsByDate({});
-    setLoadingDate(null);
-    setSearchError(null);
+    setHoldingOfferId(null);
     setHoldError(null);
     setBookError(null);
+    resetSearch();
     clearHold();
-  }, [clearHold]);
+  }, [clearHold, resetSearch]);
 
   useEffect(() => {
     return () => {
@@ -85,70 +82,48 @@ export function usePublicBookingFacade() {
     return () => window.clearInterval(interval);
   }, [activeHold, clearHold]);
 
-  const searchDate = useCallback(async (date: string, formData: WizardFormData) => {
-    setLoadingDate(date);
-    setSearchError(null);
-    try {
-      const response = await searchPublicBookingAvailability({
-        date,
-        durationEstimateMinutes: DURATION_ESTIMATE_MINUTES,
-        issueSummary: buildIssueSummary(formData),
-        maxResults: SEARCH_MAX_RESULTS,
-        serviceType: schedulerServiceType(formData),
-      });
-      const grouped = customerArrivalWindows(response.windows);
-      offerCandidatesRef.current = {
-        ...offerCandidatesRef.current,
-        ...grouped.candidatesByOfferId,
-      };
-      setWindowsByDate((current) => ({
-        ...current,
-        [date]: grouped.windows,
-      }));
-    } catch (error) {
-      setSearchError(friendlyError("Unable to load available appointment times.", error));
-    } finally {
-      setLoadingDate(null);
-    }
-  }, []);
-
   const holdWindow = useCallback(
     async (window: PublicBookingWindow, formData: WizardFormData) => {
+      void releaseHold();
       const requestId = ++holdRequestRef.current;
-      await releaseHold();
+      setHoldingOfferId(window.offerId);
       setHoldError(null);
       setBookError(null);
       const fallback = { ...window, offerId: schedulerOfferId(window.offerId) };
-      const candidates = offerCandidatesRef.current[window.offerId] || [fallback];
+      const candidates = candidatesFor(window) || [fallback];
       let lastError: unknown;
-      for (const candidate of candidates) {
-        if (requestId !== holdRequestRef.current) return null;
-        try {
-          const hold = await holdPublicBookingWindow({
-            durationEstimateMinutes: DURATION_ESTIMATE_MINUTES,
-            idempotencyKey: `${candidate.offerId}-${Date.now()}`,
-            issueSummary: buildIssueSummary(formData),
-            offerId: candidate.offerId,
-            serviceType: schedulerServiceType(formData),
-            windowId: candidate.windowId,
-          });
-          if (requestId !== holdRequestRef.current) {
-            await releasePublicBookingHold(hold.holdId).catch(() => undefined);
-            return null;
+      try {
+        for (const candidate of candidates) {
+          if (requestId !== holdRequestRef.current) return null;
+          try {
+            const hold = await holdPublicBookingWindow({
+              durationEstimateMinutes: DURATION_ESTIMATE_MINUTES,
+              idempotencyKey: `${candidate.offerId}-${Date.now()}`,
+              issueSummary: buildIssueSummary(formData),
+              offerId: candidate.offerId,
+              serviceType: schedulerServiceType(formData),
+              windowId: candidate.windowId,
+            });
+            if (requestId !== holdRequestRef.current) {
+              await releasePublicBookingHold(hold.holdId).catch(() => undefined);
+              return null;
+            }
+            const active = { ...hold, startTime: window.startTime, endTime: window.endTime };
+            activeHoldRef.current = active;
+            setActiveHold(active);
+            return active;
+          } catch (error) {
+            lastError = error;
+            if (!(error instanceof Error) || !/no longer available/i.test(error.message)) break;
           }
-          const active = { ...hold, startTime: window.startTime, endTime: window.endTime };
-          activeHoldRef.current = active;
-          setActiveHold(active);
-          return active;
-        } catch (error) {
-          lastError = error;
-          if (!(error instanceof Error) || !/no longer available/i.test(error.message)) break;
         }
+        setHoldError(friendlyError("Unable to reserve that appointment time.", lastError));
+        return null;
+      } finally {
+        if (requestId === holdRequestRef.current) setHoldingOfferId(null);
       }
-      setHoldError(friendlyError("Unable to reserve that appointment time.", lastError));
-      return null;
     },
-    [releaseHold],
+    [candidatesFor, releaseHold],
   );
 
   const book = useCallback(
@@ -187,12 +162,14 @@ export function usePublicBookingFacade() {
     bookError,
     holdError,
     holdWindow,
-    loadingDate,
+    holdingOfferId,
+    loadingDate: availabilitySearch.loadingDate,
+    prefetchDates: availabilitySearch.prefetchDates,
     releaseHold,
     remainingSeconds,
     reset,
-    searchDate,
-    searchError,
-    windowsByDate,
+    searchDate: availabilitySearch.searchDate,
+    searchError: availabilitySearch.searchError,
+    windowsByDate: availabilitySearch.windowsByDate,
   };
 }

@@ -29,6 +29,11 @@ export function firstOfferableDateId(now = new Date()): string {
   return afterLastWindowStart ? addDays(today, 1) : today;
 }
 
+export function bookingPrefetchDateIds(now = new Date(), count = 3): string[] {
+  const firstDate = firstOfferableDateId(now);
+  return Array.from({ length: Math.max(0, count) }, (_, index) => addDays(firstDate, index));
+}
+
 export function dateLabel(dateId: string, now = new Date()): string {
   const date = new Date(`${dateId}T12:00:00Z`);
   const today = ironcladTodayDateId(now);
