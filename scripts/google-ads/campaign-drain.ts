@@ -6,6 +6,7 @@ import {
   standardDescriptions,
 } from "./manifest-shared";
 import { exact, phrase, type CampaignSpec } from "./types";
+import { SERVICE_CAMPAIGN_ROUTING_NEGATIVES } from "./campaigns-service-gaps";
 
 export const DRAIN_SEWER: CampaignSpec = {
   key: "drain-sewer",
@@ -13,7 +14,19 @@ export const DRAIN_SEWER: CampaignSpec = {
   budgetMicros: "15000000",
   cpcCapMicros: "18000000",
   launchEnabled: true,
-  crossNegatives: ["emergency", "24 hour", "open now", "water heater", "tankless", "slab leak", "repipe"],
+  crossNegatives: [
+    "emergency", "24 hour", "open now", "water heater", "tankless", "slab leak", "repipe",
+    "ac drain", "air conditioner drain", "condensate drain", "dishwasher",
+    "apple cider vinegar", "baking soda", "bleach", "vinegar", "home recipe",
+    "home remedies", "home remedy", "homemade", "best homemade drain cleaner",
+    "best thing to unclog", "best way to unclog", "what can i use to unclog drain",
+    "what's good to unclog", "whats good to unclog", "toilet overflow solution",
+    "chemical drain cleaner", "chemical drain opener", "drain opener", "drain solve",
+    "drano", "liquid fire", "thrift drain cleaner", "best drain snake",
+    "drain machine", "drain snake tool", "electric eel", "flex shaft", "sewer machine",
+    "snake drain tool", "snake for plumbing", "tool to unclog",
+    ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES["drain-sewer"],
+  ],
   residentialFilter: true,
   pinnedHeadline2: "Drain Cleaning for $69",
   headlines: STANDARD_HEADLINES,

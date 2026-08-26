@@ -5,6 +5,7 @@ import {
   standardDescriptions,
 } from "./manifest-shared";
 import { exact, phrase, type CampaignSpec } from "./types";
+import { SERVICE_CAMPAIGN_ROUTING_NEGATIVES } from "./campaigns-service-gaps";
 
 export const LEAKS_LINES: CampaignSpec = {
   key: "leaks-lines",
@@ -12,7 +13,11 @@ export const LEAKS_LINES: CampaignSpec = {
   budgetMicros: "15000000",
   cpcCapMicros: "20000000",
   launchEnabled: true,
-  crossNegatives: ["emergency", "24 hour", "open now", "water heater", "tankless", "drain cleaning", "drain clearing"],
+  crossNegatives: [
+    "emergency", "24 hour", "open now", "water heater", "tankless", "drain cleaning",
+    "drain clearing", "leak detection system", "leak detector", "water leak sensor",
+    ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES["leaks-lines"],
+  ],
   residentialFilter: true,
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,

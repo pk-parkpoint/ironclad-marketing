@@ -1,4 +1,5 @@
 import { mutate, query, resourceId } from "./client";
+import { reconcileAdGroupNegatives } from "./ad-group-negatives";
 import { STANDARD_PINNED_HEADLINE_3 } from "./manifest-shared";
 import type { AdGroupSpec, CampaignSpec } from "./types";
 
@@ -220,6 +221,7 @@ async function reconcileAds(adGroups: Map<string, string>, specs: CampaignSpec[]
 export async function ensureAdGroupsKeywordsAndAds(campaigns: Map<string, string>, specs: CampaignSpec[]) {
   const adGroups = await ensureAdGroups(campaigns, specs);
   await reconcileKeywords(adGroups, specs);
+  await reconcileAdGroupNegatives(adGroups, specs);
   await reconcileAds(adGroups, specs);
   return adGroups;
 }

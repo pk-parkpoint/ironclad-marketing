@@ -42,6 +42,8 @@
     "google-ads:activate": "tsx scripts/google-ads/cli.ts activate",
     "google-ads:copy-plan": "tsx scripts/google-ads/copy-sync.ts plan",
     "google-ads:copy-apply": "tsx scripts/google-ads/copy-sync.ts apply",
+    "google-ads:services-plan": "tsx scripts/google-ads/service-gap-sync.ts plan",
+    "google-ads:services-apply": "tsx scripts/google-ads/service-gap-sync.ts apply",
     "launch:prod:audit": "tsx scripts/validate-production-launch.ts",
     "launch:prod:audit:strict": "PROD_REQUIRE_ANALYTICS=1 tsx scripts/validate-production-launch.ts",
     "og:generate": "tsx scripts/generate-og-images.ts",
