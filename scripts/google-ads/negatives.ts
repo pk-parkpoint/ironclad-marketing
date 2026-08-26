@@ -89,23 +89,23 @@ export async function ensureNegatives(campaigns: Map<string, string>, specs: Cam
   for (const spec of specs) {
     const campaign = campaigns.get(spec.key);
     if (!campaign) throw new Error(`campaign resource missing for ${spec.name}`);
-    const desired = new Set([
-      ...spec.crossNegatives,
-      ...(spec.residentialFilter ? RESIDENTIAL_NEGATIVES : []),
-    ].map((text) => text.toLowerCase()));
+    const desired = new Map([
+      ...spec.crossNegatives.map((text) => [`PHRASE:${text.toLowerCase()}`, { matchType: "PHRASE", text }] as const),
+      ...(spec.exactCrossNegatives || []).map((text) => [`EXACT:${text.toLowerCase()}`, { matchType: "EXACT", text }] as const),
+      ...(spec.residentialFilter ? RESIDENTIAL_NEGATIVES : []).map((text) => [`PHRASE:${text.toLowerCase()}`, { matchType: "PHRASE", text }] as const),
+    ]);
     const current = rows.filter((row) => row.campaign.resourceName === campaign);
     const remove = current
       .filter((row) => !row.campaignCriterion.keyword
-        || row.campaignCriterion.keyword.matchType !== "PHRASE"
-        || !desired.has(row.campaignCriterion.keyword.text.toLowerCase()))
+        || !desired.has(`${row.campaignCriterion.keyword.matchType}:${row.campaignCriterion.keyword.text.toLowerCase()}`))
       .map((row) => ({ remove: row.campaignCriterion.resourceName }));
     if (remove.length) await mutate("campaignCriteria", remove);
     const present = new Set(current
-      .filter((row) => row.campaignCriterion.keyword?.matchType === "PHRASE")
-      .map((row) => row.campaignCriterion.keyword!.text.toLowerCase()));
+      .filter((row) => row.campaignCriterion.keyword)
+      .map((row) => `${row.campaignCriterion.keyword!.matchType}:${row.campaignCriterion.keyword!.text.toLowerCase()}`));
     const create = [...desired]
-      .filter((text) => !present.has(text))
-      .map((text) => ({ create: { campaign, keyword: { matchType: "PHRASE", text }, negative: true } }));
+      .filter(([key]) => !present.has(key))
+      .map(([, keyword]) => ({ create: { campaign, keyword, negative: true } }));
     if (create.length) await mutate("campaignCriteria", create);
   }
 }

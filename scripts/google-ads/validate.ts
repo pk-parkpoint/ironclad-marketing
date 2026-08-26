@@ -35,6 +35,11 @@ export function validateManifest() {
   for (const campaign of CAMPAIGNS) {
     requireCondition(!campaignNames.has(campaign.name.toLowerCase()), `duplicate campaign: ${campaign.name}`);
     campaignNames.add(campaign.name.toLowerCase());
+    const phraseCrossNegatives = new Set(campaign.crossNegatives.map((text) => text.toLowerCase()));
+    const exactCrossNegatives = new Set((campaign.exactCrossNegatives || []).map((text) => text.toLowerCase()));
+    requireCondition(phraseCrossNegatives.size === campaign.crossNegatives.length, `${campaign.name}: duplicate phrase cross negative`);
+    requireCondition(exactCrossNegatives.size === (campaign.exactCrossNegatives || []).length, `${campaign.name}: duplicate exact cross negative`);
+    requireCondition([...exactCrossNegatives].every((text) => !phraseCrossNegatives.has(text)), `${campaign.name}: cross negative has two match types`);
     requireCondition(campaign.descriptions[0] === LICENSE_DESCRIPTION, `${campaign.name}: description 1 must be the license line`);
     requireCondition(campaign.descriptions.length === 4, `${campaign.name}: simple formula requires four descriptions`);
     requireCondition(campaign.descriptions[1] === STANDARD_OUTCOME_DESCRIPTION, `${campaign.name}: fallback outcome description drifted`);
@@ -95,6 +100,26 @@ export function validateManifest() {
         requireCondition(!keywordKeys.has(key), `${campaign.name}/${group.name}: duplicate keyword ${key}`);
         keywordKeys.add(key);
         requireCondition(!keyword.finalUrl?.endsWith("/book-online") && !keyword.finalUrl?.endsWith("/book"), `${campaign.name}/${group.name}: booking keyword URL`);
+      }
+      const negativeKeys = new Set<string>();
+      for (const negative of group.negativeKeywords || []) {
+        requireCondition(negative.matchType === "EXACT" || negative.matchType === "PHRASE", `${campaign.name}/${group.name}: broad negative ${negative.text}`);
+        const key = `${negative.matchType}:${negative.text.toLowerCase()}`;
+        requireCondition(!negativeKeys.has(key), `${campaign.name}/${group.name}: duplicate negative ${key}`);
+        requireCondition(!keywordKeys.has(key), `${campaign.name}/${group.name}: keyword is also negative ${key}`);
+        negativeKeys.add(key);
+      }
+      for (const keyword of group.keywords) {
+        const blocked = (group.negativeKeywords || []).some((negative) =>
+          negative.matchType === "EXACT"
+            ? negative.text.toLowerCase() === keyword.text.toLowerCase()
+            : keyword.text.toLowerCase().includes(negative.text.toLowerCase()));
+        requireCondition(!blocked, `${campaign.name}/${group.name}: negative blocks keyword ${keyword.text}`);
+      }
+      if (group.strictServiceIntent) {
+        requireCondition(group.keywords.every((keyword) => keyword.matchType === "EXACT"), `${campaign.name}/${group.name}: strict service keywords must be exact match`);
+        requireCondition(group.keywords.every((keyword) => /\b(?:repair|installation|installer|replacement|plumber)\b/i.test(keyword.text)), `${campaign.name}/${group.name}: unqualified strict service keyword`);
+        requireCondition((group.negativeKeywords || []).length >= 20, `${campaign.name}/${group.name}: strict service negative list is incomplete`);
       }
     }
   }

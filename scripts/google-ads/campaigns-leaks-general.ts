@@ -4,6 +4,10 @@ import {
   STANDARD_PROMOTION_HEADLINE,
   standardDescriptions,
 } from "./manifest-shared";
+import {
+  GENERAL_SERVICE_GAP_GROUPS,
+  GENERAL_SERVICE_ROUTING_NEGATIVES,
+} from "./campaigns-service-gaps";
 import { exact, phrase, type CampaignSpec, type KeywordSpec } from "./types";
 
 const cityKeyword = (text: string, path: string): KeywordSpec => ({
@@ -29,6 +33,7 @@ export const GENERAL_CITY: CampaignSpec = {
       finalUrl: `${SITE_ORIGIN}/plumbing`,
       pinnedHeadline: "Plumber Near Me",
       outcomeDescription: "Know what needs fixing—and what can wait—before you decide.",
+      negativeKeywords: GENERAL_SERVICE_ROUTING_NEGATIVES,
       keywords: [
         ...exact("plumber near me", "plumbers near me", "local plumber", "residential plumber"),
         ...phrase("plumbing company near me", "plumbing services near me", "best plumber near me", "licensed plumber near me"),
@@ -39,6 +44,7 @@ export const GENERAL_CITY: CampaignSpec = {
       finalUrl: `${SITE_ORIGIN}/plumbing/repairs`,
       pinnedHeadline: "Plumbing Repair Experts",
       outcomeDescription: "Find the cause and get the right plumbing repair for your home.",
+      negativeKeywords: GENERAL_SERVICE_ROUTING_NEGATIVES,
       keywords: [
         ...exact("plumbing repair near me", "low water pressure"),
         ...phrase("plumbing repair service", "no water pressure in house", "pressure reducing valve replacement", "water pressure regulator replacement", "plumbing repair cost"),
@@ -49,6 +55,7 @@ export const GENERAL_CITY: CampaignSpec = {
       finalUrl: `${SITE_ORIGIN}/service-area/austin-tx`,
       pinnedHeadline: "Austin Plumber",
       outcomeDescription: "Know what needs fixing—and what can wait—before you decide.",
+      negativeKeywords: GENERAL_SERVICE_ROUTING_NEGATIVES,
       keywords: [
         ...exact("austin plumber", "plumber austin tx"),
         ...phrase("licensed plumber austin", "best plumber austin", "plumbing company austin", "plumber in austin texas"),
@@ -59,6 +66,7 @@ export const GENERAL_CITY: CampaignSpec = {
       finalUrl: `${SITE_ORIGIN}/service-area/austin-tx`,
       pinnedHeadline: "{LOCATION(City):Local Plumber}",
       outcomeDescription: "Get a straight answer and the right plumbing repair for your home.",
+      negativeKeywords: GENERAL_SERVICE_ROUTING_NEGATIVES,
       keywords: [
         cityKeyword("round rock plumber", "/service-area/round-rock-tx"),
         cityKeyword("plumber round rock", "/service-area/round-rock-tx"),
@@ -73,6 +81,7 @@ export const GENERAL_CITY: CampaignSpec = {
         cityKeyword("hutto plumber", "/service-area/hutto-tx"),
       ],
     },
+    ...GENERAL_SERVICE_GAP_GROUPS,
   ],
 };
 

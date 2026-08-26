@@ -5,6 +5,7 @@ import {
   standardDescriptions,
 } from "./manifest-shared";
 import { exact, phrase, type CampaignSpec } from "./types";
+import { SERVICE_CAMPAIGN_ROUTING_NEGATIVES } from "./campaigns-service-gaps";
 
 export const EMERGENCY: CampaignSpec = {
   key: "emergency",
@@ -12,7 +13,7 @@ export const EMERGENCY: CampaignSpec = {
   budgetMicros: "15000000",
   cpcCapMicros: "30000000",
   launchEnabled: true,
-  crossNegatives: ["water heater", "tankless", "drain cleaning", "drain clearing", "leak detection", "repipe"],
+  crossNegatives: ["water heater", "tankless", "drain cleaning", "drain clearing", "leak detection", "repipe", ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES.emergency],
   residentialFilter: true,
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
@@ -71,7 +72,17 @@ export const WATER_HEATER: CampaignSpec = {
   budgetMicros: "15000000",
   cpcCapMicros: "22000000",
   launchEnabled: true,
-  crossNegatives: ["emergency", "24 hour", "open now", "drain", "sewer"],
+  crossNegatives: [
+    "emergency", "24 hour", "open now", "drain", "sewer",
+    "110 volt", "110v", "calculator", "gallons per minute", "gpm", "kw",
+    "model number", "model numbers", "spex3012", "lowe's",
+    ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES["water-heater"],
+  ],
+  exactCrossNegatives: [
+    "best non condensing tankless water heater",
+    "navien electric tankless water heater",
+    "rinnai tankless water heater",
+  ],
   residentialFilter: true,
   pinnedHeadline2: "Up to $300 Off New Heaters",
   headlines: STANDARD_HEADLINES,

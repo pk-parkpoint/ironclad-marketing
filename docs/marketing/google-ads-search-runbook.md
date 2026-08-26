@@ -1,6 +1,6 @@
 # Ironclad Google Ads Search Runbook
 
-Last updated: 2026-07-14
+Last updated: 2026-08-26
 
 ## Account and launch contract
 
@@ -12,6 +12,11 @@ Last updated: 2026-07-14
 - Freeze: built at `$75/day`, paused until the Austin forecast is below 32°F
 - Competitor: built at `$10/day`, paused until explicitly approved
 - The legacy Performance Max campaign is excluded from every reconciler mutation and remains paused.
+- On 2026-08-26, the paused live budgets for Water Heater, Drain & Sewer, and
+  Leaks & Lines were `$30/day`, while the manifest still declares `$15/day`.
+  The service-only sync preserves those live values. Do not run the full
+  `google-ads:apply` command until the operator confirms which budget contract
+  should become canonical.
 
 The checked-in manifest is the source of truth for campaigns, ad groups, keywords, ads, URLs, budgets, CPC caps, locations, negatives, and assets. It uses exact and phrase match only.
 
@@ -24,6 +29,7 @@ npm run google-ads:validate
 npm run google-ads:plan
 npm run google-ads:audit
 npm run google-ads:copy-plan
+npm run google-ads:services-plan
 ```
 
 Replace only responsive Search ad copy while requiring every managed campaign
@@ -33,6 +39,16 @@ keywords, targeting, or image links:
 
 ```zsh
 npm run google-ads:copy-apply -- --confirm-customer=4803572715
+```
+
+Add or reconcile only the tightly qualified water-softener and
+garbage-disposal service groups. This command requires all managed campaigns
+to remain paused, preserves live budgets and existing shared/campaign
+negatives, does not touch image links, and verifies exact-match service terms
+plus ad-group negatives after applying:
+
+```zsh
+npm run google-ads:services-apply -- --confirm-customer=4803572715
 ```
 
 Reconcile the build while keeping every managed campaign paused:

@@ -11,8 +11,10 @@ export type AdGroupSpec = {
   finalUrl: string;
   pinnedHeadline: string;
   outcomeDescription: string;
+  negativeKeywords?: KeywordSpec[];
   pinnedHeadline2?: string;
   promotionDescription?: string;
+  strictServiceIntent?: boolean;
   keywords: KeywordSpec[];
 };
 
@@ -23,6 +25,7 @@ export type CampaignSpec = {
   cpcCapMicros: string;
   launchEnabled: boolean;
   crossNegatives: string[];
+  exactCrossNegatives?: string[];
   residentialFilter: boolean;
   pinnedHeadline2?: string;
   headlines: string[];

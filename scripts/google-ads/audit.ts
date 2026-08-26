@@ -1,5 +1,5 @@
 import { CAMPAIGNS } from "./manifest";
-import { SHARED_NEGATIVES, TARGET_CITIES } from "./manifest-shared";
+import { RESIDENTIAL_NEGATIVES, SHARED_NEGATIVES, TARGET_CITIES } from "./manifest-shared";
 import { query } from "./client";
 
 type CampaignAuditRow = {
@@ -104,6 +104,19 @@ export async function auditAccount(expectLaunch: boolean) {
       AND ad_group.status != 'REMOVED'
       AND ad_group_ad.status != 'REMOVED'
   `);
+  const negativeRows = await query<{
+    campaign: { name: string };
+    adGroup: { name: string };
+    adGroupCriterion: { keyword?: { matchType: string; text: string } };
+  }>(`
+    SELECT campaign.name, ad_group.name, ad_group_criterion.keyword.text,
+      ad_group_criterion.keyword.match_type
+    FROM ad_group_criterion
+    WHERE campaign.id IN (${ids})
+      AND ad_group_criterion.type = 'KEYWORD'
+      AND ad_group_criterion.negative = TRUE
+      AND ad_group_criterion.status != 'REMOVED'
+  `);
   for (const spec of CAMPAIGNS) {
     const groups = groupRows.filter((row) => row.campaign.name === spec.name);
     assert(groups.length === spec.adGroups.length, `${spec.name} ad group count=${groups.length}, expected=${spec.adGroups.length}`);
@@ -111,6 +124,16 @@ export async function auditAccount(expectLaunch: boolean) {
     const expectedKeywords = spec.adGroups.reduce((sum, group) => sum + group.keywords.length, 0);
     assert(keywords.length === expectedKeywords, `${spec.name} keyword count=${keywords.length}, expected=${expectedKeywords}`);
     assert(keywords.every((row) => ["EXACT", "PHRASE"].includes(row.adGroupCriterion.keyword?.matchType || "")), `${spec.name} has broad keywords`);
+    for (const group of spec.adGroups) {
+      const actual = negativeRows
+        .filter((row) => row.campaign.name === spec.name && row.adGroup.name === group.name)
+        .map((row) => `${row.adGroupCriterion.keyword?.matchType}:${row.adGroupCriterion.keyword?.text.toLowerCase()}`)
+        .sort();
+      const expected = (group.negativeKeywords || [])
+        .map((keyword) => `${keyword.matchType}:${keyword.text.toLowerCase()}`)
+        .sort();
+      assert(JSON.stringify(actual) === JSON.stringify(expected), `${spec.name}/${group.name} negative keyword mismatch`);
+    }
   }
   assert(adRows.filter((row) => row.adGroupAd.status === "ENABLED").length === groupRows.length, "each ad group must have one enabled RSA");
 
@@ -125,6 +148,31 @@ export async function auditAccount(expectLaunch: boolean) {
     assert(count === TARGET_CITIES.length, `${spec.name} location/proximity count=${count}, expected=${TARGET_CITIES.length}`);
   }
 
+  const campaignNegativeRows = await query<{
+    campaign: { name: string };
+    campaignCriterion: { keyword?: { matchType: string; text: string } };
+  }>(`
+    SELECT campaign.name, campaign_criterion.keyword.text,
+      campaign_criterion.keyword.match_type
+    FROM campaign_criterion
+    WHERE campaign.id IN (${ids})
+      AND campaign_criterion.type = 'KEYWORD'
+      AND campaign_criterion.negative = TRUE
+      AND campaign_criterion.status != 'REMOVED'
+  `);
+  for (const spec of CAMPAIGNS) {
+    const actual = campaignNegativeRows
+      .filter((row) => row.campaign.name === spec.name)
+      .map((row) => `${row.campaignCriterion.keyword?.matchType}:${row.campaignCriterion.keyword?.text.toLowerCase()}`)
+      .sort();
+    const expected = [
+      ...spec.crossNegatives.map((text) => `PHRASE:${text.toLowerCase()}`),
+      ...(spec.exactCrossNegatives || []).map((text) => `EXACT:${text.toLowerCase()}`),
+      ...(spec.residentialFilter ? RESIDENTIAL_NEGATIVES : []).map((text) => `PHRASE:${text.toLowerCase()}`),
+    ].sort();
+    assert(JSON.stringify(actual) === JSON.stringify(expected), `${spec.name} campaign negative mismatch`);
+  }
+
   const sharedCriteria = await query<{ sharedCriterion: { keyword?: { matchType: string; text: string } } }>(`
     SELECT shared_criterion.keyword.text, shared_criterion.keyword.match_type
     FROM shared_criterion
@@ -133,5 +181,5 @@ export async function auditAccount(expectLaunch: boolean) {
   assert(sharedCriteria.length === SHARED_NEGATIVES.length, `shared negative count=${sharedCriteria.length}, expected=${SHARED_NEGATIVES.length}`);
   assert(sharedCriteria.every((row) => row.sharedCriterion.keyword?.matchType === "PHRASE"), "shared negatives must be phrase match");
 
-  console.log(`Google Ads audit passed: campaigns=${CAMPAIGNS.length} adGroups=${groupRows.length} keywords=${keywordRows.filter((row) => !row.adGroupCriterion.negative).length} locationsPerCampaign=${TARGET_CITIES.length} launch=${expectLaunch}`);
+  console.log(`Google Ads audit passed: campaigns=${CAMPAIGNS.length} adGroups=${groupRows.length} keywords=${keywordRows.filter((row) => !row.adGroupCriterion.negative).length} campaignNegatives=${campaignNegativeRows.length} adGroupNegatives=${negativeRows.length} locationsPerCampaign=${TARGET_CITIES.length} launch=${expectLaunch}`);
 }
