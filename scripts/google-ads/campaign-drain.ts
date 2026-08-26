@@ -17,15 +17,13 @@ export const DRAIN_SEWER: CampaignSpec = {
   residentialFilter: true,
   pinnedHeadline2: "Drain Cleaning for $69",
   headlines: STANDARD_HEADLINES,
-  descriptions: standardDescriptions(
-    "Drain and sewer experts. We'll explain the problem and your options.",
-    "Drain cleaning for $69. Call Ironclad today.",
-  ),
+  descriptions: standardDescriptions("Drain cleaning for $69. Call Ironclad today."),
   adGroups: [
     {
       name: "Drain Cleaning & Drain Clearing",
       finalUrl: `${SITE_ORIGIN}/drain-cleaning`,
       pinnedHeadline: "Drain Cleaning Experts",
+      outcomeDescription: "We'll clear the clog and help prevent it from coming back.",
       keywords: [
         ...exact("drain cleaning", "drain cleaning near me", "drain cleaning austin", "drain clearing", "drain clearing service"),
         ...phrase("drain clearing near me", "drain cleaning service", "drain cleaning cost", "drain snaking", "snake a drain", "drain snake service", "rooter service", "drain rooter", "sewer rooter", "drain cleaning company"),
@@ -35,6 +33,7 @@ export const DRAIN_SEWER: CampaignSpec = {
       name: "Clogged Drain",
       finalUrl: `${SITE_ORIGIN}/plumbing/clogged-drain`,
       pinnedHeadline: "Clogged Drain Experts",
+      outcomeDescription: "Get the drain flowing again and help keep the clog from coming back.",
       keywords: [
         ...exact("clogged drain plumber"),
         ...phrase("clogged kitchen sink plumber", "unclog drain plumber", "drain unclogging service", "clear clogged drain", "slow drain plumber", "clogged shower drain plumber", "clogged bathtub drain plumber", "sink wont drain"),
@@ -44,6 +43,7 @@ export const DRAIN_SEWER: CampaignSpec = {
       name: "Sewer Line",
       finalUrl: `${SITE_ORIGIN}/plumbing/sewer-services`,
       pinnedHeadline: "Sewer Line Repair Experts",
+      outcomeDescription: "Find the break and choose the right sewer repair for your home.",
       pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
       promotionDescription: STANDARD_PROMOTION_DESCRIPTION,
       keywords: [
@@ -55,6 +55,7 @@ export const DRAIN_SEWER: CampaignSpec = {
       name: "Sewer Camera & Scope",
       finalUrl: `${SITE_ORIGIN}/plumbing/sewer-camera-inspection`,
       pinnedHeadline: "Sewer Camera Experts",
+      outcomeDescription: "See exactly what is blocking or damaging your sewer line.",
       pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
       promotionDescription: STANDARD_PROMOTION_DESCRIPTION,
       keywords: [
@@ -66,6 +67,7 @@ export const DRAIN_SEWER: CampaignSpec = {
       name: "Hydro Jetting",
       finalUrl: `${SITE_ORIGIN}/plumbing/hydro-jetting`,
       pinnedHeadline: "Hydro Jetting Experts",
+      outcomeDescription: "Clear heavy buildup and restore flow through your drain or sewer line.",
       pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
       promotionDescription: STANDARD_PROMOTION_DESCRIPTION,
       keywords: [
@@ -77,6 +79,7 @@ export const DRAIN_SEWER: CampaignSpec = {
       name: "Trenchless",
       finalUrl: `${SITE_ORIGIN}/plumbing/trenchless-sewer-repair`,
       pinnedHeadline: "Trenchless Sewer Experts",
+      outcomeDescription: "Repair your sewer line with less digging and less disruption.",
       pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
       promotionDescription: STANDARD_PROMOTION_DESCRIPTION,
       keywords: [
@@ -88,6 +91,7 @@ export const DRAIN_SEWER: CampaignSpec = {
       name: "Toilet Repair & Install",
       finalUrl: `${SITE_ORIGIN}/plumbing/toilet-repair-installation`,
       pinnedHeadline: "Toilet Repair Experts",
+      outcomeDescription: "Get your toilet working properly without guessing at the cause.",
       pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
       promotionDescription: STANDARD_PROMOTION_DESCRIPTION,
       keywords: [

@@ -1,4 +1,5 @@
 import { mutate, query, resourceId } from "./client";
+import { STANDARD_PINNED_HEADLINE_3 } from "./manifest-shared";
 import type { AdGroupSpec, CampaignSpec } from "./types";
 
 type AdGroupRow = {
@@ -146,14 +147,15 @@ type AdRow = {
 
 export function desiredAd(campaign: CampaignSpec, group: AdGroupSpec) {
   const pinnedHeadline2 = group.pinnedHeadline2 || campaign.pinnedHeadline2;
-  const descriptions = group.promotionDescription
-    ? [...campaign.descriptions.slice(0, -1), group.promotionDescription]
-    : campaign.descriptions;
+  const descriptions = [...campaign.descriptions];
+  descriptions[1] = group.outcomeDescription;
+  if (group.promotionDescription) descriptions[descriptions.length - 1] = group.promotionDescription;
   return {
     finalUrls: [group.finalUrl],
     responsiveSearchAd: {
       descriptions: descriptions.map((text, index) => ({
         ...(index === 0 ? { pinnedField: "DESCRIPTION_1" } : {}),
+        ...(index === 1 ? { pinnedField: "DESCRIPTION_2" } : {}),
         text,
       })),
       headlines: [
@@ -161,6 +163,7 @@ export function desiredAd(campaign: CampaignSpec, group: AdGroupSpec) {
         ...(pinnedHeadline2
           ? [{ pinnedField: "HEADLINE_2", text: pinnedHeadline2 }]
           : []),
+        { pinnedField: "HEADLINE_3", text: STANDARD_PINNED_HEADLINE_3 },
         ...campaign.headlines.map((text) => ({ text })),
       ],
     },

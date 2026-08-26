@@ -6,77 +6,6 @@ import {
 } from "./manifest-shared";
 import { exact, phrase, type CampaignSpec, type KeywordSpec } from "./types";
 
-export const LEAKS_LINES: CampaignSpec = {
-  key: "leaks-lines",
-  name: "Leaks & Lines",
-  budgetMicros: "15000000",
-  cpcCapMicros: "20000000",
-  launchEnabled: true,
-  crossNegatives: ["emergency", "24 hour", "open now", "water heater", "tankless", "drain cleaning", "drain clearing"],
-  residentialFilter: true,
-  pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
-  headlines: STANDARD_HEADLINES,
-  descriptions: standardDescriptions(
-    "Leak detection and pipe repair experts. We'll find the problem and explain your options.",
-  ),
-  adGroups: [
-    {
-      name: "Leak Detection",
-      finalUrl: `${SITE_ORIGIN}/leak-detection`,
-      pinnedHeadline: "Leak Detection Experts",
-      keywords: [
-        ...exact("leak detection", "leak detection near me"),
-        ...phrase("water leak detection service", "high water bill leak", "leak detection cost", "water meter spinning", "hear water running in walls", "find water leak in house"),
-      ],
-    },
-    {
-      name: "Slab Leak",
-      finalUrl: `${SITE_ORIGIN}/plumbing/slab-leak-repair`,
-      pinnedHeadline: "Slab Leak Experts",
-      keywords: [
-        ...exact("slab leak repair", "slab leak detection"),
-        ...phrase("slab leak repair cost", "warm spot on floor", "slab leak plumber", "foundation leak plumber"),
-      ],
-    },
-    {
-      name: "Water Line",
-      finalUrl: `${SITE_ORIGIN}/plumbing/water-line-repair`,
-      pinnedHeadline: "Water Line Repair Experts",
-      keywords: [
-        ...exact("water line repair"),
-        ...phrase("main water line repair", "water line replacement", "water main leak", "wet spot in yard", "water line repair cost", "broken water line"),
-      ],
-    },
-    {
-      name: "Pipe Repair",
-      finalUrl: `${SITE_ORIGIN}/plumbing/water-line-repair`,
-      pinnedHeadline: "Pipe Repair Experts",
-      keywords: [
-        ...exact("pipe repair"),
-        ...phrase("pipe leak repair", "broken pipe repair", "copper pipe repair", "pinhole leak", "plumbing leak repair", "leaking pipe under sink", "pipe repair plumber"),
-      ],
-    },
-    {
-      name: "Gas Line",
-      finalUrl: `${SITE_ORIGIN}/plumbing/gas-line-services`,
-      pinnedHeadline: "Gas Line Service Experts",
-      keywords: [
-        ...exact("gas line repair", "gas line installation"),
-        ...phrase("gas line plumber", "gas leak repair", "gas line for stove", "gas line for grill", "gas line installation cost", "smell gas in house plumber"),
-      ],
-    },
-    {
-      name: "Repiping",
-      finalUrl: `${SITE_ORIGIN}/plumbing/repiping`,
-      pinnedHeadline: "Whole Home Repiping Experts",
-      keywords: [
-        ...exact("whole house repipe"),
-        ...phrase("repiping company", "repipe cost", "whole house repipe cost", "pex repipe", "repipe specialist", "replace old pipes house"),
-      ],
-    },
-  ],
-};
-
 const cityKeyword = (text: string, path: string): KeywordSpec => ({
   text,
   matchType: "EXACT",
@@ -93,14 +22,13 @@ export const GENERAL_CITY: CampaignSpec = {
   residentialFilter: true,
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
-  descriptions: standardDescriptions(
-    "Local Austin plumbing experts. We'll explain the problem and your options.",
-  ),
+  descriptions: standardDescriptions(),
   adGroups: [
     {
       name: "Plumber Near Me",
       finalUrl: `${SITE_ORIGIN}/plumbing`,
-      pinnedHeadline: "Local Austin Plumbing Experts",
+      pinnedHeadline: "Plumber Near Me",
+      outcomeDescription: "Know what needs fixing—and what can wait—before you decide.",
       keywords: [
         ...exact("plumber near me", "plumbers near me", "local plumber", "residential plumber"),
         ...phrase("plumbing company near me", "plumbing services near me", "best plumber near me", "licensed plumber near me"),
@@ -109,7 +37,8 @@ export const GENERAL_CITY: CampaignSpec = {
     {
       name: "Plumbing Repairs",
       finalUrl: `${SITE_ORIGIN}/plumbing/repairs`,
-      pinnedHeadline: "Austin Plumbing Repair Experts",
+      pinnedHeadline: "Plumbing Repair Experts",
+      outcomeDescription: "Find the cause and get the right plumbing repair for your home.",
       keywords: [
         ...exact("plumbing repair near me", "low water pressure"),
         ...phrase("plumbing repair service", "no water pressure in house", "pressure reducing valve replacement", "water pressure regulator replacement", "plumbing repair cost"),
@@ -118,7 +47,8 @@ export const GENERAL_CITY: CampaignSpec = {
     {
       name: "Austin Plumber",
       finalUrl: `${SITE_ORIGIN}/service-area/austin-tx`,
-      pinnedHeadline: "Expert Plumbers in Austin",
+      pinnedHeadline: "Austin Plumber",
+      outcomeDescription: "Know what needs fixing—and what can wait—before you decide.",
       keywords: [
         ...exact("austin plumber", "plumber austin tx"),
         ...phrase("licensed plumber austin", "best plumber austin", "plumbing company austin", "plumber in austin texas"),
@@ -128,6 +58,7 @@ export const GENERAL_CITY: CampaignSpec = {
       name: "City Modifiers",
       finalUrl: `${SITE_ORIGIN}/service-area/austin-tx`,
       pinnedHeadline: "{LOCATION(City):Local Plumber}",
+      outcomeDescription: "Get a straight answer and the right plumbing repair for your home.",
       keywords: [
         cityKeyword("round rock plumber", "/service-area/round-rock-tx"),
         cityKeyword("plumber round rock", "/service-area/round-rock-tx"),
@@ -155,14 +86,13 @@ export const FREEZE: CampaignSpec = {
   residentialFilter: false,
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
-  descriptions: standardDescriptions(
-    "Frozen pipe repair experts. Call now. We'll explain the problem and your options.",
-  ),
+  descriptions: standardDescriptions(),
   adGroups: [
     {
       name: "Frozen Pipes",
       finalUrl: `${SITE_ORIGIN}/plumbing/burst-pipe-repair`,
       pinnedHeadline: "Frozen Pipe Repair Experts",
+      outcomeDescription: "Thaw or repair frozen pipes before they cause more damage.",
       keywords: [
         ...exact("frozen pipes", "frozen pipe repair"),
         ...phrase("burst pipe from freeze", "pipe froze and burst", "frozen pipe plumber", "emergency plumber freeze", "pipes frozen no water"),
@@ -181,14 +111,13 @@ export const COMPETITOR: CampaignSpec = {
   residentialFilter: false,
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
-  descriptions: standardDescriptions(
-    "Local Austin plumbing experts. We'll explain the problem and your options.",
-  ),
+  descriptions: standardDescriptions(),
   adGroups: [
     {
       name: "Competitor Names",
       finalUrl: `${SITE_ORIGIN}/service-area/austin-tx`,
-      pinnedHeadline: "Local Austin Plumbing Experts",
+      pinnedHeadline: "Austin Plumbing Company",
+      outcomeDescription: "Know what needs fixing—and what can wait—before you decide.",
       keywords: exact("radiant plumbing", "reliant plumbing", "daniels plumbing", "s and d plumbing", "abacus plumbing", "roto rooter", "mr rooter", "benjamin franklin plumbing", "thomas plumbing"),
     },
   ],
