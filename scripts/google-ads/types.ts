@@ -10,6 +10,7 @@ export type AdGroupSpec = {
   name: string;
   finalUrl: string;
   pinnedHeadline: string;
+  outcomeDescription: string;
   pinnedHeadline2?: string;
   promotionDescription?: string;
   keywords: KeywordSpec[];

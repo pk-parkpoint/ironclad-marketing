@@ -6,6 +6,8 @@ import {
   SITELINKS,
   STANDARD_HEADLINES,
   STANDARD_AVAILABILITY_DESCRIPTION,
+  STANDARD_OUTCOME_DESCRIPTION,
+  STANDARD_PINNED_HEADLINE_3,
   TARGET_CITIES,
 } from "./manifest-shared";
 
@@ -35,10 +37,12 @@ export function validateManifest() {
     campaignNames.add(campaign.name.toLowerCase());
     requireCondition(campaign.descriptions[0] === LICENSE_DESCRIPTION, `${campaign.name}: description 1 must be the license line`);
     requireCondition(campaign.descriptions.length === 4, `${campaign.name}: simple formula requires four descriptions`);
+    requireCondition(campaign.descriptions[1] === STANDARD_OUTCOME_DESCRIPTION, `${campaign.name}: fallback outcome description drifted`);
     requireCondition(campaign.descriptions[2] === STANDARD_AVAILABILITY_DESCRIPTION, `${campaign.name}: availability description drifted`);
     requireCondition(JSON.stringify(campaign.headlines) === JSON.stringify(STANDARD_HEADLINES), `${campaign.name}: standard headline formula drifted`);
+    requireCondition(STANDARD_PINNED_HEADLINE_3.length <= 30, "pinned availability headline exceeds 30 characters");
     requireCondition(Boolean(campaign.pinnedHeadline2), `${campaign.name}: promotion must be pinned to headline 2`);
-    requireCondition(campaign.headlines.length + (campaign.pinnedHeadline2 ? 2 : 1) <= 15, `${campaign.name}: responsive search ad exceeds 15 headlines`);
+    requireCondition(campaign.headlines.length + (campaign.pinnedHeadline2 ? 3 : 2) <= 15, `${campaign.name}: responsive search ad exceeds 15 headlines`);
     if (campaign.pinnedHeadline2) {
       requireCondition(campaign.pinnedHeadline2.length <= 30, `${campaign.name}: pinned headline 2 exceeds 30 characters`);
       requireCondition(!PHONE_PATTERN.test(campaign.pinnedHeadline2), `${campaign.name}: phone number found in pinned headline 2`);
@@ -61,9 +65,9 @@ export function validateManifest() {
     const groupNames = new Set<string>();
     for (const group of campaign.adGroups) {
       const pinnedHeadline2 = group.pinnedHeadline2 || campaign.pinnedHeadline2;
-      const descriptions = group.promotionDescription
-        ? [...campaign.descriptions.slice(0, -1), group.promotionDescription]
-        : campaign.descriptions;
+      const descriptions = [...campaign.descriptions];
+      descriptions[1] = group.outcomeDescription;
+      if (group.promotionDescription) descriptions[descriptions.length - 1] = group.promotionDescription;
       requireCondition(!groupNames.has(group.name.toLowerCase()), `${campaign.name}: duplicate ad group ${group.name}`);
       groupNames.add(group.name.toLowerCase());
       requireCondition(group.pinnedHeadline.length <= 30 || group.pinnedHeadline.startsWith("{LOCATION("), `${campaign.name}/${group.name}: pinned headline exceeds 30 characters`);
@@ -75,6 +79,7 @@ export function validateManifest() {
       requireCondition(!PHONE_PATTERN.test(pinnedHeadline2 || ""), `${campaign.name}/${group.name}: phone number found in pinned headline 2`);
       requireCondition(!OPERATIONAL_DETAIL_PATTERN.test(pinnedHeadline2 || ""), `${campaign.name}/${group.name}: operational detail found in pinned headline 2`);
       requireCondition(!FORBIDDEN_COPY_PATTERN.test(pinnedHeadline2 || ""), `${campaign.name}/${group.name}: forbidden copy found in pinned headline 2`);
+      requireCondition(Boolean(group.outcomeDescription), `${campaign.name}/${group.name}: outcome description is required`);
       for (const description of descriptions) {
         requireCondition(description.length <= 90, `${campaign.name}/${group.name}: description exceeds 90 characters: ${description}`);
         requireCondition(!PHONE_PATTERN.test(description), `${campaign.name}/${group.name}: phone number found in ad description`);

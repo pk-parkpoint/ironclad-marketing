@@ -40,6 +40,8 @@
     "google-ads:apply": "tsx scripts/google-ads/cli.ts apply",
     "google-ads:audit": "tsx scripts/google-ads/cli.ts audit",
     "google-ads:activate": "tsx scripts/google-ads/cli.ts activate",
+    "google-ads:copy-plan": "tsx scripts/google-ads/copy-sync.ts plan",
+    "google-ads:copy-apply": "tsx scripts/google-ads/copy-sync.ts apply",
     "launch:prod:audit": "tsx scripts/validate-production-launch.ts",
     "launch:prod:audit:strict": "PROD_REQUIRE_ANALYTICS=1 tsx scripts/validate-production-launch.ts",
     "og:generate": "tsx scripts/generate-og-images.ts",

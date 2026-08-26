@@ -2,17 +2,19 @@ import type { SitelinkSpec } from "./types";
 
 export const SITE_ORIGIN = "https://ironcladtexas.com";
 export const LICENSE_DESCRIPTION =
-  "Local, family-owned Austin plumbers. Licensed, insured and available 24/7.";
+  "Local, family-owned Austin plumbers. Licensed and insured.";
 
 export const STANDARD_PROMOTION_HEADLINE = "Up to $100 Off Plumbing";
 export const STANDARD_PROMOTION_DESCRIPTION =
   "New customers save up to $100 on plumbing services. Call Ironclad today.";
+export const STANDARD_PINNED_HEADLINE_3 = "Available 24/7";
+export const STANDARD_OUTCOME_DESCRIPTION =
+  "Know what needs fixing—and what can wait—before you decide.";
 export const STANDARD_AVAILABILITY_DESCRIPTION =
-  "Our plumbing team is available 24/7, including nights and weekends.";
+  "Call or book online. Our team is available nights and weekends.";
 
 export const STANDARD_HEADLINES = [
   "Austin Plumbing Experts",
-  "Available 24/7",
   "Nights & Weekends",
   "Locally & Family Owned",
   "We Explain Your Options",
@@ -22,8 +24,8 @@ export const STANDARD_HEADLINES = [
   "Call Ironclad Plumbing",
 ];
 
-export function standardDescriptions(expertise: string, promotion = STANDARD_PROMOTION_DESCRIPTION): string[] {
-  return [LICENSE_DESCRIPTION, expertise, STANDARD_AVAILABILITY_DESCRIPTION, promotion];
+export function standardDescriptions(promotion = STANDARD_PROMOTION_DESCRIPTION): string[] {
+  return [LICENSE_DESCRIPTION, STANDARD_OUTCOME_DESCRIPTION, STANDARD_AVAILABILITY_DESCRIPTION, promotion];
 }
 
 export const TARGET_CITIES = [

@@ -23,6 +23,16 @@ Read-only validation and audit:
 npm run google-ads:validate
 npm run google-ads:plan
 npm run google-ads:audit
+npm run google-ads:copy-plan
+```
+
+Replace only responsive Search ad copy while requiring every managed campaign
+to remain paused. The command creates and verifies each replacement before it
+removes the superseded ad; it does not change campaigns, budgets, bids,
+keywords, targeting, or image links:
+
+```zsh
+npm run google-ads:copy-apply -- --confirm-customer=4803572715
 ```
 
 Reconcile the build while keeping every managed campaign paused:
@@ -69,4 +79,11 @@ Campaign-level AI Max, final URL expansion/text automation, Search Partners, Dis
 
 ## Known image-asset checkpoint
 
-Six approved image assets and the square business logo are uploaded. Google Ads API v24 currently rejects `AD_IMAGE` linkage for this customer with `UNSUPPORTED_FIELD_TYPE`, even though the image sizes and resource types are valid. The reconciler records the condition and continues because Search image assets are optional. Retry after the account becomes eligible; do not enable Display or Performance Max as a workaround.
+Six source-managed image assets, one older team image, and the square business
+logo are uploaded. On 2026-08-26, Google Ads API v24 accepted all 203 proposed
+`AD_IMAGE` links across the 29 managed ad groups in `validateOnly` mode; the
+earlier `UNSUPPORTED_FIELD_TYPE` eligibility error is no longer present. There
+are still zero live image links. Before applying any, replace the current
+all-images-to-all-groups behavior with service-relevant mappings and verify
+policy review after creation. Do not enable Display or Performance Max as a
+workaround.
