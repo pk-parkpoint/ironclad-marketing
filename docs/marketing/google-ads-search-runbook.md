@@ -30,6 +30,7 @@ npm run google-ads:plan
 npm run google-ads:audit
 npm run google-ads:copy-plan
 npm run google-ads:services-plan
+npm run google-ads:images-plan
 ```
 
 Replace only responsive Search ad copy while requiring every managed campaign
@@ -49,6 +50,16 @@ plus ad-group negatives after applying:
 
 ```zsh
 npm run google-ads:services-apply -- --confirm-customer=4803572715
+```
+
+Upload and reconcile only the 16 user-supplied square and landscape images
+across every managed ad group. This command refuses to run unless all managed
+campaigns remain paused, validates every exact image link before writing,
+preserves live budgets and every keyword/negative set, and verifies all image
+links plus policy-review state after applying:
+
+```zsh
+npm run google-ads:images-apply -- --confirm-customer=4803572715
 ```
 
 Reconcile the build while keeping every managed campaign paused:
@@ -93,13 +104,17 @@ The Google Ads API does not expose reliable write controls for every account UI 
 
 Campaign-level AI Max, final URL expansion/text automation, Search Partners, Display, presence-only location targeting, CPC limits, and custom conversion goals are API-managed and audit-enforced.
 
-## Known image-asset checkpoint
+## Image-asset contract
 
-Six source-managed image assets, one older team image, and the square business
-logo are uploaded. On 2026-08-26, Google Ads API v24 accepted all 203 proposed
-`AD_IMAGE` links across the 29 managed ad groups in `validateOnly` mode; the
-earlier `UNSUPPORTED_FIELD_TYPE` eligibility error is no longer present. There
-are still zero live image links. Before applying any, replace the current
-all-images-to-all-groups behavior with service-relevant mappings and verify
-policy review after creation. Do not enable Display or Performance Max as a
-workaround.
+The supplied-photo library preserves eight untouched WebP originals and
+provides a 1200×1200 square plus a 1200×628 landscape asset for each. The
+image-only reconciler attaches all 16 variants to all 31 managed ad groups, as
+explicitly approved on 2026-08-26. It replaces older `AD_IMAGE` links but does
+not alter campaign assets, ads, keywords, negatives, bids, budgets, targeting,
+Display, or Performance Max. Always inspect the policy readback after apply;
+new assets may remain under review before Google serves them.
+
+Live checkpoint on 2026-08-26: all 16 supplied assets were uploaded and all
+496 intended links read back as enabled (16 per managed ad group). The asset
+policy fields were still `UNKNOWN` immediately after creation, so recheck them
+after Google begins review.

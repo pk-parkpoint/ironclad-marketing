@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { mutate, query, resourceId } from "./client";
+import { ensureImageAssets, reconcileAdGroupImages } from "./image-assets";
 import { CALLOUTS, SITELINKS, STRUCTURED_SNIPPET_VALUES } from "./manifest-shared";
 
 type AssetRow = { asset: { name?: string; resourceName: string; type: string } };
@@ -74,20 +75,7 @@ export async function ensureAssets(callsFromAds: string): Promise<Map<string, { 
   });
   assets.set("business-logo", { fieldType: "BUSINESS_LOGO", resourceName: logo });
 
-  const images = [
-    ["square-technician", "AD_IMAGE", "assets/google-ads/square/technician-arrival.png"],
-    ["square-vanity", "AD_IMAGE", "assets/google-ads/square/bathroom-double-vanity.png"],
-    ["square-fixtures", "AD_IMAGE", "assets/google-ads/square/bathroom-fixtures.png"],
-    ["landscape-diagnostics", "AD_IMAGE", "assets/google-ads/landscape/pipe-diagnostics.png"],
-    ["landscape-truck", "AD_IMAGE", "assets/google-ads/landscape/service-truck.png"],
-    ["landscape-vanity", "AD_IMAGE", "assets/google-ads/landscape/bathroom-double-vanity.png"],
-  ] as const;
-  for (const [key, fieldType, relativePath] of images) {
-    const resourceName = await ensureAsset(`IRONCLAD | Image | ${key}`, {
-      imageAsset: { data: imageData(relativePath) },
-    });
-    assets.set(key, { fieldType, resourceName });
-  }
+  for (const [key, asset] of await ensureImageAssets()) assets.set(key, asset);
   return assets;
 }
 
@@ -130,44 +118,7 @@ export async function attachAssets(
     if (create.length) await mutate("campaignAssets", create);
   }
 
-  const imageAssets = [...assets.values()].filter((asset) => asset.fieldType === "AD_IMAGE");
-  const adGroupIds = [...adGroups.values()].map(resourceId).join(",");
-  const adGroupAssetRows = await query<{
-    adGroup: { resourceName: string };
-    adGroupAsset: { asset: string; fieldType: string; resourceName: string; status: string };
-  }>(`
-    SELECT ad_group.id, ad_group.resource_name, ad_group_asset.resource_name,
-      ad_group_asset.asset, ad_group_asset.field_type, ad_group_asset.status
-    FROM ad_group_asset
-    WHERE ad_group.id IN (${adGroupIds})
-      AND ad_group_asset.status != 'REMOVED'
-  `);
-  for (const adGroup of adGroups.values()) {
-    const current = adGroupAssetRows.filter((row) => row.adGroup.resourceName === adGroup);
-    const remove = current
-      .filter((row) => row.adGroupAsset.fieldType === "AD_IMAGE"
-        && !imageAssets.some((desired) => desired.resourceName === row.adGroupAsset.asset))
-      .map((row) => ({ remove: row.adGroupAsset.resourceName }));
-    const create = imageAssets
-      .filter((desired) => !current.some((row) => row.adGroupAsset.asset === desired.resourceName
-        && row.adGroupAsset.fieldType === "AD_IMAGE"
-        && row.adGroupAsset.status === "ENABLED"))
-      .map((desired) => ({ create: {
-        adGroup,
-        asset: desired.resourceName,
-        fieldType: "AD_IMAGE",
-        status: "ENABLED",
-      } }));
-    if (remove.length || create.length) {
-      try {
-        await mutate("adGroupAssets", [...remove, ...create]);
-      } catch (error) {
-        if (error instanceof Error && error.message.includes('"UNSUPPORTED_FIELD_TYPE"')) {
-          console.warn("Search image assets uploaded but this customer is not accepting AD_IMAGE links yet; continuing without optional image links.");
-          return;
-        }
-        throw error;
-      }
-    }
-  }
+  const imageAssets = new Map([...assets].filter(([, asset]) => asset.fieldType === "AD_IMAGE")
+    .map(([key, asset]) => [key, { fieldType: "AD_IMAGE" as const, resourceName: asset.resourceName }]));
+  await reconcileAdGroupImages([...adGroups.values()], imageAssets);
 }
