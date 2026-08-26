@@ -79,7 +79,7 @@ async function activate() {
   }
   await setLaunchStatuses(campaigns, CAMPAIGNS);
   await auditAccount(true);
-  console.log("Five core campaigns enabled at $15/day; Freeze and Competitor remain paused.");
+  console.log("Drain & Sewer and Water Heater enabled at $20/day each on Maximize Conversions with a $40 target CPA; all other campaigns remain paused.");
 }
 
 async function main() {

@@ -8,15 +8,12 @@ Last updated: 2026-08-26
 - Ironclad customer: `480-357-2715`
 - Public phone: `(512) 506-2470`
 - License: `RMP #39871`
-- Five core Search campaigns: `$15/day` each, 24/7, `$75/day` total
+- Conversion-first launch: Drain & Sewer and Water Heater at `$20/day` each,
+  `$40/day` total, using Maximize Conversions with a `$40` target CPA
+- Emergency, General & City, Leaks & Lines, Freeze, and Competitor remain paused
 - Freeze: built at `$75/day`, paused until the Austin forecast is below 32°F
 - Competitor: built at `$10/day`, paused until explicitly approved
 - The legacy Performance Max campaign is excluded from every reconciler mutation and remains paused.
-- On 2026-08-26, the paused live budgets for Water Heater, Drain & Sewer, and
-  Leaks & Lines were `$30/day`, while the manifest still declares `$15/day`.
-  The service-only sync preserves those live values. Do not run the full
-  `google-ads:apply` command until the operator confirms which budget contract
-  should become canonical.
 
 The checked-in manifest is the source of truth for campaigns, ad groups, keywords, ads, URLs, budgets, CPC caps, locations, negatives, and assets. It uses exact and phrase match only.
 
@@ -31,6 +28,7 @@ npm run google-ads:audit
 npm run google-ads:copy-plan
 npm run google-ads:services-plan
 npm run google-ads:images-plan
+npm run google-ads:conversion-restart-plan
 ```
 
 Replace only responsive Search ad copy while requiring every managed campaign
@@ -62,13 +60,22 @@ links plus policy-review state after applying:
 npm run google-ads:images-apply -- --confirm-customer=4803572715
 ```
 
+Launch only Drain & Sewer and Water Heater on conversion bidding. This command
+sets both budgets to `$20/day`, applies a `$40` target CPA, keeps the other five
+campaigns paused, changes Calls from ads to one conversion per click, and
+proves that keywords, negatives, and image links did not change:
+
+```zsh
+npm run google-ads:conversion-restart-apply -- --confirm-customer=4803572715
+```
+
 Reconcile the build while keeping every managed campaign paused:
 
 ```zsh
 npm run google-ads:apply -- --confirm-customer=4803572715
 ```
 
-Enable only the five core campaigns after production verification:
+Reapply the manifest launch statuses after production verification:
 
 ```zsh
 npm run google-ads:activate -- --confirm-customer=4803572715

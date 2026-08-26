@@ -8,6 +8,8 @@ type CampaignAuditRow = {
     aiMaxSetting?: { enableAiMax?: boolean };
     assetAutomationSettings?: Array<{ assetAutomationStatus: string; assetAutomationType: string }>;
     geoTargetTypeSetting?: { positiveGeoTargetType?: string };
+    biddingStrategyType: string;
+    maximizeConversions?: { targetCpaMicros?: string };
     name: string;
     networkSettings?: {
       targetContentNetwork?: boolean;
@@ -34,6 +36,7 @@ export async function auditAccount(expectLaunch: boolean) {
   const rows = await query<CampaignAuditRow>(`
     SELECT campaign.resource_name, campaign.name, campaign.status,
       campaign.advertising_channel_type, campaign.target_spend.cpc_bid_ceiling_micros,
+      campaign.bidding_strategy_type, campaign.maximize_conversions.target_cpa_micros,
       campaign.network_settings.target_google_search,
       campaign.network_settings.target_search_network,
       campaign.network_settings.target_content_network,
@@ -53,7 +56,12 @@ export async function auditAccount(expectLaunch: boolean) {
     const expectedStatus = expectLaunch && spec.launchEnabled ? "ENABLED" : "PAUSED";
     assert(row.campaign.status === expectedStatus, `${spec.name} status=${row.campaign.status}, expected=${expectedStatus}`);
     assert(row.campaignBudget.amountMicros === spec.budgetMicros, `${spec.name} budget mismatch`);
-    assert(row.campaign.targetSpend?.cpcBidCeilingMicros === spec.cpcCapMicros, `${spec.name} CPC cap mismatch`);
+    if (spec.targetCpaMicros) {
+      assert(row.campaign.biddingStrategyType === "MAXIMIZE_CONVERSIONS", `${spec.name} is not conversion bidding`);
+      assert(row.campaign.maximizeConversions?.targetCpaMicros === spec.targetCpaMicros, `${spec.name} target CPA mismatch`);
+    } else {
+      assert(row.campaign.targetSpend?.cpcBidCeilingMicros === spec.cpcCapMicros, `${spec.name} CPC cap mismatch`);
+    }
     assert(row.campaign.advertisingChannelType === "SEARCH", `${spec.name} is not Search`);
     assert(row.campaign.networkSettings?.targetGoogleSearch === true, `${spec.name} Google Search disabled`);
     assert(row.campaign.networkSettings?.targetSearchNetwork === false, `${spec.name} Search Partners enabled`);

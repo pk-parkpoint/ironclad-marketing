@@ -12,7 +12,7 @@ export const EMERGENCY: CampaignSpec = {
   name: "Emergency",
   budgetMicros: "15000000",
   cpcCapMicros: "30000000",
-  launchEnabled: true,
+  launchEnabled: false,
   crossNegatives: ["water heater", "tankless", "drain cleaning", "drain clearing", "leak detection", "repipe", ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES.emergency],
   residentialFilter: true,
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
@@ -69,8 +69,9 @@ export const EMERGENCY: CampaignSpec = {
 export const WATER_HEATER: CampaignSpec = {
   key: "water-heater",
   name: "Water Heater",
-  budgetMicros: "15000000",
+  budgetMicros: "20000000",
   cpcCapMicros: "22000000",
+  targetCpaMicros: "40000000",
   launchEnabled: true,
   crossNegatives: [
     "emergency", "24 hour", "open now", "drain", "sewer",

@@ -11,8 +11,9 @@ import { SERVICE_CAMPAIGN_ROUTING_NEGATIVES } from "./campaigns-service-gaps";
 export const DRAIN_SEWER: CampaignSpec = {
   key: "drain-sewer",
   name: "Drain & Sewer",
-  budgetMicros: "15000000",
+  budgetMicros: "20000000",
   cpcCapMicros: "18000000",
+  targetCpaMicros: "40000000",
   launchEnabled: true,
   crossNegatives: [
     "emergency", "24 hour", "open now", "water heater", "tankless", "slab leak", "repipe",

@@ -21,7 +21,10 @@ function requireCondition(condition: unknown, message: string): asserts conditio
 
 export function validateManifest() {
   requireCondition(CAMPAIGNS.length === 7, "manifest must contain seven campaigns");
-  requireCondition(CAMPAIGNS.filter((campaign) => campaign.launchEnabled).length === 5, "exactly five campaigns must launch");
+  const launchCampaigns = CAMPAIGNS.filter((campaign) => campaign.launchEnabled);
+  requireCondition(launchCampaigns.length === 2, "exactly two campaigns must launch");
+  requireCondition(launchCampaigns.reduce((sum, campaign) => sum + Number(campaign.budgetMicros), 0) === 40_000_000, "launch budget must total $40/day");
+  requireCondition(launchCampaigns.every((campaign) => campaign.targetCpaMicros === "40000000"), "launch campaigns must target a $40 CPA");
   requireCondition(TARGET_CITIES.length === 19, "target city list must contain 19 locations");
   requireCondition(SHARED_NEGATIVES.length > 30, "shared negative list is incomplete");
   requireCondition(SITELINKS.length === 6, "six sitelinks are required");
