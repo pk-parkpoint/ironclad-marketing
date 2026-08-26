@@ -21,7 +21,7 @@ export const GENERAL_CITY: CampaignSpec = {
   name: "General & City",
   budgetMicros: "15000000",
   cpcCapMicros: "15000000",
-  launchEnabled: true,
+  launchEnabled: false,
   crossNegatives: ["emergency", "24 hour", "open now", "water heater", "tankless", "drain", "sewer", "leak detection", "slab leak", "repipe", "gas line", "toilet"],
   residentialFilter: true,
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,

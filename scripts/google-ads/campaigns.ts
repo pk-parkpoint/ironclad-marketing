@@ -41,7 +41,9 @@ const campaignFields = (spec: CampaignSpec, budget: string, status = "PAUSED") =
     targetSearchNetwork: false,
   },
   status,
-  targetSpend: { cpcBidCeilingMicros: spec.cpcCapMicros },
+  ...(spec.targetCpaMicros
+    ? { maximizeConversions: { targetCpaMicros: spec.targetCpaMicros } }
+    : { targetSpend: { cpcBidCeilingMicros: spec.cpcCapMicros } }),
 });
 
 async function allCampaigns(): Promise<CampaignRow[]> {
@@ -102,7 +104,12 @@ export async function ensureCampaigns(specs: CampaignSpec[]): Promise<Map<string
       const resourceName = match.campaign.resourceName;
       await mutate("campaigns", [{
         update: { resourceName, ...campaignFields(spec, budget) },
-        updateMask: "name,status,campaignBudget,targetSpend.cpcBidCeilingMicros,networkSettings.targetGoogleSearch,networkSettings.targetSearchNetwork,networkSettings.targetContentNetwork,networkSettings.targetPartnerSearchNetwork,geoTargetTypeSetting.positiveGeoTargetType,aiMaxSetting.enableAiMax,assetAutomationSettings",
+        updateMask: [
+          "name,status,campaignBudget",
+          spec.targetCpaMicros ? "maximizeConversions.targetCpaMicros" : "targetSpend.cpcBidCeilingMicros",
+          "networkSettings.targetGoogleSearch,networkSettings.targetSearchNetwork,networkSettings.targetContentNetwork,networkSettings.targetPartnerSearchNetwork",
+          "geoTargetTypeSetting.positiveGeoTargetType,aiMaxSetting.enableAiMax,assetAutomationSettings",
+        ].join(","),
       }]);
       resources.set(spec.key, resourceName);
       continue;

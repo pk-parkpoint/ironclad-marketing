@@ -103,10 +103,11 @@ export async function ensureConversions(validateOnly = false): Promise<Conversio
   }
 
   await updateConversion(callsFromAds, {
+    countingType: "ONE_PER_CLICK",
     phoneCallDurationSeconds: "60",
     primaryForGoal: true,
     status: "ENABLED",
-  }, "phoneCallDurationSeconds,primaryForGoal,status", validateOnly);
+  }, "countingType,phoneCallDurationSeconds,primaryForGoal,status", validateOnly);
 
   if (!validateOnly) {
     rows = await conversionActions();

@@ -12,7 +12,7 @@ export const LEAKS_LINES: CampaignSpec = {
   name: "Leaks & Lines",
   budgetMicros: "15000000",
   cpcCapMicros: "20000000",
-  launchEnabled: true,
+  launchEnabled: false,
   crossNegatives: [
     "emergency", "24 hour", "open now", "water heater", "tankless", "drain cleaning",
     "drain clearing", "leak detection system", "leak detector", "water leak sensor",

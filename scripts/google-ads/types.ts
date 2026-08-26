@@ -23,6 +23,7 @@ export type CampaignSpec = {
   name: string;
   budgetMicros: string;
   cpcCapMicros: string;
+  targetCpaMicros?: string;
   launchEnabled: boolean;
   crossNegatives: string[];
   exactCrossNegatives?: string[];
