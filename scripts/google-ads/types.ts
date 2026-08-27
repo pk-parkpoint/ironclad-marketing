@@ -9,10 +9,11 @@ export type KeywordSpec = {
 export type AdGroupSpec = {
   name: string;
   finalUrl: string;
-  pinnedHeadline: string;
+  primaryHeadline: string;
+  additionalHeadlines?: string[];
   outcomeDescription: string;
   negativeKeywords?: KeywordSpec[];
-  pinnedHeadline2?: string;
+  promotionHeadline?: string;
   promotionDescription?: string;
   strictServiceIntent?: boolean;
   keywords: KeywordSpec[];
@@ -28,7 +29,7 @@ export type CampaignSpec = {
   crossNegatives: string[];
   exactCrossNegatives?: string[];
   residentialFilter: boolean;
-  pinnedHeadline2?: string;
+  promotionHeadline?: string;
   headlines: string[];
   descriptions: string[];
   adGroups: AdGroupSpec[];

@@ -21,14 +21,20 @@ export const LEAKS_LINES: CampaignSpec = {
     ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES["leaks-lines"],
   ],
   residentialFilter: true,
-  pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
+  promotionHeadline: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(),
   adGroups: [
     {
       name: "Leak Detection",
       finalUrl: `${SITE_ORIGIN}/leak-detection`,
-      pinnedHeadline: "Leak Detection Experts",
+      primaryHeadline: "Leak Detection Experts",
+      additionalHeadlines: [
+        "Leak Detection Near Me",
+        "Water Leak Detection",
+        "Find Hidden Water Leaks",
+        "Pinpoint the Leak",
+      ],
       outcomeDescription: "We'll pinpoint the leak and recommend the right repair.",
       keywords: [
         ...exact("leak detection", "leak detection near me"),
@@ -38,7 +44,13 @@ export const LEAKS_LINES: CampaignSpec = {
     {
       name: "Slab Leak",
       finalUrl: `${SITE_ORIGIN}/plumbing/slab-leak-repair`,
-      pinnedHeadline: "Slab Leak Experts",
+      primaryHeadline: "Slab Leak Experts",
+      additionalHeadlines: [
+        "Slab Leak Repair",
+        "Slab Leak Detection",
+        "Warm Spot on the Floor?",
+        "Find Slab Leaks Early",
+      ],
       outcomeDescription: "Find the slab leak before it causes more damage to your home.",
       keywords: [
         ...exact("slab leak repair", "slab leak detection"),
@@ -48,7 +60,13 @@ export const LEAKS_LINES: CampaignSpec = {
     {
       name: "Water Line",
       finalUrl: `${SITE_ORIGIN}/plumbing/water-line-repair`,
-      pinnedHeadline: "Water Line Repair Experts",
+      primaryHeadline: "Water Line Repair Experts",
+      additionalHeadlines: [
+        "Water Line Repair",
+        "Main Water Line Repair",
+        "Water Line Replacement",
+        "Restore Your Water Service",
+      ],
       outcomeDescription: "Find the break and restore reliable water service to your home.",
       keywords: [
         ...exact("water line repair"),
@@ -58,7 +76,13 @@ export const LEAKS_LINES: CampaignSpec = {
     {
       name: "Pipe Repair",
       finalUrl: `${SITE_ORIGIN}/plumbing/water-line-repair`,
-      pinnedHeadline: "Pipe Repair Experts",
+      primaryHeadline: "Pipe Repair Experts",
+      additionalHeadlines: [
+        "Pipe Leak Repair",
+        "Broken Pipe Repair",
+        "Leaking Pipe Plumber",
+        "Repair Pipes Before Damage",
+      ],
       outcomeDescription: "Fix the leaking or broken pipe before it causes more damage.",
       keywords: [
         ...exact("pipe repair"),
@@ -68,7 +92,13 @@ export const LEAKS_LINES: CampaignSpec = {
     {
       name: "Gas Line",
       finalUrl: `${SITE_ORIGIN}/plumbing/gas-line-services`,
-      pinnedHeadline: "Gas Line Service Experts",
+      primaryHeadline: "Gas Line Service Experts",
+      additionalHeadlines: [
+        "Gas Line Repair",
+        "Gas Line Installation",
+        "Gas Line Plumber",
+        "Safe Gas Line Service",
+      ],
       outcomeDescription: "Find the gas-line problem and get it repaired safely.",
       keywords: [
         ...exact("gas line repair", "gas line installation"),
@@ -78,7 +108,13 @@ export const LEAKS_LINES: CampaignSpec = {
     {
       name: "Repiping",
       finalUrl: `${SITE_ORIGIN}/plumbing/repiping`,
-      pinnedHeadline: "Whole Home Repiping Experts",
+      primaryHeadline: "Whole Home Repiping Experts",
+      additionalHeadlines: [
+        "Whole House Repipe",
+        "Home Repiping Company",
+        "PEX Repiping",
+        "Replace Old Home Pipes",
+      ],
       outcomeDescription: "Know which pipes need replacing—and which ones do not.",
       keywords: [
         ...exact("whole house repipe"),

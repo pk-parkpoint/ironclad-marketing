@@ -91,7 +91,13 @@ export const GENERAL_SERVICE_GAP_GROUPS: AdGroupSpec[] = [
   {
     name: SERVICE_GAP_GROUP_NAMES[0],
     finalUrl: `${SITE_ORIGIN}/plumbing/water-treatment`,
-    pinnedHeadline: "Water Softener Service",
+    primaryHeadline: "Water Softener Service",
+    additionalHeadlines: [
+      "Water Softener Repair",
+      "Water Softener Install",
+      "Water Softener Installer",
+      "Repair or Replace Softener",
+    ],
     outcomeDescription: "Repair or install the right softener without paying for what you do not need.",
     strictServiceIntent: true,
     negativeKeywords: waterSoftenerNegatives,
@@ -111,7 +117,13 @@ export const GENERAL_SERVICE_GAP_GROUPS: AdGroupSpec[] = [
   {
     name: SERVICE_GAP_GROUP_NAMES[1],
     finalUrl: `${SITE_ORIGIN}/plumbing/garbage-disposal-repair-installation`,
-    pinnedHeadline: "Garbage Disposal Service",
+    primaryHeadline: "Garbage Disposal Service",
+    additionalHeadlines: [
+      "Garbage Disposal Repair",
+      "Garbage Disposal Install",
+      "Garbage Disposal Plumber",
+      "Repair or Replace Disposal",
+    ],
     outcomeDescription: "Repair the disposal when it makes sense, or replace it when it does not.",
     strictServiceIntent: true,
     negativeKeywords: garbageDisposalNegatives,
