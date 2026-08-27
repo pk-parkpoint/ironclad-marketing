@@ -182,7 +182,7 @@ const DRAIN_CLEANING_DETAIL: ServiceDetail = {
 const SEWER_SERVICES_DETAIL: ServiceDetail = {
   slug: "sewer-services",
   heroDescription:
-    "Sewer problems are stressful. The smell, the mess, the uncertainty about what's actually wrong — we get it. Ironclad starts every sewer job with a camera inspection so we can show you exactly what's happening before recommending a course of action.",
+    "Sewer problems are stressful. Ironclad starts with a camera inspection, shows you what is wrong, and gives you written repair or replacement options with the cost before work begins.",
   symptomsHeading: "Signs of a Sewer Line Problem",
   symptoms: [
     "Multiple drains backing up simultaneously",

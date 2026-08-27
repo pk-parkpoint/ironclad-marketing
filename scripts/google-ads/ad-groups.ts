@@ -207,6 +207,11 @@ async function reconcileAds(adGroups: Map<string, string>, specs: CampaignSpec[]
       const current = rows.filter((row) => row.adGroup.resourceName === adGroup);
       const matching = current.find((row) => adMatches(row, desired));
       if (!matching) {
+        const serving = current.filter(adIsReady);
+        const stalePending = current.filter((row) => !adIsReady(row));
+        if (serving.length && stalePending.length) {
+          await mutate("adGroupAds", stalePending.map((row) => ({ remove: row.adGroupAd.resourceName })));
+        }
         await mutate("adGroupAds", [{ create: { ad: desired, adGroup, status: "ENABLED" } }]);
         continue;
       }
@@ -216,7 +221,16 @@ async function reconcileAds(adGroups: Map<string, string>, specs: CampaignSpec[]
           updateMask: "status",
         }]);
       }
-      if (!adIsReady(matching)) continue;
+      if (!adIsReady(matching)) {
+        const serving = current.filter((row) =>
+          row.adGroupAd.resourceName !== matching.adGroupAd.resourceName && adIsReady(row));
+        const stalePending = current.filter((row) =>
+          row.adGroupAd.resourceName !== matching.adGroupAd.resourceName && !adIsReady(row));
+        if (serving.length && stalePending.length) {
+          await mutate("adGroupAds", stalePending.map((row) => ({ remove: row.adGroupAd.resourceName })));
+        }
+        continue;
+      }
       const remove = current
         .filter((row) => row.adGroupAd.resourceName !== matching.adGroupAd.resourceName)
         .map((row) => ({ remove: row.adGroupAd.resourceName }));

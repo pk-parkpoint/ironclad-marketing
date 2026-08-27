@@ -14,11 +14,7 @@ export const STANDARD_AVAILABILITY_DESCRIPTION =
   "Call or book online. Our team is available nights and weekends.";
 
 export const STANDARD_HEADLINES = [
-  "Austin Plumbing Experts",
-  "Nights & Weekends",
   "Locally & Family Owned",
-  "We Explain Your Options",
-  "Fast Appointments",
   "Licensed & Insured Plumbers",
   "Book Online",
   "Call Ironclad Plumbing",

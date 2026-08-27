@@ -91,7 +91,7 @@ export function validateManifest() {
       requireCondition(Boolean(group.promotionHeadline) === Boolean(group.promotionDescription), `${campaign.name}/${group.name}: promotion headline and description overrides must be paired`);
       requireCondition(Boolean(promotionHeadline), `${campaign.name}/${group.name}: promotion headline is required`);
       requireCondition(campaign.launchEnabled ? headlines.length === 15 : headlines.length <= 15, `${campaign.name}/${group.name}: responsive search ad headline count=${headlines.length}`);
-      requireCondition(!campaign.launchEnabled || group.additionalHeadlines?.length === 4, `${campaign.name}/${group.name}: live ad group requires four relevance headlines`);
+      requireCondition(!campaign.launchEnabled || group.additionalHeadlines?.length === 8, `${campaign.name}/${group.name}: live ad group requires eight relevance headlines`);
       requireCondition(new Set(headlines.map((headline) => headline.toLowerCase())).size === headlines.length, `${campaign.name}/${group.name}: duplicate responsive search ad headline`);
       const generatedAd = desiredAd(campaign, group).responsiveSearchAd;
       requireCondition(generatedAd.headlines.length === headlines.length, `${campaign.name}/${group.name}: generated headline count drifted`);

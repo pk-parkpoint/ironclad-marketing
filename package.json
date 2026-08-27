@@ -42,6 +42,8 @@
     "google-ads:activate": "tsx scripts/google-ads/cli.ts activate",
     "google-ads:copy-plan": "tsx scripts/google-ads/copy-sync.ts plan",
     "google-ads:copy-apply": "tsx scripts/google-ads/copy-sync.ts apply",
+    "google-ads:landing-urls-plan": "tsx scripts/google-ads/landing-url-sync.ts plan",
+    "google-ads:landing-urls-apply": "tsx scripts/google-ads/landing-url-sync.ts apply",
     "google-ads:services-plan": "tsx scripts/google-ads/service-gap-sync.ts plan",
     "google-ads:services-apply": "tsx scripts/google-ads/service-gap-sync.ts apply",
     "google-ads:images-plan": "tsx scripts/google-ads/image-sync.ts plan",

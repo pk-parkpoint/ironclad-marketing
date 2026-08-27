@@ -28,6 +28,7 @@ npm run google-ads:validate
 npm run google-ads:plan
 npm run google-ads:audit
 npm run google-ads:copy-plan
+npm run google-ads:landing-urls-plan
 npm run google-ads:services-plan
 npm run google-ads:images-plan
 npm run google-ads:conversion-restart-plan
@@ -35,13 +36,23 @@ npm run google-ads:landing-pages-audit
 npm run google-ads:landing-pages-audit-live
 ```
 
-Replace only responsive Search ad copy while requiring every managed campaign
-to remain paused. The command creates and verifies each replacement before it
-removes the superseded ad; it does not change campaigns, budgets, bids,
-keywords, targeting, or image links:
+Replace only responsive Search ad copy while requiring the five live campaigns
+to stay enabled and Freeze plus Competitor to stay paused. The command creates
+and verifies each replacement before retiring approved serving copy. While a
+replacement is under review, it retains an approved serving ad and removes only
+superseded non-serving review variants; it does not change campaigns, budgets,
+bids, keywords, targeting, or image links:
 
 ```zsh
 npm run google-ads:copy-apply -- --confirm-customer=4803572715
+```
+
+Apply only explicit keyword landing-page overrides from the manifest. This
+command validates campaign status, writes only changed keyword final URLs, and
+verifies that shared budgets and every managed campaign status stayed intact:
+
+```zsh
+npm run google-ads:landing-urls-apply -- --confirm-customer=4803572715
 ```
 
 Add or reconcile only the tightly qualified water-softener and
