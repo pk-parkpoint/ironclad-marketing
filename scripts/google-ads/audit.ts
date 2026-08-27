@@ -141,8 +141,8 @@ export async function auditAccount(expectLaunch: boolean) {
     const goal = goalRows.find((row) => row.conversionGoalCampaignConfig.campaign === campaign);
     assert(Boolean(goal?.conversionGoalCampaignConfig.customConversionGoal), `${spec.name} custom goal missing`);
   }
-  const groupRows = await query<{ campaign: { name: string }; adGroup: { name: string; status: string } }>(`
-    SELECT campaign.id, campaign.name, ad_group.name, ad_group.status
+  const groupRows = await query<{ campaign: { name: string }; adGroup: { name: string; resourceName: string; status: string } }>(`
+    SELECT campaign.id, campaign.name, ad_group.resource_name, ad_group.name, ad_group.status
     FROM ad_group
     WHERE campaign.id IN (${ids}) AND ad_group.status != 'REMOVED'
   `);
@@ -159,8 +159,16 @@ export async function auditAccount(expectLaunch: boolean) {
       AND ad_group.status != 'REMOVED'
       AND ad_group_criterion.status != 'REMOVED'
   `);
-  const adRows = await query<{ adGroup: { resourceName: string }; adGroupAd: { status: string } }>(`
-    SELECT campaign.id, ad_group.resource_name, ad_group_ad.status
+  const adRows = await query<{
+    adGroup: { resourceName: string };
+    adGroupAd: {
+      primaryStatus?: string;
+      policySummary?: { approvalStatus?: string };
+      status: string;
+    };
+  }>(`
+    SELECT campaign.id, ad_group.resource_name, ad_group_ad.status,
+      ad_group_ad.primary_status, ad_group_ad.policy_summary.approval_status
     FROM ad_group_ad
     WHERE campaign.id IN (${ids})
       AND ad_group.status != 'REMOVED'
@@ -179,6 +187,7 @@ export async function auditAccount(expectLaunch: boolean) {
       AND ad_group_criterion.negative = TRUE
       AND ad_group_criterion.status != 'REMOVED'
   `);
+  let transitionAdGroups = 0;
   for (const spec of CAMPAIGNS) {
     const groups = groupRows.filter((row) => row.campaign.name === spec.name);
     assert(groups.length === spec.adGroups.length, `${spec.name} ad group count=${groups.length}, expected=${spec.adGroups.length}`);
@@ -187,6 +196,16 @@ export async function auditAccount(expectLaunch: boolean) {
     assert(keywords.length === expectedKeywords, `${spec.name} keyword count=${keywords.length}, expected=${expectedKeywords}`);
     assert(keywords.every((row) => ["EXACT", "PHRASE"].includes(row.adGroupCriterion.keyword?.matchType || "")), `${spec.name} has broad keywords`);
     for (const group of spec.adGroups) {
+      const groupRow = groups.find((row) => row.adGroup.name === group.name);
+      assert(groupRow, `${spec.name}/${group.name} ad group missing`);
+      const enabledAds = adRows.filter((row) => row.adGroup.resourceName === groupRow.adGroup.resourceName
+        && row.adGroupAd.status === "ENABLED");
+      assert(enabledAds.length >= 1 && enabledAds.length <= 2, `${spec.name}/${group.name} enabled RSA count=${enabledAds.length}`);
+      assert(enabledAds.some((row) => row.adGroupAd.policySummary?.approvalStatus === "APPROVED"), `${spec.name}/${group.name} has no approved RSA`);
+      if (expectLaunch && spec.launchEnabled) {
+        assert(enabledAds.some((row) => row.adGroupAd.primaryStatus === "ELIGIBLE"), `${spec.name}/${group.name} has no eligible RSA`);
+      }
+      if (enabledAds.length === 2) transitionAdGroups += 1;
       const actual = negativeRows
         .filter((row) => row.campaign.name === spec.name && row.adGroup.name === group.name)
         .map((row) => `${row.adGroupCriterion.keyword?.matchType}:${row.adGroupCriterion.keyword?.text.toLowerCase()}`)
@@ -197,7 +216,6 @@ export async function auditAccount(expectLaunch: boolean) {
       assert(JSON.stringify(actual) === JSON.stringify(expected), `${spec.name}/${group.name} negative keyword mismatch`);
     }
   }
-  assert(adRows.filter((row) => row.adGroupAd.status === "ENABLED").length === groupRows.length, "each ad group must have one enabled RSA");
 
   const campaignLogoRows = await query<{
     asset: { name?: string };
@@ -268,5 +286,5 @@ export async function auditAccount(expectLaunch: boolean) {
   assert(sharedCriteria.length === SHARED_NEGATIVES.length, `shared negative count=${sharedCriteria.length}, expected=${SHARED_NEGATIVES.length}`);
   assert(sharedCriteria.every((row) => row.sharedCriterion.keyword?.matchType === "PHRASE"), "shared negatives must be phrase match");
 
-  console.log(`Google Ads audit passed: campaigns=${CAMPAIGNS.length} adGroups=${groupRows.length} keywords=${keywordRows.filter((row) => !row.adGroupCriterion.negative).length} campaignNegatives=${campaignNegativeRows.length} adGroupNegatives=${negativeRows.length} locationsPerCampaign=${TARGET_CITIES.length} launch=${expectLaunch}`);
+  console.log(`Google Ads audit passed: campaigns=${CAMPAIGNS.length} adGroups=${groupRows.length} transitionAdGroups=${transitionAdGroups} keywords=${keywordRows.filter((row) => !row.adGroupCriterion.negative).length} campaignNegatives=${campaignNegativeRows.length} adGroupNegatives=${negativeRows.length} locationsPerCampaign=${TARGET_CITIES.length} launch=${expectLaunch}`);
 }
