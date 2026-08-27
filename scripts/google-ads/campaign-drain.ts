@@ -7,13 +7,14 @@ import {
 } from "./manifest-shared";
 import { exact, phrase, type CampaignSpec } from "./types";
 import { SERVICE_CAMPAIGN_ROUTING_NEGATIVES } from "./campaigns-service-gaps";
+import { TARGET_CPA_MICROS } from "./launch-config";
 
 export const DRAIN_SEWER: CampaignSpec = {
   key: "drain-sewer",
   name: "Drain & Sewer",
   budgetMicros: "20000000",
   cpcCapMicros: "18000000",
-  targetCpaMicros: "40000000",
+  targetCpaMicros: TARGET_CPA_MICROS,
   launchEnabled: true,
   crossNegatives: [
     "emergency", "24 hour", "open now", "water heater", "tankless", "slab leak", "repipe",

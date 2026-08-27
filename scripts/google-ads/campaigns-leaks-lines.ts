@@ -4,6 +4,7 @@ import {
   STANDARD_PROMOTION_HEADLINE,
   standardDescriptions,
 } from "./manifest-shared";
+import { TARGET_CPA_MICROS } from "./launch-config";
 import { exact, phrase, type CampaignSpec } from "./types";
 import { SERVICE_CAMPAIGN_ROUTING_NEGATIVES } from "./campaigns-service-gaps";
 
@@ -12,7 +13,8 @@ export const LEAKS_LINES: CampaignSpec = {
   name: "Leaks & Lines",
   budgetMicros: "15000000",
   cpcCapMicros: "20000000",
-  launchEnabled: false,
+  targetCpaMicros: TARGET_CPA_MICROS,
+  launchEnabled: true,
   crossNegatives: [
     "emergency", "24 hour", "open now", "water heater", "tankless", "drain cleaning",
     "drain clearing", "leak detection system", "leak detector", "water leak sensor",

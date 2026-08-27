@@ -1,4 +1,6 @@
 import { CUSTOMER_ID, mutate, mutateCustomer, query, resourceId } from "./client";
+import { usesLaunchPortfolio } from "./launch-config";
+import { alignLaunchPortfolio, ensureLaunchPortfolio, type LaunchPortfolio } from "./launch-portfolio";
 import { TARGET_CITIES } from "./manifest-shared";
 import type { CampaignSpec } from "./types";
 
@@ -21,7 +23,7 @@ type BudgetRow = {
   };
 };
 
-const campaignFields = (spec: CampaignSpec, budget: string, status = "PAUSED") => ({
+const campaignFields = (spec: CampaignSpec, budget: string, portfolio: LaunchPortfolio, status = "PAUSED") => ({
   advertisingChannelType: "SEARCH",
   aiMaxSetting: { enableAiMax: false },
   assetAutomationSettings: [
@@ -41,8 +43,8 @@ const campaignFields = (spec: CampaignSpec, budget: string, status = "PAUSED") =
     targetSearchNetwork: false,
   },
   status,
-  ...(spec.targetCpaMicros
-    ? { maximizeConversions: { targetCpaMicros: spec.targetCpaMicros } }
+  ...(usesLaunchPortfolio(spec.key)
+    ? { biddingStrategy: portfolio.strategy }
     : { targetSpend: { cpcBidCeilingMicros: spec.cpcCapMicros } }),
 });
 
@@ -91,6 +93,7 @@ async function ensureBudget(spec: CampaignSpec, existingCampaign?: CampaignRow):
 
 export async function ensureCampaigns(specs: CampaignSpec[]): Promise<Map<string, string>> {
   const existing = await allCampaigns();
+  const portfolio = await ensureLaunchPortfolio();
   const resources = new Map<string, string>();
   for (const spec of specs) {
     const match = existing.find((row) =>
@@ -99,14 +102,14 @@ export async function ensureCampaigns(specs: CampaignSpec[]): Promise<Map<string
     ) || (spec.key === "emergency"
       ? existing.find((row) => row.campaign.id === "24029332280")
       : undefined);
-    const budget = await ensureBudget(spec, match);
+    const budget = usesLaunchPortfolio(spec.key) ? portfolio.budget : await ensureBudget(spec, match);
     if (match) {
       const resourceName = match.campaign.resourceName;
       await mutate("campaigns", [{
-        update: { resourceName, ...campaignFields(spec, budget) },
+        update: { resourceName, ...campaignFields(spec, budget, portfolio) },
         updateMask: [
           "name,status,campaignBudget",
-          spec.targetCpaMicros ? "maximizeConversions.targetCpaMicros" : "targetSpend.cpcBidCeilingMicros",
+          usesLaunchPortfolio(spec.key) ? "biddingStrategy" : "targetSpend.cpcBidCeilingMicros",
           "networkSettings.targetGoogleSearch,networkSettings.targetSearchNetwork,networkSettings.targetContentNetwork,networkSettings.targetPartnerSearchNetwork",
           "geoTargetTypeSetting.positiveGeoTargetType,aiMaxSetting.enableAiMax,assetAutomationSettings",
         ].join(","),
@@ -114,11 +117,12 @@ export async function ensureCampaigns(specs: CampaignSpec[]): Promise<Map<string
       resources.set(spec.key, resourceName);
       continue;
     }
-    const results = await mutate("campaigns", [{ create: campaignFields(spec, budget) }]);
+    const results = await mutate("campaigns", [{ create: campaignFields(spec, budget, portfolio) }]);
     const resourceName = results[0]?.resourceName as string | undefined;
     if (!resourceName) throw new Error(`campaign creation failed for ${spec.name}`);
     resources.set(spec.key, resourceName);
   }
+  await alignLaunchPortfolio(portfolio);
   return resources;
 }
 

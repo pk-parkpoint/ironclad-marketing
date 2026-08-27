@@ -1,11 +1,14 @@
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import path from "node:path";
+import sharp from "sharp";
 import { mutate, query, resourceId } from "./client";
 import { ensureImageAssets, reconcileAdGroupImages } from "./image-assets";
 import { CALLOUTS, SITELINKS, STRUCTURED_SNIPPET_VALUES } from "./manifest-shared";
 
 type AssetRow = { asset: { name?: string; resourceName: string; type: string } };
 let cachedAssetRows: AssetRow[] | undefined;
+export const CURRENT_BUSINESS_LOGO_PREFIX = "IRONCLAD | Business Logo | Current SVG ";
 
 async function assetRows(): Promise<AssetRow[]> {
   cachedAssetRows ||= await query<AssetRow>(`
@@ -25,8 +28,64 @@ async function ensureAsset(name: string, body: Record<string, unknown>): Promise
   return resourceName;
 }
 
-function imageData(relativePath: string): string {
-  return readFileSync(path.join(process.cwd(), relativePath)).toString("base64");
+async function currentBusinessLogo() {
+  const source = readFileSync(path.join(process.cwd(), "app/icon.svg"));
+  const version = createHash("sha256").update(source).digest("hex").slice(0, 12);
+  const png = await sharp(source)
+    .resize(1200, 1200)
+    .flatten({ background: "#ffffff" })
+    .png()
+    .toBuffer();
+  return {
+    data: png.toString("base64"),
+    name: `${CURRENT_BUSINESS_LOGO_PREFIX}${version}`,
+  };
+}
+
+async function reconcileCustomerBusinessLogo(asset: string) {
+  const rows = await query<{
+    customerAsset: { asset: string; fieldType: string; resourceName: string; status: string };
+  }>(`
+    SELECT customer_asset.resource_name, customer_asset.asset, customer_asset.field_type,
+      customer_asset.status
+    FROM customer_asset
+    WHERE customer_asset.field_type = 'BUSINESS_LOGO'
+      AND customer_asset.status != 'REMOVED'
+  `);
+  const remove = rows
+    .filter((row) => row.customerAsset.asset !== asset)
+    .map((row) => ({ remove: row.customerAsset.resourceName }));
+  if (remove.length) await mutate("customerAssets", remove);
+  if (!rows.some((row) => row.customerAsset.asset === asset && row.customerAsset.status === "ENABLED")) {
+    await mutate("customerAssets", [{ create: { asset, fieldType: "BUSINESS_LOGO", status: "ENABLED" } }]);
+  }
+}
+
+export async function reconcileBusinessLogoAssociations(campaigns: string[], asset: string) {
+  await reconcileCustomerBusinessLogo(asset);
+  const ids = campaigns.map(resourceId).join(",");
+  const rows = await query<{
+    campaign: { resourceName: string };
+    campaignAsset: { asset: string; resourceName: string; status: string };
+  }>(`
+    SELECT campaign.id, campaign.resource_name, campaign_asset.resource_name, campaign_asset.asset,
+      campaign_asset.status
+    FROM campaign_asset
+    WHERE campaign.id IN (${ids})
+      AND campaign_asset.field_type = 'BUSINESS_LOGO'
+      AND campaign_asset.status != 'REMOVED'
+  `);
+  const operations: Array<Record<string, unknown>> = rows
+    .filter((row) => row.campaignAsset.asset !== asset)
+    .map((row) => ({ remove: row.campaignAsset.resourceName }));
+  for (const campaign of campaigns) {
+    if (!rows.some((row) => row.campaign.resourceName === campaign
+      && row.campaignAsset.asset === asset
+      && row.campaignAsset.status === "ENABLED")) {
+      operations.push({ create: { asset, campaign, fieldType: "BUSINESS_LOGO", status: "ENABLED" } });
+    }
+  }
+  if (operations.length) await mutate("campaignAssets", operations);
 }
 
 export async function ensureAssets(callsFromAds: string): Promise<Map<string, { fieldType: string; resourceName: string }>> {
@@ -70,8 +129,9 @@ export async function ensureAssets(callsFromAds: string): Promise<Map<string, { 
   });
   assets.set("business-name", { fieldType: "BUSINESS_NAME", resourceName: businessName });
 
-  const logo = await ensureAsset("IRONCLAD | Business Logo | Square", {
-    imageAsset: { data: imageData("assets/google-ads/logo/ironclad-logo-square-1200.png") },
+  const currentLogo = await currentBusinessLogo();
+  const logo = await ensureAsset(currentLogo.name, {
+    imageAsset: { data: currentLogo.data },
   });
   assets.set("business-logo", { fieldType: "BUSINESS_LOGO", resourceName: logo });
 
@@ -84,6 +144,9 @@ export async function attachAssets(
   adGroups: Map<string, string>,
   assets: Map<string, { fieldType: string; resourceName: string }>,
 ) {
+  const businessLogo = assets.get("business-logo");
+  if (!businessLogo) throw new Error("current business logo asset missing");
+  await reconcileBusinessLogoAssociations([...campaigns.values()], businessLogo.resourceName);
   const campaignIds = [...campaigns.values()].map(resourceId).join(",");
   const rows = await query<{
     campaign: { resourceName: string };

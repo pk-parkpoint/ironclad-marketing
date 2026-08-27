@@ -1,7 +1,9 @@
 import { CAMPAIGNS } from "./manifest";
+import { CORE_LAUNCH_KEYS, TARGET_CPA_MICROS } from "./launch-config";
 import {
   CALLOUTS,
   LICENSE_DESCRIPTION,
+  RESIDENTIAL_NEGATIVES,
   SHARED_NEGATIVES,
   SITELINKS,
   STANDARD_HEADLINES,
@@ -22,11 +24,12 @@ function requireCondition(condition: unknown, message: string): asserts conditio
 export function validateManifest() {
   requireCondition(CAMPAIGNS.length === 7, "manifest must contain seven campaigns");
   const launchCampaigns = CAMPAIGNS.filter((campaign) => campaign.launchEnabled);
-  requireCondition(launchCampaigns.length === 2, "exactly two campaigns must launch");
-  requireCondition(launchCampaigns.reduce((sum, campaign) => sum + Number(campaign.budgetMicros), 0) === 40_000_000, "launch budget must total $40/day");
-  requireCondition(launchCampaigns.every((campaign) => campaign.targetCpaMicros === "40000000"), "launch campaigns must target a $40 CPA");
+  requireCondition(launchCampaigns.length === CORE_LAUNCH_KEYS.length, "exactly five core campaigns must launch");
+  requireCondition(JSON.stringify(launchCampaigns.map((campaign) => campaign.key).sort()) === JSON.stringify([...CORE_LAUNCH_KEYS].sort()), "launch campaign set drifted");
+  requireCondition(launchCampaigns.every((campaign) => campaign.targetCpaMicros === TARGET_CPA_MICROS), "launch campaigns must target a $40 CPA");
   requireCondition(TARGET_CITIES.length === 19, "target city list must contain 19 locations");
   requireCondition(SHARED_NEGATIVES.length > 30, "shared negative list is incomplete");
+  requireCondition(RESIDENTIAL_NEGATIVES.length >= 20, "residential/commercial negative list is incomplete");
   requireCondition(SITELINKS.length === 6, "six sitelinks are required");
   requireCondition(CALLOUTS.length === 8, "eight callouts are required");
   requireCondition(LICENSE_DESCRIPTION.length <= 90, "license description exceeds 90 characters");
