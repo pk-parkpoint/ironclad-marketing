@@ -9,6 +9,7 @@ import {
   GENERAL_SERVICE_ROUTING_NEGATIVES,
 } from "./campaigns-service-gaps";
 import { exact, phrase, type CampaignSpec, type KeywordSpec } from "./types";
+import { TARGET_CPA_MICROS } from "./launch-config";
 
 const cityKeyword = (text: string, path: string): KeywordSpec => ({
   text,
@@ -21,7 +22,8 @@ export const GENERAL_CITY: CampaignSpec = {
   name: "General & City",
   budgetMicros: "15000000",
   cpcCapMicros: "15000000",
-  launchEnabled: false,
+  targetCpaMicros: TARGET_CPA_MICROS,
+  launchEnabled: true,
   crossNegatives: ["emergency", "24 hour", "open now", "water heater", "tankless", "drain", "sewer", "leak detection", "slab leak", "repipe", "gas line", "toilet"],
   residentialFilter: true,
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,

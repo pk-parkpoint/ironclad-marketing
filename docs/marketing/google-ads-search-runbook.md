@@ -8,9 +8,11 @@ Last updated: 2026-08-26
 - Ironclad customer: `480-357-2715`
 - Public phone: `(512) 506-2470`
 - License: `RMP #39871`
-- Conversion-first launch: Drain & Sewer and Water Heater at `$20/day` each,
-  `$40/day` total, using Maximize Conversions with a `$40` target CPA
-- Emergency, General & City, Leaks & Lines, Freeze, and Competitor remain paused
+- Conversion-first launch: Emergency, Water Heater, Drain & Sewer, Leaks &
+  Lines, and General & City share one `$60/day` budget
+- The five core campaigns use one Maximize Conversions portfolio strategy with
+  a `$40` target CPA and a `$15` CPC ceiling
+- Freeze and Competitor remain paused
 - Freeze: built at `$75/day`, paused until the Austin forecast is below 32°F
 - Competitor: built at `$10/day`, paused until explicitly approved
 - The legacy Performance Max campaign is excluded from every reconciler mutation and remains paused.
@@ -29,6 +31,8 @@ npm run google-ads:copy-plan
 npm run google-ads:services-plan
 npm run google-ads:images-plan
 npm run google-ads:conversion-restart-plan
+npm run google-ads:landing-pages-audit
+npm run google-ads:landing-pages-audit-live
 ```
 
 Replace only responsive Search ad copy while requiring every managed campaign
@@ -60,13 +64,27 @@ links plus policy-review state after applying:
 npm run google-ads:images-apply -- --confirm-customer=4803572715
 ```
 
-Launch only Drain & Sewer and Water Heater on conversion bidding. This command
-sets both budgets to `$20/day`, applies a `$40` target CPA, keeps the other five
-campaigns paused, changes Calls from ads to one conversion per click, and
-proves that keywords, negatives, and image links did not change:
+Launch the five core Search campaigns on one shared budget and portfolio bid
+strategy. This command sets the shared budget to `$60/day`, applies a `$40`
+target CPA and `$15` CPC ceiling, keeps Freeze and Competitor paused, changes
+Calls from ads to one conversion per click, reconciles the current logo from
+`app/icon.svg`, and proves that positive keywords and ad-group images did not
+change. It also reconciles the complete negative-keyword manifest before
+activation:
 
 ```zsh
 npm run google-ads:conversion-restart-apply -- --confirm-customer=4803572715
+```
+
+Google Ads business logos accept raster uploads, not SVG files. The sync renders
+the canonical `app/icon.svg` mark to a 1200x1200 PNG, creates a versioned asset,
+removes prior account and managed-campaign logo associations, and attaches the
+current asset at both levels.
+
+Audit every ad-group URL, keyword URL override, and sitelink against production:
+
+```zsh
+npm run google-ads:landing-pages-audit
 ```
 
 Reconcile the build while keeping every managed campaign paused:

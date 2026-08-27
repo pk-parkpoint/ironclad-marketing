@@ -80,7 +80,12 @@ export const SHARED_NEGATIVES = [
 ] as const;
 
 export const RESIDENTIAL_NEGATIVES = [
-  "commercial", "construction", "new construction", "restaurant", "apartment complex",
+  "commercial", "industrial", "construction", "new construction", "new build",
+  "restaurant", "apartment complex", "multi family", "multifamily", "property management",
+  "property manager", "facility maintenance", "facilities maintenance", "office building",
+  "retail store", "warehouse", "hotel", "school district", "general contractor",
+  "subcontractor", "construction bid", "plumbing bid", "request for proposal", "rfp",
+  "tenant improvement",
 ] as const;
 
 export const SITELINKS: SitelinkSpec[] = [

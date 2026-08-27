@@ -70,6 +70,19 @@ export async function mutate(
   return (payload.results as Array<Record<string, unknown>> | undefined) || [];
 }
 
+export async function mutateAll(
+  mutateOperations: Array<Record<string, unknown>>,
+  options: { validateOnly?: boolean } = {},
+): Promise<Array<Record<string, unknown>>> {
+  if (mutateOperations.length === 0) return [];
+  const payload = await request(`/customers/${CUSTOMER_ID}/googleAds:mutate`, {
+    mutateOperations,
+    partialFailure: false,
+    validateOnly: options.validateOnly || false,
+  });
+  return (payload.mutateOperationResponses as Array<Record<string, unknown>> | undefined) || [];
+}
+
 export async function mutateCustomer(operation: Record<string, unknown>): Promise<Record<string, unknown>> {
   return request(`/customers/${CUSTOMER_ID}:mutate`, {
     operation,

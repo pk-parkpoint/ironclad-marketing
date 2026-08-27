@@ -8,6 +8,7 @@ import { CUSTOMER_ID, query } from "./client";
 import { conversionLabels, ensureConversions } from "./conversions";
 import { ensureNegatives } from "./negatives";
 import { validateManifest } from "./validate";
+import { PORTFOLIO_STRATEGY_NAME, SHARED_BUDGET_MICROS, usesLaunchPortfolio } from "./launch-config";
 
 async function plan() {
   validateManifest();
@@ -19,8 +20,12 @@ async function plan() {
   console.log("Desired campaigns:");
   for (const campaign of CAMPAIGNS) {
     const found = current.find((row) => row.campaign.name.toLowerCase() === campaign.name.toLowerCase());
-    console.log(`- ${campaign.name}: ${found ? `existing/${found.campaign.status}` : "create"}, budget=$${Number(campaign.budgetMicros) / 1_000_000}/day, launch=${campaign.launchEnabled}`);
+    const budget = usesLaunchPortfolio(campaign.key)
+      ? `shared=$${Number(SHARED_BUDGET_MICROS) / 1_000_000}/day`
+      : `budget=$${Number(campaign.budgetMicros) / 1_000_000}/day`;
+    console.log(`- ${campaign.name}: ${found ? `existing/${found.campaign.status}` : "create"}, ${budget}, launch=${campaign.launchEnabled}`);
   }
+  console.log(`Launch portfolio: ${PORTFOLIO_STRATEGY_NAME}`);
   console.log("Legacy Performance Max is excluded from every mutation.");
 }
 
@@ -79,7 +84,7 @@ async function activate() {
   }
   await setLaunchStatuses(campaigns, CAMPAIGNS);
   await auditAccount(true);
-  console.log("Drain & Sewer and Water Heater enabled at $20/day each on Maximize Conversions with a $40 target CPA; all other campaigns remain paused.");
+  console.log("Five core Search campaigns enabled on one $60/day shared budget with portfolio Maximize Conversions, a $40 target CPA, and a $15 CPC ceiling; Freeze and Competitor remain paused.");
 }
 
 async function main() {

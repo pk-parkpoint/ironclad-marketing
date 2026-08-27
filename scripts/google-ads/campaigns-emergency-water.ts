@@ -4,6 +4,7 @@ import {
   STANDARD_PROMOTION_HEADLINE,
   standardDescriptions,
 } from "./manifest-shared";
+import { TARGET_CPA_MICROS } from "./launch-config";
 import { exact, phrase, type CampaignSpec } from "./types";
 import { SERVICE_CAMPAIGN_ROUTING_NEGATIVES } from "./campaigns-service-gaps";
 
@@ -12,7 +13,8 @@ export const EMERGENCY: CampaignSpec = {
   name: "Emergency",
   budgetMicros: "15000000",
   cpcCapMicros: "30000000",
-  launchEnabled: false,
+  targetCpaMicros: TARGET_CPA_MICROS,
+  launchEnabled: true,
   crossNegatives: ["water heater", "tankless", "drain cleaning", "drain clearing", "leak detection", "repipe", ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES.emergency],
   residentialFilter: true,
   pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
@@ -71,7 +73,7 @@ export const WATER_HEATER: CampaignSpec = {
   name: "Water Heater",
   budgetMicros: "20000000",
   cpcCapMicros: "22000000",
-  targetCpaMicros: "40000000",
+  targetCpaMicros: TARGET_CPA_MICROS,
   launchEnabled: true,
   crossNegatives: [
     "emergency", "24 hour", "open now", "drain", "sewer",

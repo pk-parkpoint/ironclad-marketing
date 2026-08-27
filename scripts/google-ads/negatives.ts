@@ -49,7 +49,7 @@ async function attachSharedSet(sharedSet: string, campaigns: Map<string, string>
     campaign: { resourceName: string };
     campaignSharedSet: { resourceName: string; sharedSet: string; status: string };
   }>(`
-    SELECT campaign.resource_name, campaign_shared_set.resource_name,
+    SELECT campaign.id, campaign.resource_name, campaign_shared_set.resource_name,
       campaign_shared_set.shared_set, campaign_shared_set.status
     FROM campaign_shared_set
     WHERE campaign.id IN (${campaignIds})
@@ -77,7 +77,7 @@ export async function ensureNegatives(campaigns: Map<string, string>, specs: Cam
       type: string;
     };
   }>(`
-    SELECT campaign.resource_name, campaign_criterion.resource_name,
+    SELECT campaign.id, campaign.resource_name, campaign_criterion.resource_name,
       campaign_criterion.type, campaign_criterion.negative,
       campaign_criterion.keyword.text, campaign_criterion.keyword.match_type
     FROM campaign_criterion

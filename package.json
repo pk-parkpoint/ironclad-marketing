@@ -46,6 +46,8 @@
     "google-ads:services-apply": "tsx scripts/google-ads/service-gap-sync.ts apply",
     "google-ads:images-plan": "tsx scripts/google-ads/image-sync.ts plan",
     "google-ads:images-apply": "tsx scripts/google-ads/image-sync.ts apply",
+    "google-ads:landing-pages-audit": "tsx scripts/google-ads/landing-page-audit.ts",
+    "google-ads:landing-pages-audit-live": "tsx scripts/google-ads/landing-page-audit.ts --live",
     "google-ads:conversion-restart-plan": "tsx scripts/google-ads/conversion-restart.ts plan",
     "google-ads:conversion-restart-apply": "tsx scripts/google-ads/conversion-restart.ts apply",
     "launch:prod:audit": "tsx scripts/validate-production-launch.ts",
