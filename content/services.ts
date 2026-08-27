@@ -26,10 +26,10 @@ export const SERVICES: ServiceEntry[] = [
   {
     slug: "sewer-services",
     title: "Sewer Line Services",
-    titleTag: "Sewer Line Services in Austin, TX | Ironclad Plumbing",
+    titleTag: "Sewer Line Repair & Replacement Austin | Ironclad",
     metaDescription:
-      "Sewer camera inspections, trenchless repair, and full-line replacement with minimal disruption.",
-    h1: "Sewer Line Services - Accurate Diagnosis, Lasting Repair",
+      "Sewer line repair and replacement in Austin, with camera diagnosis, trenchless options, upfront costs, and minimal disruption.",
+    h1: "Sewer Line Repair & Replacement in Austin",
   },
   {
     slug: "water-heaters",

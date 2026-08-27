@@ -133,8 +133,16 @@ async function applyCopy(groups: DesiredGroup[]) {
       }]);
     }
     if (!adIsReady(matching)) {
+      const servingStale = rows.filter((row) =>
+        row.adGroupAd.resourceName !== matching.adGroupAd.resourceName && adIsReady(row));
+      const nonServingStale = rows.filter((row) =>
+        row.adGroupAd.resourceName !== matching.adGroupAd.resourceName && !adIsReady(row));
+      if (servingStale.length && nonServingStale.length) {
+        await mutate("adGroupAds", nonServingStale.map((row) => ({ remove: row.adGroupAd.resourceName })));
+        removed += nonServingStale.length;
+      }
       pendingReview += 1;
-      retained += rows.filter((row) => row.adGroupAd.resourceName !== matching.adGroupAd.resourceName).length;
+      retained += servingStale.length + (servingStale.length ? 0 : nonServingStale.length);
       continue;
     }
     const stale = rows

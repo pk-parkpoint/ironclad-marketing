@@ -285,7 +285,7 @@ await fs.mkdir(outputDir, { recursive: true });
 await fs.mkdir(stateDir, { recursive: true });
 
 const variants = await readVariants();
-assert(Array.isArray(variants) && variants.length === 37, `expected 37 variants, found ${variants.length}`);
+assert(Array.isArray(variants) && variants.length === 38, `expected 38 variants, found ${variants.length}`);
 const interactionsOnly = process.env.PPC_INTERACTIONS_ONLY === "1";
 
 const browser = await chromium.launch();
