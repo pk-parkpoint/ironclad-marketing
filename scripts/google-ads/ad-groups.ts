@@ -153,6 +153,22 @@ function adIsReady(row: AdRow): boolean {
     && row.adGroupAd.policySummary?.approvalStatus === "APPROVED";
 }
 
+function compareServingAds(left: AdRow, right: AdRow): number {
+  const assetCounts = (row: AdRow) => {
+    const rsa = row.adGroupAd.ad.responsiveSearchAd;
+    const assets = [...(rsa?.headlines || []), ...(rsa?.descriptions || [])];
+    return {
+      headlines: rsa?.headlines?.length || 0,
+      pins: assets.filter((asset) => asset.pinnedField).length,
+    };
+  };
+  const leftCounts = assetCounts(left);
+  const rightCounts = assetCounts(right);
+  return leftCounts.pins - rightCounts.pins
+    || rightCounts.headlines - leftCounts.headlines
+    || left.adGroupAd.resourceName.localeCompare(right.adGroupAd.resourceName);
+}
+
 export function desiredAd(campaign: CampaignSpec, group: AdGroupSpec) {
   const promotionHeadline = group.promotionHeadline || campaign.promotionHeadline;
   const descriptions = [...campaign.descriptions];
@@ -207,10 +223,11 @@ async function reconcileAds(adGroups: Map<string, string>, specs: CampaignSpec[]
       const current = rows.filter((row) => row.adGroup.resourceName === adGroup);
       const matching = current.find((row) => adMatches(row, desired));
       if (!matching) {
-        const serving = current.filter(adIsReady);
-        const stalePending = current.filter((row) => !adIsReady(row));
-        if (serving.length && stalePending.length) {
-          await mutate("adGroupAds", stalePending.map((row) => ({ remove: row.adGroupAd.resourceName })));
+        const preferredServing = current.filter(adIsReady).sort(compareServingAds)[0];
+        const disposable = preferredServing ? current.filter((row) =>
+          row.adGroupAd.resourceName !== preferredServing.adGroupAd.resourceName) : [];
+        if (disposable.length) {
+          await mutate("adGroupAds", disposable.map((row) => ({ remove: row.adGroupAd.resourceName })));
         }
         await mutate("adGroupAds", [{ create: { ad: desired, adGroup, status: "ENABLED" } }]);
         continue;
@@ -226,8 +243,13 @@ async function reconcileAds(adGroups: Map<string, string>, specs: CampaignSpec[]
           row.adGroupAd.resourceName !== matching.adGroupAd.resourceName && adIsReady(row));
         const stalePending = current.filter((row) =>
           row.adGroupAd.resourceName !== matching.adGroupAd.resourceName && !adIsReady(row));
-        if (serving.length && stalePending.length) {
-          await mutate("adGroupAds", stalePending.map((row) => ({ remove: row.adGroupAd.resourceName })));
+        const preferredServing = [...serving].sort(compareServingAds)[0];
+        const disposable = preferredServing ? [
+          ...serving.filter((row) => row.adGroupAd.resourceName !== preferredServing.adGroupAd.resourceName),
+          ...stalePending,
+        ] : [];
+        if (disposable.length) {
+          await mutate("adGroupAds", disposable.map((row) => ({ remove: row.adGroupAd.resourceName })));
         }
         continue;
       }

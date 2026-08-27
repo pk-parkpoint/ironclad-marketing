@@ -52,6 +52,22 @@ function adIsReady(row: AdRow): boolean {
     && row.adGroupAd.policySummary?.approvalStatus === "APPROVED";
 }
 
+function compareServingAds(left: AdRow, right: AdRow): number {
+  const assetCounts = (row: AdRow) => {
+    const rsa = row.adGroupAd.ad.responsiveSearchAd;
+    const assets = [...(rsa?.headlines || []), ...(rsa?.descriptions || [])];
+    return {
+      headlines: rsa?.headlines?.length || 0,
+      pins: assets.filter((asset) => asset.pinnedField).length,
+    };
+  };
+  const leftCounts = assetCounts(left);
+  const rightCounts = assetCounts(right);
+  return leftCounts.pins - rightCounts.pins
+    || rightCounts.headlines - leftCounts.headlines
+    || left.adGroupAd.resourceName.localeCompare(right.adGroupAd.resourceName);
+}
+
 async function loadDesiredGroups(): Promise<DesiredGroup[]> {
   const campaignRows = await query<CampaignRow>(`
     SELECT campaign.resource_name, campaign.name, campaign.status
@@ -137,12 +153,17 @@ async function applyCopy(groups: DesiredGroup[]) {
         row.adGroupAd.resourceName !== matching.adGroupAd.resourceName && adIsReady(row));
       const nonServingStale = rows.filter((row) =>
         row.adGroupAd.resourceName !== matching.adGroupAd.resourceName && !adIsReady(row));
-      if (servingStale.length && nonServingStale.length) {
-        await mutate("adGroupAds", nonServingStale.map((row) => ({ remove: row.adGroupAd.resourceName })));
-        removed += nonServingStale.length;
+      const preferredServing = [...servingStale].sort(compareServingAds)[0];
+      const disposable = preferredServing ? [
+        ...servingStale.filter((row) => row.adGroupAd.resourceName !== preferredServing.adGroupAd.resourceName),
+        ...nonServingStale,
+      ] : [];
+      if (disposable.length) {
+        await mutate("adGroupAds", disposable.map((row) => ({ remove: row.adGroupAd.resourceName })));
+        removed += disposable.length;
       }
       pendingReview += 1;
-      retained += servingStale.length + (servingStale.length ? 0 : nonServingStale.length);
+      retained += preferredServing ? 1 : nonServingStale.length;
       continue;
     }
     const stale = rows
