@@ -7,7 +7,7 @@ export const LICENSE_DESCRIPTION =
 export const STANDARD_PROMOTION_HEADLINE = "Up to $100 Off Plumbing";
 export const STANDARD_PROMOTION_DESCRIPTION =
   "New customers save up to $100 on plumbing services. Call Ironclad today.";
-export const STANDARD_PINNED_HEADLINE_3 = "Available 24/7";
+export const STANDARD_AVAILABILITY_HEADLINE = "Available 24/7";
 export const STANDARD_OUTCOME_DESCRIPTION =
   "Know what needs fixing—and what can wait—before you decide.";
 export const STANDARD_AVAILABILITY_DESCRIPTION =

@@ -26,14 +26,20 @@ export const GENERAL_CITY: CampaignSpec = {
   launchEnabled: true,
   crossNegatives: ["emergency", "24 hour", "open now", "water heater", "tankless", "drain", "sewer", "leak detection", "slab leak", "repipe", "gas line", "toilet"],
   residentialFilter: true,
-  pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
+  promotionHeadline: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(),
   adGroups: [
     {
       name: "Plumber Near Me",
       finalUrl: `${SITE_ORIGIN}/plumbing`,
-      pinnedHeadline: "Plumber Near Me",
+      primaryHeadline: "Plumber Near Me",
+      additionalHeadlines: [
+        "Local Plumber Near Me",
+        "Residential Plumbing",
+        "Licensed Local Plumber",
+        "Plumbing Services Near Me",
+      ],
       outcomeDescription: "Know what needs fixing—and what can wait—before you decide.",
       negativeKeywords: GENERAL_SERVICE_ROUTING_NEGATIVES,
       keywords: [
@@ -44,7 +50,13 @@ export const GENERAL_CITY: CampaignSpec = {
     {
       name: "Plumbing Repairs",
       finalUrl: `${SITE_ORIGIN}/plumbing/repairs`,
-      pinnedHeadline: "Plumbing Repair Experts",
+      primaryHeadline: "Plumbing Repair Experts",
+      additionalHeadlines: [
+        "Plumbing Repair Near Me",
+        "Plumbing Repair Service",
+        "Low Water Pressure Help",
+        "Fix Leaks, Pipes & Fixtures",
+      ],
       outcomeDescription: "Find the cause and get the right plumbing repair for your home.",
       negativeKeywords: GENERAL_SERVICE_ROUTING_NEGATIVES,
       keywords: [
@@ -55,7 +67,13 @@ export const GENERAL_CITY: CampaignSpec = {
     {
       name: "Austin Plumber",
       finalUrl: `${SITE_ORIGIN}/service-area/austin-tx`,
-      pinnedHeadline: "Austin Plumber",
+      primaryHeadline: "Austin Plumber",
+      additionalHeadlines: [
+        "Plumber in Austin, TX",
+        "Licensed Austin Plumber",
+        "Austin Plumbing Company",
+        "Residential Austin Plumber",
+      ],
       outcomeDescription: "Know what needs fixing—and what can wait—before you decide.",
       negativeKeywords: GENERAL_SERVICE_ROUTING_NEGATIVES,
       keywords: [
@@ -66,7 +84,13 @@ export const GENERAL_CITY: CampaignSpec = {
     {
       name: "City Modifiers",
       finalUrl: `${SITE_ORIGIN}/service-area/austin-tx`,
-      pinnedHeadline: "{LOCATION(City):Local Plumber}",
+      primaryHeadline: "{LOCATION(City):Local Plumber}",
+      additionalHeadlines: [
+        "Plumber Near You",
+        "Local Plumbing Company",
+        "Residential Plumber",
+        "Plumbing Repair Near You",
+      ],
       outcomeDescription: "Get a straight answer and the right plumbing repair for your home.",
       negativeKeywords: GENERAL_SERVICE_ROUTING_NEGATIVES,
       keywords: [
@@ -95,14 +119,14 @@ export const FREEZE: CampaignSpec = {
   launchEnabled: false,
   crossNegatives: [],
   residentialFilter: false,
-  pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
+  promotionHeadline: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(),
   adGroups: [
     {
       name: "Frozen Pipes",
       finalUrl: `${SITE_ORIGIN}/plumbing/burst-pipe-repair`,
-      pinnedHeadline: "Frozen Pipe Repair Experts",
+      primaryHeadline: "Frozen Pipe Repair Experts",
       outcomeDescription: "Thaw or repair frozen pipes before they cause more damage.",
       keywords: [
         ...exact("frozen pipes", "frozen pipe repair"),
@@ -120,14 +144,14 @@ export const COMPETITOR: CampaignSpec = {
   launchEnabled: false,
   crossNegatives: [],
   residentialFilter: false,
-  pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
+  promotionHeadline: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(),
   adGroups: [
     {
       name: "Competitor Names",
       finalUrl: `${SITE_ORIGIN}/service-area/austin-tx`,
-      pinnedHeadline: "Austin Plumbing Company",
+      primaryHeadline: "Austin Plumbing Company",
       outcomeDescription: "Know what needs fixing—and what can wait—before you decide.",
       keywords: exact("radiant plumbing", "reliant plumbing", "daniels plumbing", "s and d plumbing", "abacus plumbing", "roto rooter", "mr rooter", "benjamin franklin plumbing", "thomas plumbing"),
     },

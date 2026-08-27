@@ -1,6 +1,6 @@
 import { mutate, query, resourceId } from "./client";
 import { reconcileAdGroupNegatives } from "./ad-group-negatives";
-import { STANDARD_PINNED_HEADLINE_3 } from "./manifest-shared";
+import { STANDARD_AVAILABILITY_HEADLINE } from "./manifest-shared";
 import type { AdGroupSpec, CampaignSpec } from "./types";
 
 type AdGroupRow = {
@@ -142,30 +142,34 @@ type AdRow = {
       type: string;
     };
     resourceName: string;
+    primaryStatus?: string;
+    policySummary?: { approvalStatus?: string; reviewStatus?: string };
     status: string;
   };
 };
 
+function adIsReady(row: AdRow): boolean {
+  return row.adGroupAd.primaryStatus === "ELIGIBLE"
+    && row.adGroupAd.policySummary?.approvalStatus === "APPROVED";
+}
+
 export function desiredAd(campaign: CampaignSpec, group: AdGroupSpec) {
-  const pinnedHeadline2 = group.pinnedHeadline2 || campaign.pinnedHeadline2;
+  const promotionHeadline = group.promotionHeadline || campaign.promotionHeadline;
   const descriptions = [...campaign.descriptions];
   descriptions[1] = group.outcomeDescription;
   if (group.promotionDescription) descriptions[descriptions.length - 1] = group.promotionDescription;
   return {
     finalUrls: [group.finalUrl],
     responsiveSearchAd: {
-      descriptions: descriptions.map((text, index) => ({
-        ...(index === 0 ? { pinnedField: "DESCRIPTION_1" } : {}),
-        ...(index === 1 ? { pinnedField: "DESCRIPTION_2" } : {}),
-        text,
-      })),
+      descriptions: descriptions.map((text) => ({ text })),
       headlines: [
-        { pinnedField: "HEADLINE_1", text: group.pinnedHeadline },
-        ...(pinnedHeadline2
-          ? [{ pinnedField: "HEADLINE_2", text: pinnedHeadline2 }]
+        { text: group.primaryHeadline },
+        ...(promotionHeadline
+          ? [{ text: promotionHeadline }]
           : []),
-        { pinnedField: "HEADLINE_3", text: STANDARD_PINNED_HEADLINE_3 },
+        { text: STANDARD_AVAILABILITY_HEADLINE },
         ...campaign.headlines.map((text) => ({ text })),
+        ...(group.additionalHeadlines || []).map((text) => ({ text })),
       ],
     },
   };
@@ -187,6 +191,8 @@ async function reconcileAds(adGroups: Map<string, string>, specs: CampaignSpec[]
   const adGroupIds = [...adGroups.values()].map(resourceId).join(",");
   const rows = await query<AdRow>(`
     SELECT ad_group.resource_name, ad_group_ad.resource_name, ad_group_ad.status,
+      ad_group_ad.primary_status, ad_group_ad.policy_summary.approval_status,
+      ad_group_ad.policy_summary.review_status,
       ad_group_ad.ad.type, ad_group_ad.ad.final_urls,
       ad_group_ad.ad.responsive_search_ad.headlines,
       ad_group_ad.ad.responsive_search_ad.descriptions
@@ -200,20 +206,21 @@ async function reconcileAds(adGroups: Map<string, string>, specs: CampaignSpec[]
       const desired = desiredAd(campaign, group);
       const current = rows.filter((row) => row.adGroup.resourceName === adGroup);
       const matching = current.find((row) => adMatches(row, desired));
-      const remove = current
-        .filter((row) => row.adGroupAd.resourceName !== matching?.adGroupAd.resourceName)
-        .map((row) => ({ remove: row.adGroupAd.resourceName }));
-      if (remove.length) await mutate("adGroupAds", remove);
-      if (matching) {
-        if (matching.adGroupAd.status !== "ENABLED") {
-          await mutate("adGroupAds", [{
-            update: { resourceName: matching.adGroupAd.resourceName, status: "ENABLED" },
-            updateMask: "status",
-          }]);
-        }
+      if (!matching) {
+        await mutate("adGroupAds", [{ create: { ad: desired, adGroup, status: "ENABLED" } }]);
         continue;
       }
-      await mutate("adGroupAds", [{ create: { ad: desired, adGroup, status: "ENABLED" } }]);
+      if (matching.adGroupAd.status !== "ENABLED") {
+        await mutate("adGroupAds", [{
+          update: { resourceName: matching.adGroupAd.resourceName, status: "ENABLED" },
+          updateMask: "status",
+        }]);
+      }
+      if (!adIsReady(matching)) continue;
+      const remove = current
+        .filter((row) => row.adGroupAd.resourceName !== matching.adGroupAd.resourceName)
+        .map((row) => ({ remove: row.adGroupAd.resourceName }));
+      if (remove.length) await mutate("adGroupAds", remove);
     }
   }
 }

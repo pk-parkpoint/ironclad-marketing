@@ -19,6 +19,8 @@ type AdRow = {
       responsiveSearchAd?: { descriptions?: TextAsset[]; headlines?: TextAsset[] };
       type: string;
     };
+    primaryStatus?: string;
+    policySummary?: { approvalStatus?: string; reviewStatus?: string };
     resourceName: string;
     status: string;
   };
@@ -45,6 +47,11 @@ function matches(row: AdRow, desired: ReturnType<typeof desiredAd>): boolean {
     && JSON.stringify(normalizeAssets(rsa?.descriptions)) === JSON.stringify(desired.responsiveSearchAd.descriptions);
 }
 
+function adIsReady(row: AdRow): boolean {
+  return row.adGroupAd.primaryStatus === "ELIGIBLE"
+    && row.adGroupAd.policySummary?.approvalStatus === "APPROVED";
+}
+
 async function loadDesiredGroups(): Promise<DesiredGroup[]> {
   const campaignRows = await query<CampaignRow>(`
     SELECT campaign.resource_name, campaign.name, campaign.status
@@ -56,7 +63,8 @@ async function loadDesiredGroups(): Promise<DesiredGroup[]> {
   for (const spec of CAMPAIGNS) {
     const row = campaignRows.find((candidate) => candidate.campaign.name.toLowerCase() === spec.name.toLowerCase());
     requireCondition(row, `managed campaign missing: ${spec.name}`);
-    requireCondition(row.campaign.status === "PAUSED", `campaign must remain paused: ${spec.name}/${row.campaign.status}`);
+    const expectedStatus = spec.launchEnabled ? "ENABLED" : "PAUSED";
+    requireCondition(row.campaign.status === expectedStatus, `campaign status mismatch: ${spec.name}/${row.campaign.status}/${expectedStatus}`);
     managedCampaigns.set(spec.key, row.campaign.resourceName);
   }
 
@@ -67,7 +75,7 @@ async function loadDesiredGroups(): Promise<DesiredGroup[]> {
     WHERE campaign.id IN (${campaignIds})
       AND ad_group.status != 'REMOVED'
   `);
-  return CAMPAIGNS.flatMap((campaign) => campaign.adGroups.map((group) => {
+  return CAMPAIGNS.filter((campaign) => campaign.launchEnabled).flatMap((campaign) => campaign.adGroups.map((group) => {
     const campaignResource = managedCampaigns.get(campaign.key)!;
     const row = adGroupRows.find((candidate) => candidate.adGroup.campaign === campaignResource
       && candidate.adGroup.name.toLowerCase() === group.name.toLowerCase());
@@ -81,6 +89,8 @@ async function loadAds(groups: DesiredGroup[]): Promise<AdRow[]> {
   const adGroupIds = groups.map(({ adGroup }) => resourceId(adGroup)).join(",");
   return query<AdRow>(`
     SELECT ad_group.resource_name, ad_group_ad.resource_name, ad_group_ad.status,
+      ad_group_ad.primary_status, ad_group_ad.policy_summary.approval_status,
+      ad_group_ad.policy_summary.review_status,
       ad_group_ad.ad.type, ad_group_ad.ad.final_urls,
       ad_group_ad.ad.responsive_search_ad.headlines,
       ad_group_ad.ad.responsive_search_ad.descriptions
@@ -97,12 +107,14 @@ async function validateCopy(groups: DesiredGroup[], current: AdRow[]) {
     return exists ? [] : [{ create: { ad: desired, adGroup, status: "ENABLED" } }];
   });
   if (creates.length) await mutate("adGroupAds", creates, { validateOnly: true });
-  console.log(`Copy validation passed: adGroups=${groups.length} creates=${creates.length} campaignsPaused=${CAMPAIGNS.length}`);
+  console.log(`Copy validation passed: liveAdGroups=${groups.length} creates=${creates.length} liveCampaigns=${CAMPAIGNS.filter((campaign) => campaign.launchEnabled).length}`);
 }
 
 async function applyCopy(groups: DesiredGroup[]) {
   let created = 0;
+  let pendingReview = 0;
   let removed = 0;
+  let retained = 0;
   for (const item of groups) {
     const desired = desiredAd(item.campaign, item.group);
     let rows = (await loadAds([item])).filter((row) => row.adGroup.resourceName === item.adGroup);
@@ -120,6 +132,11 @@ async function applyCopy(groups: DesiredGroup[]) {
         updateMask: "status",
       }]);
     }
+    if (!adIsReady(matching)) {
+      pendingReview += 1;
+      retained += rows.filter((row) => row.adGroupAd.resourceName !== matching.adGroupAd.resourceName).length;
+      continue;
+    }
     const stale = rows
       .filter((row) => row.adGroupAd.resourceName !== matching.adGroupAd.resourceName)
       .map((row) => ({ remove: row.adGroupAd.resourceName }));
@@ -133,7 +150,7 @@ async function applyCopy(groups: DesiredGroup[]) {
   const matchingCount = verifiedGroups.filter(({ adGroup, campaign, group }) => verifiedAds.some((row) =>
     row.adGroup.resourceName === adGroup && row.adGroupAd.status === "ENABLED" && matches(row, desiredAd(campaign, group)))).length;
   requireCondition(matchingCount === verifiedGroups.length, `live copy readback mismatch: ${matchingCount}/${verifiedGroups.length}`);
-  console.log(`Copy apply passed: created=${created} removed=${removed} verified=${matchingCount} campaignsPaused=${CAMPAIGNS.length}`);
+  console.log(`Copy apply passed: created=${created} removed=${removed} pendingReview=${pendingReview} retained=${retained} verified=${matchingCount}`);
 }
 
 async function main() {

@@ -17,14 +17,20 @@ export const EMERGENCY: CampaignSpec = {
   launchEnabled: true,
   crossNegatives: ["water heater", "tankless", "drain cleaning", "drain clearing", "leak detection", "repipe", ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES.emergency],
   residentialFilter: true,
-  pinnedHeadline2: STANDARD_PROMOTION_HEADLINE,
+  promotionHeadline: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(),
   adGroups: [
     {
       name: "Emergency Plumber",
       finalUrl: `${SITE_ORIGIN}/emergency-plumbing`,
-      pinnedHeadline: "Emergency Plumbing Experts",
+      primaryHeadline: "Emergency Plumbing Experts",
+      additionalHeadlines: [
+        "Emergency Plumber Near Me",
+        "Emergency Plumbing Repair",
+        "Help Stop Water Damage",
+        "Call for Plumbing Help",
+      ],
       outcomeDescription: "Stop the damage fast and get the right repair for your home.",
       keywords: [
         ...exact("emergency plumber", "emergency plumber austin", "emergency plumber near me", "24 hour plumber", "plumber open now", "no water in house"),
@@ -34,7 +40,13 @@ export const EMERGENCY: CampaignSpec = {
     {
       name: "Burst Pipe",
       finalUrl: `${SITE_ORIGIN}/plumbing/burst-pipe-repair`,
-      pinnedHeadline: "Burst Pipe Repair Experts",
+      primaryHeadline: "Burst Pipe Repair Experts",
+      additionalHeadlines: [
+        "Burst Pipe Plumber",
+        "Broken Pipe Emergency",
+        "Stop Water Damage",
+        "Burst Pipe Repair Near Me",
+      ],
       outcomeDescription: "Stop the water fast and get the broken pipe repaired.",
       keywords: [
         ...exact("burst pipe repair"),
@@ -44,21 +56,39 @@ export const EMERGENCY: CampaignSpec = {
     {
       name: "Sewer Backup",
       finalUrl: `${SITE_ORIGIN}/plumbing/sewer-services`,
-      pinnedHeadline: "Sewer Backup Experts",
+      primaryHeadline: "Sewer Backup Experts",
+      additionalHeadlines: [
+        "Sewer Backup Plumber",
+        "Sewage Backup Help",
+        "Clear the Sewer Backup",
+        "Find the Cause of Backups",
+      ],
       outcomeDescription: "Clear the backup and find the cause before it happens again.",
       keywords: phrase("sewer backup plumber", "sewage backup in house", "sewer backing up into shower", "raw sewage in house", "sewer backup emergency"),
     },
     {
       name: "Overflowing Toilet",
       finalUrl: `${SITE_ORIGIN}/plumbing/toilet-repair-installation`,
-      pinnedHeadline: "Overflowing Toilet Experts",
+      primaryHeadline: "Overflowing Toilet Experts",
+      additionalHeadlines: [
+        "Overflowing Toilet Plumber",
+        "Toilet Overflow Help",
+        "Stop the Toilet Overflow",
+        "Get Your Toilet Working",
+      ],
       outcomeDescription: "Stop the overflow and get your toilet working again.",
       keywords: phrase("overflowing toilet plumber", "toilet overflowing wont stop", "toilet overflowing emergency"),
     },
     {
       name: "After-Hours & Weekend",
       finalUrl: `${SITE_ORIGIN}/emergency-plumbing`,
-      pinnedHeadline: "After-Hours Plumbing Experts",
+      primaryHeadline: "After-Hours Plumbing Experts",
+      additionalHeadlines: [
+        "After Hours Plumber",
+        "Weekend Plumber Near Me",
+        "Plumber Open Nights",
+        "Saturday & Sunday Plumbing",
+      ],
       outcomeDescription: "Get the plumbing problem handled tonight or this weekend.",
       keywords: [
         ...exact("weekend plumber", "sunday plumber", "after hours plumber"),
@@ -87,7 +117,7 @@ export const WATER_HEATER: CampaignSpec = {
     "rinnai tankless water heater",
   ],
   residentialFilter: true,
-  pinnedHeadline2: "Up to $300 Off New Heaters",
+  promotionHeadline: "Up to $300 Off New Heaters",
   headlines: STANDARD_HEADLINES,
   descriptions: standardDescriptions(
     "New customers save up to $300 on a new water heater. Call Ironclad today.",
@@ -96,7 +126,13 @@ export const WATER_HEATER: CampaignSpec = {
     {
       name: "Repair & No Hot Water",
       finalUrl: `${SITE_ORIGIN}/plumbing/water-heater-repair`,
-      pinnedHeadline: "Water Heater Repair Experts",
+      primaryHeadline: "Water Heater Repair Experts",
+      additionalHeadlines: [
+        "Water Heater Repair",
+        "No Hot Water?",
+        "Hot Water Heater Repair",
+        "Repair or Replace?",
+      ],
       outcomeDescription: "Know whether you need a water heater repair or replacement before you decide.",
       keywords: [
         ...exact("water heater repair", "water heater repair near me", "water heater repair austin"),
@@ -106,7 +142,13 @@ export const WATER_HEATER: CampaignSpec = {
     {
       name: "Replacement",
       finalUrl: `${SITE_ORIGIN}/plumbing/water-heaters`,
-      pinnedHeadline: "Water Heater Replacement",
+      primaryHeadline: "Water Heater Replacement",
+      additionalHeadlines: [
+        "Replace Your Water Heater",
+        "Leaking Water Heater?",
+        "Choose the Right Water Heater",
+        "Water Heater Near Me",
+      ],
       outcomeDescription: "Choose the right water heater for your home and your hot-water needs.",
       keywords: [
         ...exact("water heater replacement"),
@@ -116,7 +158,13 @@ export const WATER_HEATER: CampaignSpec = {
     {
       name: "Installation",
       finalUrl: `${SITE_ORIGIN}/plumbing/water-heater-installation`,
-      pinnedHeadline: "Water Heater Installation",
+      primaryHeadline: "Water Heater Installation",
+      additionalHeadlines: [
+        "Water Heater Installers",
+        "New Water Heater Installed",
+        "Gas & Electric Options",
+        "Installed for Your Home",
+      ],
       outcomeDescription: "Get the right water heater installed correctly for your home.",
       keywords: [
         ...exact("water heater installation"),
@@ -126,7 +174,13 @@ export const WATER_HEATER: CampaignSpec = {
     {
       name: "Tankless",
       finalUrl: `${SITE_ORIGIN}/plumbing/tankless-water-heaters`,
-      pinnedHeadline: "Tankless Water Heater Experts",
+      primaryHeadline: "Tankless Water Heater Experts",
+      additionalHeadlines: [
+        "Tankless Water Heater",
+        "Tankless Repair & Install",
+        "Is Tankless Right for You?",
+        "Tankless Plumber Near Me",
+      ],
       outcomeDescription: "Find out whether a tankless water heater is right for your home.",
       keywords: [
         ...exact("tankless water heater repair", "tankless water heater installation"),
@@ -136,7 +190,13 @@ export const WATER_HEATER: CampaignSpec = {
     {
       name: "Brand + Service",
       finalUrl: `${SITE_ORIGIN}/plumbing/water-heater-repair`,
-      pinnedHeadline: "Water Heater Brand Experts",
+      primaryHeadline: "Water Heater Brand Experts",
+      additionalHeadlines: [
+        "Water Heater Brand Repair",
+        "Repair for Many Brands",
+        "Tank & Tankless Repair",
+        "Help for Your Heater Model",
+      ],
       outcomeDescription: "Get the right repair for your water heater brand and model.",
       keywords: phrase("rheem water heater repair", "rinnai tankless repair", "navien tankless repair", "ao smith water heater repair", "bradford white water heater repair", "state water heater repair"),
     },
