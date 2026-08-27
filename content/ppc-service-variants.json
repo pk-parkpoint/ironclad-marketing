@@ -1268,11 +1268,11 @@
     "key": "Sewer Line Services",
     "slug": "sewer-services",
     "bookUrl": "https://ironcladtexas.com/book?service=sewer-services",
-    "seoTitle": "Sewer Line Repair in Austin | Ironclad Plumbing",
-    "metaDescription": "Sewer line trouble in Austin? Ironclad runs a camera inspection, shows you the problem, and repairs it right. Upfront pricing. Call now.",
+    "seoTitle": "Sewer Line Repair & Replacement Austin | Ironclad",
+    "metaDescription": "Sewer line repair and replacement in Austin, with camera diagnosis, trenchless options, upfront costs, and minimal disruption.",
     "eyebrow": "SEWER LINE SERVICES · AUSTIN",
-    "h1": "Licensed, Expert Sewer Line Services",
-    "valueLine": "Upfront pricing, expert service, no surprises.",
+    "h1": "Sewer Line Repair & Replacement in Austin",
+    "valueLine": "Camera-first diagnosis, written options, and upfront replacement costs.",
     "pun": "Water you waiting for?",
     "punFirst": false,
     "callFirst": false,
@@ -1296,8 +1296,8 @@
         "body": "Wet or extra-green patches over the line can mean a break below."
       }
     ],
-    "servicesHeading": "Our Sewer Line Services",
-    "servicesIntro": "We diagnose by camera first, then fix it with the right method for your line.",
+    "servicesHeading": "Sewer Repair & Replacement Options",
+    "servicesIntro": "We inspect by camera first, then explain repair, trenchless, or full replacement options and their costs before work starts.",
     "services": [
       {
         "title": "Camera sewer inspection",
