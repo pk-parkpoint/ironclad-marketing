@@ -1,4 +1,5 @@
 import {
+  CORE_COMPETITOR_NEGATIVES,
   SITE_ORIGIN,
   STANDARD_HEADLINES,
   STANDARD_PROMOTION_DESCRIPTION,
@@ -27,6 +28,7 @@ export const DRAIN_SEWER: CampaignSpec = {
     "drano", "liquid fire", "thrift drain cleaner", "best drain snake",
     "drain machine", "drain snake tool", "electric eel", "flex shaft", "sewer machine",
     "snake drain tool", "snake for plumbing", "tool to unclog",
+    ...CORE_COMPETITOR_NEGATIVES,
     ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES["drain-sewer"],
   ],
   residentialFilter: true,
