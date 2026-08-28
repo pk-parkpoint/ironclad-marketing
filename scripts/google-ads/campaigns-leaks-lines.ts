@@ -20,6 +20,7 @@ export const LEAKS_LINES: CampaignSpec = {
     "drain clearing", "leak detection system", "leak detector", "water leak sensor",
     ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES["leaks-lines"],
   ],
+  exactCrossNegatives: ["plumbing austin"],
   residentialFilter: true,
   promotionHeadline: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,

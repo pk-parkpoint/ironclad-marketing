@@ -99,7 +99,7 @@ export const GENERAL_CITY: CampaignSpec = {
       outcomeDescription: "Know what needs fixing—and what can wait—before you decide.",
       negativeKeywords: GENERAL_SERVICE_ROUTING_NEGATIVES,
       keywords: [
-        ...exact("austin plumber", "plumber austin tx"),
+        ...exact("austin plumber", "plumber austin tx", "plumbing austin"),
         ...phrase("licensed plumber austin", "best plumber austin", "plumbing company austin", "plumber in austin texas"),
       ],
     },
