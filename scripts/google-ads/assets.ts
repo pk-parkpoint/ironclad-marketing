@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
+import { CAMPAIGN_SITELINKS, campaignSitelinkAssetName } from "./campaign-sitelinks";
 import { mutate, query, resourceId } from "./client";
 import { ensureImageAssets, reconcileAdGroupImages } from "./image-assets";
 import { CALLOUTS, SITELINKS, STRUCTURED_SNIPPET_VALUES } from "./manifest-shared";
@@ -112,6 +113,23 @@ export async function ensureAssets(callsFromAds: string): Promise<Map<string, { 
     assets.set(`sitelink:${sitelink.text}`, { fieldType: "SITELINK", resourceName });
   }
 
+  for (const [campaignKey, sitelinks] of Object.entries(CAMPAIGN_SITELINKS)) {
+    for (const sitelink of sitelinks) {
+      const resourceName = await ensureAsset(campaignSitelinkAssetName(campaignKey, sitelink.text), {
+        finalUrls: [sitelink.finalUrl],
+        sitelinkAsset: {
+          description1: sitelink.description1,
+          description2: sitelink.description2,
+          linkText: sitelink.text,
+        },
+      });
+      assets.set(`campaign-sitelink:${campaignKey}:${sitelink.text}`, {
+        fieldType: "SITELINK",
+        resourceName,
+      });
+    }
+  }
+
   for (const callout of CALLOUTS) {
     const resourceName = await ensureAsset(`IRONCLAD | Callout | ${callout}`, {
       calloutAsset: { calloutText: callout },
@@ -158,9 +176,17 @@ export async function attachAssets(
     WHERE campaign.id IN (${campaignIds})
       AND campaign_asset.status != 'REMOVED'
   `);
-  const desiredAssets = [...assets.values()].filter((asset) => asset.fieldType !== "AD_IMAGE");
-  const managedTypes = new Set(desiredAssets.map((asset) => asset.fieldType));
-  for (const campaign of campaigns.values()) {
+  const commonAssets = [...assets]
+    .filter(([key, asset]) => asset.fieldType !== "AD_IMAGE" && !key.startsWith("campaign-sitelink:"))
+    .map(([, asset]) => asset);
+  const managedTypes = new Set(commonAssets.map((asset) => asset.fieldType));
+  for (const [campaignKey, campaign] of campaigns) {
+    const desiredAssets = [
+      ...commonAssets,
+      ...[...assets]
+        .filter(([key]) => key.startsWith(`campaign-sitelink:${campaignKey}:`))
+        .map(([, asset]) => asset),
+    ];
     const current = rows.filter((row) => row.campaign.resourceName === campaign);
     const remove = current
       .filter((row) => managedTypes.has(row.campaignAsset.fieldType)

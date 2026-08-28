@@ -1,4 +1,5 @@
 import {
+  CORE_COMPETITOR_NEGATIVES,
   SITE_ORIGIN,
   STANDARD_HEADLINES,
   STANDARD_PROMOTION_HEADLINE,
@@ -18,6 +19,7 @@ export const LEAKS_LINES: CampaignSpec = {
   crossNegatives: [
     "emergency", "24 hour", "open now", "water heater", "tankless", "drain cleaning",
     "drain clearing", "leak detection system", "leak detector", "water leak sensor",
+    ...CORE_COMPETITOR_NEGATIVES,
     ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES["leaks-lines"],
   ],
   exactCrossNegatives: ["plumbing austin"],

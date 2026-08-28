@@ -1,4 +1,5 @@
 import {
+  CORE_COMPETITOR_NEGATIVES,
   SITE_ORIGIN,
   STANDARD_HEADLINES,
   STANDARD_PROMOTION_HEADLINE,
@@ -15,7 +16,11 @@ export const EMERGENCY: CampaignSpec = {
   cpcCapMicros: "30000000",
   targetCpaMicros: TARGET_CPA_MICROS,
   launchEnabled: true,
-  crossNegatives: ["water heater", "tankless", "drain cleaning", "drain clearing", "leak detection", "repipe", ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES.emergency],
+  crossNegatives: [
+    "water heater", "tankless", "drain cleaning", "drain clearing", "leak detection", "repipe",
+    ...CORE_COMPETITOR_NEGATIVES,
+    ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES.emergency,
+  ],
   residentialFilter: true,
   promotionHeadline: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
@@ -129,6 +134,7 @@ export const WATER_HEATER: CampaignSpec = {
     "emergency", "24 hour", "open now", "drain", "sewer",
     "110 volt", "110v", "calculator", "gallons per minute", "gpm", "kw",
     "model number", "model numbers", "spex3012", "lowe's",
+    ...CORE_COMPETITOR_NEGATIVES,
     ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES["water-heater"],
   ],
   exactCrossNegatives: [

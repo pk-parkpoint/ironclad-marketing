@@ -1,8 +1,10 @@
 import { CAMPAIGNS } from "./manifest";
 import { desiredAd } from "./ad-groups";
+import { CAMPAIGN_SITELINKS } from "./campaign-sitelinks";
 import { CORE_LAUNCH_KEYS, TARGET_CPA_MICROS } from "./launch-config";
 import {
   CALLOUTS,
+  CORE_COMPETITOR_NEGATIVES,
   LICENSE_DESCRIPTION,
   RESIDENTIAL_NEGATIVES,
   SHARED_NEGATIVES,
@@ -33,6 +35,20 @@ export function validateManifest() {
   requireCondition(RESIDENTIAL_NEGATIVES.length >= 20, "residential/commercial negative list is incomplete");
   requireCondition(SITELINKS.length === 6, "six sitelinks are required");
   requireCondition(CALLOUTS.length === 8, "eight callouts are required");
+  requireCondition(
+    JSON.stringify(Object.keys(CAMPAIGN_SITELINKS).sort()) === JSON.stringify([...CORE_LAUNCH_KEYS].sort()),
+    "campaign sitelinks must cover exactly the five live campaigns",
+  );
+  for (const [campaignKey, sitelinks] of Object.entries(CAMPAIGN_SITELINKS)) {
+    requireCondition(sitelinks.length >= 4, `${campaignKey}: fewer than four campaign sitelinks`);
+    requireCondition(new Set(sitelinks.map((sitelink) => sitelink.text.toLowerCase())).size === sitelinks.length, `${campaignKey}: duplicate campaign sitelink`);
+    for (const sitelink of sitelinks) {
+      requireCondition(sitelink.text.length <= 25, `${campaignKey}: sitelink text exceeds 25 characters: ${sitelink.text}`);
+      requireCondition(sitelink.description1.length <= 35, `${campaignKey}: sitelink description 1 exceeds 35 characters: ${sitelink.text}`);
+      requireCondition(sitelink.description2.length <= 35, `${campaignKey}: sitelink description 2 exceeds 35 characters: ${sitelink.text}`);
+      requireCondition(sitelink.finalUrl.startsWith("https://ironcladtexas.com/"), `${campaignKey}: external campaign sitelink`);
+    }
+  }
   requireCondition(LICENSE_DESCRIPTION.length <= 90, "license description exceeds 90 characters");
   for (const callout of CALLOUTS) {
     requireCondition(!FORBIDDEN_COPY_PATTERN.test(callout), `forbidden callout copy: ${callout}`);
@@ -47,6 +63,11 @@ export function validateManifest() {
     requireCondition(phraseCrossNegatives.size === campaign.crossNegatives.length, `${campaign.name}: duplicate phrase cross negative`);
     requireCondition(exactCrossNegatives.size === (campaign.exactCrossNegatives || []).length, `${campaign.name}: duplicate exact cross negative`);
     requireCondition([...exactCrossNegatives].every((text) => !phraseCrossNegatives.has(text)), `${campaign.name}: cross negative has two match types`);
+    if (campaign.launchEnabled) {
+      requireCondition(CORE_COMPETITOR_NEGATIVES.every((text) => phraseCrossNegatives.has(text)), `${campaign.name}: competitor negatives missing`);
+    } else {
+      requireCondition(CORE_COMPETITOR_NEGATIVES.every((text) => !phraseCrossNegatives.has(text)), `${campaign.name}: paused campaign blocks competitor routing`);
+    }
     requireCondition(campaign.descriptions[0] === LICENSE_DESCRIPTION, `${campaign.name}: description 1 must be the license line`);
     requireCondition(campaign.descriptions.length === 4, `${campaign.name}: simple formula requires four descriptions`);
     requireCondition(campaign.descriptions[1] === STANDARD_OUTCOME_DESCRIPTION, `${campaign.name}: fallback outcome description drifted`);

@@ -1,4 +1,5 @@
 import {
+  CORE_COMPETITOR_NEGATIVES,
   SITE_ORIGIN,
   STANDARD_HEADLINES,
   STANDARD_PROMOTION_HEADLINE,
@@ -24,7 +25,11 @@ export const GENERAL_CITY: CampaignSpec = {
   cpcCapMicros: "15000000",
   targetCpaMicros: TARGET_CPA_MICROS,
   launchEnabled: true,
-  crossNegatives: ["emergency", "24 hour", "open now", "water heater", "tankless", "drain", "sewer", "leak detection", "slab leak", "repipe", "gas line", "toilet"],
+  crossNegatives: [
+    "emergency", "24 hour", "open now", "water heater", "tankless", "drain", "sewer",
+    "leak detection", "slab leak", "repipe", "gas line", "toilet",
+    ...CORE_COMPETITOR_NEGATIVES,
+  ],
   residentialFilter: true,
   promotionHeadline: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,

@@ -13,6 +13,11 @@ export const STANDARD_OUTCOME_DESCRIPTION =
 export const STANDARD_AVAILABILITY_DESCRIPTION =
   "Call or book online. Our team is available nights and weekends.";
 
+export const CORE_COMPETITOR_NEGATIVES = [
+  "blue ribbon plumbing",
+  "benjamin franklin plumbing",
+] as const;
+
 export const STANDARD_HEADLINES = [
   "Locally & Family Owned",
   "Licensed & Insured Plumbers",
