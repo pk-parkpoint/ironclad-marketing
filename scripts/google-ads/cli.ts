@@ -84,7 +84,7 @@ async function activate() {
   }
   await setLaunchStatuses(campaigns, CAMPAIGNS);
   await auditAccount(true);
-  console.log("Five core Search campaigns enabled on one $60/day shared budget with portfolio Maximize Conversions, a $40 target CPA, and a $15 CPC ceiling; Freeze and Competitor remain paused.");
+  console.log("Five core Search campaigns enabled on one $60/day shared budget with portfolio Maximize Conversions, a $50 target CPA, and a $25 CPC ceiling; Freeze and Competitor remain paused.");
 }
 
 async function main() {

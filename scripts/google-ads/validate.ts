@@ -29,7 +29,7 @@ export function validateManifest() {
   const launchCampaigns = CAMPAIGNS.filter((campaign) => campaign.launchEnabled);
   requireCondition(launchCampaigns.length === CORE_LAUNCH_KEYS.length, "exactly five core campaigns must launch");
   requireCondition(JSON.stringify(launchCampaigns.map((campaign) => campaign.key).sort()) === JSON.stringify([...CORE_LAUNCH_KEYS].sort()), "launch campaign set drifted");
-  requireCondition(launchCampaigns.every((campaign) => campaign.targetCpaMicros === TARGET_CPA_MICROS), "launch campaigns must target a $40 CPA");
+  requireCondition(launchCampaigns.every((campaign) => campaign.targetCpaMicros === TARGET_CPA_MICROS), "launch campaigns must target a $50 CPA");
   requireCondition(TARGET_CITIES.length === 19, "target city list must contain 19 locations");
   requireCondition(SHARED_NEGATIVES.length > 30, "shared negative list is incomplete");
   requireCondition(RESIDENTIAL_NEGATIVES.length >= 20, "residential/commercial negative list is incomplete");
