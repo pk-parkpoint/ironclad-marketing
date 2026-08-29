@@ -50,6 +50,8 @@
     "google-ads:images-apply": "tsx scripts/google-ads/image-sync.ts apply",
     "google-ads:landing-pages-audit": "tsx scripts/google-ads/landing-page-audit.ts",
     "google-ads:landing-pages-audit-live": "tsx scripts/google-ads/landing-page-audit.ts --live",
+    "google-ads:bidding-plan": "tsx scripts/google-ads/bidding-sync.ts plan",
+    "google-ads:bidding-apply": "tsx scripts/google-ads/bidding-sync.ts apply",
     "google-ads:conversion-restart-plan": "tsx scripts/google-ads/conversion-restart.ts plan",
     "google-ads:conversion-restart-apply": "tsx scripts/google-ads/conversion-restart.ts apply",
     "launch:prod:audit": "tsx scripts/validate-production-launch.ts",

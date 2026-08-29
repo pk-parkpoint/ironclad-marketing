@@ -196,7 +196,7 @@ async function verify(before: Guard) {
   requireCondition(after.positiveKeywords === before.positiveKeywords, "positive keyword set changed during launch");
   requireCondition(after.imageLinks === before.imageLinks, "image links changed during launch");
   await auditAccount(true);
-  console.log(`Shared-budget launch verified: campaigns=${active.length} budget=$60/day targetCPA=$40 cpcCeiling=$15 imageLinks=${after.imageLinks}`);
+  console.log(`Shared-budget launch verified: campaigns=${active.length} budget=$60/day targetCPA=$50 cpcCeiling=$25 imageLinks=${after.imageLinks}`);
 }
 
 async function main() {
@@ -210,7 +210,7 @@ async function main() {
   const before = await guard(managed);
   const { calls } = await goalResources(managed);
   await mutate("conversionActions", [callOperation(calls)], { validateOnly: true });
-  console.log("Shared-budget launch preflight passed: five core campaigns, $60/day shared, $40 target CPA, $15 CPC ceiling");
+  console.log("Shared-budget launch preflight passed: five core campaigns, $60/day shared, $50 target CPA, $25 CPC ceiling");
   if (mode === "plan") return;
   const confirmation = process.argv.find((arg) => arg.startsWith("--confirm-customer="))?.split("=")[1]?.replace(/-/g, "");
   requireCondition(confirmation === CUSTOMER_ID, `conversion restart requires --confirm-customer=${CUSTOMER_ID}`);

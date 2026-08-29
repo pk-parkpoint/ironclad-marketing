@@ -1,6 +1,7 @@
 import { mutate, mutateAll, query, resourceId } from "./client";
 import {
   CPC_BID_CEILING_MICROS,
+  LEGACY_PORTFOLIO_STRATEGY_NAMES,
   PORTFOLIO_STRATEGY_NAME,
   SHARED_BUDGET_MICROS,
   SHARED_BUDGET_NAME,
@@ -43,7 +44,10 @@ export async function ensureLaunchPortfolio(): Promise<LaunchPortfolio> {
     SELECT bidding_strategy.resource_name, bidding_strategy.name, bidding_strategy.type
     FROM bidding_strategy WHERE bidding_strategy.status != 'REMOVED'
   `);
-  const existingStrategy = strategies.find((row) => row.biddingStrategy.name === PORTFOLIO_STRATEGY_NAME);
+  const existingStrategy = strategies.find((row) => row.biddingStrategy.name === PORTFOLIO_STRATEGY_NAME)
+    || strategies.find((row) => LEGACY_PORTFOLIO_STRATEGY_NAMES.includes(
+      row.biddingStrategy.name as (typeof LEGACY_PORTFOLIO_STRATEGY_NAMES)[number],
+    ));
   let strategy = existingStrategy?.biddingStrategy.resourceName;
   const maximizeConversions = {
     cpcBidCeilingMicros: CPC_BID_CEILING_MICROS,
@@ -54,8 +58,8 @@ export async function ensureLaunchPortfolio(): Promise<LaunchPortfolio> {
       throw new Error(`${PORTFOLIO_STRATEGY_NAME} has type ${existingStrategy.biddingStrategy.type}`);
     }
     await mutate("biddingStrategies", [{
-      update: { maximizeConversions, resourceName: strategy },
-      updateMask: "maximizeConversions.targetCpaMicros,maximizeConversions.cpcBidCeilingMicros",
+      update: { maximizeConversions, name: PORTFOLIO_STRATEGY_NAME, resourceName: strategy },
+      updateMask: "name,maximizeConversions.targetCpaMicros,maximizeConversions.cpcBidCeilingMicros",
     }]);
   } else {
     const results = await mutate("biddingStrategies", [{ create: {

@@ -1,6 +1,6 @@
 # Ironclad Google Ads Search Runbook
 
-Last updated: 2026-08-26
+Last updated: 2026-08-29
 
 ## Account and launch contract
 
@@ -11,7 +11,7 @@ Last updated: 2026-08-26
 - Conversion-first launch: Emergency, Water Heater, Drain & Sewer, Leaks &
   Lines, and General & City share one `$60/day` budget
 - The five core campaigns use one Maximize Conversions portfolio strategy with
-  a `$40` target CPA and a `$15` CPC ceiling
+  a `$50` target CPA and a `$25` CPC ceiling
 - Freeze and Competitor remain paused
 - Freeze: built at `$75/day`, paused until the Austin forecast is below 32°F
 - Competitor: built at `$10/day`, paused until explicitly approved
@@ -34,6 +34,7 @@ npm run google-ads:images-plan
 npm run google-ads:conversion-restart-plan
 npm run google-ads:landing-pages-audit
 npm run google-ads:landing-pages-audit-live
+npm run google-ads:bidding-plan
 ```
 
 Replace only responsive Search ad copy while requiring the five live campaigns
@@ -75,9 +76,19 @@ links plus policy-review state after applying:
 npm run google-ads:images-apply -- --confirm-customer=4803572715
 ```
 
+Update only the existing core Search portfolio bidding controls. This command
+keeps all five live campaigns on their existing `$60/day` shared budget,
+renames the strategy in place, applies a `$50` target CPA and `$25` CPC ceiling,
+and verifies campaign statuses, budgets, and Search-only network settings did
+not change:
+
+```zsh
+npm run google-ads:bidding-apply -- --confirm-customer=4803572715
+```
+
 Launch the five core Search campaigns on one shared budget and portfolio bid
-strategy. This command sets the shared budget to `$60/day`, applies a `$40`
-target CPA and `$15` CPC ceiling, keeps Freeze and Competitor paused, changes
+strategy. This command sets the shared budget to `$60/day`, applies a `$50`
+target CPA and `$25` CPC ceiling, keeps Freeze and Competitor paused, changes
 Calls from ads to one conversion per click, reconciles the current logo from
 `app/icon.svg`, and proves that positive keywords and ad-group images did not
 change. It also reconciles the complete negative-keyword manifest before
