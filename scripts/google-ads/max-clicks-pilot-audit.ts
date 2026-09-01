@@ -76,7 +76,7 @@ export async function auditMaxClicksPilot() {
   const groupRows = await query<{
     adGroup: { name: string; resourceName: string; status: string };
   }>(`
-    SELECT ad_group.resource_name, ad_group.name, ad_group.status FROM ad_group
+    SELECT campaign.id, ad_group.resource_name, ad_group.name, ad_group.status FROM ad_group
     WHERE campaign.id = ${id} AND ad_group.status != 'REMOVED'
   `);
   assert(groupRows.length === MAX_CLICKS_PILOT.adGroups.length, `ad group count=${groupRows.length}`);
@@ -90,7 +90,7 @@ export async function auditMaxClicksPilot() {
       status: string;
     };
   }>(`
-    SELECT ad_group.name, ad_group_criterion.status, ad_group_criterion.negative,
+    SELECT campaign.id, ad_group.name, ad_group_criterion.status, ad_group_criterion.negative,
       ad_group_criterion.keyword.text, ad_group_criterion.keyword.match_type
     FROM ad_group_criterion
     WHERE campaign.id = ${id} AND ad_group_criterion.type = 'KEYWORD'
@@ -118,7 +118,7 @@ export async function auditMaxClicksPilot() {
       type: string;
     };
   }>(`
-    SELECT campaign_criterion.type, campaign_criterion.negative,
+    SELECT campaign.id, campaign_criterion.type, campaign_criterion.negative,
       campaign_criterion.keyword.text, campaign_criterion.keyword.match_type,
       campaign_criterion.location.geo_target_constant,
       campaign_criterion.proximity.geo_point.latitude_in_micro_degrees,
@@ -140,7 +140,7 @@ export async function auditMaxClicksPilot() {
     && !criterion.campaignCriterion.negative).length === 1, "Rollingwood proximity missing");
 
   const sharedLinks = await query<{ campaignSharedSet: { sharedSet: string; status: string } }>(`
-    SELECT campaign_shared_set.shared_set, campaign_shared_set.status
+    SELECT campaign.id, campaign_shared_set.shared_set, campaign_shared_set.status
     FROM campaign_shared_set WHERE campaign.id = ${id}
   `);
   const sharedCriteria = await query<{ sharedCriterion: { resourceName: string } }>(`
@@ -154,7 +154,7 @@ export async function auditMaxClicksPilot() {
     adGroup: { name: string };
     adGroupAd: { policySummary?: { approvalStatus?: string; reviewStatus?: string }; status: string };
   }>(`
-    SELECT ad_group.name, ad_group_ad.status,
+    SELECT campaign.id, ad_group.name, ad_group_ad.status,
       ad_group_ad.policy_summary.approval_status, ad_group_ad.policy_summary.review_status
     FROM ad_group_ad WHERE campaign.id = ${id} AND ad_group_ad.status != 'REMOVED'
   `);
@@ -162,7 +162,7 @@ export async function auditMaxClicksPilot() {
     assert(ads.some((ad) => ad.adGroup.name === group.name && ad.adGroupAd.status === "ENABLED"), `${group.name} has no enabled RSA`);
   }
   const assetRows = await query<{ campaignAsset: { fieldType: string; status: string } }>(`
-    SELECT campaign_asset.field_type, campaign_asset.status FROM campaign_asset
+    SELECT campaign.id, campaign_asset.field_type, campaign_asset.status FROM campaign_asset
     WHERE campaign.id = ${id} AND campaign_asset.status != 'REMOVED'
   `);
   const enabledAssetTypes = assetRows.filter((asset) => asset.campaignAsset.status === "ENABLED")
@@ -172,7 +172,7 @@ export async function auditMaxClicksPilot() {
   }
   assert(enabledAssetTypes.filter((type) => type === "SITELINK").length === 6, "sitelink count mismatch");
   const goals = await query<{ conversionGoalCampaignConfig: { customConversionGoal?: string } }>(`
-    SELECT conversion_goal_campaign_config.custom_conversion_goal
+    SELECT campaign.id, conversion_goal_campaign_config.custom_conversion_goal
     FROM conversion_goal_campaign_config WHERE campaign.id = ${id}
   `);
   assert(Boolean(goals[0]?.conversionGoalCampaignConfig.customConversionGoal), "custom conversion goal missing");
