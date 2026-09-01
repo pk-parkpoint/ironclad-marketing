@@ -23,7 +23,7 @@ function requireCondition(condition: unknown, message: string): asserts conditio
 
 export async function attachMaxClicksPilotAssets(campaign: string) {
   const sourceRows = await query<CampaignAssetRow>(`
-    SELECT campaign.resource_name, campaign.name, campaign_asset.resource_name,
+    SELECT campaign.id, campaign.resource_name, campaign.name, campaign_asset.resource_name,
       campaign_asset.asset, campaign_asset.field_type, campaign_asset.status
     FROM campaign_asset
     WHERE campaign_asset.status != 'REMOVED'
@@ -66,7 +66,7 @@ export async function attachMaxClicksPilotAssets(campaign: string) {
   if (operations.length) await mutate("campaignAssets", operations);
 
   const readback = await query<CampaignAssetRow>(`
-    SELECT campaign.resource_name, campaign.name, campaign_asset.resource_name,
+    SELECT campaign.id, campaign.resource_name, campaign.name, campaign_asset.resource_name,
       campaign_asset.asset, campaign_asset.field_type, campaign_asset.status
     FROM campaign_asset
     WHERE campaign.id = ${resourceId(campaign)}
