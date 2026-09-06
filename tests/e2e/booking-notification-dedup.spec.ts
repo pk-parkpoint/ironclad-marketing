@@ -26,29 +26,47 @@ for (const path of ["/", "/plumbing/drain-clearing"]) {
 }
 
 test("dismissal plus pagehide sends once and a deliberate reopen remains a separate attempt", async ({ page }) => {
-  const attempts: string[] = [];
+  let requests = 0;
+  const attemptIds = new Set<string>();
+  await page.exposeFunction("recordBookingBeacon", (body: string) => {
+    attemptIds.add(JSON.parse(body).sessionId);
+  });
+  await page.addInitScript(() => {
+    const original = navigator.sendBeacon.bind(navigator);
+    navigator.sendBeacon = (url, data) => {
+      if (String(url).includes("/api/bookings/abandon") && data instanceof Blob) {
+        // Observe the original Blob without replacing or delaying its transport.
+        void data.text().then((body) => (window as unknown as {
+          recordBookingBeacon: (body: string) => Promise<void>;
+        }).recordBookingBeacon(body));
+      }
+      return original(url, data);
+    };
+  });
   await page.route("**/api/bookings/abandon", async (route) => {
-    attempts.push(route.request().postDataJSON().sessionId);
+    requests++;
+    const payload = route.request().postDataJSON();
+    if (payload) attemptIds.add(payload.sessionId);
     await route.fulfill({ status: 200, contentType: "application/json", body: '{"sent":true}' });
   });
   await page.goto("/book");
   const dialog = page.getByRole("dialog", { name: "Request an Appointment" });
   await expect(dialog).toBeVisible();
-  expect(attempts).toHaveLength(0);
+  expect(requests).toBe(0);
   await page.evaluate(() => {
     window.dispatchEvent(new Event("pagehide"));
     window.dispatchEvent(new Event("pagehide"));
   });
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
-  await expect.poll(() => attempts.length).toBe(1);
+  await expect.poll(() => requests).toBe(1);
   await page.locator('a[href^="/book"]').filter({ visible: true }).first().click();
   await expect(dialog).toBeVisible();
-  expect(attempts).toHaveLength(1);
+  expect(requests).toBe(1);
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
-  await expect.poll(() => attempts.length).toBe(2);
-  expect(new Set(attempts).size).toBe(2);
+  await expect.poll(() => requests).toBe(2);
+  await expect.poll(() => attemptIds.size).toBe(2);
 });
 
 test("browser back emits exactly one abandonment for the departing wizard", async ({ page }) => {
