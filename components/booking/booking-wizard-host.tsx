@@ -46,8 +46,14 @@ export function BookingWizardHost() {
 
     function openWithDetail(detail?: OpenBookingModalDetail) {
       clickOpenedBookingPathRef.current = detail?.bookingPath ? pathWithoutHash(detail.bookingPath) : null;
-      routeToBooking(detail);
       void preloadBookingWizard();
+      if (detail?.bookingPath) {
+        // The destination page owns this wizard. Mounting one here first would
+        // emit an abandonment during navigation and start a second attempt.
+        setOpen(false);
+        routeToBooking(detail);
+        return;
+      }
       setInitialServiceSlug(detail?.serviceSlug);
       setOpen(true);
     }
