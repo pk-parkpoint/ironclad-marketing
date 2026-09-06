@@ -42,6 +42,7 @@ export default defineConfig({
   reporter: [["list"]],
   use: {
     baseURL: BASE_URL,
+    extraHTTPHeaders: { "X-Ironclad-Test-Traffic": "1" },
     trace: "on-first-retry",
   },
   projects,
@@ -58,6 +59,7 @@ export default defineConfig({
       cwd: ".",
       env: {
         ...process.env,
+        BOOKING_NOTIFICATION_TRAFFIC: "test",
         BOOKING_WEBHOOK_URL: `${MOCK_URL}/webhooks/bookings`,
         BOOKING_CONFIRMATION_SMS_WEBHOOK_URL: `${MOCK_URL}/webhooks/booking-confirmation-sms`,
         BOOKING_CONFIRMATION_EMAIL_WEBHOOK_URL: `${MOCK_URL}/webhooks/booking-confirmation-email`,
