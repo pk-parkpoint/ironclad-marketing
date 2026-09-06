@@ -157,4 +157,3 @@ function abandonedSubjectLabel(details: BookingDetails): string {
   const screenLabel = SCREEN_LABELS[screen] || screen;
   return `bounced at ${screenLabel}`;
 }
-

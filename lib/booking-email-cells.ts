@@ -37,4 +37,3 @@ export function row(label: string, value: string | undefined | null): string {
 export function textRow(label: string, value: string | undefined | null): string {
   return `${label}: ${formatValue(value)}`;
 }
-

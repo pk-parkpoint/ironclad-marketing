@@ -63,4 +63,3 @@ export function getInitialWizardState(serviceSlug: string | null | undefined) {
     serviceIssue,
   };
 }
-
