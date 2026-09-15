@@ -44,6 +44,10 @@ export function ContactForm({
   const [submissionState, setSubmissionState] = useState<SubmissionState>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const fieldId = (name: string) => `${idPrefix}-${name}`;
+  const serviceOptions =
+    serviceInterest && !SERVICE_OPTIONS.includes(serviceInterest)
+      ? [serviceInterest, ...SERVICE_OPTIONS]
+      : SERVICE_OPTIONS;
 
   const hiddenFields = {
     page_url: "",
@@ -196,7 +200,7 @@ export function ContactForm({
             <option disabled value="">
               Choose Service
             </option>
-            {SERVICE_OPTIONS.map((service) => (
+            {serviceOptions.map((service) => (
               <option key={service} value={service}>
                 {service}
               </option>

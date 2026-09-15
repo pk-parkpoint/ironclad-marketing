@@ -166,7 +166,13 @@ function MobileNavChildList({
   );
 }
 
-export function SiteHeader() {
+type SiteHeaderProps = {
+  promotionText?: string;
+};
+
+export function SiteHeader({
+  promotionText = "Book Today and Get 10% Off Your First Service",
+}: SiteHeaderProps = {}) {
   const pathname = usePathname() || "/";
   const [isElevated, setIsElevated] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -269,7 +275,7 @@ export function SiteHeader() {
           href="/book"
         >
           <span className="block max-w-full truncate">
-            Book Today and Get 10% Off Your First Service <span className="ic-nudge" aria-hidden="true">→</span>
+            {promotionText} <span className="ic-nudge" aria-hidden="true">→</span>
           </span>
         </Link>
 

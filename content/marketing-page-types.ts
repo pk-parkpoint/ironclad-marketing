@@ -10,15 +10,19 @@ export type MarketingPageContent = {
   ctaHeading: string;
   ctaBody: string;
   showContactForm?: boolean;
+  serviceArea?: string;
+  serviceInterest?: string;
   pageType?:
     | "about"
     | "book"
     | "careers"
     | "contact"
     | "financing"
+    | "landing"
     | "legal"
     | "offers"
     | "process"
     | "reviews"
+    | "service"
     | "trust";
 };
