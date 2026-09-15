@@ -1,4 +1,5 @@
 import { COMMERCIAL_PLUMBING_PATH, COMMERCIAL_PLUMBING_SERVICE } from "./commercial-plumbing";
+import { NEW_PAGE_DEFINITIONS } from "./new-pages";
 
 export type StaticPageEntry = {
   path: string;
@@ -168,6 +169,13 @@ export const STATIC_PAGES: StaticPageEntry[] = [
     h1: "Terms of Service",
     section: "Legal",
   },
+  ...Object.values(NEW_PAGE_DEFINITIONS).map(({ path, titleTag, metaDescription, h1, section }) => ({
+    path,
+    titleTag,
+    metaDescription,
+    h1,
+    section,
+  })),
 ];
 
 export const STATIC_PAGE_BY_PATH = new Map(

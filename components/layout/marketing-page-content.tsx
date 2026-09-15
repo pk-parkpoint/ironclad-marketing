@@ -37,7 +37,12 @@ export function MarketingPageContent({ content, path }: MarketingPageContentProp
           <p className="mt-2 text-sm text-muted md:text-base">
             Share your details and we will follow up as quickly as possible.
           </p>
-          <ContactForm idPrefix={`marketing-${path.replace(/\//g, "-")}`} pageType={content.pageType} />
+          <ContactForm
+            idPrefix={`marketing-${path.replace(/\//g, "-")}`}
+            pageType={content.pageType}
+            serviceArea={content.serviceArea}
+            serviceInterest={content.serviceInterest}
+          />
         </section>
       ) : null}
 
