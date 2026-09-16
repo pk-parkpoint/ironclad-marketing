@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { STANDARD_NEW_CUSTOMER_OFFER } from "@/content/offers";
 import { DRAIN_CLEANING_TEMPLATE as defaultContent } from "./drain-cleaning-data";
 import { HeroMetaBadge } from "./hero-meta-badge";
 import { ReferenceChrome } from "./reference-chrome";
@@ -26,8 +27,10 @@ import {
 type DrainCleaningPageProps = {
   bookingHref?: string;
   content?: DrainCleaningTemplateContent;
+  offerText?: string;
   phoneDisplay: string;
   phoneHref: string;
+  promotionText?: string;
 };
 
 const DEFAULT_BOOKING_HREF = "/book?service=drain-clearing";
@@ -35,13 +38,15 @@ const DEFAULT_BOOKING_HREF = "/book?service=drain-clearing";
 export function DrainCleaningPage({
   bookingHref = DEFAULT_BOOKING_HREF,
   content = defaultContent,
+  offerText = STANDARD_NEW_CUSTOMER_OFFER.short,
   phoneDisplay,
   phoneHref,
+  promotionText,
 }: DrainCleaningPageProps) {
   const hasHeroCtaOverride = Boolean(content.hero.primaryCtaLabel || content.hero.secondaryCtaLabel);
 
   return (
-    <ReferenceChrome phoneDisplay={phoneDisplay} phoneHref={phoneHref}>
+    <ReferenceChrome phoneDisplay={phoneDisplay} phoneHref={phoneHref} promotionText={promotionText}>
         <main>
           <section className="dc-hero" id="hero-section">
         <Image
@@ -237,7 +242,7 @@ export function DrainCleaningPage({
 
           <section className="dc-final-cta">
         <div className="dc-container dc-container--cta" data-reveal>
-          <span className="dc-cta-badge">10% off your first service</span>
+          <span className="dc-cta-badge">{offerText}</span>
           <h2 className="dc-section-title-md" data-slot="cta-title">
             {content.finalCta.title}
           </h2>

@@ -7,6 +7,7 @@ type ReferenceChromeProps = {
   children: React.ReactNode;
   phoneDisplay: string;
   phoneHref: string;
+  promotionText?: string;
 };
 
 const QUICK_LINKS = [
@@ -79,10 +80,10 @@ function ChromeFooter({ phoneDisplay, phoneHref }: Pick<ReferenceChromeProps, "p
   );
 }
 
-export function ReferenceChrome({ children, phoneDisplay, phoneHref }: ReferenceChromeProps) {
+export function ReferenceChrome({ children, phoneDisplay, phoneHref, promotionText }: ReferenceChromeProps) {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader promotionText={promotionText} />
       <div className="dc-root" id="dc-root">
         {children}
         <ChromeFooter phoneDisplay={phoneDisplay} phoneHref={phoneHref} />

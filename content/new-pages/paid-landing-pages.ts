@@ -4,6 +4,8 @@ import type { NewPageDefinition } from "./types";
 export const PAID_LANDING_PAGE_DEFINITIONS: Record<string, NewPageDefinition> = {
   "lp/austin-plumber": {
     path: "lp/austin-plumber",
+    bookingHref: "/book?service=plumbing",
+    templateSlug: "plumbing",
     titleTag: "Austin Plumber Near You | Ironclad Plumbing",
     metaDescription:
       "Call a licensed Austin plumber for leaks, drains, water heaters, repairs, and urgent service with upfront pricing.",
@@ -70,6 +72,8 @@ export const PAID_LANDING_PAGE_DEFINITIONS: Record<string, NewPageDefinition> = 
   },
   "lp/water-heater-replacement": {
     path: "lp/water-heater-replacement",
+    bookingHref: "/book?service=water-heater-installation",
+    templateSlug: "water-heater-installation",
     titleTag: "Water Heater Replacement Austin | Ironclad Plumbing",
     metaDescription:
       "Replace a leaking, aging, or undersized water heater in Austin with upfront options and code-aligned installation.",

@@ -14,6 +14,8 @@ function projectCopy(project: { title: string; summary: string }) {
 export const SITE_PAGE_DEFINITIONS: Record<string, NewPageDefinition> = {
   projects: {
     path: "projects",
+    bookingHref: "/book?service=plumbing",
+    templateSlug: "plumbing",
     titleTag: "Austin Plumbing Projects | Ironclad Plumbing",
     metaDescription:
       "See examples of Ironclad plumbing diagnostics, repairs, and replacements completed for Greater Austin homes.",
@@ -67,6 +69,8 @@ export const SITE_PAGE_DEFINITIONS: Record<string, NewPageDefinition> = {
   },
   "plumbing/water-softener-repair": {
     path: "plumbing/water-softener-repair",
+    bookingHref: "/book?service=water-treatment",
+    templateSlug: "water-treatment",
     titleTag: "Water Softener Repair Austin | Ironclad Plumbing",
     metaDescription:
       "Diagnose and repair water softener problems in Austin, including hard-water return, salt issues, leaks, and control faults.",

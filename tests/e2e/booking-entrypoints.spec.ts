@@ -160,7 +160,7 @@ test("bare header booking links inherit water-heater service context", async ({ 
   await mockSchedulingFacade(page);
   await page.goto("/plumbing/water-heater-repair");
 
-  await page.getByRole("link", { name: /Book Today and Get 10% Off/i }).click();
+  await page.getByRole("link", { name: /Book Today and Get 15% Off/i }).click();
 
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
   const url = new URL(page.url());

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Phone } from "lucide-react";
+import { STANDARD_NEW_CUSTOMER_OFFER } from "@/content/offers";
 
 import styles from "./FaqCluster.module.css";
 import FaqShell from "./FaqShell";
@@ -94,7 +95,7 @@ export function CtaBand({ cta }: { cta?: FaqCta }) {
   return (
     <section className={styles.cta}>
       <div className={styles.ctaInner} data-reveal>
-        <span className={styles.ctaBadge}>10% off your first service</span>
+        <span className={styles.ctaBadge}>{STANDARD_NEW_CUSTOMER_OFFER.short}</span>
         <h2>{copy.h}</h2>
         <p>{copy.p}</p>
         <div className={styles.pills}>

@@ -1,12 +1,14 @@
 import type { SitelinkSpec } from "./types";
+import { DRAIN_CLEANING_OFFER, STANDARD_NEW_CUSTOMER_OFFER } from "../../content/offers";
 
 export const SITE_ORIGIN = "https://ironcladtexas.com";
 export const LICENSE_DESCRIPTION =
   "Local, family-owned Austin plumbers. Licensed and insured.";
 
-export const STANDARD_PROMOTION_HEADLINE = "Up to $100 Off Plumbing";
-export const STANDARD_PROMOTION_DESCRIPTION =
-  "New customers save up to $100 on plumbing services. Call Ironclad today.";
+export const STANDARD_PROMOTION_HEADLINE = STANDARD_NEW_CUSTOMER_OFFER.adHeadline;
+export const STANDARD_PROMOTION_DESCRIPTION = STANDARD_NEW_CUSTOMER_OFFER.adDescription;
+export const DRAIN_CLEANING_PROMOTION_HEADLINE = DRAIN_CLEANING_OFFER.adHeadline;
+export const DRAIN_CLEANING_PROMOTION_DESCRIPTION = DRAIN_CLEANING_OFFER.adDescription;
 export const STANDARD_AVAILABILITY_HEADLINE = "Available 24/7";
 export const STANDARD_OUTCOME_DESCRIPTION =
   "Know what needs fixing—and what can wait—before you decide.";

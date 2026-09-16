@@ -4,6 +4,7 @@ import { getServiceHeroImage } from "@/components/service/service-hero-images";
 import { ServiceStandardPage } from "@/components/service/service-standard-page";
 import { DrainCleaningPage } from "@/components/service-template/drain-cleaning-page";
 import type { DrainCleaningTemplateContent } from "@/components/service-template/service-template-types";
+import { DRAIN_CLEANING_OFFER } from "@/content/offers";
 import { getPpcServiceVariant, getPpcServiceVariantSlugs } from "@/content/ppc-service-variants";
 import { SERVICES, type ServiceEntry } from "@/content/services";
 import { getServiceDetail, type ServiceDetail } from "@/content/service-details";
@@ -122,8 +123,10 @@ export default async function ServiceDetailPage({ params }: RouteProps) {
         <DrainCleaningPage
           bookingHref={variant.bookingHref}
           content={variant.content}
+          offerText={service.slug === "drain-clearing" ? DRAIN_CLEANING_OFFER.short : undefined}
           phoneDisplay={phoneDisplay}
           phoneHref={phoneHref}
+          promotionText={service.slug === "drain-clearing" ? DRAIN_CLEANING_OFFER.banner : undefined}
         />
       </>
     );
