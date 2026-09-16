@@ -4,6 +4,7 @@ import { SAN_MARCOS_CITY_PAGE } from "./san-marcos";
 import { AUSTIN_NEIGHBORHOOD_LINKS } from "@/content/austin-neighborhoods";
 import { getLocationDetail } from "@/content/location-details";
 import { LOCATIONS, type LocationEntry } from "@/content/locations";
+import { STANDARD_NEW_CUSTOMER_OFFER } from "@/content/offers";
 import { SERVICES } from "@/content/services";
 
 export type Pair = [string, string];
@@ -96,7 +97,21 @@ function legacyLocationToLocalPage(location: LocationEntry): LocalCityPageData {
   };
 }
 
-const canonicalCityPages = [...data.cities, SAN_MARCOS_CITY_PAGE];
+function applyCurrentOfferCopy<T extends { faqs: Pair[] }>(page: T): T {
+  return {
+    ...page,
+    faqs: page.faqs.map(
+      ([question, answer]): Pair => [
+        question,
+        question === "Do you offer any first-time or new-customer discounts?"
+          ? STANDARD_NEW_CUSTOMER_OFFER.faqAnswer
+          : answer,
+      ],
+    ),
+  };
+}
+
+const canonicalCityPages = [...data.cities, SAN_MARCOS_CITY_PAGE].map(applyCurrentOfferCopy);
 const localCitySlugs = new Set(canonicalCityPages.map((page) => page.slug));
 const additionalCityPages = LOCATIONS.filter((location) => !localCitySlugs.has(location.slug)).map(legacyLocationToLocalPage);
 

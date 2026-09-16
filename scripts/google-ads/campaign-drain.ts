@@ -1,7 +1,7 @@
 import {
   CORE_COMPETITOR_NEGATIVES,
-  SITE_ORIGIN,
-  STANDARD_HEADLINES,
+  DRAIN_CLEANING_PROMOTION_DESCRIPTION, DRAIN_CLEANING_PROMOTION_HEADLINE,
+  SITE_ORIGIN, STANDARD_HEADLINES,
   STANDARD_PROMOTION_DESCRIPTION,
   STANDARD_PROMOTION_HEADLINE,
   standardDescriptions,
@@ -32,9 +32,9 @@ export const DRAIN_SEWER: CampaignSpec = {
     ...SERVICE_CAMPAIGN_ROUTING_NEGATIVES["drain-sewer"],
   ],
   residentialFilter: true,
-  promotionHeadline: "Drain Cleaning for $69",
+  promotionHeadline: DRAIN_CLEANING_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
-  descriptions: standardDescriptions("Drain cleaning for $69. Call Ironclad today."),
+  descriptions: standardDescriptions(DRAIN_CLEANING_PROMOTION_DESCRIPTION),
   adGroups: [
     {
       name: "Drain Cleaning & Drain Clearing",

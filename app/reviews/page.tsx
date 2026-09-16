@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { StructuredData } from "@/components/seo/structured-data";
+import { STANDARD_NEW_CUSTOMER_OFFER } from "@/content/offers";
 import { PUBLISHED_REVIEW_SUMMARY, REVIEWS, type ReviewEntry } from "@/content/reviews";
 import { getPublicContactInfo } from "@/lib/contact";
 import { CriticalHeroPicture } from "@/components/media/critical-hero-picture";
@@ -187,7 +188,7 @@ export default function ReviewsPage() {
 
         <section className={styles.finalCta}>
           <div className={styles.finalCtaInner}>
-            <span className={styles.offerBadge}>10% off your first service</span>
+            <span className={styles.offerBadge}>{STANDARD_NEW_CUSTOMER_OFFER.short}</span>
             <h2>Water You Waiting For?</h2>
             <p>Join Austin homeowners who choose Ironclad. Book today.</p>
             <div className={styles.finalActions}>

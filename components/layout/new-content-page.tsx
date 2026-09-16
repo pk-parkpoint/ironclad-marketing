@@ -1,9 +1,8 @@
-import { MarketingPageContent } from "@/components/layout/marketing-page-content";
-import { PageScaffold } from "@/components/layout/page-scaffold";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
 import { StructuredData } from "@/components/seo/structured-data";
-import { NEW_CUSTOMER_OFFER, type NewPageDefinition } from "@/content/new-pages";
+import { DrainCleaningPage } from "@/components/service-template/drain-cleaning-page";
+import type { DrainCleaningTemplateContent } from "@/components/service-template/service-template-types";
+import { type NewPageDefinition } from "@/content/new-pages";
+import { getPpcServiceVariant } from "@/content/ppc-service-variants";
 import { getPublicContactInfo } from "@/lib/contact";
 import {
   buildBreadcrumbListSchema,
@@ -18,14 +17,72 @@ type NewContentPageProps = {
   definition: NewPageDefinition;
 };
 
+type ServiceCard = DrainCleaningTemplateContent["services"]["cards"][number];
+type TextPair = DrainCleaningTemplateContent["signs"]["items"][number];
+
+function projectPair(paragraph: string): TextPair {
+  const separator = paragraph.indexOf(": ");
+  return separator < 0
+    ? [paragraph, "Completed with upfront scope, careful work, and final verification."]
+    : [paragraph.slice(0, separator), paragraph.slice(separator + 2)];
+}
+
+function buildTemplateContent(definition: NewPageDefinition): DrainCleaningTemplateContent {
+  const baseVariant = getPpcServiceVariant(definition.templateSlug);
+  if (!baseVariant) {
+    throw new Error(`Missing standard template content for ${definition.path}`);
+  }
+
+  const base = baseVariant.content;
+  const firstSection = definition.content.sections[0];
+  const projectPairs = definition.path === "projects"
+    ? definition.content.sections.slice(0, 3).flatMap((section) => section.paragraphs.map(projectPair))
+    : [];
+  const projectCards: ServiceCard[] = projectPairs.map(([title, body], index) => [
+    title,
+    body,
+    `Completed Ironclad project: ${title}`,
+    base.services.cards[index % base.services.cards.length]?.[3],
+  ]);
+
+  return {
+    ...base,
+    hero: {
+      ...base.hero,
+      chipLabel: definition.locationBadge,
+      eyebrow: definition.section.toUpperCase(),
+      image: definition.heroImage,
+      imageAlt: `${definition.h1} from Ironclad Plumbing`,
+      pun: undefined,
+      subhead: definition.metaDescription,
+      supportLine: "",
+      title: definition.h1,
+    },
+    signs: {
+      ...base.signs,
+      intro: firstSection?.paragraphs.join(" ") || definition.content.intro,
+      items: projectPairs.length > 0 ? projectPairs.slice(0, 4) : base.signs.items,
+      title: firstSection?.heading ?? base.signs.title,
+    },
+    services: projectCards.length > 0
+      ? {
+          cards: projectCards,
+          intro: definition.content.intro,
+          title: "Featured Greater Austin Projects",
+        }
+      : base.services,
+    finalCta: {
+      ...base.finalCta,
+      body: definition.content.ctaBody,
+      title: definition.content.ctaHeading,
+    },
+  };
+}
+
 export function NewContentPage({ definition }: NewContentPageProps) {
   const contactInfo = getPublicContactInfo();
   const pagePath = `/${definition.path}`;
-  const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    definition.breadcrumbParent,
-    { label: definition.h1 },
-  ];
+  const templateContent = buildTemplateContent(definition);
   const schemaBreadcrumbs = [
     { name: "Home", path: "/" },
     { name: definition.breadcrumbParent.label, path: definition.breadcrumbParent.href },
@@ -47,30 +104,13 @@ export function NewContentPage({ definition }: NewContentPageProps) {
 
   return (
     <div data-new-content-page={definition.path}>
-      <SiteHeader promotionText={NEW_CUSTOMER_OFFER.banner} />
       <StructuredData data={schemas} id={`ld-new-page-${definition.path.replace(/\//g, "-")}`} />
-      <PageScaffold
-        breadcrumbs={breadcrumbItems}
-        description={definition.metaDescription}
-        eyebrow={definition.section}
-        hero={{
-          actions: [
-            { href: "/book", label: "Book Service", variant: "primary" },
-            { href: contactInfo.phoneHref, label: `Call ${contactInfo.phoneDisplay}`, variant: "secondary" },
-            { href: contactInfo.smsHref, label: "Text Us", variant: "text" },
-          ],
-          alignment: "left",
-          backgroundSrc: definition.heroImage,
-          backgroundType: "image",
-          locationBadge: definition.locationBadge ? { text: definition.locationBadge } : undefined,
-          trustChips: definition.trustChips,
-        }}
-        pathLabel={pagePath}
-        title={definition.h1}
-      >
-        <MarketingPageContent content={definition.content} path={definition.path} />
-      </PageScaffold>
-      <SiteFooter />
+      <DrainCleaningPage
+        bookingHref={definition.bookingHref}
+        content={templateContent}
+        phoneDisplay={contactInfo.phoneDisplay}
+        phoneHref={contactInfo.phoneHref}
+      />
     </div>
   );
 }
