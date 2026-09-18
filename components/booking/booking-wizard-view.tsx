@@ -107,7 +107,7 @@ export function BookingWizardView({ model, modalRef, bodyRef, closeButtonRef }: 
               <h2 className="sr-only" id="booking-wizard-title">
                 Request an Appointment
               </h2>
-              <StepProgress currentStep={currentStep} onGoToStep={moveToStep} />
+              <StepProgress currentStep={currentStep} locked={Boolean(confirmation)} onGoToStep={moveToStep} />
             </header>
             <p className="sr-only" id="booking-modal-description">
               Booking request dialog. Press Escape to close.
@@ -122,7 +122,19 @@ export function BookingWizardView({ model, modalRef, bodyRef, closeButtonRef }: 
                 className={joinClasses(styles.stepContent, direction === "back" && styles.stepContentBack)}
               >
                 {currentStep === 1 && (
-                  <BookingStepSelectIssue formData={formData} onUpdate={updateFormData} onNext={() => moveToStep(2)} />
+                  <BookingStepSchedule
+                    formData={formData}
+                    windowsByDate={bookingFacade.windowsByDate}
+                    loadingDate={bookingFacade.loadingDate}
+                    searchError={bookingFacade.searchError}
+                    holdError={bookingFacade.holdError}
+                    holdingOfferId={bookingFacade.holdingOfferId}
+                    remainingSeconds={bookingFacade.remainingSeconds}
+                    onSelectDate={selectDate}
+                    onSelectWindow={selectWindow}
+                    onRefresh={refreshSelectedDate}
+                    onNext={() => moveToStep(2)}
+                  />
                 )}
                 {currentStep === 2 && (
                   <BookingStepContact
@@ -133,26 +145,11 @@ export function BookingWizardView({ model, modalRef, bodyRef, closeButtonRef }: 
                   />
                 )}
                 {currentStep === 3 && (
-                  <BookingStepSchedule
+                  <BookingStepSelectIssue
                     formData={formData}
-                    windowsByDate={bookingFacade.windowsByDate}
-                    loadingDate={bookingFacade.loadingDate}
-                    searchError={bookingFacade.searchError}
-                    holdError={bookingFacade.holdError}
-                    holdingOfferId={bookingFacade.holdingOfferId}
-                    remainingSeconds={bookingFacade.remainingSeconds}
-                    isSubmitting={isSubmitting}
-                    submitError={submitError || bookingFacade.bookError || undefined}
                     onUpdate={updateFormData}
-                    onSelectDate={selectDate}
-                    onSelectWindow={selectWindow}
-                    onRefresh={refreshSelectedDate}
                     onBack={() => moveToStep(2)}
-                    onNext={() => {
-                      void handleSubmit().then((ok) => {
-                        if (ok) moveToStep(4);
-                      });
-                    }}
+                    onNext={() => moveToStep(4)}
                   />
                 )}
                 {currentStep === 4 && (
@@ -161,6 +158,10 @@ export function BookingWizardView({ model, modalRef, bodyRef, closeButtonRef }: 
                     onUpdate={updateFormData}
                     bookingId={bookingId}
                     confirmation={confirmation}
+                    isSubmitting={isSubmitting}
+                    submitError={submitError || bookingFacade.bookError || undefined}
+                    onBack={() => moveToStep(3)}
+                    onConfirm={() => { void handleSubmit(); }}
                     onDismiss={() => onOpenChange(false)}
                     onClose={() => { void sendCompletedNotification(); }}
                   />

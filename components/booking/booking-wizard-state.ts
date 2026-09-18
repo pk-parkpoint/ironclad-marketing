@@ -58,7 +58,7 @@ export type BookingWizardProps = {
 export function getInitialWizardState(serviceSlug: string | null | undefined) {
   const serviceIssue = getBookingServiceIssuePrefill(serviceSlug);
   return {
-    currentStep: serviceIssue ? 2 : 1,
+    currentStep: 1,
     formData: serviceIssue ? { ...INITIAL_FORM_DATA, ...serviceIssue } : INITIAL_FORM_DATA,
     serviceIssue,
   };

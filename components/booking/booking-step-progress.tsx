@@ -1,9 +1,9 @@
 import styles from "./booking-wizard.module.css";
 
 const STEPS = [
-  { number: 1, label: "Select Issue" },
+  { number: 1, label: "Schedule Time" },
   { number: 2, label: "Contact Info" },
-  { number: 3, label: "Schedule Time" },
+  { number: 3, label: "Select Issue" },
   { number: 4, label: "Confirm Details" },
 ];
 
@@ -14,9 +14,11 @@ function joinClasses(...classes: Array<string | false | null | undefined>): stri
 export function StepProgress({
   currentStep,
   onGoToStep,
+  locked = false,
 }: {
   currentStep: number;
   onGoToStep: (step: number) => void;
+  locked?: boolean;
 }) {
   const completedSegments = Math.max(0, Math.min(currentStep - 1, STEPS.length - 1));
   const segmentPositionClasses = [
@@ -51,9 +53,9 @@ export function StepProgress({
               <button
                 type="button"
                 className={joinClasses(styles.stepNode, isDone && styles.stepNodeDone, isActive && styles.stepNodeActive)}
-                aria-label={isDone ? `Return to ${step.label}` : step.label}
-                disabled={!isDone}
-                onClick={() => isDone && onGoToStep(step.number)}
+                aria-label={isDone && !locked ? `Return to ${step.label}` : step.label}
+                disabled={!isDone || locked}
+                onClick={() => isDone && !locked && onGoToStep(step.number)}
               >
                 {isDone ? "✓" : step.number}
               </button>

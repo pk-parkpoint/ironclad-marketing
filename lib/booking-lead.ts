@@ -5,9 +5,9 @@ export const BOOKING_BUSINESS_KEY = "ironclad-plumbing";
 export const BOOKING_TIME_CAP_MS = 5 * 60 * 1000;
 
 export const BOOKING_SCREEN_IDS = [
-  "select_issue",
-  "contact_info",
   "schedule_time",
+  "contact_info",
+  "select_issue",
   "confirm_details",
 ] as const;
 
@@ -308,12 +308,12 @@ export function buildBookingLeadPayload({
   const stateField = resolve(normalizeValue(formData.state), ["addressFormatted", "state"]);
   const zip = resolve(normalizeValue(formData.zip), ["addressFormatted", "zip"]);
 
-  // Select-issue screen (step 1)
+  // Select-issue screen (step 3)
   const serviceCategory = resolve(humanizeServiceValue(formData.serviceCategory), ["serviceCategory"]);
   const serviceDetail = resolve(humanizeServiceValue(formData.serviceDetail), ["serviceDetail"]);
   const serviceDisplay = combineServiceDisplay(serviceCategory, serviceDetail);
 
-  // Schedule-time screen (step 3)
+  // Schedule-time screen (step 1)
   const preferredDate = resolve(normalizeValue(formData.selectedDate), ["selectedDate"]);
   // preferredWindow keys on whether the schedule screen was reached at all
   // (the customer may pick a date but skip a window, in which case the visit
@@ -325,8 +325,7 @@ export function buildBookingLeadPayload({
     "selectedDate",
   ]);
 
-  // Confirm-details screen (step 4) — only reachable after a successful book.
-  // Customers who abandon before submission will see these as Not Presented.
+  // Confirm-details screen (step 4) — review state before the final booking action.
   const notes = resolve(normalizeValue(formData.additionalNotes), ["additionalNotes"]);
   const gateCode = resolve(normalizeValue(formData.gateCode), ["gateCode"]);
   const propertyType = resolve(normalizePropertyType(formData.propertyType), ["propertyType"]);

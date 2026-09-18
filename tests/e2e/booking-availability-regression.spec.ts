@@ -54,17 +54,7 @@ function rawWindow(date: string, hour: number) {
 
 async function reachScheduleStep(page: Page) {
   await page.goto("/book");
-  const dialog = page.getByRole("dialog", { name: "Request an Appointment" });
-  await dialog.getByRole("button", { name: /Leaks, Blockages, or Sewer/i }).click();
-  await dialog.getByRole("button", { name: /^Fix a Leak/i }).click();
-
-  const textInputs = dialog.locator('input[type="text"]');
-  await textInputs.nth(0).fill("Availability");
-  await textInputs.nth(1).fill("Tester");
-  await dialog.locator('input[type="tel"]').fill("5125550100");
-  await textInputs.nth(2).fill("123 Test Street, Austin, TX 78701");
-  await dialog.getByRole("button", { name: "Continue" }).click();
-  return dialog;
+  return page.getByRole("dialog", { name: "Request an Appointment" });
 }
 
 for (const scenario of cases) {

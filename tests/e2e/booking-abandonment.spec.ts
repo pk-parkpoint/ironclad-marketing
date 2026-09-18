@@ -82,12 +82,12 @@ async function mockSchedulingFacade(page: Page): Promise<void> {
 
 async function startBookingFlow(page: Page): Promise<Locator> {
   await mockSchedulingFacade(page);
-  await page.goto("/book");
+  await page.goto("/book?service=fixture");
 
   const dialog = page.getByRole("dialog", { name: "Request an Appointment" });
   await expect(dialog).toBeVisible();
-  await dialog.getByRole("button", { name: /Installations or Replacements/i }).click();
-  await dialog.getByRole("button", { name: /Fixture \(sink, toilet, etc\.\)/i }).click();
+  await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
+  await dialog.getByRole("button", { name: "Continue" }).click();
   await expect(dialog.getByRole("heading", { name: /Enter your information/i })).toBeVisible();
   return dialog;
 }
@@ -133,8 +133,8 @@ test("booking wizard sends captured contact data when abandoned before submit", 
   expect(payload.booking.serviceCategory).toBe("Installations Replacements");
   expect(payload.booking.serviceDetail).toBe("Fixture");
   expect(payload.booking.serviceDisplay).toBe("Installations Replacements > Fixture");
-  expect(payload.booking.preferredDate).toBe("Not Presented");
-  expect(payload.booking.preferredWindow).toBe("Not Presented");
+  expect(payload.booking.preferredDate).toBe(nextDateId(1));
+  expect(payload.booking.preferredWindow).toBe("9:00 AM - 12:00 PM");
   // Confirm-details fields were never shown to this customer (abandoned at
   // contact_info / step 2). They should report Not Presented, not NA.
   expect(payload.booking.notes).toBe("Not Presented");
@@ -145,10 +145,10 @@ test("booking wizard sends captured contact data when abandoned before submit", 
   expect(payload.booking.contactPreference).toBe("Not Presented");
   expect(payload.tracking.bookingApiSubmitted).toBe("No");
   expect(payload.tracking.abandonmentScreen).toBe("contact_info");
-  expect(payload.tracking.screensVisited).toEqual(["select_issue", "contact_info"]);
+  expect(payload.tracking.screensVisited).toEqual(["schedule_time", "contact_info"]);
 });
 
-test("booking wizard keeps step-four answers when abandoned after submit", async ({ page }) => {
+test("booking wizard keeps step-four answers when abandoned before final confirmation", async ({ page }) => {
   const suffix = uniqueSuffix();
   const testEmail = `abandon-after-submit-${suffix}@example.com`;
   const testPhone = `(512) 555-${suffix.slice(-4)}`;
@@ -173,13 +173,10 @@ test("booking wizard keeps step-four answers when abandoned after submit", async
   await textInputs.nth(2).fill("456 Test Avenue, Austin, TX 78702");
   await dialog.getByRole("button", { name: "Continue" }).click();
 
-  await expect(dialog.getByRole("heading", { name: /Choose an Appointment Time/i })).toBeVisible();
-  await dialog.getByRole("button", { name: /Tomorrow/i }).click();
-  await dialog.getByRole("button", { name: "9:00 AM - 12:00 PM" }).click();
-  await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
-  await dialog.getByRole("button", { name: "Confirm appointment" }).click();
-
-  await expect(dialog.getByRole("heading", { name: /Your appointment is confirmed!/i })).toBeVisible();
+  await expect(dialog.getByRole("heading", { name: /What needs installing or replacing\?/i })).toBeVisible();
+  await dialog.getByRole("button", { name: /Fixture \(sink, toilet, etc\.\)/i }).click();
+  await expect(dialog.getByRole("heading", { name: "Confirm your appointment details" })).toBeVisible();
+  await expect(dialog.getByText("Your appointment is confirmed!", { exact: true })).toHaveCount(0);
 
   await dialog.locator("textarea").fill("Use the alley gate.");
   await dialog.getByRole("button", { name: "Commercial" }).click();
@@ -193,7 +190,7 @@ test("booking wizard keeps step-four answers when abandoned after submit", async
   const payload = requireCapturedPayload(capturedPayload);
 
   expect(payload.status).toBe("abandoned");
-  expect(payload.booking.bookingId).toBe("booking-1");
+  expect(payload.booking.bookingId).toBe("NA");
   expect(payload.booking.customerName).toBe("Later Closer");
   expect(payload.booking.phone).toBe(testPhone);
   expect(payload.booking.email).toBe(testEmail);
@@ -204,23 +201,17 @@ test("booking wizard keeps step-four answers when abandoned after submit", async
   expect(payload.booking.ownershipStatus).toBe("Someone Else");
   expect(payload.booking.petsOnPremise).toBe("Yes");
   expect(payload.booking.contactPreference).toBe("Text");
-  expect(payload.tracking.bookingApiSubmitted).toBe("Yes");
+  expect(payload.tracking.bookingApiSubmitted).toBe("No");
   expect(payload.tracking.abandonmentScreen).toBe("confirm_details");
   expect(payload.tracking.screensVisited).toEqual([
-    "select_issue",
-    "contact_info",
     "schedule_time",
+    "contact_info",
+    "select_issue",
     "confirm_details",
   ]);
 });
 
-test("empty-modal bounce reports NA for select-issue fields and Not Presented for later screens", async ({ page }) => {
-  // The customer opens the modal (auto-opens on /book) and dismisses it
-  // without picking a service. This produces the "all-NA" pattern seen in
-  // production-abandoned-booking emails. After the 2026-05-11 fix, fields
-  // collected on the screen the customer DID see (select_issue) report "NA"
-  // (saw + skipped) while fields on later, never-rendered screens report
-  // "Not Presented" so the operator can tell the two states apart.
+test("schedule-first bounce reports the held window and later screens as Not Presented", async ({ page }) => {
   let capturedPayload: CapturedAbandonmentPayload | null = null;
 
   await mockSchedulingFacade(page);
@@ -236,7 +227,8 @@ test("empty-modal bounce reports NA for select-issue fields and Not Presented fo
   await page.goto("/book");
   const dialog = page.getByRole("dialog", { name: "Request an Appointment" });
   await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole("heading", { name: /What do you need help with\?/i })).toBeVisible();
+  await expect(dialog.getByRole("heading", { name: /Choose an Appointment Time/i })).toBeVisible();
+  await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
 
   // Dismiss without engaging.
   await dialog.getByRole("button", { name: "Close booking modal" }).first().click();
@@ -245,13 +237,11 @@ test("empty-modal bounce reports NA for select-issue fields and Not Presented fo
   const payload = requireCapturedPayload(capturedPayload);
 
   expect(payload.status).toBe("abandoned");
-  // Select-issue screen WAS shown — the empty fields are NA, not Not Presented.
-  expect(payload.booking.serviceCategory).toBe("NA");
-  expect(payload.booking.serviceDetail).toBe("NA");
-  expect(payload.booking.serviceDisplay).toBe("NA");
-  // Schedule / contact / confirm-details were never rendered → Not Presented.
-  expect(payload.booking.preferredDate).toBe("Not Presented");
-  expect(payload.booking.preferredWindow).toBe("Not Presented");
+  expect(payload.booking.preferredDate).toBe(nextDateId(1));
+  expect(payload.booking.preferredWindow).toBe("9:00 AM - 12:00 PM");
+  expect(payload.booking.serviceCategory).toBe("Not Presented");
+  expect(payload.booking.serviceDetail).toBe("Not Presented");
+  expect(payload.booking.serviceDisplay).toBe("Not Presented");
   expect(payload.booking.customerName).toBe("Not Presented");
   expect(payload.booking.phone).toBe("Not Presented");
   expect(payload.booking.email).toBe("Not Presented");
@@ -262,6 +252,6 @@ test("empty-modal bounce reports NA for select-issue fields and Not Presented fo
   expect(payload.booking.petsOnPremise).toBe("Not Presented");
   expect(payload.booking.contactPreference).toBe("Not Presented");
   expect(payload.booking.notes).toBe("Not Presented");
-  expect(payload.tracking.abandonmentScreen).toBe("select_issue");
-  expect(payload.tracking.screensVisited).toEqual(["select_issue"]);
+  expect(payload.tracking.abandonmentScreen).toBe("schedule_time");
+  expect(payload.tracking.screensVisited).toEqual(["schedule_time"]);
 });
