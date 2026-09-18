@@ -51,6 +51,7 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
   const bookingIdRef = useRef<string | undefined>(undefined);
   const pathnameRef = useRef(pathname);
   const searchParamsRef = useRef(searchParams);
+  const hasInitializedRef = useRef(false);
 
   useEffect(() => {
     formDataRef.current = formData;
@@ -148,17 +149,20 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
       initialServiceSlug ?? currentSearchParams.get("service"),
     );
     finalizedRef.current = false;
-    formDataRef.current = initialState.formData;
-    currentStepRef.current = initialState.currentStep;
-    bookingIdRef.current = undefined;
-    setDirection("forward");
-    setCurrentStep(initialState.currentStep);
-    setFormData(initialState.formData);
-    setIsSubmitting(false);
-    setSubmitError(undefined);
-    setBookingId(undefined);
-    setConfirmation(null);
-    reset();
+    if (hasInitializedRef.current) {
+      formDataRef.current = initialState.formData;
+      currentStepRef.current = initialState.currentStep;
+      bookingIdRef.current = undefined;
+      setDirection("forward");
+      setCurrentStep(initialState.currentStep);
+      setFormData(initialState.formData);
+      setIsSubmitting(false);
+      setSubmitError(undefined);
+      setBookingId(undefined);
+      setConfirmation(null);
+      reset();
+    }
+    hasInitializedRef.current = true;
     clearBookingAttempt();
     const currentPathname = pathnameRef.current ?? "/";
     recordBookingSiteVisit({
@@ -178,7 +182,7 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
   }, [currentStep, open]);
 
   useEffect(() => {
-    if (!open || currentStep !== 2) return;
+    if (!open || currentStep !== 1) return;
     void prefetchDates(bookingPrefetchDateIds(), formDataRef.current);
   }, [currentStep, open, prefetchDates]);
 
@@ -237,7 +241,7 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
     setSubmitError(undefined);
     setIsSubmitting(true);
     try {
-      const booked = await book(formData);
+      const booked = await book(formDataRef.current);
       if (!booked) throw new Error(bookError || "Unable to confirm appointment.");
       setConfirmation(booked);
       setBookingId(booked.bookingId);

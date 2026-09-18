@@ -110,10 +110,18 @@ test("booking flow uses public scheduling facade and confirms from facade identi
   await page.goto("/book");
 
   await expect(page.getByRole("heading", { name: "Request an Appointment" })).toBeVisible();
+  await expect(page.getByLabel("Step 1 of 4").locator('span[class*="stepLabel"]')).toHaveText([
+    "Schedule Time",
+    "Contact Info",
+    "Select Issue",
+    "Confirm Details",
+  ]);
+  await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
+  await page.getByRole("button", { name: /Tomorrow/i }).click();
+  await page.getByRole("button", { name: "9:00 AM - 12:00 PM" }).click();
+  await expect(page.getByText(/This time is reserved for/)).toBeVisible();
+  await page.getByRole("button", { name: "Continue" }).click();
 
-  await page.getByRole("button", { name: /Leaks, Blockages, or Sewer/i }).click();
-  await expect(page.getByRole("heading", { name: "Can you tell us a bit more?" })).toBeVisible();
-  await page.getByRole("button", { name: /^Fix a Leak/i }).click();
   await expect(page.getByRole("heading", { name: "Enter your information" })).toBeVisible();
   const dialog = page.getByRole("dialog");
   await dialog.locator('input[type="text"]').nth(0).fill("E2E");
@@ -123,22 +131,20 @@ test("booking flow uses public scheduling facade and confirms from facade identi
   await dialog.locator('input[type="text"]').nth(2).fill("123 Test Street, Austin, TX 78701");
   await dialog.getByRole("button", { name: "Continue" }).click();
 
-  await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
-  await page.getByRole("button", { name: /Tomorrow/i }).click();
-  await page.getByRole("button", { name: "9:00 AM - 12:00 PM" }).click();
-  await expect(page.getByText(/This time is reserved for/)).toBeVisible();
-  await page.getByRole("button", { name: "Confirm appointment" }).click();
+  await page.getByRole("button", { name: /Leaks, Blockages, or Sewer/i }).click();
+  await expect(page.getByRole("heading", { name: "Can you tell us a bit more?" })).toBeVisible();
+  await page.getByRole("button", { name: /^Fix a Leak/i }).click();
 
-  await expect(page.getByRole("heading", { name: "Your appointment is confirmed!" })).toBeVisible();
   const confirmStep = page.getByTestId("booking-step-4");
-  await expect(confirmStep.getByText("Confirmation")).toBeVisible();
-  await expect(confirmStep.getByText("IC-1234")).toBeVisible();
+  await expect(confirmStep.getByRole("heading", { name: "Confirm your appointment details" })).toBeVisible();
+  await expect(confirmStep.getByText("Your appointment is confirmed!", { exact: true })).toHaveCount(0);
   await expect(confirmStep.getByText("Issue")).toBeVisible();
   await expect(confirmStep.getByText("Fix a Leak")).toBeVisible();
   await expect(confirmStep.getByText("Date")).toBeVisible();
   await expect(confirmStep.getByText(longDateLabel(appointmentDate))).toBeVisible();
   await expect(confirmStep.getByText("Arrival window")).toBeVisible();
   await expect(confirmStep.getByText("9:00 AM - 12:00 PM")).toBeVisible();
+  await expect(confirmStep.getByText("E2E Booker", { exact: true })).toBeVisible();
   await expect(confirmStep.getByText("Booking ID")).not.toBeVisible();
   await expect(confirmStep.getByText("Appointment ID")).not.toBeVisible();
   await expect(confirmStep.getByText("booking-1")).not.toBeVisible();
@@ -151,6 +157,17 @@ test("booking flow uses public scheduling facade and confirms from facade identi
   await expect(confirmStep.getByRole("radio", { name: "Call" })).not.toBeChecked();
   await expect(confirmStep.getByRole("radio", { name: "Text" })).not.toBeChecked();
   await expect(confirmStep.getByRole("radio", { name: "Either" })).not.toBeChecked();
+  expect(facadeCalls).not.toContain("book");
+
+  await confirmStep.getByRole("button", { name: "Confirm Appointment" }).click();
+
+  const confirmationStep = page.getByTestId("booking-confirmation");
+  await expect(confirmationStep.getByRole("heading", { name: "Your appointment is confirmed!" })).toBeVisible();
+  await expect(confirmationStep.getByText("Confirmation")).toBeVisible();
+  await expect(confirmationStep.getByText("IC-1234")).toBeVisible();
+  await expect(confirmationStep.getByText("booking-1")).not.toBeVisible();
+  await expect(confirmationStep.getByText("appointment-1")).not.toBeVisible();
+  await expect(page.getByRole("button", { name: "Schedule Time" })).toBeDisabled();
 
   await expect.poll(async () => page.evaluate(() => {
     const entries = window.dataLayer ?? [];

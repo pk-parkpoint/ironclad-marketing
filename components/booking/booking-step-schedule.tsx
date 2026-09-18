@@ -24,14 +24,10 @@ type Props = {
   searchError?: string | null;
   holdError?: string | null;
   holdingOfferId?: string | null;
-  submitError?: string;
-  isSubmitting: boolean;
   remainingSeconds: number;
-  onUpdate: (updates: Partial<WizardFormData>) => void;
   onSelectDate: (date: string) => void;
   onSelectWindow: (window: PublicBookingWindow) => Promise<boolean>;
   onRefresh: () => void;
-  onBack: () => void;
   onNext: () => void;
 };
 
@@ -54,13 +50,10 @@ export function BookingStepSchedule({
   searchError,
   holdError,
   holdingOfferId,
-  submitError,
-  isSubmitting,
   remainingSeconds,
   onSelectDate,
   onSelectWindow,
   onRefresh,
-  onBack,
   onNext,
 }: Props) {
   const todayId = ironcladTodayDateId();
@@ -69,7 +62,6 @@ export function BookingStepSchedule({
   const [viewYear, setViewYear] = useState(defaultYear);
   const [viewMonth, setViewMonth] = useState(defaultMonth - 1);
   const [dateError, setDateError] = useState<string | null>(null);
-  const autoDateRef = useRef(false);
   const autoWindowRef = useRef<string | null>(null);
   const timesBlockRef = useRef<HTMLDivElement | null>(null);
 
@@ -82,8 +74,7 @@ export function BookingStepSchedule({
   const isLoadingSelectedDate = Boolean(selectedDate && loadingDate === selectedDate);
   const firstWindow = selectedWindows[0];
   useEffect(() => {
-    if (selectedDate || autoDateRef.current) return;
-    autoDateRef.current = true;
+    if (selectedDate) return;
     onSelectDate(defaultDateId);
   }, [defaultDateId, onSelectDate, selectedDate]);
 
@@ -132,7 +123,7 @@ export function BookingStepSchedule({
   for (let day = 1; day <= daysInMonth; day += 1) cells.push(day);
 
   return (
-    <div data-testid="booking-step-3">
+    <div data-testid="booking-step-1">
       <h1 className={`${styles.heading} ${styles.scheduleHeading}`}>Choose an Appointment Time</h1>
 
       <div className={styles.calendarCard}>
@@ -265,22 +256,12 @@ export function BookingStepSchedule({
           {dateError}
         </p>
       )}
-      {submitError && <p className={styles.errorMessage}>{submitError}</p>}
-
-      <div className={`${styles.buttonRow} ${styles.buttonRowSplit}`}>
-        <button
-          type="button"
-          className={styles.secondaryButton}
-          onClick={onBack}
-        >
-          &larr; Back
-        </button>
+      <div className={styles.buttonRow}>
         <button
           type="button"
           className={styles.primaryButton}
-          disabled={isSubmitting || Boolean(holdingOfferId)}
+          disabled={Boolean(holdingOfferId)}
           onClick={() => {
-            if (isSubmitting) return;
             if (!formData.holdId || !formData.selectedStartTime) {
               setDateError("Please choose an available appointment time.");
               return;
@@ -289,7 +270,7 @@ export function BookingStepSchedule({
             onNext();
           }}
         >
-          {holdingOfferId ? "Reserving..." : isSubmitting ? "Confirming..." : "Confirm appointment"}
+          {holdingOfferId ? "Reserving..." : "Continue"}
         </button>
       </div>
     </div>

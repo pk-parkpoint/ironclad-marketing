@@ -21,7 +21,7 @@ for (const path of ["/", "/plumbing/drain-clearing"]) {
     await expect(page).toHaveURL(/\/$/);
     await expect.poll(() => payloads.length).toBe(1);
     expect(payloads[0].sessionId).toMatch(/^booking_/);
-    expect(payloads[0].tracking.abandonmentScreen).toBe(path === "/" ? "select_issue" : "contact_info");
+    expect(payloads[0].tracking.abandonmentScreen).toBe("schedule_time");
   });
 }
 

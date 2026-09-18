@@ -56,6 +56,7 @@ const BEAT = 400;
 type Props = {
   formData: WizardFormData;
   onUpdate: (updates: Partial<WizardFormData>) => void;
+  onBack: () => void;
   onNext: () => void;
 };
 
@@ -74,7 +75,7 @@ function initialSection(formData: WizardFormData): "category" | "detail" {
   return "category";
 }
 
-export function BookingStepSelectIssue({ formData, onUpdate, onNext }: Props) {
+export function BookingStepSelectIssue({ formData, onUpdate, onBack, onNext }: Props) {
   const [section, setSection] = useState<"category" | "detail">(() => initialSection(formData));
   const [pickedCategory, setPickedCategory] = useState<string | null>(formData.serviceCategory);
   const [pickedDetail, setPickedDetail] = useState<string | null>(formData.serviceDetail);
@@ -117,7 +118,7 @@ export function BookingStepSelectIssue({ formData, onUpdate, onNext }: Props) {
   // Section A — Pick a category
   if (section === "category") {
     return (
-      <div data-testid="booking-step-1">
+      <div data-testid="booking-step-3">
         <h1 className={styles.heading}>What do you need help with?</h1>
         <p className={styles.subcopy}>Pick what best describes your situation</p>
 
@@ -141,6 +142,9 @@ export function BookingStepSelectIssue({ formData, onUpdate, onNext }: Props) {
             );
           })}
         </div>
+        <button type="button" className={styles.ghostButton} onClick={onBack}>
+          &larr; Back
+        </button>
       </div>
     );
   }
@@ -151,7 +155,7 @@ export function BookingStepSelectIssue({ formData, onUpdate, onNext }: Props) {
       ? "Can you tell us a bit more?"
       : "What needs installing or replacing?";
   return (
-    <div data-testid="booking-step-1-detail">
+    <div data-testid="booking-step-3-detail">
       <h1 className={styles.heading}>{heading}</h1>
       <p className={styles.subcopy}>This helps us send the right technician.</p>
 

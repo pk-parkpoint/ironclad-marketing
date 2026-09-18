@@ -20,6 +20,50 @@ async function clickBookingTrigger(page: Page, name = "Schedule Now") {
   }
 }
 
+async function mockSchedulingFacade(page: Page) {
+  await page.route("**/api/scheduling/v3/availability/*", async (route) => {
+    const action = route.request().url().split("/").pop() || "";
+    const payload = (route.request().postDataJSON() || {}) as Record<string, string>;
+    if (action === "search") {
+      await route.fulfill({ contentType: "application/json", json: {
+        requestId: "entrypoint-search",
+        state: "available",
+        windows: [9, 12, 15].map((hour) => ({
+          endTime: `${payload.date}T${String(hour + 2).padStart(2, "0")}:00:00-05:00`,
+          isAvailable: true,
+          offerId: `entrypoint-offer-${hour}`,
+          startTime: `${payload.date}T${String(hour).padStart(2, "0")}:00:00-05:00`,
+          windowId: `entrypoint-window-${hour}`,
+        })),
+      } });
+      return;
+    }
+    if (action === "hold") {
+      await route.fulfill({ contentType: "application/json", status: 201, json: {
+        expiresAt: new Date(Date.now() + 8 * 60 * 1000).toISOString(),
+        holdId: "entrypoint-hold",
+        offerId: payload.offerId,
+        state: "hold_active",
+        ttlSeconds: 480,
+        windowId: payload.windowId,
+      } });
+      return;
+    }
+    await route.fulfill({ contentType: "application/json", json: { released: true, state: "released" } });
+  });
+}
+
+async function reachIssueStep(page: Page) {
+  const dialog = page.getByRole("dialog", { name: dialogName });
+  await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
+  await dialog.getByRole("button", { name: "Continue" }).click({ force: true });
+  await dialog.getByLabel("First name").fill("Entry");
+  await dialog.getByLabel("Last name").fill("Point");
+  await dialog.getByLabel("Phone number").fill("5125550100");
+  await dialog.getByLabel("Service address").fill("100 Test Street, Austin, TX 78701");
+  await dialog.getByRole("button", { name: "Continue" }).click();
+}
+
 test("booking links open the wizard on the book route and preserve browser back", async ({ page }) => {
   await page.goto("/");
 
@@ -91,8 +135,13 @@ test("standard service page booking links open the wizard on the book route", as
   const url = new URL(page.url());
   expect(url.pathname).toBe("/book");
   expect(url.searchParams.get("service")).toBe("repairs");
-  await expect(page.getByRole("heading", { name: "Enter your information" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Return to Select Issue" })).toBeEnabled();
+  await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
+  await expect(page.getByLabel("Step 1 of 4").locator('span[class*="stepLabel"]')).toHaveText([
+    "Schedule Time",
+    "Contact Info",
+    "Select Issue",
+    "Confirm Details",
+  ]);
 });
 
 test("service template booking links preserve service query on the book route", async ({ page }) => {
@@ -104,10 +153,11 @@ test("service template booking links preserve service query on the book route", 
   const url = new URL(page.url());
   expect(url.pathname).toBe("/book");
   expect(url.searchParams.get("service")).toBe("drain-clearing");
-  await expect(page.getByRole("heading", { name: "Enter your information" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
 });
 
 test("bare header booking links inherit water-heater service context", async ({ page }) => {
+  await mockSchedulingFacade(page);
   await page.goto("/plumbing/water-heater-repair");
 
   await page.getByRole("link", { name: /Book Today and Get 10% Off/i }).click();
@@ -116,20 +166,19 @@ test("bare header booking links inherit water-heater service context", async ({ 
   const url = new URL(page.url());
   expect(url.pathname).toBe("/book");
   expect(url.searchParams.get("service")).toBe("water-heater-repair");
-  await expect(page.getByRole("heading", { name: "Enter your information" })).toBeVisible();
-
-  await page.getByRole("button", { name: "Return to Select Issue" }).click();
+  await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
+  await reachIssueStep(page);
   await expect(page.getByRole("heading", { name: "What needs installing or replacing?" })).toBeVisible();
   await expect(page.getByRole("button", { name: /^Water Heater/i })).toHaveClass(/optionCardSelected/);
 });
 
 test("broad service context uses an editable best-fit issue", async ({ page }) => {
+  await mockSchedulingFacade(page);
   await page.goto("/book?service=plumbing");
 
   await expect(page.getByRole("dialog", { name: dialogName })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Enter your information" })).toBeVisible();
-
-  await page.getByRole("button", { name: "Return to Select Issue" }).click();
+  await expect(page.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
+  await reachIssueStep(page);
   await expect(page.getByRole("heading", { name: "Can you tell us a bit more?" })).toBeVisible();
   await expect(page.getByRole("button", { name: /^Other Issue/i })).toHaveClass(/optionCardSelected/);
 });

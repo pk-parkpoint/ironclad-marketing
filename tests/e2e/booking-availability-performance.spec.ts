@@ -1,4 +1,4 @@
-import { expect, test, type Locator, type Page } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 const FROZEN_TIME = "2026-08-12T20:01:00Z";
 const DEFAULT_DATE = "2026-08-13";
@@ -34,26 +34,14 @@ function holdResponse(payload: Record<string, string>, suffix: string) {
   };
 }
 
-async function reachContactStep(page: Page) {
+async function reachScheduleStep(page: Page) {
   await page.goto("/book");
   const dialog = page.getByRole("dialog", { name: "Request an Appointment" });
-  await dialog.getByRole("button", { name: /Leaks, Blockages, or Sewer/i }).click();
-  await dialog.getByRole("button", { name: /^Fix a Leak/i }).click();
-  await expect(dialog.getByRole("heading", { name: "Enter your information" })).toBeVisible();
+  await expect(dialog.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
   return dialog;
 }
 
-async function completeContactStep(dialog: Locator) {
-  const textInputs = dialog.locator('input[type="text"]');
-  await textInputs.nth(0).fill("Availability");
-  await textInputs.nth(1).fill("Tester");
-  await dialog.locator('input[type="tel"]').fill("5125550100");
-  await textInputs.nth(2).fill("123 Test Street, Austin, TX 78701");
-  await dialog.getByRole("button", { name: "Continue" }).click();
-  await expect(dialog.getByRole("heading", { name: "Choose an Appointment Time" })).toBeVisible();
-}
-
-test("prefetches nearby dates during contact entry and reuses them for instant date switches", async ({ page }) => {
+test("prefetches nearby dates on schedule entry and reuses them for instant date switches", async ({ page }) => {
   await page.clock.setFixedTime(new Date(FROZEN_TIME));
   const searchedDates: string[] = [];
 
@@ -77,11 +65,10 @@ test("prefetches nearby dates during contact entry and reuses them for instant d
     await route.fulfill({ contentType: "application/json", json: { released: true, state: "released" } });
   });
 
-  const dialog = await reachContactStep(page);
+  const dialog = await reachScheduleStep(page);
   await expect.poll(() => new Set(searchedDates).size).toBe(3);
   expect(searchedDates[0]).toBe(DEFAULT_DATE);
 
-  await completeContactStep(dialog);
   await expect(dialog.getByLabel("Loading available times")).toHaveCount(0);
   await expect(dialog.getByRole("button", { name: "9:00 AM - 12:00 PM" })).toBeVisible();
   expect(searchedDates).toHaveLength(3);
@@ -127,8 +114,7 @@ test("highlights a new window immediately and releases the prior hold in paralle
     await route.fulfill({ contentType: "application/json", json: { released: true, state: "released" } });
   });
 
-  const dialog = await reachContactStep(page);
-  await completeContactStep(dialog);
+  const dialog = await reachScheduleStep(page);
   const firstWindow = dialog.getByRole("button", { name: "9:00 AM - 12:00 PM" });
   const secondWindow = dialog.getByRole("button", { name: "12:00 PM - 3:00 PM" });
   await expect(firstWindow).toHaveAttribute("aria-pressed", "true");
