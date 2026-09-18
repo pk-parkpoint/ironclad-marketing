@@ -2,6 +2,8 @@ import type { MarketingPageContent } from "@/content/marketing-page-content";
 
 export type NewPageDefinition = {
   path: string;
+  bookingHref: string;
+  templateSlug: string;
   titleTag: string;
   metaDescription: string;
   h1: string;

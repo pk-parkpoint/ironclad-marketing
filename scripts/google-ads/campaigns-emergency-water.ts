@@ -143,11 +143,9 @@ export const WATER_HEATER: CampaignSpec = {
     "rinnai tankless water heater",
   ],
   residentialFilter: true,
-  promotionHeadline: "Up to $300 Off New Heaters",
+  promotionHeadline: STANDARD_PROMOTION_HEADLINE,
   headlines: STANDARD_HEADLINES,
-  descriptions: standardDescriptions(
-    "New customers save up to $300 on a new water heater. Call Ironclad today.",
-  ),
+  descriptions: standardDescriptions(),
   adGroups: [
     {
       name: "Repair & No Hot Water",

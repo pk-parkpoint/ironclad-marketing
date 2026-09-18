@@ -1,4 +1,5 @@
 import type { MarketingPageContent } from "@/content/marketing-page-types";
+import { DRAIN_CLEANING_OFFER, STANDARD_NEW_CUSTOMER_OFFER } from "@/content/offers";
 
 export const MARKETING_PAGE_CONTENT_EXTRA: Record<string, MarketingPageContent> = {
   "privacy-policy": {
@@ -20,17 +21,25 @@ export const MARKETING_PAGE_CONTENT_EXTRA: Record<string, MarketingPageContent> 
     pageType: "legal",
   },
   "special-offers": {
-    intro:
-      "Promotions and seasonal offers are published here when active. Eligibility and expiration details are shown with each offer.",
+    intro: `${STANDARD_NEW_CUSTOMER_OFFER.sentence} ${DRAIN_CLEANING_OFFER.short} is available as a separate deal.`,
     sections: [
       {
-        heading: "Offer Policy",
+        heading: "15% Off for New Customers",
         bullets: [
-          "One offer per qualifying job unless stated otherwise",
-          "Not all services or emergency calls qualify",
-          "Details are confirmed before work begins",
+          "Available to new Ironclad customers",
+          "Maximum total discount of $300",
+          "The discount is confirmed with the approved job price before work begins",
         ],
-        paragraphs: [],
+        paragraphs: [STANDARD_NEW_CUSTOMER_OFFER.sentence],
+      },
+      {
+        heading: DRAIN_CLEANING_OFFER.short,
+        bullets: [
+          "This is a separate drain-cleaning offer",
+          "The team confirms eligibility and scope before work begins",
+          "Offers cannot be combined unless stated otherwise",
+        ],
+        paragraphs: ["Book online or call to request the $89 drain-cleaning offer."],
       },
     ],
     ctaHeading: "Want to confirm an active offer?",
