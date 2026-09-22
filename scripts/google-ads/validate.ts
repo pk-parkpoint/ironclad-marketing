@@ -15,6 +15,7 @@ import {
   STANDARD_OUTCOME_DESCRIPTION,
   TARGET_CITIES,
 } from "./manifest-shared";
+import { AUSTIN_PLUMBER_NEAR_ME_URL, hasProximityIntent } from "./near-me-routing";
 
 const PHONE_PATTERN = /(?:\+?1\s*)?\(?512\)?[\s.-]*516[\s.-]*2470/;
 const OPERATIONAL_DETAIL_PATTERN = /\b(?:permit|price|pricing|financing)\b/i;
@@ -133,6 +134,9 @@ export function validateManifest() {
         requireCondition(!FORBIDDEN_COPY_PATTERN.test(description), `${campaign.name}/${group.name}: forbidden copy found in description: ${description}`);
       }
       requireCondition(!group.finalUrl.endsWith("/book-online") && !group.finalUrl.endsWith("/book"), `${campaign.name}/${group.name}: booking URL cannot be a search destination`);
+      if (group.name === "Plumber Near Me") {
+        requireCondition(group.finalUrl === AUSTIN_PLUMBER_NEAR_ME_URL, `${campaign.name}/${group.name}: near-me ad group landing URL drifted`);
+      }
       requireCondition(group.keywords.length > 0, `${campaign.name}/${group.name}: no keywords`);
       const keywordKeys = new Set<string>();
       for (const keyword of group.keywords) {
@@ -141,6 +145,9 @@ export function validateManifest() {
         requireCondition(!keywordKeys.has(key), `${campaign.name}/${group.name}: duplicate keyword ${key}`);
         keywordKeys.add(key);
         requireCondition(!keyword.finalUrl?.endsWith("/book-online") && !keyword.finalUrl?.endsWith("/book"), `${campaign.name}/${group.name}: booking keyword URL`);
+        if (group.name === "Plumber Near Me" || hasProximityIntent(keyword.text)) {
+          requireCondition(keyword.finalUrl === AUSTIN_PLUMBER_NEAR_ME_URL, `${campaign.name}/${group.name}: near-me keyword landing URL drifted: ${keyword.text}`);
+        }
       }
       const negativeKeys = new Set<string>();
       for (const negative of group.negativeKeywords || []) {
