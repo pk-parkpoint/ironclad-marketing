@@ -30,7 +30,7 @@ export const LEAKS_LINES: CampaignSpec = {
   adGroups: [
     {
       name: "Leak Detection",
-      finalUrl: `${SITE_ORIGIN}/leak-detection`,
+      finalUrl: `${SITE_ORIGIN}/plumbing/leak-detection`,
       primaryHeadline: "Leak Detection Experts",
       additionalHeadlines: [
         "Leak Detection Near Me",
@@ -90,7 +90,7 @@ export const LEAKS_LINES: CampaignSpec = {
     },
     {
       name: "Pipe Repair",
-      finalUrl: `${SITE_ORIGIN}/plumbing/water-line-repair`,
+      finalUrl: `${SITE_ORIGIN}/plumbing/leak-repair`,
       primaryHeadline: "Pipe Repair Experts",
       additionalHeadlines: [
         "Pipe Leak Repair",

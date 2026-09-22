@@ -28,7 +28,7 @@ export const EMERGENCY: CampaignSpec = {
   adGroups: [
     {
       name: "Emergency Plumber",
-      finalUrl: `${SITE_ORIGIN}/emergency-plumbing`,
+      finalUrl: `${SITE_ORIGIN}/plumbing/emergency`,
       primaryHeadline: "Emergency Plumbing Experts",
       additionalHeadlines: [
         "Emergency Plumber Near Me",
@@ -102,7 +102,7 @@ export const EMERGENCY: CampaignSpec = {
     },
     {
       name: "After-Hours & Weekend",
-      finalUrl: `${SITE_ORIGIN}/emergency-plumbing`,
+      finalUrl: `${SITE_ORIGIN}/plumbing/emergency`,
       primaryHeadline: "After-Hours Plumbing Experts",
       additionalHeadlines: [
         "After Hours Plumber",

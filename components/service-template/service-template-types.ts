@@ -1,5 +1,5 @@
 type TextPair = readonly [string, string];
-type ServiceCard = readonly [string, string, string, string?];
+type ServiceCard = readonly [string, string, string, string?, string?];
 
 export type DrainCleaningTemplateContent = {
   hero: {

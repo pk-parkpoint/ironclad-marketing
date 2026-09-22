@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { STANDARD_NEW_CUSTOMER_OFFER } from "@/content/offers";
 import { DRAIN_CLEANING_TEMPLATE as defaultContent } from "./drain-cleaning-data";
 import { HeroMetaBadge } from "./hero-meta-badge";
@@ -146,9 +147,10 @@ export function DrainCleaningPage({
             {content.services.intro}
           </p>
           <div className="dc-service-grid">
-            {content.services.cards.map(([title, body, caption, imageSrc]) => (
-              <ServiceCard body={body} caption={caption} imageSrc={imageSrc} key={title} title={title} />
-            ))}
+            {content.services.cards.map(([title, body, caption, imageSrc, href]) => {
+              const card = <ServiceCard body={body} caption={caption} imageSrc={imageSrc} key={title} title={title} />;
+              return href ? <Link aria-label={title} className="dc-service-card-link" href={href} key={title}>{card}</Link> : card;
+            })}
           </div>
           <div className="dc-ink-button-row">
             <TemplateButton href={bookingHref} icon="arrow" variant="ink">

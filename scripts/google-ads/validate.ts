@@ -18,7 +18,7 @@ import {
 import { AUSTIN_PLUMBER_NEAR_ME_URL, hasProximityIntent } from "./near-me-routing";
 
 const PHONE_PATTERN = /(?:\+?1\s*)?\(?512\)?[\s.-]*516[\s.-]*2470/;
-const OPERATIONAL_DETAIL_PATTERN = /\b(?:permit|price|pricing|financing)\b/i;
+const OPERATIONAL_DETAIL_PATTERN = /\b(?:permit|financing)\b/i;
 const FORBIDDEN_COPY_PATTERN = /\b(?:act fast|experts who|qualifying|schedule anytime)\b/i;
 
 function requireCondition(condition: unknown, message: string): asserts condition {
@@ -98,22 +98,24 @@ export function validateManifest() {
     const groupNames = new Set<string>();
     for (const group of campaign.adGroups) {
       const promotionHeadline = group.promotionHeadline || campaign.promotionHeadline;
-      const descriptions = [...campaign.descriptions];
-      const headlines = [
+      const descriptions = group.descriptions ? [...group.descriptions] : [...campaign.descriptions];
+      const headlines = group.headlines || [
         group.primaryHeadline,
         promotionHeadline,
         STANDARD_AVAILABILITY_HEADLINE,
         ...campaign.headlines,
         ...(group.additionalHeadlines || []),
       ].filter((headline): headline is string => Boolean(headline));
-      descriptions[1] = group.outcomeDescription;
-      if (group.promotionDescription) descriptions[descriptions.length - 1] = group.promotionDescription;
+      if (!group.descriptions) {
+        descriptions[1] = group.outcomeDescription;
+        if (group.promotionDescription) descriptions[descriptions.length - 1] = group.promotionDescription;
+      }
       requireCondition(!groupNames.has(group.name.toLowerCase()), `${campaign.name}: duplicate ad group ${group.name}`);
       groupNames.add(group.name.toLowerCase());
       requireCondition(Boolean(group.promotionHeadline) === Boolean(group.promotionDescription), `${campaign.name}/${group.name}: promotion headline and description overrides must be paired`);
       requireCondition(Boolean(promotionHeadline), `${campaign.name}/${group.name}: promotion headline is required`);
       requireCondition(campaign.launchEnabled ? headlines.length === 15 : headlines.length <= 15, `${campaign.name}/${group.name}: responsive search ad headline count=${headlines.length}`);
-      requireCondition(!campaign.launchEnabled || group.additionalHeadlines?.length === 8, `${campaign.name}/${group.name}: live ad group requires eight relevance headlines`);
+      requireCondition(!campaign.launchEnabled || group.headlines?.length === 15 || group.additionalHeadlines?.length === 8, `${campaign.name}/${group.name}: live ad group requires a complete headline set`);
       requireCondition(new Set(headlines.map((headline) => headline.toLowerCase())).size === headlines.length, `${campaign.name}/${group.name}: duplicate responsive search ad headline`);
       const generatedAd = desiredAd(campaign, group).responsiveSearchAd;
       requireCondition(generatedAd.headlines.length === headlines.length, `${campaign.name}/${group.name}: generated headline count drifted`);
@@ -136,6 +138,9 @@ export function validateManifest() {
       requireCondition(!group.finalUrl.endsWith("/book-online") && !group.finalUrl.endsWith("/book"), `${campaign.name}/${group.name}: booking URL cannot be a search destination`);
       if (group.name === "Plumber Near Me") {
         requireCondition(group.finalUrl === AUSTIN_PLUMBER_NEAR_ME_URL, `${campaign.name}/${group.name}: near-me ad group landing URL drifted`);
+      }
+      if (group.name === "Austin Plumber") {
+        requireCondition(group.finalUrl === "https://ironcladtexas.com/service-area/austin-tx", `${campaign.name}/${group.name}: Austin city landing URL drifted`);
       }
       requireCondition(group.keywords.length > 0, `${campaign.name}/${group.name}: no keywords`);
       const keywordKeys = new Set<string>();

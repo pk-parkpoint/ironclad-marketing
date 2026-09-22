@@ -171,22 +171,23 @@ function compareServingAds(left: AdRow, right: AdRow): number {
 
 export function desiredAd(campaign: CampaignSpec, group: AdGroupSpec) {
   const promotionHeadline = group.promotionHeadline || campaign.promotionHeadline;
-  const descriptions = [...campaign.descriptions];
-  descriptions[1] = group.outcomeDescription;
-  if (group.promotionDescription) descriptions[descriptions.length - 1] = group.promotionDescription;
+  const descriptions = group.descriptions ? [...group.descriptions] : [...campaign.descriptions];
+  if (!group.descriptions) {
+    descriptions[1] = group.outcomeDescription;
+    if (group.promotionDescription) descriptions[descriptions.length - 1] = group.promotionDescription;
+  }
+  const headlines = group.headlines || [
+    group.primaryHeadline,
+    ...(promotionHeadline ? [promotionHeadline] : []),
+    STANDARD_AVAILABILITY_HEADLINE,
+    ...campaign.headlines,
+    ...(group.additionalHeadlines || []),
+  ];
   return {
     finalUrls: [group.finalUrl],
     responsiveSearchAd: {
       descriptions: descriptions.map((text) => ({ text })),
-      headlines: [
-        { text: group.primaryHeadline },
-        ...(promotionHeadline
-          ? [{ text: promotionHeadline }]
-          : []),
-        { text: STANDARD_AVAILABILITY_HEADLINE },
-        ...campaign.headlines.map((text) => ({ text })),
-        ...(group.additionalHeadlines || []).map((text) => ({ text })),
-      ],
+      headlines: headlines.map((text) => ({ text })),
     },
   };
 }
