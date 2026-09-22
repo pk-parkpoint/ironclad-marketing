@@ -1,4 +1,5 @@
 import type { MarketingPageContent } from "@/content/marketing-page-content";
+import type { DrainCleaningTemplateContent } from "@/components/service-template/service-template-types";
 
 export type NewPageDefinition = {
   path: string;
@@ -16,5 +17,6 @@ export type NewPageDefinition = {
     label: string;
   };
   serviceName?: string;
+  templateContent?: DrainCleaningTemplateContent;
   content: MarketingPageContent;
 };

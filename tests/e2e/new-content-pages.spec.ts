@@ -7,24 +7,28 @@ const CANONICAL_ORIGIN = "https://ironcladtexas.com";
 
 const NEW_PAGES = [
   {
-    route: "/lp/austin-plumber",
-    heading: "Need a Plumber Near You in Austin?",
-    sectionHeading: "Plumbing Help for the Problem in Front of You",
+    route: "/lp/austin-plumber-near-me",
+    heading: "Need an Austin Plumber Near You?",
+    sectionHeading: "When to Call a Plumber Nearby",
+    heroCta: "Check Availability",
   },
   {
     route: "/lp/water-heater-replacement",
     heading: "Water Heater Replacement in Austin",
     sectionHeading: "When Replacement Usually Makes Sense",
+    heroCta: "Schedule Now",
   },
   {
     route: "/projects",
     heading: "Plumbing Work Across Greater Austin",
     sectionHeading: "Austin Diagnostics and Repairs",
+    heroCta: "Schedule Now",
   },
   {
     route: "/plumbing/water-softener-repair",
     heading: "Water Softener Repair in Austin",
     sectionHeading: "Signs the Softener Needs Service",
+    heroCta: "Schedule Now",
   },
 ] as const;
 
@@ -42,7 +46,7 @@ for (const pageConfig of NEW_PAGES) {
     await expect(root.getByRole("heading", { level: 1, name: pageConfig.heading })).toBeVisible();
     await expect(root.getByRole("heading", { level: 2, name: pageConfig.sectionHeading })).toBeVisible();
     await expect(root.getByText(STANDARD_HEADER_TEXT, { exact: true })).toBeVisible();
-    await expect(root.getByRole("link", { name: "Schedule Now" }).first()).toBeVisible();
+    await expect(root.getByRole("link", { name: pageConfig.heroCta }).first()).toBeVisible();
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
       `${CANONICAL_ORIGIN}${pageConfig.route}`,
@@ -51,6 +55,20 @@ for (const pageConfig of NEW_PAGES) {
     expect(runtimeErrors).toEqual([]);
   });
 }
+
+test("the previous Austin plumber landing URL redirects to the near-me page", async ({ page }) => {
+  await page.goto("/lp/austin-plumber");
+  await expect(page).toHaveURL(/\/lp\/austin-plumber-near-me$/);
+  await expect(page.getByRole("heading", { level: 1, name: "Need an Austin Plumber Near You?" })).toBeVisible();
+});
+
+test("the Austin landing page uses near-me search language naturally", async ({ page }) => {
+  await page.goto("/lp/austin-plumber-near-me");
+  await expect(page).toHaveTitle(/Austin Plumber Near Me/);
+  await expect(page.getByText(/Searching for an “Austin plumber near me”/)).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Austin Plumber Near Me FAQ" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "When to Call a Plumber Nearby" })).toBeVisible();
+});
 
 test("new pages preserve the existing mobile layout without body overflow", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });

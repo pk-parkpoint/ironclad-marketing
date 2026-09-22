@@ -82,7 +82,7 @@ function buildTemplateContent(definition: NewPageDefinition): DrainCleaningTempl
 export function NewContentPage({ definition }: NewContentPageProps) {
   const contactInfo = getPublicContactInfo();
   const pagePath = `/${definition.path}`;
-  const templateContent = buildTemplateContent(definition);
+  const templateContent = definition.templateContent ?? buildTemplateContent(definition);
   const schemaBreadcrumbs = [
     { name: "Home", path: "/" },
     { name: definition.breadcrumbParent.label, path: definition.breadcrumbParent.href },
