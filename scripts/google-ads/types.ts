@@ -11,7 +11,9 @@ export type AdGroupSpec = {
   finalUrl: string;
   primaryHeadline: string;
   additionalHeadlines?: string[];
+  headlines?: string[];
   outcomeDescription: string;
+  descriptions?: string[];
   negativeKeywords?: KeywordSpec[];
   promotionHeadline?: string;
   promotionDescription?: string;

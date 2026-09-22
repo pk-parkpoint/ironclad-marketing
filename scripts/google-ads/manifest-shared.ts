@@ -2,6 +2,7 @@ import type { SitelinkSpec } from "./types";
 import { DRAIN_CLEANING_OFFER, STANDARD_NEW_CUSTOMER_OFFER } from "../../content/offers";
 
 export const SITE_ORIGIN = "https://ironcladtexas.com";
+export const sharedSitelinkAssetName = (text: string) => `IRONCLAD | Sitelink | Canonical v2 | ${text}`;
 export const LICENSE_DESCRIPTION =
   "Local, family-owned Austin plumbers. Licensed and insured.";
 
@@ -96,31 +97,31 @@ export const SITELINKS: SitelinkSpec[] = [
     text: "Book Online",
     description1: "Pick your appointment window.",
     description2: "Same-day slots often available.",
-    finalUrl: `${SITE_ORIGIN}/book-online`,
+    finalUrl: `${SITE_ORIGIN}/book`,
   },
   {
     text: "Emergency Plumbing",
     description1: "Burst pipes, backups, major leaks.",
     description2: "Call for a live arrival window.",
-    finalUrl: `${SITE_ORIGIN}/emergency-plumbing`,
+    finalUrl: `${SITE_ORIGIN}/plumbing/emergency`,
   },
   {
     text: "Water Heaters",
     description1: "Repair, replacement, tankless.",
     description2: "Gas and electric options.",
-    finalUrl: `${SITE_ORIGIN}/water-heaters`,
+    finalUrl: `${SITE_ORIGIN}/plumbing/water-heaters`,
   },
   {
     text: "Drain Cleaning",
     description1: "Clogs, slow drains, main lines.",
     description2: "Camera inspection available.",
-    finalUrl: `${SITE_ORIGIN}/drain-cleaning`,
+    finalUrl: `${SITE_ORIGIN}/plumbing/drain-clearing`,
   },
   {
     text: "Leak Detection",
     description1: "Slab leaks and hidden leaks.",
     description2: "Found before we cut anything.",
-    finalUrl: `${SITE_ORIGIN}/leak-detection`,
+    finalUrl: `${SITE_ORIGIN}/plumbing/leak-detection`,
   },
   {
     text: "Service Area",

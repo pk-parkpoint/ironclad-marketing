@@ -824,6 +824,13 @@
   transition: var(--motion-card);
 }
 
+.dc-service-card-link {
+  color: inherit;
+  display: block;
+  height: 100%;
+  text-decoration: none;
+}
+
 .dc-service-card:hover {
   box-shadow: var(--shadow-card-hover);
   transform: translateY(-4px);

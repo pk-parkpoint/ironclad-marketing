@@ -5,7 +5,7 @@ import sharp from "sharp";
 import { CAMPAIGN_SITELINKS, campaignSitelinkAssetName } from "./campaign-sitelinks";
 import { mutate, query, resourceId } from "./client";
 import { ensureImageAssets, reconcileAdGroupImages } from "./image-assets";
-import { CALLOUTS, SITELINKS, STRUCTURED_SNIPPET_VALUES } from "./manifest-shared";
+import { CALLOUTS, sharedSitelinkAssetName, SITELINKS, STRUCTURED_SNIPPET_VALUES } from "./manifest-shared";
 
 type AssetRow = { asset: { name?: string; resourceName: string; type: string } };
 let cachedAssetRows: AssetRow[] | undefined;
@@ -102,7 +102,7 @@ export async function ensureAssets(callsFromAds: string): Promise<Map<string, { 
   assets.set("call", { fieldType: "CALL", resourceName: call });
 
   for (const sitelink of SITELINKS) {
-    const resourceName = await ensureAsset(`IRONCLAD | Sitelink | ${sitelink.text}`, {
+    const resourceName = await ensureAsset(sharedSitelinkAssetName(sitelink.text), {
       finalUrls: [sitelink.finalUrl],
       sitelinkAsset: {
         description1: sitelink.description1,

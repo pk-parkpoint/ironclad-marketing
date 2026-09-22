@@ -1,8 +1,9 @@
 import { campaignSitelinkAssetName } from "./campaign-sitelinks";
 import { mutate, query, resourceId } from "./client";
+import { sharedSitelinkAssetName } from "./manifest-shared";
 
 const SITELINK_ASSET_NAMES = [
-  "IRONCLAD | Sitelink | Book Online",
+  sharedSitelinkAssetName("Book Online"),
   campaignSitelinkAssetName("general-city", "Plumbing Repairs"),
   campaignSitelinkAssetName("general-city", "Austin Plumber"),
   campaignSitelinkAssetName("general-city", "Greater Austin Areas"),
