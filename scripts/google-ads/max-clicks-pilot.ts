@@ -6,6 +6,7 @@ import {
   standardDescriptions,
 } from "./manifest-shared";
 import { desiredAd } from "./ad-groups";
+import { routeNearMeTraffic } from "./near-me-routing";
 import { exact, phrase, type CampaignSpec, type KeywordSpec } from "./types";
 
 export const MAX_CLICKS_PILOT_KEY = "max-clicks-pilot";
@@ -39,7 +40,7 @@ const sewerRepairNegatives: KeywordSpec[] = phrase(
   "sewer map", "city sewer", "sewer department", "water heater", "commercial",
 );
 
-export const MAX_CLICKS_PILOT: CampaignSpec = {
+export const MAX_CLICKS_PILOT: CampaignSpec = routeNearMeTraffic({
   key: MAX_CLICKS_PILOT_KEY,
   name: MAX_CLICKS_PILOT_NAME,
   budgetMicros: MAX_CLICKS_PILOT_BUDGET_MICROS,
@@ -120,7 +121,7 @@ export const MAX_CLICKS_PILOT: CampaignSpec = {
       keywords: exact("sewer line repair near me"),
     },
   ],
-};
+});
 
 function requireCondition(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(`pilot manifest invalid: ${message}`);
