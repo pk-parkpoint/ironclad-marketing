@@ -93,7 +93,7 @@ export const STATIC_PAGES: StaticPageEntry[] = [
     path: "special-offers",
     titleTag: "Plumbing Deals & Offers | Ironclad Plumbing Austin, TX",
     metaDescription:
-      "Current promotions and seasonal discounts for Ironclad Plumbing customers.",
+      "New Ironclad customers save 15% up to $300, with a separate $89 drain-cleaning offer. Confirm eligibility before work begins.",
     h1: "Current Offers & Seasonal Deals",
     section: "Trust",
   },

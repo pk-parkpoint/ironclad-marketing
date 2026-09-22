@@ -13,6 +13,7 @@ import {
 import { BLOG_POSTS } from "../content/blog-posts";
 import { LOCATIONS } from "../content/locations";
 import { SERVICES } from "../content/services";
+import { buildSpecialOfferSeedDocuments } from "./sanity-offer-seed";
 
 type SanityDocument = Record<string, unknown>;
 
@@ -95,7 +96,6 @@ const locationId = (slug: string) => `location.${slug}`;
 const reviewId = (id: string) => `review.${id}`;
 const faqId = (question: string) => `faq.${slugify(question).slice(0, 90)}`;
 const blogId = (slug: string) => `blogPost.${slug}`;
-const offerId = (slug: string) => `specialOffer.${slug}`;
 const teamMemberId = (slug: string) => `teamMember.${slug}`;
 
 function slugify(value: string): string {
@@ -417,36 +417,7 @@ function main() {
     });
   });
 
-  docs.push(
-    {
-      _id: offerId("first-service-50-off"),
-      _type: "specialOffer",
-      title: "$50 Off First Service",
-      description: "New customers receive $50 off their first completed plumbing service.",
-      terms: "Valid for first-time customers on services above $200. Cannot be combined with other offers.",
-      code: "WELCOME50",
-      validFrom: "2026-01-01T00:00:00.000Z",
-      validUntil: "2026-12-31T23:59:59.000Z",
-      active: true,
-      applicableServices: [toRef(serviceId("repairs")), toRef(serviceId("drain-clearing"))],
-      newCustomersOnly: true,
-      sortOrder: 0,
-    },
-    {
-      _id: offerId("water-heater-upgrade-credit"),
-      _type: "specialOffer",
-      title: "Water Heater Upgrade Credit",
-      description: "Apply a service-call credit toward qualifying water heater replacements.",
-      terms: "Credit applies only to complete replacement projects and expires after diagnostic appointment.",
-      code: "HEATERCREDIT",
-      validFrom: "2026-01-01T00:00:00.000Z",
-      validUntil: "2026-12-31T23:59:59.000Z",
-      active: true,
-      applicableServices: [toRef(serviceId("water-heaters")), toRef(serviceId("tankless-water-heaters"))],
-      newCustomersOnly: false,
-      sortOrder: 1,
-    },
-  );
+  docs.push(...buildSpecialOfferSeedDocuments(SERVICES.map((service) => service.slug)));
 
   docs.push(
     {

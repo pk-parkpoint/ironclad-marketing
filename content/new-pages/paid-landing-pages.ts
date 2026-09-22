@@ -1,19 +1,23 @@
 import { NEW_CUSTOMER_OFFER } from "./offer";
+import { AUSTIN_PLUMBER_NEAR_ME_CONTENT } from "./austin-plumber-near-me";
 import type { NewPageDefinition } from "./types";
 
 export const PAID_LANDING_PAGE_DEFINITIONS: Record<string, NewPageDefinition> = {
-  "lp/austin-plumber": {
-    path: "lp/austin-plumber",
-    titleTag: "Austin Plumber Near You | Ironclad Plumbing",
+  "lp/austin-plumber-near-me": {
+    path: "lp/austin-plumber-near-me",
+    bookingHref: "/book?service=plumbing",
+    templateSlug: "plumbing",
+    titleTag: "Austin Plumber Near Me | Ironclad Plumbing",
     metaDescription:
-      "Call a licensed Austin plumber for leaks, drains, water heaters, repairs, and urgent service with upfront pricing.",
-    h1: "Need a Plumber Near You in Austin?",
-    section: "Austin Plumbing Service",
+      "Looking for an Austin plumber near you? Get local help for leaks, drains, water heaters, and repairs with upfront pricing and a written warranty.",
+    h1: "Need an Austin Plumber Near You?",
+    section: "Austin Plumber Near Me",
     heroImage: "/media/services/ironclad-team-hero-fallback.jpg",
     locationBadge: "Serving Austin and nearby communities",
     trustChips: ["Licensed & Insured", "Upfront Pricing", "Same-Day Windows When Available"],
     breadcrumbParent: { href: "/plumbing", label: "Plumbing" },
     serviceName: "Residential Plumbing",
+    templateContent: AUSTIN_PLUMBER_NEAR_ME_CONTENT,
     content: {
       intro:
         "Tell us what is happening at your home and we will route you to the right plumbing service. Ironclad handles everyday repairs, urgent leaks, clogged drains, water-heater problems, and larger replacements throughout Austin.",
@@ -70,6 +74,8 @@ export const PAID_LANDING_PAGE_DEFINITIONS: Record<string, NewPageDefinition> = 
   },
   "lp/water-heater-replacement": {
     path: "lp/water-heater-replacement",
+    bookingHref: "/book?service=water-heater-installation",
+    templateSlug: "water-heater-installation",
     titleTag: "Water Heater Replacement Austin | Ironclad Plumbing",
     metaDescription:
       "Replace a leaking, aging, or undersized water heater in Austin with upfront options and code-aligned installation.",

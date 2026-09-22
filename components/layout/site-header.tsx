@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import type { FocusEvent, MouseEvent } from "react";
+import { useEffect, useRef, useState, type FocusEvent, type MouseEvent } from "react";
 import { ChevronRight } from "lucide-react";
+import { STANDARD_NEW_CUSTOMER_OFFER } from "@/content/offers";
 import { getPublicContactInfo } from "@/lib/contact";
 import { TOP_NAV_LINKS } from "@/lib/routes";
 import type { NavChildLink, TopNavLink } from "@/lib/routes";
@@ -171,7 +171,7 @@ type SiteHeaderProps = {
 };
 
 export function SiteHeader({
-  promotionText = "Book Today and Get 10% Off Your First Service",
+  promotionText = STANDARD_NEW_CUSTOMER_OFFER.header,
 }: SiteHeaderProps = {}) {
   const pathname = usePathname() || "/";
   const [isElevated, setIsElevated] = useState(false);

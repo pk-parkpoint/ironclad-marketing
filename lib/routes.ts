@@ -155,7 +155,7 @@ export const DEDICATED_MARKETING_PATHS = new Set([
   "faq/plumbing",
   "guarantees",
   "guides",
-  "lp/austin-plumber",
+  "lp/austin-plumber-near-me",
   "lp/water-heater-replacement",
   "plumbing",
   "plumbing/water-softener-repair",

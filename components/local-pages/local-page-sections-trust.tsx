@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, ChevronDown, MapPin } from "lucide-react";
 import type { LocalReview, Pair } from "@/content/local-pages";
+import { STANDARD_NEW_CUSTOMER_OFFER } from "@/content/offers";
 import { LocalStars } from "./local-page-shared";
 import { SectionHeader } from "./local-section-header";
 
@@ -189,7 +190,7 @@ export function FinalCta({
   return (
     <section className="local-band local-band-navy local-final">
       <div className="local-inner local-inner-narrow" data-reveal>
-        <p className="local-final-badge">15% off your first service</p>
+        <p className="local-final-badge">{STANDARD_NEW_CUSTOMER_OFFER.short}</p>
         <SectionHeader kicker="Book Service" title={title} lead={body} />
         <div className="local-hero-actions justify-center">
           <Link className="local-button local-button-primary ic-cta" data-track-intent="book" href={bookingHref}>
