@@ -7,6 +7,7 @@
  * using the key names the backend already looks for.
  */
 
+import { notificationAddress } from "@/lib/booking-address";
 import { formatDurationMs, type BookingLeadPayload } from "@/lib/booking-lead";
 
 const NOTIFICATION_TIMEOUT_MS = 10_000;
@@ -23,7 +24,7 @@ function flattenForConduit(payload: BookingLeadPayload): Record<string, unknown>
     serviceDisplayLabel: booking.serviceDisplay,
     preferredDate: booking.preferredDate,
     preferredWindow: booking.preferredWindow,
-    address: booking.address,
+    address: notificationAddress(booking),
     street: booking.street,
     city: booking.city,
     state: booking.state,

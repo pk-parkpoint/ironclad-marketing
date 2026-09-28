@@ -4,83 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import type { WizardFormData } from "./booking-wizard";
 import styles from "./booking-wizard.module.css";
 
-type GoogleAddressComponent = {
-  long_name: string;
-  short_name: string;
-  types: string[];
-};
-
-type GooglePlaceResult = {
-  address_components?: GoogleAddressComponent[];
-  formatted_address?: string;
-  geometry?: { location?: { lat: () => number; lng: () => number } };
-};
-
-type GoogleSessionToken = Record<string, unknown>;
-
-type GoogleAutocompleteInstance = {
-  addListener: (event: string, cb: () => void) => void;
-  getPlace: () => GooglePlaceResult;
-};
-
-type GoogleMapsPlaces = {
-  Autocomplete: new (
-    input: HTMLInputElement,
-    opts: {
-      componentRestrictions?: { country: string };
-      fields?: string[];
-      types?: string[];
-      sessionToken?: GoogleSessionToken;
-    },
-  ) => GoogleAutocompleteInstance;
-  AutocompleteSessionToken: new () => GoogleSessionToken;
-};
-
-type WindowWithGoogle = Window & {
-  google?: { maps?: { places?: GoogleMapsPlaces } };
-};
-
-let googleMapsPromise: Promise<void> | null = null;
-
-function loadGoogleMaps(): Promise<void> {
-  if (googleMapsPromise) return googleMapsPromise;
-  if (typeof window !== "undefined" && (window as WindowWithGoogle).google?.maps?.places) {
-    return Promise.resolve();
-  }
-  googleMapsPromise = new Promise((resolve, reject) => {
-    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY;
-    if (!apiKey || apiKey === "replace-me") { reject(new Error("No API key")); return; }
-    const cb = `gmapsCallback_${Date.now()}`;
-    (window as unknown as Record<string, unknown>)[cb] = () => { delete (window as unknown as Record<string, unknown>)[cb]; resolve(); };
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=${cb}`;
-    script.async = true;
-    script.defer = true;
-    script.onerror = () => { delete (window as unknown as Record<string, unknown>)[cb]; googleMapsPromise = null; reject(new Error("Script load failed")); };
-    document.head.appendChild(script);
-  });
-  return googleMapsPromise;
-}
-
-function parsePlace(place: GooglePlaceResult) {
-  const comps = place.address_components || [];
-  let streetNumber = "", route = "", city = "", state = "", zip = "";
-  for (const c of comps) {
-    if (c.types.includes("street_number")) streetNumber = c.long_name;
-    else if (c.types.includes("route")) route = c.long_name;
-    else if (c.types.includes("locality")) city = c.long_name;
-    else if (c.types.includes("sublocality_level_1") && !city) city = c.long_name;
-    else if (c.types.includes("administrative_area_level_1")) state = c.short_name;
-    else if (c.types.includes("postal_code")) zip = c.long_name;
-  }
-  return {
-    addressFormatted: place.formatted_address || "",
-    street: [streetNumber, route].filter(Boolean).join(" "),
-    city, state, zip,
-    latitude: place.geometry?.location?.lat(),
-    longitude: place.geometry?.location?.lng(),
-  };
-}
+import { loadGoogleMaps, type GoogleAutocompleteInstance, type GoogleSessionToken, type WindowWithGoogle } from "./google-maps-loader";
+import { parsePlace, manualStreetAddress, updateAddressLocality } from "@/lib/booking-address";
 
 function formatPhone(raw: string): string {
   const digits = raw.replace(/\D/g, "").slice(0, 10);
@@ -89,7 +14,7 @@ function formatPhone(raw: string): string {
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
 }
 
-type FormErrors = Partial<Record<"firstName" | "lastName" | "phone" | "email" | "addressFormatted", string>>;
+type FormErrors = Partial<Record<"firstName" | "lastName" | "phone" | "email" | "addressFormatted" | "city" | "state" | "zip", string>>;
 
 type Props = {
   formData: WizardFormData;
@@ -140,7 +65,7 @@ export function BookingStepContact({ formData, onUpdate, onBack, onNext }: Props
       const place = instance.getPlace();
       if (place?.address_components) {
         onUpdateRef.current(parsePlace(place));
-        setErrors((prev) => ({ ...prev, addressFormatted: undefined }));
+        setErrors((prev) => ({ ...prev, addressFormatted: undefined, city: undefined, state: undefined, zip: undefined }));
       }
       // Rotate session token after each selection (billing efficiency)
       sessionTokenRef.current = new places.AutocompleteSessionToken();
@@ -159,7 +84,10 @@ export function BookingStepContact({ formData, onUpdate, onBack, onNext }: Props
     if (!digits || digits.length < 10) errs.phone = "Valid phone number is required.";
     if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
       errs.email = "Please enter a valid email address.";
-    if (!formData.addressFormatted.trim()) errs.addressFormatted = "Service address is required.";
+    if (!formData.street.trim()) errs.addressFormatted = "Service address is required.";
+    if (!formData.city.trim()) errs.city = "City is required.";
+    if (!/^[A-Za-z]{2}$/.test(formData.state.trim())) errs.state = "Enter a two-letter state.";
+    if (!/^\d{5}(-\d{4})?$/.test(formData.zip.trim())) errs.zip = "Enter a valid ZIP code.";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   }
@@ -245,14 +173,24 @@ export function BookingStepContact({ formData, onUpdate, onBack, onNext }: Props
             autoComplete="off"
             className={inputClass}
             type="text"
-            value={formData.addressFormatted}
-            onChange={(e) => { onUpdate({ addressFormatted: e.target.value }); clearError("addressFormatted"); }}
+            value={formData.street}
+            onChange={(e) => { onUpdate(manualStreetAddress(e.target.value)); clearError("addressFormatted"); }}
             placeholder="Start typing your address"
           />
           {errors.addressFormatted && (
             <span className={styles.errorMessage}>{errors.addressFormatted}</span>
           )}
         </div>
+        {([["city", "City"], ["state", "State"], ["zip", "ZIP code"]] as const).map(([key, label]) => (
+          <div key={key} className={fieldGroupClass(errors[key])}>
+            <label className={styles.fieldLabel} htmlFor={`booking-${key}`}>{label}</label>
+            <input id={`booking-${key}`} className={inputClass} type="text"
+              autoComplete={key === "city" ? "address-level2" : key === "state" ? "address-level1" : "postal-code"}
+              value={formData[key]}
+              onChange={(event) => { onUpdate(updateAddressLocality(formData, key, event.target.value)); clearError(key); }} />
+            {errors[key] && <span className={styles.errorMessage}>{errors[key]}</span>}
+          </div>
+        ))}
       </div>
 
       {/* Navigation */}

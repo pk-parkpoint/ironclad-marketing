@@ -51,7 +51,7 @@ test("mail identity is stable across mutable timing/IP fields and separate per a
   assert.notEqual(key, bookingMailId(payload, "other@example.test"));
 });
 
-test("renderer preserves pre-change email HTML, text and subject", () => {
+test("renderer matches email baseline with complete service address", () => {
   const expected = JSON.parse(readFileSync(new URL("./booking-email-baseline.json", import.meta.url), "utf8"));
   const payload = notificationFixture();
   assert.deepEqual(buildEmail(payload), expected.abandoned);
@@ -92,4 +92,12 @@ test("live request forwards server context and reports retryable queue failures"
   });
   assert.equal(failed.status, 500);
   assert.equal(forwards, 1);
+});
+
+test("office emails retain structured city/state/ZIP when address text contains only the street", () => {
+  for (const status of ["abandoned", "completed"] as const) {
+    const rendered = buildEmail({ ...notificationFixture(), status });
+    assert.ok(rendered.text.includes("Address: 123 Example Street, Austin, TX 78701"));
+    assert.ok(rendered.html.includes("123 Example Street, Austin, TX 78701"));
+  }
 });

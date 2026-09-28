@@ -1,6 +1,6 @@
 # Booking notification traffic and idempotency contract
 
-Scope: Ironclad business booking notifications; no booking-step or scheduling changes.
+Scope: Ironclad business booking notifications and address completeness.
 
 - Development/test runtimes, explicit `BOOKING_NOTIFICATION_TRAFFIC=test`, local
   browser origins, and requests marked `X-Ironclad-Test-Traffic: 1` are test traffic.
@@ -40,3 +40,13 @@ worker, plus intercepted browser notification routes. All repository Playwright
 requests carry the test header, and their web server explicitly disables live
 booking notifications. This protects synthetic traffic even when local default
 cloud credentials are available.
+
+
+Address completeness (USER-BOOKING-ADDRESS-0928): Google Places fills the visible
+street, city, state, and ZIP fields. Continuing requires each field; manual entry
+remains available if Google cannot load. Address edits invalidate prior coordinates.
+The wizard composes the same country-free full address for confirmation, scheduling,
+and completed/abandoned leads. Email and Conduit forwarding also reconstruct a
+street-only display from complete structured locality on older payloads. Partial
+abandoned leads remain partial; no city or ZIP is inferred from IP geolocation.
+Google component reference: https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
