@@ -45,4 +45,3 @@ export function loadGoogleMaps(): Promise<void> {
   });
   return googleMapsPromise;
 }
-
