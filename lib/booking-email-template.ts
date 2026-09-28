@@ -1,3 +1,4 @@
+import { notificationAddress } from "@/lib/booking-address";
 import { BOOKING_NA, BOOKING_NOT_PRESENTED, formatDurationMs, type BookingLeadPayload, type BookingScreenId } from "@/lib/booking-lead";
 import { formatDate, formatValue, row, textRow } from "@/lib/booking-email-cells";
 
@@ -30,7 +31,7 @@ export function buildEmail(details: BookingDetails) {
     row("Service", details.booking.serviceDisplay),
     row("Preferred Date", dateDisplay),
     row("Time Window", details.booking.preferredWindow),
-    row("Address", details.booking.address),
+    row("Address", notificationAddress(details.booking)),
     row("Gate Code", details.booking.gateCode),
     row("Property Type", details.booking.propertyType),
     row("Ownership", details.booking.ownershipStatus),
@@ -77,7 +78,7 @@ export function buildEmail(details: BookingDetails) {
     textRow("Service", details.booking.serviceDisplay),
     textRow("Preferred Date", dateDisplay),
     textRow("Time Window", details.booking.preferredWindow),
-    textRow("Address", details.booking.address),
+    textRow("Address", notificationAddress(details.booking)),
     textRow("Gate Code", details.booking.gateCode),
     textRow("Property Type", details.booking.propertyType),
     textRow("Ownership", details.booking.ownershipStatus),
