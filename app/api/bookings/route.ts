@@ -159,7 +159,7 @@ function buildBookingId(): string {
   return `book_${Date.now()}_${suffix}`;
 }
 
-async function postWebhook(webhookUrl: string, payload: unknown, headers = { "Content-Type": "application/json" }): Promise<void> {
+async function postWebhook(webhookUrl: string, payload: unknown, headers: Record<string, string> = { "Content-Type": "application/json" }): Promise<void> {
   const abortController = new AbortController();
   const timeout = setTimeout(() => abortController.abort(), NOTIFICATION_REQUEST_TIMEOUT_MS);
 
