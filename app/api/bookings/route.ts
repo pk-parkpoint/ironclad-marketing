@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { conduitWebhookHeaders } from "@/lib/conduit-webhook-headers";
 
 type ContactPreference = "call" | "text" | "either";
 
@@ -158,16 +159,14 @@ function buildBookingId(): string {
   return `book_${Date.now()}_${suffix}`;
 }
 
-async function postWebhook(webhookUrl: string, payload: unknown): Promise<void> {
+async function postWebhook(webhookUrl: string, payload: unknown, headers = { "Content-Type": "application/json" }): Promise<void> {
   const abortController = new AbortController();
   const timeout = setTimeout(() => abortController.abort(), NOTIFICATION_REQUEST_TIMEOUT_MS);
 
   try {
     const response = await fetch(webhookUrl, {
       body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
       method: "POST",
       signal: abortController.signal,
     });
@@ -191,7 +190,7 @@ async function notifyConduit(record: BookingRecord): Promise<"sent" | "skipped">
       booking: record,
       eventType: "booking_submitted",
       target: "conduit_inbox",
-    });
+    }, conduitWebhookHeaders());
   } catch (error) {
     throw new Error(`notification_failed:${String(error)}`);
   }
