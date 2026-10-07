@@ -9,6 +9,7 @@
 
 import { notificationAddress } from "@/lib/booking-address";
 import { formatDurationMs, type BookingLeadPayload } from "@/lib/booking-lead";
+import { conduitWebhookHeaders } from "@/lib/conduit-webhook-headers";
 
 const NOTIFICATION_TIMEOUT_MS = 10_000;
 
@@ -90,7 +91,7 @@ export async function notifyConduitUpdate(
         eventType: "booking_submitted",
         target: "conduit_inbox",
       }),
-      headers: { "Content-Type": "application/json" },
+      headers: conduitWebhookHeaders(),
       method: "POST",
       signal: controller.signal,
     });
