@@ -8,17 +8,31 @@ Scope: Ironclad business booking notifications and address completeness.
   business email nor Conduit intake. Test logging contains no contact details.
 - A loopback forwarded IP alone is not sufficient to classify a production
   request as test traffic: reverse proxies may supply it. Short duration, missing
-  contact details, and repeated IPs do not suppress genuine visitor alerts.
-- Live mail documents use deterministic IDs scoped to business, booking attempt,
-  notification status, and recipient. A Firestore transaction creates only absent
-  mail rows. Replays and concurrent requests cannot create another email for the
-  same attempt/status/recipient; completed and abandoned remain distinct events.
+  contact details, and crawler user agents do not suppress the first visitor alert.
+- Abandoned visits are grouped by a normalized server-observed IP hashed with the
+  business key. The first visit sends an email. Repeat attempts without new input
+  are logged without another email; newly entered contact, time, issue, or detail
+  information sends an incremental alert. Page/service prefill and the default
+  calendar date do not count as entered information. Unknown IPs remain separate
+  attempts rather than collapsing all unknown visitors together.
+- `businesses/{business}/bookingVisitors/{visitorId}` records the count, first/last
+  visit, and accumulated information. Its `attempts/{sessionId}` children retain
+  each complete visit payload for later agent queries. Transactional mail creation
+  and per-attempt records handle concurrent visits and retries without duplicate
+  alerts or counts. Completed bookings retain attempt/status/recipient identity.
+  Each attempt retains its original notification information so an old retry
+  cannot send a new alert after later visits have supplied more details.
 - Existing mail documents are never updated, replayed, or deleted. No historical
   record is destructively reclassified. The existing Firestore mail sender remains
   unchanged. Deterministic mail retention is the deduplication retention period.
 - Notification payloads require bounded attempt/session IDs, the fixed Ironclad
   business identity, and the complete expected field shape before processing.
-- Conduit forwarding remains the existing best-effort path for live traffic.
+- Conduit forwarding remains the existing authenticated, best-effort path for
+  every live visit, including unchanged repeats. The backend accepts authenticated
+  anonymous visitor/session keys so phone-less abandoned visits share one inbox
+  conversation with durable per-attempt detail. Unknown IPs use separate session
+  destinations. Existing known-phone contacts use
+  canonical phone matching; an IP is a visitor grouping, never proof of identity.
 - Booking links that navigate to `/book` must not first mount an intermediate
   wizard on the source page. One user opening produces one active wizard.
 
@@ -27,7 +41,7 @@ notification requests. For a local production build or preview server, explicitl
 set `BOOKING_NOTIFICATION_TRAFFIC=test`; this also protects direct API tests
 that have no browser Origin. This switch does not sandbox scheduling API calls.
 
-Rollback: restore the preceding site revision. Retain queued mail and delivery
+Rollback: restore the preceding site and paired backend revisions. Retain queued mail and delivery
 receipts. No credential or existing service environment value needs changing.
 
 Development effect replay must not count as leaving the wizard. Cleanup captures
@@ -41,6 +55,12 @@ requests carry the test header, and their web server explicitly disables live
 booking notifications. This protects synthetic traffic even when local default
 cloud credentials are available.
 
+Time selection (IRONCLAD-BOOKING-1022): the wizard order is Schedule Time,
+Contact Info, Select Issue, Confirm Details. The calendar may show the first
+offerable day, but no time is selected/reserved until the customer clicks it.
+Continue requires a selected time and a live hold; pending or expired holds do
+not advance. Initial time preference is empty. Abandoning on the time screen is
+still recorded, and service links can supply page context before any issue choice.
 
 Address completeness (USER-BOOKING-ADDRESS-0928): Google Places fills the visible
 street, city, state, and ZIP fields. Continuing requires each field; manual entry

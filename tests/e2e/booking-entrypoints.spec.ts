@@ -55,6 +55,7 @@ async function mockSchedulingFacade(page: Page) {
 
 async function reachIssueStep(page: Page) {
   const dialog = page.getByRole("dialog", { name: dialogName });
+  await dialog.getByRole("button", { name: /^\d{1,2}:\d{2} [AP]M -/ }).first().click();
   await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
   await dialog.getByRole("button", { name: "Continue" }).click({ force: true });
   await dialog.getByLabel("First name").fill("Entry");
@@ -98,13 +99,16 @@ test("booking links show an immediate loading shell while the wizard chunk loads
 });
 
 test("booking links reopen the wizard after closing on the book route", async ({ page }) => {
+  await mockSchedulingFacade(page);
   await page.goto("/book");
 
   const dialog = page.getByRole("dialog", { name: dialogName });
   await expect(dialog).toBeVisible();
 
+  await expect(dialog.getByRole("button", { name: "Close booking modal" }).first()).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
+  await expect(page).toHaveURL(/\/$/);
 
   await clickBookingTrigger(page);
   await expect(dialog).toBeVisible();

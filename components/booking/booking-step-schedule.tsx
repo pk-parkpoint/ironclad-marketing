@@ -62,7 +62,6 @@ export function BookingStepSchedule({
   const [viewYear, setViewYear] = useState(defaultYear);
   const [viewMonth, setViewMonth] = useState(defaultMonth - 1);
   const [dateError, setDateError] = useState<string | null>(null);
-  const autoWindowRef = useRef<string | null>(null);
   const timesBlockRef = useRef<HTMLDivElement | null>(null);
 
   const firstDay = new Date(viewYear, viewMonth, 1);
@@ -72,19 +71,10 @@ export function BookingStepSchedule({
   const selectedDate = formData.selectedDate;
   const selectedWindows = selectedDate ? windowsByDate[selectedDate] || [] : [];
   const isLoadingSelectedDate = Boolean(selectedDate && loadingDate === selectedDate);
-  const firstWindow = selectedWindows[0];
   useEffect(() => {
     if (selectedDate) return;
     onSelectDate(defaultDateId);
   }, [defaultDateId, onSelectDate, selectedDate]);
-
-  useEffect(() => {
-    if (!firstWindow || isLoadingSelectedDate || formData.selectedOfferId) return;
-    const selectionKey = `${selectedDate}:${firstWindow.offerId}`;
-    if (autoWindowRef.current === selectionKey) return;
-    autoWindowRef.current = selectionKey;
-    void onSelectWindow(firstWindow).then((reserved) => reserved && setDateError(null));
-  }, [firstWindow, formData.selectedOfferId, isLoadingSelectedDate, onSelectWindow, selectedDate]);
 
   useEffect(() => {
     if (!selectedDate) return;
@@ -262,7 +252,7 @@ export function BookingStepSchedule({
           className={styles.primaryButton}
           disabled={Boolean(holdingOfferId)}
           onClick={() => {
-            if (!formData.holdId || !formData.selectedStartTime) {
+            if (!formData.holdId || !formData.selectedStartTime || !formData.selectedOfferId || remainingSeconds <= 0) {
               setDateError("Please choose an available appointment time.");
               return;
             }

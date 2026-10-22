@@ -52,6 +52,7 @@ test("dismissal plus pagehide sends once and a deliberate reopen remains a separ
   await page.goto("/book");
   const dialog = page.getByRole("dialog", { name: "Request an Appointment" });
   await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole("button", { name: "Close booking modal" }).first()).toBeFocused();
   expect(requests).toBe(0);
   await page.evaluate(() => {
     window.dispatchEvent(new Event("pagehide"));
@@ -60,8 +61,10 @@ test("dismissal plus pagehide sends once and a deliberate reopen remains a separ
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
   await expect.poll(() => requests).toBe(1);
+  await expect(page).toHaveURL(/\/$/);
   await page.locator('a[href^="/book"]').filter({ visible: true }).first().click();
   await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole("button", { name: "Close booking modal" }).first()).toBeFocused();
   expect(requests).toBe(1);
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();

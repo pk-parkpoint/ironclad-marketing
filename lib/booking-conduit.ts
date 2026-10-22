@@ -10,6 +10,7 @@
 import { notificationAddress } from "@/lib/booking-address";
 import { formatDurationMs, type BookingLeadPayload } from "@/lib/booking-lead";
 import { conduitWebhookHeaders } from "@/lib/conduit-webhook-headers";
+import { bookingVisitorId } from "@/lib/booking-visitor";
 
 const NOTIFICATION_TIMEOUT_MS = 10_000;
 
@@ -40,6 +41,8 @@ function flattenForConduit(payload: BookingLeadPayload): Record<string, unknown>
 
     // Session/tracking keys (names match backend _SESSION_KEYS)
     status: payload.status,
+    bookingSessionId: payload.sessionId,
+    ...(payload.status === "abandoned" ? { bookingVisitorId: bookingVisitorId(payload) } : {}),
     screensVisited: tracking.screensVisited.join(" → "),
     abandonmentScreen: tracking.abandonmentScreen,
     pagesVisited: tracking.pagesVisited.join(" → "),

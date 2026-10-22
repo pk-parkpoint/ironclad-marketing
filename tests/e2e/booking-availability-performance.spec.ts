@@ -117,6 +117,8 @@ test("highlights a new window immediately and releases the prior hold in paralle
   const dialog = await reachScheduleStep(page);
   const firstWindow = dialog.getByRole("button", { name: "9:00 AM - 12:00 PM" });
   const secondWindow = dialog.getByRole("button", { name: "12:00 PM - 3:00 PM" });
+  await expect(firstWindow).toHaveAttribute("aria-pressed", "false");
+  await firstWindow.click();
   await expect(firstWindow).toHaveAttribute("aria-pressed", "true");
   await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
 

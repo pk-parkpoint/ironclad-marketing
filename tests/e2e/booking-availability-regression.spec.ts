@@ -131,6 +131,9 @@ for (const scenario of cases) {
     }
 
     const firstVisible = dialog.getByRole("button", { name: scenario.expectedVisible[0] });
+    await expect(firstVisible).toHaveAttribute("aria-pressed", "false");
+    expect(heldWindowIds).toEqual([]);
+    await firstVisible.click();
     await expect(firstVisible).toHaveAttribute("aria-pressed", "true");
     await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
     await expect(firstVisible).toBeInViewport();

@@ -86,6 +86,7 @@ async function startBookingFlow(page: Page): Promise<Locator> {
 
   const dialog = page.getByRole("dialog", { name: "Request an Appointment" });
   await expect(dialog).toBeVisible();
+  await dialog.getByRole("button", { name: "9:00 AM - 12:00 PM", exact: true }).click();
   await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
   await dialog.getByRole("button", { name: "Continue" }).click();
   await expect(dialog.getByRole("heading", { name: /Enter your information/i })).toBeVisible();
@@ -211,7 +212,7 @@ test("booking wizard keeps step-four answers when abandoned before final confirm
   ]);
 });
 
-test("schedule-first bounce reports the held window and later screens as Not Presented", async ({ page }) => {
+test("schedule-first bounce without a time choice reports no held window and later screens as Not Presented", async ({ page }) => {
   let capturedPayload: CapturedAbandonmentPayload | null = null;
 
   await mockSchedulingFacade(page);
@@ -228,7 +229,8 @@ test("schedule-first bounce reports the held window and later screens as Not Pre
   const dialog = page.getByRole("dialog", { name: "Request an Appointment" });
   await expect(dialog).toBeVisible();
   await expect(dialog.getByRole("heading", { name: /Choose an Appointment Time/i })).toBeVisible();
-  await expect(dialog.getByText(/This time is reserved for/)).toBeVisible();
+  await expect(dialog.getByRole("button", { name: "9:00 AM - 12:00 PM", exact: true })).toBeVisible();
+  await expect(dialog.getByText(/This time is reserved for/)).toHaveCount(0);
 
   // Dismiss without engaging.
   await dialog.getByRole("button", { name: "Close booking modal" }).first().click();
@@ -237,8 +239,8 @@ test("schedule-first bounce reports the held window and later screens as Not Pre
   const payload = requireCapturedPayload(capturedPayload);
 
   expect(payload.status).toBe("abandoned");
-  expect(payload.booking.preferredDate).toBe(nextDateId(1));
-  expect(payload.booking.preferredWindow).toBe("9:00 AM - 12:00 PM");
+  expect(payload.booking.preferredDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+  expect(payload.booking.preferredWindow).toBe("NA");
   expect(payload.booking.serviceCategory).toBe("Not Presented");
   expect(payload.booking.serviceDetail).toBe("Not Presented");
   expect(payload.booking.serviceDisplay).toBe("Not Presented");

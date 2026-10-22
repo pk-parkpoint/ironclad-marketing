@@ -15,10 +15,16 @@ test("booking notification authenticates its name-bearing handoff", async () => 
     return new Response("{}", { status: 200 });
   };
   try {
-    assert.equal(await notifyConduitUpdate(notificationFixture("auth-proof")), "sent");
+    const payload = notificationFixture("auth-proof");
+    payload.serverContext.ipAddress = "2001:db8::1";
+    assert.equal(await notifyConduitUpdate(payload), "sent");
     assert.equal(new Headers(request?.headers).get("X-Form-Secret"), "test-only-form-secret");
     assert.equal(JSON.parse(String(request?.body)).eventType, "booking_submitted");
     assert.ok(JSON.parse(String(request?.body)).booking.customerName);
+    assert.equal(JSON.parse(String(request?.body)).booking.bookingSessionId, "auth-proof");
+    assert.match(JSON.parse(String(request?.body)).booking.bookingVisitorId, /^ip_[a-f0-9]{64}$/);
+    assert.equal(await notifyConduitUpdate({ ...payload, status: "completed" }), "sent");
+    assert.equal(JSON.parse(String(request?.body)).booking.bookingVisitorId, undefined);
   } finally {
     globalThis.fetch = previousFetch;
     if (previousUrl === undefined) delete process.env.BOOKING_WEBHOOK_URL;
