@@ -39,7 +39,7 @@ export type BookingConfirmation = {
 
 const INITIAL_FORM_DATA: WizardFormData = {
   serviceCategory: null, serviceDetail: null, additionalNotes: "",
-  selectedDate: null, timeOfDay: "flexible",
+  selectedDate: null, timeOfDay: null,
   selectedWindowId: null, selectedOfferId: null,
   selectedStartTime: null, selectedEndTime: null,
   selectedWindowLabel: null, holdId: null,

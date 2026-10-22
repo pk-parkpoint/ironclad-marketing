@@ -34,6 +34,7 @@ test(`${outcome === "manual" ? "Manual entry" : "Google selection"} preserves lo
     await route.fulfill({ json: { sent: false, suppressed: true } });
   });
   await page.goto("/book");
+  await page.getByRole("button", { name: "9:00 AM - 12:00 PM", exact: true }).click();
   await expect(page.getByText(/This time is reserved for/)).toBeVisible();
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByLabel("First name", { exact: true }).fill("Address");
