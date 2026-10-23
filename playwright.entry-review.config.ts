@@ -5,7 +5,7 @@ const local = "http://127.0.0.1:4020";
 
 export default defineConfig({
   testDir: "./tests/booking-entry-review",
-  testMatch: ["booking-site-entrypoints.spec.ts", "entry-review-safety.spec.ts", "entry-review-responsive.spec.ts", "entry-review-sticky.spec.ts"],
+  testMatch: ["booking-site-entrypoints.spec.ts", "entry-review-safety.spec.ts", "entry-review-responsive.spec.ts", "entry-review-sticky.spec.ts", "booking-date-lifecycle.spec.ts"],
   fullyParallel: true,
   outputDir: process.env.BOOKING_REVIEW_OUTPUT || "test-results/entry-review",
   workers: 6,
