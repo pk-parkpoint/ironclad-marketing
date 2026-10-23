@@ -18,7 +18,7 @@ function joinClasses(...classes: Array<string | false | null | undefined>): stri
 type Props = {
   model: {
     currentStep: number; direction: "forward" | "back"; formData: WizardFormData;
-    isSubmitting: boolean; submitError?: string; bookingId?: string;
+    isSubmitting: boolean; submitError?: string; bookingId?: string; dateNotice: string | null;
     confirmation: BookingConfirmation | null; bookingFacade: ReturnType<typeof usePublicBookingFacade>;
     updateFormData: (updates: Partial<WizardFormData>) => void;
     moveToStep: (step: number) => void; selectDate: (date: string) => void;
@@ -34,7 +34,7 @@ type Props = {
 export function BookingWizardView({ model, modalRef, bodyRef, closeButtonRef }: Props) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const { currentStep, direction, formData, isSubmitting, submitError, bookingId, confirmation,
-    bookingFacade, updateFormData, moveToStep, selectDate, selectWindow, refreshSelectedDate,
+    bookingFacade, dateNotice, updateFormData, moveToStep, selectDate, selectWindow, refreshSelectedDate,
     handleSubmit, handleDismiss, sendCompletedNotification, handleDialogKeyDown, onOpenChange } = model;
   return (
     <div
@@ -124,6 +124,7 @@ export function BookingWizardView({ model, modalRef, bodyRef, closeButtonRef }: 
                 {currentStep === 1 && (
                   <BookingStepSchedule
                     formData={formData}
+                    dateNotice={dateNotice}
                     windowsByDate={bookingFacade.windowsByDate}
                     loadingDate={bookingFacade.loadingDate}
                     searchError={bookingFacade.searchError}

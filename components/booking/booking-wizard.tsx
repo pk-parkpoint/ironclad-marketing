@@ -24,12 +24,13 @@ import {
 } from "@/lib/booking-session";
 import { usePublicBookingFacade } from "./use-public-booking-facade";
 import type { PublicBookingWindow } from "@/lib/public-booking-facade";
-import { bookingPrefetchDateIds } from "./booking-date-policy";
+import { bookingPrefetchDateIds } from "@/lib/booking-date-policy";
 
 import { getInitialWizardState, type WizardFormData, type BookingConfirmation, type BookingWizardProps } from "./booking-wizard-state";
 import { BookingWizardView } from "./booking-wizard-view";
 import { useBookingAbandonmentLifecycle } from "./use-booking-abandonment-lifecycle";
 import { useBookingDialogFocus } from "./use-booking-dialog-focus";
+import { useBookingDateRollover } from "./use-booking-date-rollover";
 export type { WizardFormData, BookingConfirmation, BookingWizardProps } from "./booking-wizard-state";
 
 export function BookingWizard({ initialServiceSlug, open, onOpenChange }: BookingWizardProps) {
@@ -52,6 +53,10 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
   const pathnameRef = useRef(pathname);
   const searchParamsRef = useRef(searchParams);
   const hasInitializedRef = useRef(false);
+  const { dateNotice, clearDateNotice } = useBookingDateRollover(open && !confirmation, formData.selectedDate, (date) => {
+    selectDate(date);
+    moveToStep(1);
+  });
 
   useEffect(() => {
     formDataRef.current = formData;
@@ -204,6 +209,7 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
     const updates: Partial<WizardFormData> = {
       holdId: null,
       selectedDate: date,
+      timeOfDay: null,
       selectedEndTime: null,
       selectedOfferId: null,
       selectedStartTime: null,
@@ -219,6 +225,7 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
   async function selectWindow(window: PublicBookingWindow): Promise<boolean> {
     const hold = await holdWindow(window, formDataRef.current);
     if (!hold) return false;
+    clearDateNotice();
     const label = window.arrivalWindowLabel || window.displayLabel || null;
     updateFormData({
       holdId: hold.holdId,
@@ -264,7 +271,7 @@ export function BookingWizard({ initialServiceSlug, open, onOpenChange }: Bookin
   if (!open) return null;
   return <BookingWizardView modalRef={modalRef} bodyRef={bodyRef} closeButtonRef={closeButtonRef} model={{
     currentStep, direction, formData, isSubmitting, submitError, bookingId, confirmation,
-    bookingFacade, updateFormData, moveToStep, selectDate, selectWindow, refreshSelectedDate,
+    bookingFacade, dateNotice, updateFormData, moveToStep, selectDate, selectWindow, refreshSelectedDate,
     handleSubmit, handleDismiss, sendCompletedNotification, handleDialogKeyDown, onOpenChange,
   }} />;
 }

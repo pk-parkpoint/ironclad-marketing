@@ -8,9 +8,8 @@ export type EntryReviewEvents = {
 };
 
 /** The same fixture can exercise deployed JS; no browser mutation reaches a server. */
-export async function isolateBookingTraffic(page: Page): Promise<EntryReviewEvents> {
+export async function isolateBookingTraffic(page: Page, now = new Date("2026-10-23T15:00:00Z")): Promise<EntryReviewEvents> {
   const events: EntryReviewEvents = { actions: [], notifications: [], unexpectedWrites: [], pageErrors: [] };
-  const now = new Date("2026-10-23T15:00:00Z");
   await page.clock.setFixedTime(now);
   page.on("pageerror", (error) => events.pageErrors.push(error.message));
   await page.route("**/*", async (route) => {

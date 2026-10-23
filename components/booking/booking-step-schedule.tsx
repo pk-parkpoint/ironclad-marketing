@@ -8,7 +8,7 @@ import {
   firstOfferableDateId,
   formatDateId,
   ironcladTodayDateId,
-} from "./booking-date-policy";
+} from "@/lib/booking-date-policy";
 import styles from "./booking-wizard.module.css";
 
 const DAY_LABELS = ["S", "M", "T", "W", "T", "F", "S"];
@@ -19,6 +19,7 @@ function joinClasses(...classes: Array<string | false | null | undefined>): stri
 
 type Props = {
   formData: WizardFormData;
+  dateNotice?: string | null;
   windowsByDate: Record<string, PublicBookingWindow[]>;
   loadingDate: string | null;
   searchError?: string | null;
@@ -45,6 +46,7 @@ function formatCountdown(seconds: number): string {
 
 export function BookingStepSchedule({
   formData,
+  dateNotice,
   windowsByDate,
   loadingDate,
   searchError,
@@ -75,6 +77,13 @@ export function BookingStepSchedule({
     if (selectedDate) return;
     onSelectDate(defaultDateId);
   }, [defaultDateId, onSelectDate, selectedDate]);
+
+  useEffect(() => {
+    if (!selectedDate) return;
+    const [year, month] = selectedDate.split("-").map(Number);
+    setViewYear(year);
+    setViewMonth(month - 1);
+  }, [selectedDate]);
 
   useEffect(() => {
     if (!selectedDate) return;
@@ -115,6 +124,7 @@ export function BookingStepSchedule({
   return (
     <div data-testid="booking-step-1">
       <h1 className={`${styles.heading} ${styles.scheduleHeading}`}>Choose an Appointment Time</h1>
+      {dateNotice && <p role="status" className={styles.subcopy}>{dateNotice}</p>}
 
       <div className={styles.calendarCard}>
         <div className={styles.calendarHeader}>

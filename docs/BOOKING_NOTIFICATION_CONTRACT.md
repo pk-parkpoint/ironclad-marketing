@@ -70,3 +70,19 @@ and completed/abandoned leads. Email and Conduit forwarding also reconstruct a
 street-only display from complete structured locality on older payloads. Partial
 abandoned leads remain partial; no city or ZIP is inferred from IP geolocation.
 Google component reference: https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+
+Date rollover (IRONCLAD-DATE-1023): a visible wizard rechecks the Austin business
+date on focus, page restoration, visibility changes and once per minute. When
+its selected day is past, it returns to Schedule Time, clears the old time/hold,
+and shows the first offerable day with no time selected. Contact and issue input
+remain available. Calendar month/year follow the refreshed day. A confirmed
+booking is never reset by this behavior.
+
+An abandoned notification with a date before Austin's current day labels it
+Previous Preferred Date and explains the historical date. It states that no
+appointment was submitted only when the payload reports Booking API Submitted
+No and has no booking identifier. Completed notifications retain their existing
+rendering. Stored payloads and delivered mail remain unchanged; no historical
+notification is replayed. This also covers old browser versions still open at
+release time. The recorded client visit duration is diagnostic evidence, not a
+server-verified visit-start timestamp.

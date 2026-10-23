@@ -1,6 +1,7 @@
 import { notificationAddress } from "@/lib/booking-address";
 import { BOOKING_NA, BOOKING_NOT_PRESENTED, formatDurationMs, type BookingLeadPayload, type BookingScreenId } from "@/lib/booking-lead";
 import { formatDate, formatValue, row, textRow } from "@/lib/booking-email-cells";
+import { ironcladTodayDateId } from "@/lib/booking-date-policy";
 
 const SCREEN_LABELS: Record<BookingScreenId | "NA", string> = {
   select_issue: "Select Service",
@@ -17,19 +18,26 @@ type BookingDetails = {
   tracking: BookingLeadPayload["tracking"];
 };
 
-export function buildEmail(details: BookingDetails) {
+export function buildEmail(details: BookingDetails, now = new Date()) {
   const heading = details.status === "completed" ? "New Booking Submission" : "Abandoned Booking (incomplete)";
   const color = details.status === "completed" ? "#059669" : "#d97706";
   const dateDisplay = details.booking.preferredDate && /^\d{4}-\d{2}-\d{2}$/.test(details.booking.preferredDate)
     ? formatDate(details.booking.preferredDate)
     : details.booking.preferredDate;
+  const pastDate = details.status === "abandoned" && /^\d{4}-\d{2}-\d{2}$/.test(details.booking.preferredDate)
+    && details.booking.preferredDate < ironcladTodayDateId(now);
+  const dateField = pastDate ? "Previous Preferred Date" : "Preferred Date";
+  const dateNotice = !pastDate ? "" : details.tracking.bookingApiSubmitted === "No"
+    && [BOOKING_NA, BOOKING_NOT_PRESENTED, ""].includes(details.booking.bookingId)
+      ? "This date has passed. No appointment was submitted for this incomplete attempt."
+      : "This incomplete visit contains a past preferred date. Check the booking ID and submission status below.";
 
   const htmlRows = [
     row("Customer", details.booking.customerName),
     row("Phone", details.booking.phone),
     row("Email", details.booking.email),
     row("Service", details.booking.serviceDisplay),
-    row("Preferred Date", dateDisplay),
+    row(dateField, dateDisplay),
     row("Time Window", details.booking.preferredWindow),
     row("Address", notificationAddress(details.booking)),
     row("Gate Code", details.booking.gateCode),
@@ -71,12 +79,13 @@ export function buildEmail(details: BookingDetails) {
 
   const textLines = [
     heading,
+    dateNotice,
     "---",
     textRow("Customer", details.booking.customerName),
     textRow("Phone", details.booking.phone),
     textRow("Email", details.booking.email),
     textRow("Service", details.booking.serviceDisplay),
-    textRow("Preferred Date", dateDisplay),
+    textRow(dateField, dateDisplay),
     textRow("Time Window", details.booking.preferredWindow),
     textRow("Address", notificationAddress(details.booking)),
     textRow("Gate Code", details.booking.gateCode),
@@ -121,7 +130,7 @@ export function buildEmail(details: BookingDetails) {
   const html = `
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:600px;margin:0 auto">
       <div style="background:${color};color:#fff;padding:16px 20px;border-radius:8px 8px 0 0">
-        <h2 style="margin:0;font-size:18px">${heading}</h2>
+        <h2 style="margin:0;font-size:18px">${heading}</h2>${dateNotice ? `<p style="margin:8px 0 0">${dateNotice}</p>` : ""}
       </div>
       <div style="border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px;padding:4px 0">
         <table style="width:100%;border-collapse:collapse;font-size:14px">${htmlRows}</table>
