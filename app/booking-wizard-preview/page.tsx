@@ -33,7 +33,7 @@ export default function BookingWizardPreview() {
       </main>
       {!open && (
         <button
-          className="primary-button fixed bottom-6 right-6 px-6 py-3 text-sm"
+          className="primary-button fixed bottom-24 right-6 px-6 py-3 text-sm md:bottom-6"
           onClick={() => setOpen(true)}
           type="button"
         >

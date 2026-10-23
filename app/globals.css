@@ -352,6 +352,11 @@ main {
   }
 }
 
+/* Pages with their own fixed actions keep the contextual booking link tappable. */
+body:has(.local-sticky-bar, .reviews-page-root) .site-mobile-bottom-bar {
+  display: none;
+}
+
 body:has(.reviews-page-root) {
   padding-bottom: 0;
 }

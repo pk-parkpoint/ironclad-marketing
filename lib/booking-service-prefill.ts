@@ -78,6 +78,7 @@ export function getBookingServiceIssuePrefill(
       "installation",
       "repiping",
       "sump-pump",
+      "softener",
       "treatment",
       "well-pump",
     ])
