@@ -239,9 +239,10 @@ body:has(.data-desk-site) { padding-bottom: 0; }
 }
 
 @media (max-width: 1080px) {
-  .dd-header-inner { gap: 18px; }
-  .dd-nav { gap: 17px; font-size: 14px; }
-  .dd-schedule { display: none; }
+  .dd-header-inner { flex-wrap: wrap; gap: 12px 18px; }
+  .dd-nav { gap: 17px; margin-left: auto; font-size: 14px; }
+  .dd-nav-menu { right: 0; left: auto; }
+  .dd-header-actions { width: 100%; justify-content: flex-end; }
   .dd-hero-grid, .dd-hub-hero-grid { grid-template-columns: 1fr; gap: 36px; }
   .dd-hero-copy { text-align: center; }
   .dd-hero-copy .dd-badge, .dd-hero-copy .dd-cadence, .dd-hero-copy .dd-hero-actions { margin-inline: auto; }
@@ -255,11 +256,12 @@ body:has(.data-desk-site) { padding-bottom: 0; }
 @media (max-width: 640px) {
   .dd-container { width: min(calc(100% - 40px), 1240px); }
   .dd-promo { min-height: 44px; font-size: 12px; }
-  .dd-header-inner { width: calc(100% - 32px); min-height: 68px; padding-block: 12px; }
+  .dd-header-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 12px; width: calc(100% - 32px); min-height: 68px; padding-block: 12px; }
   .dd-logo img { width: 132px; height: auto; max-height: 40px; }
-  .dd-nav, .dd-schedule { display: none; }
-  .dd-header-actions { margin-left: auto; }
-  .dd-phone { min-height: 44px; padding: 10px 13px; font-size: 12.5px; }
+  .dd-nav { display: none; }
+  .dd-header-actions { display: contents; }
+  .dd-phone { grid-column: 2; grid-row: 1; min-height: 44px; padding: 10px 13px; font-size: 12.5px; }
+  .dd-schedule { grid-column: 1 / -1; grid-row: 2; }
   .dd-hero, .dd-hub-hero { padding: 46px 0 54px; }
   .dd-hero-copy { text-align: left; }
   .dd-hero-copy .dd-badge, .dd-hero-copy .dd-cadence, .dd-hero-copy .dd-hero-actions { margin-inline: 0; }
